@@ -1,0 +1,136 @@
+<!-- header-custom.liquid -->
+{% schema %}
+{
+  "name": "Custom Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo Image"
+    },
+    {
+      "type": "text",
+      "id": "certifications_link",
+      "label": "Certifications Link",
+      "default": "/collections/certifications"
+    },
+    {
+      "type": "text",
+      "id": "affiliate_program_link",
+      "label": "Affiliate Program Link",
+      "default": "/pages/affiliate-program"
+    },
+    {
+      "type": "text",
+      "id": "opportunities_link",
+      "label": "Opportunities Link",
+      "default": "/pages/opportunities"
+    },
+    {
+      "type": "text",
+      "id": "about_us_link",
+      "label": "About Us Link",
+      "default": "/pages/about-us"
+    },
+    {
+      "type": "text",
+      "id": "login_link",
+      "label": "Log In Link",
+      "default": "/account/login"
+    },
+    {
+      "type": "text",
+      "id": "get_started_link",
+      "label": "Get Started Link",
+      "default": "/account/register"
+    },
+    {
+      "type": "text",
+      "id": "cart_link",
+      "label": "Cart Link",
+      "default": "/cart"
+    }
+  ]
+}
+{% endschema %}
+
+<header class="site-header">
+  <div class="container">
+    <div class="header-logo">
+      <img src="{{ settings.logo_image | img_url: '100x' }}" alt="NPTA Logo">
+    </div>
+    <nav class="header-nav">
+      <ul>
+        <li><a href="{{ settings.certifications_link }}">Certifications</a></li>
+        <li><a href="{{ settings.affiliate_program_link }}">Affiliate Program</a></li>
+        <li><a href="{{ settings.opportunities_link }}">Opportunities</a></li>
+        <li><a href="{{ settings.about_us_link }}">About Us</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a href="{{ settings.login_link }}" class="login">Log In</a>
+      <a href="{{ settings.get_started_link }}" class="get-started">Get Started</a>
+      <a href="{{ settings.cart_link }}" class="cart">
+        <svg viewBox="0 0 24 24"><use xlink:href="#icon-cart"></use></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<svg style="display:none;">
+  <symbol id="icon-cart" viewBox="0 0 24 24">
+    <path d="M10 20a2 2 0 11-4 0 2 2 0 014 0zm10 0a2 2 0 11-4 0 2 2 0 014 0zM7.34 4l.94 2h9.27c.65 0 1.22.39 1.44 1.01l2.47 6.63a1 1 0 01-.92 1.35H8.1l-.53-1.5H4.8l-2.1-6H.5V4h6.84zM7 8l1.11 3.09L18 11 16.35 8H7z"></path>
+  </symbol>
+</svg>
+
+<style>
+  .site-header {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  .site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-logo img {
+    max-height: 40px;
+  }
+  .header-nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  .header-nav ul li {
+    margin-right: 20px;
+  }
+  .header-nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+  .header-actions {
+    display: flex;
+    align-items: center;
+  }
+  .header-actions .login {
+    margin-right: 20px;
+    text-decoration: none;
+    color: #333;
+  }
+  .header-actions .get-started {
+    background-color: #d3f931;
+    padding: 5px 15px;
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    border-radius: 3px;
+  }
+  .header-actions .cart svg {
+    width: 24px;
+    height: 24px;
+    fill: #333;
+  }
+</style>

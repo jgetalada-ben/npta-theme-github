@@ -1,0 +1,260 @@
+<section class="section--collapsible   {{ section.settings.section_class }}" style="padding-top: {{ section.settings.top_padding }}px; padding-bottom: {{ section.settings.bottom_padding }}px; background-color: {{ section.settings.background_color }};" id="{{ section.settings.section_id }}" >
+  <div class="accordion--container" style="max-width: {{ section.settings.container_width }}px;">
+    <div class="row">
+      <div class="col-md-12">
+        {%- if section.settings.title != blank -%}
+ <div class="section--title-block ">
+  <h2 class="is--flex-start" style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.title }}</h2> 
+</div>
+
+          
+        {%- endif -%}
+        <div class="accordion--main theme--text-color">
+          <div class="accordion--inner">
+            {% for block in section.blocks %}
+              {% if block.type == 'collapsible_row' %}
+                <div class="accordion--item" data-wow-duration="2.5s">
+                  <div class="accordion--title">
+                    {%- if block.settings.heading != blank -%}
+                      <h3>{{ block.settings.heading }}</h3>
+                    {%- endif -%}
+                    <div class="accordion--toggle">
+                      <div class="toggle--icon toggle--close">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+<path d="M21 12C21 12.1989 20.921 12.3897 20.7803 12.5303C20.6397 12.671 20.4489 12.75 20.25 12.75L12.75 12.75L12.75 20.25C12.75 20.4489 12.671 20.6397 12.5303 20.7803C12.3897 20.921 12.1989 21 12 21C11.8011 21 11.6103 20.921 11.4697 20.7803C11.329 20.6397 11.25 20.4489 11.25 20.25L11.25 12.75H3.75C3.55109 12.75 3.36032 12.671 3.21967 12.5303C3.07902 12.3897 3 12.1989 3 12C3 11.8011 3.07902 11.6103 3.21967 11.4697C3.36032 11.329 3.55109 11.25 3.75 11.25H11.25V3.75C11.25 3.55109 11.329 3.36032 11.4697 3.21967C11.6103 3.07902 11.8011 3 12 3C12.1989 3 12.3897 3.07902 12.5303 3.21967C12.671 3.36032 12.75 3.55109 12.75 3.75V11.25L20.25 11.25C20.4489 11.25 20.6397 11.329 20.7803 11.4697C20.921 11.6103 21 11.8011 21 12Z" fill="#141414"/>
+</svg>
+                      </div>
+                      <div class="toggle--icon toggle--open">
+ <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <g clip-path="url(#clip0_401_2992)">
+    <path d="M18.364 18.3639C18.2233 18.5045 18.0325 18.5835 17.8336 18.5835C17.6347 18.5835 17.444 18.5045 17.3033 18.3639L12 13.0606L6.6967 18.3639C6.55605 18.5045 6.36528 18.5835 6.16637 18.5835C5.96746 18.5835 5.77669 18.5045 5.63604 18.3639C5.49539 18.2232 5.41637 18.0324 5.41637 17.8335C5.41637 17.6346 5.49539 17.4438 5.63604 17.3032L10.9393 11.9999L5.63604 6.69659C5.49539 6.55594 5.41637 6.36518 5.41637 6.16626C5.41637 5.96735 5.49539 5.77659 5.63604 5.63593C5.77669 5.49528 5.96746 5.41626 6.16637 5.41626C6.36528 5.41626 6.55605 5.49528 6.6967 5.63593L12 10.9392L17.3033 5.63593C17.444 5.49528 17.6347 5.41626 17.8336 5.41626C18.0325 5.41626 18.2233 5.49528 18.364 5.63593C18.5046 5.77659 18.5836 5.96735 18.5836 6.16626C18.5836 6.36518 18.5046 6.55594 18.364 6.69659L13.0607 11.9999L18.364 17.3032C18.5046 17.4438 18.5836 17.6346 18.5836 17.8335C18.5836 18.0324 18.5046 18.2232 18.364 18.3639Z" fill="#141414"/>
+  </g>
+  <defs>
+    <clipPath id="clip0_401_2992">
+      <rect width="24" height="24" fill="white"/>
+    </clipPath>
+  </defs>
+</svg>
+
+                
+               
+                      </div>
+                    </div>
+                  </div>
+                  {%- if block.settings.row_content != blank -%}
+                    <div class="accordion--content">
+                      {{ block.settings.row_content }}
+                    </div>
+                  {%- endif -%}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        {%- if section.settings.accordion_link != blank -%}
+        <div class="link--line wow animate__animated animate__fadeIn" data-wow-duration="2.5s">
+          <a href="{{ section.settings.accordion_link }}">{{ section.settings.accordion_link_title }}</a>
+        </div>
+        {%- endif -%}
+      </div>
+<div class="accordion-footer-wrap">
+<p class="footer-text"> {{ section.settings.footer_text }}</p>
+
+                      <a href="{{ section.settings.button_link }}" {% if section.settings.button_text != "Contact Us" %} target="_blank" {% endif %} 
+     class="btn button-yg">
+                          <span class="btn-label-down">{{ section.settings.button_text }}</span>
+                          <span class="btn-label-down">{{ section.settings.button_text }}</span>
+                      </a>
+              
+  
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Accordion Collapsible",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+                 {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "certified-trainers"
+    },
+       {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "section_class",
+      "label": "Section Class"
+    },
+    
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Collapsible content",
+      "default": "Accordion Title"
+    },
+     {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Title Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "accordion_link_title",
+      "label": "Link Title"
+    },
+    {
+      "type": "url",
+      "id": "accordion_link",
+      "label": "Link"
+    },
+    {
+      "type": "range",
+      "id": "top_padding",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 92
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 92
+    },
+   {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 200,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "default": 980
+    },
+     {
+      "type": "text",
+      "id": "footer_text",
+      "label": "Footer Text",
+      "default": "Don’t see the answer to your question?"
+    },
+     {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "JOIN TODAY"
+    },
+        
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+      "default": "/"
+    },
+  ],
+  "blocks": [
+    {
+      "type": "collapsible_row",
+      "name": "Accordion",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "COLLAPSIBLE ROW",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "row_content",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Accordion Collapsible",
+      "blocks": [
+        {
+          "type": "collapsible_row"
+        },
+        {
+          "type": "collapsible_row"
+        },
+        {
+          "type": "collapsible_row"
+        },
+        {
+          "type": "collapsible_row"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function(){
+
+       if($('.accordion--main').length) {
+
+        $('.accordion--main').each(function(){
+
+            var $this = $(this);
+            var itemBlock = $this.find('.accordion--item');
+            var titleToggle = $this.find('.accordion--item .accordion--title');
+
+            titleToggle.on('click', function(){
+
+                var $this__ = $(this);
+                var content = $this__.next();
+                $this.find('.accordion--content').slideUp();
+                itemBlock.removeClass('active');
+
+                if(content.is(':visible')) {
+                    content.slideUp();
+                }
+                else {
+                    content.slideDown();
+                    $this__.parent().addClass('active');
+                }
+            });
+
+        });
+    }
+
+  });
+</script>

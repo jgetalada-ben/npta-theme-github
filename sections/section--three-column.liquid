@@ -1,0 +1,286 @@
+
+{% schema %}
+{
+  "name": "Three Column",
+  "settings": [
+    
+  {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "certified-trainers"
+    },
+        {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    
+   {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Lorem ipsum dolor sit amet"
+    },
+    
+   {
+      "type": "text",
+      "id": "section_title2",
+      "label": "Section Title2",
+      "default": "Lorem ipsum dolor sit amet"
+    },
+    {
+      "type": "richtext",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Button 1 Link"
+    },
+    {
+      "type": "text",
+      "id": "button_1_text",
+      "label": "Button 1 Text",
+      "default": "CHOOSE MY PROGRAM"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Title Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 200,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "default": 980
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Flex Start"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Flex End"
+        }
+      ],
+      "default": "center"
+    },
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Three Column Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Innovation"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "We continuously evolve our education programs to integrate the latest advancements in health, wellness, and fitness, preparing students to lead and adapt in a rapidly changing industry."
+        },
+        {
+          "type": "text",
+          "id": "title2",
+          "label": "title2",
+        }
+
+      ]
+    }
+  ],
+  
+  "presets": [
+    {
+      "name": "Three Column",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="section--three-column" id="{{ section.settings.section_id }}" style="background-color: {{ section.settings.background_color }};">
+  <div class="section--title-block page-container" style="display: flex; justify-content: {{ section.settings.alignment }};">
+  <div style="max-width: {{ section.settings.container_width }}px;">
+    <h2 style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_title }}</h2>
+    <div style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_description }}</div>
+  </div>
+</div>
+  
+<div class="three-column--container page-container">
+  <div class="three-column-card-container">
+    {% for block in section.blocks %}
+      {% if block.settings.title != blank or block.settings.title2 != blank or block.settings.description != blank %}
+        <div class="three-column-card-wrap{% if block.settings.title2 != blank %} centered{% endif %}">
+          {% if block.settings.title != blank %}
+            <h3>{{ block.settings.title }}</h3>
+          {% endif %}
+          {% if block.settings.title2 != blank %}
+            <h3 style="text-align:center;">{{ block.settings.title2 }}</h3>
+          {% endif %}
+          {% if block.settings.description != blank %}
+            <p>{{ block.settings.description }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+{% if section.settings.section_title2 != blank %}
+  <div class="section--title-block page-container" style="display: flex; justify-content: {{ section.settings.alignment }};">
+    <div style="max-width: {{ section.settings.container_width }}px;">
+      <h3 style="text-align: {{ section.settings.title_alignment }};margin-top: 100px;">{{ section.settings.section_title2 }}</h3>
+       <div class="section--hero-buttons">
+        {% if section.settings.button_1_link != blank and section.settings.button_1_text != blank %}
+        <a href="{{ section.settings.button_1_link }}" class="btn button-yg" style="display:block;">
+          <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
+          <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+</section>
+
+<style>
+.section--three-column {
+  padding: 90px 0;
+}
+
+  @media only screen and (min-width: 981px) {
+.three-column-card-container {
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 32px;
+  grid-row-gap: 32px;
+}
+
+    .three-column-card-wrap {
+
+  padding: 18px;
+
+}
+  }
+    @media only screen and (max-width: 980px) {
+.three-column-card-container {
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: 32px;
+  grid-row-gap: 32px;
+}
+      .three-column-card-wrap {
+
+  padding: 35px;
+
+}
+    
+  }
+
+
+
+.three-column-card-wrap {
+  display: flex;
+
+
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 11px;
+
+  border-radius: 20px;
+  background: #133257;
+}
+
+.three-column-card-wrap h3 {
+  color: #e9f24f;
+  font-family: Montserrat;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 104%;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.three-column-card-wrap p {
+  color: #fff;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  margin: 0;
+}
+
+.section--three-column .section--title-block h2 {
+  color: #141414;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 42px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 112%;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.section--three-column .section--title-block p {
+  color: #141414;
+  text-align: center;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  margin: 0;
+}
+.three-column-card-wrap.centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.three-column-card-wrap.centered h3 {
+  text-align: center;
+}
+
+</style>

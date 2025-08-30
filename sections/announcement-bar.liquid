@@ -1,0 +1,111 @@
+<div class="section--announcement-bar ">
+  <div class="announcement-bar--container page-container">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+      <path d="M16.2601 18.5275C14.7666 20.1944 12.6936 21.1548 10.5697 21.1548C10.007 21.1548 9.44434 21.0829 8.89857 20.9475C7.39242 20.5752 6.10626 19.7544 5.06973 18.5063C5.03588 18.464 2.16742 14.7832 4.82857 10.3917C4.97242 10.159 5.13319 9.94748 5.26011 9.78671C6.41934 8.32709 7.55319 6.30902 6.9355 5.41632C6.88757 5.34563 6.86231 5.26203 6.86306 5.17663C6.86382 5.09122 6.89056 5.00808 6.93973 4.93825C7.03703 4.79017 7.21896 4.72248 7.38819 4.76902C7.55319 4.80709 8.83088 5.20902 9.10588 7.73902C9.38511 7.14671 9.63049 6.35555 9.57126 5.4544C9.48242 4.08786 8.73357 2.78902 7.34165 1.58748C7.26882 1.52456 7.21983 1.43852 7.20288 1.34378C7.18594 1.24904 7.20207 1.15136 7.24857 1.06709C7.34165 0.893631 7.54896 0.804785 7.73511 0.864016C7.83242 0.8894 16.8736 3.63094 15.5028 13.0021C16.0316 12.4352 16.6197 11.3352 16.4759 9.32132C16.4632 9.12248 16.5859 8.94479 16.772 8.88555C16.9624 8.82632 17.1655 8.90671 17.2628 9.07594C17.2924 9.12671 20.1482 14.1825 16.2601 18.5275Z" fill="#FE773E"/>
+    </svg>
+    <p>
+      Back-to-School Sale: <strong>50% OFF Nutrition & Fitness Bundle + FREE Weight Loss Specialization</strong> <a href="https://www.npta.ca/cart/43487919308842:1,42853693358122:1">  Claim My Bundle Now!</a>
+    </p>
+    <button class="announcement-bar--close" aria-label="Close">
+   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <path d="M19.2806 18.2193C19.3502 18.289 19.4055 18.3717 19.4432 18.4628C19.4809 18.5538 19.5003 18.6514 19.5003 18.7499C19.5003 18.8485 19.4809 18.9461 19.4432 19.0371C19.4055 19.1281 19.3502 19.2109 19.2806 19.2806C19.2109 19.3502 19.1281 19.4055 19.0371 19.4432C18.9461 19.4809 18.8485 19.5003 18.7499 19.5003C18.6514 19.5003 18.5538 19.4809 18.4628 19.4432C18.3717 19.4055 18.289 19.3502 18.2193 19.2806L11.9999 13.0602L5.78055 19.2806C5.63982 19.4213 5.44895 19.5003 5.24993 19.5003C5.05091 19.5003 4.86003 19.4213 4.7193 19.2806C4.57857 19.1398 4.49951 18.949 4.49951 18.7499C4.49951 18.5509 4.57857 18.36 4.7193 18.2193L10.9396 11.9999L4.7193 5.78055C4.57857 5.63982 4.49951 5.44895 4.49951 5.24993C4.49951 5.05091 4.57857 4.86003 4.7193 4.7193C4.86003 4.57857 5.05091 4.49951 5.24993 4.49951C5.44895 4.49951 5.63982 4.57857 5.78055 4.7193L11.9999 10.9396L18.2193 4.7193C18.36 4.57857 18.5509 4.49951 18.7499 4.49951C18.949 4.49951 19.1398 4.57857 19.2806 4.7193C19.4213 4.86003 19.5003 5.05091 19.5003 5.24993C19.5003 5.44895 19.4213 5.63982 19.2806 5.78055L13.0602 11.9999L19.2806 18.2193Z" fill="#141414"/>
+</svg>
+    </button>
+  </div>
+</div>
+
+
+        <style>
+
+
+.announcement-bar--container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  padding-right:20px;
+}
+
+.announcement-bar--container p {
+  color: var(--black, #141414);
+  text-align: center;
+    font-family: var(--font-body-family);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%; /* 21px */
+  padding: 0;
+  margin: 0;
+}
+
+.announcement-bar--container p a {
+  color: var(--black, #141414);
+    font-family: var(--font-body-family);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  text-decoration-line: underline;
+}
+
+.announcement-bar--close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0;
+}
+
+.announcement-bar--close svg {
+  width: 16px;
+  height: 16px;
+}
+.section--announcement-bar {
+  background: #F4F4F4;
+  padding: 12px 0;
+  overflow: hidden; 
+  opacity: 1;
+  transition: height 0.4s ease, padding 0.4s ease, opacity 0.4s ease;
+  height: auto;
+}
+
+.section--announcement-bar.hidden {
+  height: 0; 
+  padding: 0; 
+  opacity: 0; 
+}
+
+
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const closeButton = document.querySelector('.announcement-bar--close');
+    const announcementBar = document.querySelector('.section--announcement-bar');
+
+    if (closeButton) {
+      closeButton.addEventListener('click', function() {
+     
+        announcementBar.style.height = `${announcementBar.scrollHeight}px`;
+        
+     
+        announcementBar.offsetHeight; 
+
+      
+        announcementBar.classList.add('hidden');
+        
+      
+        announcementBar.addEventListener('transitionend', function() {
+          if (announcementBar.classList.contains('hidden')) {
+            announcementBar.style.height = 'auto';
+          }
+        });
+      });
+    }
+  });
+</script>
+
+

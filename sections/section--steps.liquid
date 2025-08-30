@@ -1,0 +1,158 @@
+{% schema %}
+{
+  "name": "Steps Section",
+  "settings": [
+     {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "certified-trainers"
+    },
+    
+   {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Lorem ipsum dolor sit amet"
+    },
+    {
+      "type": "richtext",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Title Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 200,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "default": 980
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Flex Start"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Flex End"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "CHOOSE YOUR PROGRAM"
+    },
+    {
+      "type": "url",
+      "id": "program_button_link",
+      "label": "Button Link",
+      "default": "/"
+    },
+    {
+      "type": "text",
+      "id": "quiz_text",
+      "label": "Quiz Text",
+      "default": "Not sure which program is best for you? Take the quiz."
+    },
+    {
+      "type": "url",
+      "id": "quiz_link",
+      "label": "Quiz Link",
+      "default": "/"
+    }
+       
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "step_title",
+          "label": "Step Title",
+          "default": "CHOOSE CERTIFICATION"
+        },
+        {
+          "type": "textarea",
+          "id": "step_description",
+          "label": "Step Description",
+          "default": "Browse our diverse range of certification programs and choose the one that best fits your career goals and interests."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Process Section",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}
+  
+
+<section class="section--process" id="{{ section.settings.section_id }}">
+  {{ 'section--steps.css' | asset_url | stylesheet_tag }}
+  <div class="section--process-container page-container ">
+
+<div class="section--title-block page-container" style="display: flex; justify-content: {{ section.settings.alignment }};">
+  <div style="max-width: {{ section.settings.container_width }}px;">
+    <h2 style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_title }}</h2>
+    <div style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_description }}</div>
+  </div>
+</div>
+    
+    <div class="process-steps">
+      {% for block in section.blocks %}
+        <div class="step">
+          <div class="step-count">
+            <span>{{ forloop.index }}</span>
+          </div>
+          <div class="step-content">
+            <h3>{{ block.settings.step_title }}</h3>
+            <p>{{ block.settings.step_description }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+
+
+  </div>
+</section>

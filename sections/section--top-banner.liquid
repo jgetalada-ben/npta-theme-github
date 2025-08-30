@@ -1,0 +1,298 @@
+{% schema %}
+{
+  "name": "Top Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Lorem ipsum dolor sit amet"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+    },
+
+    {
+      "type": "richtext",
+      "id": "desc1",
+      "label": "Description 1",
+    },
+
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "GET CERTIFIED"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button_1",
+      "label": "Show Button 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_1_text",
+      "label": "Button Text",
+      "default": "Button"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Button Link",
+      "default": "/"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button_2",
+      "label": "Show Button 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_2_text",
+      "label": "Button Text",
+      "default": "Button"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Button 2 Link",
+      "default": "/"
+    },
+    {
+      "type": "select",
+      "id": "button_position",
+      "label": "Button Position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+      {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Title Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 200,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "default": 980
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Flex Start"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Flex End"
+        }
+      ],
+      "default": "center"
+    },
+  ],
+  "presets": [
+    {
+      "name": "Top Banner",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+
+    <div class="section--title-block " style="display: flex; justify-content: {{ section.settings.alignment }};">
+  <div style="max-width: {{ section.settings.container_width }}px;">
+    <h2 style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_title }}</h2>
+    <div style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_description }}</div>
+  </div>
+</div>
+
+
+
+
+<section class="section--top-banner" >
+  <div class="section--top-banner-container" >
+    <div class="top-banner--text-content" style="display: flex; justify-content: {{ section.settings.alignment }};">
+        <div style="max-width: {{ section.settings.container_width }}px;">
+      <h1>{{ section.settings.title }}</h1>
+      {% if section.settings.subtitle != blank %}
+        <p>{{ section.settings.subtitle }}</p>
+      {% endif %}
+      {% if section.settings.desc1 != blank %}
+        <p>{{ section.settings.desc1 }}</p>
+      {% endif %}
+          
+      <div class="button-wrapper">
+  {% if section.settings.show_button_1 %}
+    <a href="{{ section.settings.button_1_link }}" target="_blank" class="btn button-yg">
+      <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
+      <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
+    </a>
+  {% endif %}
+  
+  {% if section.settings.show_button_2 %}
+    <a href="{{ section.settings.button_2_link }}" target="_blank" class="btn button-w">
+      <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
+      <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
+    </a>
+  {% endif %}
+</div>
+</div>
+      
+    </div>
+
+
+    
+
+  </div>
+  
+
+  <div class="section--top-background" style="background-image: url({{ section.settings.background_image | img_url: 'master' }});">
+
+  </div>
+  
+</section>
+
+<style>
+
+
+   .section--top-background{
+background-size: cover;
+    background-position: left;
+    background-repeat: no-repeat;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+} 
+
+
+  
+
+  
+.section--top-background{
+background-size: cover;
+    background-position: right;
+    background-repeat: no-repeat;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+}
+  
+.section--top-banner{
+  background-color: #133257;
+
+  color: #fff;
+  text-align: left;
+  position: relative;
+  padding: 90px 0;
+}
+.section--top-banner:before {
+  content: "";
+  position: absolute;
+background: linear-gradient(90deg, #133257 1%, rgba(19, 50, 87, 0.9) 7.34%, rgba(19, 50, 87, 0.50) 15%, rgba(19, 50, 87, 0.00) 50%);
+  width: 49%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: auto;
+  right: 1%;
+  z-index: 1;
+  background-fit:cover;
+}
+.section--top-banner .section--top-banner-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1280px;
+  width:90%;
+  margin: 0 auto;
+  z-index: 99999;
+  position: relative;
+}
+.top-banner--text-content {
+  width: 100%;
+}
+
+
+
+.section--top-banner .top-banner--text-content h1 {
+  color: #fff;
+  font-family: Montserrat;
+  font-size: 42px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 112%; /* 47.04px */
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.section--top-banner .text-content p {
+  color: #fff;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%; /* 24px */
+  margin-bottom: 40px;
+}
+
+
+  
+</style>

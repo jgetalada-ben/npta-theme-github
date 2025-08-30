@@ -1,0 +1,126 @@
+.pagination-wrapper {
+  margin-top: 30px;
+  padding-top: 30px;
+  position:relative;
+  border-top: 1px solid #D0D0D0;
+  
+}
+
+@media screen and (min-width: 990px) {
+  .pagination-wrapper {
+    margin-top: 5rem;
+  }
+}
+
+.pagination__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 50px;
+}
+
+.pagination__list > li {
+
+  width: 38px;
+  height:38px;
+  margin-bottom:5px;
+}
+
+.pagination__list > li:not(:last-child) {
+  margin-right: 1rem;
+}
+.page-next{
+ position:absolute;
+  left:0;
+  right: auto;
+}
+.page-prev{
+ position:absolute;
+  right:0;
+  left: auto;
+}
+
+.page-{
+ position:absolute;
+  right:0;
+  left: auto;
+}
+
+.pagination__item {
+  
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 38px;
+  width: 100%;
+  padding: 0;
+  text-decoration: none;
+  border-radius: 4px;
+background:#fff;
+
+border: 1px solid #D0D0D0;
+}
+
+.pagination__item {
+color: #141414;
+text-align: center;
+    font-family: var(--font-heading-family);
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%;
+text-transform: uppercase;
+ opacity: 0.6 !important;
+}
+.pagination__item a {
+
+  text-decoration:none;
+}
+
+.pagination__item--current{
+
+background: #E9F24F;
+  opacity: 1 !important;
+  border: 1px solid #E9F24F !important;
+}
+
+.pagination__item .icon-caret {
+  height: 0.6rem;
+}
+
+
+.pagination__item--current::after,
+.pagination__item:hover::after {
+
+}
+
+.pagination__item--next{
+  border: none !important;
+  width: auto !important;
+}
+.pagination__item--prev{
+  border: none !important;
+  width: auto !important;
+}
+.pagination__item--next .icon {
+  margin-left: -0.2rem;
+  transform: rotate(90deg);
+}
+
+.pagination__item--next:hover .icon {
+  transform: rotate(90deg) scale(1.07);
+}
+
+.pagination__item--prev .icon {
+  margin-right: -0.2rem;
+  transform: rotate(-90deg);
+}
+
+.pagination__item--prev:hover .icon {
+  transform: rotate(-90deg) scale(1.07);
+}
+
+.pagination__item-arrow:hover::after {
+  display: none;
+}

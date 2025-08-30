@@ -1,0 +1,112 @@
+{% schema %}
+{
+  "name": "Text Highlight",
+  "settings": [
+     {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "section-id"
+    },
+    
+    {
+      "type": "richtext",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+     
+       
+  ],
+
+  "presets": [
+    {
+      "name": "Text Highlight",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}
+
+
+
+<section class="section--text-highlight" id="{{ section.settings.section_id }}">
+  <div class="section--text-highlight-container page-container ">
+
+    <div class="text-highlights-wrap">
+{{ section.settings.section_description }}
+
+
+    </div>
+
+
+  </div>
+</section>
+
+<style>
+@media only screen and (min-width: 768px) {
+  .text-highlights-wrap p {
+
+font-size: 30px;
+
+}
+  .text-highlights-wrap p {
+text-align: center;
+}
+}
+  @media only screen and (min-width: 481px)and (max-width: 767px) {
+  .text-highlights-wrap p {
+
+font-size: 24px;
+
+}
+    .text-highlights-wrap p {
+text-align: center;
+}
+}
+  @media only screen and (max-width: 480px) {
+  .text-highlights-wrap p {
+
+font-size: 21px;
+
+}
+    .text-highlights-wrap p {
+text-align: left;
+}
+}
+
+
+.text-highlights-wrap p {
+color:  #133257;
+
+    font-family: var(--font-heading-family);
+
+font-style: normal;
+font-weight: 800;
+line-height: 150%; /* 45px */
+text-transform: uppercase;
+}
+
+.text-highlights-wrap p strong {
+  -webkit-animation: 1.5s highlight 1.5s 1 normal forwards;
+          animation: 1.5s highlight 1.5s 1 normal forwards;
+  background-color: none;
+  background: linear-gradient(90deg, #E9F24F 50%, rgba(255, 255, 255, 0) 50%);
+  background-size: 200% 120%;
+  background-position: 100% 0;
+	border-radius:10px;
+	padding:0 10px;
+}
+
+@-webkit-keyframes highlight {
+  to {
+    background-position: 0 0;
+  }
+}
+
+@keyframes highlight {
+  to {
+    background-position: 0 0;
+  }
+}
+</style>

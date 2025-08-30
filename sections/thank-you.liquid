@@ -1,0 +1,134 @@
+{% schema %}
+{
+  "name": "Thank You",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+     {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "certified-trainers"
+    },
+    
+   {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Lorem ipsum dolor sit amet"
+    },
+    {
+      "type": "richtext",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Title Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 200,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "default": 980
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Flex Start"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Flex End"
+        }
+      ],
+      "default": "center"
+    },
+     {
+            "type": "text",
+            "id": "primary_button_text",
+            "label": "Primary Button Text",
+            "default": "Button"
+        },
+        {
+            "type": "url",
+            "id": "primary_button_link",
+            "label": "Primary Button Link"
+        },
+  
+       
+  ],
+ 
+  "presets": [
+    {
+      "name": "Thank You",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="section--thankyou" id="{{ section.settings.section_id }}" style="background-color: {{ section.settings.background_color }};">
+  <div class="section--title-container page-container ">
+
+<div class="section--title-block " style="display: flex; justify-content: {{ section.settings.alignment }};">
+  <div style="max-width: {{ section.settings.container_width }}px;">
+    <h1 style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_title }}</h1>
+    <div style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_description }}</div>
+  </div>
+</div>
+
+   <a href="{{ section.settings.primary_button_link }}" class="btn button-yg">
+            <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+            <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+          </a>
+    
+        </div>
+        
+</section>
+
+<style>
+  .section--thankyou{
+    padding:90px 0;
+  }
+.section--thankyou h1{
+margin-bottom:10px;
+}
+ .section--thankyou .section--title-container{
+text-align:center;
+}
+
+  </style>

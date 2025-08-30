@@ -1,0 +1,65 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "blog_show_date": true,
+            "blog_show_author": false
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        },
+        "content": {
+          "type": "content",
+          "settings": {}
+        },
+        "featured_image_hvgywr": {
+          "type": "featured_image",
+          "disabled": true,
+          "settings": {
+            "image_height": "adapt"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "share",
+        "content",
+        "featured_image_hvgywr"
+      ],
+      "settings": {}
+    },
+    "section_related_products_tjpta8": {
+      "type": "section--related-products",
+      "settings": {
+        "section_id": "related_programs",
+        "section_title": "Lorem Ipsum Dolor Sit Amet",
+        "section_description": "", // You can fill this out as needed.
+        "title_alignment": "left",
+        "container_width": 700,
+        "alignment": "flex-start",
+        "view_button_text": "Button"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section_related_products_tjpta8"
+  ]
+}

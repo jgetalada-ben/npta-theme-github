@@ -1,0 +1,470 @@
+{% schema %}
+{
+  "name": "Quiz Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "quiz_title",
+      "label": "Quiz Title",
+      "default": "Which Certification is Right for Me?"
+    },
+    {
+      "type": "text",
+      "id": "quiz_description",
+      "label": "Quiz Description",
+      "default": "Discover which course matches your passion, experience, and goals."
+    },
+    {
+      "type": "image_picker",
+      "id": "quiz_image",
+      "label": "Quiz Image"
+    },
+     {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Lorem ipsum dolor sit amet"
+    },
+    {
+      "type": "richtext",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Title Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 200,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "default": 980
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Flex Start"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Flex End"
+        }
+      ],
+      "default": "center"
+    },
+  ],
+  "presets": [
+    {
+      "name": "Quiz Section"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="section--certification-quiz">
+  <div class="section--title-block page-container" style="display: flex; justify-content: {{ section.settings.alignment }};">
+  <div style="max-width: {{ section.settings.container_width }}px;">
+    <h2 style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_title }}</h2>
+    <div class="title-block--desc" style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_description }}</div>
+  </div>
+</div>
+
+
+<div class="section--quiz-container page-container">
+
+
+
+  
+  <div class="quiz-image">
+    {% if section.settings.quiz_image != blank %}
+      <img src="{{ section.settings.quiz_image | img_url: 'master' }}" alt="Quiz Image">
+    {% endif %}
+  </div>
+  
+  <div class="quiz-question-wrapper">
+  <!--  
+  <div class="quiz-container">
+    <div class="question-container" data-question="1">
+      <h2>What type of clients do you want to work with?</h2>
+      <p class="quiz-subheading">Question 1 of 8</p>
+      <div class="answers">
+        <button onclick="toggleAnswer(1, 'A')">A. General population (adults looking to improve overall fitness)</button>
+        <button onclick="toggleAnswer(1, 'B')">B. Athletes (sport-specific training)</button>
+        <button onclick="toggleAnswer(1, 'C')">C. Special populations (elderly, pregnant women, individuals with disabilities)</button>
+        <button onclick="toggleAnswer(1, 'D')">D. Youth (children and teenagers)</button>
+      </div>
+    </div>
+    <div class="question-container" data-question="2" style="display:none;">
+      <h2>What is your current level of experience in fitness training?</h2>
+      <p>Question 2 of 8</p>
+      <div class="answers">
+        <button onclick="toggleAnswer(2, 'A')">A. No experience</button>
+        <button onclick="toggleAnswer(2, 'B')">B. Some personal experience, but no formal training</button>
+        <button onclick="toggleAnswer(2, 'C')">C. Have some formal training, but not certified</button>
+        <button onclick="toggleAnswer(2, 'D')">D. Already certified, looking to advance my skills</button>
+      </div>
+    </div>
+    <div class="question-container" data-question="3" style="display:none;">
+      <h2>How important is job placement assistance or career support from the certifying organization?</h2>
+      <p>Question 3 of 8</p>
+      <div class="answers">
+        <button onclick="toggleAnswer(3, 'A')">A. Very important</button>
+        <button onclick="toggleAnswer(3, 'B')">B. Somewhat important</button>
+        <button onclick="toggleAnswer(3, 'C')">C. Not very important</button>
+        <button onclick="toggleAnswer(3, 'D')">D. Not important at all</button>
+      </div>
+    </div>
+    <div class="question-container" data-question="4" style="display:none;">
+      <h2>What is your long-term career goal in the fitness industry?</h2>
+      <p>Question 4 of 8</p>
+      <div class="answers">
+        <button onclick="toggleAnswer(4, 'A')">A. To work in a gym or fitness center</button>
+        <button onclick="toggleAnswer(4, 'B')">B. To start my own personal training business</button>
+        <button onclick="toggleAnswer(4, 'C')">C. To work with athletes or in sports performance</button>
+        <button onclick="toggleAnswer(4, 'D')">D. To have flexible working hours</button>
+        <button onclick="toggleAnswer(4, 'E')">E. To work remotely/online</button>
+      </div>
+    </div>
+    <div class="question-container" data-question="5" style="display:none;">
+      <h2>How much time are you willing to commit to completing a course?</h2>
+      <p>Question 5 of 8</p>
+      <div class="answers">
+        <button onclick="toggleAnswer(5, 'A')">A. Less than 3 months</button>
+        <button onclick="toggleAnswer(5, 'B')">B. 3-6 months</button>
+        <button onclick="toggleAnswer(5, 'C')">C. 6-12 months</button>
+        <button onclick="toggleAnswer(5, 'D')">D. More than a year</button>
+      </div>
+    </div>
+    <div class="question-container" data-question="6" style="display:none;">
+      <h2>What is your budget for obtaining a certification?</h2>
+      <p>Question 6 of 8</p>
+      <div class="answers">
+        <button onclick="toggleAnswer(6, 'A')">A. Under $500</button>
+        <button onclick="toggleAnswer(6, 'B')">B. $500-$1,000</button>
+        <button onclick="toggleAnswer(6, 'C')">C. $1,000-$2,000</button>
+        <button onclick="toggleAnswer(6, 'D')">D. Over $2,000</button>
+      </div>
+    </div>
+    <div class="question-container" data-question="7" style="display:none;">
+      <h2>Are you interested in specialized certifications (e.g., nutrition, strength and conditioning, group fitness)?</h2>
+      <p>Question 7 of 8</p>
+      <div class="answers">
+        <button onclick="toggleAnswer(7, 'A')">A. Yes, I want to specialize in one or more areas</button>
+        <button onclick="toggleAnswer(7, 'B')">B. Maybe, but I am primarily interested in general personal training</button>
+        <button onclick="toggleAnswer(7, 'C')">C. No, I prefer a broad-based certification</button>
+      </div>
+    </div>
+    <button class="next-btn" onclick="nextQuestion()">Next Question &gt;</button>
+  </div>
+-->
+  <div class="result-container" style="display:none;">
+    <h2>Your Recommendation:</h2>
+    <p id="result"></p>
+  </div>
+  </div>
+</div>
+
+  
+</div>
+<style>
+  .section--certification-quiz{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    padding-bottom:90px;
+  }
+.section--quiz-container{
+ display:grid;
+
+
+  
+}
+
+
+  
+.section--quiz-container .quiz-image {
+  max-width: 100%;
+  height: 100%;
+  width:100%;
+  overflow:hidden;
+  border-radius:20px;
+}
+  .section--quiz-container .quiz-image img {
+object-fit:cover;
+  width:100%;
+      height: 100%;
+
+}
+
+  @media only screen and (min-width: 1281px) {
+.quiz-question-wrapper{
+  padding-left:100px;
+}
+    .section--quiz-container{
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap : 0;
+}
+          .quiz-container, .result-container {
+      padding: 20px;
+ 
+    }
+
+  }
+
+    @media only screen and (min-width: 1081px)  and (max-width: 1280px) {
+.quiz-question-wrapper{
+  padding-left:50px;
+}
+      .section--quiz-container{
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap : 0;
+}
+
+     .quiz-container,
+    .result-container {
+      padding: 20px;
+ 
+    }
+
+  }
+
+      @media only screen and (min-width: 981px)  and (max-width: 1080px) {
+.quiz-question-wrapper{
+  padding-left:30px;
+}
+.section--quiz-container{
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap : 0;
+}
+
+    .quiz-container, .result-container {
+      padding: 20px;
+ 
+    }
+
+        
+  }
+
+      @media only screen and (min-width: 768px)  and (max-width: 980px) {
+
+.section--quiz-container{
+  grid-template-columns: 1fr;
+  grid-row-gap : 30px;
+}
+      .quiz-container, .result-container {
+      padding: 0;
+ 
+    }
+        
+  }
+
+  
+
+      .quiz-container,
+    .result-container {
+      background: white;
+   
+      border-radius: 8px;
+      width: 100%;
+      text-align: center;
+    }
+
+
+
+
+  
+    .quiz-container h2,
+    .result-container h2 {
+      margin-bottom: 10px;
+      color: #141414;
+      text-align: center;
+      font-family: Montserrat;
+      font-size: 30px;
+      font-style: normal;
+      font-weight: 800;
+      line-height: 120%;
+      /* 36px */
+      text-transform: uppercase;
+    }
+
+    .result-container p {
+      margin-bottom: 20px;
+      color: #141414;
+      text-align: center;
+      font-family: Inter;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
+      /* 24px */
+    }
+
+    .quiz-container .answers button,
+    .result-container button {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: 1px solid #D0D0D0;
+      background: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .quiz-container .answers button,
+    .result-container button {
+      color: rgba(20, 20, 20, 0.70);
+      font-family: Montserrat;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%;
+      /* 21px */
+      letter-spacing: 1.12px;
+      text-transform: uppercase;
+    }
+
+    .quiz-container .answers button.selected {
+      background: #E9F24F;
+      color: #141414;
+      border:1px solid #E9F24F;
+      box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.03);
+    }
+
+    .quiz-container .answers button:hover {
+      background: #E9F24F;
+      color: #141414;
+       border:1px solid #E9F24F;
+      box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.03);
+    }
+
+    .next-btn {
+      color: #141414;
+      background-color: transparent;
+      border: none;
+      text-align: center;
+      font-family: Montserrat;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%;
+      letter-spacing: 1.12px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .quiz-subheading {
+      color: #141414;
+      text-align: center;
+      font-family: Inter;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
+      /* 24px */
+    }
+
+</style>
+
+  <script>
+    const answers = {};
+
+    function toggleAnswer(question, answer) {
+      if (!answers[question]) {
+        answers[question] = [];
+      }
+      const index = answers[question].indexOf(answer);
+      if (index === -1) {
+        answers[question].push(answer);
+      } else {
+        answers[question].splice(index, 1);
+      }
+      const buttons = document.querySelectorAll(`.question-container[data-question="${question}"] .answers button`);
+      buttons.forEach(btn => {
+        if (answers[question].includes(btn.textContent.charAt(0))) {
+          btn.classList.add('selected');
+        } else {
+          btn.classList.remove('selected');
+        }
+      });
+    }
+
+    function nextQuestion() {
+      const currentQuestion = document.querySelector('.question-container:not([style*="display: none"])');
+      const currentQuestionNumber = parseInt(currentQuestion.dataset.question, 10);
+      const nextQuestion = document.querySelector(`.question-container[data-question="${currentQuestionNumber + 1}"]`);
+      if (nextQuestion) {
+        currentQuestion.style.display = 'none';
+        nextQuestion.style.display = 'block';
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      const resultContainer = document.querySelector('.result-container');
+      const quizContainer = document.querySelector('.quiz-container');
+      quizContainer.style.display = 'none';
+      resultContainer.style.display = 'block';
+      const resultText = calculateResult();
+      document.getElementById('result').textContent = resultText;
+    }
+
+    function calculateResult() {
+      const counts = {
+        A: 0,
+        B: 0,
+        C: 0,
+        D: 0
+      };
+      for (const question in answers) {
+        answers[question].forEach(answer => counts[answer]++);
+      }
+      const maxCount = Math.max(...Object.values(counts));
+      const mostCommonAnswer = Object.keys(counts).find(key => counts[key] === maxCount);
+      switch (mostCommonAnswer) {
+        case 'A':
+          return "You are motivated by passion and a desire to help others. Look for comprehensive certifications that offer a strong foundation in fitness training and are nationally recognized, such as NASM or ACE.";
+        case 'B':
+          return "You are starting a new career and are interested in flexibility. Consider programs that offer online or hybrid learning options, such as ISSA or NCSF.";
+        case 'C':
+          return "You have some experience and are interested in expanding your knowledge. Specialized certifications or advanced courses might be a good fit, such as NSCA or ACSM.";
+        case 'D':
+          return "You have specific career goals and a longer-term vision. Look for advanced or specialized certifications that align with your career aspirations, such as CSCS for sports performance or pre/post-natal certifications.";
+        default:
+          return "Please answer all questions to get a recommendation.";
+      }
+    }
+  </script>
+

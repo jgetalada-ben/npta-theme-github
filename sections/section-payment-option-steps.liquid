@@ -1,0 +1,570 @@
+{% schema %}
+{
+  "name": "Steps - Payment options",
+  "settings": [
+     {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "section-id"
+    },
+    
+   {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Lorem ipsum dolor sit amet"
+    },
+    {
+      "type": "richtext",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Select an image",
+      "info": "Choose an image from your files."
+    },
+        
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "step_title",
+          "label": "Step Title",
+          "default": "Step"
+        },
+        {
+          "type": "richtext",
+          "id": "step_description",
+          "label": "Step Description",
+          "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+        },
+        
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Steps Payment Options",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}
+
+
+<section class="section--steps-form" id="{{ section.settings.section_id }}">
+  <div class="section--steps-form-container page-container ">
+
+    <div class="steps-form--column-left">
+<div class="section--title-block " >
+
+    <h2>{{ section.settings.section_title }}</h2>
+    <div class="section-desc">{{ section.settings.section_description }}</div>
+
+</div>
+    
+    <div class="vertical-steps">
+      {% for block in section.blocks %}
+        <div class="step">
+          <div class="step-count">
+            <span>{{ forloop.index }}</span>
+          </div>
+          <div class="step-content">
+            <h3>{{ block.settings.step_title }}</h3>
+            <div class="step-desc rte-link">{{ block.settings.step_description }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    </div>
+
+        <div class="steps-payment--column-right">
+             <div class="image-wrapper">
+             {% if section.settings.image %}
+              <img src="{{ section.settings.image | img_url: 'original' }}" alt="{{ section.settings.alt_text }}">
+            {% else %}
+              <p>No image available</p>
+            {% endif %}
+                          
+            </div>
+  </div>
+  </div>
+</section>
+
+
+
+    
+
+
+<script src="https://www.google.com/recaptcha/api.js?render=6Lf762AqAAAAALFi5cjMR1pDOlO3FhZx9vGGqFjJ&badge=bottomleft" async defer></script>
+<script>
+  function executeRecaptcha(action) {
+    return new Promise((resolve) => {
+      grecaptcha.ready(function() {
+        grecaptcha.execute('6Lf762AqAAAAALFi5cjMR1pDOlO3FhZx9vGGqFjJ', { action: action }).then(function(token) {
+          resolve(token);
+        });
+      });
+    });
+  }
+
+  function validateEmail(email) {
+    const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return re.test(email);
+  }
+
+  function validatePhone(phone) {
+    const re = /^[0-9]+$/; // Adjust regex if needed for specific formats
+    return re.test(phone);
+  }
+
+  function validateText(input) {
+    return input.trim() !== "";
+  }
+
+
+  function showError(input, message) {
+    const error = document.createElement('div');
+    error.className = 'error-message';
+    error.textContent = message;
+    input.classList.add('error');
+    input.parentNode.insertBefore(error, input.nextSibling);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('custom-form');
+
+    if (form) {
+      form.addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevent default submission
+
+        var isValid = true;
+
+         
+      var honeypotInput = form.querySelector("input[name='honeypot']");
+      if (honeypotInput && honeypotInput.value) {
+        console.log("Honeypot field filled, possible bot submission.");
+        return; 
+      }
+
+        // Clear previous errors
+        form.querySelectorAll('.error-message').forEach(elem => elem.remove());
+        form.querySelectorAll('.error').forEach(elem => elem.classList.remove('error'));
+
+   // Validate text input
+      var textInput = form.querySelector("input[type='text']");
+      if (textInput && !validateText(textInput.value)) {
+        showError(textInput, "This field cannot be empty.");
+        isValid = false;
+      }
+
+        // Validate email
+        var emailInput = form.querySelector("input[type='email']");
+        if (emailInput && !validateEmail(emailInput.value)) {
+          showError(emailInput, "Please enter a valid email address.");
+          isValid = false;
+        }
+
+        // Validate phone
+        var phoneInput = form.querySelector("input[type='tel']");
+        if (phoneInput && !validatePhone(phoneInput.value)) {
+          showError(phoneInput, "Please enter a valid phone number.");
+          isValid = false;
+        }
+
+        // Validate select input
+        var selectInput = form.querySelector("select");
+        if (selectInput && !selectInput.value) {
+          showError(selectInput, "Please select an option.");
+          isValid = false;
+        }
+
+        // Validate checkbox
+        var checkboxInput = form.querySelector("input[type='checkbox']");
+        if (checkboxInput && !checkboxInput.checked) {
+          showError(checkboxInput, "Please accept the terms.");
+          isValid = false;
+        }
+
+        // Validate textarea
+        var textareaInput = form.querySelector("textarea");
+        if (textareaInput && !validateText(textareaInput.value)) {
+          showError(textareaInput, "This field cannot be empty.");
+          isValid = false;
+        }
+
+        // If validation fails, stop form submission
+        if (!isValid) {
+          return;
+        }
+
+        try {
+          // Execute reCAPTCHA and get the token
+          const token = await executeRecaptcha('submit_form');
+          
+          // Add the token to the form data
+          var formData = new FormData(form);
+          formData.append('recaptcha_token', token); // Append token to FormData
+
+          // Send the form data with fetch
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData
+          });
+
+          if (response.ok) {
+            // Redirect upon success
+            window.location.href = '/pages/thank-you';
+          } else {
+            // Handle error response
+            const errorText = await response.text();
+            console.error('Submission error:', errorText);
+            alert('There was an error submitting the form. Please try again.');
+          }
+        } catch (error) {
+          console.error('Network error:', error);
+          alert('There was a network error. Please try again.');
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+
+  .rte-link a {
+
+    color: var(--navy, #133257);
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+    text-decoration: none;
+}
+  
+.section--steps-form .section-desc p {
+  color: #141414;
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+@media only screen and (min-width: 981px) {
+  .vertical-steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-column-gap: 34px;
+    grid-row-gap: 70px;
+    margin-bottom: 30px;
+    margin-top: 50px;
+  }
+  .step:nth-child(4) .step-content::after,
+  .step:nth-child(5) .step-content::after,
+  .step:nth-child(6) .step-content::after {
+    border-bottom: 0px solid #d0d0d0 !important;
+  }
+  .steps-form--column-left {
+    padding-right: 10%;
+  }
+
+  .section--steps-form-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 980px) {
+  .vertical-steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 34px;
+    grid-row-gap: 40px;
+    margin-bottom: 30px;
+    margin-top: 50px;
+  }
+  .step:nth-child(5) .step-content::after,
+  .step:nth-child(6) .step-content::after {
+    border-bottom: 0px solid #d0d0d0 !important;
+  }
+  .steps-form--column-left {
+    padding-right: 10%;
+  }
+
+  .section--steps-form-container {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .vertical-steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-column-gap: 34px;
+    grid-row-gap: 30px;
+    margin-bottom: 30px;
+    margin-top: 50px;
+  }
+  .step:nth-child(4) .step-content::after,
+  .step:nth-child(5) .step-content::after,
+  .step:nth-child(6) .step-content::after {
+    border-bottom: 1px solid #d0d0d0 !important;
+  }
+}
+@media only screen and (max-width: 600px) {
+  form .form-row {
+    flex-wrap: wrap;
+  }
+}
+
+.vertical-steps {
+  overflow: hidden;
+}
+
+.section--title-block h1 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+  
+.section--title-block h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.section--steps-form {
+  background: #fff;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+.section--steps-form .section--.section--steps-form-container {
+  margin: 0 auto;
+}
+.step-content h3 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+.step-content {
+  border-left: 1px solid #d0d0d0;
+  padding-left: 30px;
+  position: relative;
+}
+.step-content:after {
+  content: "";
+  position: absolute;
+  bottom: -34px;
+  width: 100%;
+
+ /** border-bottom: 1px solid #d0d0d0; **/
+}
+
+.step-content p {
+  margin-bottom: 40px;
+}
+
+
+.section--steps-form .step-count span {
+  color: #141414;
+  font-family: var(--font-heading-family);
+
+  font-size: 45px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 104%; /* 46.8px */
+  text-transform: uppercase;
+}
+
+.section--steps-form .step-content h3 {
+  color: #141414;
+  font-family: var(--font-heading-family);
+
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 104%;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.section--steps-form .step-content p {
+  color: #141414;
+
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  margin-bottom: 0;
+}
+@media only screen and (min-width: 981px) {
+  .section--steps-form .step {
+    flex: 1;
+    padding: 0 10px;
+  }
+}
+
+@media only screen and (max-width: 980px) {
+  .section--steps-form .step {
+    width: 100%;
+  }
+  .section--steps-form .step {
+    padding: 20px 0px;
+  }
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 50px auto;
+}
+
+.steps-payment--column-right .image-wrapper {
+  display: flex;
+  padding: 40px 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  border-radius: 20px;
+  background: #f0f1f2;
+  min-height: 300px;
+}
+
+.form-button {
+  border: none;
+  width: 100%;
+}
+.form-wrapper {
+  display: flex;
+  padding: 40px 24px;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 24px;
+  border-radius: 20px;
+  background: #f7f8fa;
+}
+form {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+form .form-row {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+}
+.form-row .form-column {
+  display: flex;
+  flex-wrap: Wrap;
+  justify-content: flex-start;
+  width: 100%;
+}
+.form-row .form-column label {
+  width: 100%;
+  color: var(--black, #141414);
+  font-family: var(--font-heading-family);
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 24px */
+  letter-spacing: 1.28px;
+  text-transform: uppercase;
+    margin-bottom:10px;
+}
+
+.form-row .form-column input {
+  display: flex;
+
+  padding: 15px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+  border: 1px solid #d0d0d0;
+  background: #fff;
+}
+
+.form-row .form-column input {
+  color: #141414;
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  transition: 300ms;
+  width: 100%;
+}
+
+.form-row .form-column input:focus,
+.form-row .form-column input:hover {
+  border-radius: 6px;
+  border: 1px solid #141414;
+  background: #fff;
+  transition: 300ms;
+  color: #141414;
+}
+
+.form-row .form-column textarea {
+  width: 100%;
+  color: #141414;
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  transition: 300ms;
+  border-radius: 6px;
+  border: 1px solid #d0d0d0;
+  min-height: 120px;
+  padding: 15px;
+}
+
+.form-row .form-column textarea:focus,
+.form-row .form-column textarea:hover {
+  border-radius: 6px;
+  border: 1px solid #141414;
+  background: #fff;
+  transition: 300ms;
+  color: #141414;
+  outline: none;
+}
+*:focus-visible {
+  outline: none !important;
+  outline-offset: none !important;
+  box-shadow: none !important;
+}
+
+  .steps-payment--column-right .image-wrapper img{
+ width:100%;
+  height:100%;
+}
+
+
+
+  
+    .image-wrapper {
+        position: relative;
+        height: 100%;
+      width:100%;
+
+    
+    }
+      .image-wrapper img{
+     
+      border-radius:20px;
+       overflow:hidden;
+    }
+
+
+</style>

@@ -1,0 +1,486 @@
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+           {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "certified-trainers"
+    },
+    {
+      "type": "header",
+      "content": "Program Details"
+    },
+    {
+      "type": "paragraph",
+      "content": "Configure the rich text content for the program details."
+    },
+    {
+      "type": "richtext",
+      "id": "program_details",
+      "label": "Program Details",
+      "default": "<p> Lorem ipsum dolor sit amet</p>",
+      "info": "Enter the rich text content for the program details."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}
+
+
+
+<section class="section--program-details" id="{{ section.settings.section_id }}">
+  <div class="program-details-container page-container">
+
+    <div class="details-column-left">
+      <div class="section--title-block">
+        <h2 class="is--flex-start program-details-h2" >Program details</h2>
+      </div>
+      {% if product.metafields.custom._program_details %}
+      <div class="program-details">
+        {{ product.metafields.custom._program_details | metafield_tag }}
+      </div>
+      {% endif %}
+
+      {% assign show_curriculum = false %}
+{% assign total_sections = 10 %}
+
+{% for i in (1..total_sections) %}
+  {% assign title_key = i | append: "_curriculum_title" %}
+  {% assign desc_key = i | append: "_curriculum_description" %}
+  {% if product.metafields.custom[title_key] and product.metafields.custom[desc_key] %}
+    {% assign show_curriculum = true %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% if show_curriculum %}
+  <div class="section--title-block">
+    <h2 class="is--flex-start">Curriculum</h2>
+  </div>
+
+  <div class="curriculum">
+    <div class="curriculum-sections">
+      {% for i in (1..total_sections) %}
+        {% assign section_title_key = i | append: "_curriculum_title" %}
+        {% assign long_desc_key = i | append: "_curriculum_description" %}
+        {% assign section_title = product.metafields.custom[section_title_key] %}
+        {% assign long_desc = product.metafields.custom[long_desc_key] %}
+
+        {% if section_title and long_desc %}
+          <div class="curriculum-section">
+            <div class="section-header" data-target="#section{{ i }}">
+              {{ section_title | metafield_tag }}
+              <button type="button" data-toggle="collapse" data-target="#section{{ i }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+                  <path fill="#141414" d="M21 12a.75.75 0 0 1-.75.75h-7.5v7.5a.75.75 0 1 1-1.5 0v-7.5h-7.5a.75.75 0 1 1 0-1.5h7.5v-7.5a.75.75 0 1 1 1.5 0v7.5h7.5A.75.75 0 0 1 21 12Z" />
+                </svg>
+              </button>
+            </div>
+            <div id="section{{ i }}" class="section-body">
+              {{ long_desc | metafield_tag }}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          document.querySelectorAll('.section-header').forEach(function(header) {
+            header.addEventListener('click', function() {
+              var target = this.getAttribute('data-target');
+              var body = document.querySelector(target);
+              // SVG icons for plus and minus
+              var plusSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><path fill="#141414" d="M21 12a.75.75 0 0 1-.75.75h-7.5v7.5a.75.75 0 1 1-1.5 0v-7.5h-7.5a.75.75 0 1 1 0-1.5h7.5v-7.5a.75.75 0 1 1 1.5 0v7.5h7.5A.75.75 0 0 1 21 12Z"/></svg>';
+              var minusSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><path fill="#1D1D1B" d="M20.212 12.377H4.656a.656.656 0 1 1 0-1.312h15.556a.656.656 0 1 1 0 1.312Z"/></svg>';
+              if (body.classList.contains('collapse')) {
+                body.classList.remove('collapse');
+                this.querySelector('button').innerHTML = plusSvg; // Change to plus SVG
+              } else {
+                document.querySelectorAll('.section-body').forEach(function(sectionBody) {
+                  sectionBody.classList.remove('collapse');
+                  sectionBody.previousElementSibling.querySelector('button').innerHTML = plusSvg; // Change all to plus SVG
+                });
+                body.classList.add('collapse');
+                this.querySelector('button').innerHTML = minusSvg; // Change to minus SVG
+              }
+            });
+          });
+        });
+      </script>
+
+    </div>
+
+    <div class="details-column-right">
+      
+    <div class="details-column-right-wrap">
+<div class="product--badge">
+  {% if product.compare_at_price > product.price %}
+  {% assign original_price = product.compare_at_price | floor %}
+  {% assign sale_price = product.price | floor %}
+  {% assign discount_amount = original_price | minus: sale_price %}
+  {% assign discount_percentage = discount_amount | divided_by: 100 | floor %}
+
+  <div class="discount">
+    <span>SAVE ${{ discount_percentage }}</span>
+  </div>
+
+  {% endif %}
+
+
+
+
+
+</div>
+      
+<div class="product-details-wrap">
+  <h2 class="product-title">{{ product.title }}</h2>
+  <div class="product-description">{{ product.description }}</div>
+
+   <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                    {%- render 'price',
+                      product: product,
+                      use_variant: true,
+                      show_badges: true,
+                      price_class: 'price--large'
+                    -%}
+                  </div>
+  <div class="product-button-wrap">
+       {%- render 'buy-buttons',
+                    block: block,
+                    product: product,
+                    product_form_id: product_form_id,
+                    section_id: section.id
+                  -%}
+    </div>
+</div>
+
+
+
+   
+    </div>
+      
+    </div>
+
+  </div>
+</section>
+
+
+
+<style>
+  
+  @media only screen and (min-width: 981px) {
+    .program-details-container {
+
+    gap: 70px;
+
+}
+    .details-column-left {
+  width: 50%;
+}
+
+.details-column-right {
+  width: 60%;
+  max-width:650px;
+}
+  }
+
+  @media only screen and (max-width: 980px) {
+    .program-details-container {
+
+    gap: 50px;
+    flex-wrap: wrap;
+}
+    .details-column-left {
+  width: 100%;
+}
+
+.details-column-right {
+  width: 100%;
+  max-width:100%;
+}
+  }
+  
+  .section--program-details{
+    padding-top:70px;
+    padding-bottom:70px;
+  }
+  .details-column-right-wrap{
+    position:sticky;
+    top: 20px;
+  }
+  @media only screen and (min-width: 768px) {
+      .details-column-right-wrap{
+padding: 40px;
+  }
+  }
+
+    @media only screen and (max-width: 767px) {
+      .details-column-right-wrap{
+padding: 20px;
+  }
+  }
+  
+
+  .details-column-right-wrap{
+    display: flex;
+    flex-wrap:wrap;
+
+    border-radius: 20px;
+background: var(--grey-bg, #F7F8FA);
+  }
+
+  .product-details-wrap .product-title{
+    font-size: 22px;
+font-style: normal;
+font-weight: 800;
+line-height: 104%; /* 22.88px */
+text-transform: uppercase;
+  }
+    .product-details-wrap .product-description{
+color: #141414;
+    font-family: var(--font-body-family);
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; /* 24px */
+  }
+
+      .product-details-wrap .product-description ul {
+    list-style: none;
+    padding: 0;
+  }
+
+     .product-details-wrap .product-description ul li{
+  font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 30px;
+  }
+
+
+       .product-details-wrap .product-description ul li:before{
+    content: "";
+    position: absolute;
+    left: 0;
+    background-size: 100%;
+    background-fit: contain;
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    margin-top: 0px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 2.25C10.0716 2.25 8.18657 2.82183 6.58319 3.89317C4.97982 4.96451 3.73013 6.48726 2.99218 8.26884C2.25422 10.0504 2.06114 12.0108 2.43735 13.9021C2.81355 15.7934 3.74215 17.5307 5.10571 18.8943C6.46928 20.2579 8.20656 21.1865 10.0979 21.5627C11.9892 21.9389 13.9496 21.7458 15.7312 21.0078C17.5127 20.2699 19.0355 19.0202 20.1068 17.4168C21.1782 15.8134 21.75 13.9284 21.75 12C21.7473 9.41498 20.7192 6.93661 18.8913 5.10872C17.0634 3.28084 14.585 2.25273 12 2.25ZM16.2806 10.2806L11.0306 15.5306C10.961 15.6004 10.8783 15.6557 10.7872 15.6934C10.6962 15.7312 10.5986 15.7506 10.5 15.7506C10.4014 15.7506 10.3038 15.7312 10.2128 15.6934C10.1218 15.6557 10.039 15.6004 9.96938 15.5306L7.71938 13.2806C7.57865 13.1399 7.49959 12.949 7.49959 12.75C7.49959 12.551 7.57865 12.3601 7.71938 12.2194C7.86011 12.0786 8.05098 11.9996 8.25 11.9996C8.44903 11.9996 8.6399 12.0786 8.78063 12.2194L10.5 13.9397L15.2194 9.21937C15.2891 9.14969 15.3718 9.09442 15.4628 9.0567C15.5539 9.01899 15.6515 8.99958 15.75 8.99958C15.8486 8.99958 15.9461 9.01899 16.0372 9.0567C16.1282 9.09442 16.2109 9.14969 16.2806 9.21937C16.3503 9.28906 16.4056 9.37178 16.4433 9.46283C16.481 9.55387 16.5004 9.65145 16.5004 9.75C16.5004 9.84855 16.481 9.94613 16.4433 10.0372C16.4056 10.1282 16.3503 10.2109 16.2806 10.2806Z' fill='%23141414'/%3E%3C/svg%3E");
+}
+.product-button-wrap{
+  margin-top:35px;
+}
+  
+  .curriculum-sections .section-header button svg {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle; /* Adjust vertical alignment */
+}
+.curriculum-sections .section-header button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.curriculum {
+  margin: 20px 0;
+}
+.curriculum-sections {
+  border-top: 1px solid #ddd;
+}
+.curriculum-section {
+  border-bottom: 1px solid #ddd;
+}
+.curriculum-sections .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px 0;
+}
+.curriculum-sections .section-header h3 {
+  margin: 0;
+}
+.curriculum-sections .section-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+}
+.section-body.collapse {
+  max-height: 2000px; 
+  padding: 0 0 10px 0;
+  transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+}
+.program-details-container {
+  display: flex;
+  justify-content: space-between;
+  gap:70px;
+}
+
+
+.program-details-h2{
+  margin-top:0;
+}
+.section--title-block h2 {
+  color: #141414;
+  font-family: var(--font-heading-family);
+  font-size: 42px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 112%; /* 47.04px */
+  text-transform: uppercase;
+}
+
+.section-header .metafield-rich_text_field p strong {
+  color: #141414 !important;
+  font-family: var(--font-heading-family);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 104%; /* 18.72px */
+  text-transform: uppercase;
+}
+.section-header .metafield-rich_text_field p {
+  color: #a1a1a1;
+  font-family: var(--font-body-family);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+}
+
+.section-body .metafield-rich_text_field p {
+  color: #141414;
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  font-family: var(--font-body-family);
+}
+.section-body .metafield-rich_text_field p:first-child {
+  margin-top: 0 !important;
+}
+
+.section-body .metafield-rich_text_field ul li {
+  position: relative;
+  color: #141414;
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%; /* 24px */
+}
+
+.metafield-rich_text_field ul {
+  list-style: none !important;
+  padding: 0;
+}
+
+.metafield-rich_text_field ul li {
+  padding-left: 40px;
+  margin-bottom: 5px;
+}
+
+.metafield-rich_text_field ul li:before {
+  content: "" !important;
+  position: absolute;
+  left: 0;
+  background-size: 100%;
+  background-fit: contain;
+  width: 24px;
+  height: 24px;
+  background-position: center;
+  margin-top: 0px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 2.25C10.0716 2.25 8.18657 2.82183 6.58319 3.89317C4.97982 4.96451 3.73013 6.48726 2.99218 8.26884C2.25422 10.0504 2.06114 12.0108 2.43735 13.9021C2.81355 15.7934 3.74215 17.5307 5.10571 18.8943C6.46928 20.2579 8.20656 21.1865 10.0979 21.5627C11.9892 21.9389 13.9496 21.7458 15.7312 21.0078C17.5127 20.2699 19.0355 19.0202 20.1068 17.4168C21.1782 15.8134 21.75 13.9284 21.75 12C21.7473 9.41498 20.7192 6.93661 18.8913 5.10872C17.0634 3.28084 14.585 2.25273 12 2.25ZM16.2806 10.2806L11.0306 15.5306C10.961 15.6004 10.8783 15.6557 10.7872 15.6934C10.6962 15.7312 10.5986 15.7506 10.5 15.7506C10.4014 15.7506 10.3038 15.7312 10.2128 15.6934C10.1218 15.6557 10.039 15.6004 9.96938 15.5306L7.71938 13.2806C7.57865 13.1399 7.49959 12.949 7.49959 12.75C7.49959 12.551 7.57865 12.3601 7.71938 12.2194C7.86011 12.0786 8.05098 11.9996 8.25 11.9996C8.44903 11.9996 8.6399 12.0786 8.78063 12.2194L10.5 13.9397L15.2194 9.21937C15.2891 9.14969 15.3718 9.09442 15.4628 9.0567C15.5539 9.01899 15.6515 8.99958 15.75 8.99958C15.8486 8.99958 15.9461 9.01899 16.0372 9.0567C16.1282 9.09442 16.2109 9.14969 16.2806 9.21937C16.3503 9.28906 16.4056 9.37178 16.4433 9.46283C16.481 9.55387 16.5004 9.65145 16.5004 9.75C16.5004 9.84855 16.481 9.94613 16.4433 10.0372C16.4056 10.1282 16.3503 10.2109 16.2806 10.2806Z' fill='%23141414'/%3E%3C/svg%3E");
+}
+
+.product__description.rte ul li {
+  color: #141414;
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+}
+
+.program-details{
+  margin-bottom:40px;
+}
+
+.program-details h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.program-details p {
+color: #141414;
+    font-family: var(--font-body-family);
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%;
+  margin-bottom: 20px;
+}
+
+.program-details p strong{
+    font-family: var(--font-heading-family);
+color: #141414;
+font-size: 18px;
+font-style: normal;
+font-weight: 800;
+line-height: 104%; 
+text-transform: uppercase;
+
+}
+
+
+.program-details .perfect-for-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.program-details ul {
+  list-style: none;
+  padding: 0;
+}
+
+.program-details ul li {
+color:  #141414;
+    font-family: var(--font-body-family);
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 150%; 
+  margin-bottom: 10px;
+  position: relative;
+  padding-left: 32px;
+}
+
+.program-details ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #000;
+}
+
+</style>

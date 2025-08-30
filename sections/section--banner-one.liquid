@@ -1,0 +1,240 @@
+{% schema %}
+{
+  "name": "Personal Training Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "THE GOLD STANDARD IN PERSONAL TRAINING"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Join our community of driven professionals and access special rewards and privileges based on your engagement."
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "GET CERTIFIED"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "benefit_text",
+          "label": "Benefit Text",
+          "default": "Sample Benefit"
+        },
+        {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Personal Training Banner",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="section--banner-one" style="background-image: url({{ section.settings.background_image | img_url: 'master' }});">
+  <div class="section--banner-one-container page-container">
+    <div class="banner-one--text-content">
+      <h2>{{ section.settings.title }}</h2>
+      <p>{{ section.settings.subtitle }}</p>
+          <div class="button-wrap">
+    <a href="{{ section.settings.button_link }}" class="btn button-yg">
+            <span class="btn-label-down">{{ section.settings.button_text }}</span>
+            <span class="btn-label-down">{{ section.settings.button_text }}</span>
+          
+        </a>
+        </div>
+
+    </div>
+      <div class="banner-one--benefits">
+        <ul class="benefits-list">
+          {% for block in section.blocks %}
+            <li class="benefits-item">{{ block.settings.benefit_text }}</li>
+              {% if block.settings.description %}
+                 <div class="benefits-description">{{ block.settings.description }}</div>
+              {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+</section>
+
+<style>
+.section--banner-one {
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+
+  position: relative;
+  padding: 90px 0;
+}
+
+  
+.section--banner-one:before {
+  content: "";
+  position: absolute;
+  background: linear-gradient(90deg, #133257 0%, rgba(19, 50, 87, 0.1) 100%);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+.section--banner-one .section--banner-one-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 0 auto;
+  z-index: 99999;
+  position: relative;
+}
+
+.section--banner-one .section--banner-one-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 0 auto;
+  z-index: 99999;
+  position: relative;
+}
+@media only screen and (min-width: 981px) {
+  .section--banner-one .section--banner-one-container {
+    flex-wrap: wrap;
+  }
+
+  .banner-one--text-content {
+    width: 50%;
+  }
+  .banner-one--benefits {
+    width: 50%;
+  }
+  .banner-one--benefits {
+    display: flex;
+    justify-content: flex-end;
+  }
+    .section--banner-one {
+  text-align: left;
+
+}
+
+}
+
+@media only screen and (max-width: 980px) {
+  .section--banner-one .section--banner-one-container {
+    flex-wrap: wrap;
+  }
+
+  .banner-one--text-content {
+    width: 100%;
+  }
+  .banner-one--benefits {
+    width: 100%;
+  }
+  .banner-one--benefits {
+    display: flex;
+    justify-content: center;
+  }
+    .section--banner-one {
+  text-align: center;
+
+}
+
+}
+
+.banner-one--benefits .benefits-list {
+  border-radius: 10px;
+  opacity: 0.8;
+  background: #133257;
+  display: flex;
+  max-width: 410px;
+  width: 100%;
+  padding: 35px 30px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.section--banner-one .banner-one--text-content h2 {
+  color: #fff;
+    font-family: var(--font-heading-family);
+  font-size: 42px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 112%; /* 47.04px */
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.section--banner-one .text-content p {
+  color: #fff;
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%; /* 24px */
+  margin-bottom: 40px;
+}
+
+.section--banner-one .banner-one--benefits ul {
+  list-style: none;
+}
+.section--banner-one .banner-one--benefits .benefits-item {
+  color: #fff;
+    font-family: var(--font-heading-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 134%; /* 21.44px */
+  letter-spacing: 1.28px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  position: relative;
+  padding-left: 35px;
+}
+
+.benefits-item:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  background-size: 100%;
+  background-fit: contain;
+  width: 26px;
+  height: 26px;
+  background-position: center;
+  margin-top: -4px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26' fill='none'%3E%3Cg clip-path='url(%23clip0_401_2870)'%3E%3Cpath d='M20.3125 6.5V19.5C20.3125 19.931 20.1412 20.3443 19.8365 20.649C19.5318 20.9538 19.1184 21.125 18.6875 21.125H17.0625C16.6315 21.125 16.2182 20.9538 15.9134 20.649C15.6087 20.3443 15.4375 19.931 15.4375 19.5V13.8125H10.5625V19.5C10.5625 19.931 10.3912 20.3443 10.0865 20.649C9.78176 20.9538 9.36843 21.125 8.93745 21.125H7.31245C6.88148 21.125 6.46815 20.9538 6.16341 20.649C5.85866 20.3443 5.68745 19.931 5.68745 19.5V6.5C5.68745 6.06902 5.85866 5.6557 6.16341 5.35095C6.46815 5.0462 6.88148 4.875 7.31245 4.875H8.93745C9.36843 4.875 9.78176 5.0462 10.0865 5.35095C10.3912 5.6557 10.5625 6.06902 10.5625 6.5V12.1875H15.4375V6.5C15.4375 6.06902 15.6087 5.6557 15.9134 5.35095C16.2182 5.0462 16.6315 4.875 17.0625 4.875H18.6875C19.1184 4.875 19.5318 5.0462 19.8365 5.35095C20.1412 5.6557 20.3125 6.06902 20.3125 6.5ZM3.6562 7.3125H3.24995C2.81898 7.3125 2.40565 7.48371 2.10091 7.78845C1.79616 8.0932 1.62495 8.50652 1.62495 8.9375V12.1875H0.839876C0.629912 12.1844 0.426562 12.2609 0.270733 12.4017C0.114904 12.5424 0.0181575 12.737 -4.58441e-05 12.9462C-0.0074253 13.0573 0.00812531 13.1688 0.0456401 13.2737C0.0831548 13.3785 0.141832 13.4746 0.218028 13.5558C0.294224 13.6371 0.386311 13.7018 0.488568 13.7459C0.590826 13.7901 0.70107 13.8127 0.812454 13.8125H1.62495V17.0625C1.62495 17.4935 1.79616 17.9068 2.10091 18.2115C2.40565 18.5163 2.81898 18.6875 3.24995 18.6875H3.6562C3.76395 18.6875 3.86728 18.6447 3.94347 18.5685C4.01965 18.4923 4.06245 18.389 4.06245 18.2812V7.71875C4.06245 7.61101 4.01965 7.50767 3.94347 7.43149C3.86728 7.3553 3.76395 7.3125 3.6562 7.3125ZM26 12.9462C25.9818 12.7373 25.8853 12.5431 25.7299 12.4024C25.5745 12.2617 25.3717 12.1849 25.1621 12.1875H24.375V8.9375C24.375 8.50652 24.2037 8.0932 23.899 7.78845C23.5943 7.48371 23.1809 7.3125 22.75 7.3125H22.3437C22.236 7.3125 22.1326 7.3553 22.0564 7.43149C21.9803 7.50767 21.9375 7.61101 21.9375 7.71875V18.2812C21.9375 18.389 21.9803 18.4923 22.0564 18.5685C22.1326 18.6447 22.236 18.6875 22.3437 18.6875H22.75C23.1809 18.6875 23.5943 18.5163 23.899 18.2115C24.2037 17.9068 24.375 17.4935 24.375 17.0625V13.8125H25.1875C25.2988 13.8127 25.4091 13.7901 25.5113 13.7459C25.6136 13.7018 25.7057 13.6371 25.7819 13.5558C25.8581 13.4746 25.9168 13.3785 25.9543 13.2737C25.9918 13.1688 26.0073 13.0573 26 12.9462Z' fill='%23E9F24F'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_401_2870'%3E%3Crect width='26' height='26' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
+}
+
+</style>

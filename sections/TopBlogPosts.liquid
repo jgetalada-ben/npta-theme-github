@@ -1,0 +1,296 @@
+{% schema %}
+{
+  "name": "Top Blog Posts",
+  "tag": "section",
+  "class": "top-blog-posts-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Top Blog Posts"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "top_post",
+      "name": "Top Post",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "article",
+          "id": "top_post",
+          "label": "Top Blog Post"
+        }
+      ]
+    },
+    {
+      "type": "media_promo",
+      "name": "Media Promotion",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "media_image",
+          "label": "Promotion Image"
+        },
+        {
+          "type": "url",
+          "id": "media_link",
+          "label": "Promotion Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Top Blog Posts",
+      "category": "Blog Page",
+      "blocks": [
+        { "type": "top_post" },
+        { "type": "top_post" },
+        { "type": "media_promo" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<div class="top-blog-posts-section">
+  <div class="top-blog-posts-grid">
+    
+    <!-- Left Column: Top Blog Posts -->
+    <div class="top-blog-posts-container">
+      <h2>{{ section.settings.section_title }}</h2>
+      <div class="top-blog-posts">
+        {% for block in section.blocks %}
+          {% if block.type == "top_post" %}
+            <div class="top-blog-post">
+              <a href="{{ block.settings.top_post.url }}">
+                <img src="{{ block.settings.top_post.image | img_url: '400x' }}" alt="{{ block.settings.top_post.title }}" loading="lazy">
+                <h4>{{ block.settings.top_post.title }}</h4>
+              </a>
+              <p class="blog-excerpt">{{ block.settings.top_post.excerpt_or_content | truncatewords: 25 }}</p>
+              <a href="{{ block.settings.top_post.url }}" class="read-more-btn">READ MORE FROM THIS BLOG →</a>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+      <div class="top-blog-form-container">
+  <div class="top-blog-form">
+
+    {%- for block in section.blocks -%}
+      {%- if block.type == "media_promo" and block.settings.media_image != blank -%}
+        <div class="top-media-promo">
+          <a href="{{ block.settings.media_link | default: '#' }}">
+            <img src="{{ block.settings.media_image | img_url: '800x' }}" alt="Media Promotion">
+          </a>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+
+    <iframe
+      src="https://app.npta.ca/widget/form/lJveusatl20r4YtwufAG"
+      style="width:400px;height:600px;border:none;border-radius:12px;"
+      title="$25 OFF Pop Up Form - Blog"
+    ></iframe>
+
+  </div>
+</div>
+
+
+</div>
+
+<!-- CSS Styling -->
+<style>
+.top-blog-posts-section {
+  width: 95%;
+  margin: 0 auto;
+  padding: 20px 50px;
+}
+
+.top-blog-posts-grid {
+  display: grid;
+  grid-template-columns: 65% 35%;
+  gap: 80px;
+  align-items: start;
+}
+
+.top-blog-posts-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.top-blog-post img {
+    border-radius: 20px;
+  }
+
+.top-blog-posts {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+}
+
+.top-blog-post {
+  background: #fff;
+  flex: 1 1 40%;
+  padding: 20px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.top-blog-post:hover {
+  transform: translateY(-5px);
+  background: #d0d0d0;
+}
+
+.top-blog-post h4, .top-blog-post p, .read-more-btn {
+  color: #141414;
+  margin-bottom: 10px;
+}
+
+.top-blog-post a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.top-blog-post .read-more-btn {
+  color: #133257;
+  font-weight: bold;
+}
+
+.top-blog-post:hover h4,
+.top-blog-post:hover p,
+.top-blog-post:hover .read-more-btn {
+  color: #22528c;
+}
+
+.top-media-promo img {
+  width: 400px;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: 40px; /* Add spacing below the promo image */
+}
+
+.top-blog-form iframe {
+  width: 400px;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+
+@media (max-width: 1125px) {
+  .top-blog-posts-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .top-blog-posts-container {
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+  }
+
+  .top-blog-posts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 30px;
+  }
+
+  .top-blog-post {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+  }
+
+  .top-blog-form-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .top-blog-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .top-media-promo img,
+  .top-blog-form iframe {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-blog-posts-section {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .top-blog-posts-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .top-blog-posts-container {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .top-blog-posts {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 30px;
+  }
+
+  .top-blog-post {
+    width: 100%;
+    max-width: 90%;
+    text-align: center;
+  }
+
+  .top-blog-post img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+  }
+
+  .top-blog-form-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .top-blog-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .top-media-promo img,
+  .top-blog-form iframe {
+    width: 100% !important;
+    max-width: 400px;
+    height: auto;
+  }
+}
+
+</style>

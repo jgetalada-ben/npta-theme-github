@@ -1,0 +1,337 @@
+{% comment %}
+  Renders a header drawer menu for mobile and desktop.
+
+  Usage:
+  {% render 'header-drawer' %}
+{% endcomment %}
+
+<header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
+  <details id="Details-menu-drawer-container" class="menu-drawer-container">
+    <summary
+      class="header__icon header__icon--menu header__icon--summary link focus-inset"
+      aria-label="{{ 'sections.header.menu' | t }}"
+    >
+      <span>
+        {% render 'icon-hamburger' %}
+        {% render 'icon-close' %}
+      </span>
+    </summary>
+    <div id="menu-drawer" class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}">
+      <div class="menu-drawer__inner-container">
+        <div class="menu-drawer__navigation-container">
+
+
+
+
+<div class="menu-container">
+
+<form action="/search" method="get" class="search-bar-mobile">
+  <input type="text" name="q" placeholder="Search" aria-label="Search">
+  <button type="submit">Search</button>
+</form>
+
+
+  {% assign main_menu = linklists['main-menu'] %} <!-- Replace 'main-menu' with your navigation handle -->
+  <ul class="main-menu">
+    {% for link in main_menu.links %}
+      <li class="menu-item">
+        {% if link.links.size > 0 %}
+          <div class="mobile-menu-collapsible">{{ link.title }}</div>
+          <ul class="mobile-sub-menu">
+            {% for sublink in link.links %}
+              <li><a href="{{ sublink.url }}">{{ sublink.title }}</a></li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+         <div class="drawer--mobile-buttons">
+  
+       <a href="/collections/all" class="btn button-yg menu-button">
+         <span class="btn-label-down">View All Programs</span>
+         <span class="btn-label-down">View All Programs</span>
+       </a>
+     </div>
+</div>
+
+   
+
+
+          
+          <div class="menu-drawer__utility-links">
+       <div class="utility-links-wrap">
+      <h3>Have questions? </h3>
+      <p>Our team is here to help. </p>
+         <div class="util-contact-grid">
+          <div class="util-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="19" fill="none"><path d="m14.285 12.063 2.834 2.834a.963.963 0 0 1 0 1.361 5.775 5.775 0 0 1-7.548.537l-1.809-1.357a22.997 22.997 0 0 1-4.6-4.6L1.805 9.03a5.775 5.775 0 0 1 .537-7.548.962.962 0 0 1 1.36 0l2.835 2.834a1 1 0 0 1 0 1.414L5.42 6.847a.563.563 0 0 0-.105.65 12.945 12.945 0 0 0 5.789 5.788.563.563 0 0 0 .65-.105l1.117-1.117a1 1 0 0 1 1.414 0Z" fill="#E9F24F" stroke="#E9F24F" stroke-width="1.2"/></svg><a href="tel:+1 778-924-4220">+1 778-924-4220</a> </div>
+                   <div class="util-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="19" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M.013 6.651C0 7.191 0 7.802 0 8.5v2c0 2.828 0 4.243.879 5.121.878.879 2.293.879 5.121.879h6c2.828 0 4.243 0 5.121-.879C18 14.743 18 13.328 18 10.5v-2c0-.698 0-1.31-.013-1.849L9.97 11.104a2 2 0 0 1-1.942 0L.013 6.651Zm.23-2.121c.083.02.164.052.243.096L9 9.356l8.514-4.73c.079-.044.16-.075.243-.096-.13-.474-.33-.845-.636-1.151C16.243 2.5 14.828 2.5 12 2.5H6c-2.828 0-4.243 0-5.121.879-.307.306-.506.677-.636 1.15Z" fill="#E9F24F"/></svg><a href="mailto:info@npta.ca">info@npta.ca </a> </div>
+
+          </div>
+      
+     
+           </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  
+  {% render 'header-search', input_id: 'Search-In-Modal' %}
+
+</header-drawer>
+
+<style>
+.menu-container {
+  padding: 20px;
+}
+
+.menu-search-bar {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+#menu-search-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  font-size: 16px;
+}
+
+#menu-search-button {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+}
+
+#menu-search-button:hover {
+  background-color: #555;
+}
+
+.drawer--mobile-buttons{
+
+}
+  .menu-button{
+    width:100%;
+  }
+/* Existing styles */
+
+.main-menu {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.menu-item {
+  padding: 15px 0;
+  border-bottom: 1px solid #d6d6d6;
+}
+
+.mobile-menu-collapsible {
+  background: none;
+
+  cursor: pointer;
+  padding: 0;
+  width: 100%;
+  color: var(--black, #141414);
+  font-family: var(--font-heading-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 24px */
+  letter-spacing: 1.28px;
+  text-transform: uppercase;
+  display: block;
+  position: relative;
+}
+.menu-item a {
+  background: none;
+
+  cursor: pointer;
+
+  width: 100%;
+  color: var(--black, #141414);
+  font-family: var(--font-heading-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 24px */
+  letter-spacing: 1.28px;
+  text-transform: uppercase;
+  display: block;
+  position: relative;
+  text-decoration: none;
+}
+
+.mobile-menu-collapsible::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  transition: transform 0.3s ease;
+  width: 28px;
+  height: 28px;
+  background-size: contain;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' fill='none'%3E%3Cpath d='M19.793 16.896 14 11.104l-5.793 5.793' stroke='%23141414' stroke-opacity='.6' stroke-width='2' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  transform: rotate(180deg);
+}
+
+.mobile-menu-collapsible.active::after {
+  transform: rotate(0deg);
+}
+
+.mobile-sub-menu {
+  list-style-type: none;
+  padding-left: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  background-color: #fff;
+  margin:0;
+}
+
+.mobile-sub-menu li a {
+  color: rgba(20, 20, 20, 0.6);
+
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: 1.12px;
+  text-transform: uppercase;
+  transition: 300ms;
+}
+
+.mobile-sub-menu a {
+  display: block;
+  padding: 8px 0;
+  text-decoration: none;
+}
+
+.mobile-sub-menu a:hover {
+  color: rgba(20, 20, 20, 1);
+  transition: 300ms;
+}
+
+/**  Search **/
+.search-bar-mobile {
+  position: relative;
+  border-radius: 8px;
+  background: #f4f4f4;
+  display: flex;
+  width: 100%;
+  height: 48px;
+  align-items: center;
+}
+.search-bar-mobile input {
+  border: none;
+  width: 100%;
+  outline: none;
+  height: 100%;
+  padding: 12px 15px 12px 50px;
+  background-color: transparent;
+  border-radius: 8px;
+}
+.search-bar-mobile input {
+  color: #9a9a9a;
+
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
+.search-bar-mobile button {
+  color: transparent;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  left: 13px;
+  top: 12px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none'%3E%3Cpath fill='%23141414' d='m20.71 19.29-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095ZM5 11a6 6 0 1 1 12 0 6 6 0 0 1-12 0Z'/%3E%3C/svg%3E");
+}
+
+  
+/** Utility **/
+.utility-links-wrap h3{
+  color: var(--black, #141414);
+    font-family: var(--font-heading-family);
+font-size: 16px;
+font-style: normal;
+font-weight: 800;
+line-height: 150%; /* 24px */
+letter-spacing: 1.28px;
+text-transform: uppercase;
+  margin:10px 0;
+}
+  .utility-links-wrap p{
+color: var(--black, #141414);
+    font-family: var(--font-body-family);
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; /* 21px */
+  margin:0;
+}
+  .util-contact-item{
+    display:grid;
+    grid-template-columns:20px auto;
+    grid-column-gap:5px;
+      margin:10px 0;
+  }
+    .util-contact-item a{
+    color: var(--black, #141414);
+ font-family: var(--font-heading-family);
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; /* 21px */
+letter-spacing: 1.12px;
+text-transform: uppercase;
+      text-decoration:none;
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const collapsibles = document.querySelectorAll('.mobile-menu-collapsible');
+
+  collapsibles.forEach((collapsible) => {
+    collapsible.addEventListener('click', function () {
+
+      this.classList.toggle('active');
+
+ 
+      const subMenu = this.nextElementSibling;
+
+
+      if (subMenu.style.maxHeight) {
+      
+        subMenu.style.maxHeight = null;
+      } else {
+  
+        collapsibles.forEach((item) => {
+          if (item !== this) {
+            item.classList.remove('active');
+            item.nextElementSibling.style.maxHeight = null;
+          }
+        });
+
+        subMenu.style.maxHeight = subMenu.scrollHeight + 'px';
+      }
+    });
+  });
+});
+
+
+</script>

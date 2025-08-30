@@ -1,0 +1,249 @@
+{% schema %}
+{
+  "name": "Exciting News & Media",
+  "tag": "section",
+  "class": "exciting-news-section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "media_promo",
+      "name": "Media Promotion",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "media_image",
+          "label": "Promotion Image"
+        },
+        {
+          "type": "url",
+          "id": "media_link",
+          "label": "Promotion Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Exciting News & Media",
+      "category": "Blog Page",
+      "blocks": [
+        {
+          "type": "media_promo"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<div class="exciting-news-section">
+  <div class="exciting-news-grid">
+
+    <!-- Left Column: Exciting News -->
+    <div class="exciting-news-container">
+      <h2>Exciting News!</h2>
+      <ul class="exciting-news-list">
+        {% assign news_articles = blogs['npta-blogs'].articles %}
+        {% for article in news_articles %}
+          {% if article.tags contains "News" %}
+            <li class="news-article">
+  <div class="news-thumbnail">
+    <a href="{{ article.url }}">
+      <img src="{{ article.image | img_url: '400x400' }}" alt="{{ article.title }}">
+    </a>
+  </div>
+  <div class="content">
+    <h4>
+      <a href="{{ article.url }}">{{ article.title }}</a>
+    </h4>
+    <p>{{ article.excerpt | strip_html | truncatewords: 25 }}</p>
+    <a href="{{ article.url }}" class="read-more">Read More →</a>
+  </div>
+</li>
+          {% endif %}
+          {% if forloop.index == 5 %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Right Column: Media Promotion -->
+    <div class="media-promotion">
+      {% for block in section.blocks %}
+        {% if block.type == "media_promo" and block.settings.media_image != blank %}
+          <a href="{{ block.settings.media_link | default: '#' }}">
+            <img src="{{ block.settings.media_image | img_url: '800x' }}" alt="Media Promotion">
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+
+
+<style>
+.exciting-news-section {
+  width: 90%;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.exciting-news-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+}
+
+/* Title */
+.exciting-news-container h2 {
+  margin-bottom: 20px;
+  color: #000;
+}
+
+/* News List (Column Layout) */
+.exciting-news-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Each News Article Item */
+.news-article {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 30px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.3s;
+  width: 100%;
+}
+
+
+.news-article:hover {
+  background-color: #d0d0d0;
+  transform: translateY(-3px);
+}
+
+/* Thumbnail */
+.news-thumbnail {
+  width: 95px;
+  height: 95px;
+  overflow: hidden;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+
+.news-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* News Content (Matches Latest Blogs) */
+.news-article .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+}
+
+.news-article h4 {
+  font-size: 16px;
+  color: #141414;
+  margin: 0 0 5px 0;
+  padding: 0;
+}
+
+.news-article p {
+  font-size: 13px;
+  color: #555;
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+
+.news-article .read-more {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #133257;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.news-article .read-more {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #133257;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.news-article:hover h4,
+.news-article:hover p,
+.news-article:hover .read-more {
+  color: #22528c;
+}
+
+/* Link Styling */
+.news-article a {
+  display: flex;
+  gap: 20px;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Media Promotion */
+.media-promotion img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+  .exciting-news-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .news-article {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .news-thumbnail {
+    width: 100%;
+    height: auto;
+  }
+
+  .news-thumbnail img {
+    width: 60%;
+    height: auto;
+    border-radius: 20px;
+  }
+
+  .news-article .content {
+    padding-top: 10px;
+  }
+
+  .media-promotion img {
+    width: 100%;
+    height: auto;
+  }
+}
+ 
+</style>

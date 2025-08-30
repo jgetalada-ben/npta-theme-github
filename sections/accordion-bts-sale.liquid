@@ -1,0 +1,343 @@
+{% schema %}
+{
+    "name": "Accordion BTS",
+    "settings": [
+              {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "canada-sale"
+    },
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Lorem ipsum dolor sit amet"
+        },
+    
+      {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Select an image",
+      "info": "Choose an image from your files."
+    },
+{
+  "type": "checkbox",
+  "id": "show_buttons",
+  "label": "Display Buttons"
+},
+{
+  "type": "text",
+  "id": "primary_button_text",
+  "label": "Primary Button Text",
+  "default": "Button"
+},
+{
+  "type": "url",
+  "id": "primary_button_link",
+  "label": "Primary Button URL"
+},
+{
+  "type": "select",
+  "id": "primary_button_target",
+  "label": "Primary Button Target",
+  "options": [
+    {
+      "value": "_self",
+      "label": "Same Window"
+    },
+    {
+      "value": "_blank",
+      "label": "New Window"
+    }
+  ],
+  "default": "_self"
+},
+{
+  "type": "text",
+  "id": "secondary_button_text",
+  "label": "Secondary Button Text",
+  "default": "Button"
+},
+{
+  "type": "url",
+  "id": "secondary_button_link",
+  "label": "Secondary Button URL"
+},
+{
+  "type": "select",
+  "id": "secondary_button_target",
+  "label": "Secondary Button Target",
+  "options": [
+    {
+      "value": "_self",
+      "label": "Same Window"
+    },
+    {
+      "value": "_blank",
+      "label": "New Window"
+    }
+  ],
+  "default": "_self"
+}
+
+    ],
+    "blocks": [
+        {
+            "type": "highlight",
+            "name": "Highlight",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "highlight_title",
+                    "label": "Highlight Title",
+                    "default": "Highlight Title Goes Here"
+                },
+                {
+                    "type": "richtext",
+                    "id": "highlight_description",
+                    "label": "Highlight Description",
+                    
+                },
+                {
+                "type": "image_picker",
+                "id": "highlight_image",
+                "label": "Highlight Image"
+                }
+                
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Accordion BTS",
+            "category": "Custom Sections"
+        }
+    ]
+}
+{% endschema %}
+
+
+
+<section class="section--accordion-four">
+    <div class="accordion-four--container page-container">
+        <div class="accordion-four--content">
+            <div class="accordion-four--column-left">
+                   <div class="section--title-block is--heading-white">
+                    <h2 class="is--flex-start">{{ section.settings.heading }}</h2> 
+                     <p style="color:white;font-weight:normal;font-size: 21px;text-align:left;">This bundle combines two NASM certifications - the gold standard in the fitness industry - plus a bonus Weight Loss Specialization to make you a complete fitness professional.</p>
+                        
+                </div>
+
+                <div class="accordion-four--highlights">
+                    {% for block in section.blocks %}
+                        {% if block.type == 'highlight' %}
+                            <div class="accordion-four--highlight"
+                                data-image="{{ block.settings.highlight_image | img_url: 'original' }}">
+                                <h3>{{ block.settings.highlight_title }}</h3>
+                               <div class="accordion-highlight-content"> {{ block.settings.highlight_description }}</div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+              {% if section.settings.show_buttons %}
+                  <div class="section--hero-buttons">
+                      <a href="{{ section.settings.primary_button_link }}" class="btn button-yg" target="{{ section.settings.primary_button_target }}">
+                          <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+                          <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+                      </a>
+                    
+                  </div>
+{% endif %}
+            </div>
+            <div class="accordion-four--column-right">
+              <div class="image-wrapper2">
+                <img id="highlight-main-image" src="" alt="Highlight image" />
+              </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+
+.accordion-highlight-content {
+  cursor: pointer;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 300ms ease;
+  margin: 0;
+}
+.accordion-four--highlight.active .accordion-highlight-content {
+  max-height: 1000px; /* or a reasonable max, or use scrollHeight in JS */
+  margin-top: 16px;
+}
+
+.is--heading-white h2{
+  color: #FFF;
+} 
+
+
+.section--accordion-four {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #133257;
+        padding: 90px 0;
+    }
+.accordion-four--container{
+
+}
+  @media only screen and (min-width: 981px) {
+  .accordion-four--content{
+  grid-template-columns:1fr 1fr;
+}
+    .accordion-four--content{
+  display:grid;
+}
+.accordion-four--column-right{
+ width:100%;
+  padding-left:90px;
+}
+    .accordion-four--column-left{
+ width:100%;
+    
+
+}
+  }
+  @media only screen and (max-width: 980px) {
+
+    .accordion-four--content{
+  display:flex;
+      flex-wrap:wrap;
+      flex-direction: column-reverse;
+      gap:30px;
+}
+    
+.accordion-four--column-left{
+ width:100%;
+  max-width: 100%;
+}
+
+  }
+
+
+  
+
+
+
+.accordion-four--column-right{
+ width:100%;
+}
+
+
+    .video-text-content {
+        display: flex;
+        width: 100%;
+    }
+    .text-content {
+        color: #141414;
+        flex: 1;
+        margin-right: 20px;
+    }
+  
+    .image-wrapper2 {
+        position: relative;
+        width:100%;
+        height: 100%;
+   
+    }
+      .image-wrapper2 img{
+      width:100%;
+      height:100%;  
+        object-fit:contain;
+      overflow:hidden;
+    }
+
+.accordion-four--highlights{
+  margin-bottom:30px;
+}
+.accordion-four--highlight h3{
+  color:  #fff;
+text-align: left;
+    font-family: var(--font-heading-family);
+font-size: 22px;
+font-style: normal;
+font-weight: 800;
+line-height: 104%; /* 22.88px */
+text-transform: uppercase;
+    margin-bottom: 0 ;
+}
+
+.accordion-four--highlight p{
+color: #fff;
+    font-family: var(--font-body-family);
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; /* 24px */
+}
+
+.accordion-four--highlight p {
+  cursor: pointer;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 300ms ease;
+margin: 0;
+}
+
+.accordion-four--highlight.active p {
+  max-height:auto; 
+  margin-top:16px;
+}
+
+.accordion-four--highlight.active{
+  border-left: 3px solid #E9F24F;
+    transition:300ms padding ;
+    padding-left: 24px;
+  opacity:1;
+}
+.accordion-four--highlight{
+  padding-left: 27px;
+  transition:300ms padding ;
+  opacity: 0.6;
+
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const mainImage = document.getElementById('highlight-main-image');
+  const highlights = document.querySelectorAll('.accordion-four--highlight');
+  
+  // Show the image for the first block by default, if it exists
+  if (highlights.length > 0) {
+    const firstImageUrl = highlights[0].dataset.image;
+    if (mainImage && firstImageUrl) {
+      mainImage.src = firstImageUrl;
+    }
+  }
+
+  // Your existing click logic
+  highlights.forEach(highlight => {
+    highlight.addEventListener('click', () => {
+      highlights.forEach(h => {
+        h.classList.remove('active');
+        const content = h.querySelector('.accordion-highlight-content');
+        if (content) content.style.maxHeight = '0';
+      });
+      highlight.classList.add('active');
+      const content = highlight.querySelector('.accordion-highlight-content');
+      if (content) content.style.maxHeight = content.scrollHeight + 'px';
+
+      const imageUrl = highlight.dataset.image;
+      if (mainImage && imageUrl) {
+        mainImage.src = imageUrl;
+      } else if (mainImage) {
+        mainImage.src = '';
+      }
+    });
+  });
+});
+
+</script>

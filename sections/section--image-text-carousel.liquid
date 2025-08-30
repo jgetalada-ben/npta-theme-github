@@ -1,0 +1,266 @@
+{% schema %}
+{
+  "name": "Swiper Carousel",
+  "tag": "section",
+  "class": "swiper-carousel-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "NEW PARTNERSHIP!"
+    },
+    {
+      "type": "richtext",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "<p>Take your training to the next level with KB Stronger Method!</p>"
+    },
+    {
+      "type": "range",
+      "id": "slide_count",
+      "label": "Number of slides per view",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_delay",
+      "label": "Autoplay Delay (ms)",
+      "min": 1000,
+      "max": 5000,
+      "step": 500,
+      "default": 2500
+    },
+    {
+      "type": "checkbox",
+      "id": "show_buttons",
+      "label": "Show Buttons",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Slide Image"
+        },
+        {
+          "type": "text",
+          "id": "title_prefix",
+          "label": "Title (Before Highlighted Text)",
+          "default": "UP TO"
+        },
+        {
+          "type": "text",
+          "id": "title_highlight",
+          "label": "Highlighted Text",
+          "default": "50% OFF"
+        },
+        {
+          "type": "color",
+          "id": "highlight_color",
+          "label": "Highlight Color (Highlighted Text)",
+          "default": "#e9f24f"
+        },
+        {
+          "type": "text",
+          "id": "title_suffix",
+          "label": "Title (After Highlighted Text)",
+          "default": "on all items!"
+        },
+        {
+          "type": "color",
+          "id": "highlight_suffix_color",
+          "label": "Highlight Color (Title Suffix)",
+          "default": "#ff0000"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Slide Description",
+          "default": "Your slide description goes here."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button Style",
+          "default": "button-yg",
+          "options": [
+            { "value": "button-yg", "label": "Yellow" },
+            { "value": "button-w", "label": "White" },
+            { "value": "button-b", "label": "Blue" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Swiper Carousel",
+      "category": "Image",
+      "blocks": [
+        { "type": "slide" },
+        { "type": "slide" },
+        { "type": "slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+{{ 'swiper-carousel.css' | asset_url | stylesheet_tag }}
+
+<div class="swiper-container">
+  <div class="section-header">
+    <h2>{{ section.settings.section_title }}</h2>
+    <div class="section-description">{{ section.settings.section_description }}</div>
+  </div>
+
+<div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+        {% if block.settings.image %}
+          <div class="swiper-slide">
+            <div class="slide-container">
+              <div class="slide-content">
+
+                <!-- Text Content (Left) -->
+                <span class="slide-title">
+                  {{ block.settings.title_prefix }}
+                  <br>
+                  <span style="color: {{ block.settings.highlight_color }};">{{ block.settings.title_highlight }}</span> 
+                  <span style="color: {{ block.settings.highlight_suffix_color }};">{{ block.settings.title_suffix }}</span>
+                </span>
+                
+                <p class="slide-description">{{ block.settings.description }}</p>
+
+                {% if section.settings.show_buttons %}
+                  {% if block.settings.button_text and block.settings.button_link %}
+                    <a href="{{ block.settings.button_link }}" class="btn {{ block.settings.button_style }}">
+                      <span class="btn-label-down">{{ block.settings.button_text }}</span>
+                      <span class="btn-label-down">{{ block.settings.button_text }}</span>
+                    </a>
+                  {% endif %}
+                {% endif %}
+                
+
+              </div> <!-- End of slide-content -->
+
+              <!-- Image (Right Side) -->
+              <div class="slide-image">
+                <img src="{{ block.settings.image | img_url: 'large' }}"alt="{{ block.settings.title_prefix }} {{ block.settings.title_highlight }} {{ block.settings.title_suffix }}" />
+              </div>
+
+            </div> <!-- End of slide-container -->
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+</div>
+
+
+{{ 'swiper-bundle.min.js' | asset_url | script_tag }}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const progressCircle = document.querySelector(".autoplay-progress svg circle");
+    const progressContent = document.querySelector(".autoplay-progress span");
+
+    var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 40,
+        centeredSlides: true,
+        autoplay: {
+            delay: {{ section.settings.autoplay_delay }},
+            disableOnInteraction: false
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        slidesPerView: {{ section.settings.slide_count }},
+        loop: true,
+        on: {
+            autoplayTimeLeft(s, time, progress) {
+                if (progressCircle) {
+                    let strokeDashoffset = 125.6 * (1 - progress);
+                    progressCircle.style.strokeDashoffset = strokeDashoffset;
+                }
+                if (progressContent) {
+                    progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+                }
+            },
+            init: function (swiper) {
+                updateSlideClasses(swiper);
+                resetTimer(swiper); // Reset timer on init
+            },
+            slideChange: function (swiper) {
+                updateSlideClasses(swiper);
+                resetTimer(swiper); // Reset timer on slide change
+            }
+        }
+    });
+
+    function updateSlideClasses(swiper) {
+        let slides = swiper.slides;
+        let activeIndex = swiper.activeIndex;
+
+        slides.forEach(slide => slide.classList.remove("highlight-center", "highlight-left", "highlight-right"));
+
+        if (slides[activeIndex]) slides[activeIndex].classList.add("highlight-center");
+        if (slides[activeIndex - 1]) slides[activeIndex - 1].classList.add("highlight-left");
+        if (slides[activeIndex + 1]) slides[activeIndex + 1].classList.add("highlight-right");
+    }
+
+    function resetTimer(swiper) {
+        if (progressCircle) {
+            progressCircle.style.strokeDashoffset = "0";
+        }
+        if (progressContent) {
+            progressContent.textContent = `${Math.ceil(swiper.params.autoplay.delay / 1000)}s`;
+        }
+    }
+
+    document.querySelectorAll(".swiper-slide").forEach(slide => {
+        slide.addEventListener("mouseenter", function () {
+            swiper.autoplay.stop();
+        });
+
+        slide.addEventListener("mouseleave", function () {
+            swiper.autoplay.start();
+        });
+      });
+});
+</script>

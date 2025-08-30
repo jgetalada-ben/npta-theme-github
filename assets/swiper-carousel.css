@@ -1,0 +1,334 @@
+.swiper-container {
+  width: 100%;
+  height: auto; /* Adjust height based on desired space */
+  position: relative;
+  background-color: #f7f8fa; /* Background color */
+  display: flex;
+  flex-direction: column; /* Added to stack title and slides */
+  align-items: center; /* Center content horizontally */
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.section-header {
+    text-align: center; /* Change to left or right as needed */
+    margin-bottom: 10px; /* Space below the title */
+}
+
+/* Center Slide (Active Slide) */
+.swiper-slide.highlight-center {
+  transform: scale(1);
+  opacity: 1;
+  z-index: 2;
+}
+
+/* Left and Right Slides */
+.swiper-slide.highlight-left {
+  transform: translateX(-30px) scale(0.8);
+  opacity: 0.5;
+}
+.swiper-slide.highlight-right {
+  transform: translateX(30px) scale(0.8);
+  opacity: 0.5;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-wrapper {
+  display: flex;
+  align-items: center;
+  padding-bottom: 30px;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: grab;
+  transition: transform 0.6s ease, opacity 0.5s ease;
+  transform: scale(0.8);
+  opacity: 0.6;
+  height: 100%;
+  padding-bottom: 10px;
+}
+
+.swiper-slide-active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Base Pagination Styling */
+.swiper-pagination-bullet {
+    width: 7px;
+    height: 7px;
+    background: #bbb; /* Default bullet color */
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+/* Active Bullet */
+.swiper-pagination-bullet-active {
+    background: #737373; /* Active bullet color (blue) */
+    opacity: 1;
+    transform: scale(1.3); /* Slightly bigger */
+}
+
+/* Slide Container */
+.slide-container {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  background: #133257;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;  
+}
+
+.slide-content {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  color: #fff;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Slide Image (Right Side) */
+.slide-image {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin: 30px;
+}
+
+.slide-image img{
+  width:100%;
+  height: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+/* Title, Description & Button */
+.slide-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #e9f24f;
+}
+
+.slide-description {
+  font-size: 14px;
+  padding-bottom: 20px;
+}
+
+@media only screen and (min-width: 1261px) {
+  .slide-content {
+    width: 100%;    
+  }
+
+  .slide-image {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1260px) {
+  .slide-container {
+    display:flex;
+    flex-direction: column-reverse;
+    
+  }
+  
+  .slide-content {
+    width: 80%;
+    padding-bottom: 20px;
+    margin: 0px auto 20px auto;
+  }
+  
+  .slide-image {
+    width: 100%;
+    height: auto;
+    margin: 30px auto;
+  }
+
+  .slide-image img{
+    width: 90%;
+    height: auto;
+  }
+
+  .slide-title {
+    font-size: 20px;
+  }
+
+  .slide-description {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .slide-container {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .slide-content {
+    width: 90%;
+    padding-bottom: 20px;
+    margin: 0px auto 20px auto;
+    padding: 10px;
+  }
+  
+  .slide-image {
+    display: none;
+  }
+
+  .slide-title {
+    font-size: 18px;
+  }
+
+  .slide-description {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .swiper-container {
+    display: none;
+  }
+}
+
+.btn {
+  display: inline-block;
+  height: 49px;
+  line-height: 49px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  color: white;
+  border-radius: 8px;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.btn-label-down {
+  color: #141414;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1.12px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.btn-label-down {
+  display: block;
+  margin: 0px 30px;
+  height: 100%;
+  position: relative;
+  top: -100%;
+  transition: 0.3s;
+}
+
+.button-yg:hover .btn-label-down {
+  top: 0%;
+}
+
+/* Button Styles */
+.button-yg {
+  background-color: #e9f24f;
+  color: white;
+}
+
+.button-yg:hover {
+  background: #e9f24f;
+}
+
+.button-w {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.button-w span {
+  color: #fff;
+}
+
+.button-w:hover {
+  background: #fff;
+}
+
+.button-w:hover .btn-label-down {
+  top: 0%;
+  color: #141414;
+}
+
+/* Timer Positioning */
+.autoplay-progress {
+  display: none;
+}
+
+.autoplay-progress svg {
+  display: none;
+}
+
+/* Base arrow styling */
+.swiper-button-prev,
+.swiper-button-next {
+    color: #fff; /* Arrow color */
+    font-size: 20px; /* Adjust icon size */
+    width: 50px;
+    height: 50px;
+    background-color: #133257;
+    border-radius: 50%; /* Make it circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    z-index: 10; 
+}
+
+
+/* Ensure icon is centered properly */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    font-size: 18px; /* Adjust arrow size */
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Match parent container */
+    height: 100%; /* Match parent container */
+    line-height: 1; /* Ensures proper centering */
+}
+
+/* Positioning the arrows inside the gap */
+.swiper-button-prev {
+    left: calc(20% - 25px); /* Adjusted for alignment */
+}
+
+.swiper-button-next {
+    right: calc(20% - 25px); /* Adjusted for alignment */
+}
+
+/* Hover effect */
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+    background-color: #e9f24f;
+    transform: scale(1.1);
+    color: #000;
+}
+
+/* Adjust for smaller screens */
+@media screen and (max-width: 1024px) {
+    .swiper-button-prev {
+        left: calc(15% - 30px);
+    }
+
+    .swiper-button-next {
+        right: calc(15% - 30px);
+    }
+}

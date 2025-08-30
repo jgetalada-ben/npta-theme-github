@@ -1,0 +1,276 @@
+<div class="collection-cards">
+  {% assign max_products = 3 %}
+  {% for product in collection.products %}
+    {% if forloop.index <= max_products %}
+      <a href="{{ product.url }}" class="card">
+  {% if product.compare_at_price > product.price %}
+  {% assign original_price = product.compare_at_price | floor %}
+  {% assign sale_price = product.price | floor %}
+  {% assign discount_amount = original_price | minus: sale_price %}
+  {% assign discount_percentage = discount_amount | divided_by: 100 | floor %}
+
+  <div class="discount">
+    {% if discount_percentage > 10 %}
+      <span>SAVE ${{ discount_percentage }}</span>
+    {% else %}
+ <span>Best Price</span>
+    {% endif %}
+  </div>
+{% endif %}
+
+        {% if product.featured_image %}
+          <img src="{{ product.featured_image | img_url: 'original' }}" alt="{{ product.title }}">
+        {% endif %}
+        
+
+
+
+             <!-- Product Tags -->
+{% if product.tags %}
+  <div class="product-tags">
+    {% for tag in product.tags %}
+      {% unless tag == "All Courses" %}
+        <span class="tag">{{ tag }}</span>
+      {% endunless %}
+    {% endfor %}
+  </div>
+{% endif %}
+      
+        <h3>{{ product.title }}</h3>
+        {% if product.description %}
+          <div class="description">{{ product.description | truncate: 100, '...' }}</div>
+        {% endif %}
+        {% if product.compare_at_price > product.price %}
+          <div class="card-price-wrap">
+            <span class="sale-price">{{ sale_price | floor | money }}</span>
+            <span class="compare-price">{{ original_price | floor | money }}</span>
+          </div>
+        {% else %}
+          <div class="card-price-wrap">
+          <span  class="sale-price">{{ product.price | floor | money }}</span>
+           </div>
+        {% endif %}
+
+   {% if product.available %}
+  <div class="add-to-cart-button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <rect width="34" height="34" rx="10" />
+      <path d="M9.71423 17H24.2857" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M17 9.71423V24.2857" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+{% endif %}
+
+      </a>
+    {% else %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+</div>
+
+
+
+
+
+<style>
+
+  .add-to-cart-button{
+    position:absolute;
+    bottom:0;
+    right:0;
+    width: 34px;
+height: 34px;
+  }
+
+    .add-to-cart-button svg{
+ fill: #fff;
+             transition:300ms;
+  }
+     .add-to-cart-button:hover svg{
+ fill: #E9F24F;
+       transition:300ms;
+  }
+  
+
+
+  
+ .collection-cards {
+     display: grid;
+
+
+}
+    
+ .collection-cards {
+
+    grid-template-columns: 1fr 1fr 1fr;
+   grid-column-gap:30px;
+   grid-row-gap:30px;
+
+}
+  @media only screen and (min-width: 981px) {
+     .collection-cards {
+
+    grid-template-columns: 1fr 1fr 1fr;
+   grid-column-gap:30px;
+   grid-row-gap:30px;
+
+}
+  }
+    @media only screen and (min-width: 768px) and (max-width: 981px) {
+     .collection-cards {
+
+    grid-template-columns: 1fr 1fr ;
+   grid-column-gap:30px;
+   grid-row-gap:30px;
+
+}
+  }
+
+      @media only screen  and (max-width: 767px) {
+     .collection-cards {
+
+    grid-template-columns: 1fr ;
+   grid-column-gap:30px;
+   grid-row-gap:30px;
+
+}
+  }
+  
+.card {
+  width: 100%;
+position: relative;
+  padding-bottom:50px;
+text-decoration:none;
+}
+  .card:hover .add-to-cart-button svg {
+    fill: #E9F24F !important;
+    transition: 300ms;
+}
+  /**
+    .card:hover img {
+            transform: scale(1.03);
+              transition: transform .5 ease;
+}
+  **/
+.card img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 20px;
+}
+.card h3 {
+  color: #141414;
+
+    font-family: var(--font-heading-family);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 104%; /* 18.72px */
+  text-transform: uppercase;
+  margin-bottom:7px;
+  margin-top:0;
+}
+.product-tags {
+display:flex;
+  justify-content:flex-start;
+  margin-bottom:10px;
+}
+.tag {
+    margin-bottom: 10px;
+  border-radius: 10px;
+  background: rgba(20, 20, 20, 0.05);
+  display: inline-flex;
+  height: 34px;
+  padding: 0px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: #141414;
+  font-family: var(--font-body-family);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 18px */
+  text-transform: uppercase;
+}
+  .card-price-wrap{
+        display: flex;
+    align-items: center;
+    position:absolute;
+    bottom:0;
+    left:0;
+    gap:5px;
+  }
+
+.card .sale-price {
+  color: #FFF;
+    font-family: var(--font-heading-family);
+font-size: 18px;
+font-style: normal;
+font-weight: 800;
+line-height: 104%;
+text-transform: uppercase;
+}
+.card .sale-price {
+  border-radius: 10px;
+background:  #133257;
+  display: flex;
+
+padding: 6px 13px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+flex-shrink: 0;
+}
+
+.card .compare-price {
+  text-decoration: line-through;
+  margin-left: 5px;
+  color:  #141414;
+  font-family: var(--font-body-family);
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+text-decoration-line: strikethrough;
+text-transform: uppercase;
+}
+.card .discount {
+  display: inline-flex;
+height: 34px;
+padding: 0px 10px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+flex-shrink: 0;
+  border-radius: 10px;
+background:  #E9F24F;
+}
+.card .discount {
+color:  #141414;
+    font-family: var(--font-body-family);
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; /* 21px */
+}
+.card .discount {
+position:absolute;
+  top:20px;
+  right:20px;
+  left: auto;
+}
+.card .description p{
+  color: #141414;
+    font-family: var(--font-body-family);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  opacity: 0.8;
+  margin-top:0;
+}
+
+  
+
+</style>

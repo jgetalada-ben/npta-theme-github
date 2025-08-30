@@ -1,0 +1,284 @@
+{% schema %}
+{
+  "name": "Tabs Collections",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection1",
+      "label": "Certifications Collection"
+    },
+    {
+      "type": "collection",
+      "id": "collection2",
+      "label": "Specializations Collection"
+    },
+    {
+      "type": "collection",
+      "id": "collection3",
+      "label": "Bundles Collection"
+    },
+    {
+      "type": "collection",
+      "id": "collection4",
+      "label": "View All Programs Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "category": "Custom",
+      "settings": {
+        "collection1": "",
+        "collection2": "",
+        "collection3": "",
+        "collection4": ""
+      }
+    }
+  ]
+}
+{% endschema %}
+
+<div class="section--collection-tabs">
+
+
+  
+<div class="tabs-container page-container">
+  <div class="section--title-block">
+<h2 class="is--flex-start"> Most Popular Certifications</h2> 
+
+ </div>
+  <ul class="collection-tabs">
+    <li data-tab="tab1" class="active"><span>Bundles</span></li>
+    <li data-tab="tab2"><span>Certifications</span></li>
+    <li data-tab="tab3"><span>Specializations</span></li>
+    <!--  <li data-tab="tab4"><span>View All Programs</span></li>  -->
+  </ul>
+  <div class="tab-content active" id="tab1">
+    {% assign collection = collections[section.settings.collection3] %}
+    {% include 'collection-cards' %}
+  </div>
+  <div class="tab-content" id="tab2">
+    {% assign collection = collections[section.settings.collection1] %}
+    {% include 'collection-cards' %}
+  </div>
+  <div class="tab-content" id="tab3">
+    {% assign collection = collections[section.settings.collection2] %}
+    {% include 'collection-cards' %}
+  </div>
+  <!--
+  <div class="tab-content" id="tab4">
+  {% comment %}  {% assign collection = collections[section.settings.collection4] %}
+    {% include 'collection-cards' %}
+    {% endcomment %}
+  </div>
+  -->
+
+    <div class="button-wrap" style="display: flex; justify-content: center; margin-top:50px;">
+    <a href="/collections/all" class="btn button-yg">
+            <span class="btn-label-down">View All Programs</span>
+            <span class="btn-label-down">View All Programs</span>
+          
+        </a>
+        </div>
+</div>
+
+
+  
+</div>
+
+<style>
+.section--collection-tabs{
+  width:100%;
+  padding-top:90px;
+  padding-bottom:90px;
+  background-color:#F7F8FA;
+  display:flex;
+  justify-content:center;
+  
+  
+}
+
+
+  .collection-tabs li span{
+    
+  }
+@media only screen and (min-width: 768px) {
+  .tabs {
+    display: flex;
+    list-style: none;
+    padding: 0;
+  }
+  .collection-tabs li {
+  display: inline-block;
+  padding: 0 20px;
+}
+      .collection-tabs li:first-child {
+
+  padding-left: 0;
+}
+
+    .collection-tabs li {
+    border-right: 1px solid #B3B4B5;
+ 
+  }
+    .collection-tabs li:last-child{
+    border-right: 0px solid #B3B4B5;
+
+  }
+  
+}
+  @media only screen and (max-width: 767px) {
+  .tabs {
+    display: table;
+    list-style: none;
+    padding: 0;
+  }
+    .collection-tabs li {
+  display: block;
+
+}
+       .collection-tabs li span{
+ padding: 15px 0;
+
+}
+      .collection-tabs li {
+    border-right: 0px solid #B3B4B5;
+            border-bottom:1px solid #B3B4B5;
+ 
+  }
+    .collection-tabs li:last-child{
+    border-right: 0px solid #B3B4B5;
+
+  }
+  
+}
+
+  .tabs li {
+    margin-right: 20px;
+    cursor: pointer;
+  }
+  .tabs li.active {
+    font-weight: bold;
+  }
+  .tab-content {
+    display: none;
+  }
+  .tab-content.active {
+    display: block;
+  }
+
+
+
+.collection-tabs{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom:40px;
+}
+
+
+  
+.collection-tabs li span {
+  position: relative;
+  display: block;
+  cursor: pointer;
+
+  color: #141414;
+  text-decoration: none;
+  color:  #141414;
+
+    font-family: var(--font-heading-family);
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; /* 21px */
+text-transform: uppercase;
+  opacity: 0.4;
+    transition:300ms;
+  
+}
+
+  .collection-tabs li.active span {
+color: #141414;
+
+    font-family: var(--font-heading-family);
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; 
+
+text-transform: uppercase;
+    opacity: 1 !important;
+  transition:300ms;
+}
+
+  
+.collection-tabs li span:hover{
+  color: #141414;
+  text-decoration: none;
+}
+
+.collection-tabs li span:before, .collection-tabs li span:after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -2px;
+  background: #141414;
+}
+
+.collection-tabs li span:before {
+  left: 0;
+}
+.collection-tabs li span:after {
+  right: 0;
+  background: #141414;
+  transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.collection-tabs li span:hover:before {
+  background: #141414;
+  width: 100%;
+  transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.collection-tabs li span:hover:after {
+  background: transparent;
+  width: 100%;
+  transition: 0s;
+}
+
+  .collection-tabs li.active  span:before, .collection-tabs li.active  span:after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -2px;
+  background: #141414;
+}
+  .collection-tabs li.active span:before {
+  background: #141414;
+  width: 100%;
+  transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+  
+ 
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const tabs = document.querySelectorAll('.collection-tabs li');
+    const contents = document.querySelectorAll('.tab-content');
+    
+    tabs.forEach(tab => {
+      tab.addEventListener('click', function () {
+        tabs.forEach(item => item.classList.remove('active'));
+        contents.forEach(content => content.classList.remove('active'));
+        
+        tab.classList.add('active');
+        document.getElementById(tab.getAttribute('data-tab')).classList.add('active');
+      });
+    });
+  });
+</script>

@@ -1,0 +1,254 @@
+
+{% schema %}
+{
+  "name": "Three Column Light",
+  "settings": [
+    
+  {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "certified-trainers"
+    },
+        {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    
+   {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Lorem ipsum dolor sit amet"
+    },
+    {
+      "type": "richtext",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Title Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 200,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "default": 980
+    },
+    {
+      "type": "range",
+      "id": "top_padding",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 92
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 92
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Flex Start"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Flex End"
+        }
+      ],
+      "default": "center"
+    },
+    
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Three Column Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Innovation"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "We continuously evolve our education programs to integrate the latest advancements in health, wellness, and fitness, preparing students to lead and adapt in a rapidly changing industry."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Three Column Light",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="section--three-column" id="{{ section.settings.section_id }}" style="background-color: {{ section.settings.background_color }}; padding-top: {{ section.settings.top_padding }}px; padding-bottom: {{ section.settings.bottom_padding }}px;">
+  {% if section.settings.section_title != blank %}
+  <div class="section--title-block page-container" style="display: flex; justify-content: {{ section.settings.alignment }};">
+    <div style="max-width: {{ section.settings.container_width }}px;">
+      <h2 style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_title }}</h2>
+      <div style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_description }}</div>
+    </div>
+  </div>
+  {% endif %}
+  
+<div class="three-column--container page-container">
+    <div class="three-column-card-container">
+    {% for block in section.blocks %}
+  <div class="three-column-card-wrap">
+   
+
+     <h3>{{ block.settings.title }}</h3>
+      <p>{{ block.settings.description }}</p>
+    </div>
+
+ 
+                 {% endfor %}
+</div>
+  </div>
+</section>
+
+<style>
+.section--three-column {
+  padding: 90px 0;
+}
+
+  @media only screen and (min-width: 981px) {
+.three-column-card-container {
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 32px;
+  grid-row-gap: 32px;
+}
+
+    .three-column-card-wrap {
+
+  padding: 30px;
+
+}
+  }
+    @media only screen and (max-width: 980px) {
+.three-column-card-container {
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: 32px;
+  grid-row-gap: 32px;
+}
+      .three-column-card-wrap {
+
+  padding: 35px;
+
+}
+    
+  }
+
+
+
+.three-column-card-wrap {
+  display: flex;
+
+
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 11px;
+
+  border-radius: 20px;
+  background: #F7F8FA;
+}
+
+.three-column-card-wrap h3 {
+  color: #141414;
+    font-family: var(--font-heading-family);
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 104%;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.three-column-card-wrap p {
+  color: #141414;
+    font-family: var(--font-body-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  margin: 0;
+}
+
+.section--three-column .section--title-block h2 {
+  color: #141414;
+  text-align: center;
+    font-family: var(--font-heading-family);
+  font-size: 42px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 112%;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.section--three-column .section--title-block p {
+  color: #141414;
+  text-align: center;
+    font-family: var(--font-body-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  margin: 0;
+}
+
+</style>

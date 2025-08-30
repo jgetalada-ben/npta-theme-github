@@ -1,0 +1,112 @@
+
+{% schema %}
+{
+  "name": "Mission and Vision",
+  "settings": [
+    {
+      "type": "text",
+      "id": "mission_title",
+      "label": "Mission Title",
+      "default": "OUR MISSION"
+    },
+    {
+      "type": "textarea",
+      "id": "mission_description",
+      "label": "Mission Description",
+      "default": "At NPTA, our mission is to revolutionize the fitness industry through innovative education, fostering a supportive community, and empowering individuals to achieve their highest potential. We are committed to delivering cutting-edge learning platforms that blend the latest advancements in health and wellness with a strong emphasis on community and collaboration. By cultivating a nurturing environment and providing exceptional resources, we enable our students to transform their careers, inspire others, and lead the future of fitness with confidence and competence."
+    },
+    {
+      "type": "text",
+      "id": "vision_title",
+      "label": "Vision Title",
+      "default": "OUR VISION"
+    },
+    {
+      "type": "textarea",
+      "id": "vision_description",
+      "label": "Vision Description",
+      "default": "Our vision for National Personal Training Academy is to become Canada’s leading personal training academy, dedicated to empowering fitness professionals with unparalleled resources and opportunities for growth and excellence."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mission and Vision Section"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="section--mission-vision">
+    <div class="mission-vision--container page-container">
+  <div class="row--mission-vision">
+    <h2>{{ section.settings.mission_title }}</h2>
+    <p>{{ section.settings.mission_description }}</p>
+  </div>
+  
+<div class="horizontal--divider"> </div>
+
+  <div class="row--mission-vision">
+    <h2>{{ section.settings.vision_title }}</h2>
+    <p>{{ section.settings.vision_description }}</p>
+  </div>
+        </div>
+</section>
+
+<style>
+  @media only screen and (min-width: 981px) {
+    .row--mission-vision {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap:20px;
+}
+      .horizontal--divider{
+ 
+  margin: 90px 0;
+}
+
+  }
+    @media only screen and (max-width: 980px) {
+    .row--mission-vision {
+  display:grid;
+  grid-template-columns: 1fr;
+  grid-column-gap:20px;
+}
+        .horizontal--divider{
+ 
+  margin: 40px 0;
+}
+
+  }
+
+  .section--mission-vision{
+    padding: 90px 0;
+  }
+
+
+.horizontal--divider{
+  background-color: #D0D0D0;
+  height:1px;
+  width:100%;
+
+}
+
+.section--mission-vision h2{
+  color:  #141414;
+    font-family: var(--font-heading-family);
+font-size: 42px;
+font-style: normal;
+font-weight: 800;
+line-height: 112%; 
+text-transform: uppercase;
+  margin:0 0 20px 0;
+}
+.section--mission-vision p{
+color:  #141414;
+    font-family: var(--font-body-family);
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; 
+    margin:0;
+}
+</style>

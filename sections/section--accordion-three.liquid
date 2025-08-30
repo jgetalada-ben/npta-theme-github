@@ -1,0 +1,288 @@
+{% schema %}
+{
+    "name": "Accordion Three",
+    "settings": [
+              {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "certified-trainers"
+    },
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Lorem ipsum dolor sit amet"
+        },
+    
+      {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Select an image",
+      "info": "Choose an image from your files."
+    },
+         {
+      "type": "checkbox",
+      "id": "show_buttons",
+      "label": "Display Buttons"
+    },
+        {
+            "type": "text",
+            "id": "primary_button_text",
+            "label": "Primary Button Text",
+            "default": "Button"
+        },
+        {
+            "type": "url",
+            "id": "primary_button_link",
+            "label": "Button"
+        },
+        {
+            "type": "text",
+            "id": "secondary_button_text",
+            "label": "Secondary Button Text",
+            "default": "Button"
+        },
+        {
+            "type": "url",
+            "id": "secondary_button_link",
+            "label": "Button"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "highlight",
+            "name": "Highlight",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "highlight_title",
+                    "label": "Highlight Title",
+                    "default": "Highlight Title Goes Here"
+                },
+                {
+                    "type": "textarea",
+                    "id": "highlight_description",
+                    "label": "Highlight Description",
+                    "default": "Short description goes here."
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Accordion Three",
+            "category": "Custom Sections"
+        }
+    ]
+}
+{% endschema %}
+
+
+<section class="section--accordion-three">
+    <div class="accordion-three--container page-container">
+        <div class="accordion-three--content">
+            <div class="accordion-three--column-left">
+               <div class="image-wrapper">
+ {% if section.settings.image %}
+  <img src="{{ section.settings.image | img_url: 'original' }}" alt="{{ section.settings.alt_text }}">
+{% else %}
+  <p>No image available</p>
+{% endif %}
+              
+             </div>
+            </div>
+            <div class="accordion-three--column-right">
+                   <div class="section--title-block is--heading-white">
+                    <h2 class="is--flex-start">{{ section.settings.heading }}</h2> 
+                  
+                </div>
+
+                <div class="accordion-three--highlights">
+                    {% for block in section.blocks %}
+                        {% if block.type == 'highlight' %}
+                            <div class="accordion-three--highlight">
+                                <h3>{{ block.settings.highlight_title }}</h3>
+                                <p>{{ block.settings.highlight_description }}</p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+{% if section.settings.show_buttons %}
+                <div class="section--hero-buttons">
+                    <a href="{{ section.settings.primary_button_link }}" class="btn button-yg">
+                        <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+                        <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+                    </a>
+                    <a href="{{ section.settings.secondary_button_link }}" class="btn button-w">
+                        <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
+                        <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
+                    </a>
+                </div>
+  {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.is--heading-white h2{
+  color: #FFF;
+} 
+
+
+.section--accordion-three {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #133257;
+        padding: 90px 0;
+    }
+.accordion-three--container{
+
+}
+  @media only screen and (min-width: 981px) {
+  .accordion-three--content{
+  grid-template-columns:1fr 1fr;
+}
+    .accordion-three--content{
+  display:grid;
+}
+.accordion-three--column-right{
+ width:100%;
+  padding-left:90px;
+}
+    .accordion-three--column-left{
+ width:100%;
+    
+
+}
+  }
+  @media only screen and (max-width: 980px) {
+
+    .accordion-three--content{
+  display:flex;
+      flex-wrap:wrap;
+      flex-direction: column-reverse;
+      gap:30px;
+}
+    
+.accordion-three--column-left{
+ width:100%;
+  max-width: 100%;
+}
+
+  }
+
+
+  
+
+
+
+.accordion-three--column-right{
+ width:100%;
+}
+
+
+    .video-text-content {
+        display: flex;
+        width: 100%;
+    }
+    .text-content {
+        color: #141414;
+        flex: 1;
+        margin-right: 20px;
+    }
+  
+    .image-wrapper {
+        position: relative;
+width:100%;
+        height: 100%;
+      border-radius:20px;
+      overflow:hidden;
+    }
+      .image-wrapper img{
+
+width:100%;
+        height: 100%;
+        object-fit:cover
+
+    }
+
+.accordion-three--highlights{
+  margin-bottom:30px;
+}
+.accordion-three--highlight h3{
+  color:  #fff;
+text-align: left;
+font-family: Montserrat;
+font-size: 22px;
+font-style: normal;
+font-weight: 800;
+line-height: 104%; /* 22.88px */
+text-transform: uppercase;
+    margin-bottom: 0 ;
+}
+
+.accordion-three--highlight p{
+color: #fff;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; /* 24px */
+}
+
+.accordion-three--highlight p {
+  cursor: pointer;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 300ms ease;
+margin: 0;
+}
+
+.accordion-three--highlight.active p {
+  max-height:auto; 
+  margin-top:16px;
+}
+
+.accordion-three--highlight.active{
+  border-left: 3px solid #E9F24F;
+    transition:300ms padding ;
+    padding-left: 24px;
+  opacity:1;
+}
+.accordion-three--highlight{
+  padding-left: 27px;
+  transition:300ms padding ;
+  opacity: 0.6;
+
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const highlights = document.querySelectorAll('.accordion-three--highlight');
+
+  if (highlights.length > 0) {
+    const firstHighlight = highlights[0];
+    firstHighlight.classList.add('active');
+    const content = firstHighlight.querySelector('p');
+    content.style.maxHeight = content.scrollHeight + 'px';
+  }
+
+  highlights.forEach(highlight => {
+    highlight.addEventListener('click', () => {
+      highlights.forEach(h => {
+        h.classList.remove('active');
+        h.querySelector('p').style.maxHeight = '0';
+      });
+
+      highlight.classList.add('active');
+      const content = highlight.querySelector('p');
+      content.style.maxHeight = content.scrollHeight + 'px';
+    });
+  });
+});
+
+</script>

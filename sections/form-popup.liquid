@@ -1,0 +1,1080 @@
+{% schema %}
+{
+  "name": "Timed Popup",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "popup_image",
+      "label": "Popup Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "popup_logo",
+      "label": "Popup Logo"
+    },
+    {
+      "type": "text",
+      "id": "popup_heading",
+      "label": "Popup Heading",
+      "default": "$25 OFF"
+    },
+    {
+      "type": "text",
+      "id": "popup_subheading",
+      "label": "Popup Subheading",
+      "default": "A course of your choice!"
+    },
+
+
+    {
+      "type": "text",
+      "id": "no_thanks_text",
+      "label": "No Thanks Text",
+      "default": "No Thanks"
+    },
+    {
+      "type": "richtext",
+      "id": "disclaimer_text",
+      "label": "Disclaimer Text",
+      "default": "<p>*Can only be redeemed one time\nBy entering my email, phone number above, and submitting this form, I agree to receive recurring automated promotional texts and emails.</p>"
+    },
+
+      {
+      "type": "text",
+      "id": "webhook_url",
+      "label": "Zapier Webhook URL",
+      "default": "https://hooks.zapier.com/hooks/catch/xxxxxx/"
+    },
+            {
+      "type": "text",
+      "id": "form_submit_label",
+      "label": "Form Button Label",
+      "default": "Sign Up Now",
+
+  
+    },
+       {
+      "type": "richtext",
+      "id": "thank_you_header",
+      "label": "Disclaimer Text",
+      "default": "<p>*Can only be redeemed one time\nBy entering my email, phone number above, and submitting this form, I agree to receive recurring automated promotional texts and emails.</p>"
+    },
+    
+    {
+      "type": "range",
+      "id": "popup_delay",
+      "label": "Popup Delay (seconds)",
+      "min": 1,
+      "max": 20,
+      "default": 5
+    }
+  ],
+   "blocks": [
+    {
+      "type": "text_field",
+      "name": "Text Field",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Field Label",
+          "default": "Name"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder",
+          "default": "Enter your name"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "name": "Textarea",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Field Label",
+          "default": "Message"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder",
+          "default": "Enter your message"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "name": "Dropdown",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Field Label",
+          "default": "Options"
+        },
+        {
+          "type": "text",
+          "id": "options",
+          "label": "Options (comma separated)",
+          "default": "Option 1, Option 2, Option 3"
+        }
+      ]
+    },
+    {
+      "type": "email",
+      "name": "Email Field",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Field Label",
+          "default": "Email"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder",
+          "default": "Enter your email"
+        }
+      ]
+    },
+    {
+      "type": "phone",
+      "name": "Phone Field",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Field Label",
+          "default": "Phone Number"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder",
+          "default": "Enter your phone number"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "name": "Checkbox",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Field Label",
+          "default": "Agree to Terms"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "I agree to the terms and conditions."
+        }
+      ]
+    },
+
+
+
+  ],
+  "presets": [
+    {
+      "name": "Default Popup",
+      "category": "Popups",
+      "settings": {
+        "popup_heading": "$25 OFF",
+        "popup_delay": 5
+      }
+    }
+  ]
+}
+{% endschema %}
+
+<div id="discount-popup" class="discount-popup">
+    <div class="discount-popup__content">
+        <span id="close-popup" class="discount-popup__close">
+            <svg xmlns="http://www.w3.org/2000/svg" focusable="false" class="icon icon-close" width="21" height="20" viewBox="0 0 21 20" fill="none">
+                <path d="M16.5673 15.1829C16.6254 15.241 16.6714 15.3099 16.7028 15.3858C16.7343 15.4617 16.7505 15.543 16.7505 15.6251C16.7505 15.7072 16.7343 15.7885 16.7028 15.8644C16.6714 15.9403 16.6254 16.0092 16.5673 16.0673C16.5092 16.1254 16.4403 16.1714 16.3644 16.2028C16.2885 16.2343 16.2072 16.2505 16.1251 16.2505C16.043 16.2505 15.9617 16.2343 15.8858 16.2028C15.8099 16.1714 15.741 16.1254 15.6829 16.0673L10.5001 10.8837L5.31729 16.0673C5.20002 16.1846 5.04096 16.2505 4.8751 16.2505C4.70925 16.2505 4.55019 16.1846 4.43292 16.0673C4.31564 15.95 4.24976 15.791 4.24976 15.6251C4.24976 15.4593 4.31564 15.3002 4.43292 15.1829L9.61651 10.0001L4.43292 4.81729C4.31564 4.70002 4.24976 4.54096 4.24976 4.3751C4.24976 4.20925 4.31564 4.05019 4.43292 3.93292C4.55019 3.81564 4.70925 3.74976 4.8751 3.74976C5.04096 3.74976 5.20002 3.81564 5.31729 3.93292L10.5001 9.11651L15.6829 3.93292C15.8002 3.81564 15.9593 3.74976 16.1251 3.74976C16.291 3.74976 16.45 3.81564 16.5673 3.93292C16.6846 4.05019 16.7505 4.20925 16.7505 4.3751C16.7505 4.54096 16.6846 4.70002 16.5673 4.81729L11.3837 10.0001L16.5673 15.1829Z" fill="#141414" fill-opacity="0.6"></path>
+            </svg>
+        </span>
+        <div class="discount-popup__image">
+            <img src="{{ section.settings.popup_image | img_url: 'master' }}" alt="Popup Image">
+        </div>
+        <div class="discount-popup__form">
+            <div id="popup_content" class="discount-popup__details">
+                <div class="discount-popup__logo">
+                    <img src="{{ section.settings.popup_logo | img_url: 'master' }}" alt="Popup Logo">
+                </div>
+                <h2>{{ section.settings.popup_heading }}</h2>
+                <p class="popup-subheading">{{ section.settings.popup_subheading }}</p>
+
+                <form id="discount_form" method="POST" action="{{ section.settings.webhook_url }}" enctype="application/x-www-form-urlencoded" style="max-width: {{ section.settings.form_width }}px;">
+                    {% assign block_count = 0 %}
+
+                    {% for block in section.blocks %}
+                        {% assign is_required = true %}
+
+                        {% if block.type == 'textarea' %}
+                            <div class="popup-form-row">
+                                <div class="popup-form-column full-width">
+                                    <label>{{ block.settings.label }}{% if is_required %}*{% endif %}</label>
+                                    <textarea placeholder="{{ block.settings.placeholder }}" name="{{ block.settings.label | handleize }}" required></textarea>
+                                </div>
+                            </div>
+                        {% elsif block.type == 'checkbox' %}
+                            <div class="popup-form-row">
+                                <div class="popup-form-column full-width">
+                                    <div class="form-consent">
+                                        <input type="checkbox" name="{{ block.settings.label | handleize }}" checked required>
+                                        <p>{{ block.settings.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            {% if block_count == 0 %}
+                                <div class="popup-form-row">
+                            {% endif %}
+
+                            <div class="popup-form-column half-width">
+                                <label>{{ block.settings.label }}{% if is_required %}*{% endif %}</label>
+                                {% case block.type %}
+                                    {% when 'text_field' %}
+                                        <input type="text" placeholder="{{ block.settings.placeholder }}" name="{{ block.settings.label | handleize }}" required>
+                                    {% when 'email' %}
+                                        <input type="email" placeholder="{{ block.settings.placeholder }}" name="{{ block.settings.label | handleize }}" required>
+                                    {% when 'phone' %}
+                                        <input type="tel" placeholder="{{ block.settings.placeholder }}" name="{{ block.settings.label | handleize }}" required>
+                                    {% when 'select' %}
+                                        <select name="{{ block.settings.label | handleize }}" required>
+                                            <option value="" disabled selected>Select Option</option>
+                                            {% assign options = block.settings.options | split: ', ' %}
+                                            {% for option in options %}
+                                                <option value="{{ option | handleize }}">{{ option }}</option>
+                                            {% endfor %}
+                                        </select>
+                                {% endcase %}
+                            </div>
+
+                            {% assign block_count = block_count | plus: 1 %}
+
+                            {% if block_count == 2 or forloop.last %}
+                                </div> 
+                                {% assign block_count = 0 %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if block_count > 0 %}
+                        </div>
+                    {% endif %}
+<!-- Add reCAPTCHA widget -->
+      <div class="recaptcha-wrapper">
+      <div class="g-recaptcha" data-sitekey="6LfqMl4qAAAAACOsCSCkCyh_X-zsDYy-Rhck4L2F"></div>
+      <div id="recaptcha-error" class="recaptcha--error" style="display: none;"><span>Oops!</span> <span> Our trainers are busy lifting weights. Can you show you're human and check the box?</span></div>
+      </div>
+                  
+                    <button type="submit" class="form-button btn button-yg" name="commit" aria-label="Submit">
+                        <span class="btn-label-down">{{ section.settings.form_submit_label }}</span>
+                        <span class="btn-label-down">{{ section.settings.form_submit_label }}</span>
+                    </button>
+                </form>
+
+                <div class="discount-popup__no-thanks">
+                    <a href="#" id="no-thanks-link">{{ section.settings.no_thanks_text }}</a>
+                </div>
+                <div class="popup-disclaimer">{{ section.settings.disclaimer_text }}</div>
+            </div> <!-- Content -->
+
+            <div id="thank_you_message" style="display:none;">
+                <div class="thankyou-content-wrapper">
+                    <h3>Thank You For Signing Up!</h3>
+                    <p>Your $25 off promo code is:</p>
+                    <p class="ty-coupon-code"><span id="coupon-code"></span></p>
+                </div>
+                <div class="thankyou-footer-wrapper">
+                    <p>You will also receive your promo code via email shortly!</p>
+                </div>
+            </div> <!-- Thank you -->
+
+            <div id="pop_preloader" class="popup-preloader" style="display: none; text-align: center;">
+                <lottie-player
+                    src="https://lottie.host/a92d1f08-0559-4ed0-bbee-c7b0a564d426/bkPWIMCQkN.json"
+                    background="transparent"
+                    speed="1"
+                    style="width: 300px; height: 300px;"
+                    direction="1"
+                    mode="normal"
+                    loop
+                    autoplay>
+                </lottie-player>
+                <h3>LOADING</h3>
+            </div>
+        </div> 
+    </div>
+</div>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var isCustomizer = (window.Shopify && Shopify.designMode);
+    if (isCustomizer) {
+        return;
+    }
+
+    // Check if the Pop-up Form has been submite before
+    if (localStorage.getItem('discountPopupSubmitted')) {
+        return; // Do not show the popup
+    }
+
+    // Function to get the current closure count
+    function getClosureCount() {
+        var count = localStorage.getItem('discountPopupCloseCount');
+        return count ? parseInt(count, 10) : 0;
+    }
+
+    // Function to set the closure count
+    function setClosureCount(count) {
+        localStorage.setItem('discountPopupCloseCount', count);
+    }
+
+    // Function to increment the closure count
+    function incrementClosureCount() {
+        var count = getClosureCount();
+        count += 1;
+        setClosureCount(count);
+    }
+
+    // Check if the popup has been closed twice or more
+    var closeCount = getClosureCount();
+    if (closeCount >= 2) {
+        return; // Do not show the popup
+    }
+
+  
+
+    var excludedPages = [
+        '/pages/affiliate-program',
+        '/pages/apprenticeship-program',
+        '/pages/gym-partners',
+        '/pages/about-us',
+        '/cart',
+        '/checkouts/',
+        '/pages/thank-you',
+        '/pages/book-a-call',
+        '/pages/payment-plan-options',
+        '/pages/terms-conditions',
+        '/pages/privacy-policy',
+        '/pages/contact-us',
+    ];
+
+    var currentPage = window.location.pathname;
+    var isExcluded = excludedPages.some(function(page) {
+        return currentPage.startsWith(page);
+    }) || currentPage.startsWith('/products/');
+
+    if (!isExcluded) {
+        setTimeout(function() {
+            var popup = document.getElementById('discount-popup');
+            var popUpContent = document.getElementById('popup_content');
+            popup.style.display = 'flex';
+            popup.classList.add('animate-show'); 
+            popUpContent.classList.remove('animate-hide'); 
+        }, {{ section.settings.popup_delay | times: 1000 }});
+    }
+
+    function closePopup() {
+        var popup = document.getElementById('discount-popup');
+        var popUpContent = document.getElementById('popup_content');
+        popup.classList.add('animate-hide'); 
+        popUpContent.classList.add('animate-hide'); 
+        setTimeout(function() {
+            popup.style.display = 'none';
+            popup.classList.remove('animate-hide'); 
+            popUpContent.classList.remove('animate-hide');
+          incrementClosureCount();
+        }, 500); 
+    }
+
+    var closeBtn = document.querySelector('.discount-popup__close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            closePopup();
+        });
+    }
+
+    var noThanksLink = document.getElementById('no-thanks-link');
+    if (noThanksLink) {
+        noThanksLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            closePopup();
+        });
+    }
+
+    var triggerPopup = document.getElementById('trigger-popup');
+    if (triggerPopup) {
+        triggerPopup.addEventListener('click', function(event) {
+            event.preventDefault();
+            var popup = document.getElementById('discount-popup');
+            var popUpContent = document.getElementById('popup_content');
+            popup.style.display = 'flex';
+            popup.classList.add('animate-show'); 
+            popUpContent.classList.remove('animate-hide'); 
+        });
+    }
+
+    var popUpContent = document.getElementById('popup_content');
+    var form = document.getElementById('discount_form');
+    var thankYouMessage = document.getElementById('thank_you_message');
+    var preloader = document.getElementById('pop_preloader'); 
+
+
+    function showError(input, message) {
+        const errorElem = document.createElement('span');
+        errorElem.classList.add('error-message');
+        errorElem.innerText = message;
+        input.parentElement.appendChild(errorElem);
+        input.classList.add('error');
+    }
+
+ 
+    function clearError(input) {
+        const errorElem = input.parentElement.querySelector('.error-message');
+        if (errorElem) {
+            errorElem.remove();
+        }
+        input.classList.remove('error');
+    }
+
+ 
+    function validateEmail(email) {
+        const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        return re.test(email);
+    }
+
+    function validatePhone(phone) {
+        const re = /^[0-9]+$/;  
+        return re.test(phone);
+    }
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        var isValid = true;
+
+ 
+        form.querySelectorAll('.error-message').forEach(elem => elem.remove());
+        form.querySelectorAll('.error').forEach(elem => elem.classList.remove('error'));
+
+
+        var emailInput = form.querySelector("input[type='email']");
+        if (emailInput && !validateEmail(emailInput.value)) {
+            showError(emailInput, "Please enter a valid email address.");
+            isValid = false;
+        }
+
+
+        var phoneInput = form.querySelector("input[type='tel']");
+        if (phoneInput && !validatePhone(phoneInput.value)) {
+            showError(phoneInput, "Please enter a valid 10-digit phone number.");
+            isValid = false;
+        }
+
+  
+        var selectInput = form.querySelector("select");
+        if (selectInput && !selectInput.value) {
+            showError(selectInput, "Please select an option.");
+            isValid = false;
+        }
+
+         // Validate checkbox separately
+        var checkboxInput = form.querySelector("input[type='checkbox']");
+        if (checkboxInput && !checkboxInput.checked) {
+            showError(checkboxInput, "Please accept the terms.");
+            isValid = false;
+        }
+
+
+     
+        var textareaInput = form.querySelector("textarea");
+        if (textareaInput && textareaInput.value.trim() === "") {
+          
+            isValid = false;
+        }
+
+      // Check reCAPTCHA
+      var recaptchaResponse = grecaptcha.getResponse();
+      if (recaptchaResponse.length === 0) {
+        document.getElementById('recaptcha-error').style.display = 'block';
+        isValid = false;
+      } else {
+        document.getElementById('recaptcha-error').style.display = 'none';
+      }
+      
+
+        if (!isValid) {
+            return; 
+        }
+
+
+        if (preloader) {
+            preloader.style.display = 'flex';
+        }
+
+  
+        setTimeout(function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', form.action, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+   
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        console.log('Form submitted successfully');
+                        localStorage.setItem('discountPopupSubmitted', 'true');
+
+              
+                        if (preloader) {
+                            preloader.style.display = 'none';
+                        }
+
+                   
+                        if (popUpContent && thankYouMessage) {
+                            popUpContent.style.display = 'none';  
+                            thankYouMessage.style.display = 'block'; 
+
+                        
+                            var couponCode = 'NPTA25'; 
+                            var couponSpan = thankYouMessage.querySelector('.ty-coupon-code span');
+                            if (couponSpan) {
+                                couponSpan.textContent = couponCode;
+                            }
+                        } else {
+                            console.error('popUpContent or thankYouMessage is null');
+                        }
+                    } else {
+                        console.error('Form submission failed with status:', xhr.status, xhr.responseText);
+                    }
+                }
+            };
+
+            var formData = new FormData(form);
+            var encodedData = new URLSearchParams(formData).toString();
+            console.log('Encoded Data:', encodedData);
+
+            xhr.send(encodedData);
+        }, 1500); 
+    });
+});
+</script>
+
+
+
+
+
+<style>
+  #discount-popup {
+    display: none; /* Ensure the popup is hidden by default */
+}
+
+/** Preloader **/
+.popup-preloader{
+      display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+width: 100%;
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgb(255, 255, 255, 0.5);
+  transition:300ms;
+}
+
+  .popup-preloader lottie-player{
+    width: 100%;
+    position: absolute;
+}
+
+    .popup-preloader h3{
+  padding-top:150px;
+      color: #133257;
+}
+
+  
+  
+#thank_you_message {
+    display: none; /* Initially hidden */
+}
+
+#thank_you_message.show {
+    display: block !important; /* Ensure the message is displayed when adding the .show class */
+    background-color: #fff; /* Optional styling */
+    color: #000; /* Optional styling */
+}
+
+#popup_content {
+    display: block;
+}
+
+#popup_content.hide {
+    display: none !important; /* Force hiding the popup content */
+}
+
+  
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+}
+
+.discount-popup {
+  display: none; 
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+
+}
+
+.discount-popup__content {
+  background: #fff;
+  padding: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 80%;
+  max-width: 1200px;
+  position: relative;
+  display: flex;
+  max-height: 90vh;
+  opacity: 0;
+  visibility: hidden;
+  
+}
+
+.discount-popup.animate-show .discount-popup__content {
+  animation: zoomIn 0.5s ease-out;
+  opacity: 1;
+  visibility: visible !important;
+}
+
+.discount-popup.animate-hide .discount-popup__content {
+  animation: zoomOut 0.5s ease-out;
+  
+}
+
+.discount-popup.animate-hide {
+  visibility: hidden;
+}
+
+
+
+  
+#discount-popup {
+  justify-content: center;
+  align-items: center;
+}
+
+.discount-popup {
+  display: none; 
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.discount-popup__content {
+  background: #fff;
+  padding: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 80%;
+  max-width: 1200px;
+  position: relative;
+  display: flex;
+  max-height: 90vh;
+}
+
+.discount-popup__details {
+  overflow-y: auto;
+}
+
+.discount-popup__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.discount-popup__content {
+  display: flex;
+  flex-wrap: nowrap;
+}
+.discount-popup__form{
+  position:relative;
+  overflow-y:auto;
+}
+  
+@media only screen and (min-width: 981px) {
+  .discount-popup__image {
+    width: 50%;
+  }
+  .discount-popup__form {
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 980px) {
+  .discount-popup__image {
+    width: 100%;
+    display: none !important;
+  }
+  .discount-popup__form {
+    width: 100% !important;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .discount-popup__form {
+    padding: 60px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .discount-popup__form {
+    padding: 30px;
+  }
+}
+
+/** Thank you **/
+#thank_you_message {
+
+}
+@media only screen and (max-width: 768px) {
+    .thankyou-content-wrapper h3 {
+
+  font-size: 48px;
+
+}
+
+}
+  @media only screen and (max-width: 767px) {
+    .thankyou-content-wrapper h3 {
+
+  font-size: 32px;
+
+}
+
+}
+
+
+.thankyou-content-wrapper h3 {
+  color: var(--black, #141414);
+  text-align: center;
+  font-family: var(--font-heading-family);
+
+  font-style: normal;
+  font-weight: 800;
+  line-height: 104%;
+  text-transform: uppercase;
+}
+
+.thankyou-content-wrapper p {
+  color: var(--black, #141414);
+  text-align: center;
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+}
+
+.thankyou-content-wrapper p.ty-coupon-code {
+  color: var(--black, #141414);
+  text-align: center;
+  font-family: var(--font-heading-family);
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 104%;
+  text-transform: uppercase;
+}
+
+.thankyou-content-wrapper p.ty-coupon-code span {
+  border: 2px dashed #D0D0D0;
+  padding: 20px;
+  display: inline-flex;
+}
+
+.thankyou-footer-wrapper p {
+  color: var(--black, #141414);
+  text-align: center;
+  font-family: var(--font-body-family);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+/** Thank you **/
+
+.discount-popup__logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.discount-popup__logo img {
+  max-width: 80px;
+}
+
+.discount-popup__no-thanks a {
+  color: #141414;
+  text-align: center;
+  font-family: var(--font-heading-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: 1.28px;
+  text-decoration-line: underline;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.discount-popup__no-thanks a {
+  display: inline-flex;
+}
+
+.discount-popup__no-thanks a {
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+}
+
+.discount-popup__no-thanks a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(1);
+  border-radius: 5px;
+  height: 0.05em;
+  bottom: 0;
+  left: 0;
+  background: #133257;
+  transform-origin: bottom left;
+  transition: transform 0.25s ease-out;
+}
+
+.discount-popup__no-thanks a:hover::after {
+  transform: scaleX(0);
+  transform-origin: bottom right;
+}
+
+.discount-popup__close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index:99999;
+}
+
+.discount-popup__details h2 {
+  color: var(--black, #141414);
+  text-align: center;
+  font-family: var(--font-heading-family);
+  font-size: 62px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 104%;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.discount-popup__details p {
+  color: var(--black, #141414);
+  text-align: center;
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+}
+
+.popup-subheading {
+  color: var(--black, #141414);
+  text-align: center;
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+}
+
+.popup-disclaimer p {
+  color: var(--black, #141414);
+  text-align: center;
+  font-family: var(--font-body-family);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.discount-popup__no-thanks {
+  display: block;
+  margin-top: 15px;
+  text-align: center;
+  color: #000;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+form .popup-form-row {
+  flex-wrap: wrap;
+}
+
+.form-button {
+  border: none;
+  width: 100%;
+}
+
+.form-wrapper {
+  display: flex;
+  padding: 40px 24px;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  background: #f7f8fa;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+  .form-consent p{
+    text-align: left;
+  }
+
+form .popup-form-row {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.popup-form-row .popup-form-column {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.popup-form-row .popup-form-column label {
+  width: 100%;
+  color: var(--black, #141414);
+  font-family: var(--font-heading-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: 1.28px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.popup-form-row .popup-form-column input {
+  display: flex;
+  padding: 15px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+  border: 1px solid #d0d0d0;
+  background: #fff;
+}
+
+.popup-form-row .popup-form-column input {
+  color: #141414;
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  transition: 300ms;
+  width: 100%;
+}
+
+.popup-form-row .popup-form-column input:focus,
+.popup-form-row .popup-form-column input:hover {
+  border-radius: 6px;
+  border: 1px solid #141414;
+  background: #fff;
+  transition: 300ms;
+  color: #141414;
+}
+
+.popup-form-row .popup-form-column textarea {
+  width: 100%;
+  color: #141414;
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  transition: 300ms;
+  border-radius: 6px;
+  border: 1px solid #d0d0d0;
+  min-height: 120px;
+  padding: 15px;
+}
+
+.popup-form-row .popup-form-column textarea:focus,
+.popup-form-row .popup-form-column textarea:hover {
+  border-radius: 6px;
+  border: 1px solid #141414;
+  background: #fff;
+  transition: 300ms;
+  color: #141414;
+  outline: none;
+}
+
+*:focus-visible {
+  outline: none !important;
+  outline-offset: none !important;
+  box-shadow: none !important;
+}
+</style>
+

@@ -1,0 +1,328 @@
+{% schema %}
+{
+  "name": "Form Builder",
+  "settings": [
+   
+    {
+      "type": "select",
+      "id": "form_action",
+      "label": "Form Action",
+      "options": [
+        {
+          "value": "webhook",
+          "label": "Send to Webhook"
+        },
+        {
+          "value": "/contact",
+          "label": "Contact Form"
+        }
+      ],
+      "default": "webhook"
+    },
+    {
+      "type": "text",
+      "id": "webhook_url",
+      "label": "Webhook URL",
+      "default": "/",
+      "info": "Enter your Zapier Webhook URL for integration",
+  
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text_field",
+      "name": "Text Field",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Field Label",
+          "default": "Name"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder",
+          "default": "Enter your name"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "name": "Textarea",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Field Label",
+          "default": "Message"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder",
+          "default": "Enter your message"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "name": "Dropdown",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Field Label",
+          "default": "Options"
+        },
+        {
+          "type": "text",
+          "id": "options",
+          "label": "Options (comma separated)",
+          "default": "Option 1, Option 2, Option 3"
+        }
+      ]
+    },
+    {
+      "type": "email",
+      "name": "Email Field",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Field Label",
+          "default": "Email"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder",
+          "default": "Enter your email"
+        }
+      ]
+    },
+    {
+      "type": "phone",
+      "name": "Phone Field",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Field Label",
+          "default": "Phone Number"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder",
+          "default": "Enter your phone number"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Form Builder",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="custom-form">
+  
+  <form method="POST" action="{{ section.settings.webhook_url }}" enctype="application/x-www-form-urlencoded">
+    <!-- Dynamic Form Fields -->
+    {% assign row_open = false %}
+    {% assign column_count = 0 %}
+
+    {% for block in section.blocks %}
+      {% if block.type == 'textarea' %}
+        {% if row_open %}
+          </div> <!-- Close the previous row -->
+          {% assign row_open = false %}
+        {% endif %}
+        <div class="form-row">
+          <div class="form-column full-width">
+            <label>{{ block.settings.label }}</label>
+            <textarea placeholder="{{ block.settings.placeholder }}" name="{{ block.settings.label | handleize }}"></textarea>
+          </div>
+        </div>
+      {% else %}
+        {% if column_count == 0 %}
+          {% if row_open %}
+            </div> <!-- Close the previous row -->
+          {% endif %}
+          <div class="form-row">
+          {% assign row_open = true %}
+        {% endif %}
+        <div class="form-column half-width">
+          <label>{{ block.settings.label }}</label>
+          {% case block.type %}
+            {% when 'text_field' %}
+              <input type="text" placeholder="{{ block.settings.placeholder }}" name="{{ block.settings.label | handleize }}">
+            {% when 'email' %}
+              <input type="email" placeholder="{{ block.settings.placeholder }}" name="{{ block.settings.label | handleize }}">
+            {% when 'phone' %}
+              <input type="tel" placeholder="{{ block.settings.placeholder }}" name="{{ block.settings.label | handleize }}">
+         {% when 'select' %}
+              <select name="{{ block.settings.label | handleize }}">
+                {% assign options = block.settings.options | split: ', ' %}
+                {% for option in options %}
+                  <option value="{{ option | handleize }}">{{ option }}</option>
+                {% endfor %}
+              </select>
+          {% endcase %}
+        </div>
+        {% assign column_count = column_count | plus: 1 %}
+        
+        {% if column_count == 2 or forloop.last %}
+          </div> <!-- Close the current row -->
+          {% assign row_open = false %}
+          {% assign column_count = 0 %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+    <!-- Submit Button -->
+    <button type="submit" class="form-button btn button-yg" name="commit" aria-label="Submit">
+      <span class="btn-label-down">Submit</span>
+      <span class="btn-label-down">Submit</span>
+    </button>
+  </form>
+</div>
+
+<style>
+
+
+.custom-form {
+  display: flex;
+  padding: 40px 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  border-radius: 20px;
+  background: #f7f8fa;
+  min-height: 300px;
+}
+
+@media only screen and (max-width: 600px) {
+  form .form-row {
+    flex-wrap: wrap;
+  }
+}
+
+.form-button {
+  border: none;
+  width: 100%;
+}
+.custom-form {
+  display: flex;
+  padding: 40px 24px;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 24px;
+  border-radius: 20px;
+  background: #f7f8fa;
+}
+form {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+form .form-row {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+}
+.form-row .form-column {
+  display: flex;
+  flex-wrap: Wrap;
+  justify-content: flex-start;
+  width: 100%;
+}
+.form-row .form-column label {
+  width: 100%;
+  color: var(--black, #141414);
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 24px */
+  letter-spacing: 1.28px;
+  text-transform: uppercase;
+}
+
+.form-row .form-column input {
+  display: flex;
+
+  padding: 15px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+  border: 1px solid #d0d0d0;
+  background: #fff;
+}
+
+.form-row .form-column input {
+  color: #141414;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  transition: 300ms;
+  width: 100%;
+}
+
+.form-row .form-column input:focus,
+.form-row .form-column input:hover {
+  border-radius: 6px;
+  border: 1px solid #141414;
+  background: #fff;
+  transition: 300ms;
+  color: #141414;
+}
+
+.form-row .form-column textarea {
+  width: 100%;
+  color: #141414;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  transition: 300ms;
+  border-radius: 6px;
+  border: 1px solid #d0d0d0;
+  min-height: 120px;
+  padding: 15px;
+}
+
+.form-row .form-column textarea:focus,
+.form-row .form-column textarea:hover {
+  border-radius: 6px;
+  border: 1px solid #141414;
+  background: #fff;
+  transition: 300ms;
+  color: #141414;
+  outline: none;
+}
+*:focus-visible {
+  outline: none !important;
+  outline-offset: none !important;
+  box-shadow: none !important;
+}
+
+  .form-column {
+    flex: 1;
+
+  }
+  .form-column.full-width {
+    flex: 1 0 100%;
+    margin-right: 0;
+  }
+</style>

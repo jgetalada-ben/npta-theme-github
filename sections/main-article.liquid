@@ -1,0 +1,519 @@
+{{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
+
+<article class="article-template">
+
+{%- for block in section.blocks -%}
+  {%- case block.type -%}
+
+    {%- when 'title' -%}
+    <header class="article-header">
+      <div class="article-header__wrapper">
+        
+        <!-- Left Side: Text Content -->
+        <div class="article-header__content">
+          
+          {%- if block.settings.category != blank -%}
+            <span class="article-header__category">{{ block.settings.category }}</span>
+          {%- endif -%}
+
+          <h1 class="article-template__title" style="font-size: {{ block.settings.title_font_size }}px;">
+          {{ article.title | escape }}
+          </h1>
+
+
+          <!-- Last Updated -->
+          {%- if block.settings.last_update != blank -%}
+            <div class="article-meta">
+              <strong>Last Updated:</strong> {{ block.settings.last_update | strip_html }}
+            </div>
+          {%- endif -%}
+
+          <!-- Time to Read -->
+          {%- if block.settings.time_to_read != blank -%}
+            <div class="article-meta">
+              <strong>Time to Read:</strong> {{ block.settings.time_to_read | strip_html }}
+            </div>
+          {%- endif -%}
+
+          <div class="article-header__meta">
+            {%- if block.settings.blog_show_date -%}
+              <span class="article-header__date">{{ article.published_at | time_tag: format: 'date' }}</span>
+            {%- endif -%}
+
+            {%- if block.settings.blog_show_author -%}
+              <span class="article-header__author">✍️ {{ article.author }}</span>
+            {%- endif -%}
+          </div>
+
+        </div>
+
+        <!-- Right Side: Featured Image -->
+        {%- if block.settings.featured_image != blank -%}
+          <div class="article-header__image article-header__image--{{ block.settings.image_size }}">
+            <img src="{{ block.settings.featured_image | image_url: width: 1100 }}" alt="{{ article.title | escape }}">
+          </div>
+        {%- endif -%}
+
+      </div>
+    </header>
+
+  {%- endcase -%}
+{%- endfor -%}
+  
+  <div class="article-container">
+    
+    <!-- Left Column: Blog Content -->
+    <div class="article-content">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when '@app' -%}
+            <div class="page-width page-width--narrow">
+              {% render block %}
+            </div>
+
+          {%- when 'featured_image' -%}
+            {%- if article.image -%}
+              <div class="article-template__hero-container{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+                <div class="article-template__hero-{{ block.settings.image_height }} media">
+                  <img src="{{ article.image | image_url: width: 1100 }}" loading="eager" fetchpriority="high" alt="{{ article.image.alt | escape }}">
+                </div>
+              </div>
+            {%- endif -%}
+          {%- when 'content' -%}
+            <div class="article-template__content page-width page-width--narrow rte">
+              {{ article.content }}
+            </div>
+
+      <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I become a certified personal trainer in Canada?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "To become a certified personal trainer in Canada, enroll in an accredited program like the NASM Certified Personal Trainer (CPT) through NPTA. Complete the course, pass the exam, and meet CPR/AED certification requirements."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is NASM certification recognized across Canada?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. NASM is a globally recognized certification, and through NPTA—its official Canadian partner—your credentials are widely respected by gyms, fitness studios, and employers across Canada."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to complete the NASM CPT program?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most students complete the NASM CPT certification in 4 to 6 weeks, depending on their pace. NPTA offers a flexible online learning model so you can study when it works best for you."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does NPTA offer mentorship for new personal trainers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. NPTA provides mentorship throughout the certification journey to help new trainers build confidence, find clients, and create a successful career path."
+      }
+    }
+  ]
+}
+</script>
+
+        {%- endcase -%}
+      {%- endfor -%}
+      <div class="article-template__back element-margin-top center{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+    <a href="{{ blog.url }}" class="article-template__link link animate-arrow">
+      <span class="icon-wrap">{% render 'icon-arrow' %}</span>
+      {{ 'blogs.article.back_to_blog' | t: title: blog.title | escape }}
+    </a>
+  </div>
+    </div>
+
+    <aside class="article-sidebar">
+  <div id="table-of-contents">
+    <h2>Table of Contents</h2>
+    <p>No Table of Contents available.</p> <!-- Default message, replaced dynamically by JS -->
+  </div>
+      <iframe
+  src="https://app.npta.ca/widget/form/lJveusatl20r4YtwufAG"
+  style="width:100%;height:100%;border:none;border-radius:0px"
+  id="inline-lJveusatl20r4YtwufAG" 
+  data-layout="{'id':'INLINE'}"
+  data-trigger-type="alwaysShow"
+  data-trigger-value=""
+  data-activation-type="alwaysActivated"
+  data-activation-value=""
+  data-deactivation-type="neverDeactivate"
+  data-deactivation-value=""
+  data-form-name="$25 OFF Pop Up Form - Blog"
+  data-height="543"
+  data-layout-iframe-id="inline-lJveusatl20r4YtwufAG"
+  data-form-id="lJveusatl20r4YtwufAG"
+  title="$25 OFF Pop Up Form - Blog"
+      >
+</iframe>
+<script src="https://app.npta.ca/js/form_embed.js"></script>
+</aside> 
+    </div>
+
+
+  
+</article>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const tocContainer = document.getElementById("table-of-contents");
+    const content = document.querySelector(".article-content");
+    
+    if (!tocContainer || !content) return;
+
+    const headings = content.querySelectorAll("h2"); // Capture H2 & H3 for better structure
+
+    if (headings.length > 0) {
+        tocContainer.innerHTML = "<h2>Table of Contents</h2>"; // Clear default message
+        const tocList = document.createElement("ul");
+
+        headings.forEach((heading, index) => {
+            const id = "section-" + (index + 1);
+            heading.id = id;
+
+            const listItem = document.createElement("li");
+            const link = document.createElement("a");
+            link.href = "#" + id;
+            link.textContent = heading.textContent;
+
+            listItem.appendChild(link);
+            tocList.appendChild(listItem);
+        });
+
+        tocContainer.appendChild(tocList);
+    } else {
+        tocContainer.innerHTML = "<h2>Table of Contents</h2><p>No sections available.</p>";
+    }
+});
+</script>
+
+  
+  {%- if blog.comments_enabled? -%}
+    <div class="article-template__comment-wrapper background-secondary">
+      <div
+        id="comments"
+        class="page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+      >
+        {%- if article.comments_count > 0 -%}
+          {%- assign anchorId = '#Comments-' | append: article.id -%}
+
+          <h2 id="Comments-{{ article.id }}" tabindex="-1">
+            {{ 'blogs.article.comments' | t: count: article.comments_count }}
+          </h2>
+          {% paginate article.comments by 5 %}
+            <div class="article-template__comments">
+              {%- if comment.status == 'pending' and comment.content -%}
+                <article id="{{ comment.id }}" class="article-template__comments-comment">
+                  {{ comment.content }}
+                  <footer class="right">
+                    <span class="circle-divider caption-with-letter-spacing">{{ comment.author }}</span>
+                  </footer>
+                </article>
+              {%- endif -%}
+
+              {%- for comment in article.comments -%}
+                <article id="{{ comment.id }}" class="article-template__comments-comment">
+                  {{ comment.content }}
+                  <footer class="right">
+                    <span class="circle-divider caption-with-letter-spacing">{{ comment.author }}</span
+                    ><span class="caption-with-letter-spacing">
+                      {{- comment.created_at | time_tag: format: 'date' -}}
+                    </span>
+                  </footer>
+                </article>
+              {%- endfor -%}
+              {% render 'pagination', paginate: paginate, anchor: anchorId %}
+            </div>
+          {% endpaginate %}
+        {%- endif -%}
+        {% form 'new_comment', article %}
+          {%- liquid
+            assign post_message = 'blogs.article.success'
+            if blog.moderated? and comment.status == 'unapproved'
+              assign post_message = 'blogs.article.success_moderated'
+            endif
+          -%}
+          <h2>{{ 'blogs.article.comment_form_title' | t }}</h2>
+          {%- if form.errors -%}
+            <div class="form__message" role="alert">
+              <h3 class="form-status caption-large text-body" tabindex="-1" autofocus>
+                {% render 'icon-error' %}
+                {{ 'templates.contact.form.error_heading' | t }}
+              </h3>
+            </div>
+            <ul class="form-status-list caption-large">
+              {%- for field in form.errors -%}
+                <li>
+                  <a href="#CommentForm-{{ field }}" class="link">
+                    {%- if form.errors.translated_fields[field] contains 'author' -%}
+                      {{ 'blogs.article.name' | t }}
+                    {%- elsif form.errors.translated_fields[field] contains 'body' -%}
+                      {{ 'blogs.article.message' | t }}
+                    {%- else -%}
+                      {{ form.errors.translated_fields[field] }}
+                    {%- endif -%}
+                    {{ form.errors.messages[field] }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- elsif form.posted_successfully? -%}
+            <div class="form-status-list form__message" role="status">
+              <h3 class="form-status" tabindex="-1" autofocus>
+                {% render 'icon-success' %}
+                {{ post_message | t }}
+              </h3>
+            </div>
+          {%- endif -%}
+
+          <div
+            {% if blog.moderated? == false %}
+              class="article-template__comments-fields"
+            {% endif %}
+          >
+            <div class="article-template__comment-fields">
+              <div class="field field--with-error">
+                <input
+                  type="text"
+                  name="comment[author]"
+                  id="CommentForm-author"
+                  class="field__input"
+                  autocomplete="name"
+                  value="{{ form.author }}"
+                  aria-required="true"
+                  required
+                  {% if form.errors contains 'author' %}
+                    aria-invalid="true"
+                    aria-describedby="CommentForm-author-error"
+                  {% endif %}
+                  placeholder="{{ 'blogs.article.name' | t }}"
+                >
+                <label class="field__label" for="CommentForm-author">
+                  {{- 'blogs.article.name' | t }}
+                  <span aria-hidden="true">*</span></label
+                >
+                {%- if form.errors contains 'author' -%}
+                  <small id="CommentForm-author-error">
+                    <span class="form__message">
+                      {%- render 'icon-error' -%}
+                      {{- 'blogs.article.name' | t }}
+                      {{ form.errors.messages.author }}.</span
+                    >
+                  </small>
+                {%- endif -%}
+              </div>
+              <div class="field field--with-error">
+                <input
+                  type="email"
+                  name="comment[email]"
+                  id="CommentForm-email"
+                  autocomplete="email"
+                  class="field__input"
+                  value="{{ form.email }}"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  aria-required="true"
+                  required
+                  {% if form.errors contains 'email' %}
+                    aria-invalid="true"
+                    aria-describedby="CommentForm-email-error"
+                  {% endif %}
+                  placeholder="{{ 'blogs.article.email' | t }}"
+                >
+                <label class="field__label" for="CommentForm-email">
+                  {{- 'blogs.article.email' | t }}
+                  <span aria-hidden="true">*</span></label
+                >
+                {%- if form.errors contains 'email' -%}
+                  <small id="CommentForm-email-error">
+                    <span class="form__message">
+                      {%- render 'icon-error' -%}
+                      {{- 'blogs.article.email' | t }}
+                      {{ form.errors.messages.email }}.</span
+                    >
+                  </small>
+                {%- endif -%}
+              </div>
+            </div>
+            <div class="field field--with-error">
+              <textarea
+                rows="5"
+                name="comment[body]"
+                id="CommentForm-body"
+                class="text-area field__input"
+                aria-required="true"
+                required
+                {% if form.errors contains 'body' %}
+                  aria-invalid="true"
+                  aria-describedby="CommentForm-body-error"
+                {% endif %}
+                placeholder="{{ 'blogs.article.message' | t }}"
+              >{{ form.body }}</textarea>
+              <label class="form__label field__label" for="CommentForm-body">
+                {{- 'blogs.article.message' | t }}
+                <span aria-hidden="true">*</span></label
+              >
+            </div>
+            {%- if form.errors contains 'body' -%}
+              <small id="CommentForm-body-error">
+                <span class="form__message">
+                  {%- render 'icon-error' -%}
+                  {{- 'blogs.article.message' | t }}
+                  {{ form.errors.messages.body }}.</span
+                >
+              </small>
+            {%- endif -%}
+          </div>
+          {%- if blog.moderated? -%}
+            <p class="article-template__comment-warning caption">{{ 'blogs.article.moderated' | t }}</p>
+          {%- endif -%}
+          <input type="submit" class="button" value="{{ 'blogs.article.post' | t }}">
+        {% endform %}
+      </div>
+    </div>
+  {%- endif -%}
+
+
+<script type="application/ld+json">
+  {{ article | structured_data }}
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.main-article.name",
+  "tag": "section",
+  "class": "section",
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "featured_image",
+      "name": "t:sections.main-article.blocks.featured_image.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "image_height",
+          "options": [
+            {
+              "value": "adapt",
+              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__1.label"
+            },
+            {
+              "value": "small",
+              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__2.label"
+            },
+            {
+              "value": "medium",
+              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__3.label"
+            },
+            {
+              "value": "large",
+              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__4.label"
+            }
+          ],
+          "default": "adapt",
+          "label": "t:sections.main-article.blocks.featured_image.settings.image_height.label",
+          "info": "t:sections.main-article.blocks.featured_image.settings.image_height.info"
+        }
+      ]
+    },
+    {
+  "type": "title",
+  "name": "t:sections.main-article.blocks.title.name",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "featured_image",
+      "label": "Featured Image"
+    },
+    {
+      "type": "select",
+      "id": "image_size",
+      "label": "Image Size",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "min": 16,
+      "max": 64,
+      "step": 1,
+      "default": 32,
+      "unit": "px",
+      "label": "Title Font Size"
+    },
+    {
+      "type": "richtext",
+      "id": "last_update",
+      "label": "Last Update",
+      "default": "<p>Last Updated on January 1, 2025</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "time_to_read",
+      "label": "Time to Read 🕗",
+      "default": "<p>5 min read</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_date",
+      "default": true,
+      "label": "Show Publish Date"
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_author",
+      "default": false,
+      "label": "Show Author Name"
+    }
+  ]
+},
+    {
+      "type": "content",
+      "name": "t:sections.main-article.blocks.content.name",
+      "limit": 1
+    },
+    {
+      "type": "share",
+      "name": "t:sections.main-article.blocks.share.name",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "share_label",
+          "label": "t:sections.main-article.blocks.share.settings.text.label",
+          "default": "t:sections.main-article.blocks.share.settings.text.default"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-article.blocks.share.settings.featured_image_info.content"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-article.blocks.share.settings.title_info.content"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

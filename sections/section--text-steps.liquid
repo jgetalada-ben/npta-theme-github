@@ -1,0 +1,315 @@
+{% schema %}
+{
+  "name": "Text Steps",
+  "settings": [
+     {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "section-id"
+    },
+    
+   {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Lorem ipsum dolor sit amet"
+    },
+    {
+      "type": "richtext",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+      {
+      "type": "text",
+      "id": "webhook_url",
+      "label": "Zapier Webhook URL",
+      "default": "https://hooks.zapier.com/hooks/catch/xxxxxx/"
+    },
+       
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "step_title",
+          "label": "Step Title",
+          "default": "Step"
+        },
+        {
+          "type": "richtext",
+          "id": "step_description",
+          "label": "Step Description",
+          "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+        },
+        
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text Steps",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}
+
+
+<section class="section--text-form" id="{{ section.settings.section_id }}">
+  <div class="section--text-form-container page-container ">
+
+    <div class="steps-form--column-left">
+<div class="section--title-block " >
+
+    <h2>{{ section.settings.section_title }}</h2>
+    <div class="steps--section-desc">{{ section.settings.section_description }}</div>
+
+</div>
+    
+ 
+
+    </div>
+
+        <div class="steps-form--column-right">
+
+             <div class="text-form--vertical-steps">
+      {% for block in section.blocks %}
+        <div class="step">
+          <div class="step-count">
+            <span>{{ forloop.index }}</span>
+          </div>
+          <div class="step-content">
+            <h3>{{ block.settings.step_title }}</h3>
+            <div class="step-desc  rte-link">{{ block.settings.step_description }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+    
+  </div>
+</section>
+
+
+
+<style>
+.section--text-form .steps--section-desc p {
+  color: #141414;
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+@media only screen and (min-width: 981px) {
+  .text-form--vertical-steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-column-gap: 34px;
+    grid-row-gap: 50px;
+    margin-bottom:20px;
+
+  }
+  .step:nth-child(4) .step-content::after,
+  .step:nth-child(5) .step-content::after,
+  .step:nth-child(6) .step-content::after {
+    border-bottom: 0px solid #d0d0d0 !important;
+  }
+  .steps-form--column-left {
+    padding-right: 10%;
+  }
+
+  .section--text-form-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 980px) {
+  .text-form--vertical-steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 34px;
+    grid-row-gap: 30px;
+  
+    margin-top: 50px;
+  }
+  .step:nth-child(5) .step-content::after,
+  .step:nth-child(6) .step-content::after {
+    border-bottom: 0px solid #d0d0d0 !important;
+  }
+  .steps-form--column-left {
+    padding-right: 10%;
+  }
+
+  .section--text-form-container {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .text-form--vertical-steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-column-gap: 34px;
+    grid-row-gap: 50px;
+   
+    margin-top: 50px;
+  }
+  .step:nth-child(4) .step-content::after,
+  .step:nth-child(5) .step-content::after,
+  .step:nth-child(6) .step-content::after {
+    border-bottom: 1px solid #d0d0d0 !important;
+  }
+}
+@media only screen and (max-width: 600px) {
+  form .form-row {
+    flex-wrap: wrap;
+  }
+}
+
+.text-form--vertical-steps {
+  overflow: hidden;
+}
+
+.section--title-block h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.section--text-form {
+  background: #fff;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+.section--text-form .section--.section--text-form-container {
+  margin: 0 auto;
+}
+.step-content h3 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+.step-content {
+  border-left: 1px solid #d0d0d0;
+  padding-left: 30px;
+  position: relative;
+}
+
+.step-desc a span{
+
+    color: var(--navy, #133257);
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+    text-decoration: none !important;
+}
+  .step-desc a{
+    opacity: 0.8;
+    color: var(--navy, #133257);
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+    text-decoration: none !important;
+}
+.step-content p {
+  margin-bottom: 40px;
+}
+
+.steps--section-desc ul {
+    list-style: none!important;
+    padding: 0;
+}
+.steps--section-desc ul li {
+    color: #141414;
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+
+  position:relative;
+
+}
+.steps--section-desc ul li {
+    padding-left: 32px;
+    margin-bottom: 12px;
+}
+
+  .steps--section-desc ul li:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    background-size: 100%;
+    background-fit: contain;
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    margin-top: 2px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 2.25C10.0716 2.25 8.18657 2.82183 6.58319 3.89317C4.97982 4.96451 3.73013 6.48726 2.99218 8.26884C2.25422 10.0504 2.06114 12.0108 2.43735 13.9021C2.81355 15.7934 3.74215 17.5307 5.10571 18.8943C6.46928 20.2579 8.20656 21.1865 10.0979 21.5627C11.9892 21.9389 13.9496 21.7458 15.7312 21.0078C17.5127 20.2699 19.0355 19.0202 20.1068 17.4168C21.1782 15.8134 21.75 13.9284 21.75 12C21.7473 9.41498 20.7192 6.93661 18.8913 5.10872C17.0634 3.28084 14.585 2.25273 12 2.25ZM16.2806 10.2806L11.0306 15.5306C10.961 15.6004 10.8783 15.6557 10.7872 15.6934C10.6962 15.7312 10.5986 15.7506 10.5 15.7506C10.4014 15.7506 10.3038 15.7312 10.2128 15.6934C10.1218 15.6557 10.039 15.6004 9.96938 15.5306L7.71938 13.2806C7.57865 13.1399 7.49959 12.949 7.49959 12.75C7.49959 12.551 7.57865 12.3601 7.71938 12.2194C7.86011 12.0786 8.05098 11.9996 8.25 11.9996C8.44903 11.9996 8.6399 12.0786 8.78063 12.2194L10.5 13.9397L15.2194 9.21937C15.2891 9.14969 15.3718 9.09442 15.4628 9.0567C15.5539 9.01899 15.6515 8.99958 15.75 8.99958C15.8486 8.99958 15.9461 9.01899 16.0372 9.0567C16.1282 9.09442 16.2109 9.14969 16.2806 9.21937C16.3503 9.28906 16.4056 9.37178 16.4433 9.46283C16.481 9.55387 16.5004 9.65145 16.5004 9.75C16.5004 9.84855 16.481 9.94613 16.4433 10.0372C16.4056 10.1282 16.3503 10.2109 16.2806 10.2806Z' fill='%23141414'/%3E%3C/svg%3E");
+}
+  
+.section--text-form .step-count span {
+  color: #141414;
+  font-family: var(--font-heading-family);
+
+  font-size: 45px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 104%; /* 46.8px */
+  text-transform: uppercase;
+}
+
+.section--text-form .step-content h3 {
+  color: #141414;
+  font-family: var(--font-heading-family);
+
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 104%;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.section--text-form .step-content p {
+  color: #141414;
+
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  margin-bottom: 0;
+}
+@media only screen and (min-width: 981px) {
+  .section--text-form .step {
+    flex: 1;
+    padding: 0 10px;
+  }
+}
+
+@media only screen and (max-width: 980px) {
+  .section--text-form .step {
+    width: 100%;
+  }
+  .section--text-form .step {
+    padding: 20px 0px;
+  }
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 50px auto;
+}
+
+</style>

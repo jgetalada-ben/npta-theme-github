@@ -1,0 +1,269 @@
+{% schema %}
+{
+    "name": "Text Quote",
+    "settings": [
+              {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "certified-trainers"
+    },
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Lorem ipsum dolor sit amet"
+        },
+      {
+                    "type": "textarea",
+                    "id": "description",
+                    "label": " Description",
+                    "default": "description goes here."
+                },
+          {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "JOIN TODAY"
+    },
+          {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+      "default": "/"
+    },
+      {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Select an image",
+      "info": "Choose an image from your files."
+    },
+ 
+
+    ],
+
+    "presets": [
+        {
+            "name": "Text Quote",
+            "category": "Custom Sections"
+        }
+    ]
+}
+{% endschema %}
+
+
+<section class="section--quote-text" >
+  <div class="quote-text--container page-container">
+    <div class="quote-text--content">
+      <div class="quote-text--column-left">
+        <div class="image-wrapper">
+          {% if section.settings.image %}
+          <img src="{{ section.settings.image | img_url: 'original' }}" alt="{{ section.settings.alt_text }}">
+          {% else %}
+          <p>No image available</p>
+          {% endif %}
+
+        </div>
+
+        <div class="quote-wrap"><div class="quote-text-inner"><p>Your potential as a fitness professional is limitless. Empower yourself, lead others, and change lives.</p></br><p> – Jesse Benson, CEO of NPTA </p></div></div>
+
+      </div>
+      <div class="quote-text--column-right">
+        <div class="section--title-block is--heading-white">
+          <h2 class="is--flex-start">{{ section.settings.heading }}</h2>
+          <p>{{ section.settings.description }}</p>
+
+               <div class="section--hero-buttons">
+                    <a target="_blank" href="{{ section.settings.button_link }}" class="btn button-yg">
+                        <span class="btn-label-down">{{ section.settings.button_text }}</span>
+                        <span class="btn-label-down">{{ section.settings.button_text }}</span>
+                    </a>
+                </div>
+        </div>
+
+
+          
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.quote-wrap {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #fff;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 366px;
+  min-height: 80px;
+}
+
+.quote-wrap .quote-text-inner {
+  width: 100%;
+  height: 100%;
+  padding: 18px 45px 18px 15px;
+  position: relative;
+}
+
+.quote-wrap p {
+  color: #141414;
+  font-family: Montserrat;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%;
+  letter-spacing: 1.04px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.quote-text-inner:after {
+  content: "";
+  position: absolute;
+  right: 15px;
+  top: 12px;
+  background-position: center;
+  background-fit: contain;
+  width: 26px;
+  height: 26px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26' fill='none'%3E%3Cpath d='M11.7812 7.3125V16.25C11.7799 17.5425 11.2659 18.7817 10.3519 19.6957C9.43796 20.6096 8.19877 21.1237 6.90625 21.125C6.69076 21.125 6.4841 21.0394 6.33173 20.887C6.17935 20.7347 6.09375 20.528 6.09375 20.3125C6.09375 20.097 6.17935 19.8903 6.33173 19.738C6.4841 19.5856 6.69076 19.5 6.90625 19.5C7.7682 19.5 8.59485 19.1576 9.20435 18.5481C9.81384 17.9386 10.1562 17.112 10.1562 16.25V15.4375H4.0625C3.63152 15.4375 3.2182 15.2663 2.91345 14.9615C2.6087 14.6568 2.4375 14.2435 2.4375 13.8125V7.3125C2.4375 6.88152 2.6087 6.4682 2.91345 6.16345C3.2182 5.8587 3.63152 5.6875 4.0625 5.6875H10.1562C10.5872 5.6875 11.0006 5.8587 11.3053 6.16345C11.61 6.4682 11.7812 6.88152 11.7812 7.3125ZM21.9375 5.6875H15.8438C15.4128 5.6875 14.9994 5.8587 14.6947 6.16345C14.39 6.4682 14.2188 6.88152 14.2188 7.3125V13.8125C14.2188 14.2435 14.39 14.6568 14.6947 14.9615C14.9994 15.2663 15.4128 15.4375 15.8438 15.4375H21.9375V16.25C21.9375 17.112 21.5951 17.9386 20.9856 18.5481C20.3761 19.1576 19.5495 19.5 18.6875 19.5C18.472 19.5 18.2653 19.5856 18.113 19.738C17.9606 19.8903 17.875 20.097 17.875 20.3125C17.875 20.528 17.9606 20.7347 18.113 20.887C18.2653 21.0394 18.472 21.125 18.6875 21.125C19.98 21.1237 21.2192 20.6096 22.1332 19.6957C23.0471 18.7817 23.5612 17.5425 23.5625 16.25V7.3125C23.5625 6.88152 23.3913 6.4682 23.0865 6.16345C22.7818 5.8587 22.3685 5.6875 21.9375 5.6875Z' fill='%23133257'/%3E%3C/svg%3E");
+}
+
+.is--heading-white h2 {
+  color: #fff;
+}
+
+.section--quote-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #133257;
+  padding: 90px 0;
+}
+.quote-text--container {
+}
+  .quote-text--column-left {
+  position:relative;
+}
+
+@media only screen and (min-width: 981px) {
+  .quote-text--content {
+    grid-template-columns: 1fr 1fr;
+  }
+  .quote-text--content {
+    display: grid;
+  }
+  .quote-text--column-right {
+    width: 100%;
+    padding-left: 90px;
+  }
+  .quote-text--column-left {
+    width: 100%;
+    position: relative;
+    padding-right: 25px;
+    padding-bottom: 25px;
+  }
+}
+@media only screen and (max-width: 980px) {
+  .quote-text--content {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 30px;
+  }
+
+  .quote-text--column-left {
+    width: 100%;
+    max-width: 100%;
+  }
+    .quote-text--column-left {
+    width: 100%;
+    position: relative;
+    padding-right: 25px;
+    padding-bottom: 25px;
+  }
+}
+
+.quote-text--column-right {
+  width: 100%;
+}
+
+.video-text-content {
+  display: flex;
+  width: 100%;
+}
+.text-content {
+  color: #141414;
+  flex: 1;
+  margin-right: 20px;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.quote-text--highlights {
+  margin-bottom: 30px;
+}
+.quote-text--highlight h3 {
+  color: #fff;
+  text-align: left;
+  font-family: Montserrat;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 104%; /* 22.88px */
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+.quote-text--column-right p {
+  color: #fff;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 24px */
+}
+
+
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const highlights = document.querySelectorAll('.quote-text--highlight');
+
+  if (highlights.length > 0) {
+    const firstHighlight = highlights[0];
+    firstHighlight.classList.add('active');
+    const content = firstHighlight.querySelector('p');
+    content.style.maxHeight = content.scrollHeight + 'px';
+  }
+
+  highlights.forEach(highlight => {
+    highlight.addEventListener('click', () => {
+      highlights.forEach(h => {
+        h.classList.remove('active');
+        h.querySelector('p').style.maxHeight = '0';
+      });
+
+      highlight.classList.add('active');
+      const content = highlight.querySelector('p');
+      content.style.maxHeight = content.scrollHeight + 'px';
+    });
+  });
+});
+
+</script>

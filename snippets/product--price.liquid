@@ -1,0 +1,287 @@
+{%- liquid
+  if use_variant
+    assign target = product.selected_or_first_available_variant
+  else
+    assign target = product
+  endif
+
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price | default: 1999
+  assign price_min = product.price_min
+  assign price_max = product.price_max
+  assign available = target.available | default: false
+  assign money_price = price | money
+  assign money_price_min = price_min | money
+  assign money_price_max = price_max | money
+  if settings.currency_code_enabled
+    assign money_price = price | money_with_currency
+    assign money_price_min = price_min | money_with_currency
+    assign money_price_max = price_max | money_with_currency
+  endif
+
+  if target == product and product.price_varies
+    assign money_price = 'products.product.price.from_price_html' | t: price: money_price
+  endif
+
+  assign monthly_payment = price | divided_by: 12
+  if settings.currency_code_enabled
+    assign monthly_payment = price | divided_by: 12
+  endif
+
+  assign competitor_price = product.metafields.custom.competitor_price
+  if settings.currency_code_enabled
+    assign competitor_money_price = competitor_price | money_with_currency
+  else
+    assign competitor_money_price = competitor_price | money
+  endif
+-%}
+
+{%- unless target == nil -%}
+<div
+  class="
+    price
+    {%- if price_class %} {{ price_class }}{% endif -%}
+    {%- if available == false %} price--sold-out{% endif -%}
+    {%- if compare_at_price > price and product.quantity_price_breaks_configured? != true %} price--on-sale{% endif -%}
+    {%- if compare_at_price > price and product.quantity_price_breaks_configured? %} volume-pricing--sale-badge{% endif -%}
+    {%- if product.price_varies == false and product.compare_at_price_varies %} price--no-compare{% endif -%}
+    {%- if show_badges %} price--show-badge{% endif -%}
+  "
+>
+
+
+   {% if product.compare_at_price > product.price %}
+        {% assign original_price = product.compare_at_price | floor %}
+        {% assign sale_price = product.price | floor %}
+        {% assign discount_amount = original_price | minus: sale_price %}
+        {% assign discount_percentage = discount_amount  | divided_by: 100 | floor %}
+     <div class="discount">
+  {% if discount_percentage > 10 %}
+    <span>SAVE ${{ discount_percentage }}</span>
+  {% else %}
+    <span>Best Price</span>
+  {% endif %}
+</div>
+      {% endif %}
+  {% if product.compare_at_price > product.price %}
+        <div class="card-price-wrap">
+          <span class="sale-price">{{ sale_price | floor | money  }}</span>
+          <span class="compare-price">{{ original_price | floor | money }}</span>
+        </div>
+      {% else %}
+    <div class="card-price-wrap">
+        <span class="sale-price">{{ product.price | floor | money }}</span>
+    </div>
+      {% endif %}
+
+  
+
+  {%- if show_badges -%}
+
+  {%- endif -%}
+</div>
+{% endunless %}
+
+    
+<style>
+
+  .add-to-cart-button{
+    position:absolute;
+    bottom:0;
+    right:0;
+    width: 34px;
+height: 34px;
+  }
+
+    .add-to-cart-button svg{
+ fill: #fff;
+             transition:300ms;
+  }
+     .add-to-cart-button:hover svg{
+ fill: #E9F24F;
+       transition:300ms;
+  }
+  
+
+
+  
+ .collection-cards {
+     display: grid;
+
+
+}
+    
+ .collection-cards {
+
+    grid-template-columns: 1fr 1fr 1fr;
+   grid-column-gap:30px;
+   grid-row-gap:30px;
+
+}
+  @media only screen and (min-width: 981px) {
+     .collection-cards {
+
+    grid-template-columns: 1fr 1fr 1fr;
+   grid-column-gap:30px;
+   grid-row-gap:30px;
+
+}
+  }
+    @media only screen and (min-width: 768px) and (max-width: 981px) {
+     .collection-cards {
+
+    grid-template-columns: 1fr 1fr ;
+   grid-column-gap:30px;
+   grid-row-gap:30px;
+
+}
+  }
+
+      @media only screen  and (max-width: 767px) {
+     .collection-cards {
+
+    grid-template-columns: 1fr ;
+   grid-column-gap:30px;
+   grid-row-gap:30px;
+
+}
+  }
+  
+.card {
+  width: 100%;
+position: relative;
+  padding-bottom:50px;
+text-decoration:none;
+}
+.card img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 20px;
+}
+.card h3 {
+  color: #141414;
+
+  font-family: Montserrat;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 104%; /* 18.72px */
+  text-transform: uppercase;
+  margin-bottom:7px;
+  margin-top:0;
+}
+.product-tags {
+display:flex;
+  justify-content:flex-start;
+  margin-bottom:10px;
+}
+.tag {
+    margin-bottom: 10px;
+  border-radius: 10px;
+  background: rgba(20, 20, 20, 0.05);
+  display: inline-flex;
+  height: 34px;
+  padding: 0px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: #141414;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 18px */
+  text-transform: uppercase;
+}
+  .card-price-wrap{
+        display: flex;
+    align-items: center;
+    position:absolute;
+    bottom:0;
+    left:0;
+  }
+
+.card .sale-price {
+  color: #FFF;
+font-family: Montserrat;
+font-size: 18px;
+font-style: normal;
+font-weight: 800;
+line-height: 104%;
+text-transform: uppercase;
+}
+.card .sale-price {
+  border-radius: 10px;
+background:  #133257;
+  display: flex;
+
+padding: 6px 13px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+flex-shrink: 0;
+}
+
+.card .compare-price {
+  text-decoration: line-through;
+  margin-left: 5px;
+  color:  #141414;
+font-family: Montserrat;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+text-decoration-line: strikethrough;
+text-transform: uppercase;
+}
+.card .discount {
+  display: inline-flex;
+height: 34px;
+padding: 0px 10px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+flex-shrink: 0;
+  border-radius: 10px;
+background:  #E9F24F;
+}
+.card .discount {
+color:  #141414;
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; /* 21px */
+}
+.card .discount {
+position:absolute;
+  top:20px;
+  right:20px;
+  left: auto;
+}
+.card .description {
+  color: #141414;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  opacity: 0.8;
+  margin-top:0;
+}
+
+.card__badge{
+  display:none;
+}
+
+  .card__information{
+    padding-bottom: 0 !important;
+  }
+  .card__information p{
+    padding-bottom: 0 !important;
+     margin-bottom: 0 !important;
+  }
+</style>
+
+

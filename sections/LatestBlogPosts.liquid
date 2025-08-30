@@ -1,0 +1,433 @@
+{% schema %}
+{
+  "name": "Latest Blog Posts",
+  "tag": "section",
+  "class": "latest-blog-posts",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Latest Blog Posts"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Latest Blog Posts",
+      "category": "Blog Page"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="latest-blog-posts-section">
+  <h2>{{ section.settings.section_title }}</h2>
+
+  <!-- Blog Type Navigation Bar -->
+  <div class="latest-blog-type-nav">
+    <ul class="desktop-nav">
+      <li><a href="#" class="active" data-tag="all blogs">All Blogs</a></li>
+      <li><a href="#" data-tag="certification">Certification</a></li>
+      <li><a href="#" data-tag="specialization">Specialization</a></li>
+      <li><a href="#" data-tag="apprenticeship program">Apprenticeship Program</a></li>
+    </ul>
+
+    <select class="mobile-nav">
+      <option value="all blogs">All Blogs</option>
+      <option value="certification">Certification</option>
+      <option value="specialization">Specialization</option>
+      <option value="apprenticeship program">Apprenticeship Program</option>
+    </select>
+  </div>
+
+  <!-- Latest Blog Posts Grid -->
+  <div id="latest-blog-posts" class="latest-posts-grid">
+    {% for article in blogs['npta-blogs'].articles %}
+      <div class="latest-blog-post-item" data-tags="{{ article.tags | join: ',' }}">
+        <div class="latest-blog-image-wrapper">
+          <a href="{{ article.url }}">
+            <img src="{{ article.image | img_url: '400x400' }}" alt="{{ article.title }}">
+          </a>
+        </div>
+        <div class="content">
+          <h4><a href="{{ article.url }}">{{ article.title }}</a></h4>
+          <p>{{ article.excerpt | strip_html | truncatewords: 25 }}</p>
+          <a href="{{ article.url }}" class="read-more">READ MORE FROM THIS BLOG →</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="blog-pagination"></div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const sectionHeader = document.querySelector(".latest-blog-posts-section h2");
+    const filterLinks = document.querySelectorAll(".latest-blog-type-nav a");
+    const mobileNav = document.querySelector(".mobile-nav");
+    const blogContainer = document.getElementById("latest-blog-posts");
+    const pagination = document.querySelector(".blog-pagination");
+
+    const POSTS_PER_PAGE = 4;
+    let currentTag = "all blogs";
+    let currentPage = 1;
+
+    function getFilteredBlogs() {
+      const blogItems = Array.from(document.querySelectorAll(".latest-blog-post-item"));
+      return blogItems.filter(item => {
+        const rawTags = item.dataset.tags || "";
+        const tags = rawTags.split(',').map(tag => tag.trim().toLowerCase());
+        return currentTag === "all blogs" || tags.includes(currentTag);
+      });
+    }
+
+    function renderBlogs(shouldScroll = false) {
+  const blogItems = Array.from(document.querySelectorAll(".latest-blog-post-item"));
+  blogItems.forEach(item => (item.style.display = "none"));
+
+  const filtered = getFilteredBlogs();
+  const totalPages = Math.ceil(filtered.length / POSTS_PER_PAGE);
+  const start = (currentPage - 1) * POSTS_PER_PAGE;
+  const end = start + POSTS_PER_PAGE;
+
+  filtered.slice(start, end).forEach(item => (item.style.display = "flex"));
+  renderPagination(totalPages);
+
+  if (shouldScroll && sectionHeader) {
+    sectionHeader.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
+
+    function renderPagination(totalPages) {
+      pagination.innerHTML = "";
+
+      if (totalPages <= 1) return;
+
+      // Prev button
+      if (currentPage > 1) {
+        const prev = document.createElement("button");
+        prev.textContent = "Prev";
+        prev.className = "page-nav";
+        prev.addEventListener("click", () => {
+          currentPage--;
+          renderBlogs();
+        });
+        pagination.appendChild(prev);
+      }
+
+      // Numbered pages with ellipsis
+      for (let i = 1; i <= totalPages; i++) {
+        if (
+          i === 1 ||
+          i === totalPages ||
+          (i >= currentPage - 1 && i <= currentPage + 1)
+        ) {
+          const pageBtn = document.createElement("button");
+          pageBtn.textContent = i;
+          pageBtn.className = "page-btn";
+          if (i === currentPage) pageBtn.classList.add("active");
+          pageBtn.addEventListener("click", () => {
+            currentPage = i;
+            renderBlogs(true);
+          });
+          pagination.appendChild(pageBtn);
+        } else if (
+          i === currentPage - 2 ||
+          i === currentPage + 2
+        ) {
+          const dots = document.createElement("span");
+          dots.textContent = "...";
+          dots.className = "ellipsis";
+          pagination.appendChild(dots);
+        }
+      }
+
+      // Next button
+      if (currentPage < totalPages) {
+        const next = document.createElement("button");
+        next.textContent = "Next";
+        next.className = "page-nav";
+        next.addEventListener("click", () => {
+          currentPage++;
+          renderBlogs();
+        });
+        pagination.appendChild(next);
+      }
+    }
+
+    // Desktop filters
+    filterLinks.forEach(link => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const selectedTag = this.dataset.tag;
+        currentTag = selectedTag.toLowerCase();
+        currentPage = 1;
+
+        filterLinks.forEach(l => l.classList.remove("active"));
+        this.classList.add("active");
+        if (mobileNav) mobileNav.value = selectedTag;
+        renderBlogs(true);
+      });
+    });
+
+    // Mobile filter
+    if (mobileNav) {
+      mobileNav.addEventListener("change", function () {
+        const selectedTag = this.value;
+        currentTag = selectedTag.toLowerCase();
+        currentPage = 1;
+
+        filterLinks.forEach(link => {
+          const isMatch = link.dataset.tag.toLowerCase() === selectedTag.toLowerCase();
+          link.classList.toggle("active", isMatch);
+        });
+
+        renderBlogs(true);
+      });
+    }
+
+    renderBlogs();
+  });
+</script>
+
+<style>
+.blog-pagination {
+  display: flex;
+  justify-content: center; /* Centers the buttons */
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 40px;
+  width: 100%;
+  padding: 0 20px;
+  max-width: 1000px; /* This controls the visible width */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.blog-pagination .page-btn,
+.blog-pagination .page-nav {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.blog-pagination .page-btn:hover,
+.blog-pagination .page-nav:hover {
+  background-color: #f3f3f3;
+}
+
+.blog-pagination .page-btn.active {
+  background-color: #ffff40;
+  color: #000;
+  border-color: #ffff40;
+  pointer-events: none;
+}
+
+.blog-pagination .ellipsis {
+  padding: 0 10px;
+  font-size: 16px;
+  color: #888;
+  user-select: none;
+}
+
+.blog-pagination .page-nav {
+  text-transform: uppercase;
+  color: #555;
+  border: none;
+  background: none;
+}
+
+.blog-pagination .page-nav:hover {
+  text-decoration: underline;
+}
+
+.latest-blog-posts-section {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px 20px;
+}
+.latest-blog-type-nav ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+.latest-blog-type-nav li a {
+  text-decoration: none;
+  color: #133257;
+  padding: 10px 15px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+.latest-blog-type-nav li a:hover,
+.latest-blog-type-nav li a.active {
+  text-decoration: underline;
+  color: #22528c;
+}
+.latest-posts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.latest-blog-post-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.latest-blog-post-item:hover {
+  background-color: #d0d0d0;
+  transform: translateY(-2px);
+}
+
+.latest-blog-image-wrapper {
+  width: 140px;
+  height: 140px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.latest-blog-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.latest-blog-post-item .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.latest-blog-post-item h4 {
+  font-size: 16px;
+  color: #141414;
+  margin: 0 0 5px 0;
+}
+
+.latest-blog-post-item p {
+  font-size: 13px;
+  color: #555;
+  margin: 0 0 10px 0;
+}
+
+.latest-blog-post-item .read-more {
+  font-size: 13px;
+  font-weight: bold;
+  color: #133257;
+  text-decoration: none;
+}
+
+.latest-blog-post-item a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.latest-blog-post-item:hover h4,
+.latest-blog-post-item:hover p,
+.latest-blog-post-item:hover .read-more {
+  color: #22528c;
+}
+  
+@media (max-width: 1024px) {
+  .latest-posts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .latest-blog-type-nav ul {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    scrollbar-width: none;
+  }
+
+  .latest-blog-type-nav ul::-webkit-scrollbar {
+    display: none;
+  }
+
+  .latest-blog-type-nav li {
+    flex: 0 0 auto;
+  }
+
+  .latest-blog-type-nav li a {
+    display: block;
+    padding: 10px 15px;
+    background: #f3f3f3;
+    border-radius: 30px;
+    font-size: 14px;
+    white-space: nowrap;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+  }
+
+  .latest-blog-type-nav li a.active,
+  .latest-blog-type-nav li a:hover {
+    background: #133257;
+    color: #fff;
+    border-color: #133257;
+    text-decoration: none;
+  }
+
+  .latest-blog-posts-section {
+    padding: 20px;
+  }
+
+  .latest-blog-post-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .latest-blog-post-item img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .latest-blog-type-nav .desktop-nav {
+    display: none;
+  }
+
+  .latest-blog-type-nav .mobile-nav {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (min-width: 769px) {
+  .latest-blog-type-nav .mobile-nav {
+    display: none;
+  }
+}
+</style>

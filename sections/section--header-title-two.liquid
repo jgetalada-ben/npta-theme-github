@@ -1,0 +1,138 @@
+{% schema %}
+{
+  "name": "Header Title",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+     {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "certified-trainers"
+    },
+    
+   {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Lorem ipsum dolor sit amet"
+    },
+    {
+      "type": "richtext",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Title Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 200,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "default": 980
+    },
+        {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#133257"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Flex Start"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Flex End"
+        }
+      ],
+      "default": "center"
+    },
+
+  
+       
+  ],
+ 
+  "presets": [
+    {
+      "name": "Header Title",
+      "category": "Custom Sections"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="section--title-two" id="{{ section.settings.section_id }}" style="background-color: {{ section.settings.background_color }};">
+  <div class="section--title-container page-container ">
+
+<div class="section--title-block " style="display: flex; justify-content: {{ section.settings.alignment }};">
+  <div style="max-width: {{ section.settings.container_width }}px;">
+    <h1 style="text-align: {{ section.settings.title_alignment }}; color: {{ section.settings.title_color }};">{{ section.settings.section_title }}</h1>
+    <div style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_description }}</div>
+  </div>
+</div>
+        </div>
+        
+</section>
+
+<style> 
+  .section--title-two{
+    padding: 50px 0;
+  }
+   .section--title-two h1{
+     margin-bottom:10px;
+     margin-top:0;
+   }
+  @media only screen and (min-width: 981px) {
+    .section--title-two h1 {
+  font-size: 42px !important;
+}
+  }
+
+    @media only screen and (min-width: 768px)and (max-width: 980px) {
+    .section--title-two h1 {
+  font-size: 36px !important;
+}
+  }
+    @media only screen and (max-width: 767px) {
+    .section--title-two h1 {
+  font-size: 32px !important;
+}
+  }
+
+</style>

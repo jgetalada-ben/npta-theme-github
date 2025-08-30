@@ -1,0 +1,215 @@
+{% schema %}
+{
+  "name": "Breadcrumbs",
+  "settings": [
+     {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_breadcrumbs",
+      "label": "Enable Breadcrumbs",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "breadcrumbs_home_label",
+      "label": "Home Label",
+      "default": "Home"
+    },
+    {
+      "type": "text",
+      "id": "breadcrumbs_separator",
+      "label": "Breadcrumb Separator",
+      "default": "|"
+    }
+  ],
+  
+  "presets": [
+    {
+      "name": "Default",
+      "settings": {
+        "background_color": "#ffffff",
+        "enable_breadcrumbs": true,
+        "breadcrumbs_home_label": "Home",
+        "breadcrumbs_separator": "|"
+      }
+    }
+  ]
+
+
+}
+
+  {% endschema %}
+{% unless template == 'index' or template == 'cart' or template == 'list-collections' or template == '404' %}
+
+{% assign t = template | split: '.' | first %}
+<div class="section--breadcrumb" style="background-color: {{ section.settings.background_color }};">
+  <nav class="breadcrumbs page-container" role="navigation" aria-label="breadcrumbs">
+    <ol>
+      <span>
+        <a href="/" title="Home">Home</a>
+      </span>
+
+      {% case t %}
+      {% when 'page' %}
+
+        <span>
+          <a href="{{ page.url }}" aria-current="page">{{ page.title }}</a>
+        </span>
+
+      {% when 'product' %}
+
+        {% if collection.url %}
+          <span>
+            <a href="{{ collection.url }}">{{ collection.title }}</a>
+          </span>
+        {% endif %}
+
+        <span>
+          <a href="/collections/all" aria-current="page">Products</a>
+        </span>
+        <span>
+          <a href="{{ product.url }}" aria-current="page">{{ product.title }}</a>
+        </span>
+
+      {% when 'collection' and collection.handle %}
+
+        {% if current_tags %}
+          <span>{{ collection.title | link_to: collection.url }}</span>
+          <span>
+            {% capture tag_url %}{{ collection.url }}/{{ current_tags | join: "+" }}{% endcapture %}
+            <a href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + " }}</a>
+          </span>
+        {% else %}
+          <span>
+            <a href="{{ collection.url }}" aria-current="page">{{ collection.title }}</a>
+          </span>
+        {% endif %}
+
+      {% when 'blog' %}
+
+        {% if current_tags %}
+          <span>{{ blog.title | link_to: blog.url }}</span>
+          <span>
+            {% capture tag_url %}{{ blog.url }}/tagged/{{ current_tags | join: "+" }}{% endcapture %}
+            <a href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + " }}</a>
+          </span>
+        {% else %}
+          <span>
+            <a href="{{ blog.url }}" aria-current="page">{{ blog.title }}</a>
+          </span>
+        {% endif %}
+
+      {% when 'article' %}
+
+        <span>{{ blog.title | link_to: blog.url }}</span>
+        <span>
+          <a href="{{ article.url }}" aria-current="page">{{ article.title }}</a>
+        </span>
+
+      {% else %}
+
+        <span aria-current="page">
+          <a href="{{ request.path }}" aria-current="page">{{ page_title }}</a>
+        </span>
+
+      {% endcase %}
+    </ol>
+  </nav>
+{% endunless %}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+/* Breadcrumbs' styles */
+
+
+  .product-hero-bg{
+    background: #F7F8FA;
+  }
+.breadcrumbs {
+  font-size: .85em;
+padding-top:50px;
+  padding-top:40px;
+}
+
+.breadcrumbs ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumbs span {
+
+}
+
+.breadcrumbs a {
+  text-decoration: none;
+  color: #141414;
+text-align: center;
+
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; /* 21px */
+  opacity: 0.4;
+}
+
+.breadcrumbs span:not(:last-child):after {  
+  content: "|";
+  display: inline-block;
+  padding-left: 0;
+  speak: none;
+  vertical-align: middle;
+}
+
+.breadcrumbs [aria-current="page"] {
+    text-decoration: none;
+  color:  #141414;
+text-align: center;
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; /* 21px */
+  text-decoration: none;
+  opacity: 1 !important;
+}
+
+.breadcrumbs [aria-current="page"]:hover,
+.breadcrumbs [aria-current="page"]:focus {
+  text-decoration: none;
+  color:  #141414;
+text-align: center;
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; /* 21px */
+}
+
+
+
+
+  
+</style>

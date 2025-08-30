@@ -1,0 +1,105 @@
+{%- liquid
+  if use_variant
+    assign target = product.selected_or_first_available_variant
+  else
+    assign target = product
+  endif
+
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price | default: 1999
+  assign price_min = product.price_min
+  assign price_max = product.price_max
+  assign available = target.available | default: false
+
+  assign currency_code = 'CAD '
+  if localization.country.iso_code == 'PH'
+    assign currency_code = 'PHP '
+  endif
+
+  assign money_price = price | money
+  assign money_price_min = price_min | money
+  assign money_price_max = price_max | money
+  if settings.currency_code_enabled
+    assign money_price = price | money_with_currency
+    assign money_price_min = price_min | money_with_currency
+    assign money_price_max = price_max | money_with_currency
+  endif
+
+  if target == product and product.price_varies
+    assign money_price = 'products.product.price.from_price_html' | t: price: money_price
+  endif
+
+  assign monthly_payment = price | divided_by: 12
+  if settings.currency_code_enabled
+    assign monthly_payment = price | divided_by: 12
+  endif
+
+  assign competitor_price = product.metafields.custom.competitor_price
+  if settings.currency_code_enabled
+    assign competitor_money_price = competitor_price | money_with_currency
+  else
+    assign competitor_money_price = competitor_price | money
+  endif
+-%}
+
+{%- unless target == nil -%}
+<div
+  class="price
+    {%- if price_class %} {{ price_class }}{% endif -%}
+    {%- if available == false %} price--sold-out{% endif -%}
+    {%- if compare_at_price > price and product.quantity_price_breaks_configured? != true %} price--on-sale{% endif -%}
+    {%- if compare_at_price > price and product.quantity_price_breaks_configured? %} volume-pricing--sale-badge{% endif -%}
+    {%- if product.price_varies == false and product.compare_at_price_varies %} price--no-compare{% endif -%}
+    {%- if show_badges %} price--show-badge{% endif -%}"
+>
+  <div class="price__container">
+    <div class="price__monthly">
+      <span class="visually-hidden">{{ 'products.product.price.monthly_price' | t }}</span>
+
+      <div class="starting-price-wrap">
+        <p class="starting-price-label">Starting at:</p>
+        <p class="starting-price-p"> 
+          <span class="price-item price-item--monthly">
+            {{ monthly_payment | divided_by: 100.0 | prepend: currency_code }} /
+          </span>
+          <span class="price-label-month">month</span>
+        </p>
+        <span class="price-item price-item--payment-terms">
+          12 payments
+        </span>
+      </div>
+    </div>
+
+    <div class="price__one-time">
+      <span class="visually-hidden">{{ 'products.product.price.one_time_price' | t }}</span>
+      <p class="price-item--one-time">
+        <span class="comp-price">{{ competitor_price }}</span> Full Price
+      </p>
+      <p class="price-item--compare">
+        <span>
+          {{ price | divided_by: 100.0 | prepend: currency_code }}
+        </span>
+      </p>
+      <span class="price-item--payment-terms">
+        One-time payment
+      </span>
+    </div>
+
+    {% if compare_at_price > 0 %}
+      <div class="price__one-time comp-price">
+        <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+        <p class="price-item--one-time">
+          <span class="comp-price">{{ competitor_price }}</span> Regular Price
+        </p>
+        <p class="price-item--compare">
+          <span>
+            {{ compare_at_price | divided_by: 100.0 | prepend: currency_code }}
+          </span>
+        </p>
+      </div>
+    {% endif %}
+  </div>
+  {% if show_badges %}
+  {% endif %}
+</div>
+{% endunless %}

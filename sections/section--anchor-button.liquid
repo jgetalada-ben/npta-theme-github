@@ -1,0 +1,313 @@
+{% schema %}
+{
+  "name": "Program Navigation",
+  "settings": [
+    {
+      "type": "text",
+      "id": "link1_text",
+      "label": "Link 1 Text",
+      "default": "PROGRAM DETAILS"
+    },
+    {
+      "type": "text",
+      "id": "link1_anchor",
+      "label": "Link 1 Anchor",
+      "default": "#program_details"
+    },
+    {
+      "type": "text",
+      "id": "link2_text",
+      "label": "Link 2 Text",
+      "default": "CURRICULUM"
+    },
+    {
+      "type": "text",
+      "id": "link2_anchor",
+      "label": "Link 2 Anchor",
+      "default": "#curriculum"
+    },
+    {
+      "type": "text",
+      "id": "link3_text",
+      "label": "Link 3 Text",
+      "default": "TESTIMONIALS"
+    },
+    {
+      "type": "text",
+      "id": "link3_anchor",
+      "label": "Link 3 Anchor",
+      "default": "#testimonials"
+    },
+    {
+      "type": "text",
+      "id": "link4_text",
+      "label": "Link 4 Text",
+      "default": "LOREM IPSUM"
+    },
+    {
+      "type": "text",
+      "id": "link4_anchor",
+      "label": "Link 4 Anchor",
+      "default": "#lorem-ipsum1"
+    },
+    {
+      "type": "text",
+      "id": "link5_text",
+      "label": "Link 5 Text",
+      "default": "LOREM IPSUM"
+    },
+    {
+      "type": "text",
+      "id": "link5_anchor",
+      "label": "Link 5 Anchor",
+      "default": "#lorem-ipsum2"
+    },
+    {
+      "type": "text",
+      "id": "link6_text",
+      "label": "Link 6 Text",
+      "default": "HOW IT WORKS"
+    },
+    {
+      "type": "text",
+      "id": "link6_anchor",
+      "label": "Link 6 Anchor",
+      "default": "#how_it_works"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+
+<nav class="program-details-nav">
+  <ul>
+    <li><a href="#program_details" class="active">Program details</a></li>
+    <li><a href="#curriculum">Curriculum</a></li>
+       <li><a href="#how_it_works">How It Works</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+     
+    <li><a href="#why_choose_npta">Why choose NPTA?</a></li>
+    <li><a href="#popular_questions">Popular questions</a></li>
+    <li><a href="#related_programs">Related Programs</a></li>
+  </ul>
+</nav>
+
+
+
+
+
+<style>
+
+  @media only screen and (max-width: 768px) {
+.program-details-nav ul {
+  display: flex;
+  justify-content: center;
+  list-style:none;
+  width: 100%;
+}
+    
+  }
+  
+.program-details-nav {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background-color:#fff;
+
+  border-bottom: 1px solid #D0D0D0;
+}
+
+.program-details-nav ul {
+  display: flex;
+  justify-content: center;
+  list-style:none;
+  width: 90%;
+  flex-wrap:wrap;
+  padding-left:0;
+}
+
+
+.program-details-nav a {
+  text-decoration: none;
+  color: grey;
+}
+
+.program-details-nav a.active {
+  color: #133257 !important;
+  transition:300ms;
+opacity: 1 !important;
+}
+
+
+.program-details-nav a {
+  color: #141414;
+  transition:300ms;
+opacity: 0.4;
+}
+
+
+
+  
+.program-details-nav li {
+  display: inline-flex;
+  align-items: center;
+
+  position:relative;
+  
+}
+
+  @media only screen and (min-width: 1441px) {
+      .program-details-nav li {
+  padding:10px 30px;
+}
+  }
+    @media only screen and (min-width:1081px) and (max-width: 1440px) {
+      .program-details-nav li {
+  padding:0px 20px;
+}
+  }
+      @media only screen and (max-width: 1080px) {
+      .program-details-nav li {
+  padding:0px 20px;
+}
+  }
+      @media only screen and (max-width: 480px) {
+      .program-details-nav li {
+width:100%;
+          padding:0px;
+}
+  }
+
+    .program-details-nav ul li:last-child:before{
+    display:none;  
+    }
+
+  .program-details-nav ul li:before{
+      content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+    right:0;
+
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='9' viewBox='0 0 9 9' fill='none'%3E%3Cpath opacity='0.3' d='M8.6536 4.85355C8.84886 4.65829 8.84886 4.34171 8.6536 4.14645L5.47162 0.964466C5.27636 0.769204 4.95978 0.769204 4.76451 0.964466C4.56925 1.15973 4.56925 1.47631 4.76451 1.67157L7.59294 4.5L4.76451 7.32843C4.56925 7.52369 4.56925 7.84027 4.76451 8.03553C4.95978 8.2308 5.27636 8.2308 5.47162 8.03553L8.6536 4.85355ZM0.300049 5H8.30005V4H0.300049V5Z' fill='%23141414'/%3E%3C/svg%3E");
+  }
+
+.program-details-nav a {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  padding: 8px 0;
+  color: #133257;
+  text-decoration: none;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 21px */
+  letter-spacing: 1.12px;
+  text-transform: uppercase;
+}
+.program-details-nav a:hover {
+  color: #133257;
+  text-decoration: none;
+}
+
+.program-details-nav a:before,
+a:after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 1px;
+  bottom: -1px;
+  background: #133257;
+}
+
+.program-details-nav a:before {
+  left: 0;
+}
+.program-details-nav a:after {
+  right: 0;
+  background: #133257;
+  transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.program-details-nav a:hover:before {
+  background: #133257;
+  width: 100%;
+  transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.program-details-nav a.active:before {
+  background: #133257;
+  width: 100%;
+  transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.program-details-nav a:hover:after {
+  background: transparent;
+  width: 100%;
+  transition: 0s;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const navLinks = document.querySelectorAll('.program-details-nav a');
+  
+  // Set the first navigation item as active by default
+  if (navLinks.length > 0) {
+    navLinks[0].classList.add('active'); 
+  }
+
+  navLinks.forEach(anchor => {
+    const targetSection = document.querySelector(anchor.getAttribute('href'));
+    if (!targetSection) {
+      anchor.parentElement.style.display = 'none';
+    } else {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        targetSection.scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+
+      if (window.location.hash === anchor.getAttribute('href')) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        anchor.classList.add('active');
+      }
+    }
+  });
+
+  window.addEventListener('scroll', function () {
+    let currentSection = '';
+
+    // Loop through each section to find the one currently in view
+    document.querySelectorAll('section').forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      const viewportHeight = window.innerHeight;
+
+      // Check if section is in the viewport
+      if (pageYOffset + viewportHeight / 2 >= sectionTop && pageYOffset + viewportHeight / 2 < sectionTop + sectionHeight) {
+        currentSection = '#' + section.getAttribute('id');
+      }
+    });
+
+    // Update the active class on the navigation links
+    navLinks.forEach(anchor => {
+      anchor.classList.remove('active');
+      if (anchor.getAttribute('href') === currentSection) {
+        anchor.classList.add('active');
+      }
+    });
+  });
+});
+</script>
+

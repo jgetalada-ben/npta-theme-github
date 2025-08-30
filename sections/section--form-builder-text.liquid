@@ -1,0 +1,966 @@
+{% schema %}
+{
+  "name": "Form Builder Text",
+  "settings": [
+              {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "certified-trainers"
+    },
+        {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+        {
+      "type": "range",
+      "id": "top_padding",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 92
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 92
+    },
+     {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Lorem ipsum dolor sit amet"
+    },
+        {
+      "type": "text",
+      "id": "section_sub_title",
+      "label": "Sub Title",
+      "default": "Lorem ipsum"
+    },
+
+    {
+      "type": "richtext",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Title Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 200,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "default": 980
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Flex Start"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Flex End"
+        }
+      ],
+      "default": "center"
+    },
+     {
+      "type": "checkbox",
+      "id": "show_program_button",
+      "label": "Display Program Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Button"
+    },
+    {
+      "type": "url",
+      "id": "program_button_link",
+      "label": "Button Link",
+      "default": "/"
+    },
+        {
+      "type": "richtext",
+      "id": "section_footer_description",
+      "label": "Section Footer Description",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+      {
+      "type": "range",
+      "id": "form_width",
+      "label": "Form width",
+      "min": 200,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "default": 980
+    },
+       {
+      "type": "richtext",
+      "id": "thank_you_message",
+      "label": "Thank You Message",
+      "default": "<p>Thank you for your submission!</p>"
+    },
+    {
+      "type": "select",
+      "id": "form_action",
+      "label": "Form Action",
+      "options": [
+        {
+          "value": "webhook",
+          "label": "Send to Webhook"
+        },
+        {
+          "value": "/contact",
+          "label": "Contact Form"
+        }
+      ],
+      "default": "webhook"
+    },
+    {
+      "type": "text",
+      "id": "webhook_url",
+      "label": "Webhook URL",
+      "default": "/",
+      "info": "Enter your Zapier Webhook URL for integration",
+  
+    },
+        {
+      "type": "text",
+      "id": "form_submit_label",
+      "label": "Form Button Label",
+      "default": "Sign Up Now",
+
+  
+    }
+  ],
+ "blocks": [
+    {
+      "type": "text_field",
+      "name": "Text Field",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Field Label",
+          "default": "Name"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder",
+          "default": "Enter your name"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "name": "Textarea",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Field Label",
+          "default": "Message"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder",
+          "default": "Enter your message"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "name": "Dropdown",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Field Label",
+          "default": "Options"
+        },
+        {
+          "type": "text",
+          "id": "options",
+          "label": "Options (comma separated)",
+          "default": "Option 1, Option 2, Option 3"
+        }
+      ]
+    },
+    {
+      "type": "email",
+      "name": "Email Field",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Field Label",
+          "default": "Email"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder",
+          "default": "Enter your email"
+        }
+      ]
+    },
+    {
+      "type": "phone",
+      "name": "Phone Field",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Field Label",
+          "default": "Phone Number"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder",
+          "default": "Enter your phone number"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "name": "Checkbox",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Field Label",
+          "default": "Agree to Terms"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "I agree to the terms and conditions."
+        }
+      ]
+    },
+
+
+
+  ],
+  "presets": [
+    {
+      "name": "Form Builder Text",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="section--full-custom-form" style="padding-top: {{ section.settings.top_padding }}px; padding-bottom: {{ section.settings.bottom_padding }}px; background-color: {{ section.settings.background_color }};" id="{{ section.settings.section_id }}">
+
+  <div class="section--title-block fbt-page-container page-container" style="display: flex; justify-content: {{ section.settings.alignment }};">
+    <div style="max-width: {{ section.settings.container_width }}px;">
+      <p class="fbt-form-subtitle" style="text-align: {{ section.settings.title_alignment }};" class="section--sub-title">
+        <span>{{ section.settings.section_sub_title }}</span>
+      </p>
+      <h2 class="fbt-form-title" style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_title }}</h2>
+      <div class="fbt-form-desc title-block--desc" style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_description }}</div>
+    </div>
+  </div>
+  
+ <form id="custom-form" method="POST" action="{{ section.settings.webhook_url }}" enctype="application/x-www-form-urlencoded" style="max-width: {{ section.settings.form_width }}px;">
+    {% assign row_open = false %}
+    {% assign column_count = 0 %}
+
+    {% for block in section.blocks %}
+      {% assign is_required = true %} <!-- Assuming all fields are required -->
+
+      {% if block.type == 'textarea' %}
+        {% if row_open %}
+          </div>
+          {% assign row_open = false %}
+        {% endif %}
+        <div class="form-row">
+          <div class="form-column full-width">
+            <label>{{ block.settings.label }}{% if is_required %}*{% endif %}</label>
+            <textarea placeholder="{{ block.settings.placeholder }}" name="{{ block.settings.label | handleize }}" required></textarea>
+          </div>
+        </div>
+      {% elsif block.type == 'checkbox' %}
+        {% if row_open %}
+          </div>
+          {% assign row_open = false %}
+        {% endif %}
+        <div class="form-row">
+          <div class="form-column full-width">
+            <div class="form-consent">
+              <input type="checkbox" name="{{ block.settings.label | handleize }}" required>
+              <p>{{ block.settings.description }}</p>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        {% if column_count == 0 %}
+          {% if row_open %}
+            </div>
+          {% endif %}
+          <div class="form-row">
+          {% assign row_open = true %}
+        {% endif %}
+        <div class="form-column half-width">
+          <label>{{ block.settings.label }}{% if is_required %}*{% endif %}</label>
+          {% case block.type %}
+            {% when 'text_field' %}
+              <input type="text" placeholder="{{ block.settings.placeholder }}" name="{{ block.settings.label | handleize }}" required>
+            {% when 'email' %}
+              <input type="email" placeholder="{{ block.settings.placeholder }}" name="{{ block.settings.label | handleize }}" required>
+            {% when 'phone' %}
+              <input type="tel" placeholder="{{ block.settings.placeholder }}" name="{{ block.settings.label | handleize }}" required>
+            {% when 'select' %}
+              <select name="{{ block.settings.label | handleize }}" required>
+                <option value="" disabled selected>Select Option</option>
+                {% assign options = block.settings.options | split: ', ' %}
+                {% for option in options %}
+                  <option value="{{ option | handleize }}">{{ option }}</option>
+                {% endfor %}
+              </select>
+          {% endcase %}
+        </div>
+        {% assign column_count = column_count | plus: 1 %}
+        
+        {% if column_count == 2 or forloop.last %}
+          </div>
+          {% assign row_open = false %}
+          {% assign column_count = 0 %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+
+     <input type="hidden" name="recaptcha_token" id="recaptcha_token">
+
+<input type="text" name="honeypot" class="honeypot" style="display:none;" autocomplete="off">
+
+   
+    <button type="submit" class="form-button btn button-yg" name="commit" aria-label="Submit">
+      <span class="btn-label-down">{{ section.settings.form_submit_label }}</span>
+      <span class="btn-label-down">{{ section.settings.form_submit_label }}</span>
+    </button>
+  </form>
+  
+<!-- Success Popup Modal -->
+
+<div id="success-popup" class="success-popup" >
+  <div class="success-popup-content">
+    <span id="close-popup" class="close-popup">
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+        <path d="M14.781 13.7198C14.8507 13.7895 14.906 13.8722 14.9437 13.9632C14.9814 14.0543 15.0008 14.1519 15.0008 14.2504C15.0008 14.349 14.9814 14.4465 14.9437 14.5376C14.906 14.6286 14.8507 14.7114 14.781 14.781C14.7114 14.8507 14.6286 14.906 14.5376 14.9437C14.4465 14.9814 14.349 15.0008 14.2504 15.0008C14.1519 15.0008 14.0543 14.9814 13.9632 14.9437C13.8722 14.906 13.7895 14.8507 13.7198 14.781L7.50042 8.56073L1.28104 14.781C1.14031 14.9218 0.94944 15.0008 0.750417 15.0008C0.551394 15.0008 0.360523 14.9218 0.219792 14.781C0.0790615 14.6403 3.92322e-09 14.4494 0 14.2504C-3.92322e-09 14.0514 0.0790615 13.8605 0.219792 13.7198L6.4401 7.50042L0.219792 1.28104C0.0790615 1.14031 0 0.94944 0 0.750417C0 0.551394 0.0790615 0.360523 0.219792 0.219792C0.360523 0.0790615 0.551394 0 0.750417 0C0.94944 0 1.14031 0.0790615 1.28104 0.219792L7.50042 6.4401L13.7198 0.219792C13.8605 0.0790615 14.0514 -3.92322e-09 14.2504 0C14.4494 3.92322e-09 14.6403 0.0790615 14.781 0.219792C14.9218 0.360523 15.0008 0.551394 15.0008 0.750417C15.0008 0.94944 14.9218 1.14031 14.781 1.28104L8.56073 7.50042L14.781 13.7198Z" fill="#141414" />
+      </svg>
+    </span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="71" height="70" viewBox="0 0 71 70" fill="none">
+      <g clip-path="url(#clip0_1042_1057)">
+        <path d="M35.5 0C28.5777 0 21.8108 2.05271 16.0551 5.89856C10.2993 9.74441 5.8133 15.2107 3.16423 21.6061C0.515165 28.0015 -0.177952 35.0388 1.17253 41.8282C2.52301 48.6175 5.85644 54.8539 10.7513 59.7487C15.6461 64.6436 21.8825 67.977 28.6718 69.3275C35.4612 70.6779 42.4985 69.9848 48.8939 67.3358C55.2893 64.6867 60.7556 60.2007 64.6014 54.4449C68.4473 48.6892 70.5 41.9223 70.5 35C70.4902 25.7204 66.7996 16.8237 60.2379 10.2621C53.6763 3.70043 44.7796 0.00979939 35.5 0ZM50.8663 28.8279L32.0202 47.674C31.7702 47.9243 31.4732 48.1229 31.1464 48.2584C30.8195 48.3939 30.4692 48.4636 30.1154 48.4636C29.7616 48.4636 29.4112 48.3939 29.0844 48.2584C28.7576 48.1229 28.4606 47.9243 28.2106 47.674L20.1337 39.5971C19.6285 39.0919 19.3447 38.4067 19.3447 37.6923C19.3447 36.9779 19.6285 36.2927 20.1337 35.7875C20.6388 35.2823 21.324 34.9985 22.0385 34.9985C22.7529 34.9985 23.4381 35.2823 23.9433 35.7875L30.1154 41.963L47.0567 25.0183C47.3069 24.7681 47.6038 24.5697 47.9307 24.4343C48.2575 24.2989 48.6078 24.2293 48.9615 24.2293C49.3153 24.2293 49.6656 24.2989 49.9924 24.4343C50.3192 24.5697 50.6162 24.7681 50.8663 25.0183C51.1165 25.2684 51.3149 25.5654 51.4503 25.8922C51.5857 26.219 51.6553 26.5693 51.6553 26.9231C51.6553 27.2768 51.5857 27.6271 51.4503 27.9539C51.3149 28.2808 51.1165 28.5777 50.8663 28.8279Z" fill="#E9F24F" />
+      </g>
+      <defs>
+        <clipPath id="clip0_1042_1057">
+          <rect width="70" height="70" fill="white" transform="translate(0.5)" />
+        </clipPath>
+      </defs>
+    </svg>
+
+    <h2>Awesome! </h2>
+    <p class="success-popup-desc">You are one step closer to winning!</p>
+
+    <h3>Next step: </h3>
+    <p class="success-popup-steps-desc">Follow us on <a href="https://www.instagram.com/npta_canada/" target="_blank">Instagram</a> and tag three friends to complete your entry. </p>
+    <div class="popup-social-wrap">
+      <a href="https://www.instagram.com/npta_canada/" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none">
+          <rect width="22" height="22" rx="11" fill="#133257" />
+          <path d="M14.357 6.89a.754.754 0 1 0 0 1.508.754.754 0 0 0 0-1.509Zm2.891 1.52a4.771 4.771 0 0 0-.29-1.527 3.106 3.106 0 0 0-.728-1.113 2.954 2.954 0 0 0-1.113-.723 4.589 4.589 0 0 0-1.527-.295c-.666-.038-.88-.038-2.59-.038s-1.923 0-2.59.038c-.522.01-1.038.11-1.527.295-.42.155-.8.402-1.113.723-.322.311-.569.692-.722 1.113a4.589 4.589 0 0 0-.296 1.527c-.038.667-.038.88-.038 2.59s0 1.923.038 2.59c.01.522.11 1.039.296 1.527.153.421.4.801.722 1.113.313.32.693.567 1.113.723a4.588 4.588 0 0 0 1.527.295c.667.038.88.038 2.59.038s1.924 0 2.59-.038a4.588 4.588 0 0 0 1.527-.296c.421-.153.801-.4 1.113-.722.322-.313.57-.693.729-1.113.18-.49.277-1.006.29-1.527 0-.667.037-.88.037-2.59s0-1.923-.038-2.59Zm-1.131 5.104a3.524 3.524 0 0 1-.214 1.17c-.1.273-.262.52-.472.722-.203.208-.45.369-.722.472-.375.137-.77.209-1.17.213-.628.032-.86.038-2.514.038-1.653 0-1.886 0-2.514-.038a3.604 3.604 0 0 1-1.22-.188 2.056 2.056 0 0 1-.69-.472 1.886 1.886 0 0 1-.466-.722 3.482 3.482 0 0 1-.252-1.195c0-.628-.037-.86-.037-2.514 0-1.653 0-1.886.037-2.514.003-.408.078-.812.22-1.195.111-.265.281-.501.497-.691.191-.216.427-.388.692-.503.383-.138.786-.21 1.194-.214.628 0 .86-.037 2.514-.037 1.653 0 1.886 0 2.514.037.4.005.795.077 1.17.214.285.106.542.278.748.503.205.193.366.43.47.691.14.383.213.787.215 1.195.031.628.037.86.037 2.514 0 1.653-.006 1.886-.037 2.514ZM11 7.775a3.225 3.225 0 1 0 2.987 1.989A3.219 3.219 0 0 0 11 7.775Zm0 5.318a2.093 2.093 0 1 1 0-4.186 2.093 2.093 0 0 1 0 4.186Z" fill="#E9F24F" />
+        </svg>
+        npta_canada</a>
+    </div>
+  </div>
+</div>
+
+
+  
+  {% if section.settings.show_program_button %}
+    <div class="container--footer" style="display: flex; flex-wrap: wrap; justify-content: {{ section.settings.alignment }};"> 
+      <div class="button-wrap" style="display: flex; justify-content: {{ section.settings.alignment }};">
+        <a href="{{ section.settings.program_button_link }}" class="btn button-yg">
+          <span class="btn-label-down">{{ section.settings.form_submit_label }}</span>
+          <span class="btn-label-down">{{ section.settings.form_submit_label }}</span>
+        </a>
+      </div>
+      <div class="section-footer-description" style="text-align: {{ section.settings.title_alignment }};">
+        {{ section.settings.section_footer_description }}
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+
+        <script src="https://www.google.com/recaptcha/api.js?render=6Lf762AqAAAAALFi5cjMR1pDOlO3FhZx9vGGqFjJ&badge=bottomleft"></script>
+<script>
+  function executeRecaptcha(action) {
+    return new Promise((resolve) => {
+      grecaptcha.ready(function() {
+        grecaptcha.execute('6Lf762AqAAAAALFi5cjMR1pDOlO3FhZx9vGGqFjJ', { action: action }).then(function(token) {
+          resolve(token);
+        });
+      });
+    });
+  }
+
+  function validateEmail(email) {
+    const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return re.test(email);
+  }
+
+  function validatePhone(phone) {
+    const re = /^[0-9]+$/; // Adjust regex if needed for specific formats
+    return re.test(phone);
+  }
+
+  function validateText(input) {
+    return input.trim() !== "";
+  }
+
+  function showError(input, message) {
+    const error = document.createElement('div');
+    error.className = 'error-message';
+    error.textContent = message;
+    input.classList.add('error');
+    input.parentNode.insertBefore(error, input.nextSibling);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('custom-form');
+    var successPopup = document.getElementById('success-popup');
+    var closePopup = document.getElementById('close-popup');
+
+    if (form) {
+      form.addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevent default submission
+
+        var isValid = true;
+
+        var honeypotInput = form.querySelector("input[name='honeypot']");
+        if (honeypotInput && honeypotInput.value) {
+          console.log("Honeypot field filled, possible bot submission.");
+          return; 
+        }
+
+        // Clear previous errors
+        form.querySelectorAll('.error-message').forEach(elem => elem.remove());
+        form.querySelectorAll('.error').forEach(elem => elem.classList.remove('error'));
+
+        // Validate text input
+        var textInput = form.querySelector("input[type='text']");
+        if (textInput && !validateText(textInput.value)) {
+          showError(textInput, "This field cannot be empty.");
+          isValid = false;
+        }
+
+        // Validate email
+        var emailInput = form.querySelector("input[type='email']");
+        if (emailInput && !validateEmail(emailInput.value)) {
+          showError(emailInput, "Please enter a valid email address.");
+          isValid = false;
+        }
+
+        // Validate phone
+        var phoneInput = form.querySelector("input[type='tel']");
+        if (phoneInput && !validatePhone(phoneInput.value)) {
+          showError(phoneInput, "Please enter a valid phone number.");
+          isValid = false;
+        }
+
+        // Validate select input
+        var selectInput = form.querySelector("select");
+        if (selectInput && !selectInput.value) {
+          showError(selectInput, "Please select an option.");
+          isValid = false;
+        }
+
+        // Validate checkbox
+        var checkboxInput = form.querySelector("input[type='checkbox']");
+        if (checkboxInput && !checkboxInput.checked) {
+          showError(checkboxInput, "Please accept the terms.");
+          isValid = false;
+        }
+
+        // Validate textarea
+        var textareaInput = form.querySelector("textarea");
+        if (textareaInput && !validateText(textareaInput.value)) {
+          showError(textareaInput, "This field cannot be empty.");
+          isValid = false;
+        }
+
+        // If validation fails, stop form submission
+        if (!isValid) {
+          return;
+        }
+
+        try {
+          // Execute reCAPTCHA and get the token
+          const token = await executeRecaptcha('submit_form');
+          
+          // Add the token to the form data
+          var formData = new FormData(form);
+          formData.append('recaptcha_token', token); // Append token to FormData
+
+          // Send the form data with fetch
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData
+          });
+
+          if (response.ok) {
+            form.reset(); // Clear form
+
+            // Show success popup
+            successPopup.style.visibility = 'visible';
+            successPopup.style.opacity = '1';
+            setTimeout(function() {
+              successPopup.classList.add('show'); 
+            }, 300);
+          } else {
+            alert('Something went wrong. Please try again.');
+          }
+        } catch (error) {
+          alert('There was a network error. Please try again.');
+        }
+      });
+    }
+
+    // Close popup on click of close button
+    closePopup.addEventListener('click', function() {
+      successPopup.classList.remove('show');
+      setTimeout(function() {
+        successPopup.style.visibility = 'hidden';
+        successPopup.style.opacity = '0';
+      }, 500);
+    });
+
+    // Close popup if clicking outside of the popup content
+    window.addEventListener('click', function(event) {
+      if (event.target === successPopup) {
+        successPopup.classList.remove('show');
+        setTimeout(function() {
+          successPopup.style.visibility = 'hidden';
+          successPopup.style.opacity = '0';
+        }, 500);
+      }
+    });
+  });
+</script>
+
+
+
+
+<style>
+
+ .success-popup {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.success-popup.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.success-popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+}
+
+.close-popup {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+  .fbt-form-title {
+  text-align:left !important;
+}
+    .fbt-form-desc p {
+  text-align:left !important;
+}
+      .fbt-form-subtitle{
+  text-align:left !important;
+}
+        .fbt-page-container{
+width:100% !important;
+}
+}
+  
+
+
+  
+.section--sub-title span{
+  color:#141414;
+text-align: center;
+    font-family: var(--font-heading-family) !important;
+font-size: 18px !important;
+font-style: normal;
+font-weight: 800 !important;
+line-height: 104%; /* 18.72px */
+text-transform: uppercase;
+}
+
+.section--full-custom-form {
+  display: flex;
+  padding: 40px 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  border-radius: 20px;
+  background: #f7f8fa;
+  min-height: 300px;
+}
+
+@media only screen and (max-width: 600px) {
+  form .form-row {
+    flex-wrap: wrap;
+  }
+}
+
+.form-button {
+  border: none;
+  width: 100%;
+}
+.section--full-custom-form {
+  display: flex;
+  padding: 40px 24px;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 24px;
+  border-radius: 20px;
+  background: #f7f8fa;
+}
+form {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+form .form-row {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+}
+.form-row .form-column {
+  display: flex;
+  flex-wrap: Wrap;
+  justify-content: flex-start;
+  width: 100%;
+}
+.form-row .form-column label {
+  width: 100%;
+  color: var(--black, #141414);
+      font-family: var(--font-heading-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 24px */
+  letter-spacing: 1.28px;
+  text-transform: uppercase;
+  margin-bottom:10px;
+}
+
+.form-row .form-column input {
+  display: flex;
+
+  padding: 15px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+  border: 1px solid #d0d0d0;
+  background: #fff;
+}
+
+.form-row .form-column input {
+  color: #141414;
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  transition: 300ms;
+  width: 100%;
+}
+
+.form-row .form-column input:focus,
+.form-row .form-column input:hover {
+  border-radius: 6px;
+  border: 1px solid #141414;
+  background: #fff;
+  transition: 300ms;
+  color: #141414;
+}
+
+.form-row .form-column textarea {
+  width: 100%;
+  color: #141414;
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  transition: 300ms;
+  border-radius: 6px;
+  border: 1px solid #d0d0d0;
+  min-height: 120px;
+  padding: 15px;
+}
+
+.form-row .form-column textarea:focus,
+.form-row .form-column textarea:hover {
+  border-radius: 6px;
+  border: 1px solid #141414;
+  background: #fff;
+  transition: 300ms;
+  color: #141414;
+  outline: none;
+}
+
+
+    .form-row .form-column select {
+  color: #141414;
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  transition: 300ms;
+  width: 100%;
+}
+  
+.form-row .form-column select {
+  display: flex;
+
+  padding: 15px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+  border: 1px solid #d0d0d0;
+  background: #fff;
+}
+
+  
+*:focus-visible {
+  outline: none !important;
+  outline-offset: none !important;
+  box-shadow: none !important;
+}
+@media only screen and (min-width: 601px) {
+    .form-column {
+    flex: 1;
+
+  }
+}
+
+  .form-column.full-width {
+    flex: 1 0 100%;
+    margin-right: 0;
+  }
+
+  .form-consent {
+        display: grid;
+    grid-template-columns: 18px auto;
+    gap: 15px;
+  }
+    .form-consent p{
+    color: #141414;
+
+    font-family: var(--font-body-family);
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; /* 24px */
+  }
+
+
+
+
+.success-popup {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.success-popup-content {
+  background-color: #fff;
+  padding: 90px 20px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 1080px;
+  width: 90%;
+  position: relative;
+}
+
+.close-popup {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+
+  cursor: pointer;
+}
+.close-popup {
+  position: absolute;
+
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.close-popup svg {
+  width: 15px;
+  height: 15px;
+}
+
+.success-popup h2 {
+  color: #141414;
+  text-align: center;
+    font-family: var(--font-heading-family);
+  font-size: 42px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 112%; /* 47.04px */
+  text-transform: uppercase;
+  margin-top:5px;
+  margin-bottom:7px;
+}
+
+.success-popup .success-popup-desc {
+  color: #141414;
+  text-align: center;
+font-family: var(--font-body-family);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
+.success-popup h3 {
+  color: #141414;
+  text-align: center;
+    font-family: var(--font-heading-family);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 104%;
+  text-transform: uppercase;
+}
+.success-popup .success-popup-steps-desc {
+  color: #141414;
+  text-align: center;
+font-family: var(--font-body-family);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
+.success-popup .success-popup-steps-desc a {
+  color: #133257;
+  text-align: center;
+ font-family: var(--font-body-family);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  text-decoration: none;
+}
+.popup-social-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popup-social-wrap a {
+  color: #133257;
+    font-family: var(--font-heading-family);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: 1.12px;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+  
+</style>

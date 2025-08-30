@@ -1,0 +1,204 @@
+{% schema %}
+{
+  "name": "Footer Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "THE GOLD STANDARD IN PERSONAL TRAINING"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "<p>Join our community of driven professionals and access special rewards and privileges based on your engagement.</p>"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "GET CERTIFIED"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button_1",
+      "label": "Show Button 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_1_text",
+      "label": "Button Text",
+      "default": "Button"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Button Link",
+      "default": "/"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button_2",
+      "label": "Show Button 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_2_text",
+      "label": "Button Text",
+      "default": "Button"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Button 2 Link",
+      "default": "/"
+    },
+    {
+      "type": "select",
+      "id": "button_position",
+      "label": "Button Position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+      {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Title Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 200,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "default": 980
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Flex Start"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Flex End"
+        }
+      ],
+      "default": "center"
+    },
+  ],
+  "presets": [
+    {
+      "name": "Personal Training Banner",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+
+    <div class="section--title-block " style="display: flex; justify-content: {{ section.settings.alignment }};">
+  <div style="max-width: {{ section.settings.container_width }}px;">
+    <h2 style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_title }}</h2>
+    <div class="banner-two--desc" style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_description }}</div>
+  </div>
+</div>
+
+
+      <style>
+  .button-wrapper {
+    text-align: {{ section.settings.button_position }};
+  }
+</style>
+
+<section class="section--banner-two" style="background-image: url({{ section.settings.background_image | img_url: 'master' }});">
+  {{ 'section--banner-two.css' | asset_url | stylesheet_tag }}
+  <div class="section--banner-two-container" >
+    <div class="banner-two--text-content" style="display: flex; justify-content: {{ section.settings.alignment }};">
+        <div style="max-width: {{ section.settings.container_width }}px;">
+
+           <h2 style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.title }}</h2>
+    <div class="banner-two--desc" style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.subtitle }}</div>
+
+          
+   
+
+
+
+      <div class="button-wrapper">
+  {% if section.settings.show_button_1 %}
+    <a href="{{ section.settings.button_1_link }}" class="btn button-yg">
+      <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
+      <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
+    </a>
+  {% endif %}
+  
+  {% if section.settings.show_button_2 %}
+    <a href="{{ section.settings.button_2_link }}" class="btn button-w">
+      <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
+      <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
+    </a>
+  {% endif %}
+</div>
+
+</div>
+      
+     
+
+    </div>
+
+  </div>
+</section>
+
+

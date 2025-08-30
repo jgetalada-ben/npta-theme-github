@@ -1,0 +1,9 @@
+{% capture selected_tag %}{{ request.query.tag | default: "All Blogs" }}{% endcapture %}
+
+{% paginate blogs['npta-blogs'].articles by 4 %}
+  {% for article in blogs['npta-blogs'].articles %}
+    {% if selected_tag == "All Blogs" or article.tags contains selected_tag %}
+      <!-- Display the blog post -->
+    {% endif %}
+  {% endfor %}
+{% endpaginate %}

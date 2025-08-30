@@ -1,0 +1,100 @@
+{% schema %}
+{
+  "name": "Product Program",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "program_info_column_1",
+      "label": "Program Info Column 1",
+      "default": "<p>Lorem ipsum</p><h3>LOREM IPSUM</h3>"
+    },
+    {
+      "type": "richtext",
+      "id": "program_info_column_2",
+      "label": "Program Info Column 2",
+      "default": "<p>Lorem ipsum</p><h3>LOREM IPSUM</h3>"
+    },
+    {
+      "type": "richtext",
+      "id": "program_info_column_3",
+      "label": "Program Info Column 3",
+      "default": "<p>Lorem ipsum</p><h3>LOREM IPSUM</h3>"
+    }
+  ]
+}
+{% endschema %}
+
+
+<div class="section--program-info">
+  
+<div class="program-info-container page-container ">
+  <div class="product-program-info ">
+  <div class="column">
+    <div class="program-info-content">
+      {{ product.metafields.custom.program_info_column_1_  | metafield_tag }}
+    </div>
+  </div>
+  <div class="column">
+    <div class="program-info-content">
+      {{ product.metafields.custom.program_info_column_2 | metafield_tag   }}
+    </div>
+  </div>
+  <div class="column">
+    <div class="program-info-content">
+      {{ product.metafields.custom.program_info_column_3 | metafield_tag   }}
+    </div>
+  </div>
+</div>
+</div>
+  </div>
+<style>
+  .section--program-info{
+    background:  #F7F8FA;
+
+    display:flex;
+    justify-content:center;
+
+
+  }
+  .program-info-container{
+        padding: 30px 0;
+    border-top:1px solid #D0D0D0;
+        display:flex;
+    justify-content:center;
+  }
+.product-program-info {
+  display: flex;
+  justify-content: center;
+  max-width:620px;
+  width:90%;
+}
+.product-program-info .column {
+  flex: 1;
+  text-align: center;
+}
+.product-program-info .column:not(:last-child) {
+  border-right: 1px solid #e0e0e0;
+}
+.product-program-info .column p {
+  color:  #9C9D9E;
+font-family: var(--font-body-family);
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%;
+  
+}
+  .product-program-info .column p strong {
+color: var(--black, #141414);
+    font-family: var(--font-heading-family);
+font-size: 15px;
+font-style: normal;
+font-weight: 800;
+line-height: 104%; 
+text-transform: uppercase;
+    margin-top:6px;
+  
+}
+
+</style>
+

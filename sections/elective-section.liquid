@@ -1,0 +1,319 @@
+{% schema %}
+{
+    "name": "Elective",
+    "settings": [
+           {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+              {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "section-id"
+    },
+      
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Lorem ipsum dolor sit amet"
+        },
+         {
+          "type": "richtext",
+          "id": "description",
+          "label": "Text"
+        },
+        {
+          "type": "richtext",
+          "id": "description2",
+          "label": "Text2"
+        },
+    
+        {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Select an image",
+      "info": "Choose an image from your files."
+    },
+      {
+      "type": "image_picker",
+      "id": "image2",
+      "label": "Select an image",
+      "info": "Choose an image from your files."
+    },
+          {
+      "type": "checkbox",
+      "id": "show_buttons",
+      "label": "Show Buttons",
+      "default": true
+    },
+        {
+            "type": "text",
+            "id": "primary_button_text",
+            "label": "Primary Button Text",
+            "default": "Button"
+        },
+        {
+            "type": "url",
+            "id": "primary_button_link",
+            "label": "Primary Button Link"
+        },
+        {
+            "type": "text",
+            "id": "secondary_button_text",
+            "label": "Secondary Button Text",
+            "default": "Button"
+        },
+    
+    ],
+    "blocks": [
+        {
+            "type": "highlight",
+            "name": "Highlight",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "highlight_title",
+                    "label": "Highlight Title",
+                    "default": "Highlight Title Goes Here"
+                },
+                {
+                    "type": "textarea",
+                    "id": "highlight_description",
+                    "label": "Highlight Description",
+                    "default": "Short description goes here."
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "elective section",
+            "category": "Custom Sections"
+        }
+    ]
+}
+{% endschema %}
+
+<section class="section--how-it-works"   style="background-color: {{ section.settings.background_color }};">
+  <div class="how-it-works--container page-container">
+    <div class="how-it-works--content">
+      <div class="how-it-works--column-left">
+        <div class="image-wrapper"> {% if section.settings.image %} <img src="{{ section.settings.image | img_url: 'original' }}" alt="{{ section.settings.alt_text }}"> {% else %} <p>No image available</p> {% endif %} </div>
+      </div>
+      <div class="how-it-works--column-right">
+        <div class="image-wrapper2"> {% if section.settings.image2 %} <img src="{{ section.settings.image2 | img_url: 'original' }}" alt="{{ section.settings.alt_text }}"> {% else %} <p>No image available</p> {% endif %} </div>
+        <div class="section--title-block  ">
+          <h3 class="is--flex-start">{{ section.settings.heading }}</h3>
+        </div>
+        <div class="how-it-works--description">
+          {{ section.settings.description }}
+        <br>
+          {{ section.settings.description2 }}
+        </div> {% if section.settings.show_buttons %} <div class="section--hero-buttons">
+          <a href="{{ section.settings.primary_button_link }}" class="btn button-yg">
+            <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+            <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+          </a>
+          <a href="{{ section.settings.secondary_button_link }}" class="btn button-w">
+            <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
+            <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
+          </a>
+        </div> {% else %} {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .is--heading-white h2 {
+    color: #FFF;
+  }
+
+  @media only screen and (min-width: 981px) {
+    .section--how-it-works {
+      padding: 90px 0;
+    }
+  }
+
+  @media only screen and (max-width: 980px) {
+    .section--how-it-works {
+      padding: 50px 0;
+    }
+    .how-it-works--column-left h3 {
+      text-align:Center;
+    }
+        .how-it-works--column-left p {
+      text-align:Center;
+    }
+  }
+
+  .section--how-it-works {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+  }
+
+  .section--how-it-works .section--hero-buttons {
+    margin-top: 30px;
+  }
+
+  @media only screen and (min-width: 981px) {
+    .how-it-works--content {
+      grid-template-columns: 1fr 1fr;
+    align-items:center;
+    }
+
+    .how-it-works--content {
+      display: grid;
+    }
+
+    .how-it-works--column-left {
+      width: 90%;
+      max-width: 530px;
+    }
+
+    .how-it-works--column-right {
+      width: 100%;
+    }
+  }
+
+  @media only screen and (max-width: 980px) {
+    .how-it-works--content {
+      display: flex !important;
+      flex-wrap: wrap;
+      flex-direction: column-reverse;
+      align-items:center;
+      gap: 30px;
+
+    }
+
+    .how-it-works--column-left {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+  .how-it-works--column-right .image-wrapper2{
+    display:flex;
+    justify-content:left;
+  }
+
+  .how-it-works--column-left .image-wrapper{
+    display:flex;
+    justify-content:center;
+  }
+  .how-it-works--column-right .image-wrapper img {
+margin: 0 auto;
+    height: 100%;
+    border-radius:20px;
+    max-height:450px;
+    object-fit:contain;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.04);
+  }
+
+  .image-text-content {
+    display: flex;
+    width: 100%;
+  }
+
+  .text-content {
+    color: white;
+    flex: 1;
+    margin-right: 20px;
+  }
+
+  .image-wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
+  .image-wrapper img {
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .how-it-works--description {
+    margin-bottom: 0;
+  }
+
+  .how-it-works--description p:last-child {
+    margin-bottom: 0;
+  }
+
+  .how-it-works--description ul {
+    list-style: none !important;
+    padding: 0;
+  }
+
+  .how-it-works--description ul li {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 30px;
+  }
+
+  .how-it-works--description ul li:before {
+    content: "" !important;
+    position: absolute;
+    left: 0;
+    background-size: 100%;
+    background-fit: contain;
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    margin-top: -2px !important;
+    background-image: url("data:image/svg+xml,%3Csvg
+xmlns='http://www.w3.org/2000/svg'width='24'height='24'viewBox='0 0 24 24'fill='none'%3E%3Cpath d='M12 2.25C10.0716 2.25 8.18657 2.82183 6.58319 3.89317C4.97982 4.96451 3.73013 6.48726 2.99218 8.26884C2.25422 10.0504 2.06114 12.0108 2.43735 13.9021C2.81355 15.7934 3.74215 17.5307 5.10571 18.8943C6.46928 20.2579 8.20656 21.1865 10.0979 21.5627C11.9892 21.9389 13.9496 21.7458 15.7312 21.0078C17.5127 20.2699 19.0355 19.0202 20.1068 17.4168C21.1782 15.8134 21.75 13.9284 21.75 12C21.7473 9.41498 20.7192 6.93661 18.8913 5.10872C17.0634 3.28084 14.585 2.25273 12 2.25ZM16.2806 10.2806L11.0306 15.5306C10.961 15.6004 10.8783 15.6557 10.7872 15.6934C10.6962 15.7312 10.5986 15.7506 10.5 15.7506C10.4014 15.7506 10.3038 15.7312 10.2128 15.6934C10.1218 15.6557 10.039 15.6004 9.96938 15.5306L7.71938 13.2806C7.57865 13.1399 7.49959 12.949 7.49959 12.75C7.49959 12.551 7.57865 12.3601 7.71938 12.2194C7.86011 12.0786 8.05098 11.9996 8.25 11.9996C8.44903 11.9996 8.6399 12.0786 8.78063 12.2194L10.5 13.9397L15.2194 9.21937C15.2891 9.14969 15.3718 9.09442 15.4628 9.0567C15.5539 9.01899 15.6515 8.99958 15.75 8.99958C15.8486 8.99958 15.9461 9.01899 16.0372 9.0567C16.1282 9.09442 16.2109 9.14969 16.2806 9.21937C16.3503 9.28906 16.4056 9.37178 16.4433 9.46283C16.481 9.55387 16.5004 9.65145 16.5004 9.75C16.5004 9.84855 16.481 9.94613 16.4433 10.0372C16.4056 10.1282 16.3503 10.2109 16.2806 10.2806Z'fill='%23141414'/%3E%3C/svg%3E");
+
+    }
+
+    .section--how-it-works h2 {
+      color: #141414;
+      font-family: var(--font-heading-family);
+      font-size: 42px;
+      font-style: normal;
+      font-weight: 800;
+      line-height: 112%;
+      /* 47.04px */
+      text-transform: uppercase;
+      margin-bottom:7px;
+      margin-top:0;
+    }
+
+    .section--how-it-works p {
+      color: #141414;
+      font-family: var(--font-body-family);
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
+      /* 24px */
+    }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const highlights = document.querySelectorAll('.how-it-works--highlight');
+    if (highlights.length > 0) {
+      const firstHighlight = highlights[0];
+      firstHighlight.classList.add('active');
+      const content = firstHighlight.querySelector('p');
+      content.style.maxHeight = content.scrollHeight + 'px';
+    }
+    highlights.forEach(highlight => {
+      highlight.addEventListener('click', () => {
+        highlights.forEach(h => {
+          h.classList.remove('active');
+          h.querySelector('p').style.maxHeight = '0';
+        });
+        highlight.classList.add('active');
+        const content = highlight.querySelector('p');
+        content.style.maxHeight = content.scrollHeight + 'px';
+      });
+    });
+  });
+</script>

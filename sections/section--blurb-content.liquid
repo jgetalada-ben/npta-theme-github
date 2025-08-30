@@ -1,0 +1,313 @@
+{% schema %}
+{
+  "name": "Affiliate Blurb",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Affiliate Blurb Settings"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "BECOME AN AFFILIATE"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Earn commissions by signing up your followers, friends and colleagues for any of our programs. Inspire others to begin their own careers in the fitness and wellness industry and put some extra money in your pocket!</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "JOIN TODAY"
+    },
+         {
+            "type": "url",
+            "id": "video_url",
+            "label": "Video URL"
+        },
+        {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Select an image",
+      "info": "Choose an image from your files."
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+      "default": "/"
+    },
+{
+      "type": "range",
+      "id": "top_padding",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 92
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 92
+    },
+   {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 200,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "default": 980
+    },
+  ],
+  "blocks": [
+    {
+      "type": "blurb",
+      "name": "Blurb",
+      "settings": [
+        {
+          "type": "text",
+          "id": "blurb_title",
+          "label": "Blurb Title",
+          "default": "LOREM IPSUM"
+        },
+        {
+          "type": "richtext",
+          "id": "blurb_description",
+          "label": "Blurb Description",
+          "default": "<p>Highlight of affiliate goes here. Lorem ipsum dolor sit amet consectetur. Et est varius viverra.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Affiliate Blurb",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="section--blurb-content" style="padding-top: {{ section.settings.top_padding }}px; padding-bottom: {{ section.settings.bottom_padding }}px;">
+  <div class="blurb-content-container page-container" style="max-width: {{ section.settings.container_width }}px;">
+
+      <div class="blurb-content-left-column">
+     <div class="section--title-block ">
+                    <h2 class="is--flex-start">{{ section.settings.title }}</h2> 
+                    <div class="title-block--desc">{{ section.settings.description }}</div>
+                </div>
+    <div class="blurb-list">
+      {% for block in section.blocks %}
+        <div class="blurb-item">
+          <h3>{{ block.settings.blurb_title }}</h3>
+          <div class="title-block--desc">{{ block.settings.blurb_description }}</div>
+        </div>
+      {% endfor %}
+    </div>
+            <div class="section--hero-buttons">
+                    <a href="{{ section.settings.button_link }}" class="btn button-yg">
+                        <span class="btn-label-down">{{ section.settings.button_text }}</span>
+                        <span class="btn-label-down">{{ section.settings.button_text }}</span>
+                    </a>
+                </div>
+              </div>
+
+
+<div class="blurb-content-right-column">
+
+                {% if section.settings.video_url %}
+                    <div class="video-wrapper">
+                        <iframe src="{{ section.settings.video_url | replace: 'watch?v=', 'embed/' }}" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                 
+                {% endif %}
+                 {% if section.settings.image %}
+                  <div class="image-wrapper">
+ {% if section.settings.image %}
+  <img src="{{ section.settings.image | img_url: 'original' }}" alt="{{ section.settings.alt_text }}">
+{% else %}
+  <p>No image available</p>
+{% endif %}
+              
+             </div>
+                        
+                  
+                  
+                {% endif %}
+      
+   </div>
+
+    
+  </div>
+</section>
+
+<style>
+.section--blurb-content{
+  display:flex;
+  justify-content:Center;
+}
+  .section--blurb-content .blurb-content-container {
+align-items:Center;
+  }
+.blurb-content-right-column{
+  height:100%;
+}
+
+
+.section--blurb-content .blurb-content-container .section--title-block p{
+ text-align:left;
+  color:  #141414;
+font-family:  var(--font-body-family);;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%;
+  }
+
+  @media only screen and (min-width: 768px) {
+      .blurb-content-container .blurb-list {
+    display: flex;
+   flex-wrap:Wrap;
+        justify-content:flex-start;
+        gap:15px;
+    margin-bottom:30px;
+        margin-top:20px;
+  }
+  }
+    @media only screen and (max-width: 767px) {
+      .blurb-content-container .blurb-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap:10px;
+    grid-column-gap:10px;
+    margin-bottom:30px;
+  }
+  }
+
+  .blurb-list .blurb-item {
+    position:relative;
+   display: flex;
+
+padding:0 ;
+flex-direction: column;
+align-items: flex-start;
+
+    overflow:hidden;
+  }
+
+
+      .video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 */
+        height: 0;
+      border-radius:20px;
+      overflow:hidden;
+    }
+    .video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+.blurb-item h3{
+  padding-left:35px;
+  position:relative;
+  margin-bottom:0;
+}
+.blurb-item h3:before{
+  content:'';
+  position:absolute;
+  left:0;
+  width:26px;
+  height:26px;
+  top:-3px;
+  background-size:contain;
+  background-position:center;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26' fill='none'%3E%3Cg clip-path='url(%23clip0_401_3033)'%3E%3Cpath d='M20.3126 6.5V19.5C20.3126 19.931 20.1414 20.3443 19.8366 20.649C19.5319 20.9538 19.1186 21.125 18.6876 21.125H17.0626C16.6316 21.125 16.2183 20.9538 15.9135 20.649C15.6088 20.3443 15.4376 19.931 15.4376 19.5V13.8125H10.5626V19.5C10.5626 19.931 10.3914 20.3443 10.0866 20.649C9.78188 20.9538 9.36855 21.125 8.93758 21.125H7.31258C6.8816 21.125 6.46827 20.9538 6.16353 20.649C5.85878 20.3443 5.68758 19.931 5.68758 19.5V6.5C5.68758 6.06902 5.85878 5.6557 6.16353 5.35095C6.46827 5.0462 6.8816 4.875 7.31258 4.875H8.93758C9.36855 4.875 9.78188 5.0462 10.0866 5.35095C10.3914 5.6557 10.5626 6.06902 10.5626 6.5V12.1875H15.4376V6.5C15.4376 6.06902 15.6088 5.6557 15.9135 5.35095C16.2183 5.0462 16.6316 4.875 17.0626 4.875H18.6876C19.1186 4.875 19.5319 5.0462 19.8366 5.35095C20.1414 5.6557 20.3126 6.06902 20.3126 6.5ZM3.65633 7.3125H3.25008C2.8191 7.3125 2.40577 7.48371 2.10103 7.78845C1.79628 8.0932 1.62508 8.50652 1.62508 8.9375V12.1875H0.839998C0.630034 12.1844 0.426684 12.2609 0.270855 12.4017C0.115027 12.5424 0.0182796 12.737 7.62262e-05 12.9462C-0.00730323 13.0573 0.00824738 13.1688 0.0457622 13.2737C0.0832769 13.3785 0.141955 13.4746 0.21815 13.5558C0.294346 13.6371 0.386433 13.7018 0.488691 13.7459C0.590948 13.7901 0.701193 13.8127 0.812576 13.8125H1.62508V17.0625C1.62508 17.4935 1.79628 17.9068 2.10103 18.2115C2.40577 18.5163 2.8191 18.6875 3.25008 18.6875H3.65633C3.76407 18.6875 3.8674 18.6447 3.94359 18.5685C4.01977 18.4923 4.06258 18.389 4.06258 18.2812V7.71875C4.06258 7.61101 4.01977 7.50767 3.94359 7.43149C3.8674 7.3553 3.76407 7.3125 3.65633 7.3125ZM26.0001 12.9462C25.9819 12.7373 25.8854 12.5431 25.73 12.4024C25.5746 12.2617 25.3718 12.1849 25.1622 12.1875H24.3751V8.9375C24.3751 8.50652 24.2039 8.0932 23.8991 7.78845C23.5944 7.48371 23.1811 7.3125 22.7501 7.3125H22.3438C22.2361 7.3125 22.1327 7.3553 22.0566 7.43149C21.9804 7.50767 21.9376 7.61101 21.9376 7.71875V18.2812C21.9376 18.389 21.9804 18.4923 22.0566 18.5685C22.1327 18.6447 22.2361 18.6875 22.3438 18.6875H22.7501C23.1811 18.6875 23.5944 18.5163 23.8991 18.2115C24.2039 17.9068 24.3751 17.4935 24.3751 17.0625V13.8125H25.1876C25.299 13.8127 25.4092 13.7901 25.5115 13.7459C25.6137 13.7018 25.7058 13.6371 25.782 13.5558C25.8582 13.4746 25.9169 13.3785 25.9544 13.2737C25.9919 13.1688 26.0075 13.0573 26.0001 12.9462Z' fill='%23133257'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_401_3033'%3E%3Crect width='26' height='26' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
+}
+.blurb-item h3{
+  color:  #141414;
+    font-family: var(--font-heading-family);
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%;
+letter-spacing: 1.28px;
+text-transform: uppercase;
+}
+
+.blurb-item p {
+  color: #141414;
+font-family:  var(--font-body-family);;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; 
+
+  margin-top:5px;
+}
+  @media only screen and (min-width: 1281px)  {
+    .section--blurb-content .blurb-content-container {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 80px;
+  }
+}
+
+  @media only screen and (min-width: 1081px) and (max-width: 1280px) {
+    .section--blurb-content .blurb-content-container {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 50px;
+  }
+}
+
+@media only screen and (min-width: 981px) and (max-width: 1080px) {
+    .section--blurb-content .blurb-content-container {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 30px;
+  }
+}
+
+  @media only screen and (max-width: 980px) {
+    .section--blurb-content .blurb-content-container {
+   display: grid;
+
+    grid-template-columns: 1fr ;
+    grid-column-gap:50px;;
+  }
+  
+}
+      .image-wrapper {
+        position: relative;
+width:100%;
+        height: 100%;
+   
+    }
+      .image-wrapper img{
+
+width:100%;
+        height: 100%;
+        object-fit:cover;
+   border-radius:20px;
+      overflow:hidden;
+    }
+</style>

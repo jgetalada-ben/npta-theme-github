@@ -1,0 +1,66 @@
+{% layout none %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found</title>
+
+  <!-- Styles for fallback message -->
+  <style>
+    .template-404 {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    .template-404 h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .template-404 p {
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+    .template-404 a {
+      text-decoration: none;
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      display: inline-block;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="template-404">
+    <h1>{{ 'templates.404.title' | t }}</h1>
+    <p>{{ 'templates.404.subtext' | t }}</p>
+    <a href="{{ routes.all_products_collection_url }}">Choose My Program</a>
+  </div>
+
+  <!-- JavaScript for automatic redirection -->
+  <script>
+    (function() {
+      try {
+        // Redirect to the homepage after 2 seconds
+        setTimeout(function() {
+          window.location.replace("/");
+        }, 2000);
+      } catch (error) {
+        console.error("Redirection failed:", error);
+      }
+    })();
+  </script>
+
+  <!-- Fallback for browsers with JavaScript disabled -->
+  <noscript>
+    <meta http-equiv="refresh" content="0;url=/" />
+    <div class="template-404">
+      <p>Redirecting you to the homepage. If you are not redirected, <a href="/">click here</a>.</p>
+    </div>
+  </noscript>
+</body>
+</html>

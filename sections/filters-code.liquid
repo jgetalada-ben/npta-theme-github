@@ -1,0 +1,400 @@
+{% schema %}
+{
+  "name": "Collection pages",
+  "settings": [    
+    {
+      "type": "checkbox",
+      "id": "tags_enable",
+      "label": "Enable tag filtering",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "product_sb_placement",
+      "label": "Position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Filter",
+      "info": "To setup Filter by Groups like our demo, please add product's tag to format 'Group'_'Value'. For example: Color_Black, Brand_Elle"
+    },
+    {
+      "type": "checkbox",
+      "id": "and_logic",
+      "label": "Disable 'AND' operator in a group filter",
+      "default": true
+    },
+    {
+      "type": "radio",
+      "id": "sb_filters_style",
+      "label": "Filter style",
+      "options": [
+        {
+          "value": "toggle",
+          "label": "Toggle"
+        },
+        {
+          "value": "dropdown",
+          "label": "Dropdown"
+        }
+      ],
+      "default": "dropdown",
+      "info": "Only for Sidebar Placement is None"
+    },
+    {
+      "type": "radio",
+      "id": "sb_filters",
+      "label": "Filter type",
+      "options": [
+        {
+          "value": "tags",
+          "label": "Filter by Tags"
+        },
+        {
+          "value": "groups",
+          "label": "Filter by Groups"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "groups"
+    },
+    {
+      "type": "text",
+      "id": "group_filter_prefix",
+      "label": "Group use in filter",
+      "default": "brand,color,price,size",
+      "info": "Enter your tag's prefix,separate by comma ie: color,size,brand,price.."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "category": "Collections",
+      "settings": {
+        "tags_enable": true,
+        "product_sb_placement": "left",
+        "and_logic": false,
+        "sb_filters_style": "dropdown",
+        "sb_filters": "groups",
+        "group_filter_prefix": "brand,color,price,size"
+      }
+    }
+  ]
+}
+{% endschema %}
+
+
+
+<div class="sb-widget d-none d-lg-block">
+    <div class="sb-menu">
+      {% unless section.settings.sb_categories_type == 'none' %}
+
+        {% unless section.settings.sb_categories_title == blank %}
+          <h5 class="sb-title">{{ section.settings.sb_categories_title }}</h5>
+        {% endunless %}
+
+        <ul class="categories-menu">
+          {% if section.settings.sb_categories_type == 'categories' %}
+
+            {% for collection in collections limit: section.settings.sb_categories_limit %}
+              {% unless collection.handle == 'frontpage' or collection.handle == 'all' %}
+                <li><a href="{{ collection.url }}">{{ collection.title }}</a></li>
+              {% endunless %}
+            {% endfor %}
+
+          {% else %}
+            {% for l in linklists[section.settings.sb_categories_menu].links %}
+              {% assign submenu = l.title | handleize %}
+
+              {% if linklists[submenu].links.size > 0 %}
+                {% include 'sb-dropdown-menu' %}
+              {% else %}
+                <li{% if l.active %} class="active"{% endif %}><a href="{{ l.url }}">{{ l.title }}</a></li>
+              {% endif %}
+
+            {% endfor %}
+
+          {% endif %}
+        </ul>
+
+      {% endunless %}
+    </div>
+  </div>
+  
+  {% if collection.all_tags.size > 0 and section.settings.sb_filters != 'none' %}
+  <div class="sb-widget filter-sidebar no-sidebar {{ section.settings.sb_filters_style }}">
+    <h2 class="sb-title">Filter By:</h2>
+    
+    <div class="sb-filter-wrapper">
+      {% comment %} -- filter by group -- {% endcomment %}
+      {% if section.settings.sb_filters == 'groups' %}
+      
+        {% assign _prefix_group = section.settings.group_filter_prefix | split: ',' %}
+     
+        {% assign _count = 0 %}
+        {% for prefix in _prefix_group %}
+          {% assign my_prefix = prefix | downcase | strip | append: '_+++' %}
+          {% assign _prefix_new_str = _prefix_new_str | append: my_prefix  %}
+        {% endfor %}
+        {% assign _prefix_group = _prefix_new_str | split: '+++' %}
+        {% if template contains 'collection' and collection.all_tags.size > 0 %}
+          {% assign c = 0 %}
+          {% for t in collection.all_tags %}
+            {% capture cat %}{{ cat }}{% capture temp_cat %}{% if t contains '_' %}{% assign cat_grp = t | split: '_' %}{{ cat_grp.first }}{% endif %}{% endcapture %}{% unless cat contains temp_cat %}{% if t contains '_' %}{% assign new_cat_grp = t | split: '_' %}{{ new_cat_grp.first }}{% endif %}{% unless forloop.last %}+{% endunless %}{% assign c = c | plus: 1 %}{% endunless %}{% endcapture %}
+          {% endfor %}
+          {% assign cat_array = cat | split: '+' %}
+        {% endif %}
+      
+        <div class="sbw-filter">
+          <div class="filter__widget">
+            {% comment %}
+            Loop through tag categories
+            {% endcomment %}
+            {% assign i = 0 %}
+            {% for cat_item in cat_array %}
+              {% assign i = i | plus: 1 %}
+              {% assign cat_item_plus = cat_item | downcase | append: '_' %}
+              {% comment %}
+              Ignore if tag category is empty
+              {% endcomment %}
+              {% unless cat_item == '' %}
+                {% if _prefix_group contains cat_item_plus %} 
+            
+                  <div class="sb-filter {{ cat_item | downcase }}" id="filter-{{ i }}">
+                    <div class="sbf-title">
+                      <span>{{ cat_item }}</span>
+<!--                       <a href="javascript:void(0);" class="clear-filter hidden" id="clear-filter-{{ i }}" style="float: right;">Clear</a> -->
+                    </div>
+                    {% capture ci %}{{ cat_item | downcase }}{% endcapture %}
+                    <ul class="advanced-filters{% if ci == 'color' %} list-inline afs-color{% endif %}">
+                      {% comment %}
+                      Loop through collection tags
+                      {% endcomment %}
+                      {% if ci == 'size' %}
+                        <li class="advanced-filter rt size-all hidden" data-group="{{ cat_item }}"></li>
+                      {% endif %}
+                      {% for custom_tag in collection.all_tags %}
+                        {% if custom_tag contains cat_item %}
+                          {% comment %}
+                          Strip out tag category prefix and add/remove link for tag filtering
+                          {% endcomment %}  
+                          {% assign file_extension = 'png' %}
+                          {% assign value = custom_tag | remove_first: cat_item | remove: '_' %}
+                          {% if current_tags contains custom_tag %}
+                            {% if ci == 'color' %}
+                              <li class="active-filter advanced-filter af-color {{ custom_tag | handleize }}" data-group="{{ cat_item }}" data-handle="{{ custom_tag | handleize }}" style="background-color:{{ value | handle }}; background-image: url({{ value | handle | append: '.' | append: file_extension | asset_url }});">
+                                {{ custom_tag | remove_first: cat_item | remove: '_' | link_to_remove_tag: custom_tag | replace: 'tag Color_', '' }}
+                      		  </li>
+                            {% else %}
+                              <li class="checkcontainer active-filter advanced-filter rt{% if ci == 'size' %} size-{{ value | handleize }}{% endif %}" data-group="{{ cat_item }}" data-handle="{{ custom_tag | handleize }}">
+                                {{ custom_tag | remove_first: cat_item | remove: '_' | link_to_remove_tag: custom_tag }}
+                                <input type="checkbox" checked="checked">
+  								<span class="checkmark"></span>
+                              </li>
+                            {% endif %}
+                          {% else %}
+                            {% if ci == 'color' %}
+                              <li class="advanced-filter af-color {{ custom_tag | handleize }}" data-group="{{ cat_item }}" style="background-color:{{ value | handle }}; background-image: url({{ value | handle | append: '.' | append: file_extension | asset_url }});">
+                                {{ custom_tag | remove_first: cat_item | remove: '_' | link_to_add_tag: custom_tag | replace: 'Narrow selection to products matching tag Color_', '' }}
+                              </li>
+                            {% else %}
+                              <li class="checkcontainer advanced-filter rt{% if ci == 'size' %} size-{{ value | handleize }}{% endif %}" data-group="{{ cat_item }}">
+                                {{ custom_tag | remove_first: cat_item | remove: '_' | link_to_add_tag: custom_tag }}
+                                <input type="checkbox" checked="checked">
+  								<span class="checkmark"></span>
+                              </li>
+                            {% endif %}
+                          {% endif %}
+                        {% endif %}
+                      {% endfor %}
+                    </ul>
+                  </div>
+                {% endif %}
+              {% endunless %}
+            {% endfor %}
+          </div>
+        </div>
+      {% comment %} -- filter by tag -- {% endcomment %}
+      {% else %}
+        <div class="sb-tag">
+          <ul class="list-unstyled sb-filter-tag">
+            {% unless current_tags %}
+              <li class="active first"><span>All Items</span></li>
+            {% else %}
+              {% if collection.handle %}
+                {% capture collection_url %}/collections/{{ collection.handle }}{% unless collection.sort_by == blank %}?sort_by={{ collection.sort_by }}{% endunless %}{% endcapture %}
+              {% endif %}
+              <li class="first">
+                <a href="{{ collection_url }}"><span>All Items</span></a>
+              </li>
+            {% endunless %}
+            {% for tag in collection.all_tags %}
+              {% if current_tags contains tag %}
+                <li class="active{% if forloop.length == forloop.index %} last{% endif %}">
+                  <span>{{ tag }}</span>
+                </li>
+              {% else %}
+                <li {% if forloop.length == forloop.index %}class="last"{% endif %}>
+                  <a href="/collections/{% if collection.handle.size > 0 %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handle }}">
+                    <span>{{ tag }}</span>
+                  </a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>     
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
+
+
+<style>
+/* The container */
+.checkcontainer {
+  -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  cursor: pointer;
+  display: block;
+  font-size: 16px;
+  margin-bottom: 8px;
+  padding-left: 20px;
+  position: relative;
+}
+
+/* Hide the browser's default checkbox */
+.checkcontainer input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  background-color: #eeeeee;
+  height: 15px;
+  left: 0;
+  position: absolute;
+  top: 3px;
+  width: 15px;
+}
+
+/* On mouse-over, add a grey background color */
+.checkcontainer:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkcontainer.active-filter input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.checkcontainer.active-filter input:checked ~ .checkmark::after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkcontainer .checkmark:after {
+    left: 5px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.filter-sidebar .sbf-title {
+  border-bottom: 1px solid;
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  margin-top: 30px;
+}
+.sb-filter .advanced-filters {
+  max-height: 220px;
+  overflow: auto;
+}
+.sb-widget.filter-sidebar.no-sidebar.dropdown {
+  padding: 0 20px 0 0;
+}
+.coll_prodbar .grid--view-items {
+  border-left: 1px solid #000;
+  margin: 0;
+  padding-left: 20px;
+}
+.checkcontainer.active-filter.advanced-filter.rt > a {
+  font-weight: 600;
+}
+</style>
+
+<script>
+$( document ).ready(function() {      
+      jQuery('.advanced-filter').each(function() {
+            var el = jQuery(this)
+                ,group = el.data('group');
+
+            if ( el.hasClass('active-filter') ) { //Remove class hidden
+                el.parents('.sb-filter').find('a.clear-filter').removeClass('hidden');
+            }
+        });
+      
+      jQuery('.advanced-filter').on('click', function(e) {
+         var el = $(this)
+             ,group = el.data('group')
+             ,url = el.find('a').attr('href')
+
+         // Continue as normal if we're clicking on the active link
+         if ( el.hasClass('active-filter') ) {
+           return;
+         }
+           var _logic = jQuery(".filters-sidebar").data('logic');
+           if( _logic ){
+             // Get active group link (unidentified if there isn't one)
+             activeTag = $('.active-filter[data-group="'+ group +'"]');
+
+             // If a tag from this group is already selected, remove it from the new tag's URL and continue
+             if ( activeTag && activeTag.data('group') === group ) {
+               e.preventDefault();
+               activeHandle = activeTag.data('handle') + '+';
+
+               // Create new URL without the currently active handle
+               url = url.replace(activeHandle, '');
+
+               window.location = url;
+             }
+           }
+       });
+    });
+</script>

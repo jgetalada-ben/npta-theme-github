@@ -1,0 +1,716 @@
+{% schema %}
+{
+  "name": "Fitness Program Sections",
+  "settings": [
+               {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "default": "certified-trainers"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "discount_text_1",
+      "label": "Discount Text (Section 1)",
+      "default": "UP TO <br><span>50% OFF</span>"
+    },
+    {
+      "type": "image_picker",
+      "id": "program_logo_1",
+      "label": "Program Logo (Section 1)"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_1",
+      "label": "Background Image (Section 1)"
+    },
+    {
+      "type": "text",
+      "id": "title_1",
+      "label": "Title (Section 1)",
+      "default": "CERTIFICATIONS"
+    },
+    {
+      "type": "textarea",
+      "id": "description_1",
+      "label": "Description (Section 1)",
+      "default": "Short description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "Button Link (Section 1)"
+    },
+    {
+      "type": "text",
+      "id": "button_text_1",
+      "label": "Button Text (Section 1)",
+      "default": "CHOOSE MY PROGRAM"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_visible_1",
+      "label": "Show Container 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "discount_text_2",
+      "label": "Discount Text (Section 2)",
+      "default": "UP TO <br><span>50% OFF</span>"
+    },
+    {
+      "type": "image_picker",
+      "id": "program_logo_2",
+      "label": "Program Logo (Section 2)"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_2",
+      "label": "Background Image (Section 2)"
+    },
+    {
+      "type": "text",
+      "id": "title_2",
+      "label": "Title (Section 2)",
+      "default": "CERTIFICATIONS"
+    },
+    {
+      "type": "textarea",
+      "id": "description_2",
+      "label": "Description (Section 2)",
+      "default": "Short description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Button Link (Section 2)"
+    },
+    {
+      "type": "text",
+      "id": "button_text_2",
+      "label": "Button Text (Section 2)",
+      "default": "CHOOSE MY PROGRAM"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_visible_2",
+      "label": "Show Container 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "discount_text_3",
+      "label": "Discount Text (Section 3)",
+      "default": "UP TO <br><span>50% OFF</span>"
+    },
+    {
+      "type": "image_picker",
+      "id": "program_logo_3",
+      "label": "Program Logo (Section 3)"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_3",
+      "label": "Background Image (Section 3)"
+    },
+    {
+      "type": "text",
+      "id": "title_3",
+      "label": "Title (Section 3)",
+      "default": "CERTIFICATIONS"
+    },
+    {
+      "type": "textarea",
+      "id": "description_3",
+      "label": "Description (Section 3)",
+      "default": "Short description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+      "type": "url",
+      "id": "button_link_3",
+      "label": "Button Link (Section 3)"
+    },
+    {
+      "type": "text",
+      "id": "button_text_3",
+      "label": "Button Text (Section 3)",
+      "default": "CHOOSE MY PROGRAM"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_visible_3",
+      "label": "Show Container 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "discount_text_4",
+      "label": "Discount Text (Section 4)",
+      "default": "UP TO <br><span>50% OFF</span>"
+    },
+    {
+      "type": "image_picker",
+      "id": "program_logo_4",
+      "label": "Program Logo (Section 4)"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_4",
+      "label": "Background Image (Section 4)"
+    },
+    {
+      "type": "text",
+      "id": "title_4",
+      "label": "Title (Section 4)",
+      "default": "CERTIFICATIONS"
+    },
+    {
+      "type": "textarea",
+      "id": "description_4",
+      "label": "Description (Section 4)",
+      "default": "Short description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+      "type": "url",
+      "id": "button_link_4",
+      "label": "Button Link (Section 4)"
+    },
+    {
+      "type": "text",
+      "id": "button_text_4",
+      "label": "Button Text (Section 4)",
+      "default": "CHOOSE MY PROGRAM"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_visible_4",
+      "label": "Show Container 4",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Lorem ipsum dolor sit amet"
+    },
+    {
+      "type": "richtext",
+      "id": "section_description",
+      "label": "Section Description",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Title Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 200,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "default": 980
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Flex Start"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Flex End"
+        }
+      ],
+      "default": "center"
+    },
+  {
+      "type": "checkbox",
+      "id": "show_program_button",
+      "label": "Display Program Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Button"
+    },
+    {
+      "type": "url",
+      "id": "program_button_link",
+      "label": "Button Link",
+      "default": "/"
+    },
+        {
+      "type": "richtext",
+      "id": "section_footer_description",
+      "label": "Section Footer Description",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+
+  ],
+  "presets": [
+    {
+      "name": "Fitness Program Sections",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+
+<div class="section--featured-program" id="{{ section.settings.section_id }}" style="background-color: {{ section.settings.background_color }};">
+
+<div class="section--title-block page-container" style="display: flex; justify-content: {{ section.settings.alignment }};">
+  <div style="max-width: {{ section.settings.container_width }}px;">
+    <h2 style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_title }}</h2>
+    <div class="title-block--desc" style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_description }}</div>
+  </div>
+</div>
+
+
+<div class="section--ft-program page-container">
+    {% for i in (1..4) %}
+      {% capture is_visible_key %}is_visible_{{ i }}{% endcapture %}
+      {% assign is_visible = section.settings[is_visible_key] %}
+      
+      {% if is_visible %}
+        {% capture discount_text_key %}discount_text_{{ i }}{% endcapture %}
+        {% capture program_logo_key %}program_logo_{{ i }}{% endcapture %}
+        {% capture background_image_key %}background_image_{{ i }}{% endcapture %}
+        {% capture title_key %}title_{{ i }}{% endcapture %}
+        {% capture description_key %}description_{{ i }}{% endcapture %}
+        {% capture button_link_key %}button_link_{{ i }}{% endcapture %}
+        {% capture button_text_key %}button_text_{{ i }}{% endcapture %}
+
+        {% assign discount_text = section.settings[discount_text_key] %}
+        {% assign program_logo = section.settings[program_logo_key] %}
+        {% assign background_image = section.settings[background_image_key] %}
+        {% assign title = section.settings[title_key] %}
+        {% assign description = section.settings[description_key] %}
+        {% assign button_link = section.settings[button_link_key] %}
+        {% assign button_text = section.settings[button_text_key] %}
+
+    <div class="section--ft-program-container" data-link="{{ button_link }}">
+      <a href="{{ button_link }}" class="text-decoration-none">
+{% if discount_text != '' %}
+  <div class="ft-program--badge">
+    <p>{{ discount_text }}</p>
+  </div>
+{% endif %}
+
+        <div class="section--container-wrap">
+          {% if program_logo %}
+            <img class="ft-program-logo" src="{{ program_logo | img_url: 'original' }}">
+          {% endif %}
+          {% if background_image %}
+            <img class="ft-program-background" src="{{ background_image | img_url: 'original' }}" alt="NASM Certifications" class="section--image">
+          {% endif %}
+          <div class="section--content">
+            <h1 class="ft-program--title">{{ title }}</h1>
+            <p class="ft-program--description">{{ description }}</p>
+            <div class="link-y"><a href="{{ button_link }}" class="ft-program--button">{{ button_text }}</a> </div>
+          </div>
+        </div>
+        </a>
+    </div>
+  {% endif %}
+  {% endfor %}
+
+
+      
+</div>
+
+
+
+
+  {% if section.settings.show_program_button %}
+       <div class="container--footer" style="display: flex; flex-wrap:wrap; justify-content: {{ section.settings.alignment }};"> 
+    <div class="button-wrap" style="display: flex; justify-content: {{ section.settings.alignment }};">
+    <a href="{{ section.settings.program_button_link }}" class="btn button-yg">
+            <span class="btn-label-down">{{ section.settings.button_text }}</span>
+            <span class="btn-label-down">{{ section.settings.button_text }}</span>
+          
+        </a>
+        </div>
+         <div class="section-footer-description rte-link" style="text-align: {{ section.settings.title_alignment }};">
+    {{ section.settings.section_footer_description }} 
+  </div>
+        </div>
+          {% endif %}
+
+
+  
+  
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const programSection = document.querySelector('.section--ft-program');
+
+  function updateLayout() {
+    if (programSection) {
+      const containers = programSection.querySelectorAll('.section--ft-program-container');
+
+      // Filter only visible containers
+      const visibleContainers = Array.from(containers).filter(
+        (container) => container.offsetParent !== null
+      );
+
+      if (visibleContainers.length > 0) {
+        const screenWidth = window.innerWidth;
+
+        // Reset styles before applying
+        programSection.style.display = 'grid';
+        programSection.style.gridGap = '20px';
+
+        if (screenWidth <= 480) {
+          // Mobile layout: Single column
+          programSection.style.gridTemplateColumns = '1fr';
+        } else if (screenWidth <= 768) {
+          // Tablet layout: Two columns
+          programSection.style.gridTemplateColumns = `repeat(${Math.min(visibleContainers.length, 2)}, 1fr)`;
+        } else if (screenWidth <= 1024) {
+          // Medium screens: Three columns
+          programSection.style.gridTemplateColumns = `repeat(${Math.min(visibleContainers.length, 3)}, 1fr)`;
+        } else {
+          // Desktop layout: Up to four columns
+          programSection.style.gridTemplateColumns = `repeat(${Math.min(visibleContainers.length, 4)}, 1fr)`;
+        }
+      }
+    }
+  }
+
+  // Initial layout update
+  updateLayout();
+
+  // Update layout on window resize
+  window.addEventListener('resize', updateLayout);
+});
+
+</script>
+
+<style>
+  .container--footer{
+ width:90%;
+}
+
+  a.text-decoration-none{
+    text-decoration: none;
+  }
+
+  .container--footer p{
+   color: #141414;
+text-align: center;
+   font-family: var(--font-body-family);
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; 
+  }
+  .container--footer p a{
+opacity: 0.8;
+color: var(--navy, #133257);
+   font-family: var(--font-body-family);
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%;
+text-decoration:none;
+  }
+
+.container--footer.is--centered{
+  display:flex;
+  justify-content:center;
+  flex-wrap:Wrap;
+}
+
+  .container--footer .button-wrap{
+    width:100%;
+     display:flex;
+  justify-content:center;
+  flex-wrap:Wrap;
+
+  }
+
+</style>
+
+
+<style>
+  .section--featured-program{
+    padding-top:80px;
+    padding-bottom:80px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:Wrap;
+  }
+.section--ft-program {
+  display: grid;
+  grid-gap: 20px;
+}
+
+@media only screen and (max-width: 480px) {
+  .section--ft-program {
+    grid-template-columns: 1fr; /* Mobile: Single column */
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+  .section--ft-program {
+    grid-template-columns: repeat(2, 1fr); /* Tablet: Two columns */
+  }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .section--ft-program {
+    grid-template-columns: repeat(3, 1fr); /* Medium screens: Three columns */
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  .section--ft-program {
+    grid-template-columns: repeat(4, 1fr); /* Desktop: Four columns */
+  }
+}
+
+
+
+</style>
+
+<style>
+
+
+.section--ft-program-container {
+    position: relative;
+    width: 100%;
+  height:430px;
+ 
+    overflow: visible;
+
+}
+.section--container-wrap{
+  height:100%;
+  overflow:hidden;
+  border-radius:20px;
+  display:block;
+  position:relative;
+}
+
+.section--container-wrap:before{
+  content:'';
+  position:absolute;
+background: linear-gradient(180deg, rgba(19, 50, 87, 0.30) 0%, rgba(19, 50, 87, 0.50) 100%);
+  background-size:contain;
+  background-repeat:no-repeat;
+    width:100%;
+  height:100%;
+  z-index:0;
+  transition:300ms;
+}
+  .section--ft-program-container  .section--container-wrap:after{
+  content:'';
+  position:absolute;
+background: linear-gradient(180deg, rgba(19, 50, 87, 0.30) 0%, rgba(19, 50, 87, 0.90) 59.5%);
+  background-size:contain;
+  background-repeat:no-repeat;
+    width:100%;
+  height:100%;
+  z-index:0;
+  transition:300ms;
+opacity: 0;
+    top:0;
+    bottom:0;
+}
+.section--ft-program-container:hover  .section--container-wrap:after{
+opacity: 1;
+
+}
+
+.ft-program--badge{
+  display:flex;
+  justify-content:Center;
+  align-items:center;
+  z-index:999;
+}
+
+
+.ft-program--badge p{
+  color:  #141414;
+text-align: center;
+    font-family: var(--font-body-family);
+font-size: 13px;
+font-style: normal;
+font-weight: 500;
+line-height: 125%; 
+text-transform: uppercase;
+  transform:rotate(15deg);
+}
+.ft-program--badge span{
+  color:  #141414;
+    font-family: var(--font-body-family);
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 125%;
+text-transform: uppercase;
+}
+.ft-program--badge {
+    position: absolute;
+    top: -25px;
+    right: -20px;
+
+
+ 
+
+  width: 113px;
+height: 113px;
+  background-repeat:no-repeat;
+ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='111' height='111' viewBox='0 0 111 111' fill='none'%3E%3Cpath d='M68.4343 0.861177C69.3766 0.338941 70.5632 0.656891 71.1181 1.5803L78.8388 14.428C79.1766 14.9901 79.7685 15.3509 80.423 15.3936L95.3803 16.3689C96.4553 16.439 97.2817 17.348 97.2493 18.4248L96.7983 33.4071C96.7786 34.0626 97.0815 34.6862 97.609 35.0759L109.665 43.9829C110.531 44.6231 110.735 45.8345 110.125 46.7229L101.646 59.083C101.275 59.6238 101.193 60.3121 101.426 60.9251L106.752 74.936C107.135 75.943 106.651 77.0722 105.658 77.4901L91.8426 83.3038C91.2381 83.5582 90.7968 84.0927 90.6614 84.7344L87.5674 99.4007C87.345 100.455 86.3277 101.143 85.2664 100.958L70.5008 98.3795C69.8547 98.2667 69.1944 98.4778 68.7336 98.9444L58.2016 109.61C57.4446 110.376 56.2165 110.406 55.4239 109.676L44.3963 99.5237C43.9138 99.0796 43.2443 98.9002 42.6043 99.0436L27.9781 102.322C26.9269 102.557 25.8779 101.918 25.6056 100.876L21.8173 86.3732C21.6515 85.7387 21.1852 85.2257 20.5693 85.0004L6.49262 79.8507C5.48089 79.4806 4.94411 78.3756 5.27858 77.3515L9.93225 63.1031C10.1359 62.4797 10.0209 61.7961 9.6246 61.2736L0.566689 49.3309C-0.084332 48.4725 0.0615102 47.2527 0.896543 46.5721L12.5147 37.1015C13.023 36.6872 13.2959 36.0499 13.245 35.3961L12.0817 20.4522C11.9981 19.3781 12.7803 18.4308 13.8508 18.3096L28.7447 16.6238C29.3964 16.55 29.9705 16.1615 30.2812 15.5839L37.3818 2.38337C37.8921 1.43461 39.0623 1.06056 40.0283 1.53737L53.4694 8.17142C54.0575 8.46168 54.7505 8.44518 55.3241 8.12727L68.4343 0.861177Z' fill='%23E9F24F'/%3E%3C/svg%3E");
+}
+
+.ft-program-logo{
+  max-width:120px;
+  max-height:35px;
+  position:absolute;
+  left:20px;
+  top:20px;
+  z-index:9999;
+}
+
+.ft-program-background {
+    width: 100%;
+  height:100%;
+    display: block;
+  object-fit:cover;
+  z-index:-1;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.section--content {
+  padding: 20px;
+  position: absolute;
+  display: block;
+  color: white;
+  text-align: left;
+  z-index: 99;
+  bottom: 0;
+  transform: translateY(calc(100% - 80px));
+  transition: transform 500ms;
+}
+.section--ft-program-container:hover .section--content {
+  transform: translateY(0%);
+  transition: transform 500ms;
+}
+
+.section--ft-program-container:hover .ft-program--title {
+  margin-bottom: 0px;
+  transition: 300ms;
+}
+
+.ft-program--title {
+  color: #fff;
+    font-family: var(--font-heading-family);
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 104%;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  transition: 300ms;
+}
+
+.ft-program--description {
+   color:  #FFF;
+    font-family: var(--font-body-family);
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; 
+  opacity: 0.8;
+}
+
+.ft-program--button {
+    color:  #E9F24F;
+    font-family: var(--font-heading-family);
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%;
+letter-spacing: 1.12px;
+text-transform: uppercase;
+}
+
+
+
+
+  .section--title-block h2{
+    color:  #141414;
+text-align: center;
+    font-family: var(--font-heading-family);
+font-size: 42px;
+font-style: normal;
+font-weight: 800;
+line-height: 112%; 
+text-transform: uppercase;
+    margin-top:0;
+    margin-bottom:15px;
+  }
+
+    .section--title-block p{
+color:  #141414;
+text-align: center;
+    font-family: var(--font-body-family);
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; 
+  }
+
+    .section--title-block h2.is--centered{
+
+text-align: center;
+
+  }
+     .section--title-block h2.is--flex-start{
+
+text-align: left;
+
+  }
+
+
+
+</style>

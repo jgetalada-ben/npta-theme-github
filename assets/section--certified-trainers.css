@@ -1,0 +1,139 @@
+.trainer-info.hidden {
+  display: none;
+}
+.section--certified-trainers {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  overflow:hidden;
+}
+
+.trainer-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.trainer-wrapper img {
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  -webkit-transition: transform 1000ms cubic-bezier(0.31, 0.46, 0.52, 0.96);
+  transition: transform 1000ms cubic-bezier(0.31, 0.46, 0.52, 0.96);
+}
+
+.trainer-info {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #133257;
+  z-index: 9999;
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+  -webkit-transition: transform 800ms cubic-bezier(0.48, 0.2, 0.64, 0.6);
+  transition: transform 800ms cubic-bezier(0.48, 0.2, 0.64, 0.6);
+}
+@media only screen and (max-width: 768px) {
+  .trainer-wrapper.is-active .trainer-info {
+  -webkit-transform: translateY(0%);
+  transform: translateY(0%);
+  -webkit-transition: transform 500ms cubic-bezier(0.31, 0.46, 0.52, 0.96);
+  transition: transform 500ms cubic-bezier(0.31, 0.46, 0.52, 0.96);
+}
+
+}
+
+.trainer-info-container {
+  padding: 25px 36px;
+}
+
+.trainer-info-wrap {
+  display: flex;
+  justify-content: flex-start;
+  position: absolute;
+  bottom: 25px;
+  align-items: center;
+}
+
+  @media only screen and (min-width: 768px) {
+    .trainer-info .quote {
+  font-size: 16px;
+}
+  }
+  
+  @media only screen and (max-width: 767px) {
+    .trainer-info .quote {
+  font-size: 14px;
+}
+  }
+
+.trainer-info .quote {
+  color: #fff;
+  font-family: var(--font-body-family);
+
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 24px */
+}
+
+.trainer-info .name,
+.trainer-info .certification {
+  color: #fff;
+  font-family: var(--font-heading-family);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 104%; /* 18.72px */
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.trainer-info-wrap span {
+  color: #fff;
+  font-family: var(--font-heading-family);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 104%; /* 18.72px */
+  text-transform: uppercase;
+  opacity: 0.8;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.trainer-info .rating span {
+  color: gold;
+}
+
+.trainer-wrapper:hover .trainer-info {
+  -webkit-transform: translateY(0%);
+  transform: translateY(0%);
+  -webkit-transition: transform 500ms cubic-bezier(0.31, 0.46, 0.52, 0.96);
+  transition: transform 500ms cubic-bezier(0.31, 0.46, 0.52, 0.96);
+}
+
+.trainer-wrapper:hover img {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+  -webkit-transition: transform 500ms cubic-bezier(0.31, 0.46, 0.52, 0.96);
+  transition: transform 500ms cubic-bezier(0.31, 0.46, 0.52, 0.96);
+}
+
+  
+
+@media only screen and (max-width: 768px) {
+  #certification_slide {
+        max-width: 90%;
+    margin: 0 auto;
+    overflow: visible;
+  }
+    #certification_slide .splide__track  {
+   
+    overflow: visible !important;
+  }
+   #certification_slide .trainer-wrapper{
+    min-height:450px;
+  }
+}
