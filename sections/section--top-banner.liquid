@@ -143,6 +143,24 @@
       ],
       "default": "center"
     },
+    {
+      "type": "text",
+      "id": "banner_height",
+      "label": "Banner height",
+      "info": "Enter a value like 480px or 70vh. Leave blank to use the default banner height.",
+      "placeholder": "e.g. 480px or 70vh"
+    },
+    {
+      "type": "select",
+      "id": "top_banner_align_items",
+      "label": "Top banner align-items (applies only when height is set)",
+      "options": [
+        { "value": "flex-start", "label": "Flex Start" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Flex End" }
+      ],
+      "default": "center"
+    }
   ],
   "presets": [
     {
@@ -164,7 +182,12 @@
 
 
 
-<section class="section--top-banner" >
+<section
+  class="section--top-banner"
+  {% if section.settings.banner_height != blank %}
+    style="height: {{ section.settings.banner_height }}; display: flex; flex-direction: row; align-items: {{ section.settings.top_banner_align_items }};"
+  {% endif %}
+>
   <div class="section--top-banner-container" >
     <div class="top-banner--text-content" style="display: flex; justify-content: {{ section.settings.alignment }};">
         <div style="max-width: {{ section.settings.container_width }}px;">
