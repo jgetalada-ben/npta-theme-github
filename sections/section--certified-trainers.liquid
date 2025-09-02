@@ -230,14 +230,14 @@
 
 <style>
   .section--hero-buttons {
-    max-width: 15%;
+    max-width: clamp(70%,12vw,15%);
     margin: 0 auto;
   }
-  @media (max-width: 768px) {
+  {% comment %} @media (max-width: 768px) {
     .section--hero-buttons {
       max-width:70%;
     }
-  }
+  } {% endcomment %}
   .section--title-block.page-container {
     padding-bottom: 20px;
   }
