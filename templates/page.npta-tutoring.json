@@ -32,7 +32,7 @@
         "button_link": "shopify://collections/all",
         "button_text": "GET CERTIFIED",
         "show_button_1": true,
-        "button_1_text": "Start today",
+        "button_1_text": "Get Started",
         "button_1_link": "https://app.npta.ca/widget/survey/sM15QBoTJbBVmC9vCifd",
         "show_button_2": false,
         "button_2_text": "Purchase now",
@@ -40,7 +40,9 @@
         "button_position": "left",
         "title_alignment": "left",
         "container_width": 720,
-        "alignment": "flex-start"
+        "alignment": "flex-start",
+        "banner_height": "90vh",
+        "top_banner_align_items": "flex-end"
       }
     },
     "multicolumn_rDa3cV": {
@@ -232,7 +234,9 @@
         "button_position": "left",
         "title_alignment": "left",
         "container_width": 600,
-        "alignment": "flex-start"
+        "alignment": "flex-start",
+        "banner_height": "",
+        "top_banner_align_items": "center"
       }
     },
     "section_three_column_btBeRN": {
@@ -378,7 +382,9 @@
         "button_position": "left",
         "title_alignment": "left",
         "container_width": 520,
-        "alignment": "flex-start"
+        "alignment": "flex-start",
+        "banner_height": "",
+        "top_banner_align_items": "center"
       }
     },
     "section_breadcrumb_eFj6di": {
