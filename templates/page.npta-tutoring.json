@@ -172,7 +172,7 @@
     "section_blurb_tutoring_43xBGi": {
       "type": "section--blurb-tutoring",
       "custom_css": [
-        ".blurb-content-right-column {height: 80%;}"
+        ".blurb-content-right-column {height: 100%;}"
       ],
       "name": "Tutoring blurb",
       "settings": {
