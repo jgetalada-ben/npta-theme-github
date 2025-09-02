@@ -340,7 +340,7 @@
         "trainer_QeaRQe": {
           "type": "trainer",
           "settings": {
-            "image": "shopify://shop_images/IMG_3363.jpg",
+            "image": "shopify://shop_images/Cert-6.jpg",
             "show_content": false,
             "name": "test",
             "certification": "test",
@@ -351,7 +351,7 @@
         "trainer_PPaNyr": {
           "type": "trainer",
           "settings": {
-            "image": "shopify://shop_images/IMG_3363.jpg",
+            "image": "shopify://shop_images/Cert-7.jpg",
             "show_content": false,
             "name": "test",
             "certification": "test",
@@ -362,7 +362,7 @@
         "trainer_UnHCPp": {
           "type": "trainer",
           "settings": {
-            "image": "shopify://shop_images/IMG_3363.jpg",
+            "image": "shopify://shop_images/Cert-8.jpg",
             "show_content": false,
             "name": "test",
             "certification": "test",
@@ -373,7 +373,7 @@
         "trainer_3mhjcd": {
           "type": "trainer",
           "settings": {
-            "image": "shopify://shop_images/IMG_3363.jpg",
+            "image": "shopify://shop_images/Cert-9.jpg",
             "show_content": false,
             "name": "test",
             "certification": "test",
@@ -384,11 +384,22 @@
         "trainer_4Yk9gD": {
           "type": "trainer",
           "settings": {
-            "image": "shopify://shop_images/IMG_3363.jpg",
+            "image": "shopify://shop_images/Cert-10.jpg",
             "show_content": false,
             "name": "test",
             "certification": "test",
             "quote": "test",
+            "rating": "5"
+          }
+        },
+        "trainer_f6btCP": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-11.jpg",
+            "show_content": false,
+            "name": "",
+            "certification": "",
+            "quote": "",
             "rating": "5"
           }
         }
@@ -398,7 +409,8 @@
         "trainer_PPaNyr",
         "trainer_UnHCPp",
         "trainer_3mhjcd",
-        "trainer_4Yk9gD"
+        "trainer_4Yk9gD",
+        "trainer_f6btCP"
       ],
       "name": "Certified Trainers",
       "settings": {
