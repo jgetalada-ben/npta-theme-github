@@ -42,7 +42,8 @@
         "container_width": 720,
         "alignment": "flex-start",
         "banner_height": "90vh",
-        "top_banner_align_items": "flex-end"
+        "top_banner_align_items": "flex-end",
+        "show_banner_gradient": false
       }
     },
     "multicolumn_rDa3cV": {
@@ -236,7 +237,8 @@
         "container_width": 600,
         "alignment": "flex-start",
         "banner_height": "",
-        "top_banner_align_items": "center"
+        "top_banner_align_items": "center",
+        "show_banner_gradient": true
       }
     },
     "section_three_column_btBeRN": {
@@ -384,7 +386,8 @@
         "container_width": 520,
         "alignment": "flex-start",
         "banner_height": "",
-        "top_banner_align_items": "center"
+        "top_banner_align_items": "center",
+        "show_banner_gradient": true
       }
     },
     "section_breadcrumb_eFj6di": {
