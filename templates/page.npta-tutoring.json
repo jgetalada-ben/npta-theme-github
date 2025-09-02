@@ -76,6 +76,12 @@
         "step_DzdVqn",
         "step_eWQttH"
       ],
+      "custom_css": [
+        "#featured-section {padding-top: 50px; padding-bottom: 50px;}",
+        "#featured-section .section--title-block {display: none !important;}",
+        ".process-steps-tutoring .step {justify-content: center;}",
+        ".process-steps-tutoring .step .step-content h3 {margin: 0;}"
+      ],
       "name": "Progress Section Tutoring",
       "settings": {
         "background_color": "#ffffff",
