@@ -239,15 +239,15 @@
         "benefit_itDFj3": {
           "type": "benefit",
           "settings": {
-            "benefit_text": "One on One",
-            "description": "<p>(1:1) <br/>30-Min Session – <strong>$50 <br/></strong>60-Min Session – <strong>$125</strong></p><p></p>"
+            "benefit_text": "One on One (1:1)",
+            "description": "<p>Personalized coaching tailored to your learning style and goals.</p><ul><li>30-Min Session – <strong>$50 </strong></li><li>60-Min Session – <strong>$125</strong></li></ul><p></p>"
           }
         },
         "benefit_JNDpiM": {
           "type": "benefit",
           "settings": {
-            "benefit_text": "Group-Based Lab",
-            "description": "<p>(3–6 participants)<br/>60-Min Session –<strong>$40 per person</strong></p>"
+            "benefit_text": "Group-Based Lab (3 to 6)",
+            "description": "<p>Collaborative learning with real-time feedback and support.</p><ul><li>60-Min Session – <strong>$40 per person</strong></li></ul>"
           }
         }
       },
@@ -259,7 +259,7 @@
       "settings": {
         "background_image": "shopify://shop_images/tutoring-rate-img.jpg",
         "title": "TUTORING RATES",
-        "subtitle": "Ready to begin your NPTA Tutoring journey?<br>Your next step starts here.",
+        "subtitle": "Ready to begin your NPTA Tutoring journey? Your next step starts here.",
         "button_link": "shopify://collections/all",
         "button_text": "Register Now"
       }
@@ -325,6 +325,9 @@
         "card_8VKhfg",
         "card_8gxpzD",
         "card_k7XFhP"
+      ],
+      "custom_css": [
+        ".section--three-column {background-color: #f0f1f2 !important;}"
       ],
       "name": "Three Column",
       "settings": {

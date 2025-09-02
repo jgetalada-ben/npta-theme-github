@@ -96,6 +96,17 @@
       ],
       "default": "center"
     },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Button 1 Link"
+    },
+    {
+      "type": "text",
+      "id": "button_1_text",
+      "label": "Button 1 Text",
+      "default": "Register Here"
+    },
         
   ],
   "blocks": [
@@ -205,6 +216,14 @@
           <h3 style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_title2 }}</h3>
         </div>
       </div>
+    {% endif %}
+    {% if section.settings.button_1_link != blank and section.settings.button_1_text != blank %}
+    <div class="section--hero-buttons">
+      <a href="{{ section.settings.button_1_link }}" class="btn button-yg" style="display:block;">
+        <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
+        <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
+      </a>
+    </div>
     {% endif %}
 
 </section>
