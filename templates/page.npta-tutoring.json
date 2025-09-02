@@ -430,7 +430,9 @@
         "title_alignment": "center",
         "desc_alignment": "left",
         "container_width": 980,
-        "alignment": "center"
+        "alignment": "center",
+        "button_1_link": "/",
+        "button_1_text": "Register Here"
       }
     },
     "section_top_banner_hXbGNV": {
