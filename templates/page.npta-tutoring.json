@@ -46,6 +46,51 @@
         "show_banner_gradient": false
       }
     },
+    "section_process_tutoring_DFMeTw": {
+      "type": "section--process-tutoring",
+      "blocks": {
+        "step_UzwNtx": {
+          "type": "step",
+          "settings": {
+            "step_title": "Elite Mentorship",
+            "step_description": ""
+          }
+        },
+        "step_DzdVqn": {
+          "type": "step",
+          "settings": {
+            "step_title": "Real Conversations",
+            "step_description": ""
+          }
+        },
+        "step_eWQttH": {
+          "type": "step",
+          "settings": {
+            "step_title": "Tailored to You",
+            "step_description": ""
+          }
+        }
+      },
+      "block_order": [
+        "step_UzwNtx",
+        "step_DzdVqn",
+        "step_eWQttH"
+      ],
+      "name": "Progress Section Tutoring",
+      "settings": {
+        "background_color": "#ffffff",
+        "section_id": "featured-section",
+        "section_title": "",
+        "section_description": "",
+        "title_alignment": "center",
+        "container_width": 980,
+        "alignment": "center",
+        "show_program_button": false,
+        "button_text": "Button",
+        "program_button_link": "/",
+        "section_footer_description": ""
+      }
+    },
     "multicolumn_rDa3cV": {
       "type": "multicolumn",
       "blocks": {
@@ -82,6 +127,7 @@
         "column_Ftgbze",
         "column_khhtED"
       ],
+      "disabled": true,
       "name": "t:sections.multicolumn.presets.name",
       "settings": {
         "title": "",
@@ -126,9 +172,9 @@
       "settings": {
         "title": "",
         "description": "<p><strong>The NPTA Tutoring Program</strong> bridges the gap between where you are and who you’re becoming, meeting you at any stage of your certification journey.<br/><br/>Rooted in our Apex Model™, the program adapts to your learning style with personalized 1:1 or group support. Learn from experienced Master Trainers and educators to master the material, stay motivated, and build the confidence to pass, coach, and lead.<br/></p><h3>NPTA Tutoring helps you:</h3><ul><li>Master NASM and NCSF materials with clarity</li><li>Gain practical knowledge and lasting confidence</li><li>Accelerate your progress with structured guidance</li><li>Step fully into your role as a trusted fitness professional</li></ul><p><em>This isn’t generic tutoring—it’s elite mentorship built for where you're headed.</em></p><p></p>",
-        "button_text": "JOIN TODAY",
+        "button_text": "Start Today",
         "video_url": "",
-        "image": "shopify://shop_images/Ap_2nd.jpg",
+        "image": "shopify://shop_images/Tutoring_2nd_sec.jpg",
         "button_link": "shopify://collections/certifications",
         "top_padding": 0,
         "bottom_padding": 0,
@@ -171,7 +217,7 @@
         "background_color": "#ffffff",
         "section_id": "Progress Section Tutoring",
         "section_title": "Tutoring That Elevates Your Learning",
-        "section_description": "<h4>Built for Results — Not Just a Pass</h4><p>Powered by the Apex Model™, the NPTA Tutoring Program meets you where you are—building deep understanding, confidence, and mastery that sets you apart.</p>",
+        "section_description": "",
         "title_alignment": "center",
         "container_width": 980,
         "alignment": "center",
@@ -205,11 +251,11 @@
       ],
       "name": "Personal Training Banner",
       "settings": {
-        "background_image": "shopify://shop_images/CNC2.png",
+        "background_image": "shopify://shop_images/tutoring-rate-img.jpg",
         "title": "TUTORING RATES",
-        "subtitle": "Ready to begin your NPTA Tutoring journey?Your next step starts here.",
+        "subtitle": "Ready to begin your NPTA Tutoring journey?<br>Your next step starts here.",
         "button_link": "shopify://collections/all",
-        "button_text": "GET CERTIFIED"
+        "button_text": "Register Now"
       }
     },
     "section_top_banner_U7pGph": {
@@ -220,7 +266,7 @@
         ".section--top-background {width: 100%;}"
       ],
       "settings": {
-        "background_image": "shopify://shop_images/Ap_Footer.jpg",
+        "background_image": "shopify://shop_images/tutoring_5th_sec.jpg",
         "title": "The NPTA Apex Model™",
         "subtitle": "",
         "desc1": "<p><strong>The Apex Model™</strong> is NPTA’s signature 10-pillar framework that transforms aspiring trainers into complete, confident Fitness Practitioners™. It brings together technical expertise, coaching psychology, and client connection — going far beyond textbook learning to deliver real, lasting results.<br/><br/>Created by <strong>NPTA Founder Jesse Benson</strong>, the Apex Model™ is both evidence-informed and experience-driven. Built on thousands of hours of hands-on experience, it continues to evolve with the industry to meet the real needs of clients and professionals alike.<br/><br/></p>",
@@ -236,8 +282,8 @@
         "title_alignment": "left",
         "container_width": 600,
         "alignment": "flex-start",
-        "banner_height": "",
-        "top_banner_align_items": "center",
+        "banner_height": "1080px",
+        "top_banner_align_items": "flex-end",
         "show_banner_gradient": true
       }
     },
@@ -282,7 +328,7 @@
         "section_title2": "You won’t just pass. You’ll lead.",
         "section_description": "",
         "button_1_link": "shopify://collections/bundles",
-        "button_1_text": "CHOOSE MY PROGRAM",
+        "button_1_text": "Learn with the Apex Model™",
         "title_alignment": "center",
         "container_width": 980,
         "alignment": "center"
@@ -368,10 +414,15 @@
     },
     "section_top_banner_hXbGNV": {
       "type": "section--top-banner",
+      "custom_css": [
+        ".section--top-banner {background-color: #000000;}",
+        ".section--top-banner:before {width: 100%;}",
+        ".section--top-background {width: 100%;}"
+      ],
       "settings": {
-        "background_image": "shopify://shop_images/Ap_Footer.jpg",
-        "title": "Support That Meets You Where You Are",
-        "subtitle": "Still feeling unsure? That’s completely okay. Starting your journey in the fitness industry is a big step—and you don’t have to take it alone. We’re here to talk it through and help you find the path that’s right for you.",
+        "background_image": "shopify://shop_images/Ap_Footer1.jpg",
+        "title": "Still have questions?",
+        "subtitle": "We’re here to help you get the answers you need.",
         "desc1": "",
         "button_link": "shopify://collections/all",
         "button_text": "GET CERTIFIED",
@@ -383,11 +434,11 @@
         "button_2_link": "shopify://products/apprenticeship-program",
         "button_position": "left",
         "title_alignment": "left",
-        "container_width": 520,
+        "container_width": 600,
         "alignment": "flex-start",
-        "banner_height": "",
-        "top_banner_align_items": "center",
-        "show_banner_gradient": true
+        "banner_height": "70vh",
+        "top_banner_align_items": "flex-end",
+        "show_banner_gradient": false
       }
     },
     "section_breadcrumb_eFj6di": {
@@ -598,6 +649,7 @@
   "order": [
     "main",
     "section_top_banner_hJLdAL",
+    "section_process_tutoring_DFMeTw",
     "multicolumn_rDa3cV",
     "section_header_title_two_Gt9mm9",
     "section_blurb_tutoring_43xBGi",
