@@ -232,11 +232,11 @@
 </section>
 
 <style>
-  @media (max-width: 767px) {
+{% comment %} @media (max-width: 767px) {
   .blurb-content-right-column {
     display: none !important;
   }
-}
+} {% endcomment %}
 .section--blurb-content{
   display:flex;
   justify-content:Center;
@@ -383,13 +383,6 @@ width:100%;
         height: 100%;
    
     }
-      {% comment %} .image-wrapper img{
-width:100%;
-        height: 100%;
-        object-fit:cover;
-   border-radius:20px;
-      overflow:hidden;
-    } {% endcomment %}
 
 .image-wrapper{
   border-radius: 20px;
