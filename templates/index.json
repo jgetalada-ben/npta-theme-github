@@ -64,7 +64,7 @@
         "@media only screen and (min-width: 981px) {.section--hero-banner {height: 80vh; }}"
       ],
       "settings": {
-        "background_image": "shopify://shop_images/NPTA_National_Personal_Training_Academy_header_image_bts_extended.jpg",
+        "background_image": "shopify://shop_images/header_image_bts_extended.jpg",
         "headline": "Fitness",
         "badge_1_text": "OFFICIAL CANADIAN PARTNER",
         "badge_2_text": "1.5 Million+ NASM Certified Trainers",
