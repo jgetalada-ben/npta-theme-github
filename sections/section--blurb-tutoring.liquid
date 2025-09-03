@@ -106,8 +106,10 @@
 
       <div class="blurb-content-left-column">
                 <div class="section--title-block ">
-                      <h2 class="is--flex-start">{{ section.settings.title }}</h2> 
-                      <div class="title-block--desc">{{ section.settings.description }}</div>
+                  {% if section.settings.title %}
+                    <h2 class="is--flex-start">{{ section.settings.title }}</h2> 
+                  {% endif %}
+                    <div class="title-block--desc">{{ section.settings.description }}</div>
                 </div>
 
                 <div class="section--hero-buttons">
