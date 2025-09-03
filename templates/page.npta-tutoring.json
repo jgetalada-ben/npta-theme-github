@@ -46,112 +46,6 @@
         "show_banner_gradient": false
       }
     },
-    "section_process_tutoring_DFMeTw": {
-      "type": "section--process-tutoring",
-      "blocks": {
-        "step_UzwNtx": {
-          "type": "step",
-          "settings": {
-            "step_title": "Elite Mentorship",
-            "step_description": ""
-          }
-        },
-        "step_DzdVqn": {
-          "type": "step",
-          "settings": {
-            "step_title": "Real Conversations",
-            "step_description": ""
-          }
-        },
-        "step_eWQttH": {
-          "type": "step",
-          "settings": {
-            "step_title": "Tailored to You",
-            "step_description": ""
-          }
-        }
-      },
-      "block_order": [
-        "step_UzwNtx",
-        "step_DzdVqn",
-        "step_eWQttH"
-      ],
-      "custom_css": [
-        "#featured-section {padding-top: 50px; padding-bottom: 50px;}",
-        "#featured-section .section--title-block {display: none !important;}",
-        ".process-steps-tutoring .step {justify-content: center;}",
-        ".process-steps-tutoring .step .step-content h3 {margin: 0;}"
-      ],
-      "name": "Progress Section Tutoring",
-      "settings": {
-        "background_color": "#ffffff",
-        "section_id": "featured-section",
-        "section_title": "",
-        "section_description": "",
-        "title_alignment": "center",
-        "container_width": 980,
-        "alignment": "center",
-        "show_program_button": false,
-        "button_text": "Button",
-        "program_button_link": "/",
-        "section_footer_description": ""
-      }
-    },
-    "multicolumn_rDa3cV": {
-      "type": "multicolumn",
-      "blocks": {
-        "column_9iJ8ik": {
-          "type": "column",
-          "settings": {
-            "title": "Elite Mentorship",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_Ftgbze": {
-          "type": "column",
-          "settings": {
-            "title": "Real Conversations",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column_khhtED": {
-          "type": "column",
-          "settings": {
-            "title": "Tailored to You",
-            "text": "",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column_9iJ8ik",
-        "column_Ftgbze",
-        "column_khhtED"
-      ],
-      "disabled": true,
-      "name": "t:sections.multicolumn.presets.name",
-      "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "primary",
-        "button_label": "",
-        "button_link": "",
-        "color_scheme": "",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 20,
-        "padding_bottom": 20
-      }
-    },
     "section_header_title_two_Gt9mm9": {
       "type": "section--header-title-two",
       "custom_css": [
@@ -672,8 +566,6 @@
   "order": [
     "main",
     "section_top_banner_hJLdAL",
-    "section_process_tutoring_DFMeTw",
-    "multicolumn_rDa3cV",
     "section_header_title_two_Gt9mm9",
     "section_blurb_tutoring_43xBGi",
     "section_process_tutoring_4WrKRU",
