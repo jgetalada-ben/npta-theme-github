@@ -11,13 +11,40 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "section_top_banner_pEMffK": {
+      "type": "section--top-banner",
+      "name": "Top Banner",
+      "settings": {
+        "background_image": "shopify://shop_images/hero-banner-whatsnew.png",
+        "title": "What’s New at NPTA",
+        "subtitle": "Stay ahead with the latest trends, tools, and opportunities—built to keep you leading in today’s fast-moving fitness industry.",
+        "desc1": "",
+        "button_link": "shopify://collections/all",
+        "button_text": "GET CERTIFIED",
+        "show_button_1": false,
+        "button_1_text": "Button",
+        "button_1_link": "/",
+        "show_button_2": false,
+        "button_2_text": "Button",
+        "button_2_link": "/",
+        "button_position": "center",
+        "title_alignment": "left",
+        "container_width": 1100,
+        "alignment": "center",
+        "banner_height": "90vh",
+        "top_banner_align_items": "flex-end",
+        "show_banner_gradient": false
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "section_top_banner_pEMffK"
   ]
 }
