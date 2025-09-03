@@ -118,9 +118,9 @@
 
       <div class="blurb-content-left-column">
                 <div class="section--title-block ">
-                  {% if section.settings.title %}
+                  {% unless section.settings.title == blank %}
                     <h2 class="is--flex-start">{{ section.settings.title }}</h2> 
-                  {% endif %}
+                  {% endunless %}
                     <div class="title-block--desc">{{ section.settings.description }}</div>
                 </div>
 
