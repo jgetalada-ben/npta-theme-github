@@ -19,6 +19,11 @@
     },
     "section_top_banner_pEMffK": {
       "type": "section--top-banner",
+      "custom_css": [
+        ".section--top-banner {background-color: #000000;}",
+        ".section--top-banner:before {width: 100%;}",
+        ".section--top-background {width: 100%;}"
+      ],
       "name": "Top Banner",
       "settings": {
         "background_image": "shopify://shop_images/hero-banner-whatsnew.png",
@@ -35,9 +40,174 @@
         "button_2_link": "/",
         "button_position": "center",
         "title_alignment": "left",
-        "container_width": 1100,
+        "container_width": 980,
         "alignment": "center",
-        "banner_height": "90vh",
+        "banner_height": "95vh",
+        "top_banner_align_items": "flex-end",
+        "show_banner_gradient": false
+      }
+    },
+    "multicolumn_Dh7m48": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_c8EErh": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/npta-apprenticeship-program-img.png",
+            "title": "<strong>NPTA Apprenticeship Program</strong>",
+            "text": "<p>Canada’s most immersive hands-on practicum—and a potential pathway to becoming a Fit Integrated Trainer.</p>",
+            "link_label": "Register Here",
+            "link": "/"
+          }
+        },
+        "column_JKJTgH": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/npta-tutoring-program-img.png",
+            "title": "<strong>NPTA Apprenticeship Program</strong>",
+            "text": "<p>Canada’s most immersive hands-on practicum—and a potential pathway to becoming a Fit Integrated Trainer.</p>",
+            "link_label": "Register Here",
+            "link": "/"
+          }
+        }
+      },
+      "block_order": [
+        "column_c8EErh",
+        "column_JKJTgH"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "<strong>Step Ahead. Stay Ahead.</strong>",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 2,
+        "column_alignment": "left",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-096fec44-6767-4a8d-8a18-c30494241522",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "section_top_banner_73ddQa": {
+      "type": "section--top-banner",
+      "custom_css": [
+        ".section--top-banner {background-color: #000000;}",
+        ".section--top-banner:before {width: 100%;}",
+        ".section--top-background {width: 100%;}"
+      ],
+      "name": "Top Banner",
+      "settings": {
+        "background_image": "shopify://shop_images/where-to-begin-img.png",
+        "title": "Not Sure Where to Begin?",
+        "subtitle": "Find Your Perfect Fit with the Career Pathway Quiz",
+        "desc1": "<p>Whether you're new to the field or ready to specialize, this quiz gives you a custom roadmap —built to guide your next move in the fitness industry.</p>",
+        "button_link": "shopify://collections/all",
+        "button_text": "GET CERTIFIED",
+        "show_button_1": false,
+        "button_1_text": "Button",
+        "button_1_link": "/",
+        "show_button_2": true,
+        "button_2_text": "Take the Quiz",
+        "button_2_link": "/",
+        "button_position": "center",
+        "title_alignment": "left",
+        "container_width": 980,
+        "alignment": "center",
+        "banner_height": "95vh",
+        "top_banner_align_items": "flex-end",
+        "show_banner_gradient": false
+      }
+    },
+    "featured_programs_AePGCh": {
+      "type": "featured_programs",
+      "name": "Fitness Program Sections",
+      "settings": {
+        "section_id": "certified-trainers",
+        "background_color": "#ffffff",
+        "discount_text_1": "UP TO 50% OFF",
+        "title_1": "CERTIFICATIONS",
+        "description_1": "Short description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "button_link_1": "",
+        "button_text_1": "CHOOSE MY PROGRAM",
+        "is_visible_1": true,
+        "discount_text_2": "UP TO 50% OFF",
+        "title_2": "CERTIFICATIONS",
+        "description_2": "Short description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "button_link_2": "",
+        "button_text_2": "CHOOSE MY PROGRAM",
+        "is_visible_2": true,
+        "discount_text_3": "UP TO 50% OFF",
+        "title_3": "CERTIFICATIONS",
+        "description_3": "Short description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "button_link_3": "",
+        "button_text_3": "CHOOSE MY PROGRAM",
+        "is_visible_3": true,
+        "discount_text_4": "UP TO 50% OFF",
+        "title_4": "CERTIFICATIONS",
+        "description_4": "Short description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "button_link_4": "",
+        "button_text_4": "CHOOSE MY PROGRAM",
+        "is_visible_4": true,
+        "section_title": "Lorem ipsum dolor sit amet",
+        "section_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>",
+        "title_alignment": "left",
+        "container_width": 980,
+        "alignment": "center",
+        "show_program_button": true,
+        "button_text": "Button",
+        "program_button_link": "/",
+        "section_footer_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+      }
+    },
+    "featured_blog_TbYVpW": {
+      "type": "featured-blog",
+      "name": "t:sections.featured-blog.presets.name",
+      "settings": {
+        "heading": "Blog posts",
+        "heading_size": "h1",
+        "blog": "",
+        "post_limit": 3,
+        "columns_desktop": 3,
+        "color_scheme": "",
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "show_view_all": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "section_top_banner_xqKfmc": {
+      "type": "section--top-banner",
+      "custom_css": [
+        ".section--top-banner {background-color: #000000;}",
+        ".section--top-banner:before {width: 100%;}",
+        ".section--top-background {width: 100%;}"
+      ],
+      "name": "Top Banner",
+      "settings": {
+        "background_image": "shopify://shop_images/Ap_Footer1.jpg",
+        "title": "Have Questions? We're Here to Help.",
+        "subtitle": "",
+        "desc1": "<p>Our team is ready to connect and support you.</p>",
+        "button_link": "shopify://collections/all",
+        "button_text": "GET CERTIFIED",
+        "show_button_1": true,
+        "button_1_text": "Contact Us",
+        "button_1_link": "shopify://pages/contact-us",
+        "show_button_2": false,
+        "button_2_text": "Button",
+        "button_2_link": "/",
+        "button_position": "center",
+        "title_alignment": "left",
+        "container_width": 980,
+        "alignment": "center",
+        "banner_height": "65vh",
         "top_banner_align_items": "flex-end",
         "show_banner_gradient": false
       }
@@ -45,6 +215,11 @@
   },
   "order": [
     "main",
-    "section_top_banner_pEMffK"
+    "section_top_banner_pEMffK",
+    "multicolumn_Dh7m48",
+    "section_top_banner_73ddQa",
+    "featured_programs_AePGCh",
+    "featured_blog_TbYVpW",
+    "section_top_banner_xqKfmc"
   ]
 }
