@@ -78,7 +78,8 @@
         "button_link": "shopify://collections/certifications",
         "top_padding": 0,
         "bottom_padding": 0,
-        "container_width": 1260
+        "container_width": 1260,
+        "blurb_items_alignment": "flex-start"
       }
     },
     "section_process_tutoring_4WrKRU": {
