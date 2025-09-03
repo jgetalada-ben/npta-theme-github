@@ -49,14 +49,14 @@
     "section_header_title_two_Gt9mm9": {
       "type": "section--header-title-two",
       "custom_css": [
-        ".section--title-two {padding-bottom: 0px; padding-left: 5px; margin-bottom: -20px;}"
+        ".section--title-two {padding-bottom: 0px; padding-left: 5px; margin-bottom: 20px;}"
       ],
       "name": "Header Title",
       "settings": {
         "background_color": "#ffffff",
         "section_id": "certified-trainers",
         "section_title": "The NPTA Tutoring Program",
-        "section_description": "<p>Where You Are Is Just the Beginning — We’ll Help You Go Further</p>",
+        "section_description": "<h3>Where You Are Is Just the Beginning — We’ll Help You Go Further</h3>",
         "title_alignment": "left",
         "container_width": 960,
         "title_color": "#242833",
