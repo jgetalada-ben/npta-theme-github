@@ -459,7 +459,7 @@
         "title_alignment": "left",
         "container_width": 600,
         "alignment": "flex-start",
-        "banner_height": "70vh",
+        "banner_height": "55vh",
         "top_banner_align_items": "flex-end",
         "show_banner_gradient": false
       }
