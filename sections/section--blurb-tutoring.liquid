@@ -71,6 +71,18 @@
       "unit": "px",
       "default": 980
     },
+    {
+      "type": "select",
+      "id": "blurb_items_alignment",
+      "label": "Items alignment",
+      "info": "Controls align-items on the blurb content container (flex/grid).",
+      "options": [
+        { "value": "flex-start", "label": "Flex Start" },
+        { "value": "center",     "label": "Center" },
+        { "value": "flex-end",   "label": "Flex End" }
+      ],
+      "default": "center"
+    }
   ],
   "blocks": [
     {
@@ -102,7 +114,7 @@
 {% endschema %}
 
 <section class="section--blurb-content" style="padding-top: {{ section.settings.top_padding }}px; padding-bottom: {{ section.settings.bottom_padding }}px;">
-  <div class="blurb-content-container page-container" style="max-width: {{ section.settings.container_width }}px;">
+  <div class="blurb-content-container page-container" style="max-width: {{ section.settings.container_width }}px; align-items: {{ section.settings.blurb_items_alignment }};">
 
       <div class="blurb-content-left-column">
                 <div class="section--title-block ">
@@ -159,9 +171,7 @@
   display:flex;
   justify-content:Center;
 }
-  .section--blurb-content .blurb-content-container {
-align-items:Center;
-  }
+
 .blurb-content-right-column{
   height:100%;
 }
