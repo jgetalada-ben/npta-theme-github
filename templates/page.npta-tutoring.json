@@ -54,7 +54,7 @@
       ],
       "name": "Header Title",
       "settings": {
-        "background_color": "#121212",
+        "background_color": "#ffffff",
         "section_id": "tutoring-program-title",
         "section_title": "The NPTA Tutoring Program",
         "section_description": "<p>Where You Are Is Just the Beginning — We’ll Help You Go Further</p>",
@@ -73,7 +73,7 @@
       ],
       "name": "Tutoring blurb",
       "settings": {
-        "title": "fdd",
+        "title": "",
         "description": "<p><strong>The NPTA Tutoring Program</strong> bridges the gap between where you are and who you’re becoming, meeting you at any stage of your certification journey.<br/><br/><br/>Rooted in our Apex Model™, the program adapts to your learning style with personalized 1:1 or group support. Learn from experienced Master Trainers and educators to master the material, stay motivated, and build the confidence to pass, coach, and lead.<br/><br/></p><h3><br/>NPTA Tutoring helps you:</h3><ul><li>Master NASM and NCSF materials with clarity</li><li>Gain practical knowledge and lasting confidence</li><li>Accelerate your progress with structured guidance</li><li>Step fully into your role as a trusted fitness professional<br/></li></ul><p><em>This isn’t generic tutoring—it’s elite mentorship built for where you're headed.</em></p>",
         "button_text": "Start Today",
         "video_url": "",
