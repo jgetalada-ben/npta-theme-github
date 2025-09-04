@@ -199,7 +199,7 @@
         <div style="max-width: {{ section.settings.container_width }}px;">
       <h1>{{ section.settings.title }}</h1>
       {% if section.settings.subtitle != blank %}
-        <p>{{ section.settings.subtitle }}</p>
+        <p class="subtitle-p">{{ section.settings.subtitle }}</p>
       {% endif %}
       {% if section.settings.desc1 != blank %}
         <p>{{ section.settings.desc1 }}</p>
@@ -248,9 +248,15 @@
   top: 0;
   width: 50%;
 }
+.subtitle-p {
+  font-size: 26px;
+}
 @media (max-width: 768px) {
   .section--top-background{
     background-position: center;
+  }
+  .subtitle-p {
+    font-size: 18px;
   }
 }
   
