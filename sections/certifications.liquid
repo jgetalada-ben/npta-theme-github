@@ -58,7 +58,7 @@
     </div>
 
     {% if section.settings.cta_text != blank %}
-      <div class="button-wrap certifications-cta" style="text-align: {{ section.settings.cta_alignment }};">
+      <div class="certifications-cta" style="text-align: {{ section.settings.cta_alignment }};">
         <a href="{{ section.settings.cta_link }}" class="btn button-yg">
             <span class="btn-label-down">{{ section.settings.cta_text }}</span>
             <span class="btn-label-down">{{ section.settings.cta_text }}</span>
@@ -146,6 +146,12 @@
 }
 
 /* CTA button */
+#section-{{ section.id }} .certifications-cta{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  flex-wrap:Wrap;
+}
 #section-{{ section.id }} .certifications-cta .btn.button-yg{
   background: #f1f64a;
   color: #141414;
