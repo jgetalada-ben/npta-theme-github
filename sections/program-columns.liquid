@@ -36,11 +36,17 @@
             {% endif %}
 
             {% if block.settings.button_text != blank %}
-              <div class="program-col-cta">
+              {% comment %} <div class="program-col-cta">
                 <a href="{{ block.settings.button_link }}" class="btn program-btn">
                   {{ block.settings.button_text }}
                 </a>
-              </div>
+              </div> {% endcomment %}
+                <div class="program-col-cta">
+                    <a href="{{ section.settings.button_link }}" class="btn button-yg">
+                    <span class="btn-label-down">{{ section.settings.button_text }}</span>
+                    <span class="btn-label-down">{{ section.settings.button_text }}</span>
+                    </a>
+                </div>
             {% endif %}
           </div>
         </div>
@@ -57,13 +63,19 @@
 
 /* Headings */
 #section-{{ section.id }} .program-columns-heading{
-  font-size: clamp(28px, 4vw, 42px);
-  font-weight: 800;
-  margin-bottom: 20px;
-  text-align: center;
+  font-size: clamp(28px, 3.47vw, 52px);
+  font-weight: 700;
+  margin-bottom: 60px;
+  text-align: left;
+  color: #fff;
+}
+@media (max-width: 767px){
+    #section-{{ section.id }} .program-columns-heading{
+        margin-bottom: 30px;
+    }
 }
 #section-{{ section.id }} .program-columns-subheading{
-  font-size: 16px;
+  font-size: 21px;
   line-height: 1.6;
   margin: 0 auto 40px;
   max-width: 720px;
@@ -99,14 +111,21 @@
   height: 100%;
 }
 #section-{{ section.id }} .program-col-title{
-  font-size: 20px;
+  font-size: clamp(18px, 2.13vw, 32px);
   font-weight: 800;
   margin: 0 0 10px;
+  color: #fff;
 }
 #section-{{ section.id }} .program-col-subtitle{
   font-size: 16px;
   font-weight: 500;
-  margin: 0 0 12px;
+  margin: 0 0 20px;
+  min-height: 60px;
+}
+@media (max-width: 767px){
+    #section-{{ section.id }} .program-col-subtitle{
+        min-height: auto;
+    }
 }
 #section-{{ section.id }} .program-col-image img{
   width: 100%;
@@ -124,6 +143,10 @@
 #section-{{ section.id }} .program-col-cta{
   margin-top: auto;
   padding-top: 8px;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
 }
 #section-{{ section.id }} .program-col-cta .program-btn{
   background: #e6f100;
