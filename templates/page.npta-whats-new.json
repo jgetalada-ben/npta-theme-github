@@ -164,6 +164,41 @@
         "section_footer_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
       }
     },
+    "certifications_yT3RV9": {
+      "type": "certifications",
+      "blocks": {
+        "product_Rxqg4q": {
+          "type": "product",
+          "settings": {
+            "product": "certified-personal-trainer-exam-cpt"
+          }
+        },
+        "product_CeXgEj": {
+          "type": "product",
+          "settings": {
+            "product": "wellness-coach-cwc-bogo"
+          }
+        },
+        "product_EFdRyG": {
+          "type": "product",
+          "settings": {
+            "product": "group-fitness-instructor-gfi"
+          }
+        }
+      },
+      "block_order": [
+        "product_Rxqg4q",
+        "product_CeXgEj",
+        "product_EFdRyG"
+      ],
+      "name": "Certifications Grid",
+      "settings": {
+        "heading": "Certifications That Set You Apart",
+        "subheading": "<p>The right credentials don’t just check a box—they open doors. These certifications are career-elevating and purposefully built to give you a competitive edge in today’s fitness industry.</p>",
+        "cta_text": "Explore All Courses",
+        "cta_link": "shopify://collections/all"
+      }
+    },
     "featured_blog_TbYVpW": {
       "type": "featured-blog",
       "name": "t:sections.featured-blog.presets.name",
@@ -219,6 +254,7 @@
     "multicolumn_Dh7m48",
     "section_top_banner_73ddQa",
     "featured_programs_AePGCh",
+    "certifications_yT3RV9",
     "featured_blog_TbYVpW",
     "section_top_banner_xqKfmc"
   ]
