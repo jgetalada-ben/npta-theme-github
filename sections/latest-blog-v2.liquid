@@ -13,10 +13,7 @@
     {% endif %}
   </div>
 
-  <div
-    class="latest-blog-container page-width"
-    style="--img-w: {{ section.settings.image_width_percent }}%; --gap: 40px;"
-  >
+  <div class="latest-blog-container page-width">
     <div class="latest-blog-left">
       <!-- Blog list -->
       <div class="latest-blog-list">
@@ -68,8 +65,6 @@
   grid-template-columns: calc(100% - var(--img-w)) var(--img-w);
   gap: 40px;
   align-items: center;
-  --img-w-safe: min(var(--img-w, 50%), calc(100% - var(--gap, 40px)));
-  grid-template-columns: max(0px, calc(100% - var(--img-w-safe))) var(--img-w-safe);
 }
 
 /* Left column */
@@ -186,16 +181,6 @@
         "id": "bg_color", 
         "label": "Background color", 
         "default": "#133257" 
-    },
-    {
-      "type": "range",
-      "id": "image_width_percent",
-      "label": "Right image column width (%)",
-      "min": 50,
-      "max": 100,
-      "step": 1,
-      "unit": "%",
-      "default": 50
     },
     { 
         "type": "text", 
