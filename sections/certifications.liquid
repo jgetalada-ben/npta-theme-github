@@ -58,12 +58,18 @@
     </div>
 
     {% if section.settings.cta_text != blank %}
-      <div class="certifications-cta"
+      {% comment %} <div class="certifications-cta"
            style="text-align: {{ section.settings.cta_alignment }};">
         <a href="{{ section.settings.cta_link }}" class="btn button-yg">
           {{ section.settings.cta_text }}
         </a>
-      </div>
+      </div> {% endcomment %}
+      <div class="certifications-cta" style="display: flex; justify-content: {{ section.settings.cta_alignment }};">
+        <a href="{{ section.settings.cta_link }}" class="btn button-yg">
+          <span class="btn-label-down">{{ section.settings.cta_text }}</span>
+          <span class="btn-label-down">{{ section.settings.cta_text }}</span>
+        </a>
+        </div>
     {% endif %}
   </div>
 </section>
