@@ -196,7 +196,7 @@
 >
   <div class="section--top-banner-container" >
     <div class="top-banner--text-content" style="display: flex; justify-content: {{ section.settings.alignment }};">
-        <div style="max-width: {{ section.settings.container_width }}px;">
+        <div class="top-banner--text-content-container" style="max-width: {{ section.settings.container_width }}px;">
       <h1>{{ section.settings.title }}</h1>
       {% if section.settings.subtitle != blank %}
         <p class="subtitle-p">{{ section.settings.subtitle }}</p>
