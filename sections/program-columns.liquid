@@ -14,37 +14,37 @@
     {% endif %}
 
     <div class="program-columns-grid" style="--cols: {{ section.settings.columns | default: 2 }};">
-    {% for block in section.blocks %}
+      {% for block in section.blocks %}
         <div class="program-col" {{ block.shopify_attributes }}>
-        <div class="program-col-inner">
+          <div class="program-col-inner">
             {% if block.settings.title != blank %}
-            <h3 class="program-col-title">{{ block.settings.title }}</h3>
+              <h3 class="program-col-title">{{ block.settings.title }}</h3>
             {% endif %}
 
             {% if block.settings.subtitle != blank %}
-            <div class="program-col-subtitle">{{ block.settings.subtitle }}</div>
+              <div class="program-col-subtitle">{{ block.settings.subtitle }}</div>
             {% endif %}
 
             {% if block.settings.image != blank %}
-            <div class="program-col-image">
-                <img src="{{ block.settings.image | img_url: '600x' }}" alt="{{ block.settings.title }}">
-            </div>
+              <div class="program-col-image">
+                <img src="{{ block.settings.image | img_url: '900x' }}" alt="{{ block.settings.title | escape }}">
+              </div>
             {% endif %}
 
             {% if block.settings.description != blank %}
-            <div class="program-col-description">{{ block.settings.description }}</div>
+              <div class="program-col-description">{{ block.settings.description }}</div>
             {% endif %}
 
             {% if block.settings.button_text != blank %}
-            <div class="program-col-cta">
+              <div class="program-col-cta">
                 <a href="{{ block.settings.button_link }}" class="btn program-btn">
-                {{ block.settings.button_text }}
+                  {{ block.settings.button_text }}
                 </a>
-            </div>
+              </div>
             {% endif %}
+          </div>
         </div>
-        </div>
-    {% endfor %}
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -55,14 +55,14 @@
   color: #fff;
 }
 
-.program-columns-heading{
+/* Headings */
+#section-{{ section.id }} .program-columns-heading{
   font-size: clamp(28px, 4vw, 42px);
   font-weight: 800;
   margin-bottom: 20px;
   text-align: center;
 }
-
-.program-columns-subheading{
+#section-{{ section.id }} .program-columns-subheading{
   font-size: 16px;
   line-height: 1.6;
   margin: 0 auto 40px;
@@ -71,39 +71,61 @@
   color: #e6e9ef;
 }
 
-.program-columns-grid{
+/* GRID */
+#section-{{ section.id }} .program-columns-grid{
   display: grid;
-  grid-template-columns: repeat(var(--cols, 2), 1fr);
   gap: 40px;
 }
-
-.program-col-title{
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 10px;
+/* Tablet & up: keep all columns on one line using selected count */
+@media (min-width: 768px){
+  #section-{{ section.id }} .program-columns-grid{
+    grid-template-columns: repeat(var(--cols, 2), 1fr);
+  }
+}
+/* Mobile: stack */
+@media (max-width: 767px){
+  #section-{{ section.id }} .program-columns-grid{
+    grid-template-columns: 1fr;
+  }
 }
 
-.program-col-subtitle{
+/* COLUMN: equal height with CTA aligned */
+#section-{{ section.id }} .program-col{
+  min-height: 100%;
+}
+#section-{{ section.id }} .program-col-inner{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+#section-{{ section.id }} .program-col-title{
+  font-size: 20px;
+  font-weight: 800;
+  margin: 0 0 10px;
+}
+#section-{{ section.id }} .program-col-subtitle{
   font-size: 16px;
   font-weight: 500;
-  margin-bottom: 10px;
+  margin: 0 0 12px;
 }
-
-.program-col-image img{
+#section-{{ section.id }} .program-col-image img{
   width: 100%;
   border-radius: 10px;
   display: block;
   margin-bottom: 16px;
 }
-
-.program-col-description{
+#section-{{ section.id }} .program-col-description{
   font-size: 15px;
   line-height: 1.6;
-  margin-bottom: 20px;
+  margin: 0 0 20px;
   color: #e6e9ef;
 }
-
-.program-col-cta .program-btn{
+/* Push CTA to the bottom so buttons align across columns */
+#section-{{ section.id }} .program-col-cta{
+  margin-top: auto;
+  padding-top: 8px;
+}
+#section-{{ section.id }} .program-col-cta .program-btn{
   background: #e6f100;
   color: #133257;
   font-weight: 700;
@@ -111,33 +133,15 @@
   padding: 10px 16px;
   display: inline-block;
 }
-
-@media (max-width: 980px){
-  .program-columns-grid{ grid-template-columns: 1fr; }
-}
 </style>
 
 {% schema %}
 {
   "name": "Program Columns",
   "settings": [
-    { 
-        "type": "text", 
-        "id": "heading", 
-        "label": "Heading", 
-        "default": "Step Ahead. Stay Ahead." 
-    },
-    { 
-        "type": "richtext", 
-        "id": "subheading", 
-        "label": "Subheading"
-    },
-    { 
-        "type": "color", 
-        "id": "bg_color", 
-        "label": "Background color", 
-        "default": "#133257" 
-    },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Step Ahead. Stay Ahead." },
+    { "type": "richtext", "id": "subheading", "label": "Subheading" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#133257" },
     {
       "type": "range",
       "id": "columns",
@@ -153,40 +157,12 @@
       "type": "program",
       "name": "Program column",
       "settings": [
-        { 
-            "type": "text", 
-            "id": "title", 
-            "label": "Title", 
-            "default": "NPTA Apprenticeship Program" 
-        },
-        { 
-            "type": "text", 
-            "id": "subtitle", 
-            "label": "Subtitle" 
-        },
-        { 
-            "type": "image_picker", 
-            "id": "image",
-            "label": "Image" 
-        },
-        { 
-            "type": "richtext", 
-            "id": "description", 
-            "label": "Description", 
-            "default": "<p>Program description goes here.</p>" 
-        },
-        { 
-            "type": "text", 
-            "id": "button_text", 
-            "label": "Button text", 
-            "default": "Register Here" 
-        },
-        { 
-            "type": "url", 
-            "id": "button_link", 
-            "label": "Button link", 
-            "default": "/" 
-        }
+        { "type": "text", "id": "title", "label": "Title", "default": "NPTA Apprenticeship Program" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Canada's most immersive hands-on practicum—and a potential pathway to becoming a Fit Integrated Trainer." },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Program description goes here.</p>" },
+        { "type": "text", "id": "button_text", "label": "Button text", "default": "Register Here" },
+        { "type": "url", "id": "button_link", "label": "Button link", "default": "/" }
       ]
     }
   ],
