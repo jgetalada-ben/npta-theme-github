@@ -118,29 +118,29 @@
     "certifications_yT3RV9": {
       "type": "certifications",
       "blocks": {
-        "product_Rxqg4q": {
+        "product_CDa3Gj": {
           "type": "product",
           "settings": {
-            "product": "certified-personal-trainer-exam-cpt"
+            "product": "certified-nutrition-coach-cnc"
           }
         },
-        "product_CeXgEj": {
+        "product_fLVyDR": {
           "type": "product",
           "settings": {
-            "product": "wellness-coach-cwc-bogo"
+            "product": "certified-personal-trainer-cpt-ph"
           }
         },
-        "product_EFdRyG": {
+        "product_XxUb4D": {
           "type": "product",
           "settings": {
-            "product": "cpt-essentials-cpt-cpr"
+            "product": "certified-personal-trainer-cpt"
           }
         }
       },
       "block_order": [
-        "product_Rxqg4q",
-        "product_CeXgEj",
-        "product_EFdRyG"
+        "product_CDa3Gj",
+        "product_fLVyDR",
+        "product_XxUb4D"
       ],
       "name": "Certifications Grid",
       "settings": {
