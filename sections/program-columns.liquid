@@ -36,11 +36,6 @@
             {% endif %}
 
             {% if block.settings.button_text != blank %}
-              {% comment %} <div class="program-col-cta">
-                <a href="{{ block.settings.button_link }}" class="btn program-btn">
-                  {{ block.settings.button_text }}
-                </a>
-              </div> {% endcomment %}
                 <div class="program-col-cta">
                     <a href="{{ block.settings.button_link }}" class="btn button-yg">
                         <span class="btn-label-down">{{ block.settings.button_text }}</span>
@@ -145,7 +140,7 @@
   padding-top: 8px;
   width:100%;
   display:flex;
-  justify-content:center;
+  justify-content:start;
   flex-wrap:wrap;
 }
 #section-{{ section.id }} .program-col-cta .program-btn{
