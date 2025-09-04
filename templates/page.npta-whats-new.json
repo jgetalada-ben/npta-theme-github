@@ -185,12 +185,26 @@
           "settings": {
             "article": "npta-blogs/strength-endurance"
           }
+        },
+        "blog_post_TQQNxE": {
+          "type": "blog_post",
+          "settings": {
+            "article": "npta-blogs/how-to-become-a-nutrition-coach"
+          }
+        },
+        "blog_post_JxR9FL": {
+          "type": "blog_post",
+          "settings": {
+            "article": "npta-blogs/become-a-qualified-personal-trainer"
+          }
         }
       },
       "block_order": [
         "blog_post_4dHXQb",
         "blog_post_rgFVDK",
-        "blog_post_nggJtq"
+        "blog_post_nggJtq",
+        "blog_post_TQQNxE",
+        "blog_post_JxR9FL"
       ],
       "name": "Latest Blog v2",
       "settings": {
@@ -198,6 +212,7 @@
         "subheading": "<p>Insights, strategies, and real talk to help you grow, lead, and level up your fitness career.</p>",
         "side_image": "shopify://shop_images/blog-feature-img.png",
         "bg_color": "#133257",
+        "image_width_percent": 50,
         "button_text": "View All Blogs",
         "button_link": "/"
       }
