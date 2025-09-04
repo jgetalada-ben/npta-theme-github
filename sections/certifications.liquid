@@ -1,10 +1,22 @@
-<section class="section--certifications">
+<section
+  id="section-{{ section.id }}"
+  class="section--certifications"
+  style="
+    background: {{ section.settings.bg_color }};
+    padding: {{ section.settings.padding_y_desktop }}px {{ section.settings.padding_x_desktop }}px;
+  "
+>
   <div class="certifications-container page-width">
     {% if section.settings.heading != blank %}
-      <h2 class="certifications-heading">{{ section.settings.heading }}</h2>
+      <h2 class="certifications-heading" style="text-align: {{ section.settings.heading_alignment }};">
+        {{ section.settings.heading }}
+      </h2>
     {% endif %}
+
     {% if section.settings.subheading != blank %}
-      <div class="certifications-subheading">{{ section.settings.subheading }}</div>
+      <div class="certifications-subheading" style="text-align: {{ section.settings.heading_alignment }};">
+        {{ section.settings.subheading }}
+      </div>
     {% endif %}
 
     <div class="certifications-grid">
@@ -12,7 +24,7 @@
         {% if block.settings.product != blank %}
           {% assign product = all_products[block.settings.product] %}
           {% if product %}
-            <div class="certification-card">
+            <div class="certification-card" {{ block.shopify_attributes }}>
               <a href="{{ product.url }}" class="certification-image-wrapper">
                 {{ product.featured_image | image_url: width: 600 | image_tag: class: "certification-image" }}
               </a>
@@ -30,7 +42,8 @@
     </div>
 
     {% if section.settings.cta_text != blank %}
-      <div class="certifications-cta">
+      <div class="certifications-cta"
+           style="text-align: {{ section.settings.cta_alignment }};">
         <a href="{{ section.settings.cta_link }}" class="btn button-yg">
           {{ section.settings.cta_text }}
         </a>
@@ -40,34 +53,37 @@
 </section>
 
 <style>
-.section--certifications {
-  background: #f5f6f7; /* light gray like screenshot */
-  padding: 80px 20px;
-  text-align: center;
-}
-
-.certifications-heading {
+/* base */
+#section-{{ section.id }} .certifications-heading{
   font-size: clamp(28px, 4vw, 40px);
   font-weight: 800;
   margin-bottom: 16px;
 }
-
-.certifications-subheading {
+#section-{{ section.id }} .certifications-subheading{
   max-width: 720px;
   margin: 0 auto 40px;
   font-size: 16px;
   line-height: 1.6;
   color: #333;
 }
-
-.certifications-grid {
+#section-{{ section.id }} .certifications-grid{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 32px;
   margin-bottom: 40px;
 }
+@media (max-width: 980px){
+  #section-{{ section.id }}{
+    padding: {{ section.settings.padding_y_mobile }}px {{ section.settings.padding_x_mobile }}px !important;
+  }
+  #section-{{ section.id }} .certifications-grid{
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
 
-.certification-card {
+/* cards */
+#section-{{ section.id }} .certification-card{
   background: #fff;
   border-radius: 10px;
   padding: 16px;
@@ -76,35 +92,30 @@
   flex-direction: column;
   justify-content: space-between;
 }
-
-.certification-image-wrapper {
+#section-{{ section.id }} .certification-image-wrapper{
   border-radius: 8px;
   overflow: hidden;
   display: block;
   margin-bottom: 16px;
 }
-
-.certification-image {
+#section-{{ section.id }} .certification-image{
   width: 100%;
   height: auto;
   display: block;
   object-fit: cover;
 }
-
-.certification-title {
+#section-{{ section.id }} .certification-title{
   font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
   margin: 12px 0 4px;
 }
-
-.certification-desc {
+#section-{{ section.id }} .certification-desc{
   font-size: 14px;
   color: #555;
   margin-bottom: 12px;
 }
-
-.certification-price {
+#section-{{ section.id }} .certification-price{
   font-size: 14px;
   font-weight: 600;
   background: #9c9ba0;
@@ -114,7 +125,8 @@
   display: inline-block;
 }
 
-.certifications-cta .btn.button-yg {
+/* CTA button */
+#section-{{ section.id }} .certifications-cta .btn.button-yg{
   background: #f1f64a;
   color: #141414;
   font-weight: 700;
@@ -140,6 +152,66 @@
       "label": "Subheading",
       "default": "<p>The right credentials don’t just check a box—they open doors. These certifications are career-elevating and purposefully built to give you a competitive edge in today’s fitness industry.</p>"
     },
+
+    /* 1) Heading & subheading alignment */
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading & subheading alignment",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "left"
+    },
+
+    /* 2) Section background & padding (desktop + mobile) */
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#f5f6f7" },
+
+    {
+      "type": "range",
+      "id": "padding_y_desktop",
+      "label": "Desktop padding Y (top & bottom)",
+      "min": 0, "max": 160, "step": 2, "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_x_desktop",
+      "label": "Desktop padding X (left & right)",
+      "min": 0, "max": 80, "step": 2, "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_y_mobile",
+      "label": "Mobile padding Y (top & bottom)",
+      "min": 0, "max": 160, "step": 2, "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_x_mobile",
+      "label": "Mobile padding X (left & right)",
+      "min": 0, "max": 80, "step": 2, "unit": "px",
+      "default": 16
+    },
+
+    /* 3) CTA alignment */
+    {
+      "type": "select",
+      "id": "cta_alignment",
+      "label": "CTA alignment",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "center"
+    },
+
+    /* existing CTA text/link */
     {
       "type": "text",
       "id": "cta_text",
@@ -159,20 +231,11 @@
       "name": "Product",
       "limit": 3,
       "settings": [
-        {
-          "type": "product",
-          "id": "product",
-          "label": "Select product"
-        }
+        { "type": "product", "id": "product", "label": "Select product" }
       ]
     }
   ],
   "max_blocks": 3,
-  "presets": [
-    {
-      "name": "Certifications Grid",
-      "category": "Custom"
-    }
-  ]
+  "presets": [{ "name": "Certifications Grid", "category": "Custom" }]
 }
 {% endschema %}
