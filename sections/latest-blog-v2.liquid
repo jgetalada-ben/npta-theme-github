@@ -3,7 +3,6 @@
   class="section--latest-blog"
   style="background: {{ section.settings.bg_color }};"
 >
-  <div class="latest-blog-container page-width">
     <!-- Header row: heading + subheading grouped -->
     <div class="latest-blog-header">
     {% if section.settings.heading != blank %}
@@ -12,44 +11,45 @@
     {% if section.settings.subheading != blank %}
         <div class="latest-blog-subheading">{{ section.settings.subheading }}</div>
     {% endif %}
-    </div>
+    </div>  
     
-    <div class="latest-blog-left">
-      <!-- Blog list -->
-      <div class="latest-blog-list">
-        {% for block in section.blocks %}
-          {% if block.settings.article != blank %}
-            {% assign article = articles[block.settings.article] %}
-            {% if article %}
-              <a href="{{ article.url }}" class="latest-blog-item" {{ block.shopify_attributes }}>
-                {% if article.image %}
-                  {{ article.image | image_url: width: 80 | image_tag: class: "latest-blog-thumb", alt: article.title }}
+    <div class="latest-blog-container page-width">
+        <div class="latest-blog-left">
+        <!-- Blog list -->
+        <div class="latest-blog-list">
+            {% for block in section.blocks %}
+            {% if block.settings.article != blank %}
+                {% assign article = articles[block.settings.article] %}
+                {% if article %}
+                <a href="{{ article.url }}" class="latest-blog-item" {{ block.shopify_attributes }}>
+                    {% if article.image %}
+                    {{ article.image | image_url: width: 80 | image_tag: class: "latest-blog-thumb", alt: article.title }}
+                    {% endif %}
+                    <span class="latest-blog-title">{{ article.title }}</span>
+                </a>
                 {% endif %}
-                <span class="latest-blog-title">{{ article.title }}</span>
-              </a>
             {% endif %}
-          {% endif %}
-        {% endfor %}
-      </div>
-
-      {% if section.settings.button_text != blank %}
-        <div class="latest-blog-cta">
-          <a href="{{ section.settings.button_link }}" class="btn button-white">
-            {{ section.settings.button_text }}
-          </a>
+            {% endfor %}
         </div>
-      {% endif %}
-    </div>
 
-    {% if section.settings.side_image != blank %}
-      <div class="latest-blog-right">
-        <img
-          src="{{ section.settings.side_image | img_url: '1200x' }}"
-          alt=""
-          class="latest-blog-side-image"
-        >
-      </div>
-    {% endif %}
+        {% if section.settings.button_text != blank %}
+            <div class="latest-blog-cta">
+            <a href="{{ section.settings.button_link }}" class="btn button-white">
+                {{ section.settings.button_text }}
+            </a>
+            </div>
+        {% endif %}
+        </div>
+
+        {% if section.settings.side_image != blank %}
+        <div class="latest-blog-right">
+            <img
+            src="{{ section.settings.side_image | img_url: '1200x' }}"
+            alt=""
+            class="latest-blog-side-image"
+            >
+        </div>
+        {% endif %}
   </div>
 </section>
 
