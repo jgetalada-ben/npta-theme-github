@@ -4,7 +4,7 @@
   style="background: {{ section.settings.bg_color }};"
 >
     <!-- Header row: heading + subheading grouped -->
-    <div class="latest-blog-header">
+    <div class="latest-blog-header page-width">
     {% if section.settings.heading != blank %}
         <h2 class="latest-blog-heading">{{ section.settings.heading }}</h2>
     {% endif %}
@@ -12,7 +12,7 @@
         <div class="latest-blog-subheading">{{ section.settings.subheading }}</div>
     {% endif %}
     </div>  
-    
+
     <div class="latest-blog-container page-width">
         <div class="latest-blog-left">
         <!-- Blog list -->
