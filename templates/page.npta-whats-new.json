@@ -117,6 +117,31 @@
     },
     "certifications_yT3RV9": {
       "type": "certifications",
+      "blocks": {
+        "product_METXgq": {
+          "type": "product",
+          "settings": {
+            "product": "career-kickstarter-bundle-cpt-cnc-ces"
+          }
+        },
+        "product_ittjrY": {
+          "type": "product",
+          "settings": {
+            "product": "wellness-coach-cwc-bogo"
+          }
+        },
+        "product_R9zpTm": {
+          "type": "product",
+          "settings": {
+            "product": "golf-fitness-specialization-ph-gfs-ph"
+          }
+        }
+      },
+      "block_order": [
+        "product_METXgq",
+        "product_ittjrY",
+        "product_R9zpTm"
+      ],
       "name": "Certifications Grid",
       "settings": {
         "heading": "Certifications That Set You Apart",
