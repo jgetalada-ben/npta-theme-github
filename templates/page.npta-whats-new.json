@@ -22,7 +22,7 @@
       "custom_css": [
         ".section--top-banner {background-color: #000000;}",
         ".section--top-banner:before {width: 100%;}",
-        ".section--top-background {width: 100%;}"
+        ".section--top-background {width: 100%; background-position:top;}"
       ],
       "name": "Top Banner",
       "settings": {
