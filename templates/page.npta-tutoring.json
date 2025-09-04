@@ -50,6 +50,7 @@
       "type": "section--header-title-two",
       "custom_css": [
         ".section--title-two {padding-bottom: 0px; padding-left: 5px; margin-bottom: 20px; padding-top: 80px;}",
+        "@media only screen and (max-width: 767px) {.section--title-two {padding-top: 40px; }}",
         ".section--title-block p {font-size: 21px;}"
       ],
       "name": "Header Title",
