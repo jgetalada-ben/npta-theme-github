@@ -37,25 +37,24 @@
 
     <div class="certifications-grid">
       {% for block in section.blocks %}
-        {% if block.settings.product != blank %}
-          {% assign product = all_products[block.settings.product] %}
-          {% if product %}
-            <div class="certification-card" {{ block.shopify_attributes }}>
-              <a href="{{ product.url }}" class="certification-image-wrapper">
-                {{ product.featured_image | image_url: width: 600 | image_tag: class: "certification-image" }}
-              </a>
-              <h3 class="certification-title">{{ product.title }}</h3>
-              {% if product.description != blank %}
-                <p class="certification-desc">{{ product.description | strip_html | truncate: 100 }}</p>
-              {% endif %}
-              <div class="certification-price">
-                {{ product.price | money }}
-              </div>
+        {% assign product = block.settings.product %}
+        {% if product %}
+          <div class="certification-card" {{ block.shopify_attributes }}>
+            <a href="{{ product.url }}" class="certification-image-wrapper">
+              {{ product.featured_image | image_url: width: 600 | image_tag: class: "certification-image", alt: product.title }}
+            </a>
+            <h3 class="certification-title">{{ product.title }}</h3>
+            {% if product.description != blank %}
+              <p class="certification-desc">{{ product.description | strip_html | truncate: 100 }}</p>
+            {% endif %}
+            <div class="certification-price">
+              {{ product.price | money }}
             </div>
-          {% endif %}
+          </div>
         {% endif %}
       {% endfor %}
     </div>
+
 
     {% if section.settings.cta_text != blank %}
       <div class="certifications-cta" style="display: flex; justify-content: {{ section.settings.cta_alignment }};">
