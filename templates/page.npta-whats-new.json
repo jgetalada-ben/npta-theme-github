@@ -22,7 +22,7 @@
       "custom_css": [
         ".section--top-banner {background-color: #000000;}",
         ".section--top-banner:before {width: 100%;}",
-        ".section--top-background {width: 100%; background-position:top;}"
+        ".section--top-background {width: 100%; background-position: top;}"
       ],
       "name": "Top Banner",
       "settings": {
@@ -90,7 +90,7 @@
       "custom_css": [
         ".section--top-banner {background-color: #000000;}",
         ".section--top-banner:before {width: 100%;}",
-        ".section--top-background {width: 100%;}"
+        ".section--top-background {width: 100%; background-position: top;}"
       ],
       "name": "Top Banner",
       "settings": {
@@ -110,7 +110,7 @@
         "title_alignment": "left",
         "container_width": 980,
         "alignment": "center",
-        "banner_height": "95vh",
+        "banner_height": "70vh",
         "top_banner_align_items": "flex-end",
         "show_banner_gradient": false
       }
@@ -213,7 +213,7 @@
       "custom_css": [
         ".section--top-banner {background-color: #000000;}",
         ".section--top-banner:before {width: 100%;}",
-        ".section--top-background {width: 100%;}"
+        ".section--top-background {width: 100%; background-position: top;}"
       ],
       "name": "Top Banner",
       "settings": {
@@ -233,7 +233,7 @@
         "title_alignment": "left",
         "container_width": 980,
         "alignment": "center",
-        "banner_height": "65vh",
+        "banner_height": "50vh",
         "top_banner_align_items": "flex-end",
         "show_banner_gradient": false
       }
