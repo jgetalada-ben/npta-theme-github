@@ -4,17 +4,17 @@
   style="background: {{ section.settings.bg_color }};"
 >
   <div class="latest-blog-container page-width">
+    <!-- Header row: heading + subheading grouped -->
+    <div class="latest-blog-header">
+    {% if section.settings.heading != blank %}
+        <h2 class="latest-blog-heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.subheading != blank %}
+        <div class="latest-blog-subheading">{{ section.settings.subheading }}</div>
+    {% endif %}
+    </div>
+    
     <div class="latest-blog-left">
-      <!-- Header row: heading + subheading grouped -->
-      <div class="latest-blog-header">
-        {% if section.settings.heading != blank %}
-          <h2 class="latest-blog-heading">{{ section.settings.heading }}</h2>
-        {% endif %}
-        {% if section.settings.subheading != blank %}
-          <div class="latest-blog-subheading">{{ section.settings.subheading }}</div>
-        {% endif %}
-      </div>
-
       <!-- Blog list -->
       <div class="latest-blog-list">
         {% for block in section.blocks %}
