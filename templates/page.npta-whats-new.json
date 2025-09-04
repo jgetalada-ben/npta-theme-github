@@ -212,27 +212,8 @@
         "subheading": "<p>Insights, strategies, and real talk to help you grow, lead, and level up your fitness career.</p>",
         "side_image": "shopify://shop_images/blog-feature-img.png",
         "bg_color": "#133257",
-        "image_width_percent": 50,
         "button_text": "View All Blogs",
         "button_link": "/"
-      }
-    },
-    "featured_blog_TbYVpW": {
-      "type": "featured-blog",
-      "name": "t:sections.featured-blog.presets.name",
-      "settings": {
-        "heading": "Blog posts",
-        "heading_size": "h1",
-        "blog": "",
-        "post_limit": 3,
-        "columns_desktop": 3,
-        "color_scheme": "",
-        "show_image": true,
-        "show_date": true,
-        "show_author": false,
-        "show_view_all": true,
-        "padding_top": 36,
-        "padding_bottom": 36
       }
     },
     "section_top_banner_xqKfmc": {
@@ -273,7 +254,6 @@
     "section_top_banner_73ddQa",
     "certifications_yT3RV9",
     "latest_blog_v2_hfncJz",
-    "featured_blog_TbYVpW",
     "section_top_banner_xqKfmc"
   ]
 }
