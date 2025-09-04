@@ -110,7 +110,7 @@
         "title_alignment": "left",
         "container_width": 980,
         "alignment": "center",
-        "banner_height": "95vh",
+        "banner_height": "70vh",
         "top_banner_align_items": "flex-end",
         "show_banner_gradient": false
       }
@@ -233,7 +233,7 @@
         "title_alignment": "left",
         "container_width": 980,
         "alignment": "center",
-        "banner_height": "65vh",
+        "banner_height": "50vh",
         "top_banner_align_items": "flex-end",
         "show_banner_gradient": false
       }
