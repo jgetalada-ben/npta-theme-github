@@ -61,7 +61,8 @@
       <div class="certifications-cta"
            style="text-align: {{ section.settings.cta_alignment }};">
         <a href="{{ section.settings.cta_link }}" class="btn button-yg">
-          {{ section.settings.cta_text }}
+          <span class="btn-label-down">{{ section.settings.cta_text }}</span>
+          <span class="btn-label-down">{{ section.settings.cta_text }}</span>
         </a>
       </div>
     {% endif %}
@@ -139,9 +140,10 @@
   font-weight: 600;
   background: #9c9ba0;
   color: #fff;
-  padding: 6px 14px;
+  padding: 10px 30px;
   border-radius: 20px;
   display: inline-block;
+  width: fit-content;
 }
 
 /* CTA button */
