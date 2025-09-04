@@ -117,31 +117,6 @@
     },
     "certifications_yT3RV9": {
       "type": "certifications",
-      "blocks": {
-        "product_CDa3Gj": {
-          "type": "product",
-          "settings": {
-            "product": "certified-nutrition-coach-cnc"
-          }
-        },
-        "product_fLVyDR": {
-          "type": "product",
-          "settings": {
-            "product": "mindful-stress-management"
-          }
-        },
-        "product_GULrJ7": {
-          "type": "product",
-          "settings": {
-            "product": "kettlebell-instructor-certification"
-          }
-        }
-      },
-      "block_order": [
-        "product_CDa3Gj",
-        "product_fLVyDR",
-        "product_GULrJ7"
-      ],
       "name": "Certifications Grid",
       "settings": {
         "heading": "Certifications That Set You Apart",
