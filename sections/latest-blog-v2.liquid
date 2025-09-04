@@ -33,10 +33,16 @@
       </div>
 
       {% if section.settings.button_text != blank %}
-        <div class="latest-blog-cta">
+        {% comment %} <div class="latest-blog-cta">
           <a href="{{ section.settings.button_link }}" class="btn button-white">
             {{ section.settings.button_text }}
           </a>
+        </div> {% endcomment %}
+        <div class="latest-blog-cta">
+        <a href="{{ section.settings.button_link }}" class="btn button-white">
+          <span class="btn-label-down">{{ section.settings.button_text }}</span>
+          <span class="btn-label-down">{{ section.settings.button_text }}</span>
+        </a>
         </div>
       {% endif %}
     </div>
@@ -117,6 +123,12 @@
 }
 
 /* CTA */
+#section-{{ section.id }} .latest-blog-cta {
+    width:100%;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+}
 #section-{{ section.id }} .latest-blog-cta .button-white{
   background: #fff;
   color: #133257;
