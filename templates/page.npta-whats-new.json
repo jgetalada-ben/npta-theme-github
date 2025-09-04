@@ -47,50 +47,42 @@
         "show_banner_gradient": false
       }
     },
-    "multicolumn_Dh7m48": {
-      "type": "multicolumn",
+    "program_columns_bJNDgF": {
+      "type": "program-columns",
       "blocks": {
-        "column_c8EErh": {
-          "type": "column",
+        "program_jpFzUb": {
+          "type": "program",
           "settings": {
+            "title": "NPTA Apprenticeship Program",
+            "subtitle": "Canada’s most immersive hands-on practicum—and a potential pathway to becoming a Fit Integrated Trainer.",
             "image": "shopify://shop_images/npta-apprenticeship-program-img.png",
-            "title": "<strong>NPTA Apprenticeship Program</strong>",
-            "text": "<p>Canada’s most immersive hands-on practicum—and a potential pathway to becoming a Fit Integrated Trainer.</p>",
-            "link_label": "Register Here",
-            "link": "/"
+            "description": "<p>This 40-hour, in-person practicum gives you hands-on coaching experience with real clients—mentored by expert educators.It bridges the gap between theory and practice and opens the door to future opportunities with Fit Integrated Wellness.</p>",
+            "button_text": "Register Here",
+            "button_link": "/"
           }
         },
-        "column_JKJTgH": {
-          "type": "column",
+        "program_kkcVrF": {
+          "type": "program",
           "settings": {
+            "title": "NPTA Apprenticeship Program",
+            "subtitle": "Personalized support to help you pass, practice, and lead with confidence.",
             "image": "shopify://shop_images/npta-tutoring-program-img.png",
-            "title": "<strong>NPTA Apprenticeship Program</strong>",
-            "text": "<p>Canada’s most immersive hands-on practicum—and a potential pathway to becoming a Fit Integrated Trainer.</p>",
-            "link_label": "Register Here",
-            "link": "/"
+            "description": "<p>Whether you're just starting your certification or deep in your studies,we meet you there.With personalized 1 on 1 or group support rooted in our Apex Model™,  you'll get focused guidance from expert educators. </p><p>This isn’t generic tutoring—it’s career-focused mentorship designed to get you certified and confident.</p>",
+            "button_text": "Register Here",
+            "button_link": "/"
           }
         }
       },
       "block_order": [
-        "column_c8EErh",
-        "column_JKJTgH"
+        "program_jpFzUb",
+        "program_kkcVrF"
       ],
-      "name": "t:sections.multicolumn.presets.name",
+      "name": "Program Columns",
       "settings": {
-        "title": "<strong>Step Ahead. Stay Ahead.</strong>",
-        "heading_size": "h1",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "columns_desktop": 2,
-        "column_alignment": "left",
-        "background_style": "none",
-        "button_label": "",
-        "button_link": "",
-        "color_scheme": "scheme-096fec44-6767-4a8d-8a18-c30494241522",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "heading": "Step Ahead. Stay Ahead.",
+        "subheading": "",
+        "bg_color": "#133257",
+        "columns": 2
       }
     },
     "section_top_banner_73ddQa": {
@@ -250,7 +242,7 @@
   "order": [
     "main",
     "section_top_banner_pEMffK",
-    "multicolumn_Dh7m48",
+    "program_columns_bJNDgF",
     "section_top_banner_73ddQa",
     "certifications_yT3RV9",
     "latest_blog_v2_hfncJz",
