@@ -15,7 +15,7 @@
 
   <div
     class="latest-blog-container page-width"
-    style="--img-w: {{ section.settings.image_width_percent }}%;"
+    style="--img-w: {{ section.settings.image_width_percent }}%; --gap: 40px;"
   >
     <div class="latest-blog-left">
       <!-- Blog list -->
@@ -68,6 +68,8 @@
   grid-template-columns: calc(100% - var(--img-w)) var(--img-w);
   gap: 40px;
   align-items: center;
+  --img-w-safe: min(var(--img-w, 50%), calc(100% - var(--gap, 40px)));
+  grid-template-columns: max(0px, calc(100% - var(--img-w-safe))) var(--img-w-safe);
 }
 
 /* Left column */
