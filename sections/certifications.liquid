@@ -13,11 +13,28 @@
       </h2>
     {% endif %}
 
+    {% assign a = section.settings.heading_alignment %}
     {% if section.settings.subheading != blank %}
-      <div class="certifications-subheading" style="text-align: {{ section.settings.heading_alignment }};">
+    <div
+        class="certifications-subheading"
+        style="
+        max-width: 720px;
+        {% if a == 'center' %}
+            margin: 0 auto 40px;
+            text-align: center;
+        {% elsif a == 'right' %}
+            margin: 0 0 40px auto;  /* push to the right */
+            text-align: right;
+        {% else %}
+            margin: 0 auto 40px 0;  /* push to the left */
+            text-align: left;
+        {% endif %}
+        "
+    >
         {{ section.settings.subheading }}
-      </div>
+    </div>
     {% endif %}
+
 
     <div class="certifications-grid">
       {% for block in section.blocks %}
