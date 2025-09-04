@@ -3,53 +3,56 @@
   class="section--latest-blog"
   style="background: {{ section.settings.bg_color }};"
 >
-    <!-- Header row: heading + subheading grouped -->
-    <div class="latest-blog-header page-width">
+  <!-- Header row: heading + subheading grouped -->
+  <div class="latest-blog-header page-width">
     {% if section.settings.heading != blank %}
-        <h2 class="latest-blog-heading">{{ section.settings.heading }}</h2>
+      <h2 class="latest-blog-heading">{{ section.settings.heading }}</h2>
     {% endif %}
     {% if section.settings.subheading != blank %}
-        <div class="latest-blog-subheading">{{ section.settings.subheading }}</div>
+      <div class="latest-blog-subheading">{{ section.settings.subheading }}</div>
     {% endif %}
-    </div>  
+  </div>
 
-    <div class="latest-blog-container page-width">
-        <div class="latest-blog-left">
-        <!-- Blog list -->
-        <div class="latest-blog-list">
-            {% for block in section.blocks %}
-            {% if block.settings.article != blank %}
-                {% assign article = articles[block.settings.article] %}
-                {% if article %}
-                <a href="{{ article.url }}" class="latest-blog-item" {{ block.shopify_attributes }}>
-                    {% if article.image %}
-                    {{ article.image | image_url: width: 80 | image_tag: class: "latest-blog-thumb", alt: article.title }}
-                    {% endif %}
-                    <span class="latest-blog-title">{{ article.title }}</span>
-                </a>
+  <div
+    class="latest-blog-container page-width"
+    style="--img-w: {{ section.settings.image_width_percent }}%;"
+  >
+    <div class="latest-blog-left">
+      <!-- Blog list -->
+      <div class="latest-blog-list">
+        {% for block in section.blocks %}
+          {% if block.settings.article != blank %}
+            {% assign article = articles[block.settings.article] %}
+            {% if article %}
+              <a href="{{ article.url }}" class="latest-blog-item" {{ block.shopify_attributes }}>
+                {% if article.image %}
+                  {{ article.image | image_url: width: 80 | image_tag: class: "latest-blog-thumb", alt: article.title }}
                 {% endif %}
+                <span class="latest-blog-title">{{ article.title }}</span>
+              </a>
             {% endif %}
-            {% endfor %}
-        </div>
+          {% endif %}
+        {% endfor %}
+      </div>
 
-        {% if section.settings.button_text != blank %}
-            <div class="latest-blog-cta">
-            <a href="{{ section.settings.button_link }}" class="btn button-white">
-                {{ section.settings.button_text }}
-            </a>
-            </div>
-        {% endif %}
+      {% if section.settings.button_text != blank %}
+        <div class="latest-blog-cta">
+          <a href="{{ section.settings.button_link }}" class="btn button-white">
+            {{ section.settings.button_text }}
+          </a>
         </div>
+      {% endif %}
+    </div>
 
-        {% if section.settings.side_image != blank %}
-        <div class="latest-blog-right">
-            <img
-            src="{{ section.settings.side_image | img_url: '1200x' }}"
-            alt=""
-            class="latest-blog-side-image"
-            >
-        </div>
-        {% endif %}
+    {% if section.settings.side_image != blank %}
+      <div class="latest-blog-right">
+        <img
+          src="{{ section.settings.side_image | img_url: '1200x' }}"
+          alt=""
+          class="latest-blog-side-image"
+        >
+      </div>
+    {% endif %}
   </div>
 </section>
 
@@ -59,9 +62,10 @@
   padding: 80px 20px;
   color: #fff;
 }
+/* Desktop grid uses the adjustable image width */
 #section-{{ section.id }} .latest-blog-container{
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: calc(100% - var(--img-w)) var(--img-w);
   gap: 40px;
   align-items: center;
 }
@@ -86,9 +90,7 @@
   max-width: 55%;
 }
 @media (max-width: 980px){
-    #section-{{ section.id }} .latest-blog-subheading{
-        max-width: 100%;
-    }
+  #section-{{ section.id }} .latest-blog-subheading{ max-width: 100%; }
 }
 #section-{{ section.id }} .latest-blog-list{
   display: flex;
@@ -107,11 +109,9 @@
   font-size: 18px;
   line-height: 1.2;
 }
-#section-{{ section.id }} .latest-blog-item:hover{
-  color: #ffffff;
-}
+#section-{{ section.id }} .latest-blog-item:hover{ color: #ffffff; }
 #section-{{ section.id }} .latest-blog-thumb{
-  width: 40px;     /* smaller thumbnail */
+  width: 40px;
   height: 40px;
   border-radius: 8px;
   object-fit: cover;
@@ -135,7 +135,6 @@
 }
 #section-{{ section.id }} .latest-blog-side-image{
   width: 100%;
-  max-width: 720px;          /* prevents it from dominating */
   height: auto;
   border-radius: 10px;
   display: block;
@@ -144,20 +143,19 @@
 
 /* Responsive */
 @media (max-width: 1080px){
+  /* keep some balance on mids even with big image % */
   #section-{{ section.id }} .latest-blog-container{
-    grid-template-columns: 1.1fr .9fr; /* keeps image a bit smaller on mid screens */
     gap: 32px;
+    grid-template-columns: calc(100% - var(--img-w)) var(--img-w);
   }
 }
 @media (max-width: 980px){
   #section-{{ section.id }} .latest-blog-container{
-    grid-template-columns: 1fr;
-    text-align: left; /* keep left alignment like your comps */
+    grid-template-columns: 1fr; /* image goes full width on mobile */
+    text-align: left;
     gap: 28px;
   }
-  #section-{{ section.id }} .latest-blog-right{
-    order: 2; /* keep image after text on mobile */
-  }
+  #section-{{ section.id }} .latest-blog-right{ order: 2; }
 }
 </style>
 
@@ -169,8 +167,7 @@
         "type": "text", 
         "id": "heading", 
         "label": "Heading", 
-        "default": "Latest from the Blog" 
-    },
+        "default": "Latest from the Blog" },
     { 
         "type": "richtext", 
         "id": "subheading", 
@@ -187,6 +184,16 @@
         "id": "bg_color", 
         "label": "Background color", 
         "default": "#133257" 
+    },
+    {
+      "type": "range",
+      "id": "image_width_percent",
+      "label": "Right image column width (%)",
+      "min": 50,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
     },
     { 
         "type": "text", 
@@ -208,10 +215,10 @@
       "settings": [
         { "type": "article", "id": "article", "label": "Select blog article" }
       ],
-      "limit": 3
+      "limit": 5
     }
   ],
-  "max_blocks": 3,
+  "max_blocks": 5,
   "presets": [
     { "name": "Latest Blog v2", "category": "Custom" }
   ]
