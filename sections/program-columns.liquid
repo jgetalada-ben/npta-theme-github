@@ -13,39 +13,38 @@
       <div class="program-columns-subheading">{{ section.settings.subheading }}</div>
     {% endif %}
 
-    <div
-      class="program-columns-grid"
-      style="--cols: {{ section.settings.columns | default: 2 }};"
-    >
-      {% for block in section.blocks %}
+    <div class="program-columns-grid" style="--cols: {{ section.settings.columns | default: 2 }};">
+    {% for block in section.blocks %}
         <div class="program-col" {{ block.shopify_attributes }}>
-          {% if block.settings.title != blank %}
+        <div class="program-col-inner">
+            {% if block.settings.title != blank %}
             <h3 class="program-col-title">{{ block.settings.title }}</h3>
-          {% endif %}
+            {% endif %}
 
-          {% if block.settings.subtitle != blank %}
+            {% if block.settings.subtitle != blank %}
             <div class="program-col-subtitle">{{ block.settings.subtitle }}</div>
-          {% endif %}
+            {% endif %}
 
-          {% if block.settings.image != blank %}
+            {% if block.settings.image != blank %}
             <div class="program-col-image">
-              <img src="{{ block.settings.image | img_url: '600x' }}" alt="{{ block.settings.title }}">
+                <img src="{{ block.settings.image | img_url: '600x' }}" alt="{{ block.settings.title }}">
             </div>
-          {% endif %}
+            {% endif %}
 
-          {% if block.settings.description != blank %}
+            {% if block.settings.description != blank %}
             <div class="program-col-description">{{ block.settings.description }}</div>
-          {% endif %}
+            {% endif %}
 
-          {% if block.settings.button_text != blank %}
+            {% if block.settings.button_text != blank %}
             <div class="program-col-cta">
-              <a href="{{ block.settings.button_link }}" class="btn program-btn">
+                <a href="{{ block.settings.button_link }}" class="btn program-btn">
                 {{ block.settings.button_text }}
-              </a>
+                </a>
             </div>
-          {% endif %}
+            {% endif %}
         </div>
-      {% endfor %}
+        </div>
+    {% endfor %}
     </div>
   </div>
 </section>
