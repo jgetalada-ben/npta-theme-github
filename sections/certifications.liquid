@@ -58,12 +58,6 @@
     </div>
 
     {% if section.settings.cta_text != blank %}
-      {% comment %} <div class="certifications-cta"
-           style="text-align: {{ section.settings.cta_alignment }};">
-        <a href="{{ section.settings.cta_link }}" class="btn button-yg">
-          {{ section.settings.cta_text }}
-        </a>
-      </div> {% endcomment %}
       <div class="certifications-cta" style="display: flex; justify-content: {{ section.settings.cta_alignment }};">
         <a href="{{ section.settings.cta_link }}" class="btn button-yg">
           <span class="btn-label-down">{{ section.settings.cta_text }}</span>
@@ -158,14 +152,6 @@
   justify-content:center;
   flex-wrap:wrap;
 }
-{% comment %} #section-{{ section.id }} .certifications-cta .btn.button-yg{
-  background: #f1f64a;
-  color: #141414;
-  font-weight: 700;
-  border-radius: 12px;
-  padding: 14px 20px;
-  display: inline-block;
-} {% endcomment %}
 </style>
 
 {% schema %}
