@@ -165,6 +165,43 @@
         "cta_link": "shopify://collections/all"
       }
     },
+    "latest_blog_v2_hfncJz": {
+      "type": "latest-blog-v2",
+      "blocks": {
+        "blog_post_4dHXQb": {
+          "type": "blog_post",
+          "settings": {
+            "article": "npta-blogs/muscular-development-hypertrophy"
+          }
+        },
+        "blog_post_rgFVDK": {
+          "type": "blog_post",
+          "settings": {
+            "article": "npta-blogs/nasm-specialization-fitness-certifications"
+          }
+        },
+        "blog_post_nggJtq": {
+          "type": "blog_post",
+          "settings": {
+            "article": "npta-blogs/strength-endurance"
+          }
+        }
+      },
+      "block_order": [
+        "blog_post_4dHXQb",
+        "blog_post_rgFVDK",
+        "blog_post_nggJtq"
+      ],
+      "name": "Latest Blog v2",
+      "settings": {
+        "heading": "Latest from the Blog",
+        "subheading": "<p>Insights, strategies, and real talk to help you grow, lead, and level up your fitness career.</p>",
+        "side_image": "shopify://shop_images/blog-feature-img.png",
+        "bg_color": "#133257",
+        "button_text": "View All Blogs",
+        "button_link": "/"
+      }
+    },
     "featured_blog_TbYVpW": {
       "type": "featured-blog",
       "name": "t:sections.featured-blog.presets.name",
@@ -220,6 +257,7 @@
     "multicolumn_Dh7m48",
     "section_top_banner_73ddQa",
     "certifications_yT3RV9",
+    "latest_blog_v2_hfncJz",
     "featured_blog_TbYVpW",
     "section_top_banner_xqKfmc"
   ]
