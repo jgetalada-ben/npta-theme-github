@@ -123,47 +123,6 @@
         "show_banner_gradient": false
       }
     },
-    "featured_programs_AePGCh": {
-      "type": "featured_programs",
-      "name": "Fitness Program Sections",
-      "settings": {
-        "section_id": "certified-trainers",
-        "background_color": "#ffffff",
-        "discount_text_1": "UP TO 50% OFF",
-        "title_1": "CERTIFICATIONS",
-        "description_1": "Short description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "button_link_1": "",
-        "button_text_1": "CHOOSE MY PROGRAM",
-        "is_visible_1": true,
-        "discount_text_2": "UP TO 50% OFF",
-        "title_2": "CERTIFICATIONS",
-        "description_2": "Short description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "button_link_2": "",
-        "button_text_2": "CHOOSE MY PROGRAM",
-        "is_visible_2": true,
-        "discount_text_3": "UP TO 50% OFF",
-        "title_3": "CERTIFICATIONS",
-        "description_3": "Short description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "button_link_3": "",
-        "button_text_3": "CHOOSE MY PROGRAM",
-        "is_visible_3": true,
-        "discount_text_4": "UP TO 50% OFF",
-        "title_4": "CERTIFICATIONS",
-        "description_4": "Short description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "button_link_4": "",
-        "button_text_4": "CHOOSE MY PROGRAM",
-        "is_visible_4": true,
-        "section_title": "Lorem ipsum dolor sit amet",
-        "section_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>",
-        "title_alignment": "left",
-        "container_width": 980,
-        "alignment": "center",
-        "show_program_button": true,
-        "button_text": "Button",
-        "program_button_link": "/",
-        "section_footer_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
-      }
-    },
     "certifications_yT3RV9": {
       "type": "certifications",
       "blocks": {
@@ -260,7 +219,6 @@
     "section_top_banner_pEMffK",
     "multicolumn_Dh7m48",
     "section_top_banner_73ddQa",
-    "featured_programs_AePGCh",
     "certifications_yT3RV9",
     "featured_blog_TbYVpW",
     "section_top_banner_xqKfmc"
