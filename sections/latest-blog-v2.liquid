@@ -33,11 +33,6 @@
       </div>
 
       {% if section.settings.button_text != blank %}
-        {% comment %} <div class="latest-blog-cta">
-          <a href="{{ section.settings.button_link }}" class="btn button-white">
-            {{ section.settings.button_text }}
-          </a>
-        </div> {% endcomment %}
         <div class="latest-blog-cta">
         <a href="{{ section.settings.button_link }}" class="btn button-w">
           <span class="btn-label-down">{{ section.settings.button_text }}</span>
@@ -126,7 +121,7 @@
 #section-{{ section.id }} .latest-blog-cta {
     width:100%;
     display:flex;
-    justify-content:center;
+    justify-content:flex-start;
     flex-wrap:wrap;
 }
 #section-{{ section.id }} .latest-blog-cta .button-white{
