@@ -66,6 +66,7 @@
     },
     "section_blurb_tutoring_43xBGi": {
       "type": "section--blurb-tutoring",
+      "disabled": true,
       "custom_css": [
         ".blurb-content-right-column {height: 100%;}",
         ".title-block--desc ul li {margin-bottom: 20px;}",
