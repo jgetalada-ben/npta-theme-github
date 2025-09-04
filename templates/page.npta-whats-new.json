@@ -195,6 +195,13 @@
       "settings": {
         "heading": "Certifications That Set You Apart",
         "subheading": "<p>The right credentials don’t just check a box—they open doors. These certifications are career-elevating and purposefully built to give you a competitive edge in today’s fitness industry.</p>",
+        "heading_alignment": "right",
+        "bg_color": "#f5f6f7",
+        "padding_y_desktop": 80,
+        "padding_x_desktop": 20,
+        "padding_y_mobile": 60,
+        "padding_x_mobile": 16,
+        "cta_alignment": "center",
         "cta_text": "Explore All Courses",
         "cta_link": "shopify://collections/all"
       }
