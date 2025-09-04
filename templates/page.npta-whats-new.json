@@ -130,17 +130,17 @@
             "product": "certified-personal-trainer-cpt-ph"
           }
         },
-        "product_XxUb4D": {
+        "product_GULrJ7": {
           "type": "product",
           "settings": {
-            "product": "certified-personal-trainer-cpt"
+            "product": "kettlebell-instructor-certification"
           }
         }
       },
       "block_order": [
         "product_CDa3Gj",
         "product_fLVyDR",
-        "product_XxUb4D"
+        "product_GULrJ7"
       ],
       "name": "Certifications Grid",
       "settings": {
