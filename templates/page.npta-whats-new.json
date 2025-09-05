@@ -119,29 +119,15 @@
     "certifications_yT3RV9": {
       "type": "certifications",
       "blocks": {
-        "product_XGQWVN": {
+        "product_qExkK4": {
           "type": "product",
           "settings": {
-            "product": "mindful-stress-management"
-          }
-        },
-        "product_VVmzHY": {
-          "type": "product",
-          "settings": {
-            "product": "cpt-essentials-cpt-cpr"
-          }
-        },
-        "product_Vxcjdc": {
-          "type": "product",
-          "settings": {
-            "product": "behavior-change-specialization-bcs"
+            "product": "recertify-for-life"
           }
         }
       },
       "block_order": [
-        "product_XGQWVN",
-        "product_VVmzHY",
-        "product_Vxcjdc"
+        "product_qExkK4"
       ],
       "name": "Certifications Grid",
       "settings": {
