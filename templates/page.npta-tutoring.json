@@ -68,22 +68,28 @@
     },
     "section_blurb_tutoring_LKrJKg": {
       "type": "section--blurb-tutoring",
+      "custom_css": [
+        ".blurb-content-right-column {height: 100%;}",
+        ".title-block--desc ul li {margin-bottom: 20px;}",
+        ".section--hero-buttons {margin-top: 30px;}"
+      ],
       "name": "Tutoring blurb",
       "settings": {
-        "title": "BECOME AN AFFILIATE",
-        "description": "<p>Earn commissions by signing up your followers, friends and colleagues for any of our programs. Inspire others to begin their own careers in the fitness and wellness industry and put some extra money in your pocket!</p>",
-        "button_text": "JOIN TODAY",
+        "title": "",
+        "description": "<p><strong>The NPTA Tutoring Program</strong> bridges the gap between where you are and who you’re becoming, meeting you at any stage of your certification journey.<br/><br/>Rooted in our Apex Model™, the program adapts to your learning style with personalized 1:1 or group support. Learn from experienced Master Trainers and educators to master the material, stay motivated, and build the confidence to pass, coach, and lead.<br/><br/></p><h3><br/>NPTA Tutoring helps you:</h3><ul><li>Master NASM and NCSF materials with clarity</li><li>Gain practical knowledge and lasting confidence</li><li>Accelerate your progress with structured guidance</li><li>Step fully into your role as a trusted fitness professional<br/></li></ul><p><em>This isn’t generic tutoring—it’s elite mentorship built for where you're headed.</em></p>",
+        "button_text": "Start Today",
         "video_url": "",
-        "enable_custom_image_height": false,
+        "image": "shopify://shop_images/npta-tutoring-img.png",
+        "enable_custom_image_height": true,
         "image_height": 480,
         "image_height_unit": "px",
         "image_object_fit": "contain",
         "image_object_position": "center center",
         "button_link": "/",
-        "top_padding": 92,
-        "bottom_padding": 92,
-        "container_width": 980,
-        "blurb_items_alignment": "center"
+        "top_padding": 0,
+        "bottom_padding": 0,
+        "container_width": 1260,
+        "blurb_items_alignment": "flex-start"
       }
     },
     "section_blurb_tutoring_43xBGi": {
