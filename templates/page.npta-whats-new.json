@@ -119,29 +119,29 @@
     "certifications_yT3RV9": {
       "type": "certifications",
       "blocks": {
-        "product_METXgq": {
+        "product_XGQWVN": {
           "type": "product",
           "settings": {
-            "product": "group-personal-trainer-gpts"
+            "product": "advanced-nutrition-coaching-bundle-cnc-bcs"
           }
         },
-        "product_ittjrY": {
+        "product_VVmzHY": {
           "type": "product",
           "settings": {
-            "product": "sports-nutrition-coach-csnc"
+            "product": "apprenticeship-program"
           }
         },
-        "product_R9zpTm": {
+        "product_Vxcjdc": {
           "type": "product",
           "settings": {
-            "product": "cpr-aed-certification-cpr"
+            "product": "behavior-change-specialization-bcs"
           }
         }
       },
       "block_order": [
-        "product_METXgq",
-        "product_ittjrY",
-        "product_R9zpTm"
+        "product_XGQWVN",
+        "product_VVmzHY",
+        "product_Vxcjdc"
       ],
       "name": "Certifications Grid",
       "settings": {
