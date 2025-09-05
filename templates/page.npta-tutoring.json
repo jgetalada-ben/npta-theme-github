@@ -49,21 +49,21 @@
     "section_header_title_two_jKTfQ3": {
       "type": "section--header-title-two",
       "custom_css": [
-        ".section--title-two {padding-bottom: 0px; padding-left: 5px; margin-bottom: 20px; padding-top: 80px;}",
+        "r.section--title-two {padding-bottom: 0px; padding-left: 5px; margin-bottom: 20px; padding-top: 80px;}",
         "@media only screen and (max-width: 767px) {.section--title-two {padding-top: 40px; }}",
         ".section--title-block p {font-size: 21px;}",
-        "@media (min-width: 1081px) {.section--title-container.page-container {max-width: 1400px !important; } .section--title-block {justify-content: start; }}"
+        "@media (min-width: 1081px) {.section--title-container.page-container {max-width: 1400px !important; margin: 0 !important; }}"
       ],
       "name": "Header Title",
       "settings": {
         "background_color": "#ffffff",
         "section_id": "certified-trainers",
-        "section_title": "Lorem ipsum dolor sit amet",
-        "section_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>",
+        "section_title": "The NPTA Tutoring Program",
+        "section_description": "<p>Where You Are Is Just the Beginning — We’ll Help You Go Further</p>",
         "title_alignment": "left",
         "container_width": 980,
         "title_color": "#242833",
-        "alignment": "center"
+        "alignment": "flex-start"
       }
     },
     "section_header_title_two_Gt9mm9": {
