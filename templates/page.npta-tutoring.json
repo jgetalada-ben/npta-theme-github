@@ -70,8 +70,7 @@
       "custom_css": [
         ".blurb-content-right-column {height: 100%;}",
         ".title-block--desc ul li {margin-bottom: 20px;}",
-        ".section--hero-buttons {margin-top: 30px;}",
-        "@media (max-width: 980px) {.blurb-content-container .blurb-content-right-column{margin-top: 30px; }}"
+        ".section--hero-buttons {margin-top: 30px;}"
       ],
       "name": "Tutoring blurb",
       "settings": {
