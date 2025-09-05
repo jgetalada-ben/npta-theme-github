@@ -124,10 +124,24 @@
           "settings": {
             "product": "recertify-for-life"
           }
+        },
+        "product_hgA6LA": {
+          "type": "product",
+          "settings": {
+            "product": "mindful-stress-management"
+          }
+        },
+        "product_tjDbRH": {
+          "type": "product",
+          "settings": {
+            "product": "weight-loss-specialization-wls"
+          }
         }
       },
       "block_order": [
-        "product_qExkK4"
+        "product_qExkK4",
+        "product_hgA6LA",
+        "product_tjDbRH"
       ],
       "name": "Certifications Grid",
       "settings": {
