@@ -66,6 +66,26 @@
         "alignment": "flex-start"
       }
     },
+    "section_blurb_tutoring_LKrJKg": {
+      "type": "section--blurb-tutoring",
+      "name": "Tutoring blurb",
+      "settings": {
+        "title": "BECOME AN AFFILIATE",
+        "description": "<p>Earn commissions by signing up your followers, friends and colleagues for any of our programs. Inspire others to begin their own careers in the fitness and wellness industry and put some extra money in your pocket!</p>",
+        "button_text": "JOIN TODAY",
+        "video_url": "",
+        "enable_custom_image_height": false,
+        "image_height": 480,
+        "image_height_unit": "px",
+        "image_object_fit": "contain",
+        "image_object_position": "center center",
+        "button_link": "/",
+        "top_padding": 92,
+        "bottom_padding": 92,
+        "container_width": 980,
+        "blurb_items_alignment": "center"
+      }
+    },
     "section_blurb_tutoring_43xBGi": {
       "type": "section--blurb-tutoring",
       "custom_css": [
@@ -578,6 +598,7 @@
     "main",
     "section_top_banner_hJLdAL",
     "section_header_title_two_jKTfQ3",
+    "section_blurb_tutoring_LKrJKg",
     "section_blurb_tutoring_43xBGi",
     "section_process_tutoring_4WrKRU",
     "section_banner_one_nBmk3F",
