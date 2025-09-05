@@ -1,1 +1,224 @@
-{"sections":{"main":{"type":"main-page","disabled":true,"settings":{"padding_top":28,"padding_bottom":28}},"section_top_banner_hJLdAL":{"type":"section--top-banner","custom_css":[".section--top-banner {background-position: center top; background-repeat: no-repeat; background-size: cover;}"],"settings":{"background_image":"shopify:\/\/shop_images\/G_I_18.jpg","title":"ABOUT NPTA","subtitle":"Learn how NPTA empowers the next generation of fitness and health professionals.","button_link":"shopify:\/\/collections\/all","button_text":"GET CERTIFIED","show_button_1":false,"button_1_text":"Button","button_1_link":"\/","show_button_2":false,"button_2_text":"Button","button_2_link":"\/","button_position":"left","title_alignment":"left","container_width":520,"alignment":"flex-start"}},"section_breadcrumb_eFj6di":{"type":"section--breadcrumb","settings":{"background_color":"#ffffff","enable_breadcrumbs":true,"breadcrumbs_home_label":"Home","breadcrumbs_separator":"|"}},"section_text_highlight_gBAbEw":{"type":"section--text-highlight","settings":{"section_id":"section-id","section_description":"<p>Our mission is to <strong>empower<\/strong> you to turn your fitness <strong>passion<\/strong> into a <strong>rewarding career<\/strong> with top-tier education, mentorship, and support.<\/p>"}},"section_text_image_g3MAiQ":{"type":"section--text-image","settings":{"section_id":"section-id","heading":"WHO WE ARE","description":"<p>National Personal Training Academy (NPTA) is Canada’s top choice for fitness education.<\/p><p>A proud official distribution partner of NASM. Since 2018, we’ve offered affordable NASM certifications and specializations, bridging theory with real-world application. <\/p><p>Our mission is to transform your fitness passion into a rewarding career through exceptional education, hands-on training, and dedicated support. With our high standards and expert mentorship, we equip students to become successful certified personal trainers. Join NPTA to elevate your career and make a significant impact in the fitness industry.<\/p>","image":"shopify:\/\/shop_images\/group-of-nasm-trainers-on-beach.jpg","show_buttons":false,"primary_button_text":"","primary_button_link":"","secondary_button_text":""}},"section_quote_text_VH7Afh":{"type":"section--quote-text","custom_css":[".quote-text--column-right {display: flex; align-items: center;}"],"settings":{"section_id":"certified-trainers","heading":"Fast-Track Your Fitness Career with Jesse Benson","description":"Jesse Benson, CEO of the National Personal Training Academy (NPTA), is a trailblazer in the fitness industry, embodying the pinnacle of excellence and leadership. As a NASM Certified Fitness Educator and a top-ranked fitness trainer in Canada, Jesse has established himself as a transformative force, leading numerous award-winning fitness facilities across the nation. His legacy is not just in building successful businesses but in shaping the future of fitness through education, mentorship, and community empowerment.<br><br>\n\nAt NPTA, Jesse's vision is to inspire and equip the next generation of fitness professionals with the tools, knowledge, and confidence to excel. Students are given exclusive access to his wealth of expertise, drawn from years of hands-on experience and success in the industry. His dedication goes beyond education—he offers a path forward for those eager to rise, challenge themselves, and make a lasting impact.\n<br><br>\nJesse Benson is not just a mentor but a catalyst for growth, inspiring students to unlock their full potential. For those who are ready to lead, innovate, and excel, Jesse’s guidance will be the key to unlocking endless possibilities in the fitness world.","button_text":"Schedule A MENTORSHIP CALL","button_link":"https:\/\/jessebenson.ca\/#book-a-call","image":"shopify:\/\/shop_images\/Jesse_FitIn30_Branding_ItemsToBeRemoved_004-2_fecd30db-a988-48f6-8957-b38a512bb7a5.png"}},"section_mission_vision_LzLbEt":{"type":"section--mission-vision","custom_css":["@media (min-width: 981px) {.horizontal--divider {margin: 50px 0; }}"],"settings":{"mission_title":"OUR MISSION","mission_description":"At NPTA, our mission is to revolutionize the fitness industry through innovative education, fostering a supportive community, and empowering individuals to achieve their highest potential. We are committed to delivering cutting-edge learning platforms that blend the latest advancements in health and wellness with a strong emphasis on community and collaboration. By cultivating a nurturing environment and providing exceptional resources, we enable our students to transform their careers, inspire others, and lead the future of fitness with confidence and competence.","vision_title":"OUR VISION","vision_description":"Our vision for the National Personal Training Academy is to become Canada’s leading personal training academy, dedicated to empowering fitness professionals with unparalleled resources and opportunities for growth and excellence."}},"section_three_column_87RzJe":{"type":"section--three-column","blocks":{"card_D9cFzW":{"type":"card","settings":{"title":"Innovation","description":"Continuously advancing fitness education with groundbreaking methods and curriculum."}},"card_aGEftd":{"type":"card","settings":{"title":"Community","description":"Building a strong network of students, trainers, and clients through proactive support, collaboration, and shared success."}},"card_rjkirH":{"type":"card","settings":{"title":"Empowerment","description":"Providing comprehensive resources, mentorship, and guidance to equip our students with the skills, confidence, and leadership qualities needed to excel."}}},"block_order":["card_D9cFzW","card_aGEftd","card_rjkirH"],"settings":{"section_id":"certified-trainers","background_color":"#f7f8fa","section_title":"Core Values of NPTA","section_description":"","title_alignment":"center","container_width":980,"alignment":"center"}},"section_logo_carousel_t9PTHx":{"type":"section--logo-carousel","blocks":{"logo_jdTEpK":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/logo-carousel-placeholder-1.png"}},"logo_6DLTX7":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/logo-carousel-place-holder-3.png"}},"logo_9nAJxm":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/logo-carousel-place-holder-2.png"}},"logo_89zi8a":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/logo-carousel-placeholder-1.png"}},"logo_U6x4mq":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/logo-carousel-place-holder-3.png"}},"logo_dMbFUR":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/logo-carousel-place-holder-2.png"}}},"block_order":["logo_jdTEpK","logo_6DLTX7","logo_9nAJxm","logo_89zi8a","logo_U6x4mq","logo_dMbFUR"],"settings":{"top_padding":92,"bottom_padding":92,"container_width":980}},"section_text_form_jeQTRd":{"type":"section--text-form","disabled":true,"settings":{"section_id":"section-id","top_padding":0,"bottom_padding":92,"section_title":"Why NPTA?","section_description":"<p><strong>Get Certified and Get Ahead:<br\/><\/strong> Our comprehensive NASM certification programs will equip you with cutting-edge knowledge and skills, setting you apart in a competitive industry.<\/p><p><strong>Real-World Experience:<br\/><\/strong> Dive into our hands-on apprenticeship program, gaining invaluable experience and mentorship from fitness industry leaders like Jesse Benson, so you're ready to make an impact from day one.<\/p><p><strong>Accelerate Your Career Growth:<br\/><\/strong> Whether you're just starting or leveling up, our affiliate and apprenticeship programs offer unparalleled opportunities for professional development and maximizing your earning potential.<\/p><p><strong>Join a Vibrant Community:<br\/><\/strong>Be part of a supportive, collaborative network that celebrates your achievements and fosters an environment of continuous learning and success.<\/p>","webhook_url":"https:\/\/hooks.zapier.com\/hooks\/catch\/xxxxxx\/"}}},"order":["main","section_top_banner_hJLdAL","section_breadcrumb_eFj6di","section_text_highlight_gBAbEw","section_text_image_g3MAiQ","section_quote_text_VH7Afh","section_mission_vision_LzLbEt","section_three_column_87RzJe","section_logo_carousel_t9PTHx","section_text_form_jeQTRd"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "section_top_banner_hJLdAL": {
+      "type": "section--top-banner",
+      "custom_css": [
+        ".section--top-banner {background-position: center top; background-repeat: no-repeat; background-size: cover;}"
+      ],
+      "settings": {
+        "background_image": "shopify://shop_images/G_I_18.jpg",
+        "title": "ABOUT NPTA",
+        "subtitle": "Learn how NPTA empowers the next generation of fitness and health professionals.",
+        "desc1": "",
+        "button_link": "shopify://collections/all",
+        "button_text": "GET CERTIFIED",
+        "show_button_1": false,
+        "button_1_text": "Button",
+        "button_1_link": "/",
+        "show_button_2": false,
+        "button_2_text": "Button",
+        "button_2_link": "/",
+        "button_position": "left",
+        "title_alignment": "left",
+        "container_width": 520,
+        "alignment": "flex-start"
+      }
+    },
+    "section_breadcrumb_eFj6di": {
+      "type": "section--breadcrumb",
+      "settings": {
+        "background_color": "#ffffff",
+        "enable_breadcrumbs": true,
+        "breadcrumbs_home_label": "Home",
+        "breadcrumbs_separator": "|"
+      }
+    },
+    "section_text_highlight_gBAbEw": {
+      "type": "section--text-highlight",
+      "settings": {
+        "section_id": "section-id",
+        "section_description": "<p>Our mission is to <strong>empower</strong> you to turn your fitness <strong>passion</strong> into a <strong>rewarding career</strong> with top-tier education, mentorship, and support.</p>"
+      }
+    },
+    "section_text_image_g3MAiQ": {
+      "type": "section--text-image",
+      "settings": {
+        "section_id": "section-id",
+        "heading": "WHO WE ARE",
+        "description": "<p>National Personal Training Academy (NPTA) is Canada’s top choice for fitness education.</p><p>A proud official distribution partner of NASM. Since 2018, we’ve offered affordable NASM certifications and specializations, bridging theory with real-world application. </p><p>Our mission is to transform your fitness passion into a rewarding career through exceptional education, hands-on training, and dedicated support. With our high standards and expert mentorship, we equip students to become successful certified personal trainers. Join NPTA to elevate your career and make a significant impact in the fitness industry.</p>",
+        "image": "shopify://shop_images/group-of-nasm-trainers-on-beach.jpg",
+        "show_buttons": false,
+        "primary_button_text": "",
+        "primary_button_link": "",
+        "secondary_button_text": ""
+      }
+    },
+    "section_quote_text_VH7Afh": {
+      "type": "section--quote-text",
+      "custom_css": [
+        ".quote-text--column-right {display: flex; align-items: center;}"
+      ],
+      "settings": {
+        "section_id": "certified-trainers",
+        "heading": "Fast-Track Your Fitness Career with Jesse Benson",
+        "description": "Jesse Benson, CEO of the National Personal Training Academy (NPTA), is a trailblazer in the fitness industry, embodying the pinnacle of excellence and leadership. As a NASM Certified Fitness Educator and a top-ranked fitness trainer in Canada, Jesse has established himself as a transformative force, leading numerous award-winning fitness facilities across the nation. His legacy is not just in building successful businesses but in shaping the future of fitness through education, mentorship, and community empowerment.<br><br>\n\nAt NPTA, Jesse's vision is to inspire and equip the next generation of fitness professionals with the tools, knowledge, and confidence to excel. Students are given exclusive access to his wealth of expertise, drawn from years of hands-on experience and success in the industry. His dedication goes beyond education—he offers a path forward for those eager to rise, challenge themselves, and make a lasting impact.\n<br><br>\nJesse Benson is not just a mentor but a catalyst for growth, inspiring students to unlock their full potential. For those who are ready to lead, innovate, and excel, Jesse’s guidance will be the key to unlocking endless possibilities in the fitness world.",
+        "button_text": "Schedule A MENTORSHIP CALL",
+        "button_link": "https://jessebenson.ca/#book-a-call",
+        "image": "shopify://shop_images/Jesse_FitIn30_Branding_ItemsToBeRemoved_004-2_fecd30db-a988-48f6-8957-b38a512bb7a5.png"
+      }
+    },
+    "section_mission_vision_LzLbEt": {
+      "type": "section--mission-vision",
+      "custom_css": [
+        "@media (min-width: 981px) {.horizontal--divider {margin: 50px 0; }}"
+      ],
+      "settings": {
+        "mission_title": "OUR MISSION",
+        "mission_description": "At NPTA, our mission is to revolutionize the fitness industry through innovative education, fostering a supportive community, and empowering individuals to achieve their highest potential. We are committed to delivering cutting-edge learning platforms that blend the latest advancements in health and wellness with a strong emphasis on community and collaboration. By cultivating a nurturing environment and providing exceptional resources, we enable our students to transform their careers, inspire others, and lead the future of fitness with confidence and competence.",
+        "vision_title": "OUR VISION",
+        "vision_description": "Our vision for the National Personal Training Academy is to become Canada’s leading personal training academy, dedicated to empowering fitness professionals with unparalleled resources and opportunities for growth and excellence."
+      }
+    },
+    "section_three_column_87RzJe": {
+      "type": "section--three-column",
+      "blocks": {
+        "card_D9cFzW": {
+          "type": "card",
+          "settings": {
+            "title": "Innovation",
+            "description": "Continuously advancing fitness education with groundbreaking methods and curriculum.",
+            "title2": ""
+          }
+        },
+        "card_aGEftd": {
+          "type": "card",
+          "settings": {
+            "title": "Community",
+            "description": "Building a strong network of students, trainers, and clients through proactive support, collaboration, and shared success.",
+            "title2": ""
+          }
+        },
+        "card_rjkirH": {
+          "type": "card",
+          "settings": {
+            "title": "Empowerment",
+            "description": "Providing comprehensive resources, mentorship, and guidance to equip our students with the skills, confidence, and leadership qualities needed to excel.",
+            "title2": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_D9cFzW",
+        "card_aGEftd",
+        "card_rjkirH"
+      ],
+      "settings": {
+        "section_id": "certified-trainers",
+        "background_color": "#f7f8fa",
+        "section_title": "Core Values of NPTA",
+        "section_title2": "",
+        "section_description": "",
+        "button_1_link": "",
+        "button_1_text": "CHOOSE MY PROGRAM",
+        "title_alignment": "center",
+        "container_width": 980,
+        "alignment": "center"
+      }
+    },
+    "section_logo_carousel_t9PTHx": {
+      "type": "section--logo-carousel",
+      "blocks": {
+        "logo_jdTEpK": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/logo-carousel-placeholder-1.png"
+          }
+        },
+        "logo_6DLTX7": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/logo-carousel-place-holder-3.png"
+          }
+        },
+        "logo_9nAJxm": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/logo-carousel-place-holder-2.png"
+          }
+        },
+        "logo_89zi8a": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/logo-carousel-placeholder-1.png"
+          }
+        },
+        "logo_U6x4mq": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/logo-carousel-place-holder-3.png"
+          }
+        },
+        "logo_dMbFUR": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/logo-carousel-place-holder-2.png"
+          }
+        }
+      },
+      "block_order": [
+        "logo_jdTEpK",
+        "logo_6DLTX7",
+        "logo_9nAJxm",
+        "logo_89zi8a",
+        "logo_U6x4mq",
+        "logo_dMbFUR"
+      ],
+      "settings": {
+        "top_padding": 92,
+        "bottom_padding": 92,
+        "container_width": 980
+      }
+    },
+    "section_text_form_jeQTRd": {
+      "type": "section--text-form",
+      "disabled": true,
+      "settings": {
+        "section_id": "section-id",
+        "top_padding": 0,
+        "bottom_padding": 92,
+        "section_title": "Why NPTA?",
+        "section_description": "<p><strong>Get Certified and Get Ahead:<br/></strong> Our comprehensive NASM certification programs will equip you with cutting-edge knowledge and skills, setting you apart in a competitive industry.</p><p><strong>Real-World Experience:<br/></strong> Dive into our hands-on apprenticeship program, gaining invaluable experience and mentorship from fitness industry leaders like Jesse Benson, so you're ready to make an impact from day one.</p><p><strong>Accelerate Your Career Growth:<br/></strong> Whether you're just starting or leveling up, our affiliate and apprenticeship programs offer unparalleled opportunities for professional development and maximizing your earning potential.</p><p><strong>Join a Vibrant Community:<br/></strong>Be part of a supportive, collaborative network that celebrates your achievements and fosters an environment of continuous learning and success.</p>",
+        "webhook_url": "https://hooks.zapier.com/hooks/catch/xxxxxx/"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section_top_banner_hJLdAL",
+    "section_breadcrumb_eFj6di",
+    "section_text_highlight_gBAbEw",
+    "section_text_image_g3MAiQ",
+    "section_quote_text_VH7Afh",
+    "section_mission_vision_LzLbEt",
+    "section_three_column_87RzJe",
+    "section_logo_carousel_t9PTHx",
+    "section_text_form_jeQTRd"
+  ]
+}
