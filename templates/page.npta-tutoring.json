@@ -46,8 +46,13 @@
         "show_banner_gradient": false
       }
     },
-    "section_header_title_zHTHak": {
-      "type": "section--header-title",
+    "section_header_title_two_jKTfQ3": {
+      "type": "section--header-title-two",
+      "custom_css": [
+        ".section--title-two {padding-bottom: 0px; padding-left: 5px; margin-bottom: 20px; padding-top: 80px;}",
+        "@media only screen and (max-width: 767px) {.section--title-two {padding-top: 40px; }}",
+        ".section--title-block p {font-size: 21px;}"
+      ],
       "name": "Header Title",
       "settings": {
         "background_color": "#ffffff",
@@ -56,6 +61,7 @@
         "section_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>",
         "title_alignment": "left",
         "container_width": 960,
+        "title_color": "#133257",
         "alignment": "center"
       }
     },
@@ -589,7 +595,7 @@
   "order": [
     "main",
     "section_top_banner_hJLdAL",
-    "section_header_title_zHTHak",
+    "section_header_title_two_jKTfQ3",
     "section_header_title_two_Gt9mm9",
     "section_blurb_tutoring_43xBGi",
     "section_process_tutoring_4WrKRU",
