@@ -1,0 +1,271 @@
+<section
+  id="section-{{ section.id }}"
+  class="section--certifications"
+  style="
+    background: {{ section.settings.bg_color }};
+    padding: {{ section.settings.padding_y_desktop }}px {{ section.settings.padding_x_desktop }}px;
+  "
+>
+  <div class="certifications-container page-width">
+    {% if section.settings.heading != blank %}
+      <h2 class="certifications-heading" style="text-align: {{ section.settings.heading_alignment }};">
+        {{ section.settings.heading }}
+      </h2>
+    {% endif %}
+
+    {% assign a = section.settings.heading_alignment %}
+    {% if section.settings.subheading != blank %}
+    <div
+        class="certifications-subheading"
+        style="
+        {% if a == 'center' %}
+            margin: 0 auto 40px;
+            text-align: center;
+        {% elsif a == 'right' %}
+            margin: 0 0 40px auto;  /* push to the right */
+            text-align: right;
+        {% else %}
+            margin: 0 auto 40px 0;  /* push to the left */
+            text-align: left;
+        {% endif %}
+        "
+    >
+        {{ section.settings.subheading }}
+    </div>
+    {% endif %}
+
+
+    <div class="certifications-grid">
+      {% for block in section.blocks %}
+        {% assign sel = block.settings.product %}
+        {% if sel != blank %}
+          {% assign handle = sel.handle | default: sel %}
+          {% assign product = all_products[handle] %}
+
+          {% if product %}
+            <div class="certification-card" {{ block.shopify_attributes }}>
+              {% if product.featured_image != blank %}
+                <a href="{{ product.url }}" class="certification-image-wrapper">
+                  {{ product.featured_image
+                    | image_url: width: 600
+                    | image_tag: class: "certification-image", alt: product.title }}
+                </a>
+              {% else %}
+                <div class="certification-image-wrapper">
+                  {# Optional: simple placeholder if no image #}
+                  <div style="aspect-ratio: 4/3; width:100%; background:#e9e9ec; border-radius:8px;"></div>
+                </div>
+              {% endif %}
+
+              <h3 class="certification-title">{{ product.title }}</h3>
+
+              {% if product.description != blank %}
+                <p class="certification-desc">{{ product.description | strip_html | truncate: 100 }}</p>
+              {% endif %}
+
+              <div class="certification-price">
+                {{ product.price | money }}
+              </div>
+            </div>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.cta_text != blank %}
+      <div class="certifications-cta" style="display: flex; justify-content: {{ section.settings.cta_alignment }};">
+        <a href="{{ section.settings.cta_link }}" class="btn button-yg">
+          <span class="btn-label-down">{{ section.settings.cta_text }}</span>
+          <span class="btn-label-down">{{ section.settings.cta_text }}</span>
+        </a>
+        </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+/* base */
+#section-{{ section.id }} .certifications-heading{
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+#section-{{ section.id }} .certifications-subheading{
+  max-width: 60%;
+  margin: 0 auto 40px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+#section-{{ section.id }} .certifications-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  margin-bottom: 40px;
+}
+@media (max-width: 980px){
+  #section-{{ section.id }}{
+    padding: {{ section.settings.padding_y_mobile }}px {{ section.settings.padding_x_mobile }}px !important;
+  }
+  #section-{{ section.id }} .certifications-grid{
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  #section-{{ section.id }} .certifications-subheading{
+    max-width: 100%;
+  }
+}
+
+/* cards */
+#section-{{ section.id }} .certification-card{
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#section-{{ section.id }} .certification-image-wrapper{
+  border-radius: 8px;
+  overflow: hidden;
+  display: block;
+  margin-bottom: 16px;
+}
+#section-{{ section.id }} .certification-image{
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+#section-{{ section.id }} .certification-title{
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 12px 0 4px;
+}
+#section-{{ section.id }} .certification-desc{
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 12px;
+}
+#section-{{ section.id }} .certification-price{
+  font-size: 14px;
+  font-weight: 600;
+  background: #9c9ba0;
+  color: #fff;
+  padding: 10px 30px;
+  border-radius: 20px;
+  display: inline-block;
+  width: fit-content;
+}
+
+/* CTA button */
+#section-{{ section.id }} .certifications-cta {
+  width:100%;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+</style>
+
+{% schema %}
+{
+  "name": "Certifications Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Certifications That Set You Apart"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>The right credentials don’t just check a box—they open doors. These certifications are career-elevating and purposefully built to give you a competitive edge in today’s fitness industry.</p>"
+    },
+
+    /* 1) Heading & subheading alignment */
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading & subheading alignment",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "left"
+    },
+
+    /* 2) Section background & padding (desktop + mobile) */
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#f5f6f7" },
+
+    {
+      "type": "range",
+      "id": "padding_y_desktop",
+      "label": "Desktop padding Y (top & bottom)",
+      "min": 0, "max": 160, "step": 2, "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_x_desktop",
+      "label": "Desktop padding X (left & right)",
+      "min": 0, "max": 80, "step": 2, "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_y_mobile",
+      "label": "Mobile padding Y (top & bottom)",
+      "min": 0, "max": 160, "step": 2, "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_x_mobile",
+      "label": "Mobile padding X (left & right)",
+      "min": 0, "max": 80, "step": 2, "unit": "px",
+      "default": 16
+    },
+
+    /* 3) CTA alignment */
+    {
+      "type": "select",
+      "id": "cta_alignment",
+      "label": "CTA alignment",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "center"
+    },
+
+    /* existing CTA text/link */
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA button text",
+      "default": "Explore All Courses"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA button link",
+      "default": "/collections/all"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "limit": 3,
+      "settings": [
+        { "type": "product", "id": "product", "label": "Select product" }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [{ "name": "Certifications Grid", "category": "Custom" }]
+}
+{% endschema %}

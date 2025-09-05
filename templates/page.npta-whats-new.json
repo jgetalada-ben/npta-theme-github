@@ -1,0 +1,253 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "section_top_banner_pEMffK": {
+      "type": "section--top-banner",
+      "custom_css": [
+        ".section--top-banner {background-color: #000000;}",
+        ".section--top-banner:before {width: 100%;}",
+        ".section--top-background {width: 100%; background-position: top;}"
+      ],
+      "name": "Top Banner",
+      "settings": {
+        "background_image": "shopify://shop_images/hero-banner-whatsnew.png",
+        "title": "What’s New at NPTA",
+        "subtitle": "Stay ahead with the latest trends, tools, and opportunities—built to keep you leading in today’s fast-moving fitness industry.",
+        "desc1": "",
+        "button_link": "shopify://collections/all",
+        "button_text": "GET CERTIFIED",
+        "show_button_1": false,
+        "button_1_text": "Button",
+        "button_1_link": "/",
+        "show_button_2": false,
+        "button_2_text": "Button",
+        "button_2_link": "/",
+        "button_position": "left",
+        "title_alignment": "left",
+        "container_width": 720,
+        "alignment": "flex-start",
+        "banner_height": "60vh",
+        "top_banner_align_items": "flex-end",
+        "show_banner_gradient": false
+      }
+    },
+    "program_columns_bJNDgF": {
+      "type": "program-columns",
+      "blocks": {
+        "program_jpFzUb": {
+          "type": "program",
+          "settings": {
+            "title": "NPTA Apprenticeship Program",
+            "subtitle": "Canada’s most immersive hands-on practicum—and a potential pathway to becoming a Fit Integrated Trainer.",
+            "image": "shopify://shop_images/npta-apprenticeship-program-img.png",
+            "description": "<p>This 40-hour, in-person practicum gives you hands-on coaching experience with real clients—mentored by expert educators.It bridges the gap between theory and practice and opens the door to future opportunities with Fit Integrated Wellness.</p>",
+            "button_text": "Register Here",
+            "button_link": "/"
+          }
+        },
+        "program_kkcVrF": {
+          "type": "program",
+          "settings": {
+            "title": "NPTA Apprenticeship Program",
+            "subtitle": "Personalized support to help you pass, practice, and lead with confidence.",
+            "image": "shopify://shop_images/npta-tutoring-program-img.png",
+            "description": "<p>Whether you're just starting your certification or deep in your studies,we meet you there.With personalized 1 on 1 or group support rooted in our Apex Model™,  you'll get focused guidance from expert educators. </p><p>This isn’t generic tutoring—it’s career-focused mentorship designed to get you certified and confident.</p>",
+            "button_text": "Register Here",
+            "button_link": "/"
+          }
+        }
+      },
+      "block_order": [
+        "program_jpFzUb",
+        "program_kkcVrF"
+      ],
+      "name": "Program Columns",
+      "settings": {
+        "heading": "Step Ahead. Stay Ahead.",
+        "subheading": "",
+        "bg_color": "#133257",
+        "columns": 2
+      }
+    },
+    "section_top_banner_73ddQa": {
+      "type": "section--top-banner",
+      "custom_css": [
+        ".section--top-banner {background-color: #000000;}",
+        ".section--top-banner:before {width: 100%;}",
+        ".section--top-background {width: 100%; background-position: top;}",
+        "@media (max-width: 980px) {.section--top-banner-container {top: 5%; }}"
+      ],
+      "name": "Top Banner",
+      "settings": {
+        "background_image": "shopify://shop_images/where-to-begin-img.png",
+        "title": "Not Sure Where to Begin?",
+        "subtitle": "Find Your Perfect Fit with the Career Pathway Quiz",
+        "desc1": "<p>Whether you're new to the field or ready to specialize, this quiz gives you a custom roadmap —built to guide your next move in the fitness industry.</p>",
+        "button_link": "shopify://collections/all",
+        "button_text": "GET CERTIFIED",
+        "show_button_1": false,
+        "button_1_text": "Button",
+        "button_1_link": "/",
+        "show_button_2": true,
+        "button_2_text": "Take the Quiz",
+        "button_2_link": "/",
+        "button_position": "left",
+        "title_alignment": "left",
+        "container_width": 980,
+        "alignment": "flex-start",
+        "banner_height": "60vh",
+        "top_banner_align_items": "flex-end",
+        "show_banner_gradient": false
+      }
+    },
+    "certifications_yT3RV9": {
+      "type": "certifications",
+      "blocks": {
+        "product_XGQWVN": {
+          "type": "product",
+          "settings": {
+            "product": "mindful-stress-management"
+          }
+        },
+        "product_VVmzHY": {
+          "type": "product",
+          "settings": {
+            "product": "cpt-essentials-cpt-cpr"
+          }
+        },
+        "product_Vxcjdc": {
+          "type": "product",
+          "settings": {
+            "product": "behavior-change-specialization-bcs"
+          }
+        }
+      },
+      "block_order": [
+        "product_XGQWVN",
+        "product_VVmzHY",
+        "product_Vxcjdc"
+      ],
+      "name": "Certifications Grid",
+      "settings": {
+        "heading": "Certifications That Set You Apart",
+        "subheading": "<p>The right credentials don’t just check a box—they open doors. These certifications are career-elevating and purposefully built to give you a competitive edge in today’s fitness industry.</p>",
+        "heading_alignment": "left",
+        "bg_color": "#f5f6f7",
+        "padding_y_desktop": 80,
+        "padding_x_desktop": 20,
+        "padding_y_mobile": 60,
+        "padding_x_mobile": 16,
+        "cta_alignment": "center",
+        "cta_text": "Explore All Courses",
+        "cta_link": "shopify://collections/all"
+      }
+    },
+    "latest_blog_v2_hfncJz": {
+      "type": "latest-blog-v2",
+      "blocks": {
+        "blog_post_4dHXQb": {
+          "type": "blog_post",
+          "settings": {
+            "article": "npta-blogs/muscular-development-hypertrophy"
+          }
+        },
+        "blog_post_rgFVDK": {
+          "type": "blog_post",
+          "settings": {
+            "article": "npta-blogs/nasm-specialization-fitness-certifications"
+          }
+        },
+        "blog_post_nggJtq": {
+          "type": "blog_post",
+          "settings": {
+            "article": "npta-blogs/strength-endurance"
+          }
+        },
+        "blog_post_TQQNxE": {
+          "type": "blog_post",
+          "settings": {
+            "article": "npta-blogs/how-to-become-a-nutrition-coach"
+          }
+        },
+        "blog_post_JxR9FL": {
+          "type": "blog_post",
+          "settings": {
+            "article": "npta-blogs/become-a-qualified-personal-trainer"
+          }
+        }
+      },
+      "block_order": [
+        "blog_post_4dHXQb",
+        "blog_post_rgFVDK",
+        "blog_post_nggJtq",
+        "blog_post_TQQNxE",
+        "blog_post_JxR9FL"
+      ],
+      "name": "Latest Blog v2",
+      "settings": {
+        "heading": "Latest from the Blog",
+        "subheading": "<p>Insights, strategies, and real talk to help you grow, lead, and level up your fitness career.</p>",
+        "side_image": "shopify://shop_images/blog-feature-img.png",
+        "bg_color": "#133257",
+        "button_text": "View All Blogs",
+        "button_link": "/"
+      }
+    },
+    "section_top_banner_xqKfmc": {
+      "type": "section--top-banner",
+      "custom_css": [
+        ".section--top-banner {background-color: #000000;}",
+        ".section--top-banner:before {width: 100%;}",
+        ".section--top-background {width: 100%; background-position: top;}",
+        "@media (max-width: 980px) {.section--top-banner-container {top: 20%; }}"
+      ],
+      "name": "Top Banner",
+      "settings": {
+        "background_image": "shopify://shop_images/Ap_Footer1.jpg",
+        "title": "Have Questions? We're Here to Help.",
+        "subtitle": "",
+        "desc1": "<p>Our team is ready to connect and support you.</p>",
+        "button_link": "shopify://collections/all",
+        "button_text": "GET CERTIFIED",
+        "show_button_1": true,
+        "button_1_text": "Contact Us",
+        "button_1_link": "shopify://pages/contact-us",
+        "show_button_2": false,
+        "button_2_text": "Button",
+        "button_2_link": "/",
+        "button_position": "left",
+        "title_alignment": "left",
+        "container_width": 720,
+        "alignment": "flex-start",
+        "banner_height": "50vh",
+        "top_banner_align_items": "flex-end",
+        "show_banner_gradient": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section_top_banner_pEMffK",
+    "program_columns_bJNDgF",
+    "section_top_banner_73ddQa",
+    "certifications_yT3RV9",
+    "latest_blog_v2_hfncJz",
+    "section_top_banner_xqKfmc"
+  ]
+}

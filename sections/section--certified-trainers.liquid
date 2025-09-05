@@ -96,6 +96,17 @@
       ],
       "default": "center"
     },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Button 1 Link"
+    },
+    {
+      "type": "text",
+      "id": "button_1_text",
+      "label": "Button 1 Text",
+      "default": "Register Here"
+    },
         
   ],
   "blocks": [
@@ -206,9 +217,31 @@
         </div>
       </div>
     {% endif %}
+    {% if section.settings.button_1_link != blank and section.settings.button_1_text != blank %}
+    <div class="section--hero-buttons">
+      <a href="{{ section.settings.button_1_link }}" class="btn button-yg" style="display:block;">
+        <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
+        <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
+      </a>
+    </div>
+    {% endif %}
 
 </section>
 
+<style>
+  #shopify-section-template--18233198870570__section_certified_trainers_ipxpKR .section--hero-buttons {
+    max-width: clamp(15%,12vw,25%);
+    margin: 0 auto;
+  }
+  @media (max-width: 768px) {
+    #shopify-section-template--18233198870570__section_certified_trainers_ipxpKR .section--hero-buttons {
+      max-width:70%;
+    }
+  }
+  .section--title-block.page-container {
+    padding-bottom: 20px;
+  }
+</style>
 
 <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>

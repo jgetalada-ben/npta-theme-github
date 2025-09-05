@@ -1,0 +1,222 @@
+<section
+  id="section-{{ section.id }}"
+  class="section--latest-blog"
+  style="background: {{ section.settings.bg_color }};"
+>
+  <!-- Header row: heading + subheading grouped -->
+  <div class="latest-blog-header page-width">
+    {% if section.settings.heading != blank %}
+      <h2 class="latest-blog-heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.subheading != blank %}
+      <div class="latest-blog-subheading">{{ section.settings.subheading }}</div>
+    {% endif %}
+  </div>
+
+  <div class="latest-blog-container page-width">
+    <div class="latest-blog-left">
+      <!-- Blog list -->
+      <div class="latest-blog-list">
+        {% for block in section.blocks %}
+          {% if block.settings.article != blank %}
+            {% assign article = articles[block.settings.article] %}
+            {% if article %}
+              <a href="{{ article.url }}" class="latest-blog-item" {{ block.shopify_attributes }}>
+                {% if article.image %}
+                  {{ article.image | image_url: width: 80 | image_tag: class: "latest-blog-thumb", alt: article.title }}
+                {% endif %}
+                <span class="latest-blog-title">{{ article.title }}</span>
+              </a>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      {% if section.settings.button_text != blank %}
+        <div class="latest-blog-cta">
+        <a href="{{ section.settings.button_link }}" class="btn button-w">
+          <span class="btn-label-down">{{ section.settings.button_text }}</span>
+          <span class="btn-label-down">{{ section.settings.button_text }}</span>
+        </a>
+        </div>
+      {% endif %}
+    </div>
+
+    {% if section.settings.side_image != blank %}
+      <div class="latest-blog-right">
+        <img
+          src="{{ section.settings.side_image | img_url: '1200x' }}"
+          alt=""
+          class="latest-blog-side-image"
+        >
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+/* scope everything to this section instance */
+#section-{{ section.id }}{
+  padding: 80px 20px;
+  color: #fff;
+}
+
+/* Desktop grid: balanced columns, no overflow */
+#section-{{ section.id }} .latest-blog-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* Header */
+#section-{{ section.id }} .latest-blog-header{ margin-bottom: 30px; }
+#section-{{ section.id }} .latest-blog-heading{
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  text-transform: uppercase;
+  margin: 0 0 12px;
+  line-height: 1.15;
+  color: #fff;
+}
+#section-{{ section.id }} .latest-blog-subheading{
+  font-size: clamp(14px, 1.6vw, 24px);
+  line-height: 1.6;
+  margin: 0;
+  color: #e6e9ef;
+  max-width: 55%;
+}
+@media (max-width: 980px){
+  #section-{{ section.id }} .latest-blog-subheading{ max-width: 100%; }
+}
+
+/* Blog list */
+#section-{{ section.id }} .latest-blog-list{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 30px;
+}
+#section-{{ section.id }} .latest-blog-item{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #cfd4da;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 18px;
+  line-height: 1.2;
+}
+#section-{{ section.id }} .latest-blog-item:hover{ color: #ffffff; }
+#section-{{ section.id }} .latest-blog-thumb{
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* CTA */
+#section-{{ section.id }} .latest-blog-cta {
+    width:100%;
+    display:flex;
+    justify-content:flex-start;
+    flex-wrap:wrap;
+    margin-top: 20px;
+}
+#section-{{ section.id }} .latest-blog-cta .button-white{
+  background: #fff;
+  color: #133257;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 12px 20px;
+  display: inline-block;
+}
+
+/* Right image column */
+#section-{{ section.id }} .latest-blog-right{
+  display: flex;
+  justify-content: center;
+}
+#section-{{ section.id }} .latest-blog-side-image{
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  box-shadow: 0 1px 0 rgba(0,0,0,.02), 0 12px 24px rgba(0,0,0,.18);
+}
+
+/* Responsive */
+@media (max-width: 1080px){
+  #section-{{ section.id }} .latest-blog-container{ gap: 32px; }
+}
+@media (max-width: 980px){
+  #section-{{ section.id }} .latest-blog-container{
+    grid-template-columns: 1fr;
+    text-align: left;
+    gap: 28px;
+  }
+  #section-{{ section.id }} .latest-blog-right{ 
+    display: none;
+    {% comment %} order: 2;  {% endcomment %}
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Latest Blog v2",
+  "settings": [
+    { 
+        "type": "text", 
+        "id": "heading", 
+        "label": "Heading", 
+        "default": "Latest from the Blog" 
+    },
+    { 
+        "type": "richtext", 
+        "id": "subheading", 
+        "label": "Subheading", 
+        "default": "<p>Insights, strategies, and real talk to help you grow, lead, and level up your fitness career.</p>" 
+    },
+    { 
+        "type": "image_picker", 
+        "id": "side_image", 
+        "label": "Right side image" 
+    },
+    { 
+        "type": "color", 
+        "id": "bg_color", 
+        "label": "Background color", 
+        "default": "#133257" 
+    },
+    { 
+        "type": "text", 
+        "id": "button_text", 
+        "label": "Button text", 
+        "default": "View All Blogs" 
+    },
+    { 
+        "type": "url", 
+        "id": "button_link", 
+        "label": "Button link", 
+        "default": "/" 
+    }
+  ],
+  "blocks": [
+    {
+      "type": "blog_post",
+      "name": "Blog Post",
+      "settings": [
+        { "type": "article", "id": "article", "label": "Select blog article" }
+      ],
+      "limit": 5
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    { "name": "Latest Blog v2", "category": "Custom" }
+  ]
+}
+{% endschema %}

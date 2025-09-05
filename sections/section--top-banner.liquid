@@ -143,6 +143,30 @@
       ],
       "default": "center"
     },
+    {
+      "type": "text",
+      "id": "banner_height",
+      "label": "Banner height",
+      "info": "Enter a value like 480px or 70vh. Leave blank to use the default banner height.",
+      "placeholder": "e.g. 480px or 70vh"
+    },
+    {
+      "type": "select",
+      "id": "top_banner_align_items",
+      "label": "Top banner align-items (applies only when height is set)",
+      "options": [
+        { "value": "flex-start", "label": "Flex Start" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Flex End" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_banner_gradient",
+      "label": "Show background gradient overlay",
+      "default": true
+    }
   ],
   "presets": [
     {
@@ -164,13 +188,18 @@
 
 
 
-<section class="section--top-banner" >
+<section
+  class="section--top-banner {% if section.settings.show_banner_gradient %}has-gradient{% endif %}"
+  {% if section.settings.banner_height != blank %}
+    style="height: {{ section.settings.banner_height }}; display:flex; flex-direction:row; align-items: {{ section.settings.top_banner_align_items }};"
+  {% endif %}
+>
   <div class="section--top-banner-container" >
     <div class="top-banner--text-content" style="display: flex; justify-content: {{ section.settings.alignment }};">
-        <div style="max-width: {{ section.settings.container_width }}px;">
+        <div class="top-banner--text-content-container" style="max-width: {{ section.settings.container_width }}px;">
       <h1>{{ section.settings.title }}</h1>
       {% if section.settings.subtitle != blank %}
-        <p>{{ section.settings.subtitle }}</p>
+        <p class="subtitle-p">{{ section.settings.subtitle }}</p>
       {% endif %}
       {% if section.settings.desc1 != blank %}
         <p>{{ section.settings.desc1 }}</p>
@@ -209,31 +238,26 @@
 
 <style>
 
-
-   .section--top-background{
-background-size: cover;
-    background-position: left;
-    background-repeat: no-repeat;
-    height: 100%;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
-} 
-
-
-  
-
-  
 .section--top-background{
-background-size: cover;
-    background-position: right;
-    background-repeat: no-repeat;
-    height: 100%;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 50%;
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+}
+.subtitle-p {
+  font-size: 26px;
+}
+@media (max-width: 768px) {
+  .section--top-background{
+    background-position: center;
+  }
+  .subtitle-p {
+    font-size: 18px;
+  }
 }
   
 .section--top-banner{
@@ -244,7 +268,7 @@ background-size: cover;
   position: relative;
   padding: 90px 0;
 }
-.section--top-banner:before {
+.section--top-banner.has-gradient:before {
   content: "";
   position: absolute;
 background: linear-gradient(90deg, #133257 1%, rgba(19, 50, 87, 0.9) 7.34%, rgba(19, 50, 87, 0.50) 15%, rgba(19, 50, 87, 0.00) 50%);
@@ -270,9 +294,6 @@ background: linear-gradient(90deg, #133257 1%, rgba(19, 50, 87, 0.9) 7.34%, rgba
 .top-banner--text-content {
   width: 100%;
 }
-
-
-
 .section--top-banner .top-banner--text-content h1 {
   color: #fff;
   font-family: Montserrat;
@@ -292,7 +313,4 @@ background: linear-gradient(90deg, #133257 1%, rgba(19, 50, 87, 0.9) 7.34%, rgba
   line-height: 150%; /* 24px */
   margin-bottom: 40px;
 }
-
-
-  
 </style>

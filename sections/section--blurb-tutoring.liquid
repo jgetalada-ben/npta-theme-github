@@ -36,6 +36,62 @@
       "info": "Choose an image from your files."
     },
     {
+      "type": "checkbox",
+      "id": "enable_custom_image_height",
+      "label": "Enable custom image height",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "Image height (value)",
+      "min": 100,
+      "max": 1100,
+      "step": 10,
+      "unit": "px",
+      "default": 480
+    },
+    {
+      "type": "select",
+      "id": "image_height_unit",
+      "label": "Image height unit",
+      "options": [
+        { "value": "px", "label": "px" },
+        { "value": "vh", "label": "vh" }
+      ],
+      "default": "px"
+    },
+    {
+      "type": "select",
+      "id": "image_object_fit",
+      "label": "Object fit",
+      "info": "Use “Contain” to show the full image with no cropping.",
+      "options": [
+        { "value": "contain",     "label": "Contain (no crop)" },
+        { "value": "cover",       "label": "Cover (crop may occur)" },
+        { "value": "fill",        "label": "Fill (stretch)" },
+        { "value": "scale-down",  "label": "Scale down" }
+      ],
+      "default": "contain"
+    },
+    {
+      "type": "select",
+      "id": "image_object_position",
+      "label": "Object position",
+      "options": [
+        { "value": "center center", "label": "Center" },
+        { "value": "top center",    "label": "Top" },
+        { "value": "bottom center", "label": "Bottom" },
+        { "value": "left center",   "label": "Left" },
+        { "value": "right center",  "label": "Right" },
+        { "value": "top left",      "label": "Top left" },
+        { "value": "top right",     "label": "Top right" },
+        { "value": "bottom left",   "label": "Bottom left" },
+        { "value": "bottom right",  "label": "Bottom right" }
+      ],
+      "default": "center center"
+    },
+    {
       "type": "url",
       "id": "button_link",
       "label": "Button Link",
@@ -71,6 +127,18 @@
       "unit": "px",
       "default": 980
     },
+    {
+      "type": "select",
+      "id": "blurb_items_alignment",
+      "label": "Items alignment",
+      "info": "Controls align-items on the blurb content container (flex/grid).",
+      "options": [
+        { "value": "flex-start", "label": "Flex Start" },
+        { "value": "center",     "label": "Center" },
+        { "value": "flex-end",   "label": "Flex End" }
+      ],
+      "default": "center"
+    }
   ],
   "blocks": [
     {
@@ -102,12 +170,14 @@
 {% endschema %}
 
 <section class="section--blurb-content" style="padding-top: {{ section.settings.top_padding }}px; padding-bottom: {{ section.settings.bottom_padding }}px;">
-  <div class="blurb-content-container page-container" style="max-width: {{ section.settings.container_width }}px;">
+  <div class="blurb-content-container page-container" style="max-width: {{ section.settings.container_width }}px; align-items: {{ section.settings.blurb_items_alignment }};">
 
       <div class="blurb-content-left-column">
                 <div class="section--title-block ">
-                      <h2 class="is--flex-start">{{ section.settings.title }}</h2> 
-                      <div class="title-block--desc">{{ section.settings.description }}</div>
+                  {% unless section.settings.title == blank %}
+                    <h2 class="is--flex-start">{{ section.settings.title }}</h2> 
+                  {% endunless %}
+                    <div class="title-block--desc">{{ section.settings.description }}</div>
                 </div>
 
                 <div class="section--hero-buttons">
@@ -130,7 +200,21 @@
                  {% if section.settings.image %}
                     <div class="image-wrapper">
                     {% if section.settings.image %}
-                    <img src="{{ section.settings.image | img_url: 'original' }}" alt="{{ section.settings.alt_text }}">
+                    <img
+                      src="{{ section.settings.image | img_url: 'original' }}"
+                      alt="{{ section.settings.alt_text }}"
+                      style="
+                        width: 100%;
+                        {% if section.settings.enable_custom_image_height %}
+                          height: {{ section.settings.image_height }}{{ section.settings.image_height_unit }};
+                        {% else %}
+                          height: auto;
+                        {% endif %}
+                        object-fit: {{ section.settings.image_object_fit }};
+                        object-position: {{ section.settings.image_object_position }};
+                        display: block;
+                      "
+                    >
                     {% else %}
                     <p>No image available</p>
                     {% endif %}
@@ -148,18 +232,16 @@
 </section>
 
 <style>
-  @media (max-width: 767px) {
+{% comment %} @media (max-width: 767px) {
   .blurb-content-right-column {
     display: none !important;
   }
-}
+} {% endcomment %}
 .section--blurb-content{
   display:flex;
   justify-content:Center;
 }
-  .section--blurb-content .blurb-content-container {
-align-items:Center;
-  }
+
 .blurb-content-right-column{
   height:100%;
 }
@@ -173,6 +255,7 @@ font-size: 16px;
 font-style: normal;
 font-weight: 400;
 line-height: 150%;
+margin-top: 0;
   }
 
   @media only screen and (min-width: 768px) {
@@ -294,20 +377,34 @@ line-height: 150%;
   }
   
 }
+@media only screen and (max-width: 767px) {
+  .section--blurb-content .blurb-content-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .blurb-content-right-column .image-wrapper {
+    margin-bottom: 30px;
+  }
+  .blurb-content-right-column .image-wrapper img {
+    height: auto !important;
+  }
+}
       .image-wrapper {
         position: relative;
 width:100%;
         height: 100%;
    
     }
-      .image-wrapper img{
 
-width:100%;
-        height: 100%;
-        object-fit:cover;
-   border-radius:20px;
-      overflow:hidden;
-    }
+.image-wrapper{
+  border-radius: 20px;
+  overflow: hidden;
+}
+.image-wrapper img{
+  width: 100%;
+  border-radius: 20px;
+  display: block;
+}
 
   .section--title-block ul {
     list-style: none;

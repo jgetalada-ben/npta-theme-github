@@ -1,0 +1,192 @@
+<section
+  id="section-{{ section.id }}"
+  class="section--program-columns"
+  style="background: {{ section.settings.bg_color }};"
+>
+  <div class="page-width program-columns-container">
+
+    {% if section.settings.heading != blank %}
+      <h2 class="program-columns-heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    {% if section.settings.subheading != blank %}
+      <div class="program-columns-subheading">{{ section.settings.subheading }}</div>
+    {% endif %}
+
+    <div class="program-columns-grid" style="--cols: {{ section.settings.columns | default: 2 }};">
+      {% for block in section.blocks %}
+        <div class="program-col" {{ block.shopify_attributes }}>
+          <div class="program-col-inner">
+            {% if block.settings.title != blank %}
+              <h3 class="program-col-title">{{ block.settings.title }}</h3>
+            {% endif %}
+
+            {% if block.settings.subtitle != blank %}
+              <div class="program-col-subtitle">{{ block.settings.subtitle }}</div>
+            {% endif %}
+
+            {% if block.settings.image != blank %}
+              <div class="program-col-image">
+                <img src="{{ block.settings.image | img_url: '900x' }}" alt="{{ block.settings.title | escape }}">
+              </div>
+            {% endif %}
+
+            {% if block.settings.description != blank %}
+              <div class="program-col-description">{{ block.settings.description }}</div>
+            {% endif %}
+
+            {% if block.settings.button_text != blank %}
+                <div class="program-col-cta">
+                    <a href="{{ block.settings.button_link }}" class="btn button-yg">
+                        <span class="btn-label-down">{{ block.settings.button_text }}</span>
+                        <span class="btn-label-down">{{ block.settings.button_text }}</span>
+                    </a>
+                </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+#section-{{ section.id }}{
+  padding: 80px 20px;
+  color: #fff;
+}
+
+/* Headings */
+#section-{{ section.id }} .program-columns-heading{
+  font-size: clamp(28px, 3.47vw, 52px);
+  font-weight: 700;
+  margin-bottom: 60px;
+  text-align: left;
+  color: #fff;
+}
+@media (max-width: 767px){
+    #section-{{ section.id }} .program-columns-heading{
+        margin-bottom: 30px;
+    }
+}
+#section-{{ section.id }} .program-columns-subheading{
+  font-size: 21px;
+  line-height: 1.6;
+  margin: 0 auto 40px;
+  max-width: 720px;
+  text-align: center;
+  color: #e6e9ef;
+}
+
+/* GRID */
+#section-{{ section.id }} .program-columns-grid{
+  display: grid;
+  gap: 40px;
+}
+/* Tablet & up: keep all columns on one line using selected count */
+@media (min-width: 768px){
+  #section-{{ section.id }} .program-columns-grid{
+    grid-template-columns: repeat(var(--cols, 2), 1fr);
+  }
+}
+/* Mobile: stack */
+@media (max-width: 767px){
+  #section-{{ section.id }} .program-columns-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* COLUMN: equal height with CTA aligned */
+#section-{{ section.id }} .program-col{
+  min-height: 100%;
+}
+#section-{{ section.id }} .program-col-inner{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+#section-{{ section.id }} .program-col-title{
+  font-size: clamp(18px, 2.13vw, 32px);
+  font-weight: 800;
+  margin: 0 0 10px;
+  color: #fff;
+}
+#section-{{ section.id }} .program-col-subtitle{
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 20px;
+  min-height: 60px;
+}
+@media (max-width: 767px){
+    #section-{{ section.id }} .program-col-subtitle{
+        min-height: auto;
+    }
+}
+#section-{{ section.id }} .program-col-image img{
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+  margin-bottom: 16px;
+}
+#section-{{ section.id }} .program-col-description{
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0 0 20px;
+  color: #e6e9ef;
+}
+/* Push CTA to the bottom so buttons align across columns */
+#section-{{ section.id }} .program-col-cta{
+  margin-top: auto;
+  padding-top: 8px;
+  width:100%;
+  display:flex;
+  justify-content:start;
+  flex-wrap:wrap;
+}
+#section-{{ section.id }} .program-col-cta .program-btn{
+  background: #e6f100;
+  color: #133257;
+  font-weight: 700;
+  border-radius: 6px;
+  padding: 10px 16px;
+  display: inline-block;
+}
+</style>
+
+{% schema %}
+{
+  "name": "Program Columns",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Step Ahead. Stay Ahead." },
+    { "type": "richtext", "id": "subheading", "label": "Subheading" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#133257" },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Number of columns",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    }
+  ],
+  "blocks": [
+    {
+      "type": "program",
+      "name": "Program column",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "NPTA Apprenticeship Program" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Canada's most immersive hands-on practicum—and a potential pathway to becoming a Fit Integrated Trainer." },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Program description goes here.</p>" },
+        { "type": "text", "id": "button_text", "label": "Button text", "default": "Register Here" },
+        { "type": "url", "id": "button_link", "label": "Button link", "default": "/" }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    { "name": "Program Columns", "category": "Custom" }
+  ]
+}
+{% endschema %}
