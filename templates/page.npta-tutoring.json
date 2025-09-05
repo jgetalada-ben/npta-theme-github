@@ -51,7 +51,8 @@
       "custom_css": [
         ".section--title-two {padding-bottom: 0px; padding-left: 5px; margin-bottom: 20px; padding-top: 80px;}",
         "@media only screen and (max-width: 767px) {.section--title-two {padding-top: 40px; }}",
-        ".section--title-block p {font-size: 21px;}"
+        ".section--title-block p {font-size: 21px;}",
+        "@media (min-width: 1081px) {.section--title-container.page-container {max-width: 1400px !important; } .section--title-block {justify-content: start; }}"
       ],
       "name": "Header Title",
       "settings": {
@@ -60,8 +61,8 @@
         "section_title": "Lorem ipsum dolor sit amet",
         "section_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>",
         "title_alignment": "left",
-        "container_width": 960,
-        "title_color": "#133257",
+        "container_width": 980,
+        "title_color": "#242833",
         "alignment": "center"
       }
     },
