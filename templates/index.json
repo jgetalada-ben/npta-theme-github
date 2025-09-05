@@ -577,12 +577,14 @@
       "settings": {
         "section_id": "certified-trainers",
         "section_title": "Hear from NASM certified trainers",
-        "section_title2": "Lorem ipsum dolor sit amet",
+        "section_title2": "",
         "section_description": "",
         "title_alignment": "center",
         "desc_alignment": "left",
         "container_width": 980,
-        "alignment": "center"
+        "alignment": "center",
+        "button_1_link": "",
+        "button_1_text": "Register Here"
       }
     },
     "section_banner_one_FnrnAm": {
