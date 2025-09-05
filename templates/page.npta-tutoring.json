@@ -46,6 +46,19 @@
         "show_banner_gradient": false
       }
     },
+    "section_header_title_zHTHak": {
+      "type": "section--header-title",
+      "name": "Header Title",
+      "settings": {
+        "background_color": "#ffffff",
+        "section_id": "certified-trainers",
+        "section_title": "Lorem ipsum dolor sit amet",
+        "section_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>",
+        "title_alignment": "left",
+        "container_width": 960,
+        "alignment": "center"
+      }
+    },
     "section_header_title_two_Gt9mm9": {
       "type": "section--header-title-two",
       "custom_css": [
@@ -576,6 +589,7 @@
   "order": [
     "main",
     "section_top_banner_hJLdAL",
+    "section_header_title_zHTHak",
     "section_header_title_two_Gt9mm9",
     "section_blurb_tutoring_43xBGi",
     "section_process_tutoring_4WrKRU",
