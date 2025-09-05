@@ -157,7 +157,10 @@
     text-align: left;
     gap: 28px;
   }
-  #section-{{ section.id }} .latest-blog-right{ order: 2; }
+  #section-{{ section.id }} .latest-blog-right{ 
+    display: none;
+    {% comment %} order: 2;  {% endcomment %}
+  }
 }
 </style>
 
