@@ -38,10 +38,10 @@
         "show_button_2": false,
         "button_2_text": "Button",
         "button_2_link": "/",
-        "button_position": "center",
+        "button_position": "left",
         "title_alignment": "left",
-        "container_width": 980,
-        "alignment": "center",
+        "container_width": 720,
+        "alignment": "flex-start",
         "banner_height": "60vh",
         "top_banner_align_items": "flex-end",
         "show_banner_gradient": false
