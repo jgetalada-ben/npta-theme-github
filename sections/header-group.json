@@ -1,1 +1,90 @@
-{"name":"t:sections.header.name","type":"header","sections":{"announcement-bar":{"type":"announcement-bar","custom_css":[],"settings":{}},"header":{"type":"header","settings":{"logo_position":"middle-left","menu":"main-menu","menu_type_desktop":"dropdown","sticky_header_type":"none","show_line_separator":true,"color_scheme":"scheme-1","menu_color_scheme":"scheme-1","enable_country_selector":false,"enable_language_selector":false,"enable_customer_avatar":true,"mobile_logo_position":"center","margin_bottom":0,"padding_top":14,"padding_bottom":16}},"form_popup_two_jQYbzx":{"type":"form-popup-two","blocks":{"text_field_RF8xtH":{"type":"text_field","settings":{"label":"Name","placeholder":"Enter your name"}},"email_EJXjAb":{"type":"email","settings":{"label":"Email","placeholder":"Enter your email"}},"phone_NgXkDk":{"type":"phone","settings":{"label":"Phone Number","placeholder":"Enter your phone number"}}},"block_order":["text_field_RF8xtH","email_EJXjAb","phone_NgXkDk"],"disabled":true,"name":"Default Popup","settings":{"popup_image":"shopify:\/\/shop_images\/popup-placeholder-1.jpg","popup_logo":"shopify:\/\/shop_images\/NPTA-Logo.jpg","popup_heading":"GET $25 OFF","popup_subheading":"A course of your choice!","no_thanks_text":"No Thanks","disclaimer_text":"<p><strong>*Can only be redeemed one time<\/strong><\/p><p><\/p><p><br\/>By entering my email, phone number above, and submitting this form, I agree to receive recurring automated promotional texts and emails.<\/p>","webhook_url":"https:\/\/hooks.zapier.com\/hooks\/catch\/18464236\/2hglw2q\/","form_submit_label":"Sign Up Now","thank_you_header":"<p>*Can only be redeemed one time<br\/>By entering my email, phone number above, and submitting this form, I agree to receive recurring automated promotional texts and emails.<\/p>","popup_delay":4}}},"order":["announcement-bar","header","form_popup_two_jQYbzx"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "disabled": true,
+      "custom_css": [],
+      "settings": {}
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_position": "middle-left",
+        "menu": "main-menu",
+        "menu_type_desktop": "dropdown",
+        "sticky_header_type": "none",
+        "show_line_separator": true,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "scheme-1",
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "enable_customer_avatar": true,
+        "mobile_logo_position": "center",
+        "margin_bottom": 0,
+        "padding_top": 14,
+        "padding_bottom": 16
+      }
+    },
+    "form_popup_two_jQYbzx": {
+      "type": "form-popup-two",
+      "blocks": {
+        "text_field_RF8xtH": {
+          "type": "text_field",
+          "settings": {
+            "label": "Name",
+            "placeholder": "Enter your name"
+          }
+        },
+        "email_EJXjAb": {
+          "type": "email",
+          "settings": {
+            "label": "Email",
+            "placeholder": "Enter your email"
+          }
+        },
+        "phone_NgXkDk": {
+          "type": "phone",
+          "settings": {
+            "label": "Phone Number",
+            "placeholder": "Enter your phone number"
+          }
+        }
+      },
+      "block_order": [
+        "text_field_RF8xtH",
+        "email_EJXjAb",
+        "phone_NgXkDk"
+      ],
+      "disabled": true,
+      "name": "Default Popup",
+      "settings": {
+        "popup_image": "shopify://shop_images/popup-placeholder-1.jpg",
+        "popup_logo": "shopify://shop_images/NPTA-Logo.jpg",
+        "popup_heading": "GET $25 OFF",
+        "popup_subheading": "A course of your choice!",
+        "no_thanks_text": "No Thanks",
+        "disclaimer_text": "<p><strong>*Can only be redeemed one time</strong></p><p></p><p><br/>By entering my email, phone number above, and submitting this form, I agree to receive recurring automated promotional texts and emails.</p>",
+        "webhook_url": "https://hooks.zapier.com/hooks/catch/18464236/2hglw2q/",
+        "form_submit_label": "Sign Up Now",
+        "thank_you_header": "<p>*Can only be redeemed one time<br/>By entering my email, phone number above, and submitting this form, I agree to receive recurring automated promotional texts and emails.</p>",
+        "popup_delay": 4
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header",
+    "form_popup_two_jQYbzx"
+  ]
+}
