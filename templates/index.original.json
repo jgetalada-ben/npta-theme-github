@@ -58,20 +58,23 @@
         "word_bpCGmP"
       ],
       "custom_css": [
-        "@media (max-width: 767px) {.section--hero-badges .section--badge {display: block; text-align: center; } .section--hero-badges .section--badge span {display: inline; vertical-align: top; top: 2px; position: relative; } .section--hero-badges .section--badge img {display: none !important; } .section--hero-badges .section--badge-1 {display: none !important; }}"
+        "@media (max-width: 767px) {.section--hero-badges .section--badge {display: block; text-align: center; } .section--hero-badges .section--badge span {display: inline; vertical-align: top; top: 2px; position: relative; } .section--hero-badges .section--badge img {display: none !important; } .section--hero-badges .section--badge-1 {display: none !important; }}",
+        ".section--hero-background {width: 100%; height: 100vh;}",
+        ".section--hero-text h1 {color: #e9f24f;}",
+        "@media only screen and (min-width: 981px) {.section--hero-banner {height: 80vh; }}"
       ],
       "settings": {
-        "background_image": "shopify://shop_images/196ea51af4f74325ffba5c85dcf825d4opt.jpg",
-        "headline": "Fitness/Nutrition/Strength/Weight Loss/Wellness/Virtual Coach",
+        "background_image": "shopify://shop_images/header_image_bts_extended.jpg",
+        "headline": "Fitness",
         "badge_1_text": "OFFICIAL CANADIAN PARTNER",
         "badge_2_text": "1.5 Million+ NASM Certified Trainers",
-        "button_1_link": "shopify://collections/all-products",
-        "button_1_text": "CHOOSE MY PROGRAM",
+        "button_1_link": "http://www.npta.ca/cart/43487919308842:1,42853693358122:1",
+        "button_1_text": "CLAIM MY BUNDLE NOW",
         "button_2_link": "",
         "button_2_text": "",
         "hero_image": "shopify://shop_images/award-nominated-trainer.png",
-        "hero_image_width": "500",
-        "hero_image_height": "500",
+        "hero_image_width": "",
+        "hero_image_height": "",
         "award_text": "<p><strong>Canada’s top fitness trainer</strong></p>",
         "award_sub_text": "<p>According to Impact Magazine</p>",
         "award_image_1": "shopify://shop_images/award-featured-trainer.png",
@@ -82,6 +85,94 @@
         "partner_image": "shopify://shop_images/nasm_international_partner_logo_h_white_ba599786-b284-4e5f-8ade-ae846fbd0c62.svg",
         "partner_image_width": "139",
         "partner_image_height": "40"
+      }
+    },
+    "section_logo_carousel_M4gT66": {
+      "type": "section--logo-carousel",
+      "blocks": {
+        "logo_aTK6bt": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/BTS_Yellow_Banner_mp_bg.png"
+          }
+        },
+        "logo_Qwn7BU": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/BTS_Yellow_Banner_mp_bg.png"
+          }
+        },
+        "logo_NqPQWT": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/BTS_Yellow_Banner_mp_bg.png"
+          }
+        }
+      },
+      "block_order": [
+        "logo_aTK6bt",
+        "logo_Qwn7BU",
+        "logo_NqPQWT"
+      ],
+      "custom_css": [
+        ".section--logo-carousel {background: #e9f24f;}"
+      ],
+      "name": "Logo Carousel",
+      "settings": {
+        "top_padding": 5,
+        "bottom_padding": 5,
+        "container_width": 200
+      }
+    },
+    "accordion_bts_sale_GUbPNP": {
+      "type": "accordion-bts-sale",
+      "blocks": {
+        "highlight_deBDVf": {
+          "type": "highlight",
+          "settings": {
+            "highlight_title": "1. Certified Personal Trainer (CPT)",
+            "highlight_description": "<h4>Master the skills to train clients safely and effectively.</h4><ul><li>100% online, self-paced - complete in as little as 4 weeks</li><li>24 chapters covering anatomy, physiology, nutrition basics, and coaching techniques</li><li>Learn to assess fitness levels, design effective programs, and more</li></ul>",
+            "highlight_image": "shopify://shop_images/CPT2.png"
+          }
+        },
+        "highlight_adixWW": {
+          "type": "highlight",
+          "settings": {
+            "highlight_title": "2. Certified Nutrition Coach (CNC)",
+            "highlight_description": "<h3>Empower clients to achieve lasting health through proven nutrition strategies</h3><ul><li>Dive deep into behavior change techniques to understand the psychology behind weight loss</li><li>Learn how to help clients overcome real-world challenges like reading food labels, managing portion size, and avoiding fad diets</li></ul>",
+            "highlight_image": "shopify://shop_images/CNC2.png"
+          }
+        },
+        "highlight_7iBpnn": {
+          "type": "highlight",
+          "settings": {
+            "highlight_title": "3. Weight Loss Specialization",
+            "highlight_description": "<ul><li>Stand out in a competitive market by offering specialized weight loss expertise that attracts clients seeking lasting results</li><li>Gain advanced knowledge in metabolism, fat loss science, and the obesity epidemic to position yourself as a trusted expert</li><li>Apply proven fitness and nutrition strategies to help clients lose weight — and keep it off</li></ul>",
+            "highlight_image": "shopify://shop_images/WLS.png"
+          }
+        }
+      },
+      "block_order": [
+        "highlight_deBDVf",
+        "highlight_adixWW",
+        "highlight_7iBpnn"
+      ],
+      "custom_css": [
+        ".accordion-four--highlight ul li {color: white;}",
+        ".accordion-four--highlight h4 {color: white;}"
+      ],
+      "name": "Accordion BTS",
+      "settings": {
+        "section_id": "bts-sale",
+        "heading": "What’s Included in the Nutrition & Fitness Bundle?",
+        "image": "shopify://shop_images/Canada_Day_Sale_2nd_Section.png",
+        "show_buttons": true,
+        "primary_button_text": "Claim My Bundle Now",
+        "primary_button_link": "http://www.npta.ca/cart/43487919308842:1,42853693358122:1",
+        "primary_button_target": "_self",
+        "secondary_button_text": "Button",
+        "secondary_button_link": "",
+        "secondary_button_target": "_self"
       }
     },
     "section_image_text_carousel_ARmbtF": {
@@ -486,10 +577,14 @@
       "settings": {
         "section_id": "certified-trainers",
         "section_title": "Hear from NASM certified trainers",
+        "section_title2": "",
         "section_description": "",
         "title_alignment": "center",
+        "desc_alignment": "left",
         "container_width": 980,
-        "alignment": "center"
+        "alignment": "center",
+        "button_1_link": "",
+        "button_1_text": "Register Here"
       }
     },
     "section_banner_one_FnrnAm": {
@@ -498,25 +593,29 @@
         "benefit_7D6Pxz": {
           "type": "benefit",
           "settings": {
-            "benefit_text": "Get Certified in Just 4 Weeks"
+            "benefit_text": "Get Certified in Just 4 Weeks",
+            "description": ""
           }
         },
         "benefit_ENF7La": {
           "type": "benefit",
           "settings": {
-            "benefit_text": "Self-Paced, 100% Online Courses"
+            "benefit_text": "Self-Paced, 100% Online Courses",
+            "description": ""
           }
         },
         "benefit_TKFwF8": {
           "type": "benefit",
           "settings": {
-            "benefit_text": "Canada's Lowest Prices"
+            "benefit_text": "Canada's Lowest Prices",
+            "description": ""
           }
         },
         "benefit_W8jqaP": {
           "type": "benefit",
           "settings": {
-            "benefit_text": "Zero Interest Payment Options"
+            "benefit_text": "Zero Interest Payment Options",
+            "description": ""
           }
         }
       },
@@ -769,6 +868,8 @@
   },
   "order": [
     "hero_banner_VrVBf3",
+    "section_logo_carousel_M4gT66",
+    "accordion_bts_sale_GUbPNP",
     "section_image_text_carousel_ARmbtF",
     "featured_programs_3Ebyx7",
     "section_collection_tabs_w8nGxt",
