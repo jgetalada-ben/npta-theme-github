@@ -486,10 +486,14 @@
       "settings": {
         "section_id": "certified-trainers",
         "section_title": "Hear from NASM certified trainers",
+        "section_title2": "",
         "section_description": "",
         "title_alignment": "center",
+        "desc_alignment": "left",
         "container_width": 980,
-        "alignment": "center"
+        "alignment": "center",
+        "button_1_link": "",
+        "button_1_text": "Register Here"
       }
     },
     "section_banner_one_FnrnAm": {
@@ -498,25 +502,29 @@
         "benefit_7D6Pxz": {
           "type": "benefit",
           "settings": {
-            "benefit_text": "Get Certified in Just 4 Weeks"
+            "benefit_text": "Get Certified in Just 4 Weeks",
+            "description": ""
           }
         },
         "benefit_ENF7La": {
           "type": "benefit",
           "settings": {
-            "benefit_text": "Self-Paced, 100% Online Courses"
+            "benefit_text": "Self-Paced, 100% Online Courses",
+            "description": ""
           }
         },
         "benefit_TKFwF8": {
           "type": "benefit",
           "settings": {
-            "benefit_text": "Canada's Lowest Prices"
+            "benefit_text": "Canada's Lowest Prices",
+            "description": ""
           }
         },
         "benefit_W8jqaP": {
           "type": "benefit",
           "settings": {
-            "benefit_text": "Zero Interest Payment Options"
+            "benefit_text": "Zero Interest Payment Options",
+            "description": ""
           }
         }
       },
