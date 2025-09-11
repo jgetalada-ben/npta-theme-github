@@ -1,1 +1,469 @@
-{"sections":{"main":{"type":"main-page","disabled":true,"settings":{"padding_top":28,"padding_bottom":28}},"section_top_banner_hJLdAL":{"type":"section--top-banner","custom_css":[".section--top-banner {background-color: #000000;}",".section--top-banner:before {width: 100%;}",".section--top-background {width: 100%;}"],"settings":{"background_image":"shopify:\/\/shop_images\/AP_Page_Header.jpg","title":"Real-World Training. Real-Time Mentorship. Real Fitness Careers.","subtitle":"Join Canada’s most immersive Apprenticeship Program, built toturn certified trainers into confident, career-ready coaches.","button_link":"shopify:\/\/collections\/all","button_text":"GET CERTIFIED","show_button_1":true,"button_1_text":"Start today","button_1_link":"https:\/\/app.npta.ca\/widget\/survey\/sM15QBoTJbBVmC9vCifd","show_button_2":false,"button_2_text":"Purchase now","button_2_link":"shopify:\/\/products\/apprenticeship-program","button_position":"left","title_alignment":"left","container_width":580,"alignment":"flex-start"}},"section_blurb_apprentice_djK8pq":{"type":"section--blurb-apprentice","custom_css":[".blurb-content-right-column {height: 80%;}"],"name":"Apprentices blurb","settings":{"title":"NPTA Apprenticeship Program","description":"<p>This 40-hour, in-person practicum bridges the gap between certification and real-world coaching—equipping you with the confidence, skills, and community you need to thrive in the fitness industry.<\/p><p>You'll gain hands-on experience by training real clients on the floor at our <a href=\"https:\/\/www.fitintegrated.ca\/\" title=\"https:\/\/www.fitintegrated.ca\/\"><strong>Fit Integrated Wellness<\/strong><\/a><strong> <\/strong>facilities, all under the guidance of top-tier educators and mentors.<\/p><p><\/p>","button_text":"JOIN TODAY","video_url":"","image":"shopify:\/\/shop_images\/Ap_2nd.jpg","button_link":"\/","top_padding":50,"bottom_padding":50,"container_width":1260}},"multirow_PFhaXk":{"type":"multirow","blocks":{"row_BcNwbG":{"type":"row","settings":{"image":"shopify:\/\/shop_images\/Ap_3rd.jpg","caption":"Caption","heading":"<strong>TRAIN SMART. COACH WITH CONFIDENCE. BUILD YOUR FUTURE.<\/strong>","text":"<p>At NPTA, we don't just certify trainers— we build careers. Our program goes beyond textbook learning with expert mentorship, hands-on training, and direct industry connections that set you apart.<\/p><ul><li>40 Hours of Hands-On Training – Work with real clients in a professional gym.<\/li><li>1:1 Expert Mentorship – Learn from Canada’s top personal trainers.<\/li><li>Career-Ready Training – Build the skills, confidence, and connections to launch your career.<\/li><li>Easy Setup – Quick application with no impact on your credit score<\/li><\/ul>","show_buttons":true,"button_label":"Register now","button_link":"https:\/\/app.npta.ca\/widget\/survey\/sM15QBoTJbBVmC9vCifd"}}},"block_order":["row_BcNwbG"],"name":"t:sections.multirow.presets.name","settings":{"image_height":"medium","background_color":"#133257","top_padding":92,"bottom_padding":92,"desktop_image_width":"medium","heading_size":"h1","text_style":"body","button_style":"secondary","desktop_content_position":"middle","desktop_content_alignment":"left","image_layout":"alternate-right","mobile_content_alignment":"left","padding_top":36,"padding_bottom":36}},"section_image_text_i3TFeQ":{"type":"section--image-text","blocks":{"heading_9WnQHd":{"type":"heading","settings":{"heading":"<strong>CHOOSE YOUR PATH & START TRAINING<\/strong>","heading_size":"h1"}},"caption_7PmBW3":{"type":"caption","settings":{"caption":"If you're interested in getting started, we’ve put together bundlesthat give you more value by bringing together certification andhands-on training to set you up for success.","text_style":"subtitle","text_size":"medium"}},"text_LMkUXc":{"type":"text","settings":{"text":"<p><strong>Apprenticeship ONLY<\/strong><\/p><p>40 hours of real-world coaching with expert mentorship.<\/p>","text_style":"body"}},"text_crQMVk":{"type":"text","settings":{"text":"<p><strong>Certified Personal Trainer Starter Bundle<\/strong><\/p><p>Includes 40 hours of hands-on training + CPT + CPR\/AED certification for a strong foundation.<\/p>","text_style":"body"}},"text_JLAVGe":{"type":"text","settings":{"text":"<p><strong>Complete Fitness Pro Bundle<\/strong><\/p><p>Includes 40 hours of hands-on training + CPT, CPR\/AED,<br\/>and CNC specialization—your complete career launchpad.<br\/><br\/>Register now to take the first step. Our team will guide you<br\/>in choosing the bundle that best fits your goals.<\/p>","text_style":"body"}},"button_8Pwr7p":{"type":"button","settings":{"button_label":"Register Now","button_link":"https:\/\/app.npta.ca\/widget\/survey\/sM15QBoTJbBVmC9vCifd","button_style_secondary":false}}},"block_order":["heading_9WnQHd","caption_7PmBW3","text_LMkUXc","text_crQMVk","text_JLAVGe","button_8Pwr7p"],"settings":{"image":"shopify:\/\/shop_images\/Ap_4th.jpg","height":"medium","desktop_image_width":"medium","layout":"image_first","desktop_content_position":"top","desktop_content_alignment":"left","content_layout":"no-overlap","section_color_scheme":"scheme-2","color_scheme":"scheme-2","image_behavior":"none","mobile_content_alignment":"left","padding_top":92,"padding_bottom":92}},"section_top_banner_U7pGph":{"type":"section--top-banner","custom_css":[".section--top-banner {background-color: #000000;}",".section--top-banner:before {width: 100%;}",".section--top-background {width: 100%;}"],"settings":{"background_image":"shopify:\/\/shop_images\/Ap_Footer.jpg","title":"Support That Meets You Where You Are","subtitle":"Still feeling unsure? That’s completely okay. Starting your journey in the fitness industry is a big step—and you don’t have to take it alone. We’re here to talk it through and help you find the path that’s right for you.","button_link":"shopify:\/\/collections\/all","button_text":"GET CERTIFIED","show_button_1":true,"button_1_text":"Contact Us","button_1_link":"shopify:\/\/pages\/book-a-call","show_button_2":false,"button_2_text":"Purchase now","button_2_link":"shopify:\/\/products\/apprenticeship-program","button_position":"left","title_alignment":"left","container_width":520,"alignment":"flex-start"}},"section_breadcrumb_eFj6di":{"type":"section--breadcrumb","disabled":true,"settings":{"background_color":"#ffffff","enable_breadcrumbs":true,"breadcrumbs_home_label":"Home","breadcrumbs_separator":"|"}},"section_local_video_zpf3Ty":{"type":"section--local-video","disabled":true,"settings":{"section_id":"certified-trainers","heading":"<strong>TRAIN SMART. COACH WITH CONFIDENCE. BUILD YOUR FUTURE.<\/strong>","short_description":"<p><strong>NPTA doesn’t just certify trainers—it builds careers. We go beyond education to provide mentorship, real-world training, and direct industry connections that set you apart.<\/strong><br\/><\/p><ul><li><strong>40 Hours of Hands-On Training –<\/strong> Work with real clients in a professional gym setting.<\/li><li><strong>1:1 Expert Mentorship – <\/strong>Learn from Canada’s top personal trainers.<\/li><li><strong>Career-Ready Preparation –<\/strong> Develop the skills, confidence, and network to secure your first job.<\/li><li><strong>Exclusive Gym Partnerships –<\/strong> Connect with trusted fitness employers who value NPTA graduates<\/li><\/ul>","primary_button_text":"Book A Call","primary_button_link":"shopify:\/\/pages\/book-a-call","secondary_button_text":"Contact Us","secondary_button_link":"shopify:\/\/pages\/contact-us","enable_video_looping":false,"video_url":"https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc","description":"","full_width":false,"color_scheme":"scheme-3","padding_top":36,"padding_bottom":36}},"section_process_WVRQmV":{"type":"section--process","blocks":{"step_N6GqEF":{"type":"step","settings":{"step_title":"Select Your Program","step_description":"Choose the apprenticeship package that aligns with your career goals."}},"step_ynGT9p":{"type":"step","settings":{"step_title":"Gain Hands-On Experience","step_description":"Train with real clients, refine your skills, and learn from top industry mentors."}},"step_xFUnrd":{"type":"step","settings":{"step_title":"Launch Your Career with Confidence","step_description":"With NPTA’s expert guidance and industry connections, you’ll step into the fitness world fully prepared to succeed."}}},"block_order":["step_N6GqEF","step_ynGT9p","step_xFUnrd"],"disabled":true,"settings":{"background_color":"#ffffff","section_id":"certified-trainers","section_title":"How it Works","section_description":"","title_alignment":"center","container_width":980,"alignment":"center","show_program_button":true,"button_text":"TALK TO US TODAY","program_button_link":"shopify:\/\/pages\/book-a-call","section_footer_description":""}},"section_reviews_T4eMFc":{"type":"section--reviews","blocks":{"review_bgBTCE":{"type":"review","settings":{"author_image":"shopify:\/\/shop_images\/Cailum_NASM_Certificate_1.jpg","author_name":"Cailum","author_title":"NPTA APPRENTICE GRADUATE","review_text":"Going into FITIN as a student filled me with a level of nervousness that I felt appropriate for someone who as never personally trained someone. They reassured me that as long as I’m okay with learning and allowed myself to absorb information like a sponge then everything will get better with practice and time. As Jesse said ‘you have to get your reps in, just like exercising yourself, you’ll only make progress with consistency and practice’\nI took those words to heart and practiced. A lot. I made sure to take my notes and get to know the ins and outs of the facility and system they have in place, and even to this day I’m continuing with my learning experience. Through Jesse’s guidance and the team’s support I gained the confidence and pride to become certified and properly train others.\nAfter that the opportunities began flooding in. I started gaining more responsibilities around the facility, while running the community class every Saturday and now volunteering to work with the giving truck to help those in need.\nMy experience with Jesse and the rest of FITIN has and is still unbelievably amazing. I never imagined I would be as blessed as I am today, and I still have so much more work to do. I’m thrilled and proud to be a member of this community and I’m grateful to have been given this chance to make a difference in so many lives.","review_stars":5}},"review_6U3P9L":{"type":"review","settings":{"author_image":"shopify:\/\/shop_images\/Marie-Rose.png","author_name":"Marie Rose","author_title":"NPTA APPRENTICE GRADUATE","review_text":"My entire fitness journey started with NPTA. I enrolled into the personal training certification program and with the comprehensive theory provided by I passed the exam my first try! Not having any experience training clients, I enrolled into the apprenticeship program in order to grow my confidence as a trainer and build my client base. The 8 week apprenticeship program gave me the skills I needed to train clients independently and build strong relationships with my clients. The owners at Fit Integrated saw my passion and offered me a job afterwards! I am fortunate to now be able to live in France, still keep my clients at Fit integrated as an online trainer, and continue to grow my fitness career in my new home. Thank you NPTA for starting it all!","review_stars":5}},"review_HNHC43":{"type":"review","disabled":true,"settings":{"author_image":"shopify:\/\/shop_images\/FitIntegrated_July2024_005.jpg","author_name":"Riley","author_title":"","review_text":"As a Canadian trainer, I’m glad to have found NPTA. I’m able to advance my knowledge and career through NASM’s specialization courses but now at a better price. I became a trainer with their gym partner - Fit Integrated and under the mentorship of Jesse Benson, I now have a fully booked schedule of in-person and online clients! I’m at a stage where all my clients are recurring and I can focus on continuing to build my relationships with my clients. Jesse saw my potential and believed in the knowledge I can provide to newly certified trainers and offered me the position to teach alongside him as a mentor in the apprenticeship program. I can’t wait to continue to nurture the growth of the future of the fitness industry!","review_stars":2}}},"block_order":["review_bgBTCE","review_6U3P9L","review_HNHC43"],"disabled":true,"settings":{"heading":"Customer Reviews","section_description":"<p>From students to successful trainers, see how NPTA shaped their journey.<\/p>","background_color":"#f7f8fa"}},"section_team_UCVwax":{"type":"section--team","blocks":{"trainer_7wRmGm":{"type":"trainer","settings":{"trainer_image":"shopify:\/\/shop_images\/DSC09147-Edit_57da6aa8-2473-4f8d-bf9c-f403a11f15e7.png","trainer_position":"Educator","trainer_name":"Riley McGaffin","trainer_certification":"Certified Personal Trainer","facebook_url":"","instagram_url":"https:\/\/www.instagram.com\/fit_with_riley\/","linkedin_url":"https:\/\/www.linkedin.com\/in\/riley-mcgaffin-38b788245\/?originalSubdomain=ca","x_url":""}},"trainer_9gwEPX":{"type":"trainer","settings":{"trainer_image":"shopify:\/\/shop_images\/Cailum_K_-_NPTA_Graduate.jpg","trainer_position":"NPTA Graduate","trainer_name":"Cailum Kokotilo-Moen","trainer_certification":"Certified Personal Trainer","facebook_url":"","instagram_url":"","linkedin_url":"","x_url":""}},"trainer_qqW6LW":{"type":"trainer","settings":{"trainer_image":"shopify:\/\/shop_images\/Marie-Rose.png","trainer_position":"NPTA Graduate","trainer_name":"Marie Rose","trainer_certification":"Certified Personal Trainer","facebook_url":"","instagram_url":"","linkedin_url":"","x_url":""}}},"block_order":["trainer_7wRmGm","trainer_9gwEPX","trainer_qqW6LW"],"disabled":true,"settings":{"section_id":"certified-trainers","section_title":"Our Educators and Graduates","section_description":"<p>Meet the team that will help you become Canada’s next top personal trainer.<\/p>","title_alignment":"center","container_width":660,"alignment":"center"}},"section_form_builder_np_DBqiQc":{"type":"section--form-builder-np","blocks":{"text_field_WjccHd":{"type":"text_field","settings":{"label":"First Name","placeholder":"Enter your first name"}},"text_field_DcY3Hg":{"type":"text_field","settings":{"label":"Last Name","placeholder":"Enter your last name"}},"phone_dTbhTd":{"type":"phone","settings":{"label":"Phone Number","placeholder":"Enter your phone number"}},"email_w3UY8X":{"type":"email","settings":{"label":"Email","placeholder":"Enter your email"}},"select_NjTYxB":{"type":"select","settings":{"label":"Certification Status","options":"Certified, Not Certified"}}},"block_order":["text_field_WjccHd","text_field_DcY3Hg","phone_dTbhTd","email_w3UY8X","select_NjTYxB"],"disabled":true,"settings":{"section_id":"certified-trainers","background_color":"#ffffff","top_padding":0,"bottom_padding":92,"section_title":"Join the Waitlist","section_sub_title":"","section_description":"<p>Fill out the form below and one of our friendly advisors with be in touch to walk you through some more information!<\/p>","title_alignment":"center","container_width":980,"alignment":"center","show_program_button":false,"button_text":"Button","program_button_link":"\/","section_footer_description":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<\/p>","form_width":980,"thank_you_message":"<p>Thank you for your submission!<\/p>","form_action":"webhook","webhook_url":"https:\/\/hooks.zapier.com\/hooks\/catch\/18464236\/2tblrt5\/","form_submit_label":"Submit"}}},"order":["main","section_top_banner_hJLdAL","section_blurb_apprentice_djK8pq","multirow_PFhaXk","section_image_text_i3TFeQ","section_top_banner_U7pGph","section_breadcrumb_eFj6di","section_local_video_zpf3Ty","section_process_WVRQmV","section_reviews_T4eMFc","section_team_UCVwax","section_form_builder_np_DBqiQc"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "section_top_banner_hJLdAL": {
+      "type": "section--top-banner",
+      "custom_css": [
+        ".section--top-banner {background-color: #000000;}",
+        ".section--top-banner:before {width: 100%;}",
+        ".section--top-background {width: 100%;}"
+      ],
+      "settings": {
+        "background_image": "shopify://shop_images/AP_Page_Header.jpg",
+        "title": "Real-World Training. Real-Time Mentorship. Real Fitness Careers.",
+        "subtitle": "Join Canada’s most immersive Apprenticeship Program, built to turn certified trainers into confident, career-ready coaches.",
+        "desc1": "",
+        "button_link": "shopify://collections/all",
+        "button_text": "GET CERTIFIED",
+        "show_button_1": true,
+        "button_1_text": "Start today",
+        "button_1_link": "https://app.npta.ca/widget/survey/sM15QBoTJbBVmC9vCifd",
+        "show_button_2": false,
+        "button_2_text": "Purchase now",
+        "button_2_link": "shopify://products/apprenticeship-program",
+        "button_position": "left",
+        "title_alignment": "left",
+        "container_width": 580,
+        "alignment": "flex-start",
+        "banner_height": "",
+        "top_banner_align_items": "center",
+        "show_banner_gradient": true
+      }
+    },
+    "section_blurb_apprentice_djK8pq": {
+      "type": "section--blurb-apprentice",
+      "custom_css": [
+        ".blurb-content-right-column {height: 80%;}"
+      ],
+      "name": "Apprentices blurb",
+      "settings": {
+        "title": "NPTA Apprenticeship Program",
+        "description": "<p>This 40-hour, in-person practicum bridges the gap between certification and real-world coaching—equipping you with the confidence, skills, and community you need to thrive in the fitness industry.</p><p>You'll gain hands-on experience by training real clients on the floor at our <a href=\"https://www.fitintegrated.ca/\" title=\"https://www.fitintegrated.ca/\"><strong>Fit Integrated Wellness</strong></a><strong> </strong>facilities, all under the guidance of top-tier educators and mentors.</p><p></p>",
+        "button_text": "JOIN TODAY",
+        "video_url": "",
+        "image": "shopify://shop_images/Ap_2nd.jpg",
+        "button_link": "/",
+        "top_padding": 50,
+        "bottom_padding": 50,
+        "container_width": 1260
+      }
+    },
+    "multirow_PFhaXk": {
+      "type": "multirow",
+      "blocks": {
+        "row_BcNwbG": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/Ap_3rd.jpg",
+            "caption": "Caption",
+            "heading": "<strong>TRAIN SMART. COACH WITH CONFIDENCE. BUILD YOUR FUTURE.</strong>",
+            "text": "<p>At NPTA, we don't just certify trainers— we build careers. Our program goes beyond textbook learning with expert mentorship, hands-on training, and direct industry connections that set you apart.</p><ul><li>40 Hours of Hands-On Training – Work with real clients in a professional gym.</li><li>1:1 Expert Mentorship – Learn from Canada’s top personal trainers.</li><li>Career-Ready Training – Build the skills, confidence, and connections to launch your career.</li><li>Easy Setup – Quick application with no impact on your credit score</li></ul>",
+            "show_buttons": true,
+            "button_label": "Register now",
+            "button_link": "https://app.npta.ca/widget/survey/sM15QBoTJbBVmC9vCifd"
+          }
+        }
+      },
+      "block_order": [
+        "row_BcNwbG"
+      ],
+      "name": "t:sections.multirow.presets.name",
+      "settings": {
+        "image_height": "medium",
+        "background_color": "#133257",
+        "top_padding": 92,
+        "bottom_padding": 92,
+        "desktop_image_width": "medium",
+        "heading_size": "h1",
+        "text_style": "body",
+        "button_style": "secondary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "image_layout": "alternate-right",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "section_image_text_i3TFeQ": {
+      "type": "section--image-text",
+      "blocks": {
+        "heading_9WnQHd": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>CHOOSE YOUR PATH & START TRAINING</strong>",
+            "heading_size": "h1"
+          }
+        },
+        "caption_7PmBW3": {
+          "type": "caption",
+          "settings": {
+            "caption": "If you're interested in getting started, we’ve put together bundlesthat give you more value by bringing together certification andhands-on training to set you up for success.",
+            "text_style": "subtitle",
+            "text_size": "medium"
+          }
+        },
+        "text_LMkUXc": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Apprenticeship ONLY</strong></p><p>40 hours of real-world coaching with expert mentorship.</p>",
+            "text_style": "body"
+          }
+        },
+        "text_crQMVk": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Certified Personal Trainer Starter Bundle</strong></p><p>Includes 40 hours of hands-on training + CPT + CPR/AED certification for a strong foundation.</p>",
+            "text_style": "body"
+          }
+        },
+        "text_JLAVGe": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Complete Fitness Pro Bundle</strong></p><p>Includes 40 hours of hands-on training + CPT, CPR/AED,<br/>and CNC specialization—your complete career launchpad.<br/><br/>Register now to take the first step. Our team will guide you<br/>in choosing the bundle that best fits your goals.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_8Pwr7p": {
+          "type": "button",
+          "settings": {
+            "button_label": "Register Now",
+            "button_link": "https://app.npta.ca/widget/survey/sM15QBoTJbBVmC9vCifd",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_9WnQHd",
+        "caption_7PmBW3",
+        "text_LMkUXc",
+        "text_crQMVk",
+        "text_JLAVGe",
+        "button_8Pwr7p"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Ap_4th.jpg",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "section_color_scheme": "scheme-2",
+        "color_scheme": "scheme-2",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 92,
+        "padding_bottom": 92
+      }
+    },
+    "section_top_banner_U7pGph": {
+      "type": "section--top-banner",
+      "custom_css": [
+        ".section--top-banner {background-color: #000000;}",
+        ".section--top-banner:before {width: 100%;}",
+        ".section--top-background {width: 100%;}"
+      ],
+      "settings": {
+        "background_image": "shopify://shop_images/Ap_Footer.jpg",
+        "title": "Support That Meets You Where You Are",
+        "subtitle": "Still feeling unsure? That’s completely okay. Starting your journey in the fitness industry is a big step—and you don’t have to take it alone. We’re here to talk it through and help you find the path that’s right for you.",
+        "desc1": "",
+        "button_link": "shopify://collections/all",
+        "button_text": "GET CERTIFIED",
+        "show_button_1": true,
+        "button_1_text": "Contact Us",
+        "button_1_link": "shopify://pages/book-a-call",
+        "show_button_2": false,
+        "button_2_text": "Purchase now",
+        "button_2_link": "shopify://products/apprenticeship-program",
+        "button_position": "left",
+        "title_alignment": "left",
+        "container_width": 520,
+        "alignment": "flex-start",
+        "banner_height": "",
+        "top_banner_align_items": "center",
+        "show_banner_gradient": true
+      }
+    },
+    "section_breadcrumb_eFj6di": {
+      "type": "section--breadcrumb",
+      "disabled": true,
+      "settings": {
+        "background_color": "#ffffff",
+        "enable_breadcrumbs": true,
+        "breadcrumbs_home_label": "Home",
+        "breadcrumbs_separator": "|"
+      }
+    },
+    "section_local_video_zpf3Ty": {
+      "type": "section--local-video",
+      "disabled": true,
+      "settings": {
+        "section_id": "certified-trainers",
+        "heading": "<strong>TRAIN SMART. COACH WITH CONFIDENCE. BUILD YOUR FUTURE.</strong>",
+        "short_description": "<p><strong>NPTA doesn’t just certify trainers—it builds careers. We go beyond education to provide mentorship, real-world training, and direct industry connections that set you apart.</strong><br/></p><ul><li><strong>40 Hours of Hands-On Training –</strong> Work with real clients in a professional gym setting.</li><li><strong>1:1 Expert Mentorship – </strong>Learn from Canada’s top personal trainers.</li><li><strong>Career-Ready Preparation –</strong> Develop the skills, confidence, and network to secure your first job.</li><li><strong>Exclusive Gym Partnerships –</strong> Connect with trusted fitness employers who value NPTA graduates</li></ul>",
+        "primary_button_text": "Book A Call",
+        "primary_button_link": "shopify://pages/book-a-call",
+        "secondary_button_text": "Contact Us",
+        "secondary_button_link": "shopify://pages/contact-us",
+        "enable_video_looping": false,
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "description": "",
+        "full_width": false,
+        "color_scheme": "scheme-3",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "section_process_WVRQmV": {
+      "type": "section--process",
+      "blocks": {
+        "step_N6GqEF": {
+          "type": "step",
+          "settings": {
+            "step_title": "Select Your Program",
+            "step_description": "Choose the apprenticeship package that aligns with your career goals."
+          }
+        },
+        "step_ynGT9p": {
+          "type": "step",
+          "settings": {
+            "step_title": "Gain Hands-On Experience",
+            "step_description": "Train with real clients, refine your skills, and learn from top industry mentors."
+          }
+        },
+        "step_xFUnrd": {
+          "type": "step",
+          "settings": {
+            "step_title": "Launch Your Career with Confidence",
+            "step_description": "With NPTA’s expert guidance and industry connections, you’ll step into the fitness world fully prepared to succeed."
+          }
+        }
+      },
+      "block_order": [
+        "step_N6GqEF",
+        "step_ynGT9p",
+        "step_xFUnrd"
+      ],
+      "disabled": true,
+      "settings": {
+        "background_color": "#ffffff",
+        "section_id": "certified-trainers",
+        "section_title": "How it Works",
+        "section_description": "",
+        "title_alignment": "center",
+        "container_width": 980,
+        "alignment": "center",
+        "show_program_button": true,
+        "button_text": "TALK TO US TODAY",
+        "program_button_link": "shopify://pages/book-a-call",
+        "section_footer_description": ""
+      }
+    },
+    "section_reviews_T4eMFc": {
+      "type": "section--reviews",
+      "blocks": {
+        "review_bgBTCE": {
+          "type": "review",
+          "settings": {
+            "author_image": "shopify://shop_images/Cailum_NASM_Certificate_1.jpg",
+            "author_name": "Cailum",
+            "author_title": "NPTA APPRENTICE GRADUATE",
+            "review_text": "Going into FITIN as a student filled me with a level of nervousness that I felt appropriate for someone who as never personally trained someone. They reassured me that as long as I’m okay with learning and allowed myself to absorb information like a sponge then everything will get better with practice and time. As Jesse said ‘you have to get your reps in, just like exercising yourself, you’ll only make progress with consistency and practice’\nI took those words to heart and practiced. A lot. I made sure to take my notes and get to know the ins and outs of the facility and system they have in place, and even to this day I’m continuing with my learning experience. Through Jesse’s guidance and the team’s support I gained the confidence and pride to become certified and properly train others.\nAfter that the opportunities began flooding in. I started gaining more responsibilities around the facility, while running the community class every Saturday and now volunteering to work with the giving truck to help those in need.\nMy experience with Jesse and the rest of FITIN has and is still unbelievably amazing. I never imagined I would be as blessed as I am today, and I still have so much more work to do. I’m thrilled and proud to be a member of this community and I’m grateful to have been given this chance to make a difference in so many lives.",
+            "review_stars": 5
+          }
+        },
+        "review_6U3P9L": {
+          "type": "review",
+          "settings": {
+            "author_image": "shopify://shop_images/Marie-Rose.png",
+            "author_name": "Marie Rose",
+            "author_title": "NPTA APPRENTICE GRADUATE",
+            "review_text": "My entire fitness journey started with NPTA. I enrolled into the personal training certification program and with the comprehensive theory provided by I passed the exam my first try! Not having any experience training clients, I enrolled into the apprenticeship program in order to grow my confidence as a trainer and build my client base. The 8 week apprenticeship program gave me the skills I needed to train clients independently and build strong relationships with my clients. The owners at Fit Integrated saw my passion and offered me a job afterwards! I am fortunate to now be able to live in France, still keep my clients at Fit integrated as an online trainer, and continue to grow my fitness career in my new home. Thank you NPTA for starting it all!",
+            "review_stars": 5
+          }
+        },
+        "review_HNHC43": {
+          "type": "review",
+          "disabled": true,
+          "settings": {
+            "author_image": "shopify://shop_images/FitIntegrated_July2024_005.jpg",
+            "author_name": "Riley",
+            "author_title": "",
+            "review_text": "As a Canadian trainer, I’m glad to have found NPTA. I’m able to advance my knowledge and career through NASM’s specialization courses but now at a better price. I became a trainer with their gym partner - Fit Integrated and under the mentorship of Jesse Benson, I now have a fully booked schedule of in-person and online clients! I’m at a stage where all my clients are recurring and I can focus on continuing to build my relationships with my clients. Jesse saw my potential and believed in the knowledge I can provide to newly certified trainers and offered me the position to teach alongside him as a mentor in the apprenticeship program. I can’t wait to continue to nurture the growth of the future of the fitness industry!",
+            "review_stars": 2
+          }
+        }
+      },
+      "block_order": [
+        "review_bgBTCE",
+        "review_6U3P9L",
+        "review_HNHC43"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "Customer Reviews",
+        "section_description": "<p>From students to successful trainers, see how NPTA shaped their journey.</p>",
+        "background_color": "#f7f8fa"
+      }
+    },
+    "section_team_UCVwax": {
+      "type": "section--team",
+      "blocks": {
+        "trainer_7wRmGm": {
+          "type": "trainer",
+          "settings": {
+            "trainer_image": "shopify://shop_images/DSC09147-Edit_57da6aa8-2473-4f8d-bf9c-f403a11f15e7.png",
+            "trainer_position": "Educator",
+            "trainer_name": "Riley McGaffin",
+            "trainer_certification": "Certified Personal Trainer",
+            "facebook_url": "",
+            "instagram_url": "https://www.instagram.com/fit_with_riley/",
+            "linkedin_url": "https://www.linkedin.com/in/riley-mcgaffin-38b788245/?originalSubdomain=ca",
+            "x_url": ""
+          }
+        },
+        "trainer_9gwEPX": {
+          "type": "trainer",
+          "settings": {
+            "trainer_image": "shopify://shop_images/Cailum_K_-_NPTA_Graduate.jpg",
+            "trainer_position": "NPTA Graduate",
+            "trainer_name": "Cailum Kokotilo-Moen",
+            "trainer_certification": "Certified Personal Trainer",
+            "facebook_url": "",
+            "instagram_url": "",
+            "linkedin_url": "",
+            "x_url": ""
+          }
+        },
+        "trainer_qqW6LW": {
+          "type": "trainer",
+          "settings": {
+            "trainer_image": "shopify://shop_images/Marie-Rose.png",
+            "trainer_position": "NPTA Graduate",
+            "trainer_name": "Marie Rose",
+            "trainer_certification": "Certified Personal Trainer",
+            "facebook_url": "",
+            "instagram_url": "",
+            "linkedin_url": "",
+            "x_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "trainer_7wRmGm",
+        "trainer_9gwEPX",
+        "trainer_qqW6LW"
+      ],
+      "disabled": true,
+      "settings": {
+        "section_id": "certified-trainers",
+        "section_title": "Our Educators and Graduates",
+        "section_description": "<p>Meet the team that will help you become Canada’s next top personal trainer.</p>",
+        "title_alignment": "center",
+        "container_width": 660,
+        "alignment": "center"
+      }
+    },
+    "section_form_builder_np_DBqiQc": {
+      "type": "section--form-builder-np",
+      "blocks": {
+        "text_field_WjccHd": {
+          "type": "text_field",
+          "settings": {
+            "label": "First Name",
+            "placeholder": "Enter your first name"
+          }
+        },
+        "text_field_DcY3Hg": {
+          "type": "text_field",
+          "settings": {
+            "label": "Last Name",
+            "placeholder": "Enter your last name"
+          }
+        },
+        "phone_dTbhTd": {
+          "type": "phone",
+          "settings": {
+            "label": "Phone Number",
+            "placeholder": "Enter your phone number"
+          }
+        },
+        "email_w3UY8X": {
+          "type": "email",
+          "settings": {
+            "label": "Email",
+            "placeholder": "Enter your email"
+          }
+        },
+        "select_NjTYxB": {
+          "type": "select",
+          "settings": {
+            "label": "Certification Status",
+            "options": "Certified, Not Certified"
+          }
+        }
+      },
+      "block_order": [
+        "text_field_WjccHd",
+        "text_field_DcY3Hg",
+        "phone_dTbhTd",
+        "email_w3UY8X",
+        "select_NjTYxB"
+      ],
+      "disabled": true,
+      "settings": {
+        "section_id": "certified-trainers",
+        "background_color": "#ffffff",
+        "top_padding": 0,
+        "bottom_padding": 92,
+        "section_title": "Join the Waitlist",
+        "section_sub_title": "",
+        "section_description": "<p>Fill out the form below and one of our friendly advisors with be in touch to walk you through some more information!</p>",
+        "title_alignment": "center",
+        "container_width": 980,
+        "alignment": "center",
+        "show_program_button": false,
+        "button_text": "Button",
+        "program_button_link": "/",
+        "section_footer_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>",
+        "form_width": 980,
+        "thank_you_message": "<p>Thank you for your submission!</p>",
+        "form_action": "webhook",
+        "webhook_url": "https://hooks.zapier.com/hooks/catch/18464236/2tblrt5/",
+        "form_submit_label": "Submit"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section_top_banner_hJLdAL",
+    "section_blurb_apprentice_djK8pq",
+    "multirow_PFhaXk",
+    "section_image_text_i3TFeQ",
+    "section_top_banner_U7pGph",
+    "section_breadcrumb_eFj6di",
+    "section_local_video_zpf3Ty",
+    "section_process_WVRQmV",
+    "section_reviews_T4eMFc",
+    "section_team_UCVwax",
+    "section_form_builder_np_DBqiQc"
+  ]
+}
