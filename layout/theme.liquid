@@ -5,6 +5,22 @@
     {% if request.path == '/collections/all' %}
       <meta name="robots" content="noindex, nofollow">
     {% endif %}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var host = window.location.hostname;
+    var path = window.location.pathname;
+
+    if (path === "/" || path === "") {
+      if (host === "www.npta.com.ph" || host === "npta.com.ph") {
+        window.location.href = "https://www.npta.com.ph/collections/all-products";
+      } else if (host === "www.npta.ph" || host === "npta.ph") {
+        window.location.href = "https://www.npta.ph/collections/all-products";
+      }
+    }
+  });
+</script>
+
 <script>
     (function (c, s, q, u, a, r, e) {
         c.hj=c.hj||function(){(c.hj.q=c.hj.q||[]).push(arguments)};
