@@ -6,10 +6,12 @@
 {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 
 <script defer>document.addEventListener('load', function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = "https://widget.equally.ai/equally-widget.min.js";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'equallyWidget'));!window.EQUALLY_AI_API_KEY&&(window.EQUALLY_AI_API_KEY="82idd8xx0s125fcvqhfinzkvkx8ty8br",intervalId=setInterval(function(){window.EquallyAi&&(clearInterval(intervalId),window.EquallyAi=new EquallyAi)},500));</script>
+{% liquid
+  assign country_code = localization.country.iso_code | upcase
+%}
 
 
-
-<div class="section--footer">
+<div class="section--footer"{% if country_code == 'PH' %} style="background:#02231f;"{% endif %}>
   <div class="footer--container page-container ">
     <div class="footer-menu-column">
       <div class="footer-menu-title">
@@ -166,9 +168,6 @@
 
     
   </div>
-  {% liquid
-    assign country_code = localization.country.iso_code | upcase
-  %}
       <div class="footer--second-row page-container">
       {% if country_code == 'PH' %}
         <a href="/" class="footer--logo"><img src="https://cdn.shopify.com/s/files/1/0617/9550/0074/files/npta-logo-ph.png?v=1757725169"> </a>
