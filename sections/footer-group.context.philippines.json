@@ -14,7 +14,7 @@
   },
   "sections": {
     "footer": {
-      "disabled": true,
+      "disabled": false,
       "settings": {
         "enable_country_selector": false
       },
