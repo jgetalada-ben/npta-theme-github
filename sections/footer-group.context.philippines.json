@@ -15,6 +15,9 @@
   "sections": {
     "footer": {
       "disabled": false,
+      "custom_css": [
+        ".footer-menu-list li:nth-child(2) {display: none;}"
+      ],
       "settings": {
         "enable_country_selector": false
       },
