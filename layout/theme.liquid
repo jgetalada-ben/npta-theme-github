@@ -347,9 +347,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
      {{ 'my-styles.css' | asset_url | stylesheet_tag }}
 
     {% if country_code == 'PH' %}
-      .tf-v1-sidetab.ready {
-        display: none;
-      }
+      {% style %}
+        .tf-v1-sidetab.ready {
+          display: none;
+        }
+      {% endstyle %}
     {%- endif -%}
   </head>
 
