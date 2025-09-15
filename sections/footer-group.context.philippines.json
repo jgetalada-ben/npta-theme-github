@@ -15,9 +15,7 @@
   "sections": {
     "footer": {
       "disabled": false,
-      "custom_css": [
-        ".footer--container .footer-menu-column:nth-child(2) .footer-menu-list li:nth-child(1), .footer--container .footer-menu-column:nth-child(2) .footer-menu-list li:nth-child(2) {display: none;}"
-      ],
+      "custom_css": [],
       "settings": {
         "enable_country_selector": false
       },

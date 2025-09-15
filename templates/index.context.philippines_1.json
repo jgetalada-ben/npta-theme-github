@@ -13,42 +13,8 @@
     "market": "philippines"
   },
   "sections": {
-    "section_top_banner_U6pgy": {
-      "type": "section--top-banner",
-      "disabled": false,
-      "custom_css": [
-        ".section--top-banner {background-color: #000000;}",
-        ".section--top-banner:before {width: 100%;}",
-        ".section--top-background {width: 100%;}",
-        "@media (max-width: 768px) {.section--top-banner {max-height: 40vh; }}"
-      ],
-      "settings": {
-        "background_image": "shopify://shop_images/ntpa-ph-banner.png",
-        "title": "",
-        "subtitle": "",
-        "desc1": "",
-        "button_link": "",
-        "button_text": "",
-        "show_button_1": false,
-        "button_1_text": "",
-        "button_1_link": "/",
-        "show_button_2": false,
-        "button_2_text": "Button",
-        "button_2_link": "/",
-        "button_position": "left",
-        "title_alignment": "left",
-        "container_width": 980,
-        "alignment": "center",
-        "banner_height": "70vh",
-        "top_banner_align_items": "center",
-        "show_banner_gradient": false
-      },
-      "blocks": {},
-      "block_order": [],
-      "name": "Top Banner"
-    },
     "hero_banner_VrVBf3": {
-      "disabled": true,
+      "disabled": false,
       "settings": {},
       "blocks": {}
     },
@@ -74,7 +40,6 @@
     }
   },
   "order": [
-    "section_top_banner_U6pgy",
     "hero_banner_VrVBf3",
     "section_image_text_carousel_ARmbtF",
     "featured_programs_3Ebyx7",
