@@ -20,7 +20,7 @@
         ".section--top-banner {background-color: #000000;}",
         ".section--top-banner:before {width: 100%;}",
         ".section--top-background {width: 100%;}",
-        "@media (max-width: 768px) {.section--top-banner {height: 40vh; }}"
+        "@media (max-width: 768px) {.section--top-banner {max-height: 40vh; }}"
       ],
       "settings": {
         "background_image": "shopify://shop_images/ntpa-ph-banner.png",
