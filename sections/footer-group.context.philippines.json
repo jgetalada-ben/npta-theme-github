@@ -16,7 +16,7 @@
     "footer": {
       "disabled": false,
       "custom_css": [
-        ".footer-menu-list li:nth-child(2) {display: none;}"
+        ".footer--container .footer-menu-column:nth-child(2) .footer-menu-list li:nth-child(1), .footer--container .footer-menu-column:nth-child(2) .footer-menu-list li:nth-child(2) {display: none;}"
       ],
       "settings": {
         "enable_country_selector": false
