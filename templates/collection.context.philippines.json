@@ -20,7 +20,7 @@
         ".section--top-banner {background-color: #000000;}",
         ".section--top-banner:before {width: 100%;}",
         ".section--top-background {width: 100%;}",
-        "@media (max-width: 980px) {}"
+        "@media (max-width: 980px) {.section--top-banner {max-height: 60vh;}}"
       ],
       "settings": {
         "background_image": "shopify://shop_images/Ph_hero_temporary.png",
@@ -41,7 +41,7 @@
         "alignment": "center",
         "banner_height": "90vh",
         "top_banner_align_items": "center",
-        "show_banner_gradient": true
+        "show_banner_gradient": false
       },
       "blocks": {},
       "block_order": [],
