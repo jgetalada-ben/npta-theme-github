@@ -15,9 +15,7 @@
   "sections": {
     "footer": {
       "disabled": false,
-      "custom_css": [
-        ".section--footer .footer--container .footer-menu-column:nth-child(2) ul.footer-menu-list li:first-child,.section--footer .footer--container .footer-menu-column:nth-child(2) ul.footer-menu-list li:nth-child(2),.section--footer .footer--container .footer-menu-column:nth-child(3) ul.footer-menu-list li:nth-child(1) {display: none;}"
-      ],
+      "custom_css": [],
       "settings": {
         "enable_country_selector": false
       },
