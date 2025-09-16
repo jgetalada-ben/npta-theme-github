@@ -200,14 +200,16 @@
         <div class="custom-bundle-box-wrapper">
           <h3 >Want a Custom Bundle?</h3>
           <p>
-           <span> Email </span><a href="mailto:info@npta.ca">info@npta.ca</a>
+           <span> Email </span>{% if country_code == 'PH' %}<a href="mailto:info@npta.ph">info@npta.ph</a>{% else %}<a href="mailto:info@npta.ca">info@npta.ca</a>{% endif %}
          </p>
+         {% if country_code == 'CA' %}
          <p>
           <span>  or </span>
           </p>
          <p>
             <span>  Call </span><a href="tel:+17789496782" >+1 778-949-6782</a>
           </p>
+        {% endif %}
         </div>
       </li>
     {% endif %}
