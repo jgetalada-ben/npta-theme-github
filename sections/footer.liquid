@@ -9,6 +9,13 @@
 {% liquid
   assign country_code = localization.country.iso_code | upcase
 %}
+{% if country_code != 'PH' %}
+  {%- style -%}
+    .footer-menu-title {
+      -webkit-text-fill-color: #C0FF71;
+    }
+  {%- endstyle -%}
+{% endif %}
 
 
 <div class="section--footer"{% if country_code == 'PH' %} style="background: #01241C;"{% endif %}>
