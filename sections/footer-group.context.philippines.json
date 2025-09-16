@@ -16,7 +16,7 @@
     "footer": {
       "disabled": false,
       "custom_css": [
-        ".section--footer .footer--container .footer-menu-column:nth-child(2) ul.footer-menu-list li:first-child,.section--footer .footer--container .footer-menu-column:nth-child(2) ul.footer-menu-list li:nth-child(2),.section--footer .footer--container .footer-menu-column:nth-child(3) ul.footer-menu-list li:first-child {display: none;}"
+        ".section--footer .footer--container .footer-menu-column:nth-child(2) ul.footer-menu-list li:first-child,.section--footer .footer--container .footer-menu-column:nth-child(2) ul.footer-menu-list li:nth-child(2),.section--footer .footer--container .footer-menu-column:nth-child(3) ul.footer-menu-list li:nth-child(2) {display: none;}"
       ],
       "settings": {
         "enable_country_selector": false
