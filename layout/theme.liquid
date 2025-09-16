@@ -345,9 +345,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
      {{ 'my-styles.css' | asset_url | stylesheet_tag }}
-
-
-
+     
+    {% liquid
+      assign country_code = localization.country.iso_code | upcase
+    %}
+    {% if country_code == 'PH' %}
+      <style>
+        .tf-v1-sidetab.ready {
+          display: none;
+        }
+      </style>
+    {%- endif -%}
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">

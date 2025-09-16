@@ -1,0 +1,64 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "parent": "collection.json",
+  "context": {
+    "market": "philippines"
+  },
+  "sections": {
+    "section_top_banner_CY9V4": {
+      "type": "section--top-banner",
+      "disabled": false,
+      "custom_css": [
+        ".section--top-banner {background-color: #000000;}",
+        ".section--top-banner:before {width: 100%;}",
+        ".section--top-background {width: 100%;}",
+        "@media (max-width: 980px) {.section--top-banner {max-height: 26vh; } .section--top-background {background-size: contain; }}"
+      ],
+      "settings": {
+        "background_image": "shopify://shop_images/Ph_hero_temporary_1.png",
+        "title": "",
+        "subtitle": "",
+        "desc1": "",
+        "button_link": "shopify://collections/all",
+        "button_text": "GET CERTIFIED",
+        "show_button_1": false,
+        "button_1_text": "Button",
+        "button_1_link": "/",
+        "show_button_2": false,
+        "button_2_text": "Button",
+        "button_2_link": "/",
+        "button_position": "center",
+        "title_alignment": "left",
+        "container_width": 2000,
+        "alignment": "center",
+        "banner_height": "90vh",
+        "top_banner_align_items": "center",
+        "show_banner_gradient": false
+      },
+      "blocks": {},
+      "block_order": [],
+      "name": "Top Banner"
+    },
+    "section_banner_two_Nj7D9X": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    }
+  },
+  "order": [
+    "section_top_banner_CY9V4",
+    "banner",
+    "section_breadcrumb_JGKpdR",
+    "section_header_title_4R3UWU",
+    "product-grid",
+    "section_banner_two_Nj7D9X"
+  ]
+}
