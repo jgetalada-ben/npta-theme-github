@@ -36,6 +36,10 @@
   }
 {%- endstyle -%}
 
+{% liquid
+  assign country_code = localization.country.iso_code | upcase
+%}
+
 
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
   {%- paginate collection.products by section.settings.products_per_page -%}
