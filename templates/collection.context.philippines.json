@@ -51,6 +51,12 @@
       "disabled": true,
       "settings": {},
       "blocks": {}
+    },
+    "product-grid": {
+      "settings": {
+        "enable_filtering": true
+      },
+      "blocks": {}
     }
   },
   "order": [
