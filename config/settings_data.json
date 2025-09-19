@@ -9,8 +9,8 @@
  */
 {
   "current": {
-    "logo": "shopify://shop_images/NPTA-Logo.jpg",
-    "logo_width": 90,
+    "logo": "shopify://shop_images/Azure_Logo_CA_cropped.svg",
+    "logo_width": 140,
     "favicon": "shopify://shop_images/npta-fav.png",
     "type_header_font": "montserrat_n7",
     "heading_scale": 100,
