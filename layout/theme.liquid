@@ -462,7 +462,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- Typeform UTM Integration in Shopify -->
 
-<div id="my-typeform-div" style="display:none;"></div>
+{% comment %} <div id="my-typeform-div" style="display:none;"></div>
 <script>
 (function() {
   // Check for UTM params
@@ -493,7 +493,63 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="https://embed.typeform.com/next/embed.js"></script>
     
 
-<script src="https://app.npta.ca/js/form_embed.js"></script>
+<script src="https://app.npta.ca/js/form_embed.js"></script> {% endcomment %}
+
+<!-- Typeform Popup (show once per session, after 20s, only if no UTM) -->
+<div id="my-typeform-div" style="display:none;"></div>
+<script>
+(function () {
+  if (window.__nptaTfInit) return;
+  window.__nptaTfInit = true;
+
+  var FORM_ID = '01K0SSPB5N5XXS8JF3F5QZANGK'; // replace if needed
+  var DELAY_MS = 20000;
+  var SESSION_FLAG = 'npta_tf_popup_shown';
+
+  function urlHasUTM() {
+    var params = new URLSearchParams(window.location.search);
+    for (var pair of params.entries()) {
+      if ((pair[0] + '').toLowerCase().indexOf('utm_') === 0) return true;
+    }
+    return false;
+  }
+
+  function loadTypeformSdk(cb) {
+    if (window.tf && typeof window.tf.createPopup === 'function') {
+      cb(); return;
+    }
+    var s = document.createElement('script');
+    s.src = 'https://embed.typeform.com/next/embed.js';
+    s.async = true;
+    s.onload = cb;
+    document.head.appendChild(s);
+  }
+
+  function showPopupOnce() {
+    if (sessionStorage.getItem(SESSION_FLAG)) return;
+    sessionStorage.setItem(SESSION_FLAG, '1');
+    var popup = window.tf.createPopup(FORM_ID, {
+    });
+    popup.open();
+  }
+
+  // Wait for the page to fully loaded and then delay it
+  function schedulePopup() {
+    if (urlHasUTM()) return;
+    setTimeout(function () {
+      loadTypeformSdk(showPopupOnce);
+    }, DELAY_MS);
+  }
+
+  // Fire after the page is fully loaded (covers images, etc.)
+  if (document.readyState === 'complete') {
+    schedulePopup();
+  } else {
+    window.addEventListener('load', schedulePopup, { once: true });
+  }
+})();
+</script>
+
 <script>
 
   
