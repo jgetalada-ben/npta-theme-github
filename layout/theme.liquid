@@ -462,7 +462,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- Typeform UTM Integration in Shopify -->
 
-<div id="my-typeform-div" style="display:none;"></div>
+{% comment %} <div id="my-typeform-div" style="display:none;"></div>
 <script>
 (function() {
   // Check for UTM params
@@ -490,8 +490,91 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 })();
 </script>
 
-<script src="https://embed.typeform.com/next/embed.js"></script>
+<script src="https://embed.typeform.com/next/embed.js"></script> {% endcomment %}
 
+<script>
+(function () {
+  // --- Guard so this runs once ---
+  if (window.__nptaTfFixOnce) return;
+  window.__nptaTfFixOnce = true;
+
+  // Check for UTM params
+  function urlHasUTM() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      for (var pair of params.entries()) {
+        if ((pair[0] + '').toLowerCase().indexOf('utm_') === 0) return true;
+      }
+    } catch (e) {}
+    return false;
+  }
+
+  // Remove any auto-open attributes from Typeform widgets (sidetab/popup/etc.)
+  function disableAutoOpen(root) {
+    var sel = '[data-tf-sidetab],[data-tf-widget],[data-tf-popup],[data-tf-slider],[data-tf-sidebar]';
+    var nodes = (root.querySelectorAll ? root.querySelectorAll(sel) : []);
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i], attrs = Array.from(el.attributes || []);
+      for (var j = 0; j < attrs.length; j++) {
+        var a = attrs[j].name;
+        if (/^data-tf-open($|-)/.test(a)) {
+          el.removeAttribute(a); // removes data-tf-open, data-tf-open-value, etc.
+        }
+      }
+    }
+  }
+
+  // Watch for Typeform injecting/altering the sidetab and strip auto-open immediately
+  function installObserver(target) {
+    var obs = new MutationObserver(function (muts) {
+      for (var k = 0; k < muts.length; k++) {
+        var m = muts[k];
+
+        if (m.type === 'attributes' && m.target && /^data-tf-open/.test(m.attributeName)) {
+          m.target.removeAttribute(m.attributeName);
+        }
+
+        if (m.addedNodes && m.addedNodes.length) {
+          for (var n = 0; n < m.addedNodes.length; n++) {
+            var node = m.addedNodes[n];
+            if (node.nodeType === 1) disableAutoOpen(node);
+          }
+        }
+      }
+    });
+
+    // We observe the whole document because Typeform might inject outside the container
+    obs.observe(target || document.documentElement, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['data-tf-open', 'data-tf-open-value', 'data-tf-open-trigger']
+    });
+
+    // First pass in case the sidetab is already present
+    disableAutoOpen(document);
+  }
+
+  // If no UTM, embed the Typeform (to render sidetab) but prevent any auto-open
+  if (!urlHasUTM()) {
+    var tDiv = document.getElementById('my-typeform-div');
+    tDiv.setAttribute('data-tf-live', '01K0SSPB5N5XXS8JF3F5QZANGK'); // your form ID
+    tDiv.style.display = '';
+
+    // Install the observer BEFORE/AS the SDK loads, so we can intercept attributes ASAP
+    installObserver(document);
+
+    // Load SDK (safe even if it’s also included elsewhere)
+    var existing = document.querySelector('script[src*="embed.typeform.com/next/embed.js"]');
+    if (!existing) {
+      var s = document.createElement('script');
+      s.src = 'https://embed.typeform.com/next/embed.js';
+      s.async = true;
+      document.body.appendChild(s);
+    }
+  }
+})();
+</script>
 
 <script src="https://app.npta.ca/js/form_embed.js"></script>
 <script>
