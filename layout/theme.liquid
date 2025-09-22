@@ -462,7 +462,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- Typeform UTM Integration in Shopify -->
 
-<div id="my-typeform-div" style="display:none;"></div>
+{% comment %} <div id="my-typeform-div" style="display:none;"></div>
 <script>
 (function() {
   // Check for UTM params
@@ -490,8 +490,110 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 })();
 </script>
 
-<script src="https://embed.typeform.com/next/embed.js"></script>
-    
+<script src="https://embed.typeform.com/next/embed.js"></script> {% endcomment %}
+<script>
+(function () {
+  var FORM_ID = '01K0SSPB5N5XXS8JF3F5QZANGK';
+  var SDK_URL = 'https://embed.typeform.com/next/embed.js';
+  var SDK_ID = 'typeform-embed-sdk';
+
+  // Prevent double init
+  if (window.__nptaTfClickOnly) return;
+  window.__nptaTfClickOnly = true;
+
+  function stripTfAttrs(root) {
+    if (!root || !root.querySelectorAll) return;
+    var nodes = root.querySelectorAll('*');
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i], attrs = el.attributes;
+      for (var j = attrs.length - 1; j >= 0; j--) {
+        var a = attrs[j];
+        if (/^data-tf-/.test(a.name)) {
+          el.setAttribute('data-tf-disabled-' + a.name.slice(8), a.value);
+          el.removeAttribute(a.name);
+        }
+      }
+    }
+  }
+  stripTfAttrs(document);
+  var stripObs = new MutationObserver(function (muts) {
+    for (var k = 0; k < muts.length; k++) {
+      var m = muts[k];
+      for (var n = 0; n < m.addedNodes.length; n++) {
+        var node = m.addedNodes[n];
+        if (node.nodeType === 1) stripTfAttrs(node);
+      }
+    }
+  });
+  stripObs.observe(document.documentElement, { childList: true, subtree: true });
+
+  function loadSdk(cb) {
+    if (window.tf && typeof window.tf.createPopup === 'function') { cb(); return; }
+    var s = document.getElementById(SDK_ID);
+    if (!s) {
+      s = document.createElement('script');
+      s.id = SDK_ID;
+      s.src = SDK_URL;
+      s.async = true;
+      s.onload = function () { lockTf(); cb(); };
+      document.head.appendChild(s);
+    } else {
+      s.addEventListener && s.addEventListener('load', function () { lockTf(); cb(); });
+    }
+  }
+
+  var allowOpenOnce = false;
+  function lockTf() {
+    if (!window.tf || window.tf.__nptaLocked) return;
+
+    function wrapFactory(method) {
+      var original = window.tf[method];
+      if (typeof original !== 'function') return;
+      window.tf[method] = function () {
+        var inst = original.apply(this, arguments);
+        if (inst && typeof inst.open === 'function') {
+          var origOpen = inst.open;
+          inst.open = function () {
+            if (!allowOpenOnce) return;
+            allowOpenOnce = false;     
+            return origOpen.apply(this, arguments);
+          };
+        }
+        return inst;
+      };
+    }
+
+    ['createPopup', 'createSlider', 'createSidebar'].forEach(wrapFactory);
+    window.tf.__nptaLocked = true;
+  }
+
+  var popup = null;
+  function openTypeform() {
+    if (!window.tf || typeof window.tf.createPopup !== 'function') return;
+    if (!popup) popup = window.tf.createPopup(FORM_ID, {
+    });
+    allowOpenOnce = true;
+    popup.open();
+  }
+
+  function bindTriggers(root) {
+    var els = (root || document).querySelectorAll('[data-open-typeform], .js-open-typeform, #open-typeform');
+    for (var i = 0; i < els.length; i++) {
+      (function (btn) {
+        if (btn.__nptaBound) return; btn.__nptaBound = true;
+        btn.addEventListener('click', function (e) {
+          if (btn.tagName === 'A') e.preventDefault();
+          loadSdk(openTypeform);
+        });
+      })(els[i]);
+    }
+  }
+  bindTriggers(document);
+  var triggerObs = new MutationObserver(function () { bindTriggers(document); });
+  triggerObs.observe(document.documentElement, { childList: true, subtree: true });
+
+})();
+</script>
 
 <script src="https://app.npta.ca/js/form_embed.js"></script>
 <script>
