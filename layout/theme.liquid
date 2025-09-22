@@ -463,7 +463,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- Typeform UTM Integration in Shopify -->
 
 <div id="my-typeform-div" style="display:none;"></div>
-{% comment %} <script>
+<script>
 (function() {
   // Check for UTM params
   function urlHasUTM() {
@@ -488,105 +488,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     document.body.appendChild(s);
   }
 })();
-</script> {% endcomment %}
-
-<script>
-(function () {
-  // --- Config ---
-  var FORM_ID = '01K0SSPB5N5XXS8JF3F5QZANGK';
-  var DELAY_MS = 20000;                      
-  var SESSION_FLAG = 'npta_tf_popup_shown';  
-
-  if (window.__nptaTfInit) return;
-  window.__nptaTfInit = true;
-
-  // --- Helpers ---
-  function urlHasUTM() {
-    try {
-      var params = new URLSearchParams(window.location.search);
-      for (var pair of params.entries()) {
-        if ((pair[0] + '').toLowerCase().indexOf('utm_') === 0) return true;
-      }
-    } catch (e) {}
-    return false;
-  }
-
-  function onWindowLoad(cb) {
-    if (document.readyState === 'complete') cb();
-    else window.addEventListener('load', cb, { once: true });
-  }
-
-  // Load Typeform SDK once, reuse if already present
-  var SDK_ID = 'typeform-embed-sdk';
-  var sdkLoading = false;
-  var sdkQueue = [];
-  function loadTypeformSdk(cb) {
-    if (window.tf && typeof window.tf.createPopup === 'function') {
-      cb(); return;
-    }
-    sdkQueue.push(cb);
-    if (sdkLoading) return;
-    sdkLoading = true;
-
-    var existing = document.getElementById(SDK_ID);
-    if (existing) {
-      if (!existing.__nptaHooked) {
-        existing.__nptaHooked = true;
-        existing.addEventListener && existing.addEventListener('load', flushQueue);
-      }
-      pollForTf();
-      return;
-    }
-
-    var s = document.createElement('script');
-    s.id = SDK_ID;
-    s.src = 'https://embed.typeform.com/next/embed.js';
-    s.async = true;
-    s.onload = flushQueue;
-    document.head.appendChild(s);
-  }
-
-  function pollForTf() {
-    var tries = 0;
-    var iv = setInterval(function () {
-      if (window.tf && typeof window.tf.createPopup === 'function') {
-        clearInterval(iv); flushQueue();
-      } else if (++tries > 80) {
-        clearInterval(iv);
-        flushQueue();
-      }
-    }, 100);
-  }
-
-  function flushQueue() {
-    var q = sdkQueue.slice(); sdkQueue.length = 0;
-    for (var i = 0; i < q.length; i++) q[i]();
-  }
-
-  function showPopupOnce() {
-    if (sessionStorage.getItem(SESSION_FLAG)) return;
-    sessionStorage.setItem(SESSION_FLAG, '1');
-
-    if (!(window.tf && typeof window.tf.createPopup === 'function')) return; // SDK not ready
-    var popup = window.tf.createPopup(FORM_ID, {
-    });
-    popup.open();
-  }
-
-  function schedule() {
-    if (urlHasUTM()) return;
-    setTimeout(function () {
-      loadTypeformSdk(showPopupOnce);
-    }, DELAY_MS);
-  }
-
-  // Start after full load so "20s after page is done loading"
-  onWindowLoad(schedule);
-})();
 </script>
 
-
-{% comment %} <script src="https://embed.typeform.com/next/embed.js"></script> {% endcomment %}
+<script src="https://embed.typeform.com/next/embed.js"></script>
     
 
 <script src="https://app.npta.ca/js/form_embed.js"></script>
