@@ -56,10 +56,10 @@
     {%- if show_badges %} price--show-badge{% endif -%}"
 >
   <div class="price__container">
+    
+    {% if payment_url != blank %}
     <div class="price__monthly">
       <span class="visually-hidden">{{ 'products.product.price.monthly_price' | t }}</span>
-
-      {% if payment_url != blank %}
         <div class="starting-price-wrap">
           <p class="starting-price-label">Starting at:</p>
           <p class="starting-price-p"> 
@@ -72,10 +72,8 @@
             12 payments
           </span>
         </div>
-      {% endif %}
-
-      
     </div>
+    {% endif %}
 
     <div class="price__one-time">
       <span class="visually-hidden">{{ 'products.product.price.one_time_price' | t }}</span>
