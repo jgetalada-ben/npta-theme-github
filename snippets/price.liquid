@@ -40,6 +40,9 @@
   else
     assign competitor_money_price = competitor_price | money
   endif
+
+  assign payment_url = product.metafields.custom.payment_options
+
 -%}
 
 {%- unless target == nil -%}
@@ -53,22 +56,24 @@
     {%- if show_badges %} price--show-badge{% endif -%}"
 >
   <div class="price__container">
+    
+    {% if payment_url != blank %}
     <div class="price__monthly">
       <span class="visually-hidden">{{ 'products.product.price.monthly_price' | t }}</span>
-
-      <div class="starting-price-wrap">
-        <p class="starting-price-label">Starting at:</p>
-        <p class="starting-price-p"> 
-          <span class="price-item price-item--monthly">
-            {{ monthly_payment | divided_by: 100.0 | prepend: currency_code }} /
+        <div class="starting-price-wrap">
+          <p class="starting-price-label">Starting at:</p>
+          <p class="starting-price-p"> 
+            <span class="price-item price-item--monthly">
+              {{ monthly_payment | divided_by: 100.0 | prepend: currency_code }} /
+            </span>
+            <span class="price-label-month">month</span>
+          </p>
+          <span class="price-item price-item--payment-terms">
+            12 payments
           </span>
-          <span class="price-label-month">month</span>
-        </p>
-        <span class="price-item price-item--payment-terms">
-          12 payments
-        </span>
-      </div>
+        </div>
     </div>
+    {% endif %}
 
     <div class="price__one-time">
       <span class="visually-hidden">{{ 'products.product.price.one_time_price' | t }}</span>
