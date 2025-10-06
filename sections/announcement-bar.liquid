@@ -88,53 +88,59 @@
   {% endstylesheet %}
 
   {% javascript %}
-  (function(){
-    var root = document.getElementById('AnnouncementBar-{{ section.id }}');
-    if (!root) return;
+    (function(){
+      var root = document.getElementById('AnnouncementBar-{{ section.id }}');
+      if (!root) return;
 
-    var slides = Array.prototype.slice.call(root.querySelectorAll('.announcement-rotator .announcement'));
-    if (!slides.length) return;
+      var slides = [].slice.call(root.querySelectorAll('.announcement-rotator .announcement'));
+      if (!slides.length) return;
 
-    // Fix container height to tallest slide so fades don't jump
-    var rot = root.querySelector('.announcement-rotator');
-    function setHeight(){
-      var max = 0;
-      slides.forEach(function(s){
-        s.style.position = 'relative';
-        s.style.opacity = '1';
-        s.style.transform = 'none';
-        var h = s.offsetHeight;
-        if (h > max) max = h;
-        s.removeAttribute('style');
-      });
-      rot.style.minHeight = max + 'px';
-    }
-    setHeight();
-    window.addEventListener('resize', setHeight);
+      var rot = root.querySelector('.announcement-rotator');
 
-    if (slides.length === 1) return;
+      // Fix container height to tallest slide
+      function setHeight(){
+        var max = 0;
+        slides.forEach(function(s){
+          var wasActive = s.classList.contains('is-active');
+          s.classList.add('is-active');               // ensure measurable
+          var h = s.offsetHeight;
+          if (h > max) max = h;
+          if (!wasActive) s.classList.remove('is-active');
+        });
+        rot.style.minHeight = max + 'px';
+      }
+      setHeight();
+      window.addEventListener('resize', setHeight);
 
-    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var i = 0;
-    function show(k){
-      slides.forEach(function(s, idx){ s.classList.toggle('is-active', idx === k); });
-    }
-    show(i);
-
-    if (prefersReduced) return;
-
-    var speed = {{ section.settings.rotation_ms | default: 5000 | plus: 0 }};
-    var timer = setInterval(function(){
-      i = (i + 1) % slides.length;
+      var i = 0;
+      function show(k){
+        slides.forEach(function(s, idx){ s.classList.toggle('is-active', idx === k); });
+      }
       show(i);
-    }, speed);
 
-    // Optional: pause on hover (desktop)
-    root.addEventListener('mouseenter', function(){ clearInterval(timer); });
-    root.addEventListener('mouseleave', function(){
-      timer = setInterval(function(){ i = (i + 1) % slides.length; show(i); }, speed);
-    });
-  })();
+      var speed = {{ section.settings.rotation_ms | default: 5000 | plus: 0 }};
+
+      function start(){
+        if (root._annTimer) clearInterval(root._annTimer);
+        root._annTimer = setInterval(function(){
+          i = (i + 1) % slides.length;
+          show(i);
+        }, speed);
+      }
+
+      if (slides.length > 1) start();  // always rotate, even if prefers-reduced-motion
+
+      // Pause on hover (desktop)
+      root.addEventListener('mouseenter', function(){ if (root._annTimer) clearInterval(root._annTimer); });
+      root.addEventListener('mouseleave', function(){ if (slides.length > 1) start(); });
+
+      // Clean up timer when Theme Editor hot-reloads this section
+      document.addEventListener('shopify:section:unload', function(e){
+        if (e.detail && e.detail.sectionId === '{{ section.id }}' && root._annTimer){
+          clearInterval(root._annTimer);
+        }
+      });
+    })();
   {% endjavascript %}
 </section>
 
