@@ -38,13 +38,10 @@
   </div>
 
   {% stylesheet %}
-  /* Container */
   #AnnouncementBar-{{ section.id }} .announcement-bar--container {
     display: flex; justify-content: center; align-items: center;
     padding: 0 12px;
   }
-
-  /* Grid overlay: all slides stack and the container auto-sizes to the tallest */
   #AnnouncementBar-{{ section.id }} .announcement-rotator {
     display: grid;
     width: 100%;
@@ -55,8 +52,6 @@
     margin: 0; text-align: center;
     opacity: 0; transform: translateY(6px);
   }
-
-  /* Typography (Figma: Anton 20/100%) */
   #AnnouncementBar-{{ section.id }} .rt {
     font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
     font-weight: 400; font-style: normal;
@@ -84,7 +79,6 @@
     100% { opacity: 0; transform: translateY(-6px); }
   }
 
-  /* No/one slide: just show the first, no animation */
   #AnnouncementBar-{{ section.id }}.count-0 .announcement:first-child,
   #AnnouncementBar-{{ section.id }}.count-1 .announcement:first-child {
     opacity: 1; transform: none;
