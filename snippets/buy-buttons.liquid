@@ -123,8 +123,18 @@
 
 {% if product.metafields.custom.payment_options %}
   <div class="payment-options">
-    <a href="{{ product.metafields.custom.payment_options.value }}"  target="_blank">Elective Financing Options</a>
-  
+    <a
+      href="{{ product.metafields.custom.payment_options.value }}"
+      target="_blank"
+      rel="noopener"
+      class="btn button-b"
+      data-elective-financing-link
+      data-product-handle="{{ product.handle }}"
+      data-product-id="{{ product.id }}"
+    >
+      <span class="btn-label-down">Elective Financing Options</span>
+      <span class="btn-label-down">Elective Financing Options</span>
+    </a>
   </div>
   <div class="tooltip-wrap">
       <a href="/pages/payment-plan-options" target="_blank" class="payment-options-tooltip"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><g clip-path="url(#a)"><path d="M12 2C6.475 2 2 6.475 2 12s4.475 10 10 10 10-4.475 10-10S17.525 2 12 2Zm1 15h-2v-6h2v6Zm0-8h-2V7h2v2Z" /></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h24v24H0z"/></clipPath></defs></svg></a>
@@ -181,6 +191,121 @@
 
     <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
+
+  <script>
+    (function() {
+      const ATTR_KEY = 'bh_attribution_v1';
+      const UTM_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+      const CLICK_IDS = [
+        'gclid','gbraid','wbraid',   // Google
+        'fbclid',                    // Meta
+        'ttclid',                    // TikTok
+        'msclkid',                   // Microsoft Ads
+        'li_fat_id',                 // LinkedIn
+        'twclid'                     // X
+      ];
+
+      function qsParams() {
+        const out = {};
+        const s = new URLSearchParams(window.location.search);
+        [...UTM_KEYS, ...CLICK_IDS].forEach(k => { if (s.get(k)) out[k] = s.get(k); });
+        return out;
+      }
+
+      function first(...vals){ return vals.find(v => v && String(v).trim()) || ''; }
+
+      function getAttr() {
+        try { return JSON.parse(localStorage.getItem(ATTR_KEY) || '{}'); }
+        catch(e){ return {}; }
+      }
+      function saveAttr(a) {
+        const clean = Object.fromEntries(Object.entries(a).filter(([,v]) => v != null && v !== ''));
+        localStorage.setItem(ATTR_KEY, JSON.stringify(clean));
+        // cookie fallback (90 days)
+        const d=new Date(); d.setTime(d.getTime()+90*24*60*60*1000);
+        document.cookie = `bh_attr=${encodeURIComponent(JSON.stringify(clean))}; expires=${d.toUTCString()}; path=/; SameSite=Lax`;
+      }
+
+      function initAttribution() {
+        const existing = getAttr();
+        const incoming = qsParams();
+        const hasNew = Object.keys(incoming).length > 0;
+
+        if (Object.keys(existing).length && !hasNew) return; // don't overwrite unless new UTMs present
+
+        const ref = document.referrer || existing.referrer || '';
+        const attr = {
+          ...existing,
+          ...incoming,
+          first_seen: existing.first_seen || new Date().toISOString(),
+          referrer: existing.referrer || ref,
+          landing_page: existing.landing_page || (window.location.pathname + window.location.search),
+          utm_source: first(incoming.utm_source, existing.utm_source, ref ? new URL(ref).hostname : '(direct)'),
+          utm_medium: first(incoming.utm_medium, existing.utm_medium, hasNew ? 'paid' : (ref ? 'referral' : 'direct')),
+          utm_campaign: first(incoming.utm_campaign, existing.utm_campaign, '(not set)')
+        };
+        saveAttr(attr);
+      }
+
+      function appendAttributionToUrl(url, linkEl) {
+        try {
+          const u = new URL(url, window.location.origin);
+          const attr = getAttr();
+          [...UTM_KEYS, ...CLICK_IDS].forEach(k => { if (attr[k]) u.searchParams.set(k, attr[k]); });
+          if (attr.referrer) u.searchParams.set('source_referrer', attr.referrer);
+          if (attr.landing_page) u.searchParams.set('source_landing', attr.landing_page);
+          u.searchParams.set('source_page', window.location.pathname);
+          if (linkEl?.dataset.productHandle) u.searchParams.set('product_handle', linkEl.dataset.productHandle);
+          if (linkEl?.dataset.productId) u.searchParams.set('product_id', linkEl.dataset.productId);
+          return u.toString();
+        } catch(e) {
+          return url;
+        }
+      }
+
+      function trackElectiveClick(linkEl) {
+        const attr = getAttr();
+        const payload = {
+          event: 'elective_financing_click',
+          event_category: 'Financing',
+          event_label: (linkEl.textContent || '').trim(),
+          page_location: window.location.href,
+          page_path: window.location.pathname,
+          product_handle: linkEl.dataset.productHandle || '',
+          product_id: linkEl.dataset.productId || '',
+          timestamp: Date.now(),
+          ...attr
+        };
+        // GTM / dataLayer
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push(payload);
+        // GA4 (direct)
+        if (window.gtag) window.gtag('event','elective_financing_click', payload);
+        // Meta Pixel
+        if (window.fbq) window.fbq('trackCustom','ElectiveFinancingClick', payload);
+        // Shopify Web Pixel bridge (optional)
+        document.dispatchEvent(new CustomEvent('bh:elective_financing_click', { detail: payload }));
+      }
+
+      function wire() {
+        initAttribution();
+        const link = document.querySelector('[data-elective-financing-link]');
+        if (!link || link.dataset.bhWired === '1') return;
+        link.dataset.bhWired = '1';
+
+        link.addEventListener('click', function() {
+          trackElectiveClick(link);
+          const newHref = appendAttributionToUrl(link.getAttribute('href'), link);
+          if (newHref !== link.getAttribute('href')) link.setAttribute('href', newHref);
+          // navigation proceeds normally (even with target=_blank)
+        }, { capture: true });
+      }
+
+      document.addEventListener('DOMContentLoaded', wire);
+      document.addEventListener('shopify:section:load', wire);
+      document.addEventListener('shopify:section:select', wire);
+    })();
+  </script>
 </div>
 
 
@@ -201,7 +326,7 @@ font-family: Montserrat;
 font-size: 14px;
 font-style: normal;
 font-weight: 700;
-line-height: 150%;
+{% comment %} line-height: 150%; {% endcomment %}
 letter-spacing: 1.12px;
 text-decoration-line: none;
 text-transform: uppercase;
@@ -244,8 +369,6 @@ a:after {
   width: 0%;
   transition: 0s;
 }
-
-
     
     .product-form-wrap{
           display: flex;
