@@ -49,7 +49,7 @@
         "bg_color": "#c8ff63",
         "text_color": "#000000",
         "font_size": 20,
-        "padding_y": 12,
+        "padding_y": 20,
         "rotation_ms": 5000
       }
     },
