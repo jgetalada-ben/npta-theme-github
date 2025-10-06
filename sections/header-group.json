@@ -17,7 +17,7 @@
         "message_7M8RCx": {
           "type": "message",
           "settings": {
-            "text": "FLASH SALE! BUY MORE, SAVE MORE!",
+            "text": "<p><strong>🎉 FLASH SALE! 🎁 BUY MORE, SAVE MORE!  </strong></p>",
             "link_label": "Shop now",
             "link_url": ""
           }
@@ -25,7 +25,7 @@
         "message_QkU6LY": {
           "type": "message",
           "settings": {
-            "text": "Save more buy now",
+            "text": "<p>Save more buy now</p>",
             "link_label": "Shop now",
             "link_url": ""
           }
@@ -33,7 +33,7 @@
         "message_pDj7eD": {
           "type": "message",
           "settings": {
-            "text": "the quick brow fox jumps over the lazy dog",
+            "text": "<p>the quick brow fox jumps over the lazy dog</p>",
             "link_label": "Shop now",
             "link_url": ""
           }
@@ -46,10 +46,10 @@
       ],
       "custom_css": [],
       "settings": {
-        "show_icon": true,
         "bg_color": "#c8ff63",
         "text_color": "#000000",
         "font_size": 20,
+        "padding_y": 12,
         "rotation_ms": 5000
       }
     },
