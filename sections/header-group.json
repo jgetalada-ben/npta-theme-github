@@ -13,9 +13,45 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
-      "disabled": true,
+      "blocks": {
+        "message_7M8RCx": {
+          "type": "message",
+          "settings": {
+            "text": "FLASH SALE! BUY MORE, SAVE MORE!",
+            "link_label": "Shop now",
+            "link_url": ""
+          }
+        },
+        "message_QkU6LY": {
+          "type": "message",
+          "settings": {
+            "text": "Save more buy now",
+            "link_label": "Shop now",
+            "link_url": ""
+          }
+        },
+        "message_pDj7eD": {
+          "type": "message",
+          "settings": {
+            "text": "the quick brow fox jumps over the lazy dog",
+            "link_label": "Shop now",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "message_7M8RCx",
+        "message_QkU6LY",
+        "message_pDj7eD"
+      ],
       "custom_css": [],
-      "settings": {}
+      "settings": {
+        "show_icon": true,
+        "bg_color": "#c8ff63",
+        "text_color": "#000000",
+        "font_size": 20,
+        "rotation_ms": 5000
+      }
     },
     "header": {
       "type": "header",
