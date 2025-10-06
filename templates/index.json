@@ -9,6 +9,21 @@
  */
 {
   "sections": {
+    "video_CAzNjY": {
+      "type": "video",
+      "name": "t:sections.video.presets.name",
+      "settings": {
+        "heading": "Video",
+        "heading_size": "h1",
+        "enable_video_looping": false,
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "description": "",
+        "full_width": false,
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "hero_banner_VrVBf3": {
       "type": "hero-banner",
       "blocks": {
@@ -57,6 +72,7 @@
         "word_MNHVdq",
         "word_bpCGmP"
       ],
+      "disabled": true,
       "custom_css": [
         "@media (max-width: 767px) {.section--hero-badges .section--badge {display: block; text-align: center; } .section--hero-badges .section--badge span {display: inline; vertical-align: top; top: 2px; position: relative; } .section--hero-badges .section--badge img {display: none !important; } .section--hero-badges .section--badge-1 {display: none !important; }}"
       ],
@@ -776,6 +792,7 @@
     }
   },
   "order": [
+    "video_CAzNjY",
     "hero_banner_VrVBf3",
     "section_image_text_carousel_ARmbtF",
     "featured_programs_3Ebyx7",
