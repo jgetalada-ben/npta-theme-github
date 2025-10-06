@@ -1,28 +1,35 @@
 {% comment %}
-  Announcement Rotator
-  - Up to 4 rich-text announcements that fade in/out
-  - Background + text color + padding + speed controls
+  Announcement Rotator (CSS-only)
+  - Up to 4 rich-text announcements
+  - Fade in/out via pure CSS (no JS)
+  - Background/text color + padding + speed controls
 {% endcomment %}
 
-<section id="AnnouncementBar-{{ section.id }}"
-  style="background: {{ section.settings.bg_color | default: '#C8FF63' }}; padding: {{ section.settings.padding_y | default: 12 }}px 0;"
-  class="announcement-rotator-section">
-
+<section
+  id="AnnouncementBar-{{ section.id }}"
+  class="announcement-rotator-section count-{{ section.blocks.size }}"
+  style="
+    --ann-speed: {{ section.settings.rotation_ms | default: 5000 }}ms;
+    background: {{ section.settings.bg_color | default: '#C8FF63' }};
+    color: {{ section.settings.text_color | default: '#000000' }};
+    padding: {{ section.settings.padding_y | default: 12 }}px 0;
+  "
+>
   <div class="announcement-bar--container page-container">
     <div class="announcement-rotator" role="region" aria-live="polite">
       {% if section.blocks.size > 0 %}
         {% for block in section.blocks %}
           {% if block.type == 'message' %}
-            <div class="announcement{% if forloop.first %} is-active{% endif %}" {{ block.shopify_attributes }}>
-              <div class="rt">{{ block.settings.text }}</div>
-              {% if block.settings.link_label != blank and block.settings.link_url != blank %}
-                <a class="ann-link" href="{{ block.settings.link_url }}">{{ block.settings.link_label }}</a>
-              {% endif %}
-            </div>
+          <div class="announcement" {{ block.shopify_attributes }}>
+            <div class="rt">{{ block.settings.text }}</div>
+            {% if block.settings.link_label != blank and block.settings.link_url != blank %}
+              <a class="ann-link" href="{{ block.settings.link_url }}">{{ block.settings.link_label }}</a>
+            {% endif %}
+          </div>
           {% endif %}
         {% endfor %}
       {% else %}
-        <div class="announcement is-active">
+        <div class="announcement">
           <div class="rt">🎉 FLASH SALE! BUY MORE, SAVE MORE!</div>
           <a class="ann-link" href="/collections/all">Shop now</a>
         </div>
@@ -31,41 +38,32 @@
   </div>
 
   {% stylesheet %}
-  /* Layout / colors */
-  #AnnouncementBar-{{ section.id }} {
-    color: {{ section.settings.text_color | default: '#000000' }};
-  }
+  /* Container */
   #AnnouncementBar-{{ section.id }} .announcement-bar--container {
-    display:flex; justify-content:center; align-items:center; position:relative;
+    display: flex; justify-content: center; align-items: center;
     padding: 0 12px;
   }
 
-  /* Rotator sizing: stack slides on top of each other, container keeps tallest height */
+  /* Grid overlay: all slides stack and the container auto-sizes to the tallest */
   #AnnouncementBar-{{ section.id }} .announcement-rotator {
-    position: relative;
+    display: grid;
     width: 100%;
   }
   #AnnouncementBar-{{ section.id }} .announcement {
-    position: absolute; left: 0; right: 0; top: 0;
+    grid-area: 1 / 1;      /* all items overlap */
+    justify-self: center;
     margin: 0; text-align: center;
     opacity: 0; transform: translateY(6px);
-    transition: opacity 300ms ease, transform 300ms ease;
-    pointer-events: none;
-  }
-  #AnnouncementBar-{{ section.id }} .announcement.is-active {
-    opacity: 1; transform: translateY(0); pointer-events: auto; position: relative;
   }
 
-  /* Typography — matches Figma (Anton 20 / 100%) with graceful fallback */
+  /* Typography (Figma: Anton 20/100%) */
   #AnnouncementBar-{{ section.id }} .rt {
     font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
     font-weight: 400; font-style: normal;
     font-size: {{ section.settings.font_size | default: 20 }}px;
     line-height: 100%;
     letter-spacing: 0;
-    color: inherit;
   }
-  /* Remove default margins Word/Docs may inject */
   #AnnouncementBar-{{ section.id }} .rt p { margin: 0; }
   #AnnouncementBar-{{ section.id }} .rt p + p { margin-top: .25rem; }
 
@@ -73,75 +71,67 @@
     margin-left: .5ch;
     color: inherit;
     text-decoration: underline;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
+    font: inherit;
     white-space: nowrap;
   }
 
-  @media (max-width: 640px) {
-    #AnnouncementBar-{{ section.id }} .rt { font-size: {{ section.settings.font_size | default: 20 | minus: 2 }}px; }
+  /* Keyframes for each slide’s slot within the cycle */
+  @keyframes annFade {
+    0%   { opacity: 0; transform: translateY(6px); }
+    6%   { opacity: 1; transform: translateY(0); }
+    28%  { opacity: 1; transform: translateY(0); }
+    34%  { opacity: 0; transform: translateY(-6px); }
+    100% { opacity: 0; transform: translateY(-6px); }
   }
-  @media (prefers-reduced-motion: reduce){
-    #AnnouncementBar-{{ section.id }} .announcement { transition: none; }
+
+  /* No/one slide: just show the first, no animation */
+  #AnnouncementBar-{{ section.id }}.count-0 .announcement:first-child,
+  #AnnouncementBar-{{ section.id }}.count-1 .announcement:first-child {
+    opacity: 1; transform: none;
+  }
+
+  /* 2 slides */
+  #AnnouncementBar-{{ section.id }}.count-2 { --ann-cycle: calc(var(--ann-speed) * 2); }
+  #AnnouncementBar-{{ section.id }}.count-2 .announcement {
+    animation: annFade var(--ann-cycle) linear infinite both;
+  }
+  #AnnouncementBar-{{ section.id }}.count-2 .announcement:nth-child(1) { animation-delay: calc(var(--ann-speed) * 0); }
+  #AnnouncementBar-{{ section.id }}.count-2 .announcement:nth-child(2) { animation-delay: calc(var(--ann-speed) * 1); }
+
+  /* 3 slides */
+  #AnnouncementBar-{{ section.id }}.count-3 { --ann-cycle: calc(var(--ann-speed) * 3); }
+  #AnnouncementBar-{{ section.id }}.count-3 .announcement {
+    animation: annFade var(--ann-cycle) linear infinite both;
+  }
+  #AnnouncementBar-{{ section.id }}.count-3 .announcement:nth-child(1) { animation-delay: calc(var(--ann-speed) * 0); }
+  #AnnouncementBar-{{ section.id }}.count-3 .announcement:nth-child(2) { animation-delay: calc(var(--ann-speed) * 1); }
+  #AnnouncementBar-{{ section.id }}.count-3 .announcement:nth-child(3) { animation-delay: calc(var(--ann-speed) * 2); }
+
+  /* 4 slides */
+  #AnnouncementBar-{{ section.id }}.count-4 { --ann-cycle: calc(var(--ann-speed) * 4); }
+  #AnnouncementBar-{{ section.id }}.count-4 .announcement {
+    animation: annFade var(--ann-cycle) linear infinite both;
+  }
+  #AnnouncementBar-{{ section.id }}.count-4 .announcement:nth-child(1) { animation-delay: calc(var(--ann-speed) * 0); }
+  #AnnouncementBar-{{ section.id }}.count-4 .announcement:nth-child(2) { animation-delay: calc(var(--ann-speed) * 1); }
+  #AnnouncementBar-{{ section.id }}.count-4 .announcement:nth-child(3) { animation-delay: calc(var(--ann-speed) * 2); }
+  #AnnouncementBar-{{ section.id }}.count-4 .announcement:nth-child(4) { animation-delay: calc(var(--ann-speed) * 3); }
+
+  /* Mobile sizing */
+  @media (max-width: 640px) {
+    #AnnouncementBar-{{ section.id }} .rt {
+      font-size: {{ section.settings.font_size | default: 20 | minus: 2 }}px;
+    }
+  }
+
+  /* Respect reduced motion (still rotates, but with no motion) */
+  @media (prefers-reduced-motion: reduce) {
+    #AnnouncementBar-{{ section.id }} .announcement { animation: none !important; }
+    #AnnouncementBar-{{ section.id }}.count-2 .announcement:nth-child(1),
+    #AnnouncementBar-{{ section.id }}.count-3 .announcement:nth-child(1),
+    #AnnouncementBar-{{ section.id }}.count-4 .announcement:nth-child(1) { opacity: 1; transform: none; }
   }
   {% endstylesheet %}
-
-  {% javascript %}
-    (function(){
-      var root = document.getElementById('AnnouncementBar-{{ section.id }}');
-      if (!root) return;
-
-      var slides = [].slice.call(root.querySelectorAll('.announcement-rotator .announcement'));
-      if (!slides.length) return;
-
-      var rot = root.querySelector('.announcement-rotator');
-
-      // Fix container height to tallest slide
-      function setHeight(){
-        var max = 0;
-        slides.forEach(function(s){
-          var wasActive = s.classList.contains('is-active');
-          s.classList.add('is-active');               // ensure measurable
-          var h = s.offsetHeight;
-          if (h > max) max = h;
-          if (!wasActive) s.classList.remove('is-active');
-        });
-        rot.style.minHeight = max + 'px';
-      }
-      setHeight();
-      window.addEventListener('resize', setHeight);
-
-      var i = 0;
-      function show(k){
-        slides.forEach(function(s, idx){ s.classList.toggle('is-active', idx === k); });
-      }
-      show(i);
-
-      var speed = {{ section.settings.rotation_ms | default: 5000 | plus: 0 }};
-
-      function start(){
-        if (root._annTimer) clearInterval(root._annTimer);
-        root._annTimer = setInterval(function(){
-          i = (i + 1) % slides.length;
-          show(i);
-        }, speed);
-      }
-
-      if (slides.length > 1) start();  // always rotate, even if prefers-reduced-motion
-
-      // Pause on hover (desktop)
-      root.addEventListener('mouseenter', function(){ if (root._annTimer) clearInterval(root._annTimer); });
-      root.addEventListener('mouseleave', function(){ if (slides.length > 1) start(); });
-
-      // Clean up timer when Theme Editor hot-reloads this section
-      document.addEventListener('shopify:section:unload', function(e){
-        if (e.detail && e.detail.sectionId === '{{ section.id }}' && root._annTimer){
-          clearInterval(root._annTimer);
-        }
-      });
-    })();
-  {% endjavascript %}
 </section>
 
 {% schema %}
