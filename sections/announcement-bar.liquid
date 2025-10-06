@@ -1,63 +1,90 @@
 {% comment %}
-  sections/announcement-bar.liquid
-  - Multi-message announcement bar with fade transition
-  - Up to 4 announcements (blocks)
-  - Customizable background & text colors + rotation speed
+  Announcement Rotator
+  - Up to 4 rich-text announcements that fade in/out
+  - Background + text color + padding + speed controls
 {% endcomment %}
 
 <section id="AnnouncementBar-{{ section.id }}"
-  class="section--announcement-bar"
-  style="--ann-bg: {{ section.settings.bg_color | default: '#C8FF63' }}; --ann-color: {{ section.settings.text_color | default: '#000000' }}; --ann-size: {{ section.settings.font_size | default: 20 }}px; --ann-speed: {{ section.settings.rotation_ms | default: 5000 }}ms;">
-  <div class="announcement-bar--container page-container">
-    {% if section.settings.show_icon %}
-      <span class="announcement-icon" aria-hidden="true">🎉</span>
-    {% endif %}
+  style="background: {{ section.settings.bg_color | default: '#C8FF63' }}; padding: {{ section.settings.padding_y | default: 12 }}px 0;"
+  class="announcement-rotator-section">
 
+  <div class="announcement-bar--container page-container">
     <div class="announcement-rotator" role="region" aria-live="polite">
       {% if section.blocks.size > 0 %}
         {% for block in section.blocks %}
           {% if block.type == 'message' %}
-            <p class="announcement{% if forloop.first %} is-active{% endif %}" {{ block.shopify_attributes }}>
-              {{ block.settings.text | escape }}
+            <div class="announcement{% if forloop.first %} is-active{% endif %}" {{ block.shopify_attributes }}>
+              <div class="rt">{{ block.settings.text }}</div>
               {% if block.settings.link_label != blank and block.settings.link_url != blank %}
-                <a href="{{ block.settings.link_url }}">{{ block.settings.link_label }}</a>
+                <a class="ann-link" href="{{ block.settings.link_url }}">{{ block.settings.link_label }}</a>
               {% endif %}
-            </p>
+            </div>
           {% endif %}
         {% endfor %}
       {% else %}
-        <p class="announcement is-active">
-          Flash sale! <strong>Buy more, save more.</strong>
-          <a href="/collections/all">Shop now</a>
-        </p>
+        <div class="announcement is-active">
+          <div class="rt">🎉 FLASH SALE! BUY MORE, SAVE MORE!</div>
+          <a class="ann-link" href="/collections/all">Shop now</a>
+        </div>
       {% endif %}
     </div>
-
-    <button class="announcement-bar--close" aria-label="Close announcement bar">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M19.2806 18.2193C19.3502 18.289 19.4055 18.3717 19.4432 18.4628C19.4809 18.5538 19.5003 18.6514 19.5003 18.7499C19.5003 18.8485 19.4809 18.9461 19.4432 19.0371C19.4055 19.1281 19.3502 19.2109 19.2806 19.2806C19.2109 19.3502 19.1281 19.4055 19.0371 19.4432C18.9461 19.4809 18.8485 19.5003 18.7499 19.5003C18.6514 19.5003 18.5538 19.4809 18.4628 19.4432C18.3717 19.4055 18.289 19.3502 18.2193 19.2806L11.9999 13.0602L5.78055 19.2806C5.63982 19.4213 5.44895 19.5003 5.24993 19.5003C5.05091 19.5003 4.86003 19.4213 4.7193 19.2806C4.57857 19.1398 4.49951 18.949 4.49951 18.7499C4.49951 18.5509 4.57857 18.36 4.7193 18.2193L10.9396 11.9999L4.7193 5.78055C4.57857 5.63982 4.49951 5.44895 4.49951 5.24993C4.49951 5.05091 4.57857 4.86003 4.7193 4.7193C4.86003 4.57857 5.05091 4.49951 5.24993 4.49951C5.44895 4.49951 5.63982 4.57857 5.78055 4.7193L11.9999 10.9396L18.2193 4.7193C18.36 4.57857 18.5509 4.49951 18.7499 4.49951C18.949 4.49951 19.1398 4.57857 19.2806 4.7193C19.4213 4.86003 19.5003 5.05091 19.5003 5.24993C19.5003 5.44895 19.4213 5.63982 19.2806 5.78055L13.0602 11.9999L19.2806 18.2193Z" fill="#141414"/>
-      </svg>
-    </button>
   </div>
 
   {% stylesheet %}
-  #AnnouncementBar-{{ section.id }} { background: var(--ann-bg); color: var(--ann-color); padding:12px 0; overflow:hidden; transition: height .4s ease, padding .4s ease, opacity .4s ease; height:auto;}
-  #AnnouncementBar-{{ section.id }}.is-hidden { height:0; padding:0; opacity:0; }
-  #AnnouncementBar-{{ section.id }} .announcement-bar--container { display:flex; justify-content:center; align-items:center; gap:10px; position:relative; padding-right:28px;}
-  #AnnouncementBar-{{ section.id }} .announcement-icon { font-size:18px; line-height:1; }
-  #AnnouncementBar-{{ section.id }} .announcement-rotator { position:relative; min-height:1em; }
-  #AnnouncementBar-{{ section.id }} .announcement {
-    margin:0; padding:0; position:absolute; inset:0 auto auto 0; opacity:0; pointer-events:none; transform:translateY(6px);
-    transition:opacity 300ms ease, transform 300ms ease; text-align:center;
-    font-family:'Anton', var(--font-heading-family, var(--font-body-family)); font-weight:400; font-style:normal;
-    font-size:var(--ann-size); line-height:100%; letter-spacing:0; color:var(--ann-color); white-space:nowrap;
+  /* Layout / colors */
+  #AnnouncementBar-{{ section.id }} {
+    color: {{ section.settings.text_color | default: '#000000' }};
   }
-  #AnnouncementBar-{{ section.id }} .announcement.is-active { opacity:1; pointer-events:auto; transform:translateY(0); position:relative; }
-  #AnnouncementBar-{{ section.id }} .announcement a { color:var(--ann-color); text-decoration:underline; }
-  #AnnouncementBar-{{ section.id }} .announcement-bar--close { background:none; border:0; cursor:pointer; position:absolute; right:0; top:50%; transform:translateY(-50%); padding:0; line-height:0; }
-  #AnnouncementBar-{{ section.id }} .announcement-bar--close svg { width:16px; height:16px; }
-  @media (max-width:640px){ #AnnouncementBar-{{ section.id }} .announcement { font-size:calc(var(--ann-size) - 2px); white-space:normal; } }
-  @media (prefers-reduced-motion: reduce){ #AnnouncementBar-{{ section.id }} .announcement { transition:none; } }
+  #AnnouncementBar-{{ section.id }} .announcement-bar--container {
+    display:flex; justify-content:center; align-items:center; position:relative;
+    padding: 0 12px;
+  }
+
+  /* Rotator sizing: stack slides on top of each other, container keeps tallest height */
+  #AnnouncementBar-{{ section.id }} .announcement-rotator {
+    position: relative;
+    width: 100%;
+  }
+  #AnnouncementBar-{{ section.id }} .announcement {
+    position: absolute; left: 0; right: 0; top: 0;
+    margin: 0; text-align: center;
+    opacity: 0; transform: translateY(6px);
+    transition: opacity 300ms ease, transform 300ms ease;
+    pointer-events: none;
+  }
+  #AnnouncementBar-{{ section.id }} .announcement.is-active {
+    opacity: 1; transform: translateY(0); pointer-events: auto; position: relative;
+  }
+
+  /* Typography — matches Figma (Anton 20 / 100%) with graceful fallback */
+  #AnnouncementBar-{{ section.id }} .rt {
+    font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
+    font-weight: 400; font-style: normal;
+    font-size: {{ section.settings.font_size | default: 20 }}px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: inherit;
+  }
+  /* Remove default margins Word/Docs may inject */
+  #AnnouncementBar-{{ section.id }} .rt p { margin: 0; }
+  #AnnouncementBar-{{ section.id }} .rt p + p { margin-top: .25rem; }
+
+  #AnnouncementBar-{{ section.id }} .ann-link {
+    margin-left: .5ch;
+    color: inherit;
+    text-decoration: underline;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 640px) {
+    #AnnouncementBar-{{ section.id }} .rt { font-size: {{ section.settings.font_size | default: 20 | minus: 2 }}px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    #AnnouncementBar-{{ section.id }} .announcement { transition: none; }
+  }
   {% endstylesheet %}
 
   {% javascript %}
@@ -65,36 +92,48 @@
     var root = document.getElementById('AnnouncementBar-{{ section.id }}');
     if (!root) return;
 
-    var closeBtn = root.querySelector('.announcement-bar--close');
-    if (closeBtn){
-      closeBtn.addEventListener('click', function(){
-        root.style.height = root.scrollHeight + 'px';
-        root.offsetHeight;
-        root.classList.add('is-hidden');
-        root.addEventListener('transitionend', function onEnd(){
-          root.removeEventListener('transitionend', onEnd);
-          if (root.classList.contains('is-hidden')) root.style.height = 'auto';
-        });
-      });
-    }
+    var slides = Array.prototype.slice.call(root.querySelectorAll('.announcement-rotator .announcement'));
+    if (!slides.length) return;
 
-    var items = root.querySelectorAll('.announcement-rotator .announcement');
-    if (items.length <= 1) return;
+    // Fix container height to tallest slide so fades don't jump
+    var rot = root.querySelector('.announcement-rotator');
+    function setHeight(){
+      var max = 0;
+      slides.forEach(function(s){
+        s.style.position = 'relative';
+        s.style.opacity = '1';
+        s.style.transform = 'none';
+        var h = s.offsetHeight;
+        if (h > max) max = h;
+        s.removeAttribute('style');
+      });
+      rot.style.minHeight = max + 'px';
+    }
+    setHeight();
+    window.addEventListener('resize', setHeight);
+
+    if (slides.length === 1) return;
 
     var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var index = 0;
-    var interval = parseInt(getComputedStyle(root).getPropertyValue('--ann-speed')) || 5000;
-    var timer;
-
-    function show(i){ items.forEach(function(el,k){ el.classList.toggle('is-active', k===i); }); }
-    function next(){ index = (index + 1) % items.length; show(index); }
-
-    show(index);
-    if (!prefersReduced){
-      timer = setInterval(next, interval);
-      root.addEventListener('mouseenter', function(){ clearInterval(timer); });
-      root.addEventListener('mouseleave', function(){ timer = setInterval(next, interval); });
+    var i = 0;
+    function show(k){
+      slides.forEach(function(s, idx){ s.classList.toggle('is-active', idx === k); });
     }
+    show(i);
+
+    if (prefersReduced) return;
+
+    var speed = {{ section.settings.rotation_ms | default: 5000 | plus: 0 }};
+    var timer = setInterval(function(){
+      i = (i + 1) % slides.length;
+      show(i);
+    }, speed);
+
+    // Optional: pause on hover (desktop)
+    root.addEventListener('mouseenter', function(){ clearInterval(timer); });
+    root.addEventListener('mouseleave', function(){
+      timer = setInterval(function(){ i = (i + 1) % slides.length; show(i); }, speed);
+    });
   })();
   {% endjavascript %}
 </section>
@@ -106,18 +145,18 @@
   "class": "section--announcement-bar",
   "max_blocks": 4,
   "settings": [
-    { "type": "checkbox", "id": "show_icon", "label": "Show 🎉 icon", "default": true },
     { "type": "color", "id": "bg_color", "label": "Background color", "default": "#C8FF63" },
     { "type": "color", "id": "text_color", "label": "Text color", "default": "#000000" },
     { "type": "range", "id": "font_size", "label": "Font size", "min": 12, "max": 28, "step": 1, "unit": "px", "default": 20 },
-    { "type": "range", "id": "rotation_ms", "label": "Rotation speed", "min": 2000, "max": 9000,  "step": 500, "unit": "ms", "default": 5000 }
+    { "type": "range", "id": "padding_y", "label": "Top/bottom padding", "min": 0, "max": 48, "step": 2, "unit": "px", "default": 12 },
+    { "type": "range", "id": "rotation_ms", "label": "Rotation speed", "min": 2000, "max": 9000, "step": 500, "unit": "ms", "default": 5000 }
   ],
   "blocks": [
     {
       "type": "message",
       "name": "Announcement",
       "settings": [
-        { "type": "text", "id": "text", "label": "Text", "default": "FLASH SALE! BUY MORE, SAVE MORE!" },
+        { "type": "richtext", "id": "text", "label": "Announcement text", "default": "<p>🎉 FLASH SALE! BUY MORE, SAVE MORE!</p>" },
         { "type": "text", "id": "link_label", "label": "Link label", "default": "Shop now" },
         { "type": "url", "id": "link_url", "label": "Link URL" }
       ]
@@ -126,4 +165,3 @@
   "presets": [{ "name": "Announcement (rotating)" }]
 }
 {% endschema %}
-
