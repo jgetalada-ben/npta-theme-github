@@ -12,5 +12,28 @@
   "context": {
     "market": "philippines"
   },
-  "sections": {}
+  "sections": {
+    "main": {
+      "settings": {},
+      "blocks": {
+        "recharge_subscriptions_subscription_widget_v2_YwaKc": {
+          "type": "shopify://apps/recharge-subscriptions/blocks/subscription-widget-v2/371eed76-0b44-4869-9813-730372ea378e",
+          "disabled": false,
+          "settings": {
+            "paragraph-26472caff6aa765f03e4db2e7c9e0f54": null
+          }
+        }
+      },
+      "block_order": [
+        "custom_liquid_8EceCP",
+        "title",
+        "text_tFH3Dp",
+        "description",
+        "price",
+        "variant_picker",
+        "recharge_subscriptions_subscription_widget_v2_YwaKc",
+        "buy_buttons_RWgf6F"
+      ]
+    }
+  }
 }
