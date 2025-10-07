@@ -296,7 +296,7 @@ header-drawer{
       {%- endif -%}
 
       
-      <div class="desktop-localization-wrapper header-button-wrap">
+      {% comment %} <div class="desktop-localization-wrapper header-button-wrap">
             <!-- 📞 Phone Icon & Number beside button -->
                 <a href="tel:+17789496782" 
                   class="header__icon header__icon--phone link focus-inset" 
@@ -336,9 +336,13 @@ header-drawer{
             {%- endform -%}
           </localization-form>
         {%- endif -%}
+      </div> {% endcomment %}
+
+      <div class="search-container-desktop">
+      {% render 'header-search', input_id: 'Search-In-Modal' %}
       </div>
 
-        <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
+      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
         {%- liquid
           if cart == empty
             render 'icon-cart-empty'
@@ -356,12 +360,6 @@ header-drawer{
           </div>
         {%- endif -%}
       </a>
-
-      
-   <div class="search-container-desktop">
-  {% render 'header-search', input_id: 'Search-In-Modal' %}
-</div>
-
    
 
       {%- for block in section.blocks -%}
