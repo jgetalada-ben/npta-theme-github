@@ -106,12 +106,12 @@ header-drawer{
 </style>
 
 {%- style -%}
-  .header {
+  /* .header {
     padding:0;
-  }
+  } */
 
   .section-header {
-    position: sticky; /* This is for fixing a Safari z-index issue. PR #2147 */
+    position: sticky;
     margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
   }
 
@@ -121,12 +121,107 @@ header-drawer{
     }
   }
 
-  @media screen and (min-width: 990px) {
+  /* @media screen and (min-width: 990px) {
     .header {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
-  }
+  } */
+
+/* === Layout: 3 columns (logo | nav | actions) === */
+.header {
+  display: grid;
+  grid-template-columns: 220px 1fr 240px;
+  align-items: center;
+  column-gap: 24px;
+  background: #EFF0E7; /* light off-white from mock */
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+}
+
+/* center the inline nav */
+.header .header__inline-menu,
+.header nav.header__inline-menu {
+  justify-self: center;
+}
+
+/* Right-side icons container */
+.header .header__icons {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Hide phone + CTA on desktop per mock */
+@media (min-width: 1281px){
+  .header-button-wrap { display: none !important; }
+}
+
+/* === Navigation typography (Anton, uppercase, teal) === */
+.header .header__inline-menu .list-menu__item--link,
+.header .header__inline-menu a.header__menu-item {
+  font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  font-size: 20px;
+  line-height: 1;
+  color: #0C7E80; /* teal */
+  padding: 0 !important;
+  margin: 0 20px;
+}
+
+/* active/hover state: dark */
+.header .header__inline-menu a[aria-current],
+.header .header__inline-menu a:hover,
+.header .header__inline-menu a:focus {
+  color: #0B0B0B;
+}
+
+/* tighten dropdown trigger paddings */
+.summary.list-menu__item,
+.list-menu__item { line-height: 1; }
+
+/* === Search pill (desktop) === */
+.search-container-desktop form.search,
+.search-container-desktop .search__form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #0C7E80;
+  border-radius: 9999px;
+  padding: 8px 16px;
+  min-width: 260px;
+}
+.search-container-desktop input[type="search"],
+.search-container-desktop .search__input {
+  border: none !important;
+  background: transparent !important;
+  color: #FFFFFF !important;
+  font-weight: 500;
+  width: 100%;
+  outline: none;
+}
+.search-container-desktop .search__input::placeholder { color: #E7F3F3; }
+/* search icon inside button/path */
+.search-container-desktop .search__button svg path { fill: #FFFFFF; }
+
+/* cart icon sizing/color harmony */
+#cart-icon-bubble svg { width: 28px; height: 28px; }
+#cart-icon-bubble svg path { fill: #0C7E80; }
+
+/* logo sizing align with mock */
+.header__heading-logo-wrapper { max-width: 160px; }
+
+/* remove bottom separator if any */
+.header-wrapper--border-bottom { box-shadow: none; border-bottom: none; }
+
+/* mobile keeps existing behavior */
+@media (max-width:1280px){
+  .header { grid-template-columns: 1fr auto; background: #EFF0E7; }
+}
+
 {%- endstyle -%}
 
 <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
@@ -294,47 +389,6 @@ header-drawer{
           </span>
         </a>
       {%- endif -%}
-
-      
-      {% comment %} <div class="desktop-localization-wrapper header-button-wrap">
-            <!-- 📞 Phone Icon & Number beside button -->
-                <a href="tel:+17789496782" 
-                  class="header__icon header__icon--phone link focus-inset" 
-                  style="display: flex; align-items: center; gap: 6px; margin-right: 15px; font-weight:500; text-decoration:none; color:inherit;width: 180px;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
-                    <path d="M6.62 10.79a15.093 15.093 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C5.923 21.762 2.238 18.077 2.238 3a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.58 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2Z" fill="#141414"/>
-                  </svg>
-                  <span class="phone-number">+1-778-949-6782</span>
-                </a>
-            <!-- 📞 End Phone -->
-           <a href="/collections/all" class="btn button-yg header-btn-desktop">
-            <span class="btn-label-down">Get Certified Now</span>
-            <span class="btn-label-down">Get Certified Now</span>
-          
-        </a>
-        
-        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
-          <localization-form class="small-hide medium-hide" data-prevent-hide>
-            {%- form 'localization', id: 'HeaderCountryForm', class: 'localization-form' -%}
-              <div>
-                <h2 class="visually-hidden" id="HeaderCountryLabel">{{ 'localization.country_label' | t }}</h2>
-                {%- render 'country-localization', localPosition: 'HeaderCountry' -%}
-              </div>
-            {%- endform -%}
-          </localization-form>
-        {% endif %}
-
-        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
-          <localization-form class="small-hide medium-hide" data-prevent-hide>
-            {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form' -%}
-              <div>
-                <h2 class="visually-hidden" id="HeaderLanguageLabel">{{ 'localization.language_label' | t }}</h2>
-                {%- render 'language-localization', localPosition: 'HeaderLanguage' -%}
-              </div>
-            {%- endform -%}
-          </localization-form>
-        {%- endif -%}
-      </div> {% endcomment %}
 
       <div class="search-container-desktop">
       {% render 'header-search', input_id: 'Search-In-Modal' %}
