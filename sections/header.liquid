@@ -114,9 +114,11 @@ header-drawer{
   .search-container-desktop .search__input {
     padding-right: 0;
     padding-left: 45px;
+    color: #fff;
   }
   .search-container-desktop .search-modal__content .search-modal__form .field__label {
     left: 45px;
+    color: #fff;
   }
 </style>
 
@@ -347,15 +349,6 @@ header-drawer{
                 >
                 <label class="field__label" for="{{ input_id }}">{{ 'general.search.search' | t }}</label>
                 <input type="hidden" name="options[prefix]" value="last">
-                <button
-                  type="reset"
-                  class="reset__button field__button{% if search.terms == blank %} hidden{% endif %}"
-                  aria-label="{{ 'general.search.reset' | t }}"
-                >
-                  <svg class="icon icon-close" aria-hidden="true" focusable="false">
-                    <use xlink:href="#icon-reset">
-                  </svg>
-                </button>
               </div>
             </form>
           </search-form>
