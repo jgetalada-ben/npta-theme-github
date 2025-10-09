@@ -1,0 +1,238 @@
+{% comment %}
+  Whats New – Asymmetric Feature Grid
+  - Rows are blocks; each row has two cards.
+  - Switch which side is large per row.
+{% endcomment %}
+
+<section id="WhatsNew-{{ section.id }}"
+  class="wn-section {% if section.settings.full_width %}is-full{% endif %}"
+  style="
+    --pt: {{ section.settings.pad_top | default: 24 }}px;
+    --pr: {{ section.settings.pad_right | default: 16 }}px;
+    --pb: {{ section.settings.pad_bottom | default: 24 }}px;
+    --pl: {{ section.settings.pad_left | default: 16 }}px;
+    --gap: {{ section.settings.gap | default: 16 }}px;
+    --radius: {{ section.settings.radius | default: 8 }}px;
+    --maxw: {{ section.settings.max_width | default: 1989 }};
+    --maxh: {{ section.settings.max_height | default: 1528 }}px;
+  "
+>
+  <div class="wn-wrap">
+    {% for block in section.blocks %}
+        <div class="wn-row {% if block.settings.layout == 'left-large' %}left-large{% else %}right-large{% endif %}"
+            {{ block.shopify_attributes }}
+            style="--row-h: {{ block.settings.row_height_desktop | default: 420 }}px; --row-h-m: {{ block.settings.row_height_mobile | default: 260 }}px;">
+
+            {%- comment -%} LEFT CARD {%- endcomment -%}
+            <a class="wn-card {% if block.settings.layout == 'left-large' %}is-large{% else %}is-small{% endif %}"
+            {% if block.settings.left_link != blank %}href="{{ block.settings.left_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+            style="
+                --txt: {{ block.settings.left_text_color | default: '#FFFFFF' }};
+                --ovc: {{ block.settings.left_overlay_color | default: '#000000' }};
+                --ovo: {{ block.settings.left_overlay_opacity | default: 35 | divided_by: 100.0 }};
+                {% if block.settings.left_image != blank %}--bg: url('{{ block.settings.left_image | image_url: width: 2000 }}');{% endif %}
+            ">
+            <div class="wn-card__media" aria-hidden="true"></div>
+            <div class="wn-card__overlay"></div>
+            <div class="wn-card__content">
+                {% if block.settings.left_heading != blank %}
+                <h3 class="wn-card__title">{{ block.settings.left_heading }}</h3>
+                {% endif %}
+                {% if block.settings.left_body != blank %}
+                <div class="wn-card__body">{{ block.settings.left_body }}</div>
+                {% endif %}
+                {% if block.settings.left_btn_label != blank %}
+                <span class="wn-card__btn">{{ block.settings.left_btn_label }}</span>
+                {% endif %}
+            </div>
+            </a>
+
+            {%- comment -%} RIGHT CARD {%- endcomment -%}
+            <a class="wn-card {% if block.settings.layout == 'left-large' %}is-small{% else %}is-large{% endif %}"
+            {% if block.settings.right_link != blank %}href="{{ block.settings.right_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+            style="
+                --txt: {{ block.settings.right_text_color | default: '#FFFFFF' }};
+                --ovc: {{ block.settings.right_overlay_color | default: '#000000' }};
+                --ovo: {{ block.settings.right_overlay_opacity | default: 35 | divided_by: 100.0 }};
+                {% if block.settings.right_image != blank %}--bg: url('{{ block.settings.right_image | image_url: width: 2000 }}');{% endif %}
+            ">
+            <div class="wn-card__media" aria-hidden="true"></div>
+            <div class="wn-card__overlay"></div>
+            <div class="wn-card__content">
+                {% if block.settings.right_heading != blank %}
+                <h3 class="wn-card__title">{{ block.settings.right_heading }}</h3>
+                {% endif %}
+                {% if block.settings.right_body != blank %}
+                <div class="wn-card__body">{{ block.settings.right_body }}</div>
+                {% endif %}
+                {% if block.settings.right_btn_label != blank %}
+                <span class="wn-card__btn">{{ block.settings.right_btn_label }}</span>
+                {% endif %}
+            </div>
+            </a>
+        </div>
+    {% endfor %}
+  </div>
+
+  {% stylesheet %}
+  #WhatsNew-{{ section.id }} {
+    padding: var(--pt) var(--pr) var(--pb) var(--pl);
+    overflow: hidden;
+    background: transparent;
+  }
+
+  /* Content width clamp */
+  #WhatsNew-{{ section.id }} .wn-wrap {
+    max-width: var(--maxw, 1989px);
+    max-height: var(--maxh, 1528px);
+    margin: 0 auto;
+  }
+  #WhatsNew-{{ section.id }}.is-full .wn-wrap {
+    max-width: none;
+    max-height: none;
+  }
+
+  /* Each row */
+  #WhatsNew-{{ section.id }} .wn-row {
+    display: grid;
+    gap: var(--gap);
+    grid-template-columns: 2fr 1fr; /* default, may be flipped below */
+    margin-bottom: var(--gap);
+    min-height: var(--row-h);
+  }
+  #WhatsNew-{{ section.id }} .wn-row.right-large { grid-template-columns: 1fr 2fr; }
+
+  /* Cards */
+  #WhatsNew-{{ section.id }} .wn-card {
+    position: relative;
+    display: grid;
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--txt, #fff);
+    min-height: 100%;
+  }
+  #WhatsNew-{{ section.id }} .wn-card.is-small { min-height: calc(var(--row-h) - 2px); }
+  #WhatsNew-{{ section.id }} .wn-card__media {
+    background-image: var(--bg);
+    background-size: cover;
+    background-position: center;
+    filter: none;
+  }
+  #WhatsNew-{{ section.id }} .wn-card__overlay {
+    position: absolute; inset: 0;
+    background: var(--ovc, #000);
+    opacity: var(--ovo, .35);
+  }
+  #WhatsNew-{{ section.id }} .wn-card__content {
+    position: absolute; inset: 0;
+    display: grid;
+    align-content: end;
+    gap: 10px;
+    padding: 20px;
+  }
+
+  /* Typography */
+  #WhatsNew-{{ section.id }} .wn-card__title {
+    margin: 0;
+    font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 1.05;
+    color: inherit;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+  }
+  #WhatsNew-{{ section.id }} .wn-card__body {
+    color: inherit;
+    opacity: .95;
+  }
+  #WhatsNew-{{ section.id }} .wn-card__body p { margin: 0; }
+  #WhatsNew-{{ section.id }} .wn-card__body p + p { margin-top: .35rem; }
+
+  /* Button */
+  #WhatsNew-{{ section.id }} .wn-card__btn {
+    display: inline-block;
+    align-self: start;
+    background: #C8FF63;
+    color: #0B0B0B;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-weight: 700;
+    text-transform: none;
+  }
+
+  /* Mobile */
+  @media (max-width: 990px) {
+    #WhatsNew-{{ section.id }} .wn-row {
+      grid-template-columns: 1fr;
+      min-height: var(--row-h-m);
+    }
+    #WhatsNew-{{ section.id }} .wn-card.is-large,
+    #WhatsNew-{{ section.id }} .wn-card.is-small {
+      min-height: var(--row-h-m);
+    }
+    #WhatsNew-{{ section.id }} .wn-card__title { font-size: 26px; }
+  }
+  {% endstylesheet %}
+</section>
+
+{% schema %}
+{
+  "name": "What's New Grid",
+  "tag": "section",
+  "class": "wn-grid",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "checkbox", "id": "full_width", "label": "Full width (ignore max width/height)", "default": false },
+
+    { "type": "text", "id": "max_width", "label": "Max width (e.g. 1989px)", "default": "1989px" },
+    { "type": "text", "id": "max_height", "label": "Max height (e.g. 1528px)", "default": "1528px" },
+
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "pad_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 24 },
+    { "type": "range", "id": "pad_right", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding right", "default": 16 },
+    { "type": "range", "id": "pad_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 24 },
+    { "type": "range", "id": "pad_left", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding left", "default": 16 },
+
+    { "type": "range", "id": "gap", "label": "Row/card gap", "min": 0, "max": 48, "step": 2, "unit": "px", "default": 16 },
+    { "type": "range", "id": "radius", "label": "Card corner radius", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 8 }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        { "type": "select", "id": "layout", "label": "Layout", "options": [
+          { "value": "left-large", "label": "Left card is large" },
+          { "value": "right-large", "label": "Right card is large" }
+        ], "default": "left-large" },
+
+        { "type": "range", "id": "row_height_desktop", "label": "Row min-height (desktop)", "min": 300, "max": 720, "step": 10, "unit": "px", "default": 460 },
+        { "type": "range", "id": "row_height_mobile", "label": "Row min-height (mobile)", "min": 200, "max": 520, "step": 10, "unit": "px", "default": 300 },
+
+        { "type": "header", "content": "Left card" },
+        { "type": "image_picker", "id": "left_image", "label": "Image" },
+        { "type": "text", "id": "left_heading", "label": "Heading", "default": "Social Media Influencer" },
+        { "type": "richtext", "id": "left_body", "label": "Body", "default": "<p>Expand your reach, attract clients, and boost your brand with strategies top influencers use to succeed online.</p>" },
+        { "type": "text", "id": "left_btn_label", "label": "Button label", "default": "Explore Now" },
+        { "type": "url", "id": "left_link", "label": "Link URL" },
+        { "type": "color", "id": "left_text_color", "label": "Text color", "default": "#FFFFFF" },
+        { "type": "color", "id": "left_overlay_color", "label": "Overlay color", "default": "#000000" },
+        { "type": "range", "id": "left_overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 35 },
+
+        { "type": "header", "content": "Right card" },
+        { "type": "image_picker", "id": "right_image", "label": "Image" },
+        { "type": "text", "id": "right_heading", "label": "Heading", "default": "Advanced Cardio Programming" },
+        { "type": "richtext", "id": "right_body", "label": "Body", "default": "<p>Harness cutting-edge science to design powerful, personalized programs that deliver unstoppable client results.</p>" },
+        { "type": "text", "id": "right_btn_label", "label": "Button label", "default": "Explore Now" },
+        { "type": "url", "id": "right_link", "label": "Link URL" },
+        { "type": "color", "id": "right_text_color", "label": "Text color", "default": "#FFFFFF" },
+        { "type": "color", "id": "right_overlay_color", "label": "Overlay color", "default": "#000000" },
+        { "type": "range", "id": "right_overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 35 }
+      ]
+    }
+  ],
+  "presets": [{ "name": "What's New Grid" }]
+}
+{% endschema %}
+
