@@ -330,9 +330,7 @@ header-drawer{
             <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
               <div class="field">
                 <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
-                  <svg class="icon icon-search" aria-hidden="true" focusable="false">
-                    <use href="#icon-search">
-                  </svg>
+                  {% render 'icon-search2' %}
                 </button>
                 <input
                   class="search__input field__input"
