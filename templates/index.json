@@ -101,6 +101,50 @@
         "partner_image_height": "40"
       }
     },
+    "whats_new_grid_LhNjr7": {
+      "type": "whats-new-grid",
+      "blocks": {
+        "row_P6YxJa": {
+          "type": "row",
+          "settings": {
+            "layout": "left-large",
+            "row_height_desktop": 460,
+            "row_height_mobile": 300,
+            "left_image": "shopify://shop_images/Rectangle_2.png",
+            "left_heading": "Social Media Influencer",
+            "left_body": "<p>Expand your reach, attract clients, and boost your brand with strategies top influencers use to succeed online.</p>",
+            "left_btn_label": "Explore Now",
+            "left_link": "",
+            "left_text_color": "#FFFFFF",
+            "left_overlay_color": "#000000",
+            "left_overlay_opacity": 35,
+            "right_image": "shopify://shop_images/Rectangle_3.png",
+            "right_heading": "Advanced Cardio Programming",
+            "right_body": "<p>Harness cutting-edge science to design powerful, personalized programs that deliver unstoppable client results.</p>",
+            "right_btn_label": "Explore Now",
+            "right_link": "",
+            "right_text_color": "#FFFFFF",
+            "right_overlay_color": "#000000",
+            "right_overlay_opacity": 35
+          }
+        }
+      },
+      "block_order": [
+        "row_P6YxJa"
+      ],
+      "name": "What's New Grid",
+      "settings": {
+        "full_width": false,
+        "max_width": "1989px",
+        "max_height": "1528px",
+        "pad_top": 24,
+        "pad_right": 16,
+        "pad_bottom": 24,
+        "pad_left": 16,
+        "gap": 16,
+        "radius": 8
+      }
+    },
     "section_image_text_carousel_ARmbtF": {
       "type": "section--image-text-carousel",
       "blocks": {
@@ -795,6 +839,7 @@
   "order": [
     "video_CAzNjY",
     "hero_banner_VrVBf3",
+    "whats_new_grid_LhNjr7",
     "section_image_text_carousel_ARmbtF",
     "featured_programs_3Ebyx7",
     "section_collection_tabs_w8nGxt",
