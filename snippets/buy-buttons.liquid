@@ -10,6 +10,11 @@
   Usage:
   {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true %}
 {% endcomment %}
+ <div style="padding:8px;background:#fff3cd;border:1px dashed #f0ad4e;margin:8px 0;display: none;">
+  requires_selling_plan: <b>{{ product.requires_selling_plan }}</b> |
+  selling_plan_groups: <b>{{ product.selling_plan_groups.size }}</b>
+</div>
+
 <div {{ block.shopify_attributes }}>
   {%- if product != blank -%}
     {%- liquid
