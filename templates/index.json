@@ -115,7 +115,7 @@
             "left_body": "<p>Expand your reach, attract clients, and boost your brand with strategies top influencers use to succeed online.</p>",
             "left_btn_label": "Explore Now",
             "left_link": "",
-            "left_text_color": "#FFFFFF",
+            "left_text_color": "#ffffff",
             "left_overlay_color": "#000000",
             "left_overlay_opacity": 35,
             "right_image": "shopify://shop_images/Rectangle_3.png",
@@ -123,14 +123,39 @@
             "right_body": "<p>Harness cutting-edge science to design powerful, personalized programs that deliver unstoppable client results.</p>",
             "right_btn_label": "Explore Now",
             "right_link": "",
-            "right_text_color": "#FFFFFF",
+            "right_text_color": "#ffffff",
+            "right_overlay_color": "#000000",
+            "right_overlay_opacity": 35
+          }
+        },
+        "row_iUczWx": {
+          "type": "row",
+          "settings": {
+            "layout": "right-large",
+            "row_height_desktop": 460,
+            "row_height_mobile": 300,
+            "left_image": "shopify://shop_images/Rectangle_4.png",
+            "left_heading": "Business Blueprint",
+            "left_body": "<p>Build a thriving fitness career with proven business strategies, expert coaching, and tools to grow a loyal client base.</p>",
+            "left_btn_label": "Explore Now",
+            "left_link": "",
+            "left_text_color": "#ffffff",
+            "left_overlay_color": "#000000",
+            "left_overlay_opacity": 35,
+            "right_image": "shopify://shop_images/Rectangle_5.png",
+            "right_heading": "Mindful Stress Management",
+            "right_body": "<p>Learn practical, science-backed tools to manage stress with guided sessions, gentle movement, and everyday techniques.</p>",
+            "right_btn_label": "Explore Now",
+            "right_link": "",
+            "right_text_color": "#ffffff",
             "right_overlay_color": "#000000",
             "right_overlay_opacity": 35
           }
         }
       },
       "block_order": [
-        "row_P6YxJa"
+        "row_P6YxJa",
+        "row_iUczWx"
       ],
       "name": "What's New Grid",
       "settings": {
