@@ -79,6 +79,10 @@
         <span class="visually-hidden">{{ 'products.product.price.one_time_price' | t }}</span>
         <!-- dbg: v.price={{ v.price }} ; v.compare_at_price={{ v.compare_at_price }} ;
 product.compare_at_price_max={{ product.compare_at_price_max }} -->
+{% for var in product.variants %}
+<!-- VAR {{ var.id }} title="{{ var.title }}" price={{ var.price }} compare={{ var.compare_at_price }} -->
+{% endfor %}
+
 
         {% if comp_src and comp_src > 0 and comp_src_php > v_price_php %}
           <p class="price-item--one-time">
