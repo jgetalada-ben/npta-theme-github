@@ -108,19 +108,21 @@
   .tp-subhead { margin: 0; font-weight: 700; color: #0b0b0b; }
   .tp-body { margin: 0 0 16px; color: #0b0b0b; opacity: .9; }
 
-  .tp-cta {
-    display: inline-block;
-    align-self: start;
-    margin-top: 8px;
-    background: #C8FF63;
-    color: #0B0B0B;
-    border-radius: 10px;
-    padding: 12px 22px;
-    font-weight: 800;
-    text-decoration: none;
-  }
+    .tp-section .tp-cta{
+        display: inline-flex !important;
+        width: auto !important;
+        max-width: max-content;
+        justify-self: start;
+        align-self: start;
+        padding: 12px 22px;
+        border-radius: 10px;
+        background: #C8FF63;
+        color: #0B0B0B;
+        font-weight: 800;
+        text-decoration: none;
+        line-height: 1;
+    }
 
-  /* Grid */
   .tp-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
