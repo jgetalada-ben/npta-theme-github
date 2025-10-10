@@ -3,66 +3,76 @@
   - Rows are blocks; each row has two cards.
   - Switch which side is large per row.
 {% endcomment %}
- 
+
+{% assign mw = section.settings.max_width  | default: '1989px' | strip %}
+{% assign mh = section.settings.max_height | default: '1528px' | strip %}
+
+{% unless mw contains 'px' or mw contains '%' or mw contains 'vw' or mw contains 'rem' %}
+  {% assign mw = mw | append: 'px' %}
+{% endunless %}
+
+{% unless mh contains 'px' or mh contains '%' or mh contains 'vh' or mh contains 'rem' %}
+  {% assign mh = mh | append: 'px' %}
+{% endunless %}
+
+
 {% stylesheet %}
-    #WhatsNew-{{ section.id }} {
-    padding: var(--pt) var(--pr) var(--pb) var(--pl);
-    overflow: hidden;
-    background: transparent;
+    .wn-grid-section {
+        padding: var(--pt) var(--pr) var(--pb) var(--pl);
+        overflow: hidden;
+        background: transparent;
     }
 
-    /* Width/height clamp */
-    #WhatsNew-{{ section.id }} .wn-wrap {
-    max-width: {{ section.settings.max_width | default: '1989px' }};
-    max-height: {{ section.settings.max_height | default: '1528px' }};
-    margin: 0 auto;
-    }
-    #WhatsNew-{{ section.id }}.is-full .wn-wrap { max-width: none; max-height: none; }
-
-    /* ROW */
-    #WhatsNew-{{ section.id }} .wn-row {
-    display: grid;
-    gap: var(--gap);
-    grid-template-columns: 2fr 1fr;
-    margin-bottom: var(--gap);
-    min-height: var(--row-h);
-    }
-    #WhatsNew-{{ section.id }} .wn-row.right-large { grid-template-columns: 1fr 2fr; }
-
-    /* CARD */
-    #WhatsNew-{{ section.id }} .wn-card {
-    position: relative;
-    border-radius: var(--radius);
-    overflow: hidden;
-    text-decoration: none;
-    color: var(--txt, #fff);
-    min-height: 100%;
-    display: block;
+    .wn-grid-section .wn-wrap {
+        margin: 0 auto;
     }
 
-    /* Media fills card */
-    #WhatsNew-{{ section.id }} .wn-card__img {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: center;
-    display: block;
+    .wn-grid-section.is-full .wn-wrap {
+        max-width: none; 
+        max-height: none; 
     }
 
-    /* Overlay */
-    #WhatsNew-{{ section.id }} .wn-card__overlay {
-    position: absolute; inset: 0;
-    background: var(--ovc, #000);
-    opacity: var(--ovo, .35);
-    pointer-events: none;
+    .wn-grid-section .wn-row {
+        display: grid;
+        gap: var(--gap);
+        grid-template-columns: 2fr 1fr;
+        margin-bottom: var(--gap);
+        min-height: var(--row-h);
+    }
+    .wn-grid-section .wn-row.right-large {
+        grid-template-columns: 1fr 2fr; 
     }
 
-    /* Content */
-    #WhatsNew-{{ section.id }} .wn-card__content {
-    position: absolute; inset: 0;
-    display: grid;
-    align-content: space-between;
-    gap: 10px;
-    padding: 20px;
+    .wn-grid-section .wn-card {
+        position: relative;
+        border-radius: var(--radius);
+        overflow: hidden;
+        text-decoration: none;
+        color: var(--txt, #fff);
+        min-height: 100%;
+        display: block;
+    }
+
+    .wn-grid-section .wn-card__img {
+        position: absolute; inset: 0;
+        width: 100%; height: 100%;
+        object-fit: cover; object-position: center;
+        display: block;
+    }
+
+    .wn-grid-section .wn-card__overlay {
+        position: absolute; inset: 0;
+        background: var(--ovc, #000);
+        opacity: var(--ovo, .35);
+        pointer-events: none;
+    }
+
+    .wn-grid-section .wn-card__content {
+        position: absolute; inset: 0;
+        display: grid;
+        align-content: space-between;
+        gap: 10px;
+        padding: 20px;
     }
     .card__item-content {
         width: 44.5%;
@@ -72,51 +82,48 @@
             width: 100%;
         }
     }
-    /* Typography */
-    #WhatsNew-{{ section.id }} .wn-card__title {
-    margin: 0;
-    font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
-    font-weight: 700;
-    font-size: 34px;
-    line-height: 1.05;
-    color: inherit;
-    text-shadow: 0 1px 1px rgba(0,0,0,.3);
-    }
-    #WhatsNew-{{ section.id }} .wn-card__body { color: inherit; opacity: .95; }
-    #WhatsNew-{{ section.id }} .wn-card__body p { margin: 0; }
-    #WhatsNew-{{ section.id }} .wn-card__body p + p { margin-top: .35rem; }
 
-    /* Button — not full width */
-    #WhatsNew-{{ section.id }} .wn-card__btn {
-    display: inline-block !important;
-    width: auto !important;
-    max-width: max-content;
-    place-self: end start;     /* bottom-left */
-    background: #C8FF63;
-    color: #0B0B0B;
-    border-radius: 8px;
-    padding: 10px 16px;
-    font-weight: 700;
-    text-decoration: none;
-    line-height: 1;
+    .wn-grid-section .wn-card__title {
+        margin: 0;
+        font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
+        font-weight: 700;
+        font-size: 34px;
+        line-height: 1.05;
+        color: inherit;
+        text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    }
+    .wn-grid-section .wn-card__body { color: inherit; opacity: .95; }
+    .wn-grid-section .wn-card__body p { margin: 0; }
+    .wn-grid-section .wn-card__body p + p { margin-top: .35rem; }
+
+    .wn-grid-section .wn-card__btn {
+        display: inline-block !important;
+        width: auto !important;
+        max-width: max-content;
+        place-self: end start;
+        background: #C8FF63;
+        color: #0B0B0B;
+        border-radius: 8px;
+        padding: 10px 16px;
+        font-weight: 700;
+        text-decoration: none;
+        line-height: 1;
     }
 
-    /* Mobile: stack */
     @media (max-width: 990px) {
-    #WhatsNew-{{ section.id }} .wn-row { grid-template-columns: 1fr; min-height: var(--row-h-m); }
-    #WhatsNew-{{ section.id }} .wn-card { min-height: var(--row-h-m); }
-    #WhatsNew-{{ section.id }} .wn-card__title { font-size: 26px; }
+        .wn-grid-section .wn-row { grid-template-columns: 1fr; min-height: var(--row-h-m); }
+        .wn-grid-section .wn-card { min-height: var(--row-h-m); }
+        .wn-grid-section .wn-card__title { font-size: 26px; }
     }
 
-    /* Extra-small safeguard */
     @media (max-width: 480px) {
-    #WhatsNew-{{ section.id }} .wn-card__content { padding: 16px; }
-    #WhatsNew-{{ section.id }} .wn-card__btn { padding: 10px 14px; }
+        .wn-grid-section .wn-card__content { padding: 16px; }
+        .wn-grid-section .wn-card__btn { padding: 10px 14px; }
     }
 {% endstylesheet %}
 
 <section id="WhatsNew-{{ section.id }}"
-  class="wn-section {% if section.settings.full_width %}is-full{% endif %}"
+  class="wn-grid-section {% if section.settings.full_width %}is-full{% endif %}"
   style="
     --pt: {{ section.settings.pad_top | default: 24 }}px;
     --pr: {{ section.settings.pad_right | default: 16 }}px;
@@ -128,7 +135,7 @@
     --maxh: {{ section.settings.max_height | default: 1528 }}px;
   "
 >
-  <div class="wn-wrap">
+  <div class="wn-wrap" style="max-width: {{ mw }}; max-height: {{ mh }};">
     {% for block in section.blocks %}
         <div class="wn-row {% if block.settings.layout == 'left-large' %}left-large{% else %}right-large{% endif %}"
             {{ block.shopify_attributes }}
