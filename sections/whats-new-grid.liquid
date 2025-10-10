@@ -17,6 +17,35 @@
 
 
 {% stylesheet %}
+    /* Section Heading */
+    .wn-heading {
+    text-align: left;
+    margin-bottom: 2rem;
+    max-width: 900px;
+    }
+
+    .wn-heading__title {
+    font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
+    font-size: 38px;
+    line-height: 1.1;
+    color: #0b0b0b;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem 0;
+    }
+
+    .wn-heading__subtitle {
+    color: #0b0b0b;
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    }
+
+    @media (max-width: 768px) {
+        .wn-heading__title {
+            font-size: 28px;
+        }
+    }
     .wn-grid-section {
         padding: var(--pt) var(--pr) var(--pb) var(--pl);
         overflow: hidden;
@@ -135,6 +164,17 @@
     --maxh: {{ section.settings.max_height | default: 1528 }}px;
   "
 >
+  {% if section.settings.section_title != blank or section.settings.section_subtitle != blank %}
+    <div class="wn-heading">
+        {% if section.settings.section_title != blank %}
+        <h2 class="wn-heading__title">{{ section.settings.section_title }}</h2>
+        {% endif %}
+        {% if section.settings.section_subtitle != blank %}
+        <p class="wn-heading__subtitle">{{ section.settings.section_subtitle }}</p>
+        {% endif %}
+    </div>
+  {% endif %}
+
   <div class="wn-wrap" style="max-width: {{ mw }}; max-height: {{ mh }};">
     {% for block in section.blocks %}
         <div class="wn-row {% if block.settings.layout == 'left-large' %}left-large{% else %}right-large{% endif %}"
@@ -213,6 +253,9 @@
 
     { "type": "text", "id": "max_width", "label": "Max width (e.g. 1989px)", "default": "1989px" },
     { "type": "text", "id": "max_height", "label": "Max height (e.g. 1528px)", "default": "1528px" },
+
+    { "type": "text", "id": "section_title", "label": "Section title", "default": "WHAT’S NEW" },
+    { "type": "text", "id": "section_subtitle", "label": "Section subtitle", "default": "Stay ahead with the latest programs, partnerships, and exclusive deals designed to elevate your fitness career!" },
 
     { "type": "header", "content": "Padding" },
     { "type": "range", "id": "pad_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 24 },
