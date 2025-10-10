@@ -121,10 +121,11 @@
         margin: 0;
         font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
         font-weight: 700;
-        font-size: 34px;
+        font-size: 48px;
         line-height: 1.05;
         color: inherit;
         text-shadow: 0 1px 1px rgba(0,0,0,.3);
+        margin-bottom: 34px;
     }
     .wn-grid-section .wn-card__body { color: inherit; opacity: .95; }
     .wn-grid-section .wn-card__body p { 
@@ -151,11 +152,7 @@
     @media (max-width: 990px) {
         .wn-grid-section .wn-row { grid-template-columns: 1fr; min-height: var(--row-h-m); }
         .wn-grid-section .wn-card { min-height: var(--row-h-m); }
-        .wn-grid-section .wn-card__title { 
-            font-size: 48px; 
-            font-weight: 700;
-            line-height: normal;
-        }
+        .wn-grid-section .wn-card__title { font-size: 26px; }
     }
 
     @media (max-width: 480px) {
