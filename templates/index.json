@@ -162,12 +162,12 @@
         "full_width": false,
         "max_width": "1989px",
         "max_height": "1528px",
-        "pad_top": 24,
-        "pad_right": 16,
-        "pad_bottom": 24,
-        "pad_left": 16,
-        "gap": 16,
-        "radius": 8
+        "pad_top": 48,
+        "pad_right": 48,
+        "pad_bottom": 36,
+        "pad_left": 44,
+        "gap": 10,
+        "radius": 0
       }
     },
     "section_image_text_carousel_ARmbtF": {
