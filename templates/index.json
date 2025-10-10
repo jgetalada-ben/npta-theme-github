@@ -220,12 +220,12 @@
         "cta_label": "View All",
         "cta_link": "#",
         "max_width": "1989px",
-        "bg": "#EFF0E7",
-        "price_bg": "#3A8D8F",
-        "price_color": "#FFFFFF",
-        "pad_top": 48,
+        "bg": "#eff0e7",
+        "price_bg": "#3a8d8f",
+        "price_color": "#ffffff",
+        "pad_top": 90,
         "pad_right": 24,
-        "pad_bottom": 48,
+        "pad_bottom": 140,
         "pad_left": 24,
         "gap": 24
       }
