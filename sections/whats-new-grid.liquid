@@ -104,19 +104,20 @@
         padding: 75px;
     }
     .card__item-content {
-        /* width: 52%; */
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         min-height: 100%;
     }
-    .card__item-content-header{}
+    
+    .wn-grid-section .wn-card.is-large .wn-card__body {
+        width: 48%;
+    }
     @media (max-width: 990px) {
-        .card__item-content {
+        .wn-grid-section .wn-card.is-large .wn-card__body {
             width: 100%;
         }
     }
-
     .wn-grid-section .wn-card__title {
         margin: 0;
         font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
@@ -204,7 +205,7 @@
                 {{ block.settings.left_image | image_url: width: 2400 | image_tag: class: 'wn-card__img', loading: 'lazy', alt: block.settings.left_heading }}
             {% endif %}
             <div class="wn-card__overlay"></div>
-            <div class="wn-card__content wn-card__content-left">
+            <div class="wn-card__content">
                 <div class="card__item-content">
                     <div class="card__item-content-header">
                         {% if block.settings.left_heading != blank %}
@@ -235,7 +236,7 @@
             {% endif %}
 
             <div class="wn-card__overlay"></div>
-            <div class="wn-card__content wn-card__content-right">
+            <div class="wn-card__content">
                 <div class="card__item-content">
                     <div class="card__item-content-header">
                         {% if block.settings.right_heading != blank %}
