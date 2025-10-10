@@ -32,7 +32,9 @@
                 --ovo: {{ block.settings.left_overlay_opacity | default: 35 | divided_by: 100.0 }};
                 {% if block.settings.left_image != blank %}--bg: url('{{ block.settings.left_image | image_url: width: 2000 }}');{% endif %}
             ">
-            <div class="wn-card__media" aria-hidden="true"></div>
+            {% if block.settings.left_image != blank %}
+                {{ block.settings.left_image | image_url: width: 2400 | image_tag: class: 'wn-card__img', loading: 'lazy', alt: block.settings.left_heading }}
+            {% endif %}
             <div class="wn-card__overlay"></div>
             <div class="wn-card__content">
                 {% if block.settings.left_heading != blank %}
@@ -56,7 +58,10 @@
                 --ovo: {{ block.settings.right_overlay_opacity | default: 35 | divided_by: 100.0 }};
                 {% if block.settings.right_image != blank %}--bg: url('{{ block.settings.right_image | image_url: width: 2000 }}');{% endif %}
             ">
-            <div class="wn-card__media" aria-hidden="true"></div>
+            {% if block.settings.right_image != blank %}
+                {{ block.settings.right_image | image_url: width: 2400 | image_tag: class: 'wn-card__img', loading: 'lazy', alt: block.settings.right_heading }}
+            {% endif %}
+
             <div class="wn-card__overlay"></div>
             <div class="wn-card__content">
                 {% if block.settings.right_heading != blank %}
