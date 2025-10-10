@@ -45,6 +45,9 @@
 
   assign v = product.selected_or_first_available_variant
   assign cad_to_php_rate = 41
+  assign v_price_php = v.price | times: cad_to_php_rate
+  assign v_comp_cad = v.compare_at_price | default: 0
+  assign v_comp_php = v_comp_cad | times: cad_to_php_rate
 
 -%}
 
@@ -62,18 +65,15 @@
     {% if localization.country.iso_code == 'PH' %}
       <div class="price__one-time">
         <span class="visually-hidden">{{ 'products.product.price.one_time_price' | t }}</span>
-        
+
         {% if v.compare_at_price and v.compare_at_price > v.price %}
           <p class="price-item--one-time">
             <span>{{ v.compare_at_price | money_with_currency }}</span> Regular Price
           </p>
-        {% elsif v.compare_at_price %}
-          {% assign php_comp = v.compare_at_price | times: cad_to_php_rate %}
-          {% if php_comp > v.price %}
-            <p class="price-item--one-time">
-              <span>{{ php_comp | money_with_currency: 'PHP' }}</span> Regular Price
-            </p>
-          {% endif %}
+        {% elsif v_comp_cad > 0 and v_comp_php > v_price_php %}
+          <p class="price-item--one-time">
+            <span>{{ v_comp_php | money_with_currency }}</span> Regular Price
+          </p>
         {% endif %}
 
         <p class="price-item--compare">
