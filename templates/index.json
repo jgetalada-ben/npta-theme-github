@@ -172,6 +172,64 @@
         "radius": 0
       }
     },
+    "trainers_pick_KpCy4K": {
+      "type": "trainers-pick",
+      "blocks": {
+        "product_card_9Rhb6R": {
+          "type": "product_card",
+          "settings": {
+            "product_handle": "certified-personal-trainer-cpt",
+            "custom_title": "",
+            "blurb": "<p>Become a Certified Personal Trainer from the world’s most trusted source of fitness...    </p>",
+            "custom_price": "",
+            "custom_link": ""
+          }
+        },
+        "product_card_PtPcUW": {
+          "type": "product_card",
+          "settings": {
+            "product_handle": "certified-nutrition-coach-cnc",
+            "custom_title": "",
+            "blurb": "<p>Become a Certified Personal Trainer from the world’s most trusted source of fitness...    </p>",
+            "custom_price": "",
+            "custom_link": ""
+          }
+        },
+        "product_card_xG8iYc": {
+          "type": "product_card",
+          "settings": {
+            "product_handle": "wellness-coach-cwc-bogo",
+            "custom_title": "",
+            "blurb": "<p>Become a Certified Personal Trainer from the world’s most trusted source of fitness...    </p>",
+            "custom_price": "",
+            "custom_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_card_9Rhb6R",
+        "product_card_PtPcUW",
+        "product_card_xG8iYc"
+      ],
+      "name": "Trainer's Pick",
+      "settings": {
+        "kicker": "",
+        "title": "TRAINER’S PICK",
+        "subhead": "Chosen by Thousands. Trusted by Trainers. Built for Your Next Step.",
+        "body": "Explore our best selling products.",
+        "cta_label": "View All",
+        "cta_link": "#",
+        "max_width": "1989px",
+        "bg": "#EFF0E7",
+        "price_bg": "#3A8D8F",
+        "price_color": "#FFFFFF",
+        "pad_top": 48,
+        "pad_right": 24,
+        "pad_bottom": 48,
+        "pad_left": 24,
+        "gap": 24
+      }
+    },
     "section_image_text_carousel_ARmbtF": {
       "type": "section--image-text-carousel",
       "blocks": {
@@ -867,6 +925,7 @@
     "video_CAzNjY",
     "hero_banner_VrVBf3",
     "whats_new_grid_LhNjr7",
+    "trainers_pick_KpCy4K",
     "section_image_text_carousel_ARmbtF",
     "featured_programs_3Ebyx7",
     "section_collection_tabs_w8nGxt",
