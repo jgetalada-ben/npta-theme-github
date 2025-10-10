@@ -49,20 +49,6 @@
 
 -%}
 
-{% assign comp_src = v.compare_at_price %}
-{% if comp_src == blank or comp_src == 0 %}
-  {% assign comp_src = product.compare_at_price_max %}
-{% endif %}
-{% if comp_src == blank or comp_src == 0 %}
-  {% assign cad_compare_at_decimal = v.metafields.custom.cad_compare_at | default: product.metafields.custom.cad_compare_at %}
-  {% if cad_compare_at_decimal %}
-    {% assign comp_src = cad_compare_at_decimal | times: 100 %} {# CAD dollars → cents #}
-  {% endif %}
-{% endif %}
-
-{% assign v_price_php = v.price | times: cad_to_php_rate %}
-{% assign comp_src_php = comp_src | times: cad_to_php_rate %}
-
 {%- unless target == nil -%}
 <div
   class="price
@@ -84,9 +70,9 @@ product.compare_at_price_max={{ product.compare_at_price_max }} -->
 {% endfor %}
 
 
-        {% if comp_src and comp_src > 0 and comp_src_php > v_price_php %}
+        {% if v.compare_at_price and v.compare_at_price > v.price %}
           <p class="price-item--one-time">
-            <span>{{ comp_src_php | money_with_currency: 'PHP' }}</span> Regular Price
+            <span>{{ v.compare_at_price | money_with_currency }}</span> Regular Price
           </p>
         {% endif %}
 
