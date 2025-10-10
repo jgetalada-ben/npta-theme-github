@@ -1,0 +1,222 @@
+{% comment %}
+  Section: Trainer's Pick
+  Grid of product cards with header area.
+{% endcomment %}
+
+<section
+  id="TrainersPick-{{ section.id }}"
+  class="tp-section"
+  style="
+    --pt: {{ section.settings.pad_top | default: 40 }}px;
+    --pr: {{ section.settings.pad_right | default: 24 }}px;
+    --pb: {{ section.settings.pad_bottom | default: 40 }}px;
+    --pl: {{ section.settings.pad_left | default: 24 }}px;
+    --gap: {{ section.settings.gap | default: 24 }}px;
+    --bg: {{ section.settings.bg | default: '#EFF0E7' }};
+    --price-bg: {{ section.settings.price_bg | default: '#3A8D8F' }};
+    --price-color: {{ section.settings.price_color | default: '#FFFFFF' }};
+  "
+>
+  {%- assign mw = section.settings.max_width | default: '1200px' | strip -%}
+  {%- unless mw contains 'px' or mw contains '%' or mw contains 'vw' or mw contains 'rem' -%}{% assign mw = mw | append: 'px' %}{%- endunless -%}
+
+  <div class="tp-wrap" style="max-width: {{ mw }};">
+    <div class="tp-header">
+      {% if section.settings.kicker != blank %}
+        <p class="tp-kicker">{{ section.settings.kicker }}</p>
+      {% endif %}
+      {% if section.settings.title != blank %}
+        <h2 class="tp-title">{{ section.settings.title }}</h2>
+      {% endif %}
+      {% if section.settings.subhead != blank %}
+        <p class="tp-subhead">{{ section.settings.subhead }}</p>
+      {% endif %}
+      {% if section.settings.body != blank %}
+        <p class="tp-body">{{ section.settings.body }}</p>
+      {% endif %}
+
+      {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
+        <a class="tp-cta" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+      {% endif %}
+    </div>
+
+    <div class="tp-grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'product_card' %}
+          {%- assign p = block.settings.product_handle -%}
+
+          <a class="tp-card" href="{% if block.settings.custom_link != blank %}{{ block.settings.custom_link }}{% elsif p %}{{ p.url }}{% else %}#{% endif %}" {{ block.shopify_attributes }}>
+            <div class="tp-media">
+                {% if block.settings.custom_image != blank %}
+                    {% assign alt_text = block.settings.custom_title | default: p.title %}
+                    {{ block.settings.custom_image | image_url: width: 1200 | image_tag: class: 'tp-img', loading: 'lazy', alt: alt_text }}
+                {% elsif p and p.featured_image %}
+                    {{ p.featured_image | image_url: width: 1200 | image_tag: class: 'tp-img', loading: 'lazy', alt: p.title }}
+                {% else %}
+                    <div class="tp-img tp-img--placeholder" aria-hidden="true"></div>
+                {% endif %}
+            </div>
+
+            <div class="tp-content">
+              <h3 class="tp-card-title">
+                {% if block.settings.custom_title != blank %}
+                  {{ block.settings.custom_title }}
+                {% elsif p %}
+                  {{ p.title }}
+                {% else %}
+                  Product title
+                {% endif %}
+              </h3>
+
+              {% if block.settings.blurb != blank %}
+                <div class="tp-card-blurb">{{ block.settings.blurb }}</div>
+              {% elsif p and p.description != blank %}
+                <div class="tp-card-blurb">{{ p.description | strip_html | truncate: 140 }}</div>
+              {% endif %}
+
+              <span class="tp-price">
+                {% if block.settings.custom_price != blank %}
+                  {{ block.settings.custom_price }}
+                {% elsif p %}
+                  {{ p.price | money }}
+                {% else %}
+                  $0.00
+                {% endif %}
+              </span>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  {% stylesheet %}
+  .tp-section { background: var(--bg); padding: var(--pt) var(--pr) var(--pb) var(--pl); }
+  .tp-wrap { margin: 0 auto; }
+
+  /* Header */
+  .tp-header { display: grid; gap: 6px; margin-bottom: 24px; }
+  .tp-kicker { margin: 0; font-weight: 700; letter-spacing: .02em; color: #0b0b0b; }
+  .tp-title {
+    margin: 0;
+    font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
+    text-transform: uppercase;
+    font-size: 38px;
+    line-height: 1.1;
+    color: #0b0b0b;
+  }
+  .tp-subhead { margin: 0; font-weight: 700; color: #0b0b0b; }
+  .tp-body { margin: 0 0 16px; color: #0b0b0b; opacity: .9; }
+
+  .tp-cta {
+    display: inline-block;
+    align-self: start;
+    margin-top: 8px;
+    background: #C8FF63;
+    color: #0B0B0B;
+    border-radius: 10px;
+    padding: 12px 22px;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  /* Grid */
+  .tp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--gap);
+  }
+  @media (max-width: 1024px) {
+    .tp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 640px) {
+    .tp-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Card */
+  .tp-card {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 14px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .tp-media { position: relative; border-radius: 6px; overflow: hidden; }
+  .tp-img { width: 100%; height: auto; display: block; aspect-ratio: 4 / 3; object-fit: cover; }
+  .tp-img--placeholder { background: #e6e6e6; aspect-ratio: 4 / 3; }
+
+  .tp-content { display: grid; gap: 10px; align-content: start; }
+
+  .tp-card-title {
+    margin: 0;
+    font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
+    text-transform: uppercase;
+    font-size: 18px;
+    line-height: 1.2;
+    color: #0b0b0b;
+  }
+
+  .tp-card-blurb { color: #0b0b0b; opacity: .8; font-size: 14px; line-height: 1.5; }
+
+  .tp-price {
+    justify-self: start;
+    display: inline-block;
+    background: var(--price-bg);
+    color: var(--price-color);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-weight: 800;
+    letter-spacing: .02em;
+  }
+  {% endstylesheet %}
+</section>
+
+{% schema %}
+{
+  "name": "Trainer's Pick",
+  "tag": "section",
+  "class": "trainers-pick",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker (small line above title)" },
+    { "type": "text", "id": "title", "label": "Title", "default": "TRAINER’S PICK" },
+    { "type": "text", "id": "subhead", "label": "Bold subhead", "default": "Chosen by Thousands. Trusted by Trainers. Built for Your Next Step." },
+    { "type": "text", "id": "body", "label": "Body", "default": "Explore our best selling products." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "View All" },
+    { "type": "url",  "id": "cta_link",  "label": "CTA link" },
+
+    { "type": "header", "content": "Layout & style" },
+    { "type": "text", "id": "max_width", "label": "Max width (e.g. 1200px or 90%)", "default": "1200px" },
+    { "type": "color", "id": "bg", "label": "Background color", "default": "#EFF0E7" },
+    { "type": "color", "id": "price_bg", "label": "Price pill background", "default": "#3A8D8F" },
+    { "type": "color", "id": "price_color", "label": "Price pill text", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "pad_top", "min": 0, "max": 140, "step": 2, "unit": "px", "label": "Padding top", "default": 48 },
+    { "type": "range", "id": "pad_right", "min": 0, "max": 80,  "step": 2, "unit": "px", "label": "Padding right", "default": 24 },
+    { "type": "range", "id": "pad_bottom", "min": 0, "max": 140, "step": 2, "unit": "px", "label": "Padding bottom", "default": 48 },
+    { "type": "range", "id": "pad_left", "min": 0, "max": 80,  "step": 2, "unit": "px", "label": "Padding left", "default": 24 },
+    { "type": "range", "id": "gap", "min": 8, "max": 36, "step": 2, "unit": "px", "label": "Card gap", "default": 24 }
+  ],
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Product",
+      "settings": [
+        { "type": "product", "id": "product_handle", "label": "Product" },
+
+        { "type": "header", "content": "Overrides (optional)" },
+        { "type": "image_picker", "id": "custom_image", "label": "Image override" },
+        { "type": "text", "id": "custom_title", "label": "Title override" },
+        { "type": "richtext", "id": "blurb", "label": "Short blurb", "default": "<p>Write a short description…</p>" },
+        { "type": "text", "id": "custom_price", "label": "Price override (e.g. $1,299)" },
+        { "type": "url", "id": "custom_link", "label": "Link override" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Trainer's Pick" }
+  ]
+}
+{% endschema %}
