@@ -162,10 +162,10 @@
         "full_width": false,
         "max_width": "1989px",
         "max_height": "1528px",
-        "pad_top": 48,
-        "pad_right": 48,
-        "pad_bottom": 36,
-        "pad_left": 44,
+        "pad_top": 52,
+        "pad_right": 20,
+        "pad_bottom": 52,
+        "pad_left": 20,
         "gap": 10,
         "radius": 0
       }
