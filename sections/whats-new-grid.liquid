@@ -199,12 +199,14 @@
             <div class="wn-card__overlay"></div>
             <div class="wn-card__content">
                 <div class="card__item-content">
-                    {% if block.settings.left_heading != blank %}
-                    <h3 class="wn-card__title">{{ block.settings.left_heading }}</h3>
-                    {% endif %}
-                    {% if block.settings.left_body != blank %}
-                    <div class="wn-card__body">{{ block.settings.left_body }}</div>
-                    {% endif %}
+                    <div class="card__item-content-header">
+                        {% if block.settings.left_heading != blank %}
+                        <h3 class="wn-card__title">{{ block.settings.left_heading }}</h3>
+                        {% endif %}
+                        {% if block.settings.left_body != blank %}
+                        <div class="wn-card__body">{{ block.settings.left_body }}</div>
+                        {% endif %}
+                    </div>
                     {% if block.settings.left_btn_label != blank %}
                     <span class="wn-card__btn">{{ block.settings.left_btn_label }}</span>
                     {% endif %}
