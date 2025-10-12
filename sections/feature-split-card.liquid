@@ -1,0 +1,191 @@
+{% comment %}
+  Section: Split Feature (Image + Floating Text Card)
+  - Two-column layout with a floating/overlapping content card
+  - Toggle layout: image-left / image-right
+  - Title (Anton), eyebrow, body, CTA
+  - Per-side padding, background color, max width, offsets, radius
+{% endcomment %}
+
+<section
+  id="FeatureSplit-{{ section.id }}"
+  class="nl-section {% if section.settings.layout == 'image-right' %}is-right{% else %}is-left{% endif %}"
+  style="
+    --pt: {{ section.settings.pad_top | default: 48 }}px;
+    --pr: {{ section.settings.pad_right | default: 24 }}px;
+    --pb: {{ section.settings.pad_bottom | default: 48 }}px;
+    --pl: {{ section.settings.pad_left | default: 24 }}px;
+    --gap: {{ section.settings.gap | default: 24 }}px;
+    --bg: {{ section.settings.bg | default: '#E5E5D7' }};
+    --radius: {{ section.settings.radius | default: 12 }}px;
+    --card-bg: {{ section.settings.card_bg | default: '#FFFFFF' }};
+    --card-pad: {{ section.settings.card_pad | default: 28 }}px;
+    --offset: {{ section.settings.card_overlap | default: 28 }}px;   /* negative margin to overlap image */
+    --shadow: 0 2px 0 rgba(0,0,0,.06), 0 18px 28px rgba(0,0,0,.12);
+  "
+>
+  {%- assign mw = section.settings.max_width | default: '1200px' | strip -%}
+  {%- unless mw contains 'px' or mw contains '%' or mw contains 'vw' or mw contains 'rem' -%}{% assign mw = mw | append: 'px' %}{%- endunless -%}
+
+  <div class="nl-wrap" style="max-width: {{ mw }};">
+    <div class="nl-grid">
+      {%- comment -%} IMAGE COLUMN {%- endcomment -%}
+      <div class="nl-media">
+        {% if section.settings.image != blank %}
+          {{ section.settings.image | image_url: width: 1800 | image_tag: class: 'nl-img', loading: 'lazy', alt: section.settings.title | default: 'Feature image' }}
+        {% else %}
+          <div class="nl-img nl-img--placeholder" aria-hidden="true"></div>
+        {% endif %}
+      </div>
+
+      {%- comment -%} FLOATING CARD {%- endcomment -%}
+      <div class="nl-card">
+        {% if section.settings.title != blank %}
+          <h2 class="nl-title">{{ section.settings.title }}</h2>
+        {% endif %}
+
+        {% if section.settings.eyebrow != blank %}
+          <p class="nl-eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+
+        {% if section.settings.body != blank %}
+          <div class="nl-body">{{ section.settings.body }}</div>
+        {% endif %}
+
+        {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
+          <a class="nl-cta" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {% stylesheet %}
+  .nl-section { background: var(--bg); padding: var(--pt) var(--pr) var(--pb) var(--pl); }
+  .nl-wrap { margin: 0 auto; }
+
+  .nl-grid{
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;   /* image ~10% wider by default */
+    gap: var(--gap);
+    align-items: center;
+    position: relative;
+  }
+  /* Flip order when image is on the right */
+  .nl-section.is-right .nl-media { order: 2; }
+  .nl-section.is-right .nl-card  { order: 1; }
+
+  /* Media */
+  .nl-media { position: relative; }
+  .nl-img{
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius);
+    aspect-ratio: 16 / 10; /* adjustable via CSS if needed */
+    object-fit: cover;
+  }
+  .nl-img--placeholder{ background:#d9d9d9; aspect-ratio: 16 / 10; border-radius: var(--radius); }
+
+  /* Floating card */
+  .nl-card{
+    position: relative;
+    background: var(--card-bg);
+    border-radius: calc(var(--radius) - 2px);
+    box-shadow: var(--shadow);
+    padding: var(--card-pad);
+    /* Overlap toward the image */
+    margin-left: calc(var(--offset) * -1);
+    z-index: 2;
+  }
+  .nl-section.is-right .nl-card{ margin-left: 0; margin-right: calc(var(--offset) * -1); }
+
+  /* Typography */
+  .nl-title{
+    margin: 0 0 12px;
+    font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
+    font-size: 36px;
+    line-height: 1.15;
+    letter-spacing: .01em;
+    color: #0b2a22; /* deep green similar to mock */
+    text-transform: uppercase;
+  }
+  .nl-eyebrow{
+    margin: 0 0 10px;
+    font-weight: 700;
+    color: #0b2a22;
+  }
+  .nl-body{ color: #0b0b0b; opacity: .95; }
+  .nl-body p{ margin: 0 0 12px; }
+
+  /* CTA button (compact, not full width) */
+  .nl-cta{
+    display: inline-flex !important;
+    width: auto !important;
+    max-width: max-content;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12px;
+    padding: 12px 22px;
+    border-radius: 10px;
+    background: #C8FF63;
+    color: #0B0B0B;
+    font-weight: 800;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px){
+    .nl-grid{ grid-template-columns: 1fr; }
+    .nl-card{
+      margin: 0;          /* remove overlap on smaller screens */
+      margin-top: calc(var(--gap) * -0.25); /* light tuck */
+    }
+  }
+
+  @media (max-width: 640px){
+    .nl-title{ font-size: 28px; }
+    .nl-card{ padding: calc(var(--card-pad) - 6px); }
+  }
+  {% endstylesheet %}
+</section>
+
+{% schema %}
+{
+  "name": "Split Feature Card",
+  "tag": "section",
+  "class": "feature-split-card",
+  "settings": [
+    { "type": "select", "id": "layout", "label": "Layout", "options": [
+      { "value": "image-left",  "label": "Image left, card right" },
+      { "value": "image-right", "label": "Image right, card left" }
+    ], "default": "image-left" },
+
+    { "type": "image_picker", "id": "image", "label": "Image" },
+
+    { "type": "text", "id": "title", "label": "Title", "default": "WHY STUDENTS LOVE NPTA" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow (bold line)", "default": "Canada’s Lowest Prices" },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Get the best NASM deals with zero percent interest payment plans. Found an individual NASM course at a lower price elsewhere? Let us know so we can price match and find an even better deal!</p>" },
+
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "View All" },
+    { "type": "url",  "id": "cta_link",  "label": "Button link" },
+
+    { "type": "header", "content": "Layout & style" },
+    { "type": "text", "id": "max_width", "label": "Max width (e.g. 1200px or 90%)", "default": "1200px" },
+    { "type": "color", "id": "bg", "label": "Section background", "default": "#E3E3D5" },
+    { "type": "color", "id": "card_bg", "label": "Card background", "default": "#FFFFFF" },
+    { "type": "range", "id": "radius", "label": "Corner radius", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "card_overlap", "label": "Card overlap amount", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 28 },
+    { "type": "range", "id": "card_pad", "label": "Card padding", "min": 12, "max": 48, "step": 2, "unit": "px", "default": 28 },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "pad_top", "min": 0, "max": 140, "step": 2, "unit": "px", "label": "Padding top", "default": 40 },
+    { "type": "range", "id": "pad_right", "min": 0, "max": 80,  "step": 2, "unit": "px", "label": "Padding right", "default": 24 },
+    { "type": "range", "id": "pad_bottom", "min": 0, "max": 140, "step": 2, "unit": "px", "label": "Padding bottom", "default": 40 },
+    { "type": "range", "id": "pad_left", "min": 0, "max": 80,  "step": 2, "unit": "px", "label": "Padding left", "default": 24 },
+    { "type": "range", "id": "gap", "min": 8, "max": 48, "step": 2, "unit": "px", "label": "Image / Card gap", "default": 24 }
+  ],
+  "blocks": [],
+  "presets": [{ "name": "Split Feature Card" }]
+}
+{% endschema %}
