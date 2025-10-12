@@ -18,7 +18,8 @@
     --bg: {{ section.settings.bg | default: '#E5E5D7' }};
     --radius: {{ section.settings.radius | default: 12 }}px;
     --card-bg: {{ section.settings.card_bg | default: '#FFFFFF' }};
-    --card-pad: {{ section.settings.card_pad | default: 28 }}px;
+    --card-pad-y: {{ section.settings.card_pad_y | default: 100 }}px;
+    --card-pad-x: {{ section.settings.card_pad_x | default: 80 }}px;
     --offset: {{ section.settings.card_overlap | default: 28 }}px;   /* negative margin to overlap image */
     --shadow: 0 2px 0 rgba(0,0,0,.06), 0 18px 28px rgba(0,0,0,.12);
   "
@@ -74,13 +75,17 @@
   .nl-section.is-right .nl-card  { order: 1; }
 
   /* Media */
-  .nl-media { position: relative; }
+  .nl-media {
+    position: relative;
+    width: clamp(360px, 60vw, 865px);
+    max-width: 100%;
+}
   .nl-img{
     width: 100%;
     height: auto;
+    aspect-ratio: 865 / 750;
     display: block;
     border-radius: var(--radius);
-    aspect-ratio: 16 / 10; /* adjustable via CSS if needed */
     object-fit: cover;
   }
   .nl-img--placeholder{ background:#d9d9d9; aspect-ratio: 16 / 10; border-radius: var(--radius); }
@@ -91,8 +96,8 @@
     background: var(--card-bg);
     border-radius: calc(var(--radius) - 2px);
     box-shadow: var(--shadow);
-    padding: var(--card-pad);
-    /* Overlap toward the image */
+    padding-block: clamp(20px, calc(var(--card-pad-y) * (100vw / 1440)), 150px);
+    padding-inline: clamp(20px, calc(var(--card-pad-x) * (100vw / 1440)), 150px);
     margin-left: calc(var(--offset) * -1);
     z-index: 2;
   }
@@ -176,7 +181,8 @@
     { "type": "color", "id": "card_bg", "label": "Card background", "default": "#FFFFFF" },
     { "type": "range", "id": "radius", "label": "Corner radius", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 12 },
     { "type": "range", "id": "card_overlap", "label": "Card overlap amount", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 28 },
-    { "type": "range", "id": "card_pad", "label": "Card padding", "min": 12, "max": 48, "step": 2, "unit": "px", "default": 28 },
+    { "type": "range", "id": "card_pad_y", "label": "Card padding - top & bottom", "min": 20, "max": 150, "step": 2, "unit": "px", "default": 100 },
+    { "type": "range", "id": "card_pad_x", "label": "Card padding - left & right", "min": 20, "max": 150, "step": 2, "unit": "px", "default": 80 },
 
     { "type": "header", "content": "Spacing" },
     { "type": "range", "id": "pad_top", "min": 0, "max": 140, "step": 2, "unit": "px", "label": "Padding top", "default": 40 },
