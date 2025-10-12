@@ -108,7 +108,7 @@
           "type": "row",
           "settings": {
             "layout": "left-large",
-            "row_height_desktop": 460,
+            "row_height_desktop": 640,
             "row_height_mobile": 300,
             "left_image": "shopify://shop_images/Rectangle_2.png",
             "left_heading": "Social Media Influencer",
@@ -132,7 +132,7 @@
           "type": "row",
           "settings": {
             "layout": "right-large",
-            "row_height_desktop": 460,
+            "row_height_desktop": 640,
             "row_height_mobile": 300,
             "left_image": "shopify://shop_images/Rectangle_4.png",
             "left_heading": "Business Blueprint",
