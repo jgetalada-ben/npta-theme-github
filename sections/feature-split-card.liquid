@@ -125,8 +125,10 @@
     color: #01241E;
     font-size: clamp(18px,2.3vw,28px);
     font-family: var(--font-poppins500);
+    line-height: normal;
+    margin-bottom: 60px;
   }
-  .nl-body p{ margin: 0 0 12px; }
+  .nl-body p{ margin: 0; }
 
   /* CTA button (compact, not full width) */
   .nl-cta{
@@ -153,6 +155,9 @@
       margin: 0;
       margin-top: calc(var(--gap) * -0.25);
       width: 100%;
+    }
+    .nl-body{ 
+      margin-bottom: 30px;
     }
   }
   {% endstylesheet %}
