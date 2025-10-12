@@ -230,6 +230,30 @@
         "gap": 24
       }
     },
+    "feature_split_card_bcA9Uz": {
+      "type": "feature-split-card",
+      "name": "Split Feature Card",
+      "settings": {
+        "layout": "image-left",
+        "image": "shopify://shop_images/why-students-love-npta.png",
+        "title": "WHY STUDENTS LOVE NPTA",
+        "eyebrow": "Canada’s Lowest Prices",
+        "body": "<p>Get the best NASM deals with zero percent interest payment plans. Found an individual NASM course at a lower price elsewhere? Let us know so we can price match and find an even better deal!</p>",
+        "cta_label": "View All",
+        "cta_link": "",
+        "max_width": "1989px",
+        "bg": "#E3E3D5",
+        "card_bg": "#FFFFFF",
+        "radius": 12,
+        "card_overlap": 80,
+        "card_pad": 48,
+        "pad_top": 40,
+        "pad_right": 24,
+        "pad_bottom": 40,
+        "pad_left": 24,
+        "gap": 24
+      }
+    },
     "section_image_text_carousel_ARmbtF": {
       "type": "section--image-text-carousel",
       "blocks": {
@@ -927,6 +951,7 @@
     "hero_banner_VrVBf3",
     "whats_new_grid_LhNjr7",
     "trainers_pick_KpCy4K",
+    "feature_split_card_bcA9Uz",
     "section_image_text_carousel_ARmbtF",
     "featured_programs_3Ebyx7",
     "section_collection_tabs_w8nGxt",
