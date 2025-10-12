@@ -108,7 +108,7 @@
   .nl-title{
     margin: 0 0 12px;
     font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
-    font-size: 36px;
+    font-size: clamp(32px,3.3vw,58px);
     line-height: 1.15;
     letter-spacing: .01em;
     color: #0b2a22; /* deep green similar to mock */
@@ -148,10 +148,6 @@
       margin-top: calc(var(--gap) * -0.25);
       width: 100%;
     }
-  }
-
-  @media (max-width: 640px){
-    .nl-title{ font-size: 28px; }
   }
   {% endstylesheet %}
 </section>
