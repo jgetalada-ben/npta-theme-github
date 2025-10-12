@@ -202,12 +202,24 @@
     margin-bottom: 30px;
   }
   .tp-card-blurb { 
-    color: #01241E; 
-    font-size: clap(12px,1vw,18px);
+    color: #01241E;
+    font-family: var(--font-poppins400);
+    font-size: clamp(12px,1vw,18px);
     margin-bottom: 25px; 
   }
   .tp-card-blurb p{ 
     margin: 0;
+  }
+  .tp-price {
+    justify-self: start;
+    display: inline-block;
+    background: var(--price-bg);
+    color: var(--price-color);
+    border-radius: 10px;
+    padding: clamp(10px,1vw,24px) clamp(24px,2vw,56px);
+    font-weight: 800;
+    letter-spacing: .02em;
+    font-family: var(--font-poppins700);
   }
   @media (max-width: 1024px) {
     .tp-content { 
@@ -217,20 +229,11 @@
     .tp-card-blurb {
       margin-bottom: 0;
     }
+    .tp-price {
+      padding: 12px 30px;
+    }
   }
 
-  
-
-  .tp-price {
-    justify-self: start;
-    display: inline-block;
-    background: var(--price-bg);
-    color: var(--price-color);
-    border-radius: 10px;
-    padding: 10px 18px;
-    font-weight: 800;
-    letter-spacing: .02em;
-  }
   {% endstylesheet %}
 </section>
 
