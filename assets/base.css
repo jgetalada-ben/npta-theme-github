@@ -7,6 +7,9 @@
   --focused-base-outline-offset: 0.3rem;
   --focused-base-box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
   --font-anton: "Anton", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-poppins400: "Poppins400", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-poppins500: "Poppins500", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-poppins700: "Poppins700", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
 .product-card-wrapper .card,
