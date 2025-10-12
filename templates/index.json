@@ -255,6 +255,50 @@
         "gap": 24
       }
     },
+    "section_process_PPjrLE": {
+      "type": "section--process",
+      "blocks": {
+        "step_pqbwnY": {
+          "type": "step",
+          "settings": {
+            "step_title": "Get Certified",
+            "step_description": ""
+          }
+        },
+        "step_XzC3VX": {
+          "type": "step",
+          "settings": {
+            "step_title": "Get Hands-On Training",
+            "step_description": ""
+          }
+        },
+        "step_G4TCdU": {
+          "type": "step",
+          "settings": {
+            "step_title": "Get insured and employed",
+            "step_description": ""
+          }
+        }
+      },
+      "block_order": [
+        "step_pqbwnY",
+        "step_XzC3VX",
+        "step_G4TCdU"
+      ],
+      "settings": {
+        "background_color": "#ffffff",
+        "section_id": "certified-trainers",
+        "section_title": "HOW TO BECOME A TRAINER",
+        "section_description": "",
+        "title_alignment": "center",
+        "container_width": 980,
+        "alignment": "center",
+        "show_program_button": false,
+        "button_text": "",
+        "program_button_link": "",
+        "section_footer_description": ""
+      }
+    },
     "section_image_text_carousel_ARmbtF": {
       "type": "section--image-text-carousel",
       "blocks": {
@@ -714,50 +758,6 @@
         "button_text": "GET CERTIFIED"
       }
     },
-    "section_process_PPjrLE": {
-      "type": "section--process",
-      "blocks": {
-        "step_pqbwnY": {
-          "type": "step",
-          "settings": {
-            "step_title": "Get Certified",
-            "step_description": "Choose from our diverse range of science-based certification programs. All courses are 100% online and self-paced to provide a flexible learning experience."
-          }
-        },
-        "step_XzC3VX": {
-          "type": "step",
-          "settings": {
-            "step_title": "Gain Experience",
-            "step_description": "Build your resume + confidence as a trainer through NPTA's Apprenticeship program. Gain hands-on experience and learn directly from Canada's top leading trainers."
-          }
-        },
-        "step_G4TCdU": {
-          "type": "step",
-          "settings": {
-            "step_title": "Make Money!",
-            "step_description": "Now that you’re experienced and job-ready, start maximizing your earning potential. Join NPTA’s affiliate program and inspire others to sign up for our top-tier certification programs. Earn up to $600 for every successful referral."
-          }
-        }
-      },
-      "block_order": [
-        "step_pqbwnY",
-        "step_XzC3VX",
-        "step_G4TCdU"
-      ],
-      "settings": {
-        "background_color": "#ffffff",
-        "section_id": "certified-trainers",
-        "section_title": "Your Guide to Success!",
-        "section_description": "<p>3 Steps to Go From Your Desk to Your Dream Job Coaching Clients</p>",
-        "title_alignment": "center",
-        "container_width": 980,
-        "alignment": "center",
-        "show_program_button": true,
-        "button_text": "View All Programs",
-        "program_button_link": "shopify://collections/all",
-        "section_footer_description": ""
-      }
-    },
     "section_accordion_four_XFTakr": {
       "type": "section--accordion-four",
       "blocks": {
@@ -953,12 +953,12 @@
     "whats_new_grid_LhNjr7",
     "trainers_pick_KpCy4K",
     "feature_split_card_bcA9Uz",
+    "section_process_PPjrLE",
     "section_image_text_carousel_ARmbtF",
     "featured_programs_3Ebyx7",
     "section_collection_tabs_w8nGxt",
     "section_certified_trainers_HNR8DL",
     "section_banner_one_FnrnAm",
-    "section_process_PPjrLE",
     "section_accordion_four_XFTakr",
     "section_video_text_jXi47M",
     "section_collapsible_AWdycp",
