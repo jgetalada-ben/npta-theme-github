@@ -65,9 +65,9 @@
 
   .nl-grid{
     display: grid;
-    grid-template-columns: 1.1fr 1fr;   /* image ~10% wider by default */
     gap: var(--gap);
     align-items: center;
+    grid-template-columns: minmax(420px, 865px) minmax(480px, 1fr);
     position: relative;
   }
   /* Flip order when image is on the right */
@@ -76,8 +76,8 @@
 
   /* Media */
   .nl-media {
-    position: relative;
-    width: clamp(330px, 60vw, 865px);
+    /* position: relative;
+    width: clamp(330px, 60vw, 865px); */
     max-width: 100%;
 }
   .nl-img{
@@ -96,11 +96,13 @@
     background: var(--card-bg);
     border-radius: calc(var(--radius) - 2px);
     box-shadow: var(--shadow);
-    padding-block: clamp(20px, 3vw, var(--card-pad-y));
-    padding-inline: clamp(20px, 3vw, var(--card-pad-x));
-    margin-left: calc(var(--offset) * -1);
+    padding-block: clamp(20px, 6vw, var(--card-pad-y));
+    padding-inline: clamp(20px, 5vw, var(--card-pad-x));
+    --offset-fluid: clamp(8px, 2.2vw, var(--offset));
+    margin-left: calc(var(--offset-fluid) * -1);
     z-index: 2;
-    width: clamp(1050px, 54vw, 1989px);
+    width: auto;
+    max-width: clamp(520px, 46vw, 980px);
   }
   .nl-section.is-right .nl-card{ margin-left: 0; margin-right: calc(var(--offset) * -1); }
 
@@ -154,8 +156,9 @@
     .nl-grid{ grid-template-columns: 1fr; }
     .nl-card{
       margin: 0;
-      margin-top: calc(var(--gap) * -0.25);
-      width: 100%;
+      max-width: 100%;
+      /* margin-top: calc(var(--gap) * -0.25);
+      width: 100%; */
     }
     .nl-body{ 
       margin-bottom: 30px;
