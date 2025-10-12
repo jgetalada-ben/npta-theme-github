@@ -170,9 +170,14 @@
   .tp-card {
     display: grid;
     grid-template-rows: auto 1fr;
-    gap: 14px;
+    gap: 45px;
     text-decoration: none;
     color: inherit;
+  }
+  @media (max-width: 1024px) {
+    .tp-card {
+      gap: 20px;
+    }
   }
 
   .tp-media { 
@@ -182,18 +187,39 @@
   .tp-img { width: 100%; height: auto; display: block; aspect-ratio: 4 / 3; object-fit: cover; }
   .tp-img--placeholder { background: #e6e6e6; aspect-ratio: 4 / 3; }
 
-  .tp-content { display: grid; gap: 10px; align-content: start; }
+  .tp-content { 
+    display: grid; 
+    align-content: start; 
+  }
 
   .tp-card-title {
     margin: 0;
-    font-family: var(--font-anton);
+    font-family: var(--font-poppins700);
     text-transform: uppercase;
-    font-size: 18px;
+    font-size: clamp(18px,3.2vw,28px);
     line-height: 1.2;
     color: #01241E;
+    margin-bottom: 30px;
+  }
+  .tp-card-blurb { 
+    color: #01241E; 
+    font-size: clap(12px,0.4vw,18px);
+    margin-bottom: 25px; 
+  }
+  .tp-card-blurb p{ 
+    margin: 0;
+  }
+  @media (max-width: 1024px) {
+    .tp-content { 
+      gap: 20px;
+    }
+    .tp-card-title,
+    .tp-card-blurb {
+      margin-bottom: 0;
+    }
   }
 
-  .tp-card-blurb { color: #01241E; opacity: .8; font-size: 14px; line-height: 1.5; }
+  
 
   .tp-price {
     justify-self: start;
