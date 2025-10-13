@@ -418,322 +418,14 @@
         "padding_bottom": 36
       }
     },
-    "section_image_text_carousel_ARmbtF": {
-      "type": "section--image-text-carousel",
-      "blocks": {
-        "slide_4UzdLh": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/paymentsection2.jpg",
-            "title_prefix": "PAYMENT PLANS AVAILABLE!",
-            "title_highlight": "Finance",
-            "highlight_color": "#ffffff",
-            "title_suffix": "Your Fitness Career",
-            "highlight_suffix_color": "#ffffff",
-            "description": "We’ve partnered with Elective to make your path even more accessible with flexible payment plans. You might be managing a full-time job, raising a family, or switching careers entirely, and we’re here to walk with you. This isn’t just about financing. It’s about making sure every aspiring coach and wellness leader in Canada has the opportunity, encouragement, and tools to succeed.",
-            "button_text": "HOW IT WORKS",
-            "button_link": "shopify://pages/payment-plan-options",
-            "button_style": "button-yg"
-          }
-        },
-        "slide_qDUayL": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/NCSF.jpg",
-            "title_prefix": "NEW PARTNERSHIP!",
-            "title_highlight": "Elevate Your Skills",
-            "highlight_color": "#ffffff",
-            "title_suffix": "with NCSF",
-            "highlight_suffix_color": "#e9f24f",
-            "description": "NPTA has partnered with NCSF, a globally recognized leader in fitness education, to offer top-tier certifications in Strength & Conditioning, Personal Training, and Sport Performance. Expand your expertise with specialized courses in Health Coaching, Suspension Training, and Lower Back Specialization—now available!",
-            "button_text": "EXPLORE NCSF COURSES",
-            "button_link": "shopify://collections/specializations",
-            "button_style": "button-yg"
-          }
-        },
-        "slide_6nEhXa": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/KBStronger.jpg",
-            "title_prefix": "NEW PARTNERSHIP!",
-            "title_highlight": "Master Kettlebell Training",
-            "highlight_color": "#ffffff",
-            "title_suffix": "with KBStronger!",
-            "highlight_suffix_color": "#e9f24f",
-            "description": "We’re partnering with KBStronger to bring you expert-led kettlebell certifications. Enhance strength, endurance, and mobility with the Kettlebell Certification, KB Stronger Level 1 Certification, and Full Mobility Swing Certification. Elevate your coaching and performance today!",
-            "button_text": "EXPAND YOUR EXPERTISE",
-            "button_link": "shopify://collections/specializations",
-            "button_style": "button-yg"
-          }
-        },
-        "slide_fdWJWA": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Apprenticeship_Program.jpg",
-            "title_prefix": "APPRENTICESHIP PROGRAM!",
-            "title_highlight": "Train with",
-            "highlight_color": "#ffffff",
-            "title_suffix": "Canada’s Top Trainers!",
-            "highlight_suffix_color": "#e9f24f",
-            "description": "This 40-hour hands-on training program takes place in a real gym, where you'll work with clients under expert mentorship. Build confidence, refine your coaching skills, and gain practical, career-ready experience to excel as a trainer.",
-            "button_text": "START TRAINING",
-            "button_link": "shopify://pages/apprenticeship-program",
-            "button_style": "button-yg"
-          }
-        },
-        "slide_kGfp9G": {
-          "type": "slide",
-          "disabled": true,
-          "settings": {
-            "image": "shopify://shop_images/February_Sale.jpg",
-            "title_prefix": "FEBRUARY SALE!",
-            "title_highlight": "15% OFF -",
-            "highlight_color": "#e9f24f",
-            "title_suffix": "Specializations!",
-            "highlight_suffix_color": "#ffffff",
-            "description": "Show yourself some love this February with 15% OFF all specializations over $399! Advance your career, expand your expertise, and gain in-demand skills with industry-recognized certifications. This is your chance to invest in your passion and future—at a discount!",
-            "button_text": "GET 15% OFF NOW!",
-            "button_link": "shopify://collections/specializations",
-            "button_style": "button-yg"
-          }
-        }
-      },
-      "block_order": [
-        "slide_4UzdLh",
-        "slide_qDUayL",
-        "slide_6nEhXa",
-        "slide_fdWJWA",
-        "slide_kGfp9G"
-      ],
-      "disabled": true,
-      "settings": {
-        "section_title": "WHAT’S NEW AT NPTA?",
-        "section_description": "<p>Stay ahead with the latest <strong>partnerships</strong>, <strong>programs</strong>, and<strong> exclusive deals</strong> designed to elevate your fitness career!</p>",
-        "slide_count": 2,
-        "autoplay": true,
-        "autoplay_delay": 5000,
-        "show_buttons": true
-      }
-    },
-    "featured_programs_3Ebyx7": {
-      "type": "featured_programs",
-      "settings": {
-        "section_id": "programs",
-        "background_color": "#ffffff",
-        "discount_text_1": "",
-        "program_logo_1": "shopify://shop_images/nasm-canada-logo-white_56715b3b-8afa-466e-94e0-0971b6afb304.svg",
-        "background_image_1": "shopify://shop_images/certifications-placeholder-image.jpg",
-        "title_1": "CERTIFICATIONS",
-        "description_1": "Become NASM certified in 4 weeks. The gold standard in globally recognized certification programs for personal trainers and fitness professionals to help your clients reach their fitness goals faster.",
-        "button_link_1": "/collections/all?filter.p.tag=Certification&filter.v.price.gte=&filter.v.price.lte=&sort_by=title-ascending",
-        "button_text_1": "Choose My Program",
-        "is_visible_1": true,
-        "discount_text_2": "",
-        "program_logo_2": "shopify://shop_images/nasm-canada-logo-white_56715b3b-8afa-466e-94e0-0971b6afb304.svg",
-        "background_image_2": "shopify://shop_images/specializations-placeholder-image.jpg",
-        "title_2": "Specializations",
-        "description_2": "Gain a competitive edge by mastering advanced methods in sports nutrition, weight loss, corrective exercise, and many more.",
-        "button_link_2": "/collections/all?filter.p.tag=Specialization&filter.v.price.gte=&filter.v.price.lte=&sort_by=title-ascending",
-        "button_text_2": "Choose My Program",
-        "is_visible_2": true,
-        "discount_text_3": "SAVE UP TO <span>50% OFF</span>",
-        "program_logo_3": "shopify://shop_images/nasm-canada-logo-white_56715b3b-8afa-466e-94e0-0971b6afb304.svg",
-        "background_image_3": "shopify://shop_images/bundles-placeholder-image.jpg",
-        "title_3": "Bundles",
-        "description_3": "Maximize your benefits and save big with NASM's bundles! Get essential certifications and specialization courses all in one comprehensive deal.",
-        "button_link_3": "/collections/all?filter.p.tag=Bundles&filter.v.price.gte=&filter.v.price.lte=&sort_by=title-ascending",
-        "button_text_3": "Choose My Program",
-        "is_visible_3": true,
-        "discount_text_4": "",
-        "program_logo_4": "shopify://shop_images/nasm-canada-logo-white_56715b3b-8afa-466e-94e0-0971b6afb304.svg",
-        "background_image_4": "shopify://shop_images/apprenticeship-placeholder-image.jpg",
-        "title_4": "Apprenticeship",
-        "description_4": "Get hands-on experience training clients under the guidance of Canada’s top fitness trainers.",
-        "button_link_4": "shopify://pages/apprenticeship-program",
-        "button_text_4": "Read Full Guide",
-        "is_visible_4": true,
-        "section_title": "Programs designed for you",
-        "section_description": "<p>Your Path to Personal Training Success Starts Here</p>",
-        "title_alignment": "center",
-        "container_width": 1280,
-        "alignment": "center",
-        "show_program_button": true,
-        "button_text": "View all programs",
-        "program_button_link": "shopify://collections/all",
-        "section_footer_description": "<p>Looking for something specific? <a href=\"/pages/contact-us\" title=\"Contact Us\">Contact us</a> to build your own bundle.</p>"
-      }
-    },
-    "section_collection_tabs_w8nGxt": {
-      "type": "section-collection-tabs",
-      "settings": {
-        "collection1": "certifications",
-        "collection2": "specializations",
-        "collection3": "bundles",
-        "collection4": "all-products"
-      }
-    },
     "section_certified_trainers_6Q4NDV": {
       "type": "section--certified-trainers",
       "blocks": {
-        "trainer_rPxBm8": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/DSC04326-Edit_1.jpg",
-            "show_content": true,
-            "name": "Alfredson T.",
-            "certification": "CPT",
-            "quote": "\"If you’re someone who currently works a full-time job and is looking to make that jump to become a trainer, the NASM online self-study program is the right choice for you. Even with a full-time job, I was able to complete the course in 6 weeks and pass my exam first try!\"",
-            "rating": "5"
-          }
-        },
-        "trainer_wBpaAE": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/IMG_3357-_2.jpg",
-            "show_content": true,
-            "name": "Mark Lopez",
-            "certification": "",
-            "quote": "\"I chose to get NASM certified because of its in-depth, evidence-based approach, which I knew would greatly benefit my clients.\"",
-            "rating": "5"
-          }
-        },
-        "trainer_ntQWGc": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/IMG_3363.jpg",
-            "show_content": true,
-            "name": "Martin Chan",
-            "certification": "",
-            "quote": "\"I selected NASM certification for its comprehensive and research-driven curriculum, ensuring my clients receive the highest level of expertise.\"",
-            "rating": "5"
-          }
-        },
-        "trainer_XNkdmx": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-1.jpg",
-            "show_content": true,
-            "name": "Debora",
-            "certification": "",
-            "quote": "\"For the past six months, I have been studying hard to become a Certified Personal Trainer with NASM, known for its rigorous exam and strong reputation. Before this, I earned a German fitness instructor license (B-Lizenz). I worked in a gym while studying and really liked the NASM content, especially the OPT model.\"",
-            "rating": "5"
-          }
-        },
-        "trainer_XpLW6L": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-4.jpg",
-            "show_content": true,
-            "name": "Kevin",
-            "certification": "",
-            "quote": "\"Becoming NASM Certified is a significant milestone for me. It represents the knowledge and skills I’ve acquired, and my dedication to helping others achieve their fitness goals.\"",
-            "rating": "5"
-          }
-        },
-        "trainer_rrq4c9": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-3.jpg",
-            "show_content": true,
-            "name": "Vierra G.",
-            "certification": "",
-            "quote": "\"Balancing studying, work, and motherhood was incredibly challenging, but I’m proud to have completed it. This certification enhances my skills for better client service. The Corrective Exercise Specialist course provided advanced techniques for movement impairments, and I’m eager to apply this knowledge to help my clients reach their goals.\"",
-            "rating": "5"
-          }
-        },
-        "trainer_mjTweR": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-5.jpg",
-            "show_content": true,
-            "name": "Joyce",
-            "certification": "",
-            "quote": "“I wanted to take a moment to express my heartfelt gratitude for the exceptional education and support I have received at NASM. The knowledge and skills I’ve gained here have been invaluable, and I am truly thankful for the dedication and passion of the faculty and staff.”",
-            "rating": "5"
-          }
-        },
-        "trainer_n8nNeC": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-6.jpg",
-            "show_content": true,
-            "name": "Mahmoud",
-            "certification": "",
-            "quote": "\"I chose the NASM program for its excellent reputation and scientific approach, ensuring I gain the skills to provide top-notch service to my clients. With my NASM certification, I now create personalized training programs to help clients achieve their fitness goals safely and effectively.”",
-            "rating": "5"
-          }
-        },
-        "trainer_Yf7yb4": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-7.jpg",
-            "show_content": true,
-            "name": "Hossam",
-            "certification": "",
-            "quote": "\"I study biochemistry, but my passion is exercise science. Finding NASM was the best choice ever. Completing the course while studying was tough, but it deepened my love for exercise science and equipped me with valuable tools to become a professional personal trainer. Thank you, NASM.\"",
-            "rating": "5"
-          }
-        },
-        "trainer_MpEYcn": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-8.jpg",
-            "show_content": true,
-            "name": "Abigail",
-            "certification": "",
-            "quote": "\"I'm officially a NASM-certified personal trainer and deeply grateful for the program's support in passing the CPT exam! I'm excited to use what I've learned to help clients achieve their fitness goals and transform lives. Certification is just the beginning, and I'm ready for what's next!\"",
-            "rating": "5"
-          }
-        },
-        "trainer_KJfcE9": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-9.jpg",
-            "show_content": true,
-            "name": "Natalya",
-            "certification": "",
-            "quote": "\"I am now officially a NASM Certified Personal Trainer. I learned so much from this program. As a Certified Personal Trainer, I can now help people achieve their fitness goals and be the best version of themselves! Thank you to everyone who believed in me and helped me in my journey.\"",
-            "rating": "5"
-          }
-        },
-        "trainer_9LTp3Y": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-10.jpg",
-            "show_content": true,
-            "name": "Rodrigo",
-            "certification": "",
-            "quote": "\"NASM made this course extremely enjoyable and very informative. I was able to acquire knowledge and skills that will allow me to be a successful personal trainer. I’ve learned so much information that I would love to implement to empower others and help them achieve their goals. I am truly passionate about assisting others in becoming the best versions of themselves and living healthier and happier lives.\"",
-            "rating": "5"
-          }
-        },
-        "trainer_yQ6rWM": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-11.jpg",
-            "show_content": true,
-            "name": "Marina",
-            "certification": "",
-            "quote": "“I’ve been a Personal Trainer for 8 years and chose NASM for their reputation and flexible schedule. The certification took 4 months at my own pace and was applicable to both my profession and personal routines. I’m excited to use my new credentials to help people achieve their fitness goals and improve their lifestyles. Thank you, NASM!”",
-            "rating": "5"
-          }
-        },
-        "trainer_UjehRy": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-12.jpg",
-            "show_content": true,
-            "name": "Frank",
-            "certification": "",
-            "quote": "\"Training isn't complete without nutrition. For those offering nutritional guidance, the NASM CNC is essential. In my nine years in fitness, it’s been one of the most comprehensive and insightful certifications. The sections on behavior change and coaching skills were transformative. I’m now equipped to assess client needs and provide tailored nutritional coaching for their fitness and lifestyle goals.\"",
-            "rating": "5"
-          }
-        },
         "trainer_A9TM6F": {
           "type": "trainer",
           "settings": {
-            "image": "shopify://shop_images/Cert-13.jpg",
-            "show_content": true,
+            "image": "shopify://shop_images/Component_2.png",
+            "show_content": false,
             "name": "Savanna",
             "certification": "",
             "quote": "\"Enrolling in NASM was one of the best decisions for my career as a Personal Trainer and Sports Nutritionist. The education provided was excellent and equipped me with essential knowledge for the fitness industry. I appreciated the focus on coaching, nutrition, and exercise techniques. Thanks to NASM, I feel empowered to pursue my passion and look forward to further education in fitness, health, and wellness. I highly recommend NASM for expanding your knowledge in the fitness industry.\"",
@@ -743,8 +435,8 @@
         "trainer_pQjW8c": {
           "type": "trainer",
           "settings": {
-            "image": "shopify://shop_images/Cert-14.jpg",
-            "show_content": true,
+            "image": "shopify://shop_images/trainer_3.png",
+            "show_content": false,
             "name": "Alex Jung Lee",
             "certification": "",
             "quote": "\"Throughout the NASM CPT certification course, I've gained a comprehensive understanding of the intrinsic value associated with health and wellness. I take great pride in successfully achieving the designation of NASM CPT. I am enthusiastic about leveraging my acquired knowledge to support and enhance the well-being of my family, friends, and community as a NASM Certified Personal Trainer.\"",
@@ -754,8 +446,8 @@
         "trainer_GnQEiL": {
           "type": "trainer",
           "settings": {
-            "image": "shopify://shop_images/Cert-15.jpg",
-            "show_content": true,
+            "image": "shopify://shop_images/trainer_3_1.png",
+            "show_content": false,
             "name": "Felicitas Avendaño",
             "certification": "",
             "quote": "\"In 2018, I became a NASM Certified Personal Trainer (CPT) and Certified Nutrition Coach (CNC), turning a hobby into a full-time job with a busy schedule across two gyms, online clients, and home visits. Being a nutrition coach has enhanced my ability to help clients and added revenue streams to my business. I’m also proud to have been a gym owner for almost a year, enjoying the responsibility and freedom of leading my own team.\"",
@@ -766,7 +458,7 @@
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-16.jpg",
-            "show_content": true,
+            "show_content": false,
             "name": "Helen",
             "certification": "",
             "quote": "\"𝐃𝐫𝐞𝐚𝐦𝐬 💭 𝐝𝐨 𝐜𝐨𝐦𝐞 𝐭𝐫𝐮𝐞...𝐚𝐧𝐝 𝐈 𝐃𝐈𝐃 𝐈𝐓!⁣ Studying at 𝟓𝟕 is so very different than at 𝟏𝟗. Yet very possible.⁣\"⁠",
@@ -777,7 +469,7 @@
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-17.jpg",
-            "show_content": true,
+            "show_content": false,
             "name": "Darryl",
             "certification": "",
             "quote": "\"Time to pass some of this fitness energy down to our youth! Helping to make sure that they play for at least 60 minutes a day.\"",
@@ -788,7 +480,7 @@
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-18.jpg",
-            "show_content": true,
+            "show_content": false,
             "name": "Kenneth",
             "certification": "",
             "quote": "\"You can teach an old dog new tricks 😂 something good came out of the pandemic for me!\"",
@@ -797,20 +489,6 @@
         }
       },
       "block_order": [
-        "trainer_rPxBm8",
-        "trainer_wBpaAE",
-        "trainer_ntQWGc",
-        "trainer_XNkdmx",
-        "trainer_XpLW6L",
-        "trainer_rrq4c9",
-        "trainer_mjTweR",
-        "trainer_n8nNeC",
-        "trainer_Yf7yb4",
-        "trainer_MpEYcn",
-        "trainer_KJfcE9",
-        "trainer_9LTp3Y",
-        "trainer_yQ6rWM",
-        "trainer_UjehRy",
         "trainer_A9TM6F",
         "trainer_pQjW8c",
         "trainer_GnQEiL",
@@ -820,10 +498,10 @@
       ],
       "settings": {
         "section_id": "certified-trainers",
-        "section_title": "Hear from NASM certified trainers",
+        "section_title": "Trainer Success Journeys",
         "section_title2": "",
-        "section_description": "",
-        "title_alignment": "center",
+        "section_description": "<p><strong>Real Stories. Real Results.</strong></p><p>See how NASM-certified trainers turned passion into thriving careers. With the right certification and support, you’ll gain the skills, confidence, and opportunities to shape your own path.<br/></p>",
+        "title_alignment": "left",
         "desc_alignment": "left",
         "container_width": 980,
         "alignment": "center",
@@ -1076,9 +754,6 @@
     "section_text_image_QUzLBC",
     "section_logo_carousel_Typ4JF",
     "multicolumn_4hXCqV",
-    "section_image_text_carousel_ARmbtF",
-    "featured_programs_3Ebyx7",
-    "section_collection_tabs_w8nGxt",
     "section_certified_trainers_6Q4NDV",
     "section_banner_one_FnrnAm",
     "section_accordion_four_XFTakr",
