@@ -139,7 +139,8 @@
     max-width: 530px;
   }
   #{{ sid }} .text-image--column-right{
-  width:100%;
+    width:100%;
+    height: 100%;
   }
 }
 
@@ -156,10 +157,8 @@
     max-width: 100%;
   }
 }
-
-#{{ sid }} .text-image--column-right .image-wrapper img{
- width:100%;
-  height:100%;
+#{{ sid }} .text-image--column-right .image-wrapper {
+  height: 100%;
 }
 
 #{{ sid }} .image-text-content {
@@ -248,7 +247,11 @@ line-height: 150%; /* 24px */
 }
 
 @media (min-width: 981px){
-  .text-image--content{ display:grid; grid-template-columns: 1fr 1fr; align-items:center; gap: 0; }
+  .text-image--content{ 
+    display:grid; 
+    grid-template-columns: 1fr 1fr; 
+    align-items:stretch; 
+    gap: 0; }
   #{{ sid }}.section--text-image.image-left .text-image--column-left{ order: 2; }  /* move content to right */
   #{{ sid }}.section--text-image.image-left .text-image--column-right{ order: 1; } /* image to left */
 }
@@ -256,6 +259,9 @@ line-height: 150%; /* 24px */
 @media (max-width: 980px){
   #{{ sid }} .text-image--content{ display:flex !important; flex-wrap:wrap; flex-direction: column-reverse; gap:30px; }
   #{{ sid }} .text-image--column-left{ width:100%; max-width:100%; }
+  #{{ sid }} .text-image--column-right .image-wrapper{
+    min-height: 280px;
+  }
 }
 
 #{{ sid }}.section--text-image .button-yg{
@@ -264,7 +270,14 @@ line-height: 150%; /* 24px */
   color: #0B0B0B !important;
 }
 #{{ sid }} .text-image--container{ width:100%; }
-#{{ sid }} .text-image--column-right .image-wrapper img{ width:100%; height:100%; border-radius:20px; overflow:hidden; }
+#{{ sid }} .text-image--column-right .image-wrapper img{ 
+  width:100%; 
+  height:100%; 
+  border-radius:0; 
+  overflow:hidden; 
+  object-fit: cover;
+  display: block;
+}
 </style>
 
 <script>
