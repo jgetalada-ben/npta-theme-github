@@ -536,11 +536,11 @@
       "type": "section--newsletter-signup",
       "name": "Newsletter",
       "settings": {
-        "heading": "SIGN UP TO RECEIVE A FREE PERSONAL TRAINER START UP GUIDE",
+        "heading": "Enter your email for 25$ OFF your first order, plus the latest NPTA news.",
         "email_label": "EMAIL*",
         "email_placeholder": "Enter your email",
         "button_text": "SIGN UP",
-        "disclaimer_text": "By submitting this form, you agree to receive emails about our products, apps, sales, exclusive content and more.",
+        "disclaimer_text": "By providing my email, l am consenting to receive NPTA emails and Email-Based Advertising. For additional information, please see our",
         "privacy_policy_link": "/",
         "privacy_policy_text": "Privacy Policy"
       }
