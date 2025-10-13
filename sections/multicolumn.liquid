@@ -13,6 +13,13 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+  .multicolumn__title.heading-align-left  { text-align: left; }
+  .multicolumn__title.heading-align-center{ text-align: center; }
+  .multicolumn__title.heading-align-right { text-align: right; }
+  .multicolumn__inner .multicolumn-card.content-container { padding: var(--col-pad); }
+  @media (max-width: 749px){
+    .multicolumn__inner .multicolumn-card.content-container { padding: calc(var(--col-pad) * 0.75); }
+  }
 {%- endstyle -%}
 
 {%- liquid
@@ -23,15 +30,22 @@
   endif
 -%}
 
-<div class="multicolumn color-{{ section.settings.color_scheme }} gradient{% unless section.settings.background_style == 'none' and settings.text_boxes_border_thickness > 0 or settings.text_boxes_shadow_opacity > 0 %} background-{{ section.settings.background_style }}{% endunless %}{% if section.settings.title == blank %} no-heading{% endif %}">
+{%- assign mw = section.settings.max_width | default: '1989px' | strip -%}
+{%- unless mw contains 'px' or mw contains '%' or mw contains 'vw' or mw contains 'rem' -%}
+  {%- assign mw = mw | append: 'px' -%}
+{%- endunless -%}
+
+<div class="multicolumn color-{{ section.settings.color_scheme }} gradient{% unless section.settings.background_style == 'none' and settings.text_boxes_border_thickness > 0 or settings.text_boxes_shadow_opacity > 0 %} background-{{ section.settings.background_style }}{% endunless %}{% if section.settings.title == blank %} no-heading{% endif %}"
+     style="--col-pad: {{ section.settings.col_pad | default: 24 }}px;">  
   <div
-    class="page-width section-{{ section.id }}-padding isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+    class="section-{{ section.id }}-padding isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} multicolumn__inner"
+    style="max-width: {{ mw }}; width: 100%; margin: 0 auto;"
     {% if settings.animations_reveal_on_scroll %}
       data-cascade
     {% endif %}
   >
     {%- unless section.settings.title == blank -%}
-      <div class="title-wrapper-with-link title-wrapper--self-padded-mobile title-wrapper--no-top-margin multicolumn__title">
+      <div class="title-wrapper-with-link title-wrapper--self-padded-mobile title-wrapper--no-top-margin multicolumn__title heading-align-{{ section.settings.heading_align }}">
         <h2 class="title inline-richtext {{ section.settings.heading_size }}">
           {{ section.settings.title }}
         </h2>
@@ -198,10 +212,27 @@
   },
   "settings": [
     {
+      "type": "text",
+      "id": "max_width",
+      "label": "Section Max width (e.g., 1989px or 90%)",
+      "default": "1989px"
+    },
+    {
       "type": "inline_richtext",
       "id": "title",
       "default": "t:sections.multicolumn.settings.title.default",
       "label": "t:sections.multicolumn.settings.title.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Heading alignment",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "left"
     },
     {
       "type": "select",
@@ -382,6 +413,20 @@
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
       "default": 36
+    },
+    {
+      "type": "header",
+      "content": "Content Padding"
+    },
+    {
+      "type": "range",
+      "id": "col_pad",
+      "label": "Column padding",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 24
     }
   ],
   "blocks": [
