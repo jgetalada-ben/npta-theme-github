@@ -1,85 +1,57 @@
 {% schema %}
 {
-    "name": "Text Image",
-    "settings": [
-              {
-      "type": "text",
-      "id": "section_id",
-      "label": "Section ID",
-      "default": "section-id"
-    },
-        {
-            "type": "text",
-            "id": "heading",
-            "label": "Heading",
-            "default": "Lorem ipsum dolor sit amet"
-        },
-         {
-          "type": "richtext",
-          "id": "description",
-          "label": "Text"
-        },
-    
-        {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Select an image",
-      "info": "Choose an image from your files."
-    },
-          {
-      "type": "checkbox",
-      "id": "show_buttons",
-      "label": "Show Buttons",
-      "default": true
-    },
-        {
-            "type": "text",
-            "id": "primary_button_text",
-            "label": "Primary Button Text",
-            "default": "Button"
-        },
-        {
-            "type": "url",
-            "id": "primary_button_link",
-            "label": "Primary Button Link"
-        },
-        {
-            "type": "text",
-            "id": "secondary_button_text",
-            "label": "Secondary Button Text",
-            "default": "Button"
-        },
-    
-    ],
-    "blocks": [
-        {
-            "type": "highlight",
-            "name": "Highlight",
-            "settings": [
-                {
-                    "type": "text",
-                    "id": "highlight_title",
-                    "label": "Highlight Title",
-                    "default": "Highlight Title Goes Here"
-                },
-                {
-                    "type": "textarea",
-                    "id": "highlight_description",
-                    "label": "Highlight Description",
-                    "default": "Short description goes here."
-                }
-            ]
-        }
-    ],
-    "presets": [
-        {
-            "name": "Text Image",
-            "category": "Custom Sections"
-        }
-    ]
+  "name": "Text Image",
+  "settings": [
+    { "type": "text", "id": "section_id", "label": "Section ID", "default": "section-id" },
+
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Lorem ipsum dolor sit amet" },
+    { "type": "richtext", "id": "description", "label": "Text" },
+
+    { "type": "image_picker", "id": "image", "label": "Select an image" },
+
+    { "type": "checkbox", "id": "show_buttons", "label": "Show Button", "default": true },
+    { "type": "text", "id": "primary_button_text", "label": "Primary Button Text", "default": "Button" },
+    { "type": "url",  "id": "primary_button_link", "label": "Primary Button Link" },
+
+    { "type": "color", "id": "primary_button_color", "label": "Primary button color", "default": "#e9f24f" },
+
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "layout", "label": "Desktop order", "options": [
+      { "value": "content-left", "label": "Content left, image right" },
+      { "value": "image-left",   "label": "Image left, content right" }
+    ], "default": "content-left" },
+
+    { "type": "header", "content": "Container width" },
+    { "type": "text", "id": "max_width", "label": "Max width (e.g. 1989px or 90%)", "default": "1989px" },
+
+    { "type": "header", "content": "Spacing & background" },
+    { "type": "range", "id": "pad_y", "min": 0, "max": 200, "step": 2, "unit": "px", "label": "Padding top & bottom", "default": 120 },
+    { "type": "range", "id": "pad_x", "min": 0, "max": 200, "step": 2, "unit": "px", "label": "Padding left & right", "default": 80 },
+    { "type": "color", "id": "bg", "label": "Background color", "default": "#ffffff" }
+  ],
+  "blocks": [
+    {
+      "type": "highlight",
+      "name": "Highlight",
+      "settings": [
+        { "type": "text", "id": "highlight_title", "label": "Highlight Title", "default": "Highlight Title Goes Here" },
+        { "type": "textarea", "id": "highlight_description", "label": "Highlight Description", "default": "Short description goes here." }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Text Image", "category": "Custom Sections" }
+  ]
 }
 {% endschema %}
 
+{%- assign sid = section.settings.section_id | strip | handleize -%}
+{%- if sid == blank -%}{% assign sid = 'section-' | append: section.id %}{%- endif -%}
+
+{%- assign mw = section.settings.max_width | default: '1989px' | strip -%}
+{%- unless mw contains 'px' or mw contains '%' or mw contains 'vw' or mw contains 'rem' -%}
+  {% assign mw = mw | append: 'px' %}
+{%- endunless -%}
 
 <section class="section--text-image">
     <div class="text-image--container page-container">
