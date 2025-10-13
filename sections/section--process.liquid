@@ -135,18 +135,21 @@
   gird-colum
 }
 </style>
+{% stylesheet %}
+
+{% endstylesheet %}
 
 
 <section class="section--process" id="{{ section.settings.section_id }}" style="background-color: {{ section.settings.background_color }};">
-  <div class="section--process-container page-container ">
+  <div class="section--process-container page-container " style="max-width: {{ section.settings.container_width }}px;">
 
-<div class="section--title-block page-container" style="display: flex; justify-content: {{ section.settings.alignment }};">
-  <div style="max-width: {{ section.settings.container_width }}px;">
-    <h2 style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_title }}</h2>
-    <div class="title-block--desc" style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_description }}</div>
-  </div>
-</div>
-    
+    <div class="section--title-block page-container" style="display: flex; justify-content: {{ section.settings.alignment }};">
+      <div>
+        <h2 style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_title }}</h2>
+        <div class="title-block--desc" style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_description }}</div>
+      </div>
+    </div>
+
     <div class="process-steps">
       {% for block in section.blocks %}
         <div class="step">
@@ -160,11 +163,6 @@
         </div>
       {% endfor %}
     </div>
-
-
-
-
-
   </div>
       {% if section.settings.show_program_button %}
        <div class="container--footer" style="display: flex; flex-wrap:wrap; justify-content: {{ section.settings.alignment }};"> 
