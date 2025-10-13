@@ -14,8 +14,11 @@
     }
   }
   .multicolumn__title.heading-align-left  { text-align: left; }
-  .multicolumn__title.heading-align-center{ text-align: center; }
+  .multicolumn__title.heading-align-left .title {margin:0;}
+  .multicolumn__title.heading-align-center,{ text-align: center; }
+  .multicolumn__title.heading-align-center .title {margin: 0 auto;}
   .multicolumn__title.heading-align-right { text-align: right; }
+  .multicolumn__title.heading-align-right .title {margin: 0 0 0 auto;}
   .multicolumn__inner .multicolumn-card.content-container { padding: var(--col-pad); }
   @media (max-width: 749px){
     .multicolumn__inner .multicolumn-card.content-container { padding: calc(var(--col-pad) * 0.75); }
