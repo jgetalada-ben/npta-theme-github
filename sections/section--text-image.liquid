@@ -53,51 +53,51 @@
   {% assign mw = mw | append: 'px' %}
 {%- endunless -%}
 
-<section class="section--text-image">
-    <div class="text-image--container page-container">
-        <div class="text-image--content">
-            <div class="text-image--column-left">
-                <div class="section--title-block  ">
-                    <h2 class="is--flex-start">{{ section.settings.heading }}</h2> 
-                 
-                </div>
-
-                <div class="text-image--description">
-                  {{ section.settings.description }}
-                </div>
-{% if section.settings.show_buttons %}
-                <div class="section--hero-buttons">
-                    <a href="{{ section.settings.primary_button_link }}" class="btn button-yg">
-                        <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
-                        <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
-                    </a>
-                    <a href="{{ section.settings.secondary_button_link }}" class="btn button-w">
-                        <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
-                        <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
-                    </a>
-                </div>
-              {% else %}
-
-{% endif %}
-            </div>
-            <div class="text-image--column-right">
-                   <div class="image-wrapper">
- {% if section.settings.image %}
-  <img src="{{ section.settings.image | img_url: 'original' }}" alt="{{ section.settings.alt_text }}">
-{% else %}
-  <p>No image available</p>
-{% endif %}
-              
-             </div>
-            </div>
+<section
+  id="{{ sid }}"
+  class="section--text-image {{ section.settings.layout }}"
+  style="
+    --py: {{ section.settings.pad_y | default: 120 }}px;
+    --px: {{ section.settings.pad_x | default: 80 }}px;
+    --bg: {{ section.settings.bg | default: '#ffffff' }};
+    --btn-bg: {{ section.settings.primary_button_color | default: '#e9f24f' }};
+  "
+>
+  <div class="text-image--container" style="max-width: {{ mw }}; width: 100%; margin: 0 auto;">
+    <div class="text-image--content">
+      <div class="text-image--column-left">
+        <div class="section--title-block">
+          <h2 class="is--flex-start">{{ section.settings.heading }}</h2>
         </div>
+
+        <div class="text-image--description">
+          {{ section.settings.description }}
+        </div>
+
+        {% if section.settings.show_buttons %}
+          <div class="section--hero-buttons">
+            <a href="{{ section.settings.primary_button_link }}" class="btn button-yg">
+              <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+              <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+            </a>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="text-image--column-right">
+        <div class="image-wrapper">
+          {% if section.settings.image %}
+            <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.heading | escape }}">
+          {% else %}
+            <p>No image available</p>
+          {% endif %}
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
 <style>
-
-
-  
 .is--heading-white h1{
   color: #FFF;
 } 
@@ -255,8 +255,33 @@ font-weight: 400;
 line-height: 150%; /* 24px */
 }
 
+.section--text-image{
+  background: var(--bg);
+  padding: var(--py) var(--px);
+  display: flex; justify-content: center; align-items: center;
+}
+@media (max-width: 980px){
+  .section--text-image{ padding: calc(var(--py)/2) calc(var(--px)/2); }
+}
 
+@media (min-width: 981px){
+  .text-image--content{ display:grid; grid-template-columns: 1fr 1fr; align-items:center; gap: 0; }
+  .section--text-image.image-left .text-image--column-left{ order: 2; }  /* move content to right */
+  .section--text-image.image-left .text-image--column-right{ order: 1; } /* image to left */
+}
 
+@media (max-width: 980px){
+  .text-image--content{ display:flex !important; flex-wrap:wrap; flex-direction: column-reverse; gap:30px; }
+  .text-image--column-left{ width:100%; max-width:100%; }
+}
+
+.section--text-image .button-yg{
+  background: var(--btn-bg) !important;
+  border-color: var(--btn-bg) !important;
+  color: #0B0B0B !important;
+}
+.text-image--container{ width:100%; }
+.text-image--column-right .image-wrapper img{ width:100%; height:100%; border-radius:20px; overflow:hidden; }
 </style>
 
 <script>
