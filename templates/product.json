@@ -53,6 +53,11 @@
             "swatch_shape": "circle"
           }
         },
+        "bogos_io_free_gift_bundle_page_button_view_4V3fb3": {
+          "type": "shopify://apps/bogos-io-free-gift/blocks/bundle-page-button-view/0432bba6-720a-4e95-be5a-b868386f7aa6",
+          "disabled": true,
+          "settings": {}
+        },
         "buy_buttons_RWgf6F": {
           "type": "buy_buttons",
           "settings": {
@@ -68,6 +73,7 @@
         "description",
         "price",
         "variant_picker",
+        "bogos_io_free_gift_bundle_page_button_view_4V3fb3",
         "buy_buttons_RWgf6F"
       ],
       "custom_css": [
