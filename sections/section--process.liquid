@@ -85,23 +85,19 @@
   margin-bottom: 40px;
 }
 
-.section--process .step-count span {
-  color:  #141414;
-  font-family: var(--font-heading-family);
-  font-size: 45px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: 104%; /* 46.8px */
+#{{ section.settings.section_id }} .section--process .step-count span {
+  font-family: var(--font-anton);
+  font-weight:400;
+  color: #28666E;
+  font-size: clamp(32px,4.3vw,64px);
   text-transform: uppercase;
 }
 
-.section--process .step-content h3 {
-  color: #141414;
-  font-family: var(--font-heading-family);
-  font-size: 22px;
-  font-style: normal;
+#{{ section.settings.section_id }} .section--process .step-content h3 {
+  color: #0F828C;
+  font-family: var(--font-adirek800);
+  font-size: clamp(18px,2.3vw,36px);
   font-weight: 800;
-  line-height: 104%; 
   text-transform: uppercase;
   margin-top:0;
   margin-bottom:10px;
