@@ -17,6 +17,7 @@
     --price-color: {{ section.settings.price_color | default: '#FFFFFF' }};
   "
 >
+
   {%- assign mw = section.settings.max_width | default: '1200px' | strip -%}
   {%- unless mw contains 'px' or mw contains '%' or mw contains 'vw' or mw contains 'rem' -%}{% assign mw = mw | append: 'px' %}{%- endunless -%}
 
