@@ -38,7 +38,8 @@
 
 <style>
 #logo-carousel li img{
-  max-height:40px;
+  {% comment %} max-height:40px; {% endcomment %}
+   max-height: clamp(40px, 17vw, 300px);
   height:100%;
   width:100%;
   filter: saturate(0);
