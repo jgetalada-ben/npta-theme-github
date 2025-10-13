@@ -169,6 +169,10 @@
   }
   #{{ sid }}.section--text-image .section--hero-buttons {
     margin-top: 30px;
+    text-align: center;
+  }
+  #{{ sid }}.section--text-image .section--hero-buttons a{
+    width: auto;
   }
 }
 #{{ sid }} .text-image--column-right .image-wrapper {
@@ -278,7 +282,13 @@
 }
 
 @media (max-width: 980px){
-  #{{ sid }} .text-image--content{ display:flex !important; flex-wrap:wrap; flex-direction: column-reverse; gap:30px; }
+  #{{ sid }} .text-image--content{ 
+    display:flex !important; 
+    flex-wrap:wrap; flex-direction: 
+    column-reverse; 
+    gap:30px; 
+    padding-bottom: 20px;
+  }
   #{{ sid }} .text-image--column-left{ width:100%; max-width:100%; }
   #{{ sid }} .text-image--column-right .image-wrapper{
     min-height: 280px;
