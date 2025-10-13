@@ -361,6 +361,63 @@
         "container_width": 2000
       }
     },
+    "multicolumn_4hXCqV": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_UNGJEJ": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_25.png",
+            "title": "ATHLETES",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_ajeEYg": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_26.png",
+            "title": "NUTRITION",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_qLqfqw": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_27.png",
+            "title": "WELLNESS",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_UNGJEJ",
+        "column_ajeEYg",
+        "column_qLqfqw"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "TRENDING BUNDLES",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "section_image_text_carousel_ARmbtF": {
       "type": "section--image-text-carousel",
       "blocks": {
@@ -1018,6 +1075,7 @@
     "section_process_PPjrLE",
     "section_text_image_QUzLBC",
     "section_logo_carousel_Typ4JF",
+    "multicolumn_4hXCqV",
     "section_image_text_carousel_ARmbtF",
     "featured_programs_3Ebyx7",
     "section_collection_tabs_w8nGxt",
