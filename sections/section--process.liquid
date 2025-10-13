@@ -1,3 +1,9 @@
+{% assign mw = section.settings.container_width  | default: '1989px' | strip %}
+
+{% unless mw contains 'px' or mw contains '%' or mw contains 'vw' or mw contains 'rem' %}
+  {% assign mw = mw | append: 'px' %}
+{% endunless %}
+
 <style>
 .section-footer-description{
   width:100%;
@@ -139,9 +145,8 @@
 
 {% endstylesheet %}
 
-
 <section class="section--process" id="{{ section.settings.section_id }}" style="background-color: {{ section.settings.background_color }};">
-  <div class="section--process-container page-container " style="max-width: {{ section.settings.container_width }}px;">
+  <div class="section--process-container page-container " style="max-width: {{ mw }};">
 
     <div class="section--title-block page-container" style="display: flex; justify-content: {{ section.settings.alignment }};">
       <div>
@@ -229,15 +234,11 @@
       ],
       "default": "left"
     },
-    {
-      "type": "range",
+    { 
+      "type": "text",
       "id": "container_width",
-      "label": "Container width",
-      "min": 200,
-      "max": 2000,
-      "step": 20,
-      "unit": "px",
-      "default": 980
+      "label": "Container width (e.g. 1989px)",
+      "default": "980" 
     },
     {
       "type": "select",
