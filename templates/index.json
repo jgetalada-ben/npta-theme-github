@@ -531,6 +531,19 @@
         "container_width": 620,
         "alignment": "flex-start"
       }
+    },
+    "section_newsletter_signup_LcJCrX": {
+      "type": "section--newsletter-signup",
+      "name": "Newsletter",
+      "settings": {
+        "heading": "SIGN UP TO RECEIVE A FREE PERSONAL TRAINER START UP GUIDE",
+        "email_label": "EMAIL*",
+        "email_placeholder": "Enter your email",
+        "button_text": "SIGN UP",
+        "disclaimer_text": "By submitting this form, you agree to receive emails about our products, apps, sales, exclusive content and more.",
+        "privacy_policy_link": "/",
+        "privacy_policy_text": "Privacy Policy"
+      }
     }
   },
   "order": [
@@ -544,6 +557,7 @@
     "section_logo_carousel_Typ4JF",
     "multicolumn_4hXCqV",
     "section_certified_trainers_6Q4NDV",
-    "section_banner_two_CRjekD"
+    "section_banner_two_CRjekD",
+    "section_newsletter_signup_LcJCrX"
   ]
 }

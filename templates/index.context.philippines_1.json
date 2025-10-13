@@ -22,20 +22,11 @@
       "disabled": true,
       "settings": {},
       "blocks": {}
-    },
-    "section_accordion_four_XFTakr": {
-      "disabled": true,
-      "settings": {},
-      "blocks": {}
     }
   },
   "order": [
     "hero_banner_VrVBf3",
-    "section_banner_one_FnrnAm",
     "section_process_PPjrLE",
-    "section_accordion_four_XFTakr",
-    "section_video_text_jXi47M",
-    "section_collapsible_AWdycp",
     "section_banner_two_CRjekD"
   ]
 }
