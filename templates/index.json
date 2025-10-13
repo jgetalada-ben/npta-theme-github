@@ -299,6 +299,54 @@
         "section_footer_description": ""
       }
     },
+    "image_with_text_UtnfTd": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_kM3MnJ": {
+          "type": "heading",
+          "settings": {
+            "heading": "Why students love npta",
+            "heading_size": "h1"
+          }
+        },
+        "text_Ya9NBr": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Get the best NASM deals with zero percent interest payment plans. Found an individual NASM course at a lower price elsewhere? Let us know so we can price match and find an even better deal!</p>",
+            "text_style": "body"
+          }
+        },
+        "button_rjed7E": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_kM3MnJ",
+        "text_Ya9NBr",
+        "button_rjed7E"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/why-students-love-npta.png",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
     "section_image_text_carousel_ARmbtF": {
       "type": "section--image-text-carousel",
       "blocks": {
@@ -954,6 +1002,7 @@
     "trainers_pick_KpCy4K",
     "feature_split_card_bcA9Uz",
     "section_process_PPjrLE",
+    "image_with_text_UtnfTd",
     "section_image_text_carousel_ARmbtF",
     "featured_programs_3Ebyx7",
     "section_collection_tabs_w8nGxt",
