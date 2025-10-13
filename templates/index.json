@@ -326,25 +326,25 @@
         "logo_daxrAW": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/image_2.png"
+            "image": "shopify://shop_images/nasm-logo.png"
           }
         },
         "logo_tXtcJX": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/partner_logo_1.png"
+            "image": "shopify://shop_images/npta-ph-logo_61da15a0-7548-4732-becb-f2132c7cc3c8.png"
           }
         },
         "logo_d8MRnj": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/ph_logo_1.png"
+            "image": "shopify://shop_images/ncsf-logo.png"
           }
         },
         "logo_rmVXhc": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/image_1.png"
+            "image": "shopify://shop_images/kbstronger-logo.png"
           }
         }
       },
