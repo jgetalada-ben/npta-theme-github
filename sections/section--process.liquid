@@ -229,11 +229,15 @@
       ],
       "default": "left"
     },
-    { 
-      "type": "text",
+    {
+      "type": "range",
       "id": "container_width",
-      "label": "Container width (e.g. 1989px)",
-      "default": "980" 
+      "label": "Container width",
+      "min": 200,
+      "max": 2000,
+      "step": 20,
+      "unit": "px",
+      "default": 980
     },
     {
       "type": "select",
