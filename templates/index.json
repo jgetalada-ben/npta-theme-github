@@ -503,10 +503,10 @@
         "section_description": "<p><strong>Real Stories. Real Results.</strong></p><p>See how NASM-certified trainers turned passion into thriving careers. With the right certification and support, you’ll gain the skills, confidence, and opportunities to shape your own path.<br/></p>",
         "title_alignment": "left",
         "desc_alignment": "left",
-        "container_width": 980,
-        "alignment": "center",
+        "container_width": 2000,
+        "alignment": "flex-start",
         "button_1_link": "",
-        "button_1_text": "Register Here"
+        "button_1_text": ""
       }
     },
     "section_banner_one_FnrnAm": {
