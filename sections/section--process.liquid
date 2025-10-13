@@ -100,7 +100,7 @@
 #{{ section.settings.section_id }} .step-content h3 {
   color: #0F828C;
   font-family: var(--font-adirek800);
-  font-size: clamp(18px,2.3vw,36px);
+  font-size: clamp(26px,2.3vw,36px);
   font-weight: 800;
   text-transform: uppercase;
   margin-top:0;
@@ -129,8 +129,9 @@
   .section--process .step {
     width:100%;
   }
-  .section--process .step {
+  #{{ section.settings.section_id }} .section--process .step {
     padding: 20px 0px;
+    align-items: center;
   }
 }
 .step{
