@@ -310,7 +310,12 @@
         "show_buttons": true,
         "primary_button_text": "Button",
         "primary_button_link": "",
-        "secondary_button_text": "Button"
+        "primary_button_color": "#e9f24f",
+        "layout": "content-left",
+        "max_width": "1989px",
+        "pad_y": 0,
+        "pad_x": 0,
+        "bg": "#0f828c"
       }
     },
     "section_image_text_carousel_ARmbtF": {
