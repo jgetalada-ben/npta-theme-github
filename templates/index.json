@@ -303,7 +303,7 @@
       "type": "section--text-image",
       "name": "Text Image",
       "settings": {
-        "section_id": "section-id",
+        "section_id": "homepage-quiz-section",
         "heading": "Lorem ipsum dolor sit amet",
         "description": "",
         "image": "shopify://shop_images/Rectangle_19.png",
