@@ -402,7 +402,9 @@
       ],
       "name": "t:sections.multicolumn.presets.name",
       "settings": {
+        "max_width": "1989px",
         "title": "TRENDING BUNDLES",
+        "heading_align": "center",
         "heading_size": "h1",
         "image_width": "full",
         "image_ratio": "adapt",
@@ -415,7 +417,8 @@
         "columns_mobile": "1",
         "swipe_on_mobile": true,
         "padding_top": 36,
-        "padding_bottom": 36
+        "padding_bottom": 36,
+        "col_pad": 0
       }
     },
     "section_certified_trainers_6Q4NDV": {
