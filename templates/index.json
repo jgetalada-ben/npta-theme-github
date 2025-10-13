@@ -320,6 +320,47 @@
         "bg": "#0f828c"
       }
     },
+    "section_logo_carousel_Typ4JF": {
+      "type": "section--logo-carousel",
+      "blocks": {
+        "logo_daxrAW": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/image_2.png"
+          }
+        },
+        "logo_tXtcJX": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/partner_logo_1.png"
+          }
+        },
+        "logo_d8MRnj": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/ph_logo_1.png"
+          }
+        },
+        "logo_rmVXhc": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/image_1.png"
+          }
+        }
+      },
+      "block_order": [
+        "logo_daxrAW",
+        "logo_tXtcJX",
+        "logo_d8MRnj",
+        "logo_rmVXhc"
+      ],
+      "name": "Logo Carousel",
+      "settings": {
+        "top_padding": 92,
+        "bottom_padding": 92,
+        "container_width": 2000
+      }
+    },
     "section_image_text_carousel_ARmbtF": {
       "type": "section--image-text-carousel",
       "blocks": {
@@ -474,10 +515,10 @@
         "collection4": "all-products"
       }
     },
-    "section_certified_trainers_HNR8DL": {
+    "section_certified_trainers_6Q4NDV": {
       "type": "section--certified-trainers",
       "blocks": {
-        "trainer_6RkQ8y": {
+        "trainer_rPxBm8": {
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/DSC04326-Edit_1.jpg",
@@ -488,7 +529,7 @@
             "rating": "5"
           }
         },
-        "trainer_9kA6xC": {
+        "trainer_wBpaAE": {
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/IMG_3357-_2.jpg",
@@ -499,7 +540,7 @@
             "rating": "5"
           }
         },
-        "trainer_EeaEDm": {
+        "trainer_ntQWGc": {
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/IMG_3363.jpg",
@@ -510,7 +551,7 @@
             "rating": "5"
           }
         },
-        "trainer_ej68AR": {
+        "trainer_XNkdmx": {
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-1.jpg",
@@ -521,7 +562,7 @@
             "rating": "5"
           }
         },
-        "trainer_3gdTai": {
+        "trainer_XpLW6L": {
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-4.jpg",
@@ -532,7 +573,7 @@
             "rating": "5"
           }
         },
-        "trainer_YyQwcz": {
+        "trainer_rrq4c9": {
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-3.jpg",
@@ -543,7 +584,7 @@
             "rating": "5"
           }
         },
-        "trainer_gNBkiJ": {
+        "trainer_mjTweR": {
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-5.jpg",
@@ -554,7 +595,7 @@
             "rating": "5"
           }
         },
-        "trainer_dPMrzb": {
+        "trainer_n8nNeC": {
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-6.jpg",
@@ -565,7 +606,7 @@
             "rating": "5"
           }
         },
-        "trainer_8RVP4A": {
+        "trainer_Yf7yb4": {
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-7.jpg",
@@ -576,7 +617,7 @@
             "rating": "5"
           }
         },
-        "trainer_8WQTnV": {
+        "trainer_MpEYcn": {
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-8.jpg",
@@ -587,7 +628,7 @@
             "rating": "5"
           }
         },
-        "trainer_ici9kx": {
+        "trainer_KJfcE9": {
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-9.jpg",
@@ -598,7 +639,7 @@
             "rating": "5"
           }
         },
-        "trainer_qejMLT": {
+        "trainer_9LTp3Y": {
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-10.jpg",
@@ -609,7 +650,7 @@
             "rating": "5"
           }
         },
-        "trainer_dBFwGh": {
+        "trainer_yQ6rWM": {
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-11.jpg",
@@ -620,7 +661,7 @@
             "rating": "5"
           }
         },
-        "trainer_VgHH6g": {
+        "trainer_UjehRy": {
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-12.jpg",
@@ -631,7 +672,7 @@
             "rating": "5"
           }
         },
-        "trainer_87Lpeq": {
+        "trainer_A9TM6F": {
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-13.jpg",
@@ -642,7 +683,7 @@
             "rating": "5"
           }
         },
-        "trainer_HY7xBL": {
+        "trainer_pQjW8c": {
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-14.jpg",
@@ -653,7 +694,7 @@
             "rating": "5"
           }
         },
-        "trainer_FVtrQ9": {
+        "trainer_GnQEiL": {
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-15.jpg",
@@ -664,7 +705,7 @@
             "rating": "5"
           }
         },
-        "trainer_7yagcB": {
+        "trainer_fdV8UX": {
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-16.jpg",
@@ -675,7 +716,7 @@
             "rating": "5"
           }
         },
-        "trainer_tEcriM": {
+        "trainer_i8F8Gd": {
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-17.jpg",
@@ -686,7 +727,7 @@
             "rating": "5"
           }
         },
-        "trainer_KMc8wD": {
+        "trainer_AkBPkW": {
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-18.jpg",
@@ -699,26 +740,26 @@
         }
       },
       "block_order": [
-        "trainer_6RkQ8y",
-        "trainer_9kA6xC",
-        "trainer_EeaEDm",
-        "trainer_ej68AR",
-        "trainer_3gdTai",
-        "trainer_YyQwcz",
-        "trainer_gNBkiJ",
-        "trainer_dPMrzb",
-        "trainer_8RVP4A",
-        "trainer_8WQTnV",
-        "trainer_ici9kx",
-        "trainer_qejMLT",
-        "trainer_dBFwGh",
-        "trainer_VgHH6g",
-        "trainer_87Lpeq",
-        "trainer_HY7xBL",
-        "trainer_FVtrQ9",
-        "trainer_7yagcB",
-        "trainer_tEcriM",
-        "trainer_KMc8wD"
+        "trainer_rPxBm8",
+        "trainer_wBpaAE",
+        "trainer_ntQWGc",
+        "trainer_XNkdmx",
+        "trainer_XpLW6L",
+        "trainer_rrq4c9",
+        "trainer_mjTweR",
+        "trainer_n8nNeC",
+        "trainer_Yf7yb4",
+        "trainer_MpEYcn",
+        "trainer_KJfcE9",
+        "trainer_9LTp3Y",
+        "trainer_yQ6rWM",
+        "trainer_UjehRy",
+        "trainer_A9TM6F",
+        "trainer_pQjW8c",
+        "trainer_GnQEiL",
+        "trainer_fdV8UX",
+        "trainer_i8F8Gd",
+        "trainer_AkBPkW"
       ],
       "settings": {
         "section_id": "certified-trainers",
@@ -976,10 +1017,11 @@
     "feature_split_card_bcA9Uz",
     "section_process_PPjrLE",
     "section_text_image_QUzLBC",
+    "section_logo_carousel_Typ4JF",
     "section_image_text_carousel_ARmbtF",
     "featured_programs_3Ebyx7",
     "section_collection_tabs_w8nGxt",
-    "section_certified_trainers_HNR8DL",
+    "section_certified_trainers_6Q4NDV",
     "section_banner_one_FnrnAm",
     "section_accordion_four_XFTakr",
     "section_video_text_jXi47M",
