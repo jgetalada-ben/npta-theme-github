@@ -574,11 +574,11 @@
         "bg_image": "shopify://shop_images/Footer_Banner.png",
         "bg_position": "left center",
         "overlay_opacity": 0,
-        "bg": "#09A7B3",
-        "heading_color": "#FFFFFF",
-        "text_color": "#FFFFFF",
-        "btn_bg": "#FFFFFF",
-        "btn_txt": "#0B0B0B",
+        "bg": "#09a7b3",
+        "heading_color": "#ffffff",
+        "text_color": "#ffffff",
+        "btn_bg": "#ffffff",
+        "btn_txt": "#0b0b0b",
         "content_pos": "right",
         "max_width": "1989px",
         "pad_y": 80,
@@ -592,7 +592,7 @@
         ".section--banner-two {background-position: center 30%; background-repeat: no-repeat; background-size: cover;}"
       ],
       "settings": {
-        "background_image": "shopify://shop_images/CES-6_2a.jpg",
+        "background_image": "shopify://shop_images/Footer_Banner.png",
         "title": "Your Fitness Career Starts Here",
         "subtitle": "",
         "button_link": "shopify://collections/all",
@@ -600,13 +600,13 @@
         "show_button_1": true,
         "button_1_text": "Choose my program",
         "button_1_link": "shopify://collections/all",
-        "show_button_2": true,
+        "show_button_2": false,
         "button_2_text": "Contact Us",
         "button_2_link": "shopify://pages/contact-us",
         "button_position": "left",
         "title_alignment": "left",
-        "container_width": 620,
-        "alignment": "flex-start"
+        "container_width": 500,
+        "alignment": "flex-end"
       }
     },
     "section_newsletter_signup_LcJCrX": {
