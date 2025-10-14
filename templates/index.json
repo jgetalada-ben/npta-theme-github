@@ -421,6 +421,66 @@
         "col_pad": 0
       }
     },
+    "multicolumn_VNjxCM": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_H99qD4": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_25.png",
+            "title": "ATHLETES",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_Ctn8Te": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_26.png",
+            "title": "NUTRITION",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_UUn4m8": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_27.png",
+            "title": "WELLNESS",
+            "text": "",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_H99qD4",
+        "column_Ctn8Te",
+        "column_UUn4m8"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "max_width": "1989px",
+        "title": "LEARN NOW, PAY LATER WITH <span style",
+        "heading_align": "center",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "col_pad": 0
+      }
+    },
     "section_certified_trainers_6Q4NDV": {
       "type": "section--certified-trainers",
       "blocks": {
@@ -559,6 +619,7 @@
     "section_text_image_QUzLBC",
     "section_logo_carousel_Typ4JF",
     "multicolumn_4hXCqV",
+    "multicolumn_VNjxCM",
     "section_certified_trainers_6Q4NDV",
     "section_banner_two_CRjekD",
     "section_newsletter_signup_LcJCrX"
