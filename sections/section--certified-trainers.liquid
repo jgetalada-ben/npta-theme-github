@@ -162,8 +162,8 @@
 
 <section class="section--certified-trainers" id="{{ section.settings.section_id }}">
   {{ 'section--certified-trainers.css' | asset_url | stylesheet_tag }}
-  <div class="section--title-block page-container" style="display: flex; justify-content: {{ section.settings.alignment }};">
-    <div style="max-width: {{ section.settings.container_width }}px;">
+  <div class="section--title-block page-container" style="display: flex; justify-content: {{ section.settings.alignment }};max-width: {{ section.settings.container_width }}px;">
+    <div>
       <h2 style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_title }}</h2>
       <span style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_description }}</span>
     </div>
