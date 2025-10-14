@@ -596,6 +596,7 @@
     },
     "section_newsletter_signup_LcJCrX": {
       "type": "section--newsletter-signup",
+      "disabled": true,
       "name": "Newsletter",
       "settings": {
         "heading": "Enter your email for 25$ OFF your first order, plus the latest NPTA news.",
