@@ -249,6 +249,26 @@
     justify-content: center;
     flex-wrap: wrap;
   }
+  #{{ section.settings.section_id }} .section--title-block h2 {
+    font-family: var(--font-anton);
+    font-weight:400;
+    color: #01241E;
+    font-size: clamp(32px,4.3vw,64px);
+  }
+  #{{ section.settings.section_id }} .section--title-block span h3 {
+    font-size: clamp(21px, 2.3vw, 32px);
+    font-family: var(--font-poppins500);
+    font-weight: 600;
+    line-height: 1;
+    color: #000;
+  }
+  #{{ section.settings.section_id }} .section--title-block span p {
+    font-family: var(--font-poppins500);
+    font-weight: 500;
+    font-size: clamp(18px,3.2vw,28px);
+    line-height: 1;
+    color: #000;
+  }
   @media (max-width: 768px) {
     .section--certified-trainers .section--hero-buttons .btn{
       width: 90%;
