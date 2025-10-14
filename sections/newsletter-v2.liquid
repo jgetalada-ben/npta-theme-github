@@ -1,0 +1,217 @@
+{% comment %}
+  Newsletter v2 — centered heading, inline input+button, disclaimer, socials
+{% endcomment %}
+{%- assign sid = section.id -%}
+{%- assign mw = section.settings.max_width | default: '1280px' | strip -%}
+
+{%- if mw contains 'px' -%}
+  {%- assign mw = mw -%}
+{%- elsif mw contains '%' -%}
+  {%- assign mw = mw -%}
+{%- elsif mw contains 'vw' -%}
+  {%- assign mw = mw -%}
+{%- elsif mw contains 'rem' -%}
+  {%- assign mw = mw -%}
+{%- else -%}
+  {%- assign mw = mw | append: 'px' -%}
+{%- endif -%}
+
+<section
+  id="nlv2-{{ sid }}"
+  class="nlv2"
+  style="
+    --bg: {{ section.settings.bg_color }};
+    --hdg: {{ section.settings.heading_color }};
+    --txt: {{ section.settings.text_color }};
+    --btn-bg: {{ section.settings.btn_bg }};
+    --btn-txt: {{ section.settings.btn_txt }};
+    --pad-y: {{ section.settings.pad_y }}px;
+    --pad-x: {{ section.settings.pad_x }}px;
+  "
+>
+  <div class="nlv2__wrap" style="max-width: {{ mw }};">
+    {% if section.settings.heading != blank %}
+      <h2 class="nlv2__title">
+        {{ section.settings.heading }}
+      </h2>
+    {% endif %}
+
+    {%- form 'customer', id: 'nlv2-form-' | append: sid, class: 'nlv2__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <label class="visually-hidden" for="nlv2-email-{{ sid }}">{{ 'newsletter.label' | t | default: 'Email' }}</label>
+
+      <div class="nlv2__fields">
+        <input
+          id="nlv2-email-{{ sid }}"
+          class="nlv2__input"
+          type="email"
+          name="contact[email]"
+          required
+          autocomplete="email"
+          placeholder="{{ section.settings.placeholder | default: 'Email' }}"
+          value="{{ form.email }}"
+          aria-label="{{ section.settings.placeholder | default: 'Email' }}"
+        >
+        <button class="nlv2__btn" type="submit">
+          {{ section.settings.btn_label }}
+        </button>
+      </div>
+
+      {% if form.errors %}
+        <p class="nlv2__msg nlv2__msg--error">{{ form.errors.translated_fields['email'] | default: 'Email' }} {{ form.errors.messages['email'] }}</p>
+      {% elsif form.posted_successfully? %}
+        <p class="nlv2__msg nlv2__msg--success">{{ 'newsletter.success' | t | default: 'Thanks for subscribing!' }}</p>
+      {% endif %}
+    {%- endform -%}
+
+    {% if section.settings.disclaimer != blank %}
+      <div class="nlv2__disclaimer rte">
+        {{ section.settings.disclaimer }}
+      </div>
+    {% endif %}
+
+    {%- assign has_socials = false -%}
+    {%- if settings.social_instagram_link or settings.social_facebook_link or settings.social_linkedin_link or settings.social_youtube_link -%}
+      {%- assign has_socials = true -%}
+    {%- endif -%}
+
+    {% if has_socials %}
+      <div class="nlv2__socials">
+        {% if settings.social_instagram_link != blank %}
+          <a href="{{ settings.social_instagram_link }}" aria-label="Instagram" target="_blank" rel="noopener" class="nlv2__social">{% render 'icon-instagram' %}</a>
+        {% endif %}
+        {% if settings.social_facebook_link != blank %}
+          <a href="{{ settings.social_facebook_link }}" aria-label="Facebook" target="_blank" rel="noopener" class="nlv2__social">{% render 'icon-facebook' %}</a>
+        {% endif %}
+        {% if settings.social_linkedin_link != blank %}
+          <a href="{{ settings.social_linkedin_link }}" aria-label="LinkedIn" target="_blank" rel="noopener" class="nlv2__social">{% render 'icon-linkedin' %}</a>
+        {% endif %}
+        {% if settings.social_youtube_link != blank %}
+          <a href="{{ settings.social_youtube_link }}" aria-label="YouTube" target="_blank" rel="noopener" class="nlv2__social">{% render 'icon-youtube' %}</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+/* scope by section id */
+#nlv2-{{ sid }}.nlv2{
+  background: var(--bg);
+  padding: var(--pad-y) var(--pad-x);
+  display: grid;
+  justify-items: center;
+  color: var(--txt);
+}
+
+#nlv2-{{ sid }} .nlv2__wrap{
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#nlv2-{{ sid }} .nlv2__title{
+  margin: 0 0 clamp(16px, 2.2vw, 24px);
+  color: var(--hdg);
+  font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
+  font-weight: 400;
+  text-transform: none;
+  line-height: 1.15;
+  font-size: clamp(22px, 3.6vw, 32px);
+}
+
+#nlv2-{{ sid }} .nlv2__form{ margin: 0; }
+
+#nlv2-{{ sid }} .nlv2__fields{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  max-width: 720px;
+  margin: 0 auto clamp(14px, 2.2vw, 18px);
+}
+
+#nlv2-{{ sid }} .nlv2__input{
+  height: 52px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,.1);
+  padding: 0 16px;
+  background: #fff;
+  color: #141414;
+  font-size: 16px;
+  line-height: 1;
+  width: 100%;
+}
+
+#nlv2-{{ sid }} .nlv2__btn{
+  height: 52px;
+  border: 0;
+  border-radius: 12px;
+  padding: 0 22px;
+  background: var(--btn-bg);
+  color: var(--btn-txt);
+  font-weight: 800;
+  font-family: var(--font-body-family);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform .15s ease, opacity .15s ease;
+}
+#nlv2-{{ sid }} .nlv2__btn:hover{ transform: translateY(-1px); opacity: .95; }
+
+#nlv2-{{ sid }} .nlv2__msg{
+  font-size: 14px;
+  margin-top: 8px;
+}
+#nlv2-{{ sid }} .nlv2__msg--success{ color: #1a7f37; }
+#nlv2-{{ sid }} .nlv2__msg--error{ color: #c62828; }
+
+#nlv2-{{ sid }} .nlv2__disclaimer{
+  max-width: 880px;
+  margin: 6px auto 18px;
+  font-size: 12px;
+  opacity: .8;
+}
+
+#nlv2-{{ sid }} .nlv2__socials{
+  display: inline-flex;
+  gap: 22px;
+  align-items: center;
+  justify-content: center;
+}
+#nlv2-{{ sid }} .nlv2__social svg{ width: 22px; height: 22px; display: block; color: var(--txt); }
+
+@media (max-width: 768px){
+  #nlv2-{{ sid }} .nlv2__fields{
+    grid-template-columns: 1fr;
+  }
+  #nlv2-{{ sid }} .nlv2__btn{ width: 100%; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Newsletter v2",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "richtext", "id": "heading", "label": "Heading", "default": "<p><strong>Enter your email for 25$ OFF</strong> your first order, plus the latest NPTA news.</p>" },
+
+    { "type": "text", "id": "placeholder", "label": "Email placeholder", "default": "Email" },
+    { "type": "text", "id": "btn_label", "label": "Button label", "default": "Sign Up" },
+
+    { "type": "richtext", "id": "disclaimer", "label": "Disclaimer / consent text", "default": "<p>By providing my email, I am consenting to receive NPTA emails and Email-Based Advertising. For additional information, please see our <a href=\"/policies/privacy-policy\">Privacy Policy</a>.</p>" },
+
+    { "type": "header", "content": "Layout" },
+    { "type": "text", "id": "max_width", "label": "Max width (px/%/vw)", "default": "1280px" },
+    { "type": "range", "id": "pad_y", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Padding top & bottom", "default": 48 },
+    { "type": "range", "id": "pad_x", "min": 0, "max": 80, "step": 2, "unit": "px", "label": "Padding left & right", "default": 16 },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#E6E3D7" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#01241E" },
+    { "type": "color", "id": "text_color", "label": "Text & icons color", "default": "#01241E" },
+    { "type": "color", "id": "btn_bg", "label": "Button background", "default": "#C8FF63" },
+    { "type": "color", "id": "btn_txt", "label": "Button text", "default": "#0B0B0B" }
+  ],
+  "presets": [{ "name": "Newsletter v2" }]
+}
+{% endschema %}
