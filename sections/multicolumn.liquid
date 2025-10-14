@@ -38,6 +38,29 @@
   @media (max-width: 749px){
     .multicolumn__inner .multicolumn-card.content-container { padding: calc(var(--col-pad) * 0.75); }
   }
+  
+  .multicolumn__inner .multicolumn-card__info{
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .multicolumn.content-align-left  .multicolumn-card__info{ text-align: left;  align-items: flex-start; }
+  .multicolumn.content-align-center.multicolumn .multicolumn-card__info{ text-align: center; align-items: center; }
+  .multicolumn.content-align-right .multicolumn-card__info{ text-align: right; align-items: flex-end; }
+
+  .multicolumn .multicolumn-card__info > * { width: 100%; }
+  .multicolumn.content-align-center .multicolumn-card__info > * { width: auto; }
+
+  .multicolumn.content-align-left  .multicolumn-card__info .link{ align-self: flex-start; }
+  .multicolumn.content-align-center .multicolumn-card__info .link{ align-self: center; }
+  .multicolumn.content-align-right .multicolumn-card__info .link{ align-self: flex-end; }
+
+  .multicolumn__inner .multicolumn-card.content-container { padding: var(--col-pad); }
+  @media (max-width: 749px){
+    .multicolumn__inner .multicolumn-card.content-container { padding: calc(var(--col-pad) * 0.75); }
+  }
+
 {%- endstyle -%}
 
 {%- liquid
@@ -53,7 +76,7 @@
   {%- assign mw = mw | append: 'px' -%}
 {%- endunless -%}
 
-<div class="multicolumn color-{{ section.settings.color_scheme }} gradient{% unless section.settings.background_style == 'none' and settings.text_boxes_border_thickness > 0 or settings.text_boxes_shadow_opacity > 0 %} background-{{ section.settings.background_style }}{% endunless %}{% if section.settings.title == blank %} no-heading{% endif %}"
+<div class="multicolumn content-align-{{ section.settings.content_align }} color-{{ section.settings.color_scheme }} gradient{% unless section.settings.background_style == 'none' and settings.text_boxes_border_thickness > 0 or settings.text_boxes_shadow_opacity > 0 %} background-{{ section.settings.background_style }}{% endunless %}{% if section.settings.title == blank %} no-heading{% endif %}"
      style="--col-pad: {{ section.settings.col_pad | default: 24 }}px;">  
   <div
     class="section-{{ section.id }}-padding isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} multicolumn__inner"
@@ -445,6 +468,17 @@
       "step": 2,
       "unit": "px",
       "default": 24
+    },
+    {
+      "type": "select",
+      "id": "content_align",
+      "label": "Content alignment (inside columns)",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "left"
     }
   ],
   "blocks": [
