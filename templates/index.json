@@ -607,6 +607,24 @@
         "privacy_policy_link": "/",
         "privacy_policy_text": "Privacy Policy"
       }
+    },
+    "newsletter_v2_MYDzwi": {
+      "type": "newsletter-v2",
+      "name": "Newsletter v2",
+      "settings": {
+        "heading": "<p><strong>Enter your email for 25$ OFF</strong> your first order, plus the latest NPTA news.</p>",
+        "placeholder": "Email",
+        "btn_label": "Sign Up",
+        "disclaimer": "<p>By providing my email, I am consenting to receive NPTA emails and Email-Based Advertising. For additional information, please see our <a href=\"/policies/privacy-policy\">Privacy Policy</a>.</p>",
+        "max_width": "1280px",
+        "pad_y": 48,
+        "pad_x": 16,
+        "bg_color": "#E6E3D7",
+        "heading_color": "#01241E",
+        "text_color": "#01241E",
+        "btn_bg": "#C8FF63",
+        "btn_txt": "#0B0B0B"
+      }
     }
   },
   "order": [
@@ -622,6 +640,7 @@
     "payment_highlights_wmDcWb",
     "section_certified_trainers_6Q4NDV",
     "section_top_banner_MGfjA4",
-    "section_newsletter_signup_LcJCrX"
+    "section_newsletter_signup_LcJCrX",
+    "newsletter_v2_MYDzwi"
   ]
 }
