@@ -69,7 +69,7 @@
 
 /* Title */
 .payhi__title{
-  margin: 0 0 2rem 0;
+  margin: 0 0 3rem 0;
   font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
   font-weight: 400;
   text-transform: uppercase;
@@ -93,6 +93,11 @@
   .payhi__grid{
     grid-template-columns: repeat(3, 1fr);
   }
+}
+@media (max-width: 768px) {
+    .payhi__grid{
+        gap: 50px;
+    }
 }
 
 /* Item */
