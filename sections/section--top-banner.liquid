@@ -214,7 +214,7 @@
   {% endif %}
   
   {% if section.settings.show_button_2 %}
-    <a href="{{ section.settings.button_2_link }}" target="_blank" class="btn button-black">
+    <a href="{{ section.settings.button_2_link }}" target="_blank" class="btn button-b">
       <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
       <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
     </a>
@@ -312,15 +312,15 @@ background: linear-gradient(90deg, #133257 1%, rgba(19, 50, 87, 0.9) 7.34%, rgba
   line-height: 150%; /* 24px */
   margin-bottom: 40px;
 }
-.section--top-banner .top-banner--text-content .button-wrapper .btn.button-black {
+.section--top-banner .top-banner--text-content .button-wrapper .btn.button-b {
   background-color: #fff;
   color: #01241E;
-  border-radius: 8px;
-  padding: clamp(10px,1vw,24px) clamp(24px,2vw,56px);
+  border-radius: 10px;
+}
+.section--top-banner .top-banner--text-content .button-wrapper .btn.button-b span {
   font-size: clamp(21px, 2.3vw, 32px);
   font-family: var(--font-adirek800);
   font-weight: 800;
   text-decoration: none;
-  border-radius: 10px;
 }
 </style>
