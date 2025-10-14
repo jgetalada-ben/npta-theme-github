@@ -616,14 +616,14 @@
         "placeholder": "Email",
         "btn_label": "Sign Up",
         "disclaimer": "<p>By providing my email, I am consenting to receive NPTA emails and Email-Based Advertising. For additional information, please see our <a href=\"/policies/privacy-policy\">Privacy Policy</a>.</p>",
-        "max_width": "1280px",
+        "max_width": "50%",
         "pad_y": 48,
         "pad_x": 16,
-        "bg_color": "#E6E3D7",
-        "heading_color": "#01241E",
-        "text_color": "#01241E",
-        "btn_bg": "#C8FF63",
-        "btn_txt": "#0B0B0B"
+        "bg_color": "#e6e3d7",
+        "heading_color": "#01241e",
+        "text_color": "#01241e",
+        "btn_bg": "#c8ff63",
+        "btn_txt": "#0b0b0b"
       }
     }
   },
