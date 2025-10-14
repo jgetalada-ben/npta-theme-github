@@ -56,6 +56,11 @@
   color: var(--txt);
   padding: var(--pad-y) var(--pad-x);
 }
+@media (max-width: 768px) {
+    .payhi{
+        padding: calc(var(--pad-y)/2) calc(var(--pad-x)/2);
+    }
+}
 .payhi__inner{
   max-width: {{ section.settings.max_width | default: '1200px' }};
   width: 100%;
