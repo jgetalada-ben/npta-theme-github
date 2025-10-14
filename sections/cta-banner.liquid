@@ -1,0 +1,179 @@
+{% comment %}
+  Section: CTA Banner (desktop image, mobile color)
+{% endcomment %}
+
+{%- assign sid = section.id -%}
+{%- assign mw = section.settings.max_width | default: '1989px' | strip -%}
+{%- unless mw contains 'px' or mw contains '%' or mw contains 'vw' or mw contains 'rem' -%}
+  {%- assign mw = mw | append: 'px' -%}
+{%- endunless -%}
+
+<section
+  id="cta-{{ sid }}"
+  class="cta-banner pos-{{ section.settings.content_pos }}"
+  style="
+    --bg: {{ section.settings.bg | default: '#0BAFB7' }};
+    --txt: {{ section.settings.text_color | default: '#FFFFFF' }};
+    --hdg: {{ section.settings.heading_color | default: '#FFFFFF' }};
+    --btn-bg: {{ section.settings.btn_bg | default: '#ffffff' }};
+    --btn-txt: {{ section.settings.btn_txt | default: '#0B0B0B' }};
+    --overlay: {{ section.settings.overlay_opacity | default: 0 }}%;
+    --py: {{ section.settings.pad_y | default: 80 }}px;
+    --px: {{ section.settings.pad_x | default: 24 }}px;
+    --minh: {{ section.settings.min_h | default: 420 }}px;
+  "
+>
+  <div class="cta-banner__bg"></div>
+
+  <div class="cta-banner__inner" style="max-width: {{ mw }};">
+    <div class="cta-banner__content">
+      {% if section.settings.heading != blank %}
+        <h2 class="cta-banner__title">{{ section.settings.heading }}</h2>
+      {% endif %}
+
+      {% if section.settings.subheading != blank %}
+        <p class="cta-banner__subtitle">{{ section.settings.subheading }}</p>
+      {% endif %}
+
+      {% if section.settings.btn_label != blank %}
+        <a class="cta-banner__btn" href="{{ section.settings.btn_link }}">
+          {{ section.settings.btn_label }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+/* --- wrapper --- */
+#cta-{{ sid }}.cta-banner{
+  position: relative;
+  background: var(--bg);
+  color: var(--txt);
+  min-height: var(--minh);
+  padding: var(--py) var(--px);
+  display: grid;
+  justify-items: center;
+}
+
+/* background layer (image on desktop, color on mobile) */
+#cta-{{ sid }} .cta-banner__bg{
+  position: absolute; inset: 0; z-index: 0;
+  background: var(--bg);
+  {% if section.settings.bg_image != blank %}
+    background-image: url({{ section.settings.bg_image | image_url: width: 3200 }});
+    background-size: cover;
+    background-position: {{ section.settings.bg_position }};
+  {% endif %}
+}
+#cta-{{ sid }} .cta-banner__bg::after{
+  content: "";
+  position: absolute; inset: 0;
+  background: rgba(0,0,0, calc(var(--overlay) / 100));
+}
+
+/* content container */
+#cta-{{ sid }} .cta-banner__inner{
+  width: 100%;
+  margin: 0 auto;
+  z-index: 1;
+  display: grid;
+}
+
+/* content block + alignment variants */
+#cta-{{ sid }} .cta-banner__content{
+  max-width: 680px;
+  display: grid;
+  gap: clamp(12px, 1.8vw, 22px);
+}
+#cta-{{ sid }}.pos-left  .cta-banner__inner{ justify-content: start;  }
+#cta-{{ sid }}.pos-center.cta-banner .cta-banner__inner{ justify-content: center; }
+#cta-{{ sid }}.pos-right .cta-banner__inner{ justify-content: end;   }
+#cta-{{ sid }}.pos-center .cta-banner__content{ text-align: center; }
+
+/* typography (clamped) */
+#cta-{{ sid }} .cta-banner__title{
+  margin: 0;
+  color: var(--hdg);
+  font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
+  font-weight: 400;
+  line-height: 1.05;
+  text-transform: uppercase;
+  font-size: clamp(28px, 4.6vw, 64px);
+}
+#cta-{{ sid }} .cta-banner__subtitle{
+  margin: 0;
+  color: var(--txt);
+  font-size: clamp(14px, 2.2vw, 22px);
+  line-height: 1.5;
+  max-width: 50ch;
+}
+
+/* button */
+#cta-{{ sid }} .cta-banner__btn{
+  display: inline-block;
+  background: var(--btn-bg);
+  color: var(--btn-txt);
+  border-radius: 10px;
+  padding: 14px 24px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform .15s ease, opacity .15s ease;
+}
+#cta-{{ sid }} .cta-banner__btn:hover{ transform: translateY(-1px); opacity: .95; }
+
+/* --- mobile behaviour: drop background image for readability --- */
+@media (max-width: 768px){
+  #cta-{{ sid }} .cta-banner__bg{ background-image: none !important; }
+  #cta-{{ sid }} .cta-banner__inner{ justify-content: center; }
+  #cta-{{ sid }} .cta-banner__content{ text-align: center; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "CTA Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Your Fitness Career Starts Here" },
+    { "type": "text", "id": "subheading", "label": "Subheading" },
+
+    { "type": "text", "id": "btn_label", "label": "Primary button label", "default": "Choose My Program" },
+    { "type": "url",  "id": "btn_link",  "label": "Primary button link" },
+
+    { "type": "header", "content": "Background" },
+    { "type": "image_picker", "id": "bg_image", "label": "Background image (desktop only)" },
+    { "type": "select", "id": "bg_position", "label": "Image focal position", "options": [
+      { "value": "center center", "label": "Center" },
+      { "value": "left center",   "label": "Left" },
+      { "value": "right center",  "label": "Right" },
+      { "value": "center top",    "label": "Top" },
+      { "value": "center bottom", "label": "Bottom" }
+    ], "default": "right center" },
+    { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity (%)", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 0 },
+    { "type": "color", "id": "bg", "label": "Background color (shown on mobile)", "default": "#09A7B3" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#FFFFFF" },
+    { "type": "color", "id": "text_color",    "label": "Text color",    "default": "#FFFFFF" },
+    { "type": "color", "id": "btn_bg",        "label": "Button background", "default": "#FFFFFF" },
+    { "type": "color", "id": "btn_txt",       "label": "Button text",        "default": "#0B0B0B" },
+
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "content_pos", "label": "Content position", "options": [
+      { "value": "left",   "label": "Left" },
+      { "value": "center", "label": "Center" },
+      { "value": "right",  "label": "Right" }
+    ], "default": "right" },
+    { "type": "text",  "id": "max_width", "label": "Max width (px/%/vw)", "default": "1989px" },
+    { "type": "range", "id": "pad_y", "label": "Padding top & bottom", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "pad_x", "label": "Padding left & right",  "min": 0, "max": 200, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "min_h", "label": "Min height (desktop)", "min": 280, "max": 720, "step": 10, "unit": "px", "default": 420 }
+  ],
+  "presets": [
+    { "name": "CTA Banner" }
+  ]
+}
+{% endschema %}
