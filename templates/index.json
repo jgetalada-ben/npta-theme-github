@@ -9,20 +9,13 @@
  */
 {
   "sections": {
-    "video_CAzNjY": {
-      "type": "video",
-      "name": "t:sections.video.presets.name",
+    "video_v2_AqMBKg": {
+      "type": "video-v2",
+      "name": "Video v2",
       "settings": {
-        "heading": "",
-        "heading_size": "h1",
-        "enable_video_looping": true,
-        "video": "shopify://files/videos/NPTA PH Vid.mp4",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "description": "",
-        "full_width": true,
-        "color_scheme": "",
-        "padding_top": 0,
-        "padding_bottom": 0
+        "embed_url": "",
+        "alt": "Promotional video",
+        "aspect_ratio": "16-9"
       }
     },
     "hero_banner_VrVBf3": {
@@ -628,7 +621,7 @@
     }
   },
   "order": [
-    "video_CAzNjY",
+    "video_v2_AqMBKg",
     "hero_banner_VrVBf3",
     "whats_new_grid_LhNjr7",
     "trainers_pick_KpCy4K",
