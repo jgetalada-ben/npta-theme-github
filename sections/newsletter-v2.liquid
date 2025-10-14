@@ -36,7 +36,8 @@
       </h2>
     {% endif %}
 
-    {%- form 'customer', id: 'nlv2-form-' | append: sid, class: 'nlv2__form' -%}
+    {%- assign nlv2_form_id = 'nlv2-form-' | append: sid -%}
+    {%- form 'customer', id: nlv2_form_id, class: 'nlv2__form' -%}
       <input type="hidden" name="contact[tags]" value="newsletter">
       <label class="visually-hidden" for="nlv2-email-{{ sid }}">{{ 'newsletter.label' | t | default: 'Email' }}</label>
 
