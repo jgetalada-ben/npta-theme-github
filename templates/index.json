@@ -563,6 +563,29 @@
         "button_1_text": ""
       }
     },
+    "cta_banner_6NegEJ": {
+      "type": "cta-banner",
+      "name": "CTA Banner",
+      "settings": {
+        "heading": "Your Fitness Career Starts Here",
+        "subheading": "",
+        "btn_label": "Choose My Program",
+        "btn_link": "#",
+        "bg_image": "shopify://shop_images/Footer_Banner.png",
+        "bg_position": "left center",
+        "overlay_opacity": 0,
+        "bg": "#09A7B3",
+        "heading_color": "#FFFFFF",
+        "text_color": "#FFFFFF",
+        "btn_bg": "#FFFFFF",
+        "btn_txt": "#0B0B0B",
+        "content_pos": "right",
+        "max_width": "1989px",
+        "pad_y": 80,
+        "pad_x": 24,
+        "min_h": 420
+      }
+    },
     "section_banner_two_CRjekD": {
       "type": "section--banner-two",
       "custom_css": [
@@ -612,6 +635,7 @@
     "multicolumn_4hXCqV",
     "payment_highlights_wmDcWb",
     "section_certified_trainers_6Q4NDV",
+    "cta_banner_6NegEJ",
     "section_banner_two_CRjekD",
     "section_newsletter_signup_LcJCrX"
   ]
