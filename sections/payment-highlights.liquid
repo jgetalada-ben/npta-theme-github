@@ -1,0 +1,179 @@
+{% comment %}
+  Section: Payment Highlights
+{% endcomment %}
+
+<section
+  class="payhi"
+  style="
+    --pad-y: {{ section.settings.pad_y | default: 64 }}px;
+    --pad-x: {{ section.settings.pad_x | default: 24 }}px;
+    --wrap: {{ section.settings.max_width | default: '1200px' }};
+    --bg: {{ section.settings.bg | default: '#f2f0e9' }};
+    --txt: {{ section.settings.text_color | default: '#0b0b0b' }};
+    --hdg: {{ section.settings.heading_color | default: '#01241E' }};
+    --accent: {{ section.settings.accent_color | default: '#157C80' }};
+  "
+>
+  <div class="payhi__inner">
+    {% if section.settings.heading != blank %}
+      <h2 class="payhi__title" style="text-align: {{ section.settings.heading_align }};">
+        {{ section.settings.heading }}
+        {% if section.settings.heading_accent != blank %}
+          <span class="payhi__accent">{{ section.settings.heading_accent }}</span>
+        {% endif %}
+      </h2>
+    {% endif %}
+
+    <div class="payhi__grid">
+      {% for block in section.blocks %}
+        <div class="payhi__item" {{ block.shopify_attributes }} style="--logo-w: {{ block.settings.logo_width | default: 96 }};">
+          {% if block.settings.icon != blank %}
+            <div class="payhi__logo">
+              {{ block.settings.icon
+                | image_url: width: 600
+                | image_tag: loading: 'lazy', alt: block.settings.title | escape }}
+            </div>
+          {% endif %}
+
+          {% if block.settings.title != blank %}
+            <h3 class="payhi__item-title">{{ block.settings.title }}</h3>
+          {% endif %}
+
+          {% if block.settings.body != blank %}
+            <div class="payhi__item-body">
+              {{ block.settings.body }}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+.payhi{
+  background: var(--bg);
+  color: var(--txt);
+  padding: var(--pad-y) var(--pad-x);
+}
+.payhi__inner{
+  max-width: {{ section.settings.max_width | default: '1200px' }};
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Title */
+.payhi__title{
+  margin: 0 0 2rem 0;
+  font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 1.05;
+  color: var(--hdg);
+  /* clamp to ~64 at desktop */
+  font-size: clamp(28px, 4.5vw, 64px);
+}
+.payhi__accent{
+  color: var(--accent);
+}
+
+/* Grid */
+.payhi__grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(16px, 3vw, 32px);
+  align-items: start;
+}
+@media (min-width: 900px){
+  .payhi__grid{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Item */
+.payhi__item{
+  text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: clamp(8px, 1.8vw, 16px);
+  padding: 0; /* no card chrome by default */
+}
+
+/* Logo: width clamped via per-block slider (var --logo-w in px) */
+.payhi__logo img{
+  display: block;
+  width: clamp(32px, calc(var(--logo-w) * (100vw / 1440)), 220px);
+  height: auto;
+}
+
+/* Column title + body with clamped sizes */
+.payhi__item-title{
+  margin: 0;
+  font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
+  font-weight: 400;         /* per request: regular */
+  text-transform: uppercase; /* matches your mock */
+  line-height: 1.1;
+  color: var(--hdg);
+  font-size: clamp(18px, 3.2vw, 40px);
+}
+
+.payhi__item-body{
+  margin: 0;
+  line-height: 1.5;
+  max-width: 40ch;
+  font-size: clamp(14px, 2.4vw, 24px);
+}
+.payhi__item-body p{ margin: 0; }
+.payhi__item-body p + p{ margin-top: 0.35rem; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Payment highlights",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Learn Now, Pay Later With" },
+    { "type": "text", "id": "heading_accent", "label": "Heading accent (e.g., ELECTIVE)" },
+    { "type": "select", "id": "heading_align", "label": "Heading alignment", "options": [
+      { "value": "left", "label": "Left" },
+      { "value": "center", "label": "Center" },
+      { "value": "right", "label": "Right" }
+    ], "default": "center" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#01241E" },
+    { "type": "color", "id": "accent_color",  "label": "Accent color",  "default": "#157C80" },
+    { "type": "color", "id": "text_color",    "label": "Text color",    "default": "#0B0B0B" },
+    { "type": "color", "id": "bg",            "label": "Background",    "default": "#F1EFE8" },
+
+    { "type": "header", "content": "Layout" },
+    { "type": "text", "id": "max_width", "label": "Max width (px/%/vw)", "default": "1200px" },
+    { "type": "range", "id": "pad_y", "label": "Padding top & bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "pad_x", "label": "Padding left & right",  "min": 0, "max": 160, "step": 4, "unit": "px", "default": 24 }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Logo / Icon" },
+        { "type": "range", "id": "logo_width", "label": "Logo width (desktop base, px)", "min": 32, "max": 220, "step": 2, "unit": "px", "default": 96 },
+        { "type": "text", "id": "title", "label": "Title", "default": "Quick Approval" },
+        { "type": "richtext", "id": "body", "label": "Description", "default": "<p>Get a real-time decision</p>" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Payment highlights",
+      "blocks": [
+        { "type": "feature", "settings": { "title": "Quick Approval" } },
+        { "type": "feature", "settings": { "title": "Easy Payments", "body": "<p>Split your purchase into 3, 6, 9, and 12 easy payments</p>" } },
+        { "type": "feature", "settings": { "title": "No Hidden Fees", "body": "<p>0% interest payments with no surprises</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
