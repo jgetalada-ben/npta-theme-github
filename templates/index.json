@@ -422,6 +422,56 @@
         "content_align": "center"
       }
     },
+    "payment_highlights_wmDcWb": {
+      "type": "payment-highlights",
+      "blocks": {
+        "feature_edbdf4": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/material-symbols-light_approval-delegation-sharp.png",
+            "logo_width": 120,
+            "title": "Quick Approval",
+            "body": "<p>Get a real-time decision</p>"
+          }
+        },
+        "feature_9wpwKm": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/material-symbols_payments-outline-sharp.png",
+            "logo_width": 120,
+            "title": "Easy Payments",
+            "body": "<p>Split your purchase into 3, 6, 9, and 12 easy payments</p>"
+          }
+        },
+        "feature_Mhcqpq": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/ic_outline-money-off-csred.png",
+            "logo_width": 120,
+            "title": "No Hidden Fees",
+            "body": "<p>0% interest payments with no surprises</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_edbdf4",
+        "feature_9wpwKm",
+        "feature_Mhcqpq"
+      ],
+      "name": "Payment highlights",
+      "settings": {
+        "heading": "Learn Now, Pay Later With",
+        "heading_accent": "ELECTIVE",
+        "heading_align": "center",
+        "heading_color": "#01241E",
+        "accent_color": "#157C80",
+        "text_color": "#0B0B0B",
+        "bg": "#F1EFE8",
+        "max_width": "1200px",
+        "pad_y": 100,
+        "pad_x": 100
+      }
+    },
     "section_certified_trainers_6Q4NDV": {
       "type": "section--certified-trainers",
       "blocks": {
@@ -560,6 +610,7 @@
     "section_text_image_QUzLBC",
     "section_logo_carousel_Typ4JF",
     "multicolumn_4hXCqV",
+    "payment_highlights_wmDcWb",
     "section_certified_trainers_6Q4NDV",
     "section_banner_two_CRjekD",
     "section_newsletter_signup_LcJCrX"
