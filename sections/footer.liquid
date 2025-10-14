@@ -304,12 +304,18 @@ grid-row-gap: 50px;
 .footer-menu-title {
   color: #e9f24f !important;
   -webkit-text-fill-color: #e9f24f;
-  font-family: Montserrat;
+  {% comment %} font-family: Montserrat;
   font-size: 18px;
   font-style: normal;
   font-weight: 800;
-  line-height: 104%; /* 18.72px */
-  text-transform: uppercase;
+  line-height: 104%;
+  text-transform: uppercase; {% endcomment %}
+}
+.footer-menu-title h3 {
+  font-size: clamp(12px, 1.2vw, 22px);
+  font-family: var(--font-adirek800);
+  font-weight: 800;
+  line-height: norma;
 }
 
 .footer-menu-list {
