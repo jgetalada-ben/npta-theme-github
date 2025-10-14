@@ -96,6 +96,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     {{ content_for_header }}
 
+    <script>
+    (function(w,d,t,r,u){
+      var f,n,i; w[u]=w[u]||[];
+      f=function(){ var o={ti:"97210226", enableAutoSpaTracking:true}; o.q=w[u]; w[u]=new UET(o); w[u].push("pageLoad"); };
+      n=d.createElement(t); n.src=r; n.async=1;
+      n.onload=n.onreadystatechange=function(){ var s=this.readyState; s && s!=="loaded" && s!=="complete" || (f(), n.onload=n.onreadystatechange=null); };
+      i=d.getElementsByTagName(t)[0]; i.parentNode.insertBefore(n,i);
+    })(window,document,"script","//bat.bing.com/bat.js","uetq");
+    </script>
+
+    <script>window.uetq = window.uetq || [];window.uetq.push('event', '', {"revenue_value":Replace_with_Variable_Revenue_Function(),"currency":"CAD"});</script>
+
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
       assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
