@@ -416,8 +416,8 @@
         "color_scheme": "",
         "columns_mobile": "1",
         "swipe_on_mobile": true,
-        "padding_top": 36,
-        "padding_bottom": 36,
+        "padding_top": 52,
+        "padding_bottom": 52,
         "col_pad": 0,
         "content_align": "center"
       }
@@ -463,10 +463,10 @@
         "heading": "Learn Now, Pay Later With",
         "heading_accent": "ELECTIVE",
         "heading_align": "center",
-        "heading_color": "#01241E",
-        "accent_color": "#157C80",
-        "text_color": "#0B0B0B",
-        "bg": "#F1EFE8",
+        "heading_color": "#01241e",
+        "accent_color": "#157c80",
+        "text_color": "#0b0b0b",
+        "bg": "#f1efe8",
         "max_width": "1200px",
         "pad_y": 100,
         "pad_x": 100
