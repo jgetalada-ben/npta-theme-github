@@ -424,13 +424,50 @@
     },
     "multicolumn_VNjxCM": {
       "type": "multicolumn",
+      "blocks": {
+        "column_AKXFBG": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/material-symbols-light_approval-delegation-sharp.png",
+            "title": "QUICK APPROVAL",
+            "text": "<p>Get a real-time decision</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_A6CtJe": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/material-symbols_payments-outline-sharp.png",
+            "title": "EASY PAYMENTS",
+            "text": "<p>Split your purchase into 3, 6, 9,and 12 easy payments</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_c3KKne": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/ic_outline-money-off-csred.png",
+            "title": "NO HIDDEN FEES",
+            "text": "<p>0% interest paymentswith no surprises</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_AKXFBG",
+        "column_A6CtJe",
+        "column_c3KKne"
+      ],
       "name": "t:sections.multicolumn.presets.name",
       "settings": {
         "max_width": "1989px",
         "title": "LEARN NOW, PAY LATER WITH ELECTIVE",
         "heading_align": "center",
         "heading_size": "h1",
-        "image_width": "full",
+        "image_width": "third",
         "image_ratio": "adapt",
         "columns_desktop": 3,
         "column_alignment": "center",
@@ -443,7 +480,7 @@
         "padding_top": 36,
         "padding_bottom": 36,
         "col_pad": 0,
-        "content_align": "left"
+        "content_align": "center"
       }
     },
     "section_certified_trainers_6Q4NDV": {
