@@ -14,7 +14,7 @@
 {%- elsif ratio == '1-1' -%}
   {%- assign pad = 100 | append: '%' -%}
 {%- else -%}
-  {%- assign pad = 56.25 | append: '%' -%} {# 16:9 default #}
+  {%- assign pad = 56.25 | append: '%' -%}
 {%- endif -%}
 
 <section id="vid2-{{ sid }}" class="vid2">
@@ -24,8 +24,11 @@
         {%- assign v = section.settings.shopify_video -%}
         <video
           class="vid2__media"
-          controls
+          autoplay
+          muted
+          loop
           playsinline
+          preload="metadata"
           {% if section.settings.cover_image %}
             poster="{{ section.settings.cover_image | image_url: width: 2400 }}"
           {% endif %}
@@ -43,16 +46,18 @@
 
         {%- if url contains 'youtu.be/' -%}
           {%- assign yt_id = url | split: 'youtu.be/' | last | split: '?' | first -%}
-          {%- assign iframe_src = 'https://www.youtube-nocookie.com/embed/' | append: yt_id | append: '?rel=0' -%}
         {%- elsif url contains 'watch?v=' -%}
           {%- assign yt_id = url | split: 'watch?v=' | last | split: '&' | first -%}
-          {%- assign iframe_src = 'https://www.youtube-nocookie.com/embed/' | append: yt_id | append: '?rel=0' -%}
         {%- elsif url contains 'youtube.com/embed/' -%}
           {%- assign yt_id = url | split: 'embed/' | last | split: '?' | first -%}
-          {%- assign iframe_src = 'https://www.youtube-nocookie.com/embed/' | append: yt_id | append: '?rel=0' -%}
+        {%- endif -%}
+
+        {%- if yt_id -%}
+          {%- assign yt_params = '?rel=0&autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=1&playsinline=1&loop=1&playlist=' | append: yt_id -%}
+          {%- assign iframe_src = 'https://www.youtube-nocookie.com/embed/' | append: yt_id | append: yt_params -%}
         {%- elsif url contains 'vimeo.com/' -%}
           {%- assign vimeo_id = url | split: 'vimeo.com/' | last | split: '?' | first | split: '/' | last -%}
-          {%- assign iframe_src = 'https://player.vimeo.com/video/' | append: vimeo_id -%}
+          {%- assign iframe_src = 'https://player.vimeo.com/video/' | append: vimeo_id | append: '?background=1&autoplay=1&muted=1&loop=1' -%}
         {%- endif -%}
 
         {%- if iframe_src != blank -%}
@@ -63,16 +68,17 @@
             allow="autoplay; fullscreen; picture-in-picture"
             allowfullscreen
             loading="lazy"
+            aria-hidden="true"
           ></iframe>
         {%- else -%}
           <div class="vid2__fallback">
-            {{ 'general.video.invalid_url' | t | default: 'Please provide a valid YouTube or Vimeo URL.' }}
+            Please provide a valid YouTube or Vimeo URL.
           </div>
         {%- endif -%}
 
       {%- else -%}
         <div class="vid2__fallback">
-          {{ 'general.video.missing' | t | default: 'Add a Shopify video or a YouTube/Vimeo URL.' }}
+          Please provide a valid YouTube or Vimeo URL.
         </div>
       {%- endif -%}
     </div>
@@ -113,6 +119,7 @@
   display: block;
   background: #000; /* letterbox behind video */
   object-fit: cover;
+  pointer-events: none;
 }
 
 /* Fallback text */
