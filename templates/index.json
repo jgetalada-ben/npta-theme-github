@@ -13,6 +13,7 @@
       "type": "video-v2",
       "name": "Video v2",
       "settings": {
+        "shopify_video": "shopify://files/videos/NPTA PH Vid.mp4",
         "embed_url": "",
         "alt": "Promotional video",
         "aspect_ratio": "16-9"
