@@ -80,9 +80,9 @@ text-transform: uppercase;
 
 .pagination__item--current{
 
-background: #E9F24F;
+background: #C1FF72;
   opacity: 1 !important;
-  border: 1px solid #E9F24F !important;
+  border: 1px solid #C1FF72 !important;
 }
 
 .pagination__item .icon-caret {

@@ -583,7 +583,7 @@ line-height: 150%;
 }
 .facets__label.active svg {
  
-      background-color: #E9F24F;
+      background-color: #C1FF72;
 }
 .facets__label.active .icon-checkmark {
  
@@ -591,8 +591,8 @@ line-height: 150%;
 }
 
 .facets__label.active input {
-   background-color: #E9F24F !important;
-     border: 2px solid #E9F24F !important;
+   background-color: #C1FF72 !important;
+     border: 2px solid #C1FF72 !important;
 }
 
 
