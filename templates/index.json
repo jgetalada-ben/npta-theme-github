@@ -563,7 +563,7 @@
         ".section--top-banner {background-color: #000000;}",
         ".section--top-banner:before {width: 100%;}",
         ".section--top-background {width: 100%;}",
-        "@media (max-width: 980px) {.section--top-banner-container {top: 15%; } .section--top-background {background-position: -140vw center; }}"
+        "@media (max-width: 980px) {.section--top-banner-container {top: 15%; } .section--top-background {background-position: -100vw center; }}"
       ],
       "name": "Top Banner",
       "settings": {
