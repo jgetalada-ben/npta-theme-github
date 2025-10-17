@@ -13,11 +13,6 @@
     "market": "philippines"
   },
   "sections": {
-    "hero_banner_VrVBf3": {
-      "disabled": false,
-      "settings": {},
-      "blocks": {}
-    },
     "section_process_PPjrLE": {
       "disabled": true,
       "settings": {},
@@ -25,7 +20,6 @@
     }
   },
   "order": [
-    "hero_banner_VrVBf3",
     "section_process_PPjrLE"
   ]
 }
