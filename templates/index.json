@@ -563,7 +563,7 @@
         ".section--top-banner {background-color: #000000;}",
         ".section--top-banner:before {width: 100%;}",
         ".section--top-background {width: 100%;}",
-        "@media (max-width: 980px) {.section--top-banner-container {top: 15%; }}"
+        "@media (max-width: 980px) {.section--top-banner-container {top: 15%; } .section--top-background {background-position: -140vw center; }}"
       ],
       "name": "Top Banner",
       "settings": {
@@ -583,7 +583,7 @@
         "title_alignment": "left",
         "container_width": 800,
         "alignment": "flex-end",
-        "banner_height": "80vh",
+        "banner_height": "60vh",
         "top_banner_align_items": "center",
         "show_banner_gradient": false
       }
