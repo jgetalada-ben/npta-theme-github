@@ -175,8 +175,10 @@
   margin: 0;
 }
 .accordion-four--highlight.active .accordion-highlight-content {
-  max-height: 1000px;
+  max-height: 1000px; /* or a reasonable max, or use scrollHeight in JS */
+  margin-top: 16px;
 }
+
 .is--heading-white h2{
   color: #FFF;
 } 
@@ -280,7 +282,7 @@ text-transform: uppercase;
 
 .accordion-four--highlight p{
 color: #fff;
-font-family: var(--font-body-family);
+    font-family: var(--font-body-family);
 font-size: 16px;
 font-style: normal;
 font-weight: 400;
@@ -289,16 +291,15 @@ line-height: 150%; /* 24px */
 
 .accordion-four--highlight p {
   cursor: pointer;
-  {% comment %} max-height: 0; {% endcomment %}
-   min-height: 24px;
+  max-height: 0;
   overflow: hidden;
   transition: max-height 300ms ease;
 margin: 0;
-color: #fff;
 }
 
 .accordion-four--highlight.active p {
-  max-height:auto;
+  max-height:auto; 
+  margin-top:16px;
 }
 
 .accordion-four--highlight.active{
@@ -311,9 +312,7 @@ color: #fff;
   padding-left: 27px;
   transition:300ms padding ;
   opacity: 0.6;
-}
-.accordion-four--highlight ul li {
-  color: #fff;
+
 }
 </style>
 
