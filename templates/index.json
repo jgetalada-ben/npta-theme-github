@@ -101,15 +101,19 @@
         "badge_right": "1.5 MILLION+ NASM CERTIFIED TRAINERS",
         "align_h": "left",
         "align_v": "middle",
+        "award_img_1": "shopify://shop_images/award-featured-trainer.png",
+        "award_img_2": "shopify://shop_images/award-nominated-trainer.png",
+        "award_size": 28,
+        "badge_icon_color": "#e9f24f",
         "pad_y": 80,
         "pad_x": 24,
         "max_width": "1400",
-        "min_height": 640,
+        "min_height": 1000,
         "min_height_mobile": 480,
-        "heading_color": "#F0FF63",
-        "text_color": "#FFFFFF",
-        "btn_bg": "#E9F24F",
-        "btn_txt": "#0B0B0B"
+        "heading_color": "#f0ff63",
+        "text_color": "#ffffff",
+        "btn_bg": "#e9f24f",
+        "btn_txt": "#0b0b0b"
       }
     },
     "section_image_text_carousel_ARmbtF": {
