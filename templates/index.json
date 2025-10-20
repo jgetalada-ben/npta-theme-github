@@ -57,6 +57,7 @@
         "word_MNHVdq",
         "word_bpCGmP"
       ],
+      "disabled": true,
       "custom_css": [
         "@media (max-width: 767px) {.section--hero-badges .section--badge {display: block; text-align: center; } .section--hero-badges .section--badge span {display: inline; vertical-align: top; top: 2px; position: relative; } .section--hero-badges .section--badge img {display: none !important; } .section--hero-badges .section--badge-1 {display: none !important; }}"
       ],
@@ -82,6 +83,33 @@
         "partner_image": "shopify://shop_images/nasm_international_partner_logo_h_white_ba599786-b284-4e5f-8ade-ae846fbd0c62.svg",
         "partner_image_width": "139",
         "partner_image_height": "40"
+      }
+    },
+    "hero_banner_v2_xbVhbH": {
+      "type": "hero-banner-v2",
+      "name": "Hero Banner v2",
+      "settings": {
+        "image_desktop": "shopify://shop_images/Header_Wellness.webp",
+        "alt": "Hero background",
+        "overlay": 30,
+        "eyebrow": "Performance Wellness Bundle! LIMITED OFFER",
+        "heading": "YOUR PATH. YOUR BUNDLE. YOUR IMPACT.",
+        "subheading": "For a limited time, save 40% on Mix & Match Wellness Bundles, and unlock 4 FREE bonus courses to help you coach the whole person.",
+        "btn_label": "Choose My Bundle",
+        "btn_url": "shopify://collections/bundles",
+        "badge_left": "CANADA’S TOP FITNESS TRAINER • ACCORDING TO IMPACT MAGAZINE",
+        "badge_right": "1.5 MILLION+ NASM CERTIFIED TRAINERS",
+        "align_h": "left",
+        "align_v": "middle",
+        "pad_y": 80,
+        "pad_x": 24,
+        "max_width": "1400",
+        "min_height": 640,
+        "min_height_mobile": 480,
+        "heading_color": "#F0FF63",
+        "text_color": "#FFFFFF",
+        "btn_bg": "#E9F24F",
+        "btn_txt": "#0B0B0B"
       }
     },
     "section_image_text_carousel_ARmbtF": {
@@ -777,6 +805,7 @@
   },
   "order": [
     "hero_banner_VrVBf3",
+    "hero_banner_v2_xbVhbH",
     "section_image_text_carousel_ARmbtF",
     "featured_programs_3Ebyx7",
     "section_collection_tabs_w8nGxt",
