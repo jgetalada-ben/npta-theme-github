@@ -98,7 +98,7 @@
                     "default": "Highlight Title Goes Here"
                 },
                 {
-                    "type": "richtext",
+                    "type": "textarea",
                     "id": "highlight_description",
                     "label": "Highlight Description"
                 }
@@ -131,7 +131,7 @@
                       {% if block.type == 'highlight' %}
                           <div class="accordion-four--highlight">
                               <h3>{{ block.settings.highlight_title }}</h3>
-                              <div><p>{{ block.settings.highlight_description }}</p></div>
+                              <p>{{ block.settings.highlight_description }}</p>
                           </div>
                       {% endif %}
                   {% endfor %}
