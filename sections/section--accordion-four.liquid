@@ -133,14 +133,18 @@
                 </div>
 {% if section.settings.show_buttons %}
     <div class="section--hero-buttons">
+        {%if section.settings.primary_button_link %}
         <a href="{{ section.settings.primary_button_link }}" class="btn button-yg" target="{{ section.settings.primary_button_target }}">
             <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
             <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
         </a>
+        {% endif %}
+        {%if section.settings.secondary_button_link %}
         <a href="{{ section.settings.secondary_button_link }}" class="btn button-w" target="{{ section.settings.secondary_button_target }}">
             <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
             <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
         </a>
+        {% endif %}
     </div>
 {% endif %}
             </div>
