@@ -299,28 +299,31 @@ margin: 0;
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const highlights = document.querySelectorAll('.accordion-four--highlight');
+(function initAccordionFour(rootId){
+  const root = document.getElementById(rootId);
+  if (!root) return;
+
+  const highlights = root.querySelectorAll('.accordion-four--highlight');
 
   if (highlights.length > 0) {
-    const firstHighlight = highlights[0];
-    firstHighlight.classList.add('active');
-    const content = firstHighlight.querySelector('p');
-    content.style.maxHeight = content.scrollHeight + 'px';
+    const first = highlights[0];
+    first.classList.add('active');
+    const content = first.querySelector('p');
+    if (content) content.style.maxHeight = content.scrollHeight + 'px';
   }
 
-  highlights.forEach(highlight => {
+  highlights.forEach((highlight) => {
     highlight.addEventListener('click', () => {
-      highlights.forEach(h => {
+      highlights.forEach((h) => {
         h.classList.remove('active');
-        h.querySelector('p').style.maxHeight = '0';
+        const p = h.querySelector('p');
+        if (p) p.style.maxHeight = '0';
       });
 
       highlight.classList.add('active');
       const content = highlight.querySelector('p');
-      content.style.maxHeight = content.scrollHeight + 'px';
+      if (content) content.style.maxHeight = content.scrollHeight + 'px';
     });
   });
-});
-
+})('accordion-four-{{ section.id }}');
 </script>
