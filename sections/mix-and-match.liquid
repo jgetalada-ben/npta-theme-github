@@ -142,9 +142,13 @@
 </section>
 
 <style>
-  /* ====== Layout ====== */
   #{{ ROOT_ID }}.mm-container { padding-top: 50px; padding-bottom: 50px; }
-  @media (min-width: 981px) { #{{ ROOT_ID }}.mm-container { padding-top: 90px; padding-bottom: 90px; } }
+  @media (min-width: 981px) { 
+    #{{ ROOT_ID }}.mm-container { 
+        padding-top: 90px; 
+        padding-bottom: 90px; 
+    }
+  }
 
   #{{ ROOT_ID }} .mm-grid {
     display: grid;
@@ -193,14 +197,23 @@
   #{{ ROOT_ID }} .mm-link-icon svg { display: block; }
   #{{ ROOT_ID }} .mm-text { color: #141414; }
   #{{ ROOT_ID }} .mm-buttons { 
-    margin-top: 26px; 
+    margin-top: 50px; 
     display: flex; 
     gap: 14px; 
     flex-wrap: wrap; 
 }
   @media (max-width: 980px) {
-    #{{ ROOT_ID }} .mm-heading, #{{ ROOT_ID }} .mm-intro p { text-align: center; }
-    #{{ ROOT_ID }} .mm-col-left { max-width: 100%; margin: 0 auto; }
+    #{{ ROOT_ID }} .mm-heading,
+    #{{ ROOT_ID }} .mm-intro p { 
+        text-align: center; 
+    }
+    #{{ ROOT_ID }} .mm-col-left { 
+        max-width: 100%; 
+        margin: 0 auto; 
+    }
+    #{{ ROOT_ID }} .mm-buttons {
+        margin-top: 20px;
+    }
   }
 </style>
 
