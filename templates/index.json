@@ -146,13 +146,21 @@
             "highlight_title": "Free Gift: GLP-1 Nutrition for Weight Management & Mindful Stress Management",
             "highlight_description": ""
           }
+        },
+        "highlight_TBf37t": {
+          "type": "highlight",
+          "settings": {
+            "highlight_title": "",
+            "highlight_description": ""
+          }
         }
       },
       "block_order": [
         "highlight_6MPgkP",
         "highlight_dC8WVh",
         "highlight_jRKWkD",
-        "highlight_mxVAWA"
+        "highlight_mxVAWA",
+        "highlight_TBf37t"
       ],
       "name": "Accordion Four",
       "settings": {
