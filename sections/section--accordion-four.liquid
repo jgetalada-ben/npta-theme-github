@@ -113,58 +113,51 @@
 
 
 <section class="section--accordion-four">
-    <div class="accordion-four--container page-container">
-        <div class="accordion-four--content">
-            <div class="accordion-four--column-left">
-                   <div class="section--title-block is--heading-white">
-                    <h2 class="is--flex-start">{{ section.settings.heading }}</h2> 
-                  
-                </div>
+  <div class="accordion-four--container page-container">
+      <div class="accordion-four--content">
+          <div class="accordion-four--column-left">
+              <div class="section--title-block is--heading-white">
+                <h2 class="is--flex-start">{{ section.settings.heading }}</h2> 
+              </div>
 
-                <div class="accordion-four--highlights">
-                    {% for block in section.blocks %}
-                        {% if block.type == 'highlight' %}
-                            <div class="accordion-four--highlight">
-                                <h3>{{ block.settings.highlight_title }}</h3>
-                                <p>{{ block.settings.highlight_description }}</p>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-{% if section.settings.show_buttons %}
-    <div class="section--hero-buttons">
-        {%if section.settings.primary_button_link %}
-        <a href="{{ section.settings.primary_button_link }}" class="btn button-yg" target="{{ section.settings.primary_button_target }}">
-            <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
-            <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
-        </a>
-        {% endif %}
-        {%if section.settings.secondary_button_link %}
-        <a href="{{ section.settings.secondary_button_link }}" class="btn button-w" target="{{ section.settings.secondary_button_target }}">
-            <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
-            <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
-        </a>
-        {% endif %}
-    </div>
-{% endif %}
-            </div>
-            <div class="accordion-four--column-right">
-
-
-                  <div class="image-wrapper">
- {% if section.settings.image %}
-  <img src="{{ section.settings.image | img_url: 'original' }}" alt="{{ section.settings.alt_text }}">
-{% else %}
-  <p>No image available</p>
-{% endif %}
-              
-             </div>
-              
-              
-           
-            </div>
+              <div class="accordion-four--highlights">
+                  {% for block in section.blocks %}
+                      {% if block.type == 'highlight' %}
+                          <div class="accordion-four--highlight">
+                              <h3>{{ block.settings.highlight_title }}</h3>
+                              <p>{{ block.settings.highlight_description }}</p>
+                          </div>
+                      {% endif %}
+                  {% endfor %}
+              </div>
+              {% if section.settings.show_buttons %}
+                  <div class="section--hero-buttons">
+                      {%if section.settings.primary_button_link %}
+                      <a href="{{ section.settings.primary_button_link }}" class="btn button-yg" target="{{ section.settings.primary_button_target }}">
+                          <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+                          <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+                      </a>
+                      {% endif %}
+                      {%if section.settings.secondary_button_link %}
+                      <a href="{{ section.settings.secondary_button_link }}" class="btn button-w" target="{{ section.settings.secondary_button_target }}">
+                          <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
+                          <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
+                      </a>
+                      {% endif %}
+                  </div>
+              {% endif %}
         </div>
-    </div>
+        <div class="accordion-four--column-right">
+          <div class="image-wrapper">
+            {% if section.settings.image %}
+              <img src="{{ section.settings.image | img_url: 'original' }}" alt="{{ section.settings.alt_text }}">
+            {% else %}
+              <p>No image available</p>
+            {% endif %}
+            </div>
+          </div>
+      </div>
+  </div>
 </section>
 
 <style>
