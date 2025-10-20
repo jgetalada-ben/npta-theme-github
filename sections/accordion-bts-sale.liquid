@@ -280,7 +280,7 @@ text-transform: uppercase;
 
 .accordion-four--highlight p{
 color: #fff;
-    font-family: var(--font-body-family);
+font-family: var(--font-body-family);
 font-size: 16px;
 font-style: normal;
 font-weight: 400;
@@ -289,19 +289,16 @@ line-height: 150%; /* 24px */
 
 .accordion-four--highlight p {
   cursor: pointer;
-  max-height: 0;
+  {% comment %} max-height: 0; {% endcomment %}
+   min-height: 24px;
   overflow: hidden;
   transition: max-height 300ms ease;
 margin: 0;
+color: #fff;
 }
 
 .accordion-four--highlight.active p {
   max-height:auto;
-  min-height: 24px;
-  color: #fff;
-}
-.accordion-four--highlight.active ul li {
-  color: #fff;
 }
 
 .accordion-four--highlight.active{
