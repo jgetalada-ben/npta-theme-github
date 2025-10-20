@@ -8,19 +8,14 @@
       "label": "Section ID",
       "default": "canada-sale"
     },
-    {
-        "type": "text",
-        "id": "heading",
-        "label": "Heading",
-        "default": "Lorem ipsum dolor sit amet"
-    },
-    {
-      "type": "text",
-      "id": "subtitle",
-      "label": "Subtitle",
-      "default": "This bundle combines two NASM certifications - the gold standard in the fitness industry - plus a bonus Weight Loss Specialization to make you a complete fitness professional."
-    },
-    {
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Lorem ipsum dolor sit amet"
+        },
+    
+      {
       "type": "image_picker",
       "id": "image",
       "label": "Select an image",
@@ -129,10 +124,9 @@
         <div class="accordion-four--content">
             <div class="accordion-four--column-left">
                    <div class="section--title-block is--heading-white">
-                    <h2 class="is--flex-start">{{ section.settings.heading }}</h2>
-                    {% if section.settings.subtitle %}
-                      <p class="section--title-block-subtitle">{{ section.settings.subtitle }}</p>
-                    {% endif %}
+                    <h2 class="is--flex-start">{{ section.settings.heading }}</h2> 
+                     <p style="color:white;font-weight:normal;font-size: 21px;text-align:left;">This bundle combines two NASM certifications - the gold standard in the fitness industry - plus a bonus Weight Loss Specialization to make you a complete fitness professional.</p>
+                        
                 </div>
 
                 <div class="accordion-four--highlights">
@@ -182,12 +176,7 @@
 .is--heading-white h2{
   color: #FFF;
 } 
-.accordion-four--column-left .section--title-block-subtitle {
-  color:#fff;
-  font-weight:normal;
-  font-size: 21px;
-  text-align:left;
-}
+
 
 .section--accordion-four {
         display: flex;
