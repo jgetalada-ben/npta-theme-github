@@ -118,10 +118,25 @@
     },
     "accordion_bts_sale_EBJVpW": {
       "type": "accordion-bts-sale",
+      "blocks": {
+        "highlight_iitcrx": {
+          "type": "highlight",
+          "settings": {
+            "highlight_title": "Certified Personal Trainer (CPT)",
+            "highlight_description": "<p>Master the skills to train clients safely and effectively.</p><ul><li>100% online, self-paced - complete in as little as 4 weeks</li><li>24 chapters covering anatomy, physiology, nutrition basics, and coaching techniques</li><li>Learn to assess fitness levels, design effective programs, and more</li></ul>",
+            "highlight_image": "shopify://shop_images/CPT.webp"
+          }
+        }
+      },
+      "block_order": [
+        "highlight_iitcrx"
+      ],
       "name": "Accordion BTS",
       "settings": {
         "section_id": "build-your-path",
         "heading": "Build your path. Expand your impact. Save big.",
+        "subtitle": "This bundle combines two NASM certifications - the gold standard in the fitness industry - plus a bonus Weight Loss Specialization to make you a complete fitness professional.",
+        "image": "shopify://shop_images/CPT.webp",
         "show_buttons": true,
         "primary_button_text": "CHOOSE THIS BUNDLE",
         "primary_button_link": "shopify://collections/bundles",
