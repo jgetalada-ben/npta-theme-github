@@ -9,79 +9,6 @@
  */
 {
   "sections": {
-    "hero_banner_VrVBf3": {
-      "type": "hero-banner",
-      "blocks": {
-        "word_9Khai3": {
-          "type": "word",
-          "settings": {
-            "word_text": "Certified Fitness"
-          }
-        },
-        "word_GfGwUC": {
-          "type": "word",
-          "settings": {
-            "word_text": "Nutrition"
-          }
-        },
-        "word_pkrUpB": {
-          "type": "word",
-          "settings": {
-            "word_text": "Strength"
-          }
-        },
-        "word_Wzfjkq": {
-          "type": "word",
-          "settings": {
-            "word_text": "Weight Loss"
-          }
-        },
-        "word_MNHVdq": {
-          "type": "word",
-          "settings": {
-            "word_text": "Wellness"
-          }
-        },
-        "word_bpCGmP": {
-          "type": "word",
-          "settings": {
-            "word_text": "Virtual"
-          }
-        }
-      },
-      "block_order": [
-        "word_9Khai3",
-        "word_GfGwUC",
-        "word_pkrUpB",
-        "word_Wzfjkq",
-        "word_MNHVdq",
-        "word_bpCGmP"
-      ],
-      "disabled": true,
-      "settings": {
-        "background_image": "shopify://shop_images/196ea51af4f74325ffba5c85dcf825d4opt.jpg",
-        "headline": "Fitness/Nutrition/Strength/Weight Loss/Wellness/Virtual Coach",
-        "badge_1_text": "OFFICIAL CANADIAN PARTNER",
-        "badge_2_text": "1.5 Million+ NASM Certified Trainers",
-        "button_1_link": "shopify://collections/all-products",
-        "button_1_text": "CHOOSE MY PROGRAM",
-        "button_2_link": "",
-        "button_2_text": "",
-        "hero_image": "shopify://shop_images/award-nominated-trainer.png",
-        "hero_image_width": "500",
-        "hero_image_height": "500",
-        "award_text": "<p><strong>Canada’s top fitness trainer</strong></p>",
-        "award_sub_text": "<p>According to Impact Magazine</p>",
-        "award_image_1": "shopify://shop_images/award-featured-trainer.png",
-        "award_image_2": "shopify://shop_images/award-featured-trainer.png",
-        "award_image_width": "50",
-        "award_image_height": "50",
-        "partner_text": "OFFICIAL CANADIAN PARTNER",
-        "partner_image": "shopify://shop_images/nasm_international_partner_logo_h_white_ba599786-b284-4e5f-8ade-ae846fbd0c62.svg",
-        "partner_image_width": "139",
-        "partner_image_height": "40"
-      }
-    },
     "hero_banner_v2_YQkTUU": {
       "type": "hero-banner-v2",
       "name": "Hero Banner V2",
@@ -292,103 +219,6 @@
         "primary_button_link": "http://npta.ca/pages/wellnessbundle",
         "secondary_button_text": "",
         "secondary_button_link": ""
-      }
-    },
-    "section_image_text_carousel_ARmbtF": {
-      "type": "section--image-text-carousel",
-      "blocks": {
-        "slide_4UzdLh": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/paymentsection2.jpg",
-            "title_prefix": "PAYMENT PLANS AVAILABLE!",
-            "title_highlight": "Finance",
-            "highlight_color": "#ffffff",
-            "title_suffix": "Your Fitness Career",
-            "highlight_suffix_color": "#ffffff",
-            "description": "We’ve partnered with Elective to make your path even more accessible with flexible payment plans. You might be managing a full-time job, raising a family, or switching careers entirely, and we’re here to walk with you. This isn’t just about financing. It’s about making sure every aspiring coach and wellness leader in Canada has the opportunity, encouragement, and tools to succeed.",
-            "button_text": "HOW IT WORKS",
-            "button_link": "shopify://pages/payment-plan-options",
-            "button_style": "button-yg"
-          }
-        },
-        "slide_qDUayL": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/NCSF.jpg",
-            "title_prefix": "NEW PARTNERSHIP!",
-            "title_highlight": "Elevate Your Skills",
-            "highlight_color": "#ffffff",
-            "title_suffix": "with NCSF",
-            "highlight_suffix_color": "#e9f24f",
-            "description": "NPTA has partnered with NCSF, a globally recognized leader in fitness education, to offer top-tier certifications in Strength & Conditioning, Personal Training, and Sport Performance. Expand your expertise with specialized courses in Health Coaching, Suspension Training, and Lower Back Specialization—now available!",
-            "button_text": "EXPLORE NCSF COURSES",
-            "button_link": "shopify://collections/specializations",
-            "button_style": "button-yg"
-          }
-        },
-        "slide_6nEhXa": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/KBStronger.jpg",
-            "title_prefix": "NEW PARTNERSHIP!",
-            "title_highlight": "Master Kettlebell Training",
-            "highlight_color": "#ffffff",
-            "title_suffix": "with KBStronger!",
-            "highlight_suffix_color": "#e9f24f",
-            "description": "We’re partnering with KBStronger to bring you expert-led kettlebell certifications. Enhance strength, endurance, and mobility with the Kettlebell Certification, KB Stronger Level 1 Certification, and Full Mobility Swing Certification. Elevate your coaching and performance today!",
-            "button_text": "EXPAND YOUR EXPERTISE",
-            "button_link": "shopify://collections/specializations",
-            "button_style": "button-yg"
-          }
-        },
-        "slide_fdWJWA": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Apprenticeship_Program.jpg",
-            "title_prefix": "APPRENTICESHIP PROGRAM!",
-            "title_highlight": "Train with",
-            "highlight_color": "#ffffff",
-            "title_suffix": "Canada’s Top Trainers!",
-            "highlight_suffix_color": "#e9f24f",
-            "description": "This 40-hour hands-on training program takes place in a real gym, where you'll work with clients under expert mentorship. Build confidence, refine your coaching skills, and gain practical, career-ready experience to excel as a trainer.",
-            "button_text": "START TRAINING",
-            "button_link": "shopify://pages/apprenticeship-program",
-            "button_style": "button-yg"
-          }
-        },
-        "slide_kGfp9G": {
-          "type": "slide",
-          "disabled": true,
-          "settings": {
-            "image": "shopify://shop_images/February_Sale.jpg",
-            "title_prefix": "FEBRUARY SALE!",
-            "title_highlight": "15% OFF -",
-            "highlight_color": "#e9f24f",
-            "title_suffix": "Specializations!",
-            "highlight_suffix_color": "#ffffff",
-            "description": "Show yourself some love this February with 15% OFF all specializations over $399! Advance your career, expand your expertise, and gain in-demand skills with industry-recognized certifications. This is your chance to invest in your passion and future—at a discount!",
-            "button_text": "GET 15% OFF NOW!",
-            "button_link": "shopify://collections/specializations",
-            "button_style": "button-yg"
-          }
-        }
-      },
-      "block_order": [
-        "slide_4UzdLh",
-        "slide_qDUayL",
-        "slide_6nEhXa",
-        "slide_fdWJWA",
-        "slide_kGfp9G"
-      ],
-      "disabled": true,
-      "settings": {
-        "section_title": "WHAT’S NEW AT NPTA?",
-        "section_description": "<p>Stay ahead with the latest <strong>partnerships</strong>, <strong>programs</strong>, and<strong> exclusive deals</strong> designed to elevate your fitness career!</p>",
-        "slide_count": 2,
-        "autoplay": true,
-        "autoplay_delay": 5000,
-        "show_buttons": true
       }
     },
     "featured_programs_3Ebyx7": {
@@ -987,11 +817,9 @@
     }
   },
   "order": [
-    "hero_banner_VrVBf3",
     "hero_banner_v2_YQkTUU",
     "accordion_bts_sale_EBJVpW",
     "mix_and_match_4gdfiY",
-    "section_image_text_carousel_ARmbtF",
     "featured_programs_3Ebyx7",
     "section_collection_tabs_w8nGxt",
     "section_certified_trainers_HNR8DL",
