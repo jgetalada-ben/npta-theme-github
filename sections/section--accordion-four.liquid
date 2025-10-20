@@ -17,8 +17,7 @@
     {
       "type": "text",
       "id": "subtitle",
-      "label": "Subtitle",
-      "default": "Choose a curated wellness pathway or create your own."
+      "label": "Subtitle"
     },
     {
       "type": "image_picker",
@@ -122,8 +121,10 @@
       <div class="accordion-four--content">
           <div class="accordion-four--column-left">
               <div class="section--title-block is--heading-white">
-                <h2 class="is--flex-start">{{ section.settings.heading }}</h2> 
-                <p>{{ section.settings.subtitle }}</p>
+                <h2 class="is--flex-start">{{ section.settings.heading }}</h2>
+                {% if section.settings.subtitle %}
+                  <p>{{ section.settings.subtitle }}</p>
+                {% endif %}
               </div>
 
               <div class="accordion-four--highlights">
