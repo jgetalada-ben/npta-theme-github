@@ -131,7 +131,7 @@
                       {% if block.type == 'highlight' %}
                           <div class="accordion-four--highlight">
                               <h3>{{ block.settings.highlight_title }}</h3>
-                              <p>{{ block.settings.highlight_description }}</p>
+                              <div><p>{{ block.settings.highlight_description }}</p></div>
                           </div>
                       {% endif %}
                   {% endfor %}
@@ -270,7 +270,7 @@ text-transform: uppercase;
 
 .accordion-four--highlight p{
 color: #fff;
-    font-family: var(--font-body-family);
+font-family: var(--font-body-family);
 font-size: 16px;
 font-style: normal;
 font-weight: 400;
