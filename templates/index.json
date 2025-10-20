@@ -142,6 +142,130 @@
         "secondary_button_target": "_self"
       }
     },
+    "mix_and_match_4gdfiY": {
+      "type": "mix-and-match",
+      "blocks": {
+        "mm_group_PhaWTP": {
+          "type": "mm_group",
+          "settings": {
+            "group_id": "group-1",
+            "group_title": "Choose any 3 certifications from:"
+          }
+        },
+        "mm_item_gtm7nm": {
+          "type": "mm_item",
+          "settings": {
+            "group_id": "group-1",
+            "item_type": "link",
+            "link_label": "Certified Nutrition Coach (CNC)",
+            "link_url": "#",
+            "text_rte": ""
+          }
+        },
+        "mm_item_f8934W": {
+          "type": "mm_item",
+          "settings": {
+            "group_id": "group-1",
+            "item_type": "link",
+            "link_label": "Certified Sports Nutrition Coach (CSNC)",
+            "link_url": "#",
+            "text_rte": ""
+          }
+        },
+        "mm_item_ePQfE9": {
+          "type": "mm_item",
+          "settings": {
+            "group_id": "group-1",
+            "item_type": "link",
+            "link_label": "Certified Wellness Coach (CWC)",
+            "link_url": "#",
+            "text_rte": ""
+          }
+        },
+        "mm_item_tnXUxi": {
+          "type": "mm_item",
+          "settings": {
+            "group_id": "group-1",
+            "item_type": "link",
+            "link_label": "Behavior Change Specialization (BCS)",
+            "link_url": "#",
+            "text_rte": ""
+          }
+        },
+        "mm_item_hQcHJn": {
+          "type": "mm_item",
+          "settings": {
+            "group_id": "group-1",
+            "item_type": "link",
+            "link_label": "Stretching and Flexibility Coach (SFC)",
+            "link_url": "#",
+            "text_rte": ""
+          }
+        },
+        "mm_item_EhiKY6": {
+          "type": "mm_item",
+          "settings": {
+            "group_id": "group-1",
+            "item_type": "link",
+            "link_label": "Women’s Fitness Specialization (WFS)",
+            "link_url": "#",
+            "text_rte": ""
+          }
+        },
+        "mm_group_9FQX3E": {
+          "type": "mm_group",
+          "settings": {
+            "group_id": "group-2",
+            "group_title": "Receive your choice of:"
+          }
+        },
+        "mm_item_9HUQUM": {
+          "type": "mm_item",
+          "settings": {
+            "group_id": "group-2",
+            "item_type": "link",
+            "link_label": "Free - GLP-1 Nutrition for Weight Management",
+            "link_url": "#",
+            "text_rte": ""
+          }
+        },
+        "mm_item_hkkH4p": {
+          "type": "mm_item",
+          "settings": {
+            "group_id": "group-2",
+            "item_type": "link",
+            "link_label": "Free- Mindful Stress Management",
+            "link_url": "#",
+            "text_rte": ""
+          }
+        }
+      },
+      "block_order": [
+        "mm_group_PhaWTP",
+        "mm_item_gtm7nm",
+        "mm_item_f8934W",
+        "mm_item_ePQfE9",
+        "mm_item_tnXUxi",
+        "mm_item_hQcHJn",
+        "mm_item_EhiKY6",
+        "mm_group_9FQX3E",
+        "mm_item_9HUQUM",
+        "mm_item_hkkH4p"
+      ],
+      "name": "Mix & Match",
+      "settings": {
+        "background_color": "#ffffff",
+        "section_id": "mix-and-match",
+        "heading": "CUSTOM MIX & MATCH BUNDLE",
+        "description": "",
+        "image": "shopify://shop_images/M_and_M.webp",
+        "show_buttons": true,
+        "primary_button_text": "Mix and match my bundle",
+        "primary_button_link": "#",
+        "secondary_button_text": "",
+        "secondary_button_link": ""
+      }
+    },
     "section_image_text_carousel_ARmbtF": {
       "type": "section--image-text-carousel",
       "blocks": {
@@ -837,6 +961,7 @@
   "order": [
     "hero_banner_VrVBf3",
     "accordion_bts_sale_EBJVpW",
+    "mix_and_match_4gdfiY",
     "section_image_text_carousel_ARmbtF",
     "featured_programs_3Ebyx7",
     "section_collection_tabs_w8nGxt",
