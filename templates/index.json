@@ -143,14 +143,7 @@
         "highlight_mxVAWA": {
           "type": "highlight",
           "settings": {
-            "highlight_title": "Free Gift: GLP-1 Nutrition for Weight",
-            "highlight_description": ""
-          }
-        },
-        "highlight_TF4q6j": {
-          "type": "highlight",
-          "settings": {
-            "highlight_title": "Management & Mindful Stress Management",
+            "highlight_title": "Free Gift: GLP-1 Nutrition for Weight Management & Mindful Stress Management",
             "highlight_description": ""
           }
         }
@@ -159,8 +152,7 @@
         "highlight_6MPgkP",
         "highlight_dC8WVh",
         "highlight_jRKWkD",
-        "highlight_mxVAWA",
-        "highlight_TF4q6j"
+        "highlight_mxVAWA"
       ],
       "name": "Accordion Four",
       "settings": {
