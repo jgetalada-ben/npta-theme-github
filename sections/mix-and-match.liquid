@@ -163,8 +163,6 @@
     width: 100%; max-height: 480px; object-fit: cover; border-radius: 20px;
     box-shadow: 0 4px 4px rgba(0,0,0,.04);
   }
-
-  /* ====== Typography ====== */
   #{{ ROOT_ID }} .mm-heading {
     margin: 0 0 8px 0;
     color: #141414;
@@ -173,14 +171,10 @@
   }
   #{{ ROOT_ID }} .mm-intro { margin-bottom: 18px; }
   #{{ ROOT_ID }} .mm-intro p:last-child { margin-bottom: 0; }
-
-  /* ====== Lists (red boxes in mock) ====== */
   #{{ ROOT_ID }} .mm-list {
     margin: 18px 0;
   }
-  #{{ ROOT_ID }} .mm-list:last-child {
-    margin: 18px 0 30px;
-  }
+
   #{{ ROOT_ID }} .mm-list-title {
     margin-bottom: 12px;
     color: #141414;
@@ -188,7 +182,6 @@
   #{{ ROOT_ID }} .mm-items { list-style: none; padding: 0; margin: 0; }
   #{{ ROOT_ID }} .mm-item + .mm-item { margin-top: 10px; }
 
-  /* Link item */
   #{{ ROOT_ID }} .mm-link {
     display: inline-flex; align-items: center; gap: 10px;
     text-decoration: none;
@@ -198,14 +191,13 @@
   #{{ ROOT_ID }} .mm-link:hover .mm-link-label { text-decoration: underline; }
   #{{ ROOT_ID }} .mm-link-icon { display: inline-flex; }
   #{{ ROOT_ID }} .mm-link-icon svg { display: block; }
-
-  /* Rich text item */
   #{{ ROOT_ID }} .mm-text { color: #141414; }
-
-  /* Buttons */
-  #{{ ROOT_ID }} .mm-buttons { margin-top: 26px; display: flex; gap: 14px; flex-wrap: wrap; }
-
-  /* Mobile niceties */
+  #{{ ROOT_ID }} .mm-buttons { 
+    margin-top: 26px; 
+    display: flex; 
+    gap: 14px; 
+    flex-wrap: wrap; 
+}
   @media (max-width: 980px) {
     #{{ ROOT_ID }} .mm-heading, #{{ ROOT_ID }} .mm-intro p { text-align: center; }
     #{{ ROOT_ID }} .mm-col-left { max-width: 100%; margin: 0 auto; }
@@ -213,15 +205,9 @@
 </style>
 
 <script>
-/* Scoped initializer: future-proofed and safe with other sections */
 (() => {
   const root = document.getElementById('{{ ROOT_ID }}');
   if (!root) return;
-
-  // No interactive JS required for basic lists.
-  // Hook here if you later add toggles/expanders inside this section only.
-
-  // Example: emit a custom event for analytics if needed
   root.dataset.ready = "true";
 })();
 </script>
