@@ -124,7 +124,7 @@
 
 
 
-<section class="section--accordion-four">
+<section id="accordion-bts-{{ section.id }}" class="section--accordion-four">
     <div class="accordion-four--container page-container">
         <div class="accordion-four--content">
             <div class="accordion-four--column-left">
@@ -317,38 +317,34 @@ margin: 0;
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const mainImage = document.getElementById('highlight-main-image');
-  const highlights = document.querySelectorAll('.accordion-four--highlight');
-  
-  // Show the image for the first block by default, if it exists
+(function initAccordionBTS(rootId){
+  const root = document.getElementById(rootId);
+  if (!root) return;
+
+  const mainImage  = root.querySelector('.js-highlight-main-image');
+  const highlights = root.querySelectorAll('.accordion-four--highlight');
+
+  // default: show first image if present
   if (highlights.length > 0) {
     const firstImageUrl = highlights[0].dataset.image;
-    if (mainImage && firstImageUrl) {
-      mainImage.src = firstImageUrl;
-    }
+    if (mainImage && firstImageUrl) mainImage.src = firstImageUrl;
   }
 
-  // Your existing click logic
-  highlights.forEach(highlight => {
+  highlights.forEach((highlight) => {
     highlight.addEventListener('click', () => {
-      highlights.forEach(h => {
+      highlights.forEach((h) => {
         h.classList.remove('active');
-        const content = h.querySelector('.accordion-highlight-content');
-        if (content) content.style.maxHeight = '0';
+        const c = h.querySelector('.accordion-highlight-content');
+        if (c) c.style.maxHeight = '0';
       });
+
       highlight.classList.add('active');
       const content = highlight.querySelector('.accordion-highlight-content');
       if (content) content.style.maxHeight = content.scrollHeight + 'px';
 
       const imageUrl = highlight.dataset.image;
-      if (mainImage && imageUrl) {
-        mainImage.src = imageUrl;
-      } else if (mainImage) {
-        mainImage.src = '';
-      }
+      if (mainImage) mainImage.src = imageUrl || '';
     });
   });
-});
-
+})('accordion-bts-{{ section.id }}');
 </script>
