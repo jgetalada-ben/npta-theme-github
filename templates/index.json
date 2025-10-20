@@ -124,12 +124,39 @@
           "settings": {
             "highlight_title": "Certified Personal Trainer (CPT)",
             "highlight_description": "<p>Master the skills to train clients safely and effectively.</p><ul><li>100% online, self-paced - complete in as little as 4 weeks</li><li>24 chapters covering anatomy, physiology, nutrition basics, and coaching techniques</li><li>Learn to assess fitness levels, design effective programs, and more</li></ul>",
-            "highlight_image": "shopify://shop_images/CPT.webp"
+            "highlight_image": "shopify://shop_images/0_1.webp"
+          }
+        },
+        "highlight_L49g7D": {
+          "type": "highlight",
+          "settings": {
+            "highlight_title": "Certified Nutrition Coach (CNC)",
+            "highlight_description": "<p>Empower clients to achieve lasting health through proven nutrition strategies</p><ul><li>Dive deep into behavior change techniques to understand the psychology behind weight loss</li><li>Learn how to help clients overcome real-world challenges like reading food labels, managing portion size, and avoiding fad diets</li></ul>",
+            "highlight_image": "shopify://shop_images/CNC.webp"
+          }
+        },
+        "highlight_wNMmDG": {
+          "type": "highlight",
+          "settings": {
+            "highlight_title": "Certified Wellness Coach (CWC)",
+            "highlight_description": "<p>Launch your career in the $7 trillion wellness industry with comprehensive training that equips you to guide clients toward lasting transformation.</p><ul><li>World-Class Training & Tools: Learn from industry experts and access exclusive resources to build your practice</li><li>Master Essential Skills: Develop powerful coaching competencies that deliver measurable results for clients</li></ul>",
+            "highlight_image": "shopify://shop_images/CWC.webp"
+          }
+        },
+        "highlight_eMCQ8j": {
+          "type": "highlight",
+          "settings": {
+            "highlight_title": "Free Gift: GLP-1 Nutrition for Weight Management & Mindful Stress Management",
+            "highlight_description": "<ul><li>Confidently support clients using GLP-1 and GIP medications with evidence-based strategies that integrate exercise, nutrition, and behavioral coaching for sustainable results.</li><li>Manage everyday stress with science-backed tools you can use immediately—including guided audio sessions, gentle movement flows, and practical techniques that fit your real routine.</li></ul>",
+            "highlight_image": "shopify://shop_images/Free_gifts.webp"
           }
         }
       },
       "block_order": [
-        "highlight_iitcrx"
+        "highlight_iitcrx",
+        "highlight_L49g7D",
+        "highlight_wNMmDG",
+        "highlight_eMCQ8j"
       ],
       "name": "Accordion BTS",
       "settings": {
