@@ -321,30 +321,39 @@ margin: 0;
   const root = document.getElementById(rootId);
   if (!root) return;
 
-  const mainImage  = root.querySelector('.js-highlight-main-image');
-  const highlights = root.querySelectorAll('.accordion-four--highlight');
-
-  // default: show first image if present
+  const mainImage = document.getElementById('highlight-main-image');
+  const highlights = document.querySelectorAll('.accordion-four--highlight');
+  
+  // Show the image for the first block by default, if it exists
   if (highlights.length > 0) {
     const firstImageUrl = highlights[0].dataset.image;
-    if (mainImage && firstImageUrl) mainImage.src = firstImageUrl;
+    if (mainImage && firstImageUrl) {
+      mainImage.src = firstImageUrl;
+    }
   }
 
-  highlights.forEach((highlight) => {
+  // Your existing click logic
+  highlights.forEach(highlight => {
     highlight.addEventListener('click', () => {
-      highlights.forEach((h) => {
+      highlights.forEach(h => {
         h.classList.remove('active');
-        const c = h.querySelector('.accordion-highlight-content');
-        if (c) c.style.maxHeight = '0';
+        const content = h.querySelector('.accordion-highlight-content');
+        if (content) content.style.maxHeight = '0';
       });
-
       highlight.classList.add('active');
       const content = highlight.querySelector('.accordion-highlight-content');
       if (content) content.style.maxHeight = content.scrollHeight + 'px';
 
       const imageUrl = highlight.dataset.image;
-      if (mainImage) mainImage.src = imageUrl || '';
+      if (mainImage && imageUrl) {
+        mainImage.src = imageUrl;
+      } else if (mainImage) {
+        mainImage.src = '';
+      }
     });
   });
+
 })('accordion-bts-{{ section.id }}');
+
 </script>
+
