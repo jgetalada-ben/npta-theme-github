@@ -13,16 +13,6 @@
     "market": "philippines"
   },
   "sections": {
-    "hero_banner_VrVBf3": {
-      "disabled": false,
-      "settings": {},
-      "blocks": {}
-    },
-    "section_image_text_carousel_ARmbtF": {
-      "disabled": true,
-      "settings": {},
-      "blocks": {}
-    },
     "featured_programs_3Ebyx7": {
       "disabled": true,
       "settings": {},
@@ -40,8 +30,6 @@
     }
   },
   "order": [
-    "hero_banner_VrVBf3",
-    "section_image_text_carousel_ARmbtF",
     "featured_programs_3Ebyx7",
     "section_collection_tabs_w8nGxt",
     "section_certified_trainers_HNR8DL",
