@@ -116,50 +116,12 @@
         "btn_txt": "#0b0b0b"
       }
     },
-    "section_accordion_four_48z3HP": {
-      "type": "section--accordion-four",
-      "blocks": {
-        "highlight_6MPgkP": {
-          "type": "highlight",
-          "settings": {
-            "highlight_title": "Certified Personal Trainer (CPT)",
-            "highlight_description": "Master the skills to train clients safely and effectively."
-          }
-        },
-        "highlight_dC8WVh": {
-          "type": "highlight",
-          "settings": {
-            "highlight_title": "Certified Nutrition Coach (CNC)",
-            "highlight_description": ""
-          }
-        },
-        "highlight_jRKWkD": {
-          "type": "highlight",
-          "settings": {
-            "highlight_title": "Certified Wellness Coach (CWC)",
-            "highlight_description": ""
-          }
-        },
-        "highlight_mxVAWA": {
-          "type": "highlight",
-          "settings": {
-            "highlight_title": "Free Gift: GLP-1 Nutrition for Weight Management & Mindful Stress Management",
-            "highlight_description": "Confidently support clients using GLP-1 and GIP medications with evidence-based strategies that integrate exercise, nutrition, and behavioral coaching for sustainable results."
-          }
-        }
-      },
-      "block_order": [
-        "highlight_6MPgkP",
-        "highlight_dC8WVh",
-        "highlight_jRKWkD",
-        "highlight_mxVAWA"
-      ],
-      "name": "Accordion Four",
+    "accordion_bts_sale_EBJVpW": {
+      "type": "accordion-bts-sale",
+      "name": "Accordion BTS",
       "settings": {
         "section_id": "build-your-path",
         "heading": "Build your path. Expand your impact. Save big.",
-        "subtitle": "Choose a curated wellness pathway or create your own. Each bundle is designed to strengthen your expertise — and comes with a FREE bonus NEW course: either GLP-1 Nutrition for Weight Management or Mindful Stress Management.",
-        "image": "shopify://shop_images/CPT.webp",
         "show_buttons": true,
         "primary_button_text": "CHOOSE THIS BUNDLE",
         "primary_button_link": "shopify://collections/bundles",
@@ -707,7 +669,6 @@
       "settings": {
         "section_id": "certified-trainers",
         "heading": "Why students love npta",
-        "subtitle": "",
         "image": "shopify://shop_images/CNC_13_2.jpg",
         "show_buttons": true,
         "primary_button_text": "Get Certified",
@@ -864,7 +825,7 @@
   "order": [
     "hero_banner_VrVBf3",
     "hero_banner_v2_xbVhbH",
-    "section_accordion_four_48z3HP",
+    "accordion_bts_sale_EBJVpW",
     "section_image_text_carousel_ARmbtF",
     "featured_programs_3Ebyx7",
     "section_collection_tabs_w8nGxt",
