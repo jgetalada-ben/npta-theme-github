@@ -1,0 +1,226 @@
+{% schema %}
+{
+  "name": "Mix & Match",
+  "settings": [
+    { "type": "color", "id": "background_color", "label": "Background color", "default": "#ffffff" },
+    { "type": "text",  "id": "section_id", "label": "Section ID (optional)", "default": "mix-and-match" },
+
+    { "type": "text", "id": "heading", "label": "Heading", "default": "CUSTOM MIX & MATCH BUNDLE" },
+    { "type": "richtext", "id": "description", "label": "Intro text" },
+
+    { "type": "image_picker", "id": "image", "label": "Right image" },
+
+    { "type": "checkbox", "id": "show_buttons", "label": "Show buttons", "default": true },
+    { "type": "text", "id": "primary_button_text", "label": "Primary button label", "default": "Mix and match my bundle" },
+    { "type": "url",  "id": "primary_button_link", "label": "Primary button link" },
+    { "type": "text", "id": "secondary_button_text", "label": "Secondary button label" },
+    { "type": "url",  "id": "secondary_button_link", "label": "Secondary button link" }
+  ],
+  "blocks": [
+    {
+      "type": "mm_group",
+      "name": "Group (title box)",
+      "settings": [
+        { "type": "text", "id": "group_id", "label": "Group ID (e.g., group-1)", "default": "group-1", "info": "Items with the same Group ID will appear under this title." },
+        { "type": "text", "id": "group_title", "label": "Title", "default": "Choose any 3 certifications from:" }
+      ]
+    },
+    {
+      "type": "mm_item",
+      "name": "Item",
+      "settings": [
+        { "type": "text", "id": "group_id", "label": "Group ID to attach to", "default": "group-1" },
+        {
+          "type": "select",
+          "id": "item_type",
+          "label": "Item type",
+          "default": "link",
+          "options": [
+            { "value": "link", "label": "Link (shows arrow icon)" },
+            { "value": "text", "label": "Rich text" }
+          ]
+        },
+        { "type": "text", "id": "link_label", "label": "Link label" },
+        { "type": "url",  "id": "link_url", "label": "Link URL" },
+        { "type": "richtext", "id": "text_rte", "label": "Rich text content" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Mix & Match", "category": "Custom Sections" }
+  ]
+}
+{% endschema %}
+
+{%- comment -%}
+  Wrapper is uniquely scoped by section.id to avoid JS/CSS collisions.
+{%- endcomment -%}
+{%- assign ROOT_ID = 'mix-and-match-' | append: section.id -%}
+<section id="{{ section.settings.section_id | default: ROOT_ID }}"
+         class="mix-and-match"
+         data-root-id="{{ ROOT_ID }}"
+         style="background-color: {{ section.settings.background_color }};">
+
+  <div id="{{ ROOT_ID }}" class="mm-container page-container">
+    <div class="mm-grid">
+      <!-- Left column -->
+      <div class="mm-col-left">
+        <div class="mm-header">
+          <h2 class="mm-heading">{{ section.settings.heading }}</h2>
+          {%- if section.settings.description != blank -%}
+            <div class="mm-intro rte">{{ section.settings.description }}</div>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%}
+          Render groups in the order they appear.
+          For each mm_group, we find all mm_item blocks that share its group_id.
+        {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'mm_group' -%}
+            <div class="mm-list" {{ block.shopify_attributes }} data-group="{{ block.settings.group_id | escape }}">
+              <div class="mm-list-title">{{ block.settings.group_title }}</div>
+              <ul class="mm-items" role="list">
+                {%- for item in section.blocks -%}
+                  {%- if item.type == 'mm_item' and item.settings.group_id == block.settings.group_id -%}
+                    <li class="mm-item" {{ item.shopify_attributes }}>
+                      {%- if item.settings.item_type == 'link' and item.settings.link_label and item.settings.link_url -%}
+                        <a class="mm-link" href="{{ item.settings.link_url }}">
+                          <span class="mm-link-label">{{ item.settings.link_label }}</span>
+                          <span class="mm-link-icon" aria-hidden="true">
+                            <!-- arrow-in-circle icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+                              <path d="M12 2.25a9.75 9.75 0 1 0 0 19.5 9.75 9.75 0 0 0 0-19.5Z" stroke="currentColor" stroke-width="1.5"/>
+                              <path d="M9 15l6-6M10 8.5h5.5V14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                          </span>
+                        </a>
+                      {%- else -%}
+                        <div class="mm-text rte">
+                          {{ item.settings.text_rte }}
+                        </div>
+                      {%- endif -%}
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- if section.settings.show_buttons -%}
+          <div class="mm-buttons">
+            {%- if section.settings.primary_button_text and section.settings.primary_button_link -%}
+              <a href="{{ section.settings.primary_button_link }}" class="btn button-yg">
+                <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+                <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.secondary_button_text and section.settings.secondary_button_link -%}
+              <a href="{{ section.settings.secondary_button_link }}" class="btn button-w">
+                <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
+                <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Right column -->
+      <div class="mm-col-right">
+        <div class="mm-image-wrap">
+          {%- if section.settings.image -%}
+            <img src="{{ section.settings.image | img_url: 'master' }}"
+                 alt="{{ section.settings.heading | escape }}">
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ====== Layout ====== */
+  #{{ ROOT_ID }}.mm-container { padding-top: 50px; padding-bottom: 50px; }
+  @media (min-width: 981px) { #{{ ROOT_ID }}.mm-container { padding-top: 90px; padding-bottom: 90px; } }
+
+  #{{ ROOT_ID }} .mm-grid {
+    display: grid;
+    gap: 32px;
+  }
+  @media (min-width: 981px) {
+    #{{ ROOT_ID }} .mm-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+  }
+
+  #{{ ROOT_ID }} .mm-col-left { max-width: 620px; }
+  #{{ ROOT_ID }} .mm-col-right .mm-image-wrap { display: flex; justify-content: center; }
+  #{{ ROOT_ID }} .mm-col-right img {
+    width: 100%; max-height: 480px; object-fit: cover; border-radius: 20px;
+    box-shadow: 0 4px 4px rgba(0,0,0,.04);
+  }
+
+  /* ====== Typography ====== */
+  #{{ ROOT_ID }} .mm-heading {
+    margin: 0 0 8px 0;
+    color: #141414;
+    font-family: var(--font-heading-family);
+    font-size: 42px; font-weight: 800; line-height: 1.12; text-transform: uppercase;
+  }
+  #{{ ROOT_ID }} .mm-intro { margin-bottom: 18px; }
+  #{{ ROOT_ID }} .mm-intro p:last-child { margin-bottom: 0; }
+
+  /* ====== Lists (red boxes in mock) ====== */
+  #{{ ROOT_ID }} .mm-list {
+    border: 3px solid #F04; /* visual during build; adjust to brand if needed */
+    border-color: #e74d3c;  /* soft red like mock */
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 18px 0;
+    background: rgba(0,0,0,0.02);
+  }
+  #{{ ROOT_ID }} .mm-list-title {
+    font-weight: 600; margin-bottom: 12px; color: #141414;
+  }
+  #{{ ROOT_ID }} .mm-items { list-style: none; padding: 0; margin: 0; }
+  #{{ ROOT_ID }} .mm-item + .mm-item { margin-top: 10px; }
+
+  /* Link item */
+  #{{ ROOT_ID }} .mm-link {
+    display: inline-flex; align-items: center; gap: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #141414;
+  }
+  #{{ ROOT_ID }} .mm-link:hover .mm-link-label { text-decoration: underline; }
+  #{{ ROOT_ID }} .mm-link-icon { display: inline-flex; }
+  #{{ ROOT_ID }} .mm-link-icon svg { display: block; }
+
+  /* Rich text item */
+  #{{ ROOT_ID }} .mm-text { color: #141414; }
+
+  /* Buttons */
+  #{{ ROOT_ID }} .mm-buttons { margin-top: 26px; display: flex; gap: 14px; flex-wrap: wrap; }
+
+  /* Mobile niceties */
+  @media (max-width: 980px) {
+    #{{ ROOT_ID }} .mm-heading, #{{ ROOT_ID }} .mm-intro p { text-align: center; }
+    #{{ ROOT_ID }} .mm-col-left { max-width: 100%; margin: 0 auto; }
+  }
+</style>
+
+<script>
+/* Scoped initializer: future-proofed and safe with other sections */
+(() => {
+  const root = document.getElementById('{{ ROOT_ID }}');
+  if (!root) return;
+
+  // No interactive JS required for basic lists.
+  // Hook here if you later add toggles/expanders inside this section only.
+
+  // Example: emit a custom event for analytics if needed
+  root.dataset.ready = "true";
+})();
+</script>
