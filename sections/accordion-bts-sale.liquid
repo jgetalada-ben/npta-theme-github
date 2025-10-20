@@ -175,8 +175,10 @@
   margin: 0;
 }
 .accordion-four--highlight.active .accordion-highlight-content {
-  max-height: 1000px;
+  max-height: 1000px; /* or a reasonable max, or use scrollHeight in JS */
+  margin-top: 16px;
 }
+
 .is--heading-white h2{
   color: #FFF;
 } 
@@ -297,6 +299,7 @@ margin: 0;
 
 .accordion-four--highlight.active p {
   max-height:auto; 
+  margin-top:16px;
 }
 
 .accordion-four--highlight.active{
