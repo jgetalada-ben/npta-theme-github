@@ -116,6 +116,66 @@
         "btn_txt": "#0b0b0b"
       }
     },
+    "section_accordion_four_48z3HP": {
+      "type": "section--accordion-four",
+      "blocks": {
+        "highlight_6MPgkP": {
+          "type": "highlight",
+          "settings": {
+            "highlight_title": "Certified Personal Trainer (CPT)",
+            "highlight_description": "Choose a curated wellness pathway or create your own. Each bundle is designed to strengthen your expertise — and comes with a FREE bonus NEW course: either GLP-1 Nutrition for Weight Management or Mindful Stress Management."
+          }
+        },
+        "highlight_dC8WVh": {
+          "type": "highlight",
+          "settings": {
+            "highlight_title": "Certified Nutrition Coach (CNC)",
+            "highlight_description": ""
+          }
+        },
+        "highlight_jRKWkD": {
+          "type": "highlight",
+          "settings": {
+            "highlight_title": "Certified Wellness Coach (CWC)",
+            "highlight_description": ""
+          }
+        },
+        "highlight_mxVAWA": {
+          "type": "highlight",
+          "settings": {
+            "highlight_title": "Free Gift: GLP-1 Nutrition for Weight",
+            "highlight_description": ""
+          }
+        },
+        "highlight_TF4q6j": {
+          "type": "highlight",
+          "settings": {
+            "highlight_title": "Management & Mindful Stress Management",
+            "highlight_description": ""
+          }
+        }
+      },
+      "block_order": [
+        "highlight_6MPgkP",
+        "highlight_dC8WVh",
+        "highlight_jRKWkD",
+        "highlight_mxVAWA",
+        "highlight_TF4q6j"
+      ],
+      "name": "Accordion Four",
+      "settings": {
+        "section_id": "build-your-path",
+        "heading": "Build your path. Expand your impact. Save big.",
+        "image": "shopify://shop_images/CPT.webp",
+        "show_buttons": true,
+        "primary_button_text": "CHOOSE THIS BUNDLE",
+        "primary_button_link": "shopify://collections/bundles",
+        "primary_button_target": "_self",
+        "secondary_button_text": "",
+        "secondary_button_link": "",
+        "secondary_button_target": "_self"
+      }
+    },
     "section_image_text_carousel_ARmbtF": {
       "type": "section--image-text-carousel",
       "blocks": {
@@ -810,6 +870,7 @@
   "order": [
     "hero_banner_VrVBf3",
     "hero_banner_v2_xbVhbH",
+    "section_accordion_four_48z3HP",
     "section_image_text_carousel_ARmbtF",
     "featured_programs_3Ebyx7",
     "section_collection_tabs_w8nGxt",
