@@ -123,35 +123,28 @@
           "type": "highlight",
           "settings": {
             "highlight_title": "Certified Personal Trainer (CPT)",
-            "highlight_description": ""
+            "highlight_description": "<p>Master the skills to train clients safely and effectively.</p><ul><li>100% online, self-paced - complete in as little as 4 weeks</li><li>24 chapters covering anatomy, physiology, nutrition basics, and coaching techniques</li><li>Learn to assess fitness levels, design effective programs, and more</li></ul>"
           }
         },
         "highlight_dC8WVh": {
           "type": "highlight",
           "settings": {
             "highlight_title": "Certified Nutrition Coach (CNC)",
-            "highlight_description": ""
+            "highlight_description": "<p>Empower clients to achieve lasting health through proven nutrition strategies</p><ul><li>Dive deep into behavior change techniques to understand the psychology behind weight loss</li><li>Learn how to help clients overcome real-world challenges like reading food labels, managing portion size, and avoiding fad diets</li></ul>"
           }
         },
         "highlight_jRKWkD": {
           "type": "highlight",
           "settings": {
             "highlight_title": "Certified Wellness Coach (CWC)",
-            "highlight_description": ""
+            "highlight_description": "<p>Launch your career in the $7 trillion wellness industry with comprehensive training that equips you to guide clients toward lasting transformation.</p><ul><li>World-Class Training & Tools: Learn from industry experts and access exclusive resources to build your practice</li><li>Master Essential Skills: Develop powerful coaching competencies that deliver measurable results for clients</li></ul>"
           }
         },
         "highlight_mxVAWA": {
           "type": "highlight",
           "settings": {
             "highlight_title": "Free Gift: GLP-1 Nutrition for Weight Management & Mindful Stress Management",
-            "highlight_description": ""
-          }
-        },
-        "highlight_TBf37t": {
-          "type": "highlight",
-          "settings": {
-            "highlight_title": "",
-            "highlight_description": ""
+            "highlight_description": "<ul><li>Confidently support clients using GLP-1 and GIP medications with evidence-based strategies that integrate exercise, nutrition, and behavioral coaching for sustainable results.</li><li>Manage everyday stress with science-backed tools you can use immediately—including guided audio sessions, gentle movement flows, and practical techniques that fit your real routine.</li></ul>"
           }
         }
       },
@@ -159,8 +152,7 @@
         "highlight_6MPgkP",
         "highlight_dC8WVh",
         "highlight_jRKWkD",
-        "highlight_mxVAWA",
-        "highlight_TBf37t"
+        "highlight_mxVAWA"
       ],
       "name": "Accordion Four",
       "settings": {
@@ -686,21 +678,21 @@
           "type": "highlight",
           "settings": {
             "highlight_title": "Canada's Lowest Prices",
-            "highlight_description": "Get the best NASM deals with zero percent interest payment plans. Found an individual NASM course at a lower price elsewhere? Let us know so we can price match and find an even better deal!"
+            "highlight_description": "<p>Get the best NASM deals with zero percent interest payment plans. Found an individual NASM course at a lower price elsewhere? Let us know so we can price match and find an even better deal!</p>"
           }
         },
         "highlight_dYU4cw": {
           "type": "highlight",
           "settings": {
             "highlight_title": "Job Assistance Opportunities",
-            "highlight_description": "Our Apprenticeship Program equips newly certified trainers with 40 hours of hands-on experience. Get mentored by Canada's Top Fitness Trainer and renowned fitness entrepreneur, Jesse Benson."
+            "highlight_description": "<p>Our Apprenticeship Program equips newly certified trainers with 40 hours of hands-on experience. Get mentored by Canada's Top Fitness Trainer and renowned fitness entrepreneur, Jesse Benson.</p>"
           }
         },
         "highlight_f6WV7C": {
           "type": "highlight",
           "settings": {
             "highlight_title": "Flexible Learning Platform",
-            "highlight_description": "Complete your course remotely at your own pace, whether you’re a full-time student or working a full-time job."
+            "highlight_description": "<p>Complete your course remotely at your own pace, whether you’re a full-time student or working a full-time job.</p>"
           }
         }
       },
