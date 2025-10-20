@@ -20,32 +20,52 @@
 
   <div class="hbv2__inner">
     <div class="hbv2__content">
-      {% if section.settings.eyebrow != blank %}
+        {% if section.settings.eyebrow != blank %}
         <div class="hbv2__eyebrow">{{ section.settings.eyebrow }}</div>
-      {% endif %}
+        {% endif %}
 
-      {% if section.settings.heading != blank %}
+        {% if section.settings.heading != blank %}
         <h1 class="hbv2__heading">{{ section.settings.heading }}</h1>
-      {% endif %}
+        {% endif %}
 
-      {% if section.settings.subheading != blank %}
+        {% if section.settings.subheading != blank %}
         <div class="hbv2__sub">{{ section.settings.subheading }}</div>
-      {% endif %}
+        {% endif %}
 
-      {% if section.settings.btn_label != blank and section.settings.btn_url != blank %}
+        {% if section.settings.btn_label != blank and section.settings.btn_url != blank %}
         <a class="hbv2__btn" href="{{ section.settings.btn_url }}">{{ section.settings.btn_label }}</a>
-      {% endif %}
+        {% endif %}
 
-      {% if section.settings.badge_left != blank or section.settings.badge_right != blank %}
-        <div class="hbv2__badges">
-          {% if section.settings.badge_left != blank %}
-            <div class="hbv2__badge">{{ section.settings.badge_left }}</div>
-          {% endif %}
-          {% if section.settings.badge_right != blank %}
-            <div class="hbv2__badge">{{ section.settings.badge_right }}</div>
-          {% endif %}
-        </div>
-      {% endif %}
+        {% if section.settings.badge_left != blank or section.settings.badge_right != blank %}
+            <div class="hbv2__ribbon">
+                <div class="hbv2__ribbon-left">
+                {% if section.settings.award_img_1 %}
+                    <img class="hbv2__award" src="{{ section.settings.award_img_1 | image_url: width: 160 }}" alt="Award" loading="lazy">
+                {% endif %}
+                {% if section.settings.award_img_2 %}
+                    <img class="hbv2__award" src="{{ section.settings.award_img_2 | image_url: width: 160 }}" alt="Award" loading="lazy">
+                {% endif %}
+                {% if section.settings.badge_left != blank %}
+                    <div class="hbv2__ribbon-text">{{ section.settings.badge_left }}</div>
+                {% endif %}
+                </div>
+
+                {% if section.settings.badge_right != blank %}
+                <div class="hbv2__ribbon-right">
+                    <!-- yellow check badge (SVG) -->
+                    <svg class="hbv2__badge-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" aria-hidden="true" focusable="false">
+                    <g clip-path="url(#clip0_401_2691)">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M10.586 2.1C10.94 1.74648 11.4136 1.53846 11.9134 1.51698C12.4132 1.49551 12.903 1.66214 13.286 1.984L13.414 2.101L15.314 4H18C18.5044 4.00009 18.9901 4.19077 19.3599 4.53384C19.7297 4.8769 19.9561 5.34702 19.994 5.85L20 6V8.686L21.9 10.586C22.2538 10.94 22.462 11.4139 22.4834 11.9139C22.5049 12.414 22.3381 12.9039 22.016 13.287L21.899 13.414L19.999 15.314V18C19.9991 18.5046 19.8086 18.9906 19.4655 19.3605C19.1224 19.7305 18.6521 19.9572 18.149 19.995L18 20H15.315L13.415 21.9C13.0609 22.2538 12.5871 22.462 12.087 22.4835C11.587 22.505 11.097 22.3382 10.714 22.016L10.587 21.9L8.68697 20H5.99997C5.49539 20.0002 5.0094 19.8096 4.63942 19.4665C4.26944 19.1234 4.04281 18.6532 4.00497 18.15L3.99997 18V15.314L2.09997 13.414C1.74616 13.06 1.53797 12.5861 1.51649 12.0861C1.49502 11.586 1.66182 11.0961 1.98397 10.713L2.09997 10.586L3.99997 8.686V6C4.00006 5.4956 4.19074 5.00986 4.53381 4.64009C4.87687 4.27032 5.34699 4.04383 5.84997 4.006L5.99997 4H8.68597L10.586 2.1ZM15.079 8.983L10.835 13.227L9.06697 11.459C8.87933 11.2715 8.62489 11.1662 8.35962 11.1663C8.09435 11.1664 7.83998 11.2719 7.65247 11.4595C7.46496 11.6471 7.35967 11.9016 7.35977 12.1669C7.35986 12.4321 7.46533 12.6865 7.65297 12.874L10.057 15.278C10.1591 15.3802 10.2804 15.4613 10.4139 15.5166C10.5474 15.5719 10.6905 15.6004 10.835 15.6004C10.9795 15.6004 11.1226 15.5719 11.256 15.5166C11.3895 15.4613 11.5108 15.3802 11.613 15.278L16.493 10.397C16.6751 10.2084 16.7759 9.9558 16.7736 9.6936C16.7714 9.4314 16.6662 9.18059 16.4808 8.99518C16.2954 8.80977 16.0446 8.70461 15.7824 8.70233C15.5202 8.70005 15.2676 8.80084 15.079 8.983Z"
+                        fill="{{ section.settings.badge_icon_color }}" />
+                    </g>
+                    <defs><clipPath id="clip0_401_2691"><rect width="24" height="24" fill="white"/></clipPath></defs>
+                    </svg>
+                    <div class="hbv2__ribbon-text">{{ section.settings.badge_right }}</div>
+                </div>
+                {% endif %}
+            </div>
+        {% endif %}
     </div>
   </div>
 </section>
@@ -173,10 +193,52 @@
     opacity:.95;
   }
 
-  /* Mobile spacing tweaks */
-  @media (max-width: 768px){
+  /* ---- Under-button ribbon ---- */
+#hero-{{ section.id }} .hbv2__ribbon{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: clamp(10px, 3vw, 32px);
+    margin-top: clamp(10px, 2.2vw, 18px);
+    flex-wrap: wrap;
+}
+
+#hero-{{ section.id }} .hbv2__ribbon-left,
+#hero-{{ section.id }} .hbv2__ribbon-right{
+    display:flex; align-items:center; gap: clamp(8px, 1.6vw, 16px);
+}
+
+#hero-{{ section.id }} .hbv2__award{
+    height: clamp({{ section.settings.award_size | default: 28 }}px, 3.2vw, {{ section.settings.award_size | default: 28 | plus: 10 }}px);
+    width: auto;
+}
+
+#hero-{{ section.id }} .hbv2__ribbon-text{
+    font-size: clamp(12px, 1.6vw, 16px);
+    letter-spacing: .02em;
+    color: var(--txt);
+    opacity: .95;
+    white-space: nowrap;
+}
+
+#hero-{{ section.id }} .hbv2__badge-icon{
+    min-width: 24px; min-height: 24px;
+}
+
+/* Stack on small screens */
+@media (max-width: 640px){
+    #hero-{{ section.id }} .hbv2__ribbon{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    #hero-{{ section.id }}.is-center .hbv2__ribbon{ align-items: center; }
+    #hero-{{ section.id }}.is-right  .hbv2__ribbon{ align-items: flex-end; }
+}
+
+/* Mobile spacing tweaks */
+@media (max-width: 768px){
     #hero-{{ section.id }}{ min-height: {{ section.settings.min_height_mobile }}px; }
-  }
+}
 </style>
 
 {% schema %}
