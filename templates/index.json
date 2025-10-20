@@ -158,7 +158,6 @@
         "highlight_wNMmDG",
         "highlight_eMCQ8j"
       ],
-      "disabled": true,
       "custom_css": [
         ".accordion-four--highlight ul li {color: white;}",
         ".accordion-four--highlight h4 {color: white;}"
