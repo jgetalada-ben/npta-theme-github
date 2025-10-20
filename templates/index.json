@@ -158,6 +158,10 @@
         "highlight_wNMmDG",
         "highlight_eMCQ8j"
       ],
+      "custom_css": [
+        ".accordion-four--highlight ul li {color: white;}",
+        ".accordion-four--highlight h4 {color: white;}"
+      ],
       "name": "Accordion BTS",
       "settings": {
         "section_id": "build-your-path",
