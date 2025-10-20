@@ -113,7 +113,7 @@
             "group_id": "group-1",
             "item_type": "link",
             "link_label": "Certified Nutrition Coach (CNC)",
-            "link_url": "#",
+            "link_url": "https://www.npta.ca/products/certified-nutrition-coach-cnc?_pos=1&_sid=4f5784824&_ss=r",
             "text_rte": ""
           }
         },
@@ -123,7 +123,7 @@
             "group_id": "group-1",
             "item_type": "link",
             "link_label": "Certified Sports Nutrition Coach (CSNC)",
-            "link_url": "#",
+            "link_url": "shopify://products/sports-nutrition-coach-csnc",
             "text_rte": ""
           }
         },
@@ -133,7 +133,7 @@
             "group_id": "group-1",
             "item_type": "link",
             "link_label": "Certified Wellness Coach (CWC)",
-            "link_url": "#",
+            "link_url": "shopify://products/wellness-coach-cwc-bogo",
             "text_rte": ""
           }
         },
@@ -143,7 +143,7 @@
             "group_id": "group-1",
             "item_type": "link",
             "link_label": "Behavior Change Specialization (BCS)",
-            "link_url": "#",
+            "link_url": "shopify://products/behavior-change-specialization-bcs",
             "text_rte": ""
           }
         },
@@ -153,7 +153,7 @@
             "group_id": "group-1",
             "item_type": "link",
             "link_label": "Stretching and Flexibility Coach (SFC)",
-            "link_url": "#",
+            "link_url": "shopify://products/stretching-flexibility-coach-sfc",
             "text_rte": ""
           }
         },
@@ -163,7 +163,7 @@
             "group_id": "group-1",
             "item_type": "link",
             "link_label": "Women’s Fitness Specialization (WFS)",
-            "link_url": "#",
+            "link_url": "shopify://products/womens-fitness-specialization-wfs",
             "text_rte": ""
           }
         },
@@ -180,7 +180,7 @@
             "group_id": "group-2",
             "item_type": "link",
             "link_label": "Free - GLP-1 Nutrition for Weight Management",
-            "link_url": "#",
+            "link_url": "shopify://products/nutrition-pro-bundle-plus-cpt-cnc-wls-bcs-cpr",
             "text_rte": ""
           }
         },
@@ -190,7 +190,7 @@
             "group_id": "group-2",
             "item_type": "link",
             "link_label": "Free- Mindful Stress Management",
-            "link_url": "#",
+            "link_url": "shopify://products/mindful-stress-management",
             "text_rte": ""
           }
         }
