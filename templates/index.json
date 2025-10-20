@@ -57,7 +57,6 @@
         "word_MNHVdq",
         "word_bpCGmP"
       ],
-      "disabled": true,
       "custom_css": [
         "@media (max-width: 767px) {.section--hero-badges .section--badge {display: block; text-align: center; } .section--hero-badges .section--badge span {display: inline; vertical-align: top; top: 2px; position: relative; } .section--hero-badges .section--badge img {display: none !important; } .section--hero-badges .section--badge-1 {display: none !important; }}"
       ],
@@ -87,6 +86,7 @@
     },
     "hero_banner_v2_xbVhbH": {
       "type": "hero-banner-v2",
+      "disabled": true,
       "name": "Hero Banner v2",
       "settings": {
         "image_desktop": "shopify://shop_images/Header_Wellness.webp",
