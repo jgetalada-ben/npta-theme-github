@@ -1,0 +1,235 @@
+{% comment %}
+  Hero Banner v2
+  - Desktop + Mobile background images
+  - Clamped type sizes
+  - Overlay control
+  - Alignment + padding + max width
+  - Primary CTA
+{% endcomment %}
+
+<section id="hero-{{ section.id }}" class="hbv2 {% if section.settings.align_h == 'center' %}is-center{% elsif section.settings.align_h == 'right' %}is-right{% else %}is-left{% endif %} {% if section.settings.align_v == 'bottom' %}is-bottom{% elsif section.settings.align_v == 'top' %}is-top{% else %}is-middle{% endif %}">
+  <div class="hbv2__bg">
+    {% if section.settings.image_desktop %}
+      <div class="hbv2__bg--desk" role="img" aria-label="{{ section.settings.alt | escape }}"></div>
+    {% endif %}
+    {% if section.settings.image_mobile %}
+      <div class="hbv2__bg--mob" role="img" aria-label="{{ section.settings.alt | escape }}"></div>
+    {% endif %}
+    <div class="hbv2__overlay" aria-hidden="true"></div>
+  </div>
+
+  <div class="hbv2__inner">
+    <div class="hbv2__content">
+      {% if section.settings.eyebrow != blank %}
+        <div class="hbv2__eyebrow">{{ section.settings.eyebrow }}</div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h1 class="hbv2__heading">{{ section.settings.heading }}</h1>
+      {% endif %}
+
+      {% if section.settings.subheading != blank %}
+        <div class="hbv2__sub">{{ section.settings.subheading }}</div>
+      {% endif %}
+
+      {% if section.settings.btn_label != blank and section.settings.btn_url != blank %}
+        <a class="hbv2__btn" href="{{ section.settings.btn_url }}">{{ section.settings.btn_label }}</a>
+      {% endif %}
+
+      {% if section.settings.badge_left != blank or section.settings.badge_right != blank %}
+        <div class="hbv2__badges">
+          {% if section.settings.badge_left != blank %}
+            <div class="hbv2__badge">{{ section.settings.badge_left }}</div>
+          {% endif %}
+          {% if section.settings.badge_right != blank %}
+            <div class="hbv2__badge">{{ section.settings.badge_right }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ---- Scope to this section ---- */
+  #hero-{{ section.id }}{
+    --pad-y: {{ section.settings.pad_y }}px;
+    --pad-x: {{ section.settings.pad_x }}px;
+    --maxw: {{ section.settings.max_width | default: 1400 }}px;
+    --overlay: {{ section.settings.overlay | divided_by: 100.0 }};
+    --txt: {{ section.settings.text_color }};
+    --btn-bg: {{ section.settings.btn_bg }};
+    --btn-txt: {{ section.settings.btn_txt }};
+    color: var(--txt);
+    position: relative;
+    overflow: hidden;
+    min-height: {{ section.settings.min_height }}px;
+  }
+
+  #hero-{{ section.id }} .hbv2__bg{
+    position:absolute; inset:0; z-index:0;
+  }
+  #hero-{{ section.id }} .hbv2__bg--desk,
+  #hero-{{ section.id }} .hbv2__bg--mob{
+    position:absolute; inset:0;
+    background-size: cover;
+    background-position: center;
+  }
+  /* desktop image */
+  {% if section.settings.image_desktop %}
+  #hero-{{ section.id }} .hbv2__bg--desk{
+    background-image: url('{{ section.settings.image_desktop | image_url: width: 2880 }}');
+    display:block;
+  }
+  {% endif %}
+  /* mobile image (only shown <= 768px if provided) */
+  #hero-{{ section.id }} .hbv2__bg--mob{ display:none; }
+  @media (max-width: 768px){
+    {% if section.settings.image_mobile %}
+    #hero-{{ section.id }} .hbv2__bg--desk{ display:none; }
+    #hero-{{ section.id }} .hbv2__bg--mob{
+      display:block;
+      background-image: url('{{ section.settings.image_mobile | image_url: width: 1440 }}');
+    }
+    {% endif %}
+  }
+
+  #hero-{{ section.id }} .hbv2__overlay{
+    position:absolute; inset:0;
+    background: #000;
+    opacity: var(--overlay);
+  }
+
+  #hero-{{ section.id }} .hbv2__inner{
+    position: relative; z-index:1;
+    display:grid;
+    justify-items: start;
+    padding: var(--pad-y) var(--pad-x);
+  }
+
+  #hero-{{ section.id }} .hbv2__content{
+    width:100%;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    display:grid;
+    gap: clamp(10px, 2vw, 22px);
+  }
+
+  /* Alignment controls */
+  #hero-{{ section.id }}.is-center .hbv2__inner{ justify-items:center; text-align:center; }
+  #hero-{{ section.id }}.is-right  .hbv2__inner{ justify-items:end;   text-align:right;  }
+  #hero-{{ section.id }}.is-left   .hbv2__inner{ justify-items:start; text-align:left;   }
+
+  #hero-{{ section.id }}.is-top .hbv2__inner{ align-content:start;  min-height:inherit; }
+  #hero-{{ section.id }}.is-middle .hbv2__inner{ align-content:center; min-height:inherit; }
+  #hero-{{ section.id }}.is-bottom .hbv2__inner{ align-content:end;   min-height:inherit; }
+
+  /* Type */
+  #hero-{{ section.id }} .hbv2__eyebrow{
+    font-size: clamp(14px, 1.4vw, 20px);
+    letter-spacing:.02em;
+    opacity:.95;
+  }
+  #hero-{{ section.id }} .hbv2__heading{
+    margin:0;
+    font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
+    font-weight: 700;
+    line-height: 1.02;
+    text-transform: uppercase;
+    /*  clamp(32px, ~7vw, 96px) – tune as needed  */
+    font-size: clamp(32px, 7vw, 96px);
+    color: {{ section.settings.heading_color }};
+  }
+  #hero-{{ section.id }} .hbv2__sub{
+    font-size: clamp(16px, 2.2vw, 24px);
+    line-height: 1.5;
+    max-width: 70ch;
+  }
+
+  /* CTA */
+  #hero-{{ section.id }} .hbv2__btn{
+    display:inline-block;
+    background: var(--btn-bg);
+    color: var(--btn-txt);
+    border-radius: 14px;
+    padding: clamp(10px, 1.2vw, 18px) clamp(16px, 2vw, 28px);
+    font-weight: 800;
+    text-decoration:none;
+    white-space: nowrap;
+    width: max-content;
+    transition: transform .15s ease, opacity .15s ease;
+  }
+  #hero-{{ section.id }} .hbv2__btn:hover{ transform: translateY(-1px); opacity:.95; }
+
+  /* Bottom badges (optional) */
+  #hero-{{ section.id }} .hbv2__badges{
+    display:flex; gap: clamp(10px, 2vw, 40px);
+    flex-wrap: wrap;
+    margin-top: clamp(6px, 1.2vw, 12px);
+  }
+  #hero-{{ section.id }} .hbv2__badge{
+    font-size: clamp(12px, 1.4vw, 16px);
+    letter-spacing:.02em;
+    opacity:.95;
+  }
+
+  /* Mobile spacing tweaks */
+  @media (max-width: 768px){
+    #hero-{{ section.id }}{ min-height: {{ section.settings.min_height_mobile }}px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero Banner v2",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "image_picker", "id": "image_desktop", "label": "Background image (desktop)" },
+    { "type": "image_picker", "id": "image_mobile",  "label": "Background image (mobile)" },
+    { "type": "text", "id": "alt", "label": "Background image alt", "default": "Hero background" },
+
+    { "type": "range", "id": "overlay", "label": "Overlay darkness", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 30 },
+
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow (small line)", "default": "Performance Wellness Bundle! LIMITED OFFER" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "YOUR PATH. YOUR BUNDLE. YOUR IMPACT." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "For a limited time, save 40% on Mix & Match Wellness Bundles, and unlock 4 FREE bonus courses to help you coach the whole person." },
+
+    { "type": "text", "id": "btn_label", "label": "Button label", "default": "Choose My Bundle" },
+    { "type": "url",  "id": "btn_url",   "label": "Button link" },
+
+    { "type": "text", "id": "badge_left",  "label": "Left badge",  "default": "CANADA’S TOP FITNESS TRAINER • ACCORDING TO IMPACT MAGAZINE" },
+    { "type": "text", "id": "badge_right", "label": "Right badge", "default": "1.5 MILLION+ NASM CERTIFIED TRAINERS" },
+
+    { "type": "select", "id": "align_h", "label": "Horizontal alignment", "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    { "type": "select", "id": "align_v", "label": "Vertical alignment", "default": "middle",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "middle", "label": "Middle" },
+        { "value": "bottom", "label": "Bottom" }
+      ]
+    },
+
+    { "type": "range", "id": "pad_y", "label": "Padding top/bottom", "min": 0, "max": 180, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "pad_x", "label": "Padding left/right", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 24 },
+    { "type": "text",  "id": "max_width", "label": "Content max width (px)", "default": "1400" },
+
+    { "type": "range", "id": "min_height", "label": "Min height desktop", "min": 300, "max": 1000, "step": 10, "unit": "px", "default": 640 },
+    { "type": "range", "id": "min_height_mobile", "label": "Min height mobile", "min": 240, "max": 900, "step": 10, "unit": "px", "default": 480 },
+
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#F0FF63" },
+    { "type": "color", "id": "text_color", "label": "Body/eyebrow/badge color", "default": "#FFFFFF" },
+    { "type": "color", "id": "btn_bg", "label": "Button background", "default": "#E9F24F" },
+    { "type": "color", "id": "btn_txt", "label": "Button text", "default": "#0B0B0B" }
+  ],
+  "presets": [
+    { "name": "Hero Banner v2" }
+  ]
+}
+{% endschema %}
