@@ -57,6 +57,7 @@
         "word_MNHVdq",
         "word_bpCGmP"
       ],
+      "disabled": true,
       "settings": {
         "background_image": "shopify://shop_images/196ea51af4f74325ffba5c85dcf825d4opt.jpg",
         "headline": "Fitness/Nutrition/Strength/Weight Loss/Wellness/Virtual Coach",
@@ -79,6 +80,29 @@
         "partner_image": "shopify://shop_images/nasm_international_partner_logo_h_white_ba599786-b284-4e5f-8ade-ae846fbd0c62.svg",
         "partner_image_width": "139",
         "partner_image_height": "40"
+      }
+    },
+    "hero_banner_v2_YQkTUU": {
+      "type": "hero-banner-v2",
+      "name": "Hero Banner V2",
+      "settings": {
+        "background_image": "shopify://shop_images/Header_Wellness.webp",
+        "headline": "Your Path. Your Bundle. Your Impact.",
+        "ribbon_text": "Performance Wellness Bundle! LIMITED OFFER",
+        "promo_text": "For a limited time, save 40% on Mix & Match Wellness Bundles, and unlock a FREE bonus courses to help you coach the whole person.",
+        "button_1_link": "https://npta.ca/cart/43011093004330:1,43470596341802:1,41949082910762:1,42853599674410:1,41995616190506:1",
+        "button_1_text": "CHOOSE MY PROGRAM",
+        "button_2_link": "",
+        "button_2_text": "TAKE THE QUIZ",
+        "hero_image_width": "500",
+        "hero_image_height": "500",
+        "award_text": "<p>CANADA'S TOP FITNESS TRAINER</p>",
+        "award_sub_text": "<p>According to Impact Magazine</p>",
+        "award_image_1": "shopify://shop_images/award-featured-trainer.png",
+        "award_image_2": "shopify://shop_images/award-nominated-trainer.png",
+        "award_image_width": "40",
+        "award_image_height": "40",
+        "badge_2_text": "1.5 MILLION+ NASM CERTIFIED TRAINERS"
       }
     },
     "accordion_bts_sale_EBJVpW": {
@@ -261,7 +285,7 @@
         "image": "shopify://shop_images/M_and_M.webp",
         "show_buttons": true,
         "primary_button_text": "Mix and match my bundle",
-        "primary_button_link": "#",
+        "primary_button_link": "https://www.npta.ca/apps/secomapp_freegifts_get_order/bundle/13186?ver=3.0",
         "secondary_button_text": "",
         "secondary_button_link": ""
       }
@@ -960,6 +984,7 @@
   },
   "order": [
     "hero_banner_VrVBf3",
+    "hero_banner_v2_YQkTUU",
     "accordion_bts_sale_EBJVpW",
     "mix_and_match_4gdfiY",
     "section_image_text_carousel_ARmbtF",
