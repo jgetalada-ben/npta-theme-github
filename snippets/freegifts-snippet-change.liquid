@@ -4,3 +4,11 @@
     margin-bottom: 75px !important;
   }
 </style>
+
+{% if request.path contains 'secomapp_freegifts_get_order/bundle' %}
+  <script>
+    document.addEventListener('bogos:bundle-added', async () => {
+      window.location.href = '/checkout';
+    });
+  </script>
+{% endif %}
