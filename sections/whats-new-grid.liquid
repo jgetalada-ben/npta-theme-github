@@ -251,11 +251,11 @@
                         {% endif %}
                     </div>
                     {% if block.settings.left_btn_label != blank %}
-                    <span class="wn-card__btn">{{ block.settings.left_btn_label }}</span>
-                    {% comment %} <a href="{{ section.settings.left_link }}" target="_blank" class="btn button-yg">
-                        <span class="btn-label-down">{{ section.settings.left_btn_label }}</span>
-                        <span class="btn-label-down">{{ section.settings.left_btn_label }}</span>
-                    </a> {% endcomment %}
+                    {% comment %} <span class="wn-card__btn">{{ block.settings.left_btn_label }}</span> {% endcomment %}
+                    <a href="{{ block.settings.left_link }}" target="_blank" class="btn button-yg">
+                        <span class="btn-label-down">{{ block.settings.left_btn_label }}</span>
+                        <span class="btn-label-down">{{ block.settings.left_btn_label }}</span>
+                    </a>
                     {% endif %}
                 </div>
             </div>
