@@ -53,7 +53,10 @@
         {% endif %}
 
         {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
-          <a class="nl-cta" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+          <a href="{{ section.settings.cta_link }}" class="btn button-yg nl-cta">
+            <span class="btn-label-down">{{ section.settings.cta_label }}</span>
+            <span class="btn-label-down">{{ section.settings.cta_label }}</span>
+        </a>
         {% endif %}
       </div>
     </div>
@@ -135,20 +138,9 @@
 
   /* CTA button (compact, not full width) */
   .nl-cta{
-    display: inline-flex !important;
-    width: auto !important;
-    max-width: max-content;
-    align-items: center;
-    justify-content: center;
-    padding: clamp(10px,1vw,24px) clamp(24px,2vw,56px);
-    border-radius: 10px;
-    background: #C8FF63;
-    color: #01241E;
-    text-decoration: none;
-    line-height: 1;
-    font-size: clamp(14px, 1.4vw, 32px);
-    font-family: var(--font-adirek800);
-    font-weight: 800;
+    background: #C8FF63 !important;
+    color: #01241E !important;
+    width:fit-content;
   }
 
   /* Responsive */
