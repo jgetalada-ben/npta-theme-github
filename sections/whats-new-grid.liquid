@@ -228,14 +228,14 @@
             style="--row-h: {{ block.settings.row_height_desktop | default: 420 }}px; --row-h-m: {{ block.settings.row_height_mobile | default: 260 }}px;">
 
             {%- comment -%} LEFT CARD {%- endcomment -%}
-            {% comment %} <a class="wn-card {% if block.settings.layout == 'left-large' %}is-large{% else %}is-small{% endif %}"
+            <a class="wn-card {% if block.settings.layout == 'left-large' %}is-large{% else %}is-small{% endif %}"
             {% if block.settings.left_link != blank %}href="{{ block.settings.left_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
             style="
                 --txt: {{ block.settings.left_text_color | default: '#FFFFFF' }};
                 --ovc: {{ block.settings.left_overlay_color | default: '#000000' }};
                 --ovo: {{ block.settings.left_overlay_opacity | default: 35 | divided_by: 100.0 }};
                 {% if block.settings.left_image != blank %}--bg: url('{{ block.settings.left_image | image_url: width: 2000 }}');{% endif %}
-            "> {% endcomment %}
+            ">
             {% if block.settings.left_image != blank %}
                 {{ block.settings.left_image | image_url: width: 2400 | image_tag: class: 'wn-card__img', loading: 'lazy', alt: block.settings.left_heading }}
             {% endif %}
@@ -252,14 +252,14 @@
                     </div>
                     {% if block.settings.left_btn_label != blank %}
                     {% comment %} <span class="wn-card__btn">{{ block.settings.left_btn_label }}</span> {% endcomment %}
-                    <a href="{{ block.settings.left_link }}" target="_blank" class="btn button-yg">
+                    <div class="btn button-yg">
                         <span class="btn-label-down">{{ block.settings.left_btn_label }}</span>
                         <span class="btn-label-down">{{ block.settings.left_btn_label }}</span>
-                    </a>
+                    </div>
                     {% endif %}
                 </div>
             </div>
-            {% comment %} </a> {% endcomment %}
+            </a>
 
             {%- comment -%} RIGHT CARD {%- endcomment -%}
             <a class="wn-card {% if block.settings.layout == 'left-large' %}is-small{% else %}is-large{% endif %}"
