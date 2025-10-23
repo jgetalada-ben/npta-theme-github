@@ -38,9 +38,9 @@
 
       {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
         {% comment %} <a class="tp-cta" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a> {% endcomment %}
-        <a class="btn button-yg tp-cta">
-            <span class="btn-label-down">{{ section.settings.cta_link }}</span>
-            <span class="btn-label-down">{{ section.settings.cta_link }}</span>
+        <a href="{{ section.settings.cta_link }}" class="btn button-yg tp-cta">
+            <span class="btn-label-down">{{ section.settings.cta_label }}</span>
+            <span class="btn-label-down">{{ section.settings.cta_label }}</span>
         </a>
       {% endif %}
     </div>
