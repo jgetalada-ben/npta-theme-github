@@ -186,16 +186,16 @@
             font-size: 26px; 
             margin-bottom: 10px;
         }
-        .wn-grid-section .wn-card__btn {
+        /* .wn-grid-section .wn-card__btn {
             padding: 12px 30px;
-        }
+        } */
     }
 
-    @media (max-width: 480px) {
+    /* @media (max-width: 480px) {
         .wn-grid-section .wn-card__btn { 
             padding: 10px 14px; 
         }
-    }
+    } */
 {% endstylesheet %}
 
 <section id="WhatsNew-{{ section.id }}"
@@ -253,7 +253,7 @@
                     </div>
                     {% if block.settings.left_btn_label != blank %}
                     {% comment %} <span class="wn-card__btn">{{ block.settings.left_btn_label }}</span> {% endcomment %}
-                    <div class="btn button-yg wn-card__btn" style="width: fit-content;">
+                    <div class="btn button-yg wn-card__btn">
                         <span class="btn-label-down">{{ block.settings.left_btn_label }}</span>
                         <span class="btn-label-down">{{ block.settings.left_btn_label }}</span>
                     </div>
