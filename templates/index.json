@@ -506,7 +506,7 @@
         "title_alignment": "left",
         "container_width": 800,
         "alignment": "flex-end",
-        "banner_height": "60vh",
+        "banner_height": "64vh",
         "top_banner_align_items": "center",
         "show_banner_gradient": false
       }
