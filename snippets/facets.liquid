@@ -216,7 +216,15 @@
                               </span>
                             {%- endcapture -%}
 
-                           
+                            {%- assign hide_value = false -%}
+                            {%- if filter.label == 'Tags' -%}
+                              {%- assign tag_text = value.label | downcase -%}
+                              {%- if tag_text | starts_with: 'market:' -%}
+                                {%- assign hide_value = true -%}
+                              {%- endif -%}
+                            {%- endif -%}
+
+                            {%- unless hide_value -%}
                             <li class="list-menu__item facets__item{% if forloop.index > show_more_number and filter_type == 'vertical' %} show-more-item hidden{% endif %}">
                               {%- if presentation == 'swatch' -%}
                                 <div class="{{ label_class }}">
@@ -292,7 +300,7 @@
                                 </label>
                               {%- endif -%}
                             </li>
-                  
+                            {%- endunless -%}
                           {%- endfor -%}
                         </ul>
                       </fieldset>
