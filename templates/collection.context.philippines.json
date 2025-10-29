@@ -63,44 +63,41 @@
       "settings": {},
       "blocks": {}
     },
-    "section_top_banner_8eHFf": {
-      "type": "section--top-banner",
+    "hero_banner_v2_VPhiR": {
+      "type": "hero-banner-v2",
       "disabled": true,
-      "custom_css": [
-        ".section--top-banner {background-color: #000000;}",
-        ".section--top-banner:before {width: 100%;}",
-        ".section--top-background {width: 100%;}",
-        "@media (max-width: 980px) {.section--top-banner-container {top: 10%; }}"
-      ],
       "settings": {
         "background_image": "shopify://shop_images/PH_HERO_Section.png",
-        "title": "40% OFF ON ALL COURSES",
-        "subtitle": "LIMITED TIME OFFER",
-        "desc1": "",
-        "button_link": "shopify://collections/all",
-        "button_text": "",
-        "show_button_1": true,
-        "button_1_text": "Shop Now",
+        "banner_bg_color": "#ffffff",
+        "headline": "BACK TO SCHOOL SALE",
+        "title_color": "#ffffff",
+        "ribbon_text": "Labour Day Exclusive - LIMITED EXTENDED SALE",
+        "promo_text": "",
         "button_1_link": "#certified-trainers",
-        "show_button_2": false,
-        "button_2_text": "",
-        "button_2_link": "/",
-        "button_position": "left",
-        "title_alignment": "left",
-        "container_width": 720,
-        "alignment": "flex-start",
-        "banner_height": "70vh",
-        "top_banner_align_items": "flex-end",
-        "show_banner_gradient": false
+        "button_1_text": "Shop Now",
+        "button_2_link": "",
+        "button_2_text": "TAKE THE QUIZ",
+        "buttons_margin_top": "20px",
+        "buttons_margin_bottom": "20px",
+        "hero_image": null,
+        "hero_image_width": "500",
+        "hero_image_height": "500",
+        "award_text": "",
+        "award_sub_text": "",
+        "award_image_1": null,
+        "award_image_2": null,
+        "award_image_width": "40",
+        "award_image_height": "40",
+        "badge_2_text": ""
       },
       "blocks": {},
       "block_order": [],
-      "name": "Top Banner"
+      "name": "Hero Banner V2"
     }
   },
   "order": [
     "section_top_banner_CY9V4",
-    "section_top_banner_8eHFf",
+    "hero_banner_v2_VPhiR",
     "banner",
     "section_breadcrumb_JGKpdR",
     "section_header_title_4R3UWU",
