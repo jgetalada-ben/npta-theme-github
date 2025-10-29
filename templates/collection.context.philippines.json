@@ -15,7 +15,7 @@
   "sections": {
     "section_top_banner_CY9V4": {
       "type": "section--top-banner",
-      "disabled": true,
+      "disabled": false,
       "custom_css": [
         ".section--top-banner {background-color: #000000;}",
         ".section--top-banner:before {width: 100%;}",
@@ -65,7 +65,7 @@
     },
     "section_top_banner_8eHFf": {
       "type": "section--top-banner",
-      "disabled": false,
+      "disabled": true,
       "custom_css": [
         ".section--top-banner {background-color: #000000;}",
         ".section--top-banner:before {width: 100%;}",
