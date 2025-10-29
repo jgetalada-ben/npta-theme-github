@@ -12,5 +12,12 @@
   "context": {
     "market": "ca"
   },
-  "sections": {}
+  "sections": {
+    "accordion_bts_sale_EBJVpW": {
+      "settings": {
+        "subtitle": "This bundle combines three NASM certifications - the gold standard in the fitness industry - plus BONUS courses  to make you a complete fitness professional."
+      },
+      "blocks": {}
+    }
+  }
 }
