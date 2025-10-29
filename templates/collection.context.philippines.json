@@ -15,7 +15,7 @@
   "sections": {
     "section_top_banner_CY9V4": {
       "type": "section--top-banner",
-      "disabled": false,
+      "disabled": true,
       "custom_css": [
         ".section--top-banner {background-color: #000000;}",
         ".section--top-banner:before {width: 100%;}",
@@ -49,7 +49,13 @@
     },
     "hero_banner_v2_VPhiR": {
       "type": "hero-banner-v2",
-      "disabled": true,
+      "disabled": false,
+      "custom_css": [
+        ".hbv2-btn-yg{background:#c1ff72;}",
+        ".hbv2-ribbon {font-size: clamp(25px, 3vw, 50px); letter-spacing: -1px; color: #c1ff72;}",
+        "@media (min-width: 981px) {.hbv2-content {grid-template-columns: none;}}",
+        ".hbv2-title {font-size: clamp(40px, 4.5vw,80px);}"
+      ],
       "settings": {
         "background_image": "shopify://shop_images/PH_HERO_Section.png",
         "banner_bg_color": "#ffffff",
