@@ -216,6 +216,7 @@
                               </span>
                             {%- endcapture -%}
 
+                            {% if {{ value.value }} != 'market:ph' %}
                             <li class="list-menu__item facets__item{% if forloop.index > show_more_number and filter_type == 'vertical' %} show-more-item hidden{% endif %}" id="list-item-{{ value.value }}">
                               {%- if presentation == 'swatch' -%}
                                 <div class="{{ label_class }}">
@@ -291,6 +292,7 @@
                                 </label>
                               {%- endif -%}
                             </li>
+                            {%- endif -%}
                           {%- endfor -%}
                         </ul>
                       </fieldset>
