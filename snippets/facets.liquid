@@ -586,6 +586,7 @@
                                 </span>
                               {%- endcapture -%}
 
+                              {% if value.value != 'market:ph' %}
                               <li class="mobile-facets__item list-menu__item">
                                 {% if presentation == 'swatch' %}
                                   <div class="{{ label_class }}">
@@ -660,6 +661,7 @@
                                   </label>
                                 {% endif %}
                               </li>
+                              {% endif %}
                             {%- endfor -%}
                           </ul>
 
