@@ -15,7 +15,7 @@
   "sections": {
     "section_top_banner_CY9V4": {
       "type": "section--top-banner",
-      "disabled": false,
+      "disabled": true,
       "custom_css": [
         ".section--top-banner {background-color: #000000;}",
         ".section--top-banner:before {width: 100%;}",
@@ -47,20 +47,60 @@
       "block_order": [],
       "name": "Top Banner"
     },
-    "section_banner_two_Nj7D9X": {
-      "disabled": true,
-      "settings": {},
-      "blocks": {}
-    },
     "product-grid": {
       "settings": {
         "enable_filtering": true
       },
       "blocks": {}
+    },
+    "section_banner_two_Nj7D9X": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "banner": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "section_top_banner_8eHFf": {
+      "type": "section--top-banner",
+      "disabled": false,
+      "custom_css": [
+        ".section--top-banner {background-color: #000000;}",
+        ".section--top-banner:before {width: 100%;}",
+        ".section--top-background {width: 100%;}",
+        "@media (max-width: 980px) {.section--top-banner-container {top: 10%; }}"
+      ],
+      "settings": {
+        "background_image": "shopify://shop_images/PH_HERO_Section.png",
+        "title": "40% OFF ON ALL COURSES",
+        "subtitle": "LIMITED TIME OFFER",
+        "desc1": "",
+        "button_link": "shopify://collections/all",
+        "button_text": "",
+        "show_button_1": true,
+        "button_1_text": "Shop Now",
+        "button_1_link": "#certified-trainers",
+        "show_button_2": false,
+        "button_2_text": "",
+        "button_2_link": "/",
+        "button_position": "left",
+        "title_alignment": "left",
+        "container_width": 720,
+        "alignment": "flex-start",
+        "banner_height": "70vh",
+        "top_banner_align_items": "flex-end",
+        "show_banner_gradient": false
+      },
+      "blocks": {},
+      "block_order": [],
+      "name": "Top Banner"
     }
   },
   "order": [
     "section_top_banner_CY9V4",
+    "section_top_banner_8eHFf",
     "banner",
     "section_breadcrumb_JGKpdR",
     "section_header_title_4R3UWU",
