@@ -15,7 +15,7 @@
   "sections": {
     "section_top_banner_CY9V4": {
       "type": "section--top-banner",
-      "disabled": false,
+      "disabled": true,
       "custom_css": [
         ".section--top-banner {background-color: #000000;}",
         ".section--top-banner:before {width: 100%;}",
@@ -49,7 +49,7 @@
     },
     "hero_banner_v2_VPhiR": {
       "type": "hero-banner-v2",
-      "disabled": true,
+      "disabled": false,
       "settings": {
         "background_image": "shopify://shop_images/PH_HERO_Section.png",
         "banner_bg_color": "#ffffff",
