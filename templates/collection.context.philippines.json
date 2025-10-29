@@ -47,22 +47,6 @@
       "block_order": [],
       "name": "Top Banner"
     },
-    "product-grid": {
-      "settings": {
-        "enable_filtering": true
-      },
-      "blocks": {}
-    },
-    "section_banner_two_Nj7D9X": {
-      "disabled": true,
-      "settings": {},
-      "blocks": {}
-    },
-    "banner": {
-      "disabled": true,
-      "settings": {},
-      "blocks": {}
-    },
     "hero_banner_v2_VPhiR": {
       "type": "hero-banner-v2",
       "disabled": true,
@@ -93,6 +77,22 @@
       "blocks": {},
       "block_order": [],
       "name": "Hero Banner V2"
+    },
+    "banner": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "product-grid": {
+      "settings": {
+        "enable_filtering": true
+      },
+      "blocks": {}
+    },
+    "section_banner_two_Nj7D9X": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
     }
   },
   "order": [
