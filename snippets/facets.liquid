@@ -216,7 +216,7 @@
                               </span>
                             {%- endcapture -%}
 
-                            {% if value.value != 'market:ph' %}
+                            {% if value.value != 'phmarket' %}
                             <li class="list-menu__item facets__item{% if forloop.index > show_more_number and filter_type == 'vertical' %} show-more-item hidden{% endif %}" id="list-item-{{ value.value }}">
                               {%- if presentation == 'swatch' -%}
                                 <div class="{{ label_class }}">
@@ -586,7 +586,7 @@
                                 </span>
                               {%- endcapture -%}
 
-                              {% if value.value != 'market:ph' %}
+                              {% if value.value != 'phmarket' %}
                               <li class="mobile-facets__item list-menu__item">
                                 {% if presentation == 'swatch' %}
                                   <div class="{{ label_class }}">
