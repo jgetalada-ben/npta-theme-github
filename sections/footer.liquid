@@ -8,41 +8,42 @@
 {% liquid
   assign country_code = localization.country.iso_code | upcase
 %}
-{% if country_code == 'PH' %}
-  {%- style -%}
-    .footer-menu-title {
-      -webkit-text-fill-color: #C0FF71 !important;
-    }
-    .section--footer {
-      background: #01241C !important;
-    }
-    .footer--second-row p svg path,
-    .footer-menu-column .footer-menu-list li svg path {
-      fill: #C0FF71;
-    }
-    .pagination-wrapper .pagination .pagination__list .pagination__item--current {
-      background: #C0FF71;
-      border: 1px solid #C0FF71 !important;
-    }
-    .card:hover .quick-add__submit,
-    .quick-add__submit:hover {
-      background-color: #C0FF71;
-    }
-    .card-wrapper .card__content .card__information .card-price-wrap .sale-price {
-      background: #27666C;
-    }
-    .product-grid-container .collection .custom-bundle-box {
-      background: #01241C;
-    }
-    .footer--social ul li:hover {
-      background: #C0FF71 !important;
-    }
-    .footer--term-links ul li a,
-    .footer--third-row p {
-      font-family: Montserrat, sans-serif !important;
-    }
-  {%- endstyle -%}
-{% endif %}
+{%- style -%}
+  .footer-menu-title {
+    -webkit-text-fill-color: #C0FF71 !important;
+  }
+  .section--footer {
+    background: #01241C !important;
+  }
+  .footer--second-row p svg path,
+  .footer-menu-column .footer-menu-list li svg path {
+    fill: #C0FF71;
+  }
+  .pagination-wrapper .pagination .pagination__list .pagination__item--current {
+    background: #C0FF71;
+    border: 1px solid #C0FF71 !important;
+  }
+  .card:hover .quick-add__submit,
+  .quick-add__submit:hover {
+    background-color: #C0FF71;
+  }
+  .card-wrapper .card__content .card__information .card-price-wrap .sale-price {
+    background: #27666C;
+  }
+  .product-grid-container .collection .custom-bundle-box {
+    background: #01241C;
+  }
+  .footer--social ul li:hover {
+    background: #C0FF71 !important;
+  }
+  .footer--term-links ul li a,
+  .footer--third-row p {
+    font-family: Montserrat, sans-serif !important;
+  }
+  .footer--logo.logo-ph {
+    max-width: 200px;
+  }
+{%- endstyle -%}
 
 
 <div class="section--footer">
