@@ -150,6 +150,7 @@
     },
     "feature_split_card_bcA9Uz": {
       "type": "feature-split-card",
+      "disabled": true,
       "name": "Split Feature Card",
       "settings": {
         "layout": "image-left",
@@ -376,6 +377,7 @@
         "feature_9wpwKm",
         "feature_Mhcqpq"
       ],
+      "disabled": true,
       "name": "Payment highlights",
       "settings": {
         "heading": "Learn Now, Pay Later With",
@@ -528,6 +530,7 @@
     },
     "newsletter_v2_MYDzwi": {
       "type": "newsletter-v2",
+      "disabled": true,
       "name": "Newsletter v2",
       "settings": {
         "heading": "<p><strong>Enter your email for 25$ OFF</strong> your first order, plus the latest NPTA news.</p>",
