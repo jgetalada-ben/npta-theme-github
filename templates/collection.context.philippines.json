@@ -39,7 +39,7 @@
         "title_alignment": "left",
         "container_width": 2000,
         "alignment": "center",
-        "banner_height": "100vh",
+        "banner_height": "60vh",
         "top_banner_align_items": "center",
         "show_banner_gradient": false
       },
