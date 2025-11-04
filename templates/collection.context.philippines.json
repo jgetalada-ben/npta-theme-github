@@ -23,7 +23,7 @@
         "@media (max-width: 980px) {.section--top-banner {max-height: 15vh; } .section--top-background {background-size: contain; }}"
       ],
       "settings": {
-        "background_image": "shopify://shop_images/Screenshot_1.png",
+        "background_image": "shopify://shop_images/Screenshot_2.png",
         "title": "",
         "subtitle": "",
         "desc1": "",
