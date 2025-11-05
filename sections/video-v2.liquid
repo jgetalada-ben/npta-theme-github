@@ -1,8 +1,5 @@
 {% comment %}
-  Video v2 (full-width)
-  - If a Shopify-hosted video is selected, we build a <video> element with its sources.
-  - Otherwise, we embed a YouTube/Vimeo iframe from the provided URL.
-  - Optional cover image becomes the video poster.
+  Video v2 (full-width, with content overlay)
 {% endcomment %}
 {%- assign sid = section.id -%}
 
@@ -17,114 +14,236 @@
   {%- assign pad = 56.25 | append: '%' -%}
 {%- endif -%}
 
-<section id="vid2-{{ sid }}" class="vid2">
+{%- comment -%} Booleans need to be built via if blocks in Liquid {%- endcomment -%}
+{%- assign has_btn1 = false -%}
+{%- if section.settings.show_btn1 and section.settings.btn1_label != blank -%}
+  {%- assign has_btn1 = true -%}
+{%- endif -%}
+
+{%- assign has_btn2 = false -%}
+{%- if section.settings.show_btn2 and section.settings.btn2_label != blank -%}
+  {%- assign has_btn2 = true -%}
+{%- endif -%}
+
+{%- assign has_text = false -%}
+{%- if section.settings.title != blank or section.settings.subtitle != blank or section.settings.desc != blank -%}
+  {%- assign has_text = true -%}
+{%- endif -%}
+
+{%- assign has_overlay = false -%}
+{%- if has_text or has_btn1 or has_btn2 -%}
+  {%- assign has_overlay = true -%}
+{%- endif -%}
+
+<section id="vid2-{{ sid }}" class="vid2 media-{{ section.settings.media_type }} align-{{ section.settings.content_align }}">
   <div class="vid2__outer">
-    <div class="vid2__frame" style="--ar: {{ pad }};">
-      {%- if section.settings.shopify_video != blank -%}
-        {%- assign v = section.settings.shopify_video -%}
-        <video
-          class="vid2__media"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          {% if section.settings.cover_image %}
-            poster="{{ section.settings.cover_image | image_url: width: 2400 }}"
-          {% endif %}
-          aria-label="{{ section.settings.alt | escape }}"
-        >
-          {%- for s in v.sources -%}
-            <source src="{{ s.url }}" type="{{ s.mime_type }}">
-          {%- endfor -%}
-          {{ section.settings.alt | escape }}
-        </video>
-
-      {%- elsif section.settings.embed_url != blank -%}
-        {%- assign url = section.settings.embed_url | strip -%}
-        {%- assign iframe_src = '' -%}
-
-        {%- if url contains 'youtu.be/' -%}
-          {%- assign yt_id = url | split: 'youtu.be/' | last | split: '?' | first -%}
-        {%- elsif url contains 'watch?v=' -%}
-          {%- assign yt_id = url | split: 'watch?v=' | last | split: '&' | first -%}
-        {%- elsif url contains 'youtube.com/embed/' -%}
-          {%- assign yt_id = url | split: 'embed/' | last | split: '?' | first -%}
-        {%- endif -%}
-
-        {%- if yt_id -%}
-          {%- assign yt_params = '?rel=0&autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=1&playsinline=1&loop=1&playlist=' | append: yt_id -%}
-          {%- assign iframe_src = 'https://www.youtube-nocookie.com/embed/' | append: yt_id | append: yt_params -%}
-        {%- elsif url contains 'vimeo.com/' -%}
-          {%- assign vimeo_id = url | split: 'vimeo.com/' | last | split: '?' | first | split: '/' | last -%}
-          {%- assign iframe_src = 'https://player.vimeo.com/video/' | append: vimeo_id | append: '?background=1&autoplay=1&muted=1&loop=1' -%}
-        {%- endif -%}
-
-        {%- if iframe_src != blank -%}
-          <iframe
-            class="vid2__media vid2__embed"
-            src="{{ iframe_src }}"
-            title="{{ section.settings.alt | escape }}"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowfullscreen
-            loading="lazy"
-            aria-hidden="true"
-          ></iframe>
-        {%- else -%}
-          <div class="vid2__fallback">
-            Please provide a valid YouTube or Vimeo URL.
-          </div>
-        {%- endif -%}
-
-      {%- else -%}
-        <div class="vid2__fallback">
-          Please provide a valid YouTube or Vimeo URL.
-        </div>
+    <div class="vid2__frame" style="--ar: {{ pad }}; {% if section.settings.mobile_min_h != blank %} --m-min-h: {{ section.settings.mobile_min_h }};{% endif %}">
+      
+      {%- comment -%} Poster/thumbnail layer if image provided {%- endcomment -%}
+      {%- if section.settings.cover_image != blank -%}
+        <div class="vid2__poster"
+             style="background-image:url('{{ section.settings.cover_image | image_url: width: 3200 }}');"></div>
       {%- endif -%}
+
+      {%- if section.settings.media_type == 'image' and section.settings.cover_image != blank -%}
+        <img class="vid2__media vid2__image"
+             src="{{ section.settings.cover_image | image_url: width: 3200 }}"
+             alt="{{ section.settings.alt | escape }}"
+             loading="lazy" />
+      {%- else -%}
+        {%- if section.settings.shopify_video != blank -%}
+          {%- assign v = section.settings.shopify_video -%}
+          <video
+            class="vid2__media vid2__video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            {% if section.settings.cover_image %}
+              poster="{{ section.settings.cover_image | image_url: width: 2400 }}"
+            {% endif %}
+            aria-label="{{ section.settings.alt | escape }}"
+          >
+            {%- for s in v.sources -%}
+              <source src="{{ s.url }}" type="{{ s.mime_type }}">
+            {%- endfor -%}
+            {{ section.settings.alt | escape }}
+          </video>
+
+        {%- elsif section.settings.embed_url != blank -%}
+          {%- assign url = section.settings.embed_url | strip -%}
+          {%- assign iframe_src = '' -%}
+          {%- assign yt_id = '' -%}
+
+          {%- if url contains 'youtu.be/' -%}
+            {%- assign yt_id = url | split: 'youtu.be/' | last | split: '?' | first -%}
+          {%- elsif url contains 'watch?v=' -%}
+            {%- assign yt_id = url | split: 'watch?v=' | last | split: '&' | first -%}
+          {%- elsif url contains 'youtube.com/embed/' -%}
+            {%- assign yt_id = url | split: 'embed/' | last | split: '?' | first -%}
+          {%- endif -%}
+
+          {%- if yt_id != '' -%}
+            {%- assign yt_params = '?rel=0&autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=1&playsinline=1&loop=1&playlist=' | append: yt_id -%}
+            {%- assign iframe_src = 'https://www.youtube-nocookie.com/embed/' | append: yt_id | append: yt_params -%}
+          {%- elsif url contains 'vimeo.com/' -%}
+            {%- assign vimeo_id = url | split: 'vimeo.com/' | last | split: '?' | first | split: '/' | last -%}
+            {%- assign iframe_src = 'https://player.vimeo.com/video/' | append: vimeo_id | append: '?background=1&autoplay=1&muted=1&loop=1' -%}
+          {%- endif -%}
+
+          {%- if iframe_src != blank -%}
+            <iframe
+              class="vid2__media vid2__embed"
+              src="{{ iframe_src }}"
+              title="{{ section.settings.alt | escape }}"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+              aria-hidden="true"
+            ></iframe>
+          {%- else -%}
+            <div class="vid2__fallback">Please provide a valid YouTube or Vimeo URL.</div>
+          {%- endif -%}
+        {%- else -%}
+          <div class="vid2__fallback">Please provide a media source (video or image).</div>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if has_overlay -%}
+        <div class="vid2__scrim" style="--ovl: {{ section.settings.overlay_opacity | default: 40 }}%;"></div>
+      {%- endif -%}
+
+      {%- if has_overlay -%}
+      <div class="vid2__content" style="
+        --title-fs: {{ section.settings.title_size | default: 'clamp(28px,5vw,72px)' }};
+        --title-color: {{ section.settings.title_color | default: '#ffffff' }};
+        --subtitle-fs: {{ section.settings.subtitle_size | default: 'clamp(18px,3vw,40px)' }};
+        --subtitle-color: {{ section.settings.subtitle_color | default: '#C8FF63' }};
+        --desc-fs: {{ section.settings.desc_size | default: 'clamp(14px,2vw,20px)' }};
+        --desc-color: {{ section.settings.desc_color | default: '#ffffff' }};
+        --btn1-mt: {{ section.settings.btns_margin_top | default: 'clamp(12px,2.2vw,24px)' }};
+      ">
+        {% if section.settings.title != blank %}
+          <h2 class="vid2__title">{{ section.settings.title }}</h2>
+        {% endif %}
+        {% if section.settings.subtitle != blank %}
+          <div class="vid2__subtitle">{{ section.settings.subtitle }}</div>
+        {% endif %}
+        {% if section.settings.desc != blank %}
+          <div class="vid2__desc">{{ section.settings.desc }}</div>
+        {% endif %}
+
+        {% if has_btn1 or has_btn2 %}
+          <div class="vid2__btns" style="margin-top: var(--btn1-mt);">
+            {% if has_btn1 %}
+              <a class="vid2__btn"
+                 href="{{ section.settings.btn1_link | default: '#' }}"
+                 style="--btn-bg: {{ section.settings.btn1_bg | default: '#C8FF63' }}; --btn-tx: {{ section.settings.btn1_tx | default: '#0B0B0B' }};">
+                 {{ section.settings.btn1_label }}
+              </a>
+            {% endif %}
+            {% if has_btn2 %}
+              <a class="vid2__btn"
+                 href="{{ section.settings.btn2_link | default: '#' }}"
+                 style="--btn-bg: {{ section.settings.btn2_bg | default: '#FFFFFF' }}; --btn-tx: {{ section.settings.btn2_tx | default: '#0B0B0B' }};">
+                 {{ section.settings.btn2_label }}
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+      {%- endif -%}
+
     </div>
   </div>
 </section>
 
 {% stylesheet %}
 #vid2-{{ sid }}.vid2{
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  background: #1110;
-}
-#vid2-{{ sid }} .vid2__outer{
-  width: 100%;
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  background:#0000;
 }
 
-#vid2-{{ sid }} .vid2__frame{
-  position: relative;
-  width: 100%;
+/* Frame w/ intrinsic ratio */
+#vid2-{{ sid }} .vid2__frame{ position:relative; width:100%; }
+#vid2-{{ sid }} .vid2__frame::before{ content:""; display:block; padding-top:var(--ar,56.25%); }
+
+/* Media */
+#vid2-{{ sid }} .vid2__media,
+#vid2-{{ sid }} .vid2__poster{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; background-size:cover; background-position:center;
 }
-#vid2-{{ sid }} .vid2__frame::before{
-  content: "";
-  display: block;
-  padding-top: var(--ar, 56.25%);
+#vid2-{{ sid }} .vid2__poster{ z-index:0; }
+#vid2-{{ sid }} .vid2__media{ z-index:0; }
+#vid2-{{ sid }} .vid2__embed{ border:0; }
+#vid2-{{ sid }} .vid2__image{ object-fit:cover; }
+
+/* Mobile fit & min height overrides */
+@media (max-width: 768px){
+  #vid2-{{ sid }} .vid2__frame{ min-height: var(--m-min-h, 360px); }
+  #vid2-{{ sid }} .vid2__media{
+    object-fit: {% if section.settings.mobile_fit == 'contain' %}contain{% else %}cover{% endif %};
+    background-color:#000;
+  }
 }
 
-#vid2-{{ sid }} .vid2__media{
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  background: #000;
-  object-fit: cover;
-  pointer-events: none;
+/* Scrim / overlay */
+#vid2-{{ sid }} .vid2__scrim{
+  position:absolute; inset:0; z-index:1;
+  background: rgba(0,0,0, calc(var(--ovl,40)/100));
+  pointer-events:none;
 }
 
+/* Content */
+#vid2-{{ sid }} .vid2__content{
+  position:absolute; inset:0; z-index:2;
+  display:grid; align-content:center;
+  gap: clamp(8px, 1.2vw, 16px);
+  padding: clamp(16px, 4vw, 80px);
+  color:#fff;
+  max-width: 1200px;
+}
+#vid2-{{ sid }}.align-center .vid2__content{ justify-items:center; text-align:center; margin:0 auto; }
+#vid2-{{ sid }}.align-right  .vid2__content{ justify-items:end;   text-align:right;  margin-left:auto; margin-right:clamp(16px,4vw,80px); }
+#vid2-{{ sid }}.align-left   .vid2__content{ justify-items:start; text-align:left;  margin-left:clamp(16px,4vw,80px); }
+
+/* Typography */
+#vid2-{{ sid }} .vid2__title{
+  margin:0;
+  font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
+  font-weight:400; text-transform:uppercase; line-height:1.05;
+  font-size: var(--title-fs); color: var(--title-color);
+}
+#vid2-{{ sid }} .vid2__subtitle{
+  margin:0;
+  font-size: var(--subtitle-fs); color: var(--subtitle-color);
+  font-weight: 800;
+}
+#vid2-{{ sid }} .vid2__desc{
+  margin:0; max-width: 70ch;
+  font-size: var(--desc-fs); color: var(--desc-color);
+  line-height:1.5;
+}
+
+/* Buttons */
+#vid2-{{ sid }} .vid2__btns{ display:flex; flex-wrap:wrap; gap: clamp(10px,1.4vw,16px); }
+#vid2-{{ sid }} .vid2__btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding: 14px 22px; border-radius: 12px;
+  background: var(--btn-bg, #C8FF63); color: var(--btn-tx, #0B0B0B);
+  font-weight:800; text-decoration:none; white-space:nowrap;
+  line-height:1; transition: transform .15s ease, opacity .15s ease;
+}
+#vid2-{{ sid }} .vid2__btn:hover{ transform: translateY(-1px); opacity:.95; }
+
+/* Fallback */
 #vid2-{{ sid }} .vid2__fallback{
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  color: #fff;
-  background: #000;
-  font-size: 16px;
+  position:absolute; inset:0; z-index:1; display:grid; place-items:center;
+  color:#fff; background:#000; font-size:16px;
 }
 {% endstylesheet %}
 
@@ -134,43 +253,76 @@
   "tag": "section",
   "class": "section",
   "settings": [
-    {
-      "type": "video",
-      "id": "shopify_video",
-      "label": "Shopify-hosted video"
+    { "type": "select", "id": "media_type", "label": "Media type", "default": "video",
+      "options": [
+        { "value": "video", "label": "Video" },
+        { "value": "image", "label": "Image only" }
+      ]
     },
-    {
-      "type": "url",
-      "id": "embed_url",
-      "label": "YouTube or Vimeo URL (used only if no Shopify video selected)",
-      "info": "Examples: https://youtu.be/VIDEO_ID, https://www.youtube.com/watch?v=VIDEO_ID, https://vimeo.com/VIDEO_ID"
-    },
-    {
-      "type": "image_picker",
-      "id": "cover_image",
-      "label": "Cover image (poster for Shopify video)"
-    },
-    {
-      "type": "text",
-      "id": "alt",
-      "label": "Video alt text / title",
-      "default": "Promotional video"
-    },
-    {
-      "type": "select",
-      "id": "aspect_ratio",
-      "label": "Aspect ratio",
-      "default": "16-9",
+
+    { "type": "video", "id": "shopify_video", "label": "Shopify-hosted video" },
+    { "type": "url", "id": "embed_url", "label": "YouTube or Vimeo URL (used if no Shopify video)", "info": "https://youtu.be/VIDEO_ID or https://vimeo.com/VIDEO_ID" },
+
+    { "type": "image_picker", "id": "cover_image", "label": "Cover image (poster / standalone image)" },
+    { "type": "text", "id": "alt", "label": "Media alt text / title", "default": "Promotional media" },
+
+    { "type": "select", "id": "aspect_ratio", "label": "Aspect ratio (desktop)", "default": "16-9",
       "options": [
         { "value": "21-9", "label": "21:9 (ultra-wide)" },
         { "value": "16-9", "label": "16:9 (default)" },
         { "value": "4-3",  "label": "4:3" },
         { "value": "1-1",  "label": "1:1 (square)" }
       ]
-    }
+    },
+
+    { "type": "header", "content": "Overlay Content" },
+    { "type": "text", "id": "title", "label": "Title" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle" },
+    { "type": "richtext", "id": "desc", "label": "Description" },
+
+    { "type": "text", "id": "title_size", "label": "Title font-size (accepts clamp())", "default": "clamp(28px,5vw,72px)" },
+    { "type": "color", "id": "title_color", "label": "Title color", "default": "#FFFFFF" },
+
+    { "type": "text", "id": "subtitle_size", "label": "Subtitle font-size (accepts clamp())", "default": "clamp(18px,3vw,40px)" },
+    { "type": "color", "id": "subtitle_color", "label": "Subtitle color", "default": "#C8FF63" },
+
+    { "type": "text", "id": "desc_size", "label": "Description font-size (accepts clamp())", "default": "clamp(14px,2vw,20px)" },
+    { "type": "color", "id": "desc_color", "label": "Description color", "default": "#FFFFFF" },
+
+    { "type": "select", "id": "content_align", "label": "Content alignment", "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+
+    { "type": "range", "id": "overlay_opacity", "label": "Overlay darkness (only when content exists)", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 40 },
+
+    { "type": "header", "content": "Buttons" },
+    { "type": "checkbox", "id": "show_btn1", "label": "Show button 1", "default": true },
+    { "type": "text", "id": "btn1_label", "label": "Button 1 label", "default": "CHOOSE MY COURSE" },
+    { "type": "url", "id": "btn1_link", "label": "Button 1 link" },
+    { "type": "color", "id": "btn1_bg", "label": "Button 1 background", "default": "#C8FF63" },
+    { "type": "color", "id": "btn1_tx", "label": "Button 1 text color", "default": "#0B0B0B" },
+
+    { "type": "checkbox", "id": "show_btn2", "label": "Show button 2", "default": false },
+    { "type": "text", "id": "btn2_label", "label": "Button 2 label", "default": "LEARN MORE" },
+    { "type": "url", "id": "btn2_link", "label": "Button 2 link" },
+    { "type": "color", "id": "btn2_bg", "label": "Button 2 background", "default": "#FFFFFF" },
+    { "type": "color", "id": "btn2_tx", "label": "Button 2 text color", "default": "#0B0B0B" },
+
+    { "type": "text", "id": "btns_margin_top", "label": "Buttons top margin (accepts clamp())", "default": "clamp(14px,2.4vw,28px)" },
+
+    { "type": "header", "content": "Mobile video sizing" },
+    { "type": "select", "id": "mobile_fit", "label": "Object fit on mobile", "default": "cover",
+      "options": [
+        { "value": "cover", "label": "Cover" },
+        { "value": "contain", "label": "Contain" }
+      ]
+    },
+    { "type": "text", "id": "mobile_min_h", "label": "Mobile min height (e.g., 320px or clamp())", "default": "360px" }
   ],
-  "presets": [
-    { "name": "Video v2" }
-  ]
+  "presets": [{ "name": "Video v2" }]
 }
 {% endschema %}
