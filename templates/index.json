@@ -120,7 +120,7 @@
         "product_card_9Rhb6R": {
           "type": "product_card",
           "settings": {
-            "product_handle": "career-kickstarter-plus-cpt-ces-cnc-cpr-ph",
+            "product_handle": "career-kickstarter-plus-cpt-ces-cnc-cpr",
             "custom_title": "",
             "blurb": "<p>Become a Certified Personal Trainer from the world’s most trusted source of fitness...    </p>",
             "custom_price": "",
@@ -130,7 +130,7 @@
         "product_card_PtPcUW": {
           "type": "product_card",
           "settings": {
-            "product_handle": "certified-nutrition-coach-cnc-ph",
+            "product_handle": "certified-nutrition-coach-cnc",
             "custom_title": "",
             "blurb": "<p>Become a Certified Personal Trainer from the world’s most trusted source of fitness...    </p>",
             "custom_price": "",
@@ -140,7 +140,7 @@
         "product_card_xG8iYc": {
           "type": "product_card",
           "settings": {
-            "product_handle": "cpt-essentials-ph-cpt-cpr",
+            "product_handle": "cpt-essentials-cpt-cpr",
             "custom_title": "",
             "blurb": "<p>Become a Certified Personal Trainer from the world’s most trusted source of fitness...    </p>",
             "custom_price": "",
@@ -160,7 +160,7 @@
         "subhead": "Chosen by Thousands. Trusted by Trainers. Built for Your Next Step.",
         "body": "Explore our best selling products.",
         "cta_label": "View All",
-        "cta_link": "#",
+        "cta_link": "shopify://collections/all-products",
         "max_width": "1989px",
         "bg": "#eff0e7",
         "price_bg": "#0f828c",
@@ -254,7 +254,7 @@
         "image": "shopify://shop_images/Rectangle_19.png",
         "show_buttons": true,
         "primary_button_text": "TAKE THE QUIZ",
-        "primary_button_link": "",
+        "primary_button_link": "shopify://products/advanced-nutrition-coaching-bundle-cnc-bcs",
         "primary_button_color": "#f2f2e9",
         "layout": "content-left",
         "max_width": "1989px",
@@ -528,7 +528,7 @@
         "button_1_link": "/",
         "show_button_2": true,
         "button_2_text": "CHOOSE MY PROGRAM",
-        "button_2_link": "/",
+        "button_2_link": "shopify://collections/all-products",
         "button_position": "left",
         "title_alignment": "left",
         "container_width": 800,
