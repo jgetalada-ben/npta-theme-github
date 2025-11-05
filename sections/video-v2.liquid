@@ -98,7 +98,7 @@
       {%- endif -%}
 
       {%- if has_content -%}
-        <div class="vid2__overlay" style="--ov: {{ ov }};" aria-hidden="true"></div>
+        <div class="vid2__overlay" style="--ov: {{ ov }}; background: rgba(0,0,0, {{ ov }});" aria-hidden="true"></div>
 
         <div class="vid2__content content-{{ section.settings.align }}">
           {%- if section.settings.title != blank -%}
@@ -178,8 +178,7 @@
 #vid2-{{ sid }} .vid2__overlay{
   position:absolute; inset:0;
   z-index:1;
-  background: rgba(0 0 0 / var(--ov, 0));
-  background: rgba(0,0,0,var(--ov,0)); /* compatibility */
+  background: rgba(0,0,0,var(--ov,0));
   pointer-events:none;
 }
 
