@@ -29,7 +29,7 @@
         "desc_size": "clamp(14px,2vw,20px)",
         "desc_color": "#ffffff",
         "align": "center",
-        "overlay_darkness": 70,
+        "overlay_darkness": 100,
         "show_btn1": true,
         "btns_margin_top": "16px",
         "btn1_label": "CHOOSE MY COURSE",
