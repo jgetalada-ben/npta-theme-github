@@ -31,8 +31,13 @@
 
 <section id="vid2-{{ sid }}" class="vid2">
   <div class="vid2__outer">
-    <div class="vid2__frame"
-         style="--ar: {{ ar_desktop }}; --arm: {{ ar_mobile }}; --ov: {{ ov }};">
+    <div class="vid2__frame {% if section.settings.height_mode == 'vh' %}vh-mode{% endif %}"
+     style="--ar: {{ ar_desktop }}; --arm: {{ ar_mobile }};
+            --ov: {{ ov }};
+            --reveal: {{ section.settings.reveal_desktop | default: 0 }}px;
+            --revealm: {{ section.settings.reveal_mobile  | default: 0 }}px;
+            --vh-d: {{ section.settings.vh_desktop | default: '75vh' }};
+            --vh-m: {{ section.settings.vh_mobile  | default: '62dvh' }};">
       {%- if section.settings.media_type == 'image' and section.settings.cover_image != blank -%}
         <img
           class="vid2__media vid2__img"
@@ -157,11 +162,30 @@
 #vid2-{{ sid }} .vid2__frame{
   position: relative; width:100%;
 }
+/* Aspect-ratio mode (existing behavior) stays as-is */
 #vid2-{{ sid }} .vid2__frame::before{
-  content:""; display:block; padding-top: var(--ar,56.25%);
+  content:""; display:block; padding-top: calc(var(--ar,56.25%) - var(--reveal,0px));
 }
 @media (max-width: 750px){
-  #vid2-{{ sid }} .vid2__frame::before{ padding-top: var(--arm, var(--ar,56.25%)); }
+  #vid2-{{ sid }} .vid2__frame::before{
+    padding-top: calc(var(--arm, var(--ar,56.25%)) - var(--revealm,0px));
+  }
+}
+
+/* Viewport-height mode: mimic Nike */
+#vid2-{{ sid }} .vid2__frame.vh-mode::before{ content:none; display:none; }
+#vid2-{{ sid }} .vid2__frame.vh-mode{
+  height: var(--vh-d, 75vh);      /* desktop */
+}
+@media (max-width: 750px){
+  #vid2-{{ sid }} .vid2__frame.vh-mode{
+    height: var(--vh-m, 62dvh);   /* mobile; dvh handles browser UI bars */
+  }
+}
+
+/* Ensure media fills the set height */
+#vid2-{{ sid }} .vid2__media{
+  width:100%; height:100%; object-fit:cover;
 }
 
 #vid2-{{ sid }} .vid2__media{
@@ -238,6 +262,28 @@ z-index:2;
         { "value": "4-3",  "label": "4:3"  },
         { "value": "1-1",  "label": "1:1"  }
       ]
+    },
+    {
+      "type": "select",
+      "id": "height_mode",
+      "label": "Height mode",
+      "default": "ratio",
+      "options": [
+        { "value": "ratio", "label": "Aspect ratio (current)" },
+        { "value": "vh",    "label": "Viewport height" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "vh_desktop",
+      "label": "Desktop height (vh/dvh, accepts clamp())",
+      "default": "75vh"
+    },
+    {
+      "type": "text",
+      "id": "vh_mobile",
+      "label": "Mobile height (vh/dvh, accepts clamp())",
+      "default": "62dvh"
     },
 
     { "type": "header", "content": "Overlay Content" },
