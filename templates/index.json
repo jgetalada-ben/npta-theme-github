@@ -27,7 +27,7 @@
         "desc": "<p>Where credibility meets career. A complete, modern approach to fitness education: certification, mentorship, practical skills, and career pathways — built to launch leaders.</p>",
         "title_size": "clamp(28px,5vw,60px)",
         "title_color": "#ffffff",
-        "subtitle_size": "clamp(18px,3vw,40px)",
+        "subtitle_size": "clamp(18px,3vw,30px)",
         "subtitle_color": "#c8ff63",
         "desc_size": "clamp(14px,2vw,20px)",
         "desc_color": "#ffffff",
