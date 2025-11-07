@@ -1,0 +1,26 @@
+<div id="ghlFinanceModal" class="ghl-modal" hidden aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="ghl-modal__overlay" data-close-ghl></div>
+  <div class="ghl-modal__dialog" role="document">
+    <button class="ghl-modal__close" type="button" data-close-ghl aria-label="Close">×</button>
+    <div id="ghlFormMount"><!-- GHL form loads here --></div>
+  </div>
+</div>
+
+<style>
+  .ghl-modal[hidden]{display:none}
+  .ghl-modal{position:fixed;inset:0;z-index:9999}
+  .ghl-modal__overlay{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+  .ghl-modal__dialog{
+    position:relative; margin:4vh auto; width:min(720px,92vw);
+    background:#fff; border-radius:12px; padding:16px;
+    max-height:92vh; overflow:auto;
+  }
+  .ghl-modal__close{position:absolute;top:8px;right:10px;background:none;border:0;font-size:24px;line-height:1;cursor:pointer}
+  #ghlFormMount{ min-height:60vh; }
+  #ghlFormMount iframe{ width:100%; height:70vh; min-height:480px; border:0; }
+  @media (max-width: 640px){
+    .ghl-modal__dialog{ margin:2vh auto; padding:12px; }
+    #ghlFormMount{ min-height:70vh; }
+    #ghlFormMount iframe{ height:75vh; min-height:420px; }
+  }
+</style>
