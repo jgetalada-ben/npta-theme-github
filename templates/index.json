@@ -262,19 +262,19 @@
       "settings": {
         "section_id": "homepage-quiz-section",
         "heading": "Discover the Right Path for You",
-        "heading_color": "#ffffff",
+        "heading_color": "#01241e",
         "description": "<p>Not sure where to begin? Take our quick quiz to find the best starting point for your goals, interests, and experience—we’ll guide you to the path that’s right for you.</p>",
-        "text_color": "#ffffff",
+        "text_color": "#01241e",
         "image": "shopify://shop_images/Rectangle_19.png",
         "show_buttons": true,
         "primary_button_text": "TAKE THE QUIZ",
         "primary_button_link": "shopify://products/advanced-nutrition-coaching-bundle-cnc-bcs",
-        "primary_button_color": "#f2f2e9",
+        "primary_button_color": "#0f828c",
         "layout": "content-left",
         "max_width": "1989px",
         "pad_y": 0,
         "pad_x": 0,
-        "bg": "#0f828c"
+        "bg": "#f2f2e9"
       }
     },
     "section_logo_carousel_Typ4JF": {
