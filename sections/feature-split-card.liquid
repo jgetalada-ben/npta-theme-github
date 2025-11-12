@@ -16,12 +16,12 @@
     --pl: {{ section.settings.pad_left | default: 24 }}px;
     --gap: {{ section.settings.gap | default: 24 }}px;
     --bg: {{ section.settings.bg | default: '#E5E5D7' }};
-    --radius: {{ section.settings.radius | default: 12 }}px;
-    --card-bg: {{ section.settings.card_bg | default: '#FFFFFF' }};
-    --card-pad-y: {{ section.settings.card_pad_y | default: 100 }}px;
-    --card-pad-x: {{ section.settings.card_pad_x | default: 80 }}px;
-    --offset: {{ section.settings.card_overlap | default: 28 }}px;   /* negative margin to overlap image */
-    --shadow: 0 2px 0 rgba(0,0,0,.06), 0 18px 28px rgba(0,0,0,.12);
+    --radius: {{ section.settings.radius | default: 20 }}px;
+    --card-bg: {{ section.settings.card_bg | default: '#F6F8EF' }};
+    --card-pad-y: {{ section.settings.card_pad_y | default: 80 }}px;
+    --card-pad-x: {{ section.settings.card_pad_x | default: 64 }}px;
+    --offset: {{ section.settings.card_overlap | default: 36 }}px;
+    --shadow: 0 10px 18px rgba(0,0,0,.06), 0 28px 48px rgba(0,0,0,.10);
   "
 >
   {%- assign mw = section.settings.max_width | default: '1200px' | strip -%}
@@ -70,7 +70,7 @@
     display: grid;
     gap: var(--gap);
     align-items: center;
-    grid-template-columns: minmax(420px, 865px) minmax(480px, 1fr);
+    grid-template-columns: minmax(420px, 640px) 1fr;
     position: relative;
   }
   /* Flip order when image is on the right */
@@ -86,10 +86,11 @@
   .nl-img{
     width: 100%;
     height: auto;
-    aspect-ratio: 865 / 750;
+    aspect-ratio: 4 / 3;
     display: block;
     border-radius: var(--radius);
     object-fit: cover;
+    box-shadow: 0 10px 24px rgba(0,0,0,.06);
   }
   .nl-img--placeholder{ background:#d9d9d9; aspect-ratio: 16 / 10; border-radius: var(--radius); }
 
@@ -105,7 +106,8 @@
     margin-left: calc(var(--offset-fluid) * -1);
     z-index: 2;
     width: auto;
-    max-width: clamp(520px, 63vw, 1200px);
+    max-width: clamp(560px, 60vw, 980px);
+    border: 1px solid rgba(0,0,0,.04);
   }
   .nl-section.is-right .nl-card{ margin-left: 0; margin-right: calc(var(--offset) * -1); }
 
@@ -132,7 +134,7 @@
     font-size: clamp(12px, 1.2vw, 21px);
     font-family: var(--font-poppins500);
     line-height: normal;
-    margin-bottom: 60px;
+    margin-bottom: 36px;
   }
   .nl-body p{ margin: 0; }
 
@@ -141,6 +143,7 @@
     background: #C8FF63 !important;
     color: #01241E !important;
     width: fit-content;
+    border-radius: 12px;
   }
   .nl-cta span {
     font-family: var(--font-adirek800);
@@ -157,7 +160,7 @@
       width: 100%; */
     }
     .nl-body{ 
-      margin-bottom: 30px;
+      margin-bottom: 24px;
     }
   }
   {% endstylesheet %}
