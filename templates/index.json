@@ -173,7 +173,7 @@
         "cta_label": "View All Course",
         "cta_link": "shopify://collections/all-products",
         "cta2_label": "Build Your Bundle",
-        "cta2_link": "",
+        "cta2_link": "shopify://collections/bundles",
         "cta2_bg": "#2e7480",
         "cta2_color": "#ffffff",
         "max_width": "1989px",
