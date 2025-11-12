@@ -274,7 +274,14 @@
         "max_width": "1989px",
         "pad_y": 0,
         "pad_x": 0,
-        "bg": "#f2f2e9"
+        "bg": "#f3f3eb",
+        "primary_button_text_color": "#ffffff",
+        "secondary_prompt": "Would like to speak to a Career Advisor?",
+        "secondary_prompt_color": "#0e2a24",
+        "secondary_button_text": "Book a Free Call",
+        "secondary_button_link": "https://calendly.com/",
+        "secondary_button_color": "#e0ded0",
+        "secondary_button_text_color": "#0b0b0b"
       }
     },
     "section_logo_carousel_Typ4JF": {
