@@ -1,149 +1,97 @@
 <style>
-.section-footer-description{
-  width:100%;
-  margin-top: 20px;
+/* ===== Section frame ===== */
+.section--process{
+  background: {{ section.settings.background_color }};
+  padding-block: 80px;
 }
+.section--process .section--process-container{ margin: 0 auto; }
 
-@media only screen and (min-width: 981px) {
-  .section--process .process-steps {
-  display: grid;
-  grid-template-columns:1fr 1fr 1fr;
-  grid-column-gap:34px;
-  grid-row-gap:70px;
-}
-   .step:nth-child(4) .step-content::after, .step:nth-child(5) .step-content::after, .step:nth-child(6) .step-content::after{
-      border-bottom: 0px solid #D0D0D0 !important;
-  }
-}
-@media only screen and (min-width: 768px) and (max-width: 980px) {
-  .section--process .process-steps {
-  display: grid;
-  grid-template-columns:1fr 1fr;
-  grid-column-gap:34px;
-  grid-row-gap:70px;
-}
-   .step:nth-child(5) .step-content::after, .step:nth-child(6) .step-content::after{
-      border-bottom: 0px solid #D0D0D0 !important;
-  }
-}
-
-  @media only screen and (max-width: 768px) {
-    .section--process .process-steps {
-    display: grid;
-    grid-template-columns:1fr ;
-    grid-column-gap:34px;
-    {% comment %} grid-row-gap:20px; {% endcomment %}
-  }
-       .step:nth-child(4) .step-content::after, .step:nth-child(5) .step-content::after, .step:nth-child(6) .step-content::after{
-      border-bottom: 1px solid #D0D0D0 !important;
-  }
-}
-.process-steps{
-  overflow:hidden;
-}
-#{{ section.settings.section_id }} .section--title-block h2 {
-  margin-top: 0;
-  margin-bottom: 60px;
+/* Heading */
+#{{ section.settings.section_id }} .section--title-block h2{
+  margin: 0 0 28px;
   font-family: var(--font-anton);
-  font-weight:400;
-  color: #0F828C;
-  font-size: clamp(21px, 4vw, 40px);
-}
-@media (max-width: 990px) {
-  #{{ section.settings.section_id }} .section--title-block h2 {
-    margin-bottom: 0;
-  }
-}
-  
-.section--process {
-  background:  #F7F8FA;
-  padding-top:80px;
-  padding-bottom:80px;
-}
-.section--process .section--process-container {
-  margin: 0 auto;
-}
-.step-content h3 {
-  font-size: 2em;
-  margin-bottom: 20px;
-}
-.step-content  {
-  border-left: 1px solid #D0D0D0;
-  padding-left: 30px;
-  position:relative;
-}
-.step-content:after{
-  content:'';
-  position:absolute;
-  bottom:-34px;
-  width:100%;
-  {% comment %} border-bottom: 1px solid #D0D0D0; {% endcomment %}
-}
-
-@media only screen and (max-width: 768px) {
-   .step-content:after{
-     display:none;
-  }
-}
-
-.step-content p {
-  margin-bottom: 40px;
-}
-
-#{{ section.settings.section_id }} .step-count span {
-  font-family: var(--font-anton);
-  font-weight:400;
-  color: #28666E;
-  font-size: clamp(21px, 4vw, 40px);
-  text-transform: uppercase;
-}
-#{{ section.settings.section_id }} .step-content h3 {
-  color: #0F828C;
-  font-family: var(--font-adirek800);
-  font-size: clamp(18px, 2vw, 32px);
-  font-weight: 600;
-  text-transform: uppercase;
-  margin-top:0;
-  margin-bottom:10px;
-}
-.section--process .step-content  p {
-  color:  #141414;
-  font-family: var(--font-body-family);
-  font-size: 16px;
-  font-style: normal;
   font-weight: 400;
-  line-height: 150%; 
-  margin-bottom:0;
+  text-transform: uppercase;
+  color: #FFFFFF;               /* white like screenshot */
+  font-size: clamp(24px,4vw,40px);
 }
-  @media only screen and (min-width: 981px) {
-  .section--process .step {
-    flex: 1;
-    padding: 0 10px;
-    align-items: center;
+#{{ section.settings.section_id }} .title-block--desc{
+  color: #EDEDE6;
+  max-width: 80ch;
+}
+
+/* ===== Grid ===== */
+.process-steps{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(28px,4vw,40px);
+  align-items: start;
+  overflow: hidden;
+}
+
+/* ≥ 1024px : three columns */
+@media (min-width: 1024px){
+  .process-steps{ grid-template-columns: repeat(3,1fr); }
+}
+
+/* ===== Step card ===== */
+.step{
+  position: relative;
+  text-align: center;
+  padding: clamp(10px,2.2vw,18px);
+}
+
+/* Arrow between columns (desktop only) */
+@media (min-width: 1024px){
+  .step.has-arrow::after{
+    content:"";
+    position:absolute;
+    inset: 50% auto auto calc(100% + clamp(8px,1.2vw,14px));
+    transform: translateY(-50%);
+    width: clamp(26px, 3.2vw, 44px);
+    aspect-ratio: 1.6 / 1;                /* matches the PNG proportions well */
+    background: url('https://cdn.shopify.com/s/files/1/0617/9550/0074/files/arrow-icon-right.png?v=1762975403') no-repeat center / contain;
+    pointer-events: none;
   }
 }
 
-@media only screen and (max-width: 980px) {
-  .section--process{
-  }
-  .section--process .step {
-    width:100%;
-  }
-  #{{ section.settings.section_id }}.section--process .step {
-    padding: 20px 0px;
-    align-items: center;
-  }
+/* ===== Step typography ===== */
+#{{ section.settings.section_id }} .step-count{
+  margin-bottom: 10px;
 }
-.step{
-  display:grid;
-  grid-template-columns: 50px auto;
-  gird-colum
+#{{ section.settings.section_id }} .step-count span{
+  display:inline-block;
+  font-family: var(--font-anton);
+  font-weight: 400;
+  letter-spacing: .02em;
+  color: #F1EEDC;                           /* warm off-white */
+  text-transform: uppercase;
+  font-size: clamp(18px,3.2vw,28px);
+}
+
+#{{ section.settings.section_id }} .step-title{
+  margin: 0 0 8px;
+  font-family: var(--font-adirek800);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  font-size: clamp(16px,2.6vw,26px);
+}
+
+#{{ section.settings.section_id }} .step-desc{
+  margin: 0;
+  color: #FFFFFF;
+  opacity: .95;
+  font-family: var(--font-body-family);
+  font-size: clamp(14px,1.6vw,18px);
+  line-height: 1.45;
+}
+
+/* Tighten layout on small screens */
+@media (max-width: 768px){
+  .section--process{ padding-block: 48px; }
 }
 </style>
-{% stylesheet %}
-
-{% endstylesheet %}
-
 
 <section class="section--process" id="{{ section.settings.section_id }}" style="background-color: {{ section.settings.background_color }};">
   <div class="section--process-container page-container " style="max-width: {{ section.settings.container_width }}px;">
@@ -157,21 +105,16 @@
     
     <div class="process-steps">
       {% for block in section.blocks %}
-        <div class="step">
+        <div class="step {% unless forloop.last %}has-arrow{% endunless %}">
           <div class="step-count">
-            <span>{{ forloop.index }}</span>
+            <span>STEP {{ forloop.index }}</span>
           </div>
-          <div class="step-content">
-            <h3>{{ block.settings.step_title }}</h3>
-            <p>{{ block.settings.step_description }}</p>
-          </div>
+
+          <div class="step-title">{{ block.settings.step_title }}</div>
+          <p class="step-desc">{{ block.settings.step_description }}</p>
         </div>
       {% endfor %}
     </div>
-
-
-
-
 
   </div>
       {% if section.settings.show_program_button %}
