@@ -272,14 +272,14 @@
         "primary_button_color": "#0f828c",
         "layout": "content-left",
         "max_width": "1989px",
-        "pad_y": 40,
-        "pad_x": 40,
+        "pad_y": 0,
+        "pad_x": 0,
         "bg": "#f3f3eb",
         "primary_button_text_color": "#ffffff",
         "secondary_prompt": "Would like to speak to a Career Advisor?",
         "secondary_prompt_color": "#0e2a24",
         "secondary_button_text": "Book a Free Call",
-        "secondary_button_link": "https://calendly.com/",
+        "secondary_button_link": "https://app.npta.ca/widget/bookings/jessica-npta-calendar",
         "secondary_button_color": "#e0ded0",
         "secondary_button_text_color": "#0b0b0b"
       }
