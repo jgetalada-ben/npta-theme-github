@@ -189,7 +189,6 @@
     },
     "feature_split_card_bcA9Uz": {
       "type": "feature-split-card",
-      "disabled": true,
       "name": "Split Feature Card",
       "settings": {
         "layout": "image-left",
