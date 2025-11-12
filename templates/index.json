@@ -218,7 +218,7 @@
         "step_pqbwnY": {
           "type": "step",
           "settings": {
-            "step_title": "Get Certified",
+            "step_title": "Get  Certified",
             "step_description": ""
           }
         },
@@ -245,7 +245,7 @@
       "settings": {
         "background_color": "#0f828c",
         "section_id": "homepage-trainers",
-        "section_title": "HOW TO BECOME A TRAINER",
+        "section_title": "BECOME A PERSONAL TRAINER TODAY",
         "section_description": "",
         "title_alignment": "center",
         "container_width": 2000,
