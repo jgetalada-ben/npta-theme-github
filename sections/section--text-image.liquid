@@ -29,7 +29,17 @@
     { "type": "header", "content": "Spacing & background" },
     { "type": "range", "id": "pad_y", "min": 0, "max": 200, "step": 2, "unit": "px", "label": "Padding top & bottom", "default": 120 },
     { "type": "range", "id": "pad_x", "min": 0, "max": 200, "step": 2, "unit": "px", "label": "Padding left & right", "default": 80 },
-    { "type": "color", "id": "bg", "label": "Background color", "default": "#ffffff" }
+    { "type": "color", "id": "bg", "label": "Background color", "default": "#ffffff" },
+    { "type": "color", "id": "primary_button_text_color", "label": "Primary button text color", "default": "#0B0B0B" },
+
+    { "type": "header", "content": "Secondary prompt + button" },
+    { "type": "text", "id": "secondary_prompt", "label": "Secondary prompt (small heading)", "default": "Would like to speak to a Career Advisor?" },
+    { "type": "color", "id": "secondary_prompt_color", "label": "Secondary prompt color", "default": "#0E2A24" },
+
+    { "type": "text", "id": "secondary_button_text", "label": "Secondary Button Text", "default": "Book a Free Call" },
+    { "type": "url",  "id": "secondary_button_link", "label": "Secondary Button Link" },
+    { "type": "color", "id": "secondary_button_color", "label": "Secondary button background", "default": "#EFEFDF" },
+    { "type": "color", "id": "secondary_button_text_color", "label": "Secondary button text color", "default": "#0B0B0B" }
   ],
   "blocks": [
     {
@@ -62,9 +72,14 @@
     --py: {{ section.settings.pad_y | default: 120 }}px;
     --px: {{ section.settings.pad_x | default: 80 }}px;
     --bg: {{ section.settings.bg | default: '#ffffff' }};
-    --btn-bg: {{ section.settings.primary_button_color | default: '#C1FF72' }};
     --hdg: {{ section.settings.heading_color | default: '#01241E' }};
     --txt: {{ section.settings.text_color   | default: '#01241E' }};
+    --btn-bg: {{ section.settings.primary_button_color | default: '#C1FF72' }};
+    --btn-txt: {{ section.settings.primary_button_text_color | default: '#0B0B0B' }};
+
+    --btn2-bg: {{ section.settings.secondary_button_color | default: '#EFEFDF' }};
+    --btn2-txt: {{ section.settings.secondary_button_text_color | default: '#0B0B0B' }};
+    --prompt2-col: {{ section.settings.secondary_prompt_color | default: '#0E2A24' }};
   "
 >
   <div class="text-image--container" style="max-width: {{ mw }}; width: 100%; margin: 0 auto;">
@@ -80,10 +95,25 @@
 
         {% if section.settings.show_buttons %}
           <div class="section--hero-buttons">
-            <a href="{{ section.settings.primary_button_link }}" class="btn button-yg">
+            <!-- Primary -->
+            <a href="{{ section.settings.primary_button_link }}" class="btn button-yg btn--primary">
               <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
               <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
             </a>
+          </div>
+
+          <!-- Secondary prompt + button -->
+          <div class="section--secondary">
+            {% if section.settings.secondary_prompt != blank %}
+              <div class="secondary-prompt">{{ section.settings.secondary_prompt }}</div>
+            {% endif %}
+
+            {% if section.settings.secondary_button_text != blank and section.settings.secondary_button_link != blank %}
+              <a href="{{ section.settings.secondary_button_link }}" class="btn button-yg btn--secondary">
+                <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
+                <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
+              </a>
+            {% endif %}
           </div>
         {% endif %}
       </div>
@@ -309,6 +339,37 @@
   object-fit: cover;
   display: block;
 }
+
+#{{ sid }}.section--text-image .button-yg.btn--primary{
+  background: var(--btn-bg) !important;
+  border-color: var(--btn-bg) !important;
+  color: var(--btn-txt) !important;
+}
+#{{ sid }} .section--secondary{
+  margin-top: clamp(24px, 5vw, 40px);
+}
+#{{ sid }} .section--secondary .secondary-prompt{
+  color: var(--prompt2-col);
+  font-family: var(--font-poppins700);
+  font-size: clamp(14px, 1.3vw, 18px);
+  margin: 0 0 14px;
+}
+#{{ sid }} .button-yg.btn--secondary{
+  background: var(--btn2-bg) !important;
+  border-color: var(--btn2-bg) !important;
+  color: var(--btn2-txt) !important;
+}
+#{{ sid }} .button-yg .btn-label-down{
+  font-family: var(--font-adirek800);
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+@media (max-width: 980px){
+  #{{ sid }}.section--text-image .section--hero-buttons{ margin-top: 30px; }
+  #{{ sid }} .section--secondary{ margin-top: 20px; }
+}
+
 </style>
 
 <script>
