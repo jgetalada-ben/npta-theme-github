@@ -557,10 +557,9 @@
     },
     "newsletter_v2_MYDzwi": {
       "type": "newsletter-v2",
-      "disabled": true,
       "name": "Newsletter v2",
       "settings": {
-        "heading": "<p><strong>Enter your email for 25$ OFF</strong> your first order, plus the latest NPTA news.</p>",
+        "heading": "<p>Join the NPTA Community and receive promos when you sign up!</p>",
         "placeholder": "Email",
         "btn_label": "Sign Up",
         "disclaimer": "<p>By providing my email, I am consenting to receive NPTA emails and Email-Based Advertising. For additional information, please see our <a href=\"/policies/privacy-policy\">Privacy Policy</a>.</p>",
