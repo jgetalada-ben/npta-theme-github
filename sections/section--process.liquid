@@ -24,7 +24,7 @@
 .process-steps{
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(28px,4vw,40px);
+  gap: clamp(28px,6vw,70px);
   align-items: start;
   overflow: hidden;
 }
@@ -64,18 +64,18 @@
   font-family: var(--font-anton);
   font-weight: 400;
   letter-spacing: .02em;
-  color: #F1EEDC;                           /* warm off-white */
+  color: #F1EEDC;
   text-transform: uppercase;
   font-size: clamp(18px,3.2vw,28px);
 }
 
 #{{ section.settings.section_id }} .step-title{
-  margin: 0 0 8px;
   font-family: var(--font-adirek800);
   font-weight: 800;
   text-transform: uppercase;
   color: #FFFFFF;
   font-size: clamp(16px,2.6vw,26px);
+  line-height: normal;
 }
 
 #{{ section.settings.section_id }} .step-desc{
