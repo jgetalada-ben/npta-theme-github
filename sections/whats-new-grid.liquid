@@ -182,16 +182,29 @@
             font-size: 26px; 
             margin-bottom: 10px;
         }
-        /* .wn-grid-section .wn-card__btn {
-            padding: 12px 30px;
-        } */
     }
+    .wn-card__actions{
+    display:flex; align-items:center; gap:14px; margin-top:16px;
+    }
+    .wn-card__form .wn-card__btn{ background:#C8FF63!important; color:#01241E!important; }
+    .wn-card__info{
+    --ring: rgba(255,255,255,.85);
+    --bg: rgba(0,0,0,.35);
+    position:relative; width:44px; height:44px; border-radius:999px;
+    display:grid; place-items:center; text-decoration:none;
+    border:2px solid var(--ring); background:var(--bg); color:#fff;
+    backdrop-filter: blur(2px);
+    }
+    .wn-card__info-i{ font-family: var(--font-poppins500, sans-serif); font-size:18px; line-height:1; }
+    .wn-card__tip{
+    position:absolute; bottom:calc(100% + 10px); left:50%; transform:translateX(-50%);
+    background:#fff; color:#0B0B0B; font-size:12px; padding:6px 10px; border-radius:999px;
+    box-shadow:0 4px 16px rgba(0,0,0,.22);
+    opacity:0; pointer-events:none; transition:opacity .15s ease;
+    white-space:nowrap;
+    }
+    .wn-card__info:hover .wn-card__tip{ opacity:1; }
 
-    /* @media (max-width: 480px) {
-        .wn-grid-section .wn-card__btn { 
-            padding: 10px 14px; 
-        }
-    } */
 {% endstylesheet %}
 
 <section id="WhatsNew-{{ section.id }}"
@@ -225,73 +238,128 @@
             style="--row-h: {{ block.settings.row_height_desktop | default: 420 }}px; --row-h-m: {{ block.settings.row_height_mobile | default: 260 }}px;">
 
             {%- comment -%} LEFT CARD {%- endcomment -%}
-            <a class="wn-card {% if block.settings.layout == 'left-large' %}is-large{% else %}is-small{% endif %}"
-            {% if block.settings.left_link != blank %}href="{{ block.settings.left_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+            {%- assign lp = block.settings.left_product -%}
+            {%- if lp != blank -%}
+            {%- assign left_product_obj = all_products[lp] -%}
+            {%- endif -%}
+            {%- assign left_variant_id = '' -%}
+            {%- if block.settings.left_variant_id_override != blank -%}
+            {%- assign left_variant_id = block.settings.left_variant_id_override -%}
+            {%- elsif left_product_obj and left_product_obj.first_available_variant -%}
+            {%- assign left_variant_id = left_product_obj.first_available_variant.id -%}
+            {%- endif -%}
+            {%- assign left_learn_url = block.settings.left_link -%}
+            {%- if left_product_obj and left_product_obj.url != blank -%}
+            {%- assign left_learn_url = left_product_obj.url -%}
+            {%- endif -%}
+
+            <div class="wn-card {% if block.settings.layout == 'left-large' %}is-large{% else %}is-small{% endif %}"
             style="
                 --txt: {{ block.settings.left_text_color | default: '#FFFFFF' }};
                 --ovc: {{ block.settings.left_overlay_color | default: '#000000' }};
                 --ovo: {{ block.settings.left_overlay_opacity | default: 35 | divided_by: 100.0 }};
-                {% if block.settings.left_image != blank %}--bg: url('{{ block.settings.left_image | image_url: width: 2000 }}');{% endif %}
             ">
             {% if block.settings.left_image != blank %}
-                {{ block.settings.left_image | image_url: width: 2400 | image_tag: class: 'wn-card__img', loading: 'lazy', alt: block.settings.left_heading }}
+                {{ block.settings.left_image
+                | image_url: width: 2400
+                | image_tag: class: 'wn-card__img', loading: 'lazy', alt: block.settings.left_heading }}
             {% endif %}
             <div class="wn-card__overlay"></div>
+
             <div class="wn-card__content">
                 <div class="card__item-content">
-                    <div class="card__item-content-header">
-                        {% if block.settings.left_heading != blank %}
-                        <h3 class="wn-card__title">{{ block.settings.left_heading }}</h3>
-                        {% endif %}
-                        {% if block.settings.left_body != blank %}
-                        <div class="wn-card__body">{{ block.settings.left_body }}</div>
-                        {% endif %}
-                    </div>
-                    {% if block.settings.left_btn_label != blank %}
-                    {% comment %} <span class="wn-card__btn">{{ block.settings.left_btn_label }}</span> {% endcomment %}
-                    <div class="btn button-yg wn-card__btn">
-                        <span class="btn-label-down">{{ block.settings.left_btn_label }}</span>
-                        <span class="btn-label-down">{{ block.settings.left_btn_label }}</span>
-                    </div>
+                <div class="card__item-content-header">
+                    {% if block.settings.left_heading != blank %}
+                    <h3 class="wn-card__title">{{ block.settings.left_heading }}</h3>
+                    {% endif %}
+                    {% if block.settings.left_body != blank %}
+                    <div class="wn-card__body">{{ block.settings.left_body }}</div>
                     {% endif %}
                 </div>
+
+                <div class="wn-card__actions">
+                    {% if left_variant_id != '' %}
+                    <form method="post" action="/cart/add" class="wn-card__form" novalidate>
+                        <input type="hidden" name="id" value="{{ left_variant_id }}">
+                        <button type="submit" class="btn button-yg wn-card__btn">
+                        <span class="btn-label-down">{{ block.settings.left_btn_label | default: 'Add to Cart' }}</span>
+                        <span class="btn-label-down">{{ block.settings.left_btn_label | default: 'Add to Cart' }}</span>
+                        </button>
+                    </form>
+                    {% endif %}
+
+                    {% if left_learn_url != blank %}
+                    <a href="{{ left_learn_url }}" class="wn-card__info" aria-label="Learn more">
+                        <span class="wn-card__info-i">i</span>
+                        <span class="wn-card__tip">Learn More</span>
+                    </a>
+                    {% endif %}
+                </div>
+                </div>
             </div>
-            </a>
+            </div>
 
             {%- comment -%} RIGHT CARD {%- endcomment -%}
-            <a class="wn-card {% if block.settings.layout == 'left-large' %}is-small{% else %}is-large{% endif %}"
-            {% if block.settings.right_link != blank %}href="{{ block.settings.right_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+            {%- assign rp = block.settings.right_product -%}
+            {%- if rp != blank -%}
+            {%- assign right_product_obj = all_products[rp] -%}
+            {%- endif -%}
+            {%- assign right_variant_id = '' -%}
+            {%- if block.settings.right_variant_id_override != blank -%}
+            {%- assign right_variant_id = block.settings.right_variant_id_override -%}
+            {%- elsif right_product_obj and right_product_obj.first_available_variant -%}
+            {%- assign right_variant_id = right_product_obj.first_available_variant.id -%}
+            {%- endif -%}
+            {%- assign right_learn_url = block.settings.right_link -%}
+            {%- if right_product_obj and right_product_obj.url != blank -%}
+            {%- assign right_learn_url = right_product_obj.url -%}
+            {%- endif -%}
+
+            <div class="wn-card {% if block.settings.layout == 'left-large' %}is-small{% else %}is-large{% endif %}"
             style="
                 --txt: {{ block.settings.right_text_color | default: '#FFFFFF' }};
                 --ovc: {{ block.settings.right_overlay_color | default: '#000000' }};
                 --ovo: {{ block.settings.right_overlay_opacity | default: 35 | divided_by: 100.0 }};
-                {% if block.settings.right_image != blank %}--bg: url('{{ block.settings.right_image | image_url: width: 2000 }}');{% endif %}
             ">
             {% if block.settings.right_image != blank %}
-                {{ block.settings.right_image | image_url: width: 2400 | image_tag: class: 'wn-card__img', loading: 'lazy', alt: block.settings.right_heading }}
+                {{ block.settings.right_image
+                | image_url: width: 2400
+                | image_tag: class: 'wn-card__img', loading: 'lazy', alt: block.settings.right_heading }}
             {% endif %}
-
             <div class="wn-card__overlay"></div>
+
             <div class="wn-card__content">
                 <div class="card__item-content">
-                    <div class="card__item-content-header">
-                        {% if block.settings.right_heading != blank %}
-                        <h3 class="wn-card__title">{{ block.settings.right_heading }}</h3>
-                        {% endif %}
-                        {% if block.settings.right_body != blank %}
-                        <div class="wn-card__body">{{ block.settings.right_body }}</div>
-                        {% endif %}
-                    </div>
-                    {% if block.settings.right_btn_label != blank %}
-                    {% comment %} <span class="wn-card__btn">{{ block.settings.right_btn_label }}</span> {% endcomment %}
-                     <div class="btn button-yg wn-card__btn">
-                        <span class="btn-label-down">{{ block.settings.right_btn_label }}</span>
-                        <span class="btn-label-down">{{ block.settings.right_btn_label }}</span>
-                    </div>
+                <div class="card__item-content-header">
+                    {% if block.settings.right_heading != blank %}
+                    <h3 class="wn-card__title">{{ block.settings.right_heading }}</h3>
+                    {% endif %}
+                    {% if block.settings.right_body != blank %}
+                    <div class="wn-card__body">{{ block.settings.right_body }}</div>
                     {% endif %}
                 </div>
+
+                <div class="wn-card__actions">
+                    {% if right_variant_id != '' %}
+                    <form method="post" action="/cart/add" class="wn-card__form" novalidate>
+                        <input type="hidden" name="id" value="{{ right_variant_id }}">
+                        <button type="submit" class="btn button-yg wn-card__btn">
+                        <span class="btn-label-down">{{ block.settings.right_btn_label | default: 'Add to Cart' }}</span>
+                        <span class="btn-label-down">{{ block.settings.right_btn_label | default: 'Add to Cart' }}</span>
+                        </button>
+                    </form>
+                    {% endif %}
+
+                    {% if right_learn_url != blank %}
+                    <a href="{{ right_learn_url }}" class="wn-card__info" aria-label="Learn more">
+                        <span class="wn-card__info-i">i</span>
+                        <span class="wn-card__tip">Learn More</span>
+                    </a>
+                    {% endif %}
+                </div>
+                </div>
             </div>
-            </a>
+            </div>
         </div>
     {% endfor %}
   </div>
@@ -323,37 +391,51 @@
   ],
   "blocks": [
     {
-      "type": "row",
-      "name": "Row",
-      "settings": [
+        "type": "row",
+        "name": "Row",
+        "settings": [
         { "type": "select", "id": "layout", "label": "Layout", "options": [
-          { "value": "left-large", "label": "Left card is large" },
-          { "value": "right-large", "label": "Right card is large" }
+            { "value": "left-large", "label": "Left card is large" },
+            { "value": "right-large", "label": "Right card is large" }
         ], "default": "left-large" },
 
         { "type": "range", "id": "row_height_desktop", "label": "Row min-height (desktop)", "min": 300, "max": 720, "step": 10, "unit": "px", "default": 460 },
-        { "type": "range", "id": "row_height_mobile", "label": "Row min-height (mobile)", "min": 200, "max": 520, "step": 10, "unit": "px", "default": 300 },
+        { "type": "range", "id": "row_height_mobile",  "label": "Row min-height (mobile)",  "min": 200, "max": 520, "step": 10, "unit": "px", "default": 300 },
 
         { "type": "header", "content": "Left card" },
         { "type": "image_picker", "id": "left_image", "label": "Image" },
+
+        { "type": "product", "id": "left_product", "label": "Product to add (left)" },
+        { "type": "text", "id": "left_variant_id_override", "label": "Variant ID override (optional)" },
+
         { "type": "text", "id": "left_heading", "label": "Heading", "default": "Social Media Influencer" },
         { "type": "richtext", "id": "left_body", "label": "Body", "default": "<p>Expand your reach, attract clients, and boost your brand with strategies top influencers use to succeed online.</p>" },
-        { "type": "text", "id": "left_btn_label", "label": "Button label", "default": "Explore Now" },
-        { "type": "url", "id": "left_link", "label": "Link URL" },
+
+        { "type": "text", "id": "left_btn_label", "label": "Button label", "default": "Add to Cart" },
+
+        { "type": "url", "id": "left_link", "label": "Fallback learn-more URL" },
+
         { "type": "color", "id": "left_text_color", "label": "Text color", "default": "#FFFFFF" },
         { "type": "color", "id": "left_overlay_color", "label": "Overlay color", "default": "#000000" },
         { "type": "range", "id": "left_overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 35 },
 
         { "type": "header", "content": "Right card" },
         { "type": "image_picker", "id": "right_image", "label": "Image" },
+
+        { "type": "product", "id": "right_product", "label": "Product to add (right)" },
+        { "type": "text", "id": "right_variant_id_override", "label": "Variant ID override (optional)" },
+
         { "type": "text", "id": "right_heading", "label": "Heading", "default": "Advanced Cardio Programming" },
         { "type": "richtext", "id": "right_body", "label": "Body", "default": "<p>Harness cutting-edge science to design powerful, personalized programs that deliver unstoppable client results.</p>" },
-        { "type": "text", "id": "right_btn_label", "label": "Button label", "default": "Explore Now" },
-        { "type": "url", "id": "right_link", "label": "Link URL" },
+
+        { "type": "text", "id": "right_btn_label", "label": "Button label", "default": "Add to Cart" },
+
+        { "type": "url", "id": "right_link", "label": "Fallback learn-more URL" },
+
         { "type": "color", "id": "right_text_color", "label": "Text color", "default": "#FFFFFF" },
         { "type": "color", "id": "right_overlay_color", "label": "Overlay color", "default": "#000000" },
         { "type": "range", "id": "right_overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 90, "step": 5, "unit": "%", "default": 35 }
-      ]
+        ]
     }
   ],
   "presets": [{ "name": "What's New Grid" }]
