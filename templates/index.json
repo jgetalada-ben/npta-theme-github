@@ -335,7 +335,7 @@
             "image_width_pct": 100,
             "image_align": "center",
             "title": "ATHLETES",
-            "title_size": "clamp(21px,3vw,40px)",
+            "title_size": "clamp(14px,3vw,24px)",
             "text": "",
             "link_label": "",
             "link": ""
@@ -348,7 +348,7 @@
             "image_width_pct": 100,
             "image_align": "center",
             "title": "NUTRITION",
-            "title_size": "clamp(21px,3vw,40px)",
+            "title_size": "clamp(14px,3vw,24px)",
             "text": "",
             "link_label": "",
             "link": ""
@@ -361,7 +361,7 @@
             "image_width_pct": 100,
             "image_align": "center",
             "title": "WELLNESS",
-            "title_size": "clamp(21px,3vw,40px)",
+            "title_size": "clamp(14px,3vw,24px)",
             "text": "",
             "link_label": "",
             "link": ""
