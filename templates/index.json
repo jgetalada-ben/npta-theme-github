@@ -375,7 +375,7 @@
       ],
       "name": "t:sections.multicolumn.presets.name",
       "settings": {
-        "max_width": "1247px",
+        "max_width": "1989px",
         "title": "TRENDING BUNDLES",
         "subtitle": "Check out most trending bundles!",
         "subtitle_size": "clamp(14px,1.3vw,18px)",
