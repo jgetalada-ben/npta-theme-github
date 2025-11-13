@@ -551,6 +551,7 @@
         ".section--top-banner:before {width: 100%;}",
         ".section--top-background {width: 100%; display: block;}",
         "h1 {color: #fff;}",
+        ".subtitle-p {line-height: normal;}",
         "@media (max-width: 980px) {.section--top-banner-container {top: 15%; } .section--top-background {background-position: -100vw center; }}"
       ],
       "name": "Top Banner",
