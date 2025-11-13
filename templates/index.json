@@ -603,13 +603,16 @@
     },
     "newsletter_v2_MYDzwi": {
       "type": "newsletter-v2",
+      "custom_css": [
+        "h2.nlv2__title {font-size: 30px;}"
+      ],
       "name": "Newsletter v2",
       "settings": {
         "heading": "<p>Join the NPTA Community and receive promos when you sign up!</p>",
         "placeholder": "Email",
         "btn_label": "Sign Up",
         "disclaimer": "<p>By providing my email, I am consenting to receive NPTA emails and Email-Based Advertising. For additional information, please see our <a href=\"/policies/privacy-policy\">Privacy Policy</a>.</p>",
-        "max_width": "50%",
+        "max_width": "70%",
         "pad_y": 48,
         "pad_x": 16,
         "bg_color": "#e6e3d7",
