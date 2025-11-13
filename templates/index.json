@@ -335,7 +335,7 @@
             "image_width_pct": 100,
             "image_align": "center",
             "title": "ATHLETES",
-            "title_size": "clamp(14px,3vw,24px)",
+            "title_size": "clamp(18px,3vw,24px)",
             "text": "",
             "link_label": "",
             "link": ""
@@ -348,7 +348,7 @@
             "image_width_pct": 100,
             "image_align": "center",
             "title": "NUTRITION",
-            "title_size": "clamp(14px,3vw,24px)",
+            "title_size": "clamp(18px,3vw,24px)",
             "text": "",
             "link_label": "",
             "link": ""
@@ -361,7 +361,7 @@
             "image_width_pct": 100,
             "image_align": "center",
             "title": "WELLNESS",
-            "title_size": "clamp(14px,3vw,24px)",
+            "title_size": "clamp(18px,3vw,24px)",
             "text": "",
             "link_label": "",
             "link": ""
@@ -372,6 +372,10 @@
         "column_UNGJEJ",
         "column_ajeEYg",
         "column_qLqfqw"
+      ],
+      "custom_css": [
+        "slider-component {width: 80%; margin: 0 auto;}",
+        "@media (max-width: 749px) {slider-component {width: 100%; }}"
       ],
       "name": "t:sections.multicolumn.presets.name",
       "settings": {
