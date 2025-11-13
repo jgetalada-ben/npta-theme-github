@@ -7,6 +7,7 @@
       "id": "background_image",
       "label": "Background Image"
     },
+
     {
       "type": "text",
       "id": "title",
@@ -16,27 +17,49 @@
     {
       "type": "text",
       "id": "subtitle",
-      "label": "Subtitle",
+      "label": "Subtitle"
     },
-
     {
       "type": "richtext",
       "id": "desc1",
-      "label": "Description 1",
+      "label": "Description 1"
     },
 
+    /* Heading / text sizes */
+    {
+      "type": "text",
+      "id": "title_size",
+      "label": "Title font-size (accepts clamp())",
+      "default": "clamp(32px,6vw,64px)"
+    },
+    {
+      "type": "text",
+      "id": "subtitle_size",
+      "label": "Subtitle font-size (accepts clamp())",
+      "default": "26px"
+    },
+    {
+      "type": "text",
+      "id": "desc_size",
+      "label": "Description font-size (accepts clamp())",
+      "default": "16px"
+    },
+
+    /* Old single-button fields (kept for backwards compatibility, not used) */
     {
       "type": "url",
       "id": "button_link",
-      "label": "Button Link",
-      "default": "/collections/all"
+      "label": "Button Link (legacy)",
+      "default": "/collections/all",
+      "info": "Legacy – current banner uses Button 1 and Button 2 settings below."
     },
     {
       "type": "text",
       "id": "button_text",
-      "label": "Button Text",
+      "label": "Button Text (legacy)",
       "default": "GET CERTIFIED"
     },
+
     {
       "type": "checkbox",
       "id": "show_button_1",
@@ -46,15 +69,16 @@
     {
       "type": "text",
       "id": "button_1_text",
-      "label": "Button Text",
+      "label": "Button 1 Text",
       "default": "Button"
     },
     {
       "type": "url",
       "id": "button_1_link",
-      "label": "Button Link",
+      "label": "Button 1 Link",
       "default": "/"
     },
+
     {
       "type": "checkbox",
       "id": "show_button_2",
@@ -64,7 +88,7 @@
     {
       "type": "text",
       "id": "button_2_text",
-      "label": "Button Text",
+      "label": "Button 2 Text",
       "default": "Button"
     },
     {
@@ -73,43 +97,86 @@
       "label": "Button 2 Link",
       "default": "/"
     },
+
+    /* Button spacing */
+    {
+      "type": "range",
+      "id": "button_gap",
+      "label": "Gap between buttons",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+
+    /* Button 1 style */
+    {
+      "type": "header",
+      "content": "Button 1 style"
+    },
+    {
+      "type": "color",
+      "id": "btn1_bg",
+      "label": "Button 1 background",
+      "default": "#C1FF72"
+    },
+    {
+      "type": "color",
+      "id": "btn1_text_color",
+      "label": "Button 1 text color",
+      "default": "#01241E"
+    },
+    {
+      "type": "text",
+      "id": "btn1_font_size",
+      "label": "Button 1 font-size (accepts clamp())",
+      "default": "clamp(14px,1.4vw,32px)"
+    },
+
+    /* Button 2 style */
+    {
+      "type": "header",
+      "content": "Button 2 style"
+    },
+    {
+      "type": "color",
+      "id": "btn2_bg",
+      "label": "Button 2 background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "btn2_text_color",
+      "label": "Button 2 text color",
+      "default": "#01241E"
+    },
+    {
+      "type": "text",
+      "id": "btn2_font_size",
+      "label": "Button 2 font-size (accepts clamp())",
+      "default": "clamp(14px,1.4vw,32px)"
+    },
+
     {
       "type": "select",
       "id": "button_position",
       "label": "Button Position",
       "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
       ],
       "default": "center"
     },
-      {
+    {
       "type": "select",
       "id": "title_alignment",
       "label": "Title Alignment",
       "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
       ],
       "default": "left"
     },
@@ -128,18 +195,9 @@
       "id": "alignment",
       "label": "Alignment",
       "options": [
-        {
-          "value": "flex-start",
-          "label": "Flex Start"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "flex-end",
-          "label": "Flex End"
-        }
+        { "value": "flex-start", "label": "Flex Start" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Flex End" }
       ],
       "default": "center"
     },
@@ -177,67 +235,93 @@
 }
 {% endschema %}
 
-
-    <div class="section--title-block " style="display: flex; justify-content: {{ section.settings.alignment }};">
-  <div style="max-width: {{ section.settings.container_width }}px;">
-    <h2 style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_title }}</h2>
-    <div style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_description }}</div>
-  </div>
-</div>
-
-
-
-
 <section
   class="section--top-banner {% if section.settings.show_banner_gradient %}has-gradient{% endif %}"
   {% if section.settings.banner_height != blank %}
     style="height: {{ section.settings.banner_height }}; display:flex; flex-direction:row; align-items: {{ section.settings.top_banner_align_items }};"
   {% endif %}
 >
-  <div class="section--top-banner-container" >
+  <div class="section--top-banner-container">
     <div class="top-banner--text-content" style="display: flex; justify-content: {{ section.settings.alignment }};">
-        <div class="top-banner--text-content-container" style="max-width: {{ section.settings.container_width }}px;">
-      <h1>{{ section.settings.title }}</h1>
-      {% if section.settings.subtitle != blank %}
-        <p class="subtitle-p">{{ section.settings.subtitle }}</p>
-      {% endif %}
-      {% if section.settings.desc1 != blank %}
-        <p>{{ section.settings.desc1 }}</p>
-      {% endif %}
-          
-      <div class="button-wrapper">
-  {% if section.settings.show_button_1 %}
-    <a href="{{ section.settings.button_1_link }}" target="_blank" class="btn button-yg">
-      <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
-      <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
-    </a>
-  {% endif %}
-  
-  {% if section.settings.show_button_2 %}
-    <a href="{{ section.settings.button_2_link }}" target="_blank" class="btn button-b">
-      <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
-      <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
-    </a>
-  {% endif %}
-</div>
-</div>
-      
+      <div class="top-banner--text-content-container" style="max-width: {{ section.settings.container_width }}px; text-align: {{ section.settings.title_alignment }};">
+        
+        <h1 style="font-size: {{ section.settings.title_size | default: 'clamp(32px,6vw,64px)' }};">
+          {{ section.settings.title }}
+        </h1>
+
+        {% if section.settings.subtitle != blank %}
+          <p class="subtitle-p" style="font-size: {{ section.settings.subtitle_size | default: '26px' }};">
+            {{ section.settings.subtitle }}
+          </p>
+        {% endif %}
+
+        {% if section.settings.desc1 != blank %}
+          <div class="top-banner-desc" style="font-size: {{ section.settings.desc_size | default: '16px' }};">
+            {{ section.settings.desc1 }}
+          </div>
+        {% endif %}
+
+        {%- assign has_both_buttons = false -%}
+        {%- if section.settings.show_button_1 and section.settings.show_button_2 -%}
+          {%- assign has_both_buttons = true -%}
+        {%- endif -%}
+
+        <div
+          class="button-wrapper"
+          style="justify-content: {{ section.settings.button_position }}; --btn-gap: {% if has_both_buttons %}{{ section.settings.button_gap | default: 24 }}px{% else %}0px{% endif %};"
+        >
+          {% if section.settings.show_button_1 %}
+            <a
+              href="{{ section.settings.button_1_link }}"
+              target="_blank"
+              class="btn button-yg top-btn1"
+              style="background-color: {{ section.settings.btn1_bg | default: '#C1FF72' }}; border-color: {{ section.settings.btn1_bg | default: '#C1FF72' }};"
+            >
+              <span
+                class="btn-label-down"
+                style="color: {{ section.settings.btn1_text_color | default: '#01241E' }}; font-size: {{ section.settings.btn1_font_size | default: 'clamp(14px,1.4vw,32px)' }};"
+              >
+                {{ section.settings.button_1_text }}
+              </span>
+              <span
+                class="btn-label-down"
+                style="color: {{ section.settings.btn1_text_color | default: '#01241E' }}; font-size: {{ section.settings.btn1_font_size | default: 'clamp(14px,1.4vw,32px)' }};"
+              >
+                {{ section.settings.button_1_text }}
+              </span>
+            </a>
+          {% endif %}
+
+          {% if section.settings.show_button_2 %}
+            <a
+              href="{{ section.settings.button_2_link }}"
+              target="_blank"
+              class="btn button-b top-btn2"
+              style="background-color: {{ section.settings.btn2_bg | default: '#FFFFFF' }};"
+            >
+              <span
+                class="btn-label-down"
+                style="color: {{ section.settings.btn2_text_color | default: '#01241E' }}; font-size: {{ section.settings.btn2_font_size | default: 'clamp(14px,1.4vw,32px)' }};"
+              >
+                {{ section.settings.button_2_text }}
+              </span>
+              <span
+                class="btn-label-down"
+                style="color: {{ section.settings.btn2_text_color | default: '#01241E' }}; font-size: {{ section.settings.btn2_font_size | default: 'clamp(14px,1.4vw,32px)' }};"
+              >
+                {{ section.settings.button_2_text }}
+              </span>
+            </a>
+          {% endif %}
+        </div>
+      </div>
     </div>
-
-
-    
-
   </div>
-  
 
-  <div class="section--top-background" style="background-image: url({{ section.settings.background_image | img_url: 'master' }});">
-
-  </div>
-  
+  <div class="section--top-background" style="background-image: url({{ section.settings.background_image | img_url: 'master' }});"></div>
 </section>
 
 <style>
-
 .section--top-background{
   background-size: cover;
   background-position: right;
@@ -248,21 +332,15 @@
   top: 0;
   width: 50%;
 }
-.subtitle-p {
-  font-size: 26px;
-}
+
 @media (max-width: 768px) {
   .section--top-background{
     background-position: center;
   }
-  .subtitle-p {
-    font-size: 18px;
-  }
 }
-  
+
 .section--top-banner{
   background-color: #133257;
-
   color: #fff;
   text-align: left;
   position: relative;
@@ -271,7 +349,7 @@
 .section--top-banner.has-gradient:before {
   content: "";
   position: absolute;
-background: linear-gradient(90deg, #133257 1%, rgba(19, 50, 87, 0.9) 7.34%, rgba(19, 50, 87, 0.50) 15%, rgba(19, 50, 87, 0.00) 50%);
+  background: linear-gradient(90deg, #133257 1%, rgba(19, 50, 87, 0.9) 7.34%, rgba(19, 50, 87, 0.50) 15%, rgba(19, 50, 87, 0.00) 50%);
   width: 49%;
   height: 100%;
   top: 0;
@@ -281,52 +359,58 @@ background: linear-gradient(90deg, #133257 1%, rgba(19, 50, 87, 0.9) 7.34%, rgba
   z-index: 1;
   background-fit:cover;
 }
+
 .section--top-banner .section--top-banner-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   max-width: 1989px;
-  width:90%;
+  width: 90%;
   margin: 0 auto;
-  z-index: 99999;
+  z-index: 2;
   position: relative;
 }
+
 .top-banner--text-content {
   width: 100%;
 }
-.section--top-banner .top-banner--text-content h1 {
+
+.section--top-banner .top-banner-desc {
   color: #fff;
-  font-family: var(--font-anton);
-  font-size: clamp(32px,6vw,64px);
-  font-weight: 400;
-  line-height: 1.2;
-  margin-bottom: clamp(20px,5vw,50px);
-  text-transform: none;
-}
-.section--top-banner .text-content p {
-  color: #fff;
-  font-family: Inter;
-  font-size: 16px;
+  font-family: var(--font-poppins500);
   font-style: normal;
   font-weight: 500;
-  line-height: 150%; /* 24px */
-  margin-bottom: 40px;
+  line-height: 150%;
+  margin-top: 16px;
 }
+
+.subtitle-p {
+  margin: 0 0 16px 0;
+}
+
+.button-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--btn-gap, 0);
+  margin-top: clamp(24px,5vh,60px);
+}
+
+/* Button 2 base styles (Button 1 is styled via inline bg/text) */
 .section--top-banner .top-banner--text-content .button-wrapper .btn.button-b {
-  background-color: #fff;
   border-radius: 10px;
 }
 .section--top-banner .top-banner--text-content .button-wrapper .btn.button-b span {
-  {% comment %} font-size: clamp(14px, 1.4vw, 32px); {% endcomment %}
   font-family: var(--font-adirek800);
   font-weight: 800;
   text-decoration: none;
-  color: #01241E;
 }
+
 @media (max-width: 990px) {
+  .section--top-banner .top-banner--text-content .button-wrapper {
+    justify-content: center;
+  }
   .section--top-banner .top-banner--text-content .button-wrapper .btn.button-b {
     width: auto;
   }
 }
 </style>
-
