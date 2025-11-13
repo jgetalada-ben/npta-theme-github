@@ -16,42 +16,58 @@
     },
     {
       "type": "text",
+      "id": "title_font_size",
+      "label": "Title font-size (accepts clamp())",
+      "default": "clamp(32px,6vw,64px)"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#FFFFFF"
+    },
+
+    {
+      "type": "text",
       "id": "subtitle",
       "label": "Subtitle"
     },
+    {
+      "type": "text",
+      "id": "subtitle_font_size",
+      "label": "Subtitle font-size (accepts clamp())",
+      "default": "clamp(20px,2.5vw,28px)"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#FFFFFF"
+    },
+
     {
       "type": "richtext",
       "id": "desc1",
       "label": "Description 1"
     },
-
-    /* Heading / text sizes */
     {
       "type": "text",
-      "id": "title_size",
-      "label": "Title font-size (accepts clamp())",
-      "default": "clamp(32px,6vw,64px)"
-    },
-    {
-      "type": "text",
-      "id": "subtitle_size",
-      "label": "Subtitle font-size (accepts clamp())",
-      "default": "26px"
-    },
-    {
-      "type": "text",
-      "id": "desc_size",
+      "id": "desc_font_size",
       "label": "Description font-size (accepts clamp())",
-      "default": "16px"
+      "default": "clamp(14px,1.4vw,18px)"
+    },
+    {
+      "type": "color",
+      "id": "desc_color",
+      "label": "Description color",
+      "default": "#FFFFFF"
     },
 
-    /* Old single-button fields (kept for backwards compatibility, not used) */
     {
       "type": "url",
       "id": "button_link",
       "label": "Button Link (legacy)",
-      "default": "/collections/all",
-      "info": "Legacy – current banner uses Button 1 and Button 2 settings below."
+      "default": "/collections/all"
     },
     {
       "type": "text",
@@ -70,13 +86,25 @@
       "type": "text",
       "id": "button_1_text",
       "label": "Button 1 Text",
-      "default": "Button"
+      "default": "SPEAK TO ADVISOR"
     },
     {
       "type": "url",
       "id": "button_1_link",
       "label": "Button 1 Link",
       "default": "/"
+    },
+    {
+      "type": "color",
+      "id": "button_1_bg",
+      "label": "Button 1 background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "button_1_text_color",
+      "label": "Button 1 text color",
+      "default": "#01241E"
     },
 
     {
@@ -89,7 +117,7 @@
       "type": "text",
       "id": "button_2_text",
       "label": "Button 2 Text",
-      "default": "Button"
+      "default": "BOOK A CALL"
     },
     {
       "type": "url",
@@ -97,65 +125,30 @@
       "label": "Button 2 Link",
       "default": "/"
     },
-
-    /* Button spacing */
-    {
-      "type": "range",
-      "id": "button_gap",
-      "label": "Gap between buttons",
-      "min": 0,
-      "max": 80,
-      "step": 2,
-      "unit": "px",
-      "default": 24
-    },
-
-    /* Button 1 style */
-    {
-      "type": "header",
-      "content": "Button 1 style"
-    },
     {
       "type": "color",
-      "id": "btn1_bg",
-      "label": "Button 1 background",
-      "default": "#C1FF72"
-    },
-    {
-      "type": "color",
-      "id": "btn1_text_color",
-      "label": "Button 1 text color",
-      "default": "#01241E"
-    },
-    {
-      "type": "text",
-      "id": "btn1_font_size",
-      "label": "Button 1 font-size (accepts clamp())",
-      "default": "clamp(14px,1.4vw,32px)"
-    },
-
-    /* Button 2 style */
-    {
-      "type": "header",
-      "content": "Button 2 style"
-    },
-    {
-      "type": "color",
-      "id": "btn2_bg",
+      "id": "button_2_bg",
       "label": "Button 2 background",
-      "default": "#FFFFFF"
+      "default": "#C8FF63"
     },
     {
       "type": "color",
-      "id": "btn2_text_color",
+      "id": "button_2_text_color",
       "label": "Button 2 text color",
       "default": "#01241E"
     },
+
     {
       "type": "text",
-      "id": "btn2_font_size",
-      "label": "Button 2 font-size (accepts clamp())",
-      "default": "clamp(14px,1.4vw,32px)"
+      "id": "button_font_size",
+      "label": "Button font-size (accepts clamp())",
+      "default": "clamp(13px,1.2vw,16px)"
+    },
+    {
+      "type": "text",
+      "id": "button_gap",
+      "label": "Gap between buttons (accepts clamp())",
+      "default": "clamp(12px,2vw,32px)"
     },
 
     {
@@ -167,8 +160,9 @@
         { "value": "center", "label": "Center" },
         { "value": "right", "label": "Right" }
       ],
-      "default": "center"
+      "default": "left"
     },
+
     {
       "type": "select",
       "id": "title_alignment",
@@ -180,6 +174,7 @@
       ],
       "default": "left"
     },
+
     {
       "type": "range",
       "id": "container_width",
@@ -193,7 +188,7 @@
     {
       "type": "select",
       "id": "alignment",
-      "label": "Alignment",
+      "label": "Block Alignment",
       "options": [
         { "value": "flex-start", "label": "Flex Start" },
         { "value": "center", "label": "Center" },
@@ -201,6 +196,7 @@
       ],
       "default": "center"
     },
+
     {
       "type": "text",
       "id": "banner_height",
@@ -235,30 +231,55 @@
 }
 {% endschema %}
 
+{%- comment -%}
+Optional global title block (kept from original)
+{%- endcomment -%}
+<div class="section--title-block " style="display: flex; justify-content: {{ section.settings.alignment }};">
+  <div style="max-width: {{ section.settings.container_width }}px;">
+    <h2 style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_title }}</h2>
+    <div style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_description }}</div>
+  </div>
+</div>
+
+{%- comment -%}
+Build style string for section (CSS variables + optional height)
+{%- endcomment -%}
+{%- capture banner_style -%}
+  --title-size: {{ section.settings.title_font_size | default: 'clamp(32px,6vw,64px)' }};
+  --subtitle-size: {{ section.settings.subtitle_font_size | default: 'clamp(20px,2.5vw,28px)' }};
+  --desc-size: {{ section.settings.desc_font_size | default: 'clamp(14px,1.4vw,18px)' }};
+  --title-color: {{ section.settings.title_color | default: '#FFFFFF' }};
+  --subtitle-color: {{ section.settings.subtitle_color | default: '#FFFFFF' }};
+  --desc-color: {{ section.settings.desc_color | default: '#FFFFFF' }};
+  --btn1-bg: {{ section.settings.button_1_bg | default: '#FFFFFF' }};
+  --btn1-color: {{ section.settings.button_1_text_color | default: '#01241E' }};
+  --btn2-bg: {{ section.settings.button_2_bg | default: '#C8FF63' }};
+  --btn2-color: {{ section.settings.button_2_text_color | default: '#01241E' }};
+  --btn-font-size: {{ section.settings.button_font_size | default: 'clamp(13px,1.2vw,16px)' }};
+  {%- if section.settings.banner_height != blank -%}
+    height: {{ section.settings.banner_height }};
+    display:flex;
+    flex-direction:row;
+    align-items: {{ section.settings.top_banner_align_items }};
+  {%- endif -%}
+{%- endcapture -%}
+
 <section
   class="section--top-banner {% if section.settings.show_banner_gradient %}has-gradient{% endif %}"
-  {% if section.settings.banner_height != blank %}
-    style="height: {{ section.settings.banner_height }}; display:flex; flex-direction:row; align-items: {{ section.settings.top_banner_align_items }};"
-  {% endif %}
+  style="{{ banner_style | strip }}"
 >
   <div class="section--top-banner-container">
     <div class="top-banner--text-content" style="display: flex; justify-content: {{ section.settings.alignment }};">
       <div class="top-banner--text-content-container" style="max-width: {{ section.settings.container_width }}px; text-align: {{ section.settings.title_alignment }};">
-        
-        <h1 style="font-size: {{ section.settings.title_size | default: 'clamp(32px,6vw,64px)' }};">
-          {{ section.settings.title }}
-        </h1>
+
+        <h1>{{ section.settings.title }}</h1>
 
         {% if section.settings.subtitle != blank %}
-          <p class="subtitle-p" style="font-size: {{ section.settings.subtitle_size | default: '26px' }};">
-            {{ section.settings.subtitle }}
-          </p>
+          <p class="subtitle-p">{{ section.settings.subtitle }}</p>
         {% endif %}
 
         {% if section.settings.desc1 != blank %}
-          <div class="top-banner-desc" style="font-size: {{ section.settings.desc_size | default: '16px' }};">
-            {{ section.settings.desc1 }}
-          </div>
+          <p class="top-banner-desc">{{ section.settings.desc1 }}</p>
         {% endif %}
 
         {%- assign has_both_buttons = false -%}
@@ -268,49 +289,19 @@
 
         <div
           class="button-wrapper"
-          style="justify-content: {{ section.settings.button_position }}; --btn-gap: {% if has_both_buttons %}{{ section.settings.button_gap | default: 24 }}px{% else %}0px{% endif %};"
+          style="justify-content: {{ section.settings.button_position }}; --btn-gap: {% if has_both_buttons %}{{ section.settings.button_gap | default: 'clamp(12px,2vw,32px)' }}{% else %}0px{% endif %};"
         >
           {% if section.settings.show_button_1 %}
-            <a
-              href="{{ section.settings.button_1_link }}"
-              target="_blank"
-              class="btn button-yg top-btn1"
-              style="background-color: {{ section.settings.btn1_bg | default: '#C1FF72' }}; border-color: {{ section.settings.btn1_bg | default: '#C1FF72' }};"
-            >
-              <span
-                class="btn-label-down"
-                style="color: {{ section.settings.btn1_text_color | default: '#01241E' }}; font-size: {{ section.settings.btn1_font_size | default: 'clamp(14px,1.4vw,32px)' }};"
-              >
-                {{ section.settings.button_1_text }}
-              </span>
-              <span
-                class="btn-label-down"
-                style="color: {{ section.settings.btn1_text_color | default: '#01241E' }}; font-size: {{ section.settings.btn1_font_size | default: 'clamp(14px,1.4vw,32px)' }};"
-              >
-                {{ section.settings.button_1_text }}
-              </span>
+            <a href="{{ section.settings.button_1_link }}" target="_blank" class="btn button-yg btn-1">
+              <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
+              <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
             </a>
           {% endif %}
 
           {% if section.settings.show_button_2 %}
-            <a
-              href="{{ section.settings.button_2_link }}"
-              target="_blank"
-              class="btn button-b top-btn2"
-              style="background-color: {{ section.settings.btn2_bg | default: '#FFFFFF' }};"
-            >
-              <span
-                class="btn-label-down"
-                style="color: {{ section.settings.btn2_text_color | default: '#01241E' }}; font-size: {{ section.settings.btn2_font_size | default: 'clamp(14px,1.4vw,32px)' }};"
-              >
-                {{ section.settings.button_2_text }}
-              </span>
-              <span
-                class="btn-label-down"
-                style="color: {{ section.settings.btn2_text_color | default: '#01241E' }}; font-size: {{ section.settings.btn2_font_size | default: 'clamp(14px,1.4vw,32px)' }};"
-              >
-                {{ section.settings.button_2_text }}
-              </span>
+            <a href="{{ section.settings.button_2_link }}" target="_blank" class="btn button-b btn-2">
+              <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
+              <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
             </a>
           {% endif %}
         </div>
@@ -336,6 +327,8 @@
 @media (max-width: 768px) {
   .section--top-background{
     background-position: center;
+    width: 100%;
+    opacity: 0.4;
   }
 }
 
@@ -346,6 +339,7 @@
   position: relative;
   padding: 90px 0;
 }
+
 .section--top-banner.has-gradient:before {
   content: "";
   position: absolute;
@@ -357,7 +351,7 @@
   left: auto;
   right: 1%;
   z-index: 1;
-  background-fit:cover;
+  background-fit: cover;
 }
 
 .section--top-banner .section--top-banner-container {
@@ -375,41 +369,82 @@
   width: 100%;
 }
 
-.section--top-banner .top-banner-desc {
-  color: #fff;
-  font-family: var(--font-poppins500);
+/* Heading */
+.section--top-banner .top-banner--text-content h1 {
+  font-family: var(--font-anton);
+  font-size: var(--title-size, clamp(32px,6vw,64px));
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: clamp(20px,5vw,50px);
+  text-transform: none;
+  color: var(--title-color, #ffffff);
+}
+
+/* Subtitle */
+.subtitle-p {
+  font-size: var(--subtitle-size, 26px);
+  color: var(--subtitle-color, #ffffff);
+  margin-bottom: 18px;
+}
+
+/* Description */
+.top-banner-desc {
+  color: var(--desc-color, #ffffff);
+  font-family: var(--font-poppins500, var(--font-body-family));
+  font-size: var(--desc-size, 16px);
   font-style: normal;
   font-weight: 500;
   line-height: 150%;
-  margin-top: 16px;
+  margin-bottom: 40px;
 }
 
-.subtitle-p {
-  margin: 0 0 16px 0;
+/* Ensure any other <p> under the banner (not subtitle) follows desc styles */
+.section--top-banner .top-banner--text-content p:not(.subtitle-p) {
+  color: var(--desc-color, #ffffff);
+  font-size: var(--desc-size, 16px);
 }
 
-.button-wrapper{
+/* Buttons */
+.button-wrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--btn-gap, 0);
-  margin-top: clamp(24px,5vh,60px);
+  gap: var(--btn-gap, 24px);
 }
 
-/* Button 2 base styles (Button 1 is styled via inline bg/text) */
-.section--top-banner .top-banner--text-content .button-wrapper .btn.button-b {
+.section--top-banner .top-banner--text-content .button-wrapper .btn {
   border-radius: 10px;
 }
-.section--top-banner .top-banner--text-content .button-wrapper .btn.button-b span {
+
+.section--top-banner .top-banner--text-content .button-wrapper .btn .btn-label-down {
   font-family: var(--font-adirek800);
   font-weight: 800;
+  font-size: var(--btn-font-size, 14px);
   text-decoration: none;
 }
 
+/* Button 1 styling via CSS vars */
+.section--top-banner .top-banner--text-content .button-wrapper .btn.btn-1 {
+  background-color: var(--btn1-bg, #ffffff);
+  border-color: var(--btn1-bg, #ffffff);
+}
+.section--top-banner .top-banner--text-content .button-wrapper .btn.btn-1 .btn-label-down {
+  color: var(--btn1-color, #01241E);
+}
+
+/* Button 2 styling via CSS vars */
+.section--top-banner .top-banner--text-content .button-wrapper .btn.btn-2 {
+  background-color: var(--btn2-bg, #C8FF63);
+  border-color: var(--btn2-bg, #C8FF63);
+}
+.section--top-banner .top-banner--text-content .button-wrapper .btn.btn-2 .btn-label-down {
+  color: var(--btn2-color, #01241E);
+}
+
 @media (max-width: 990px) {
-  .section--top-banner .top-banner--text-content .button-wrapper {
-    justify-content: center;
+  .section--top-banner {
+    padding: 60px 0;
   }
-  .section--top-banner .top-banner--text-content .button-wrapper .btn.button-b {
+  .section--top-banner .top-banner--text-content .button-wrapper .btn {
     width: auto;
   }
 }
