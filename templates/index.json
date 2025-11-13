@@ -335,7 +335,7 @@
             "image_width_pct": 100,
             "image_align": "center",
             "title": "ATHLETES",
-            "title_size": "clamp(18px,3vw,30px)",
+            "title_size": "clamp(21px,3vw,40px)",
             "text": "",
             "link_label": "",
             "link": ""
