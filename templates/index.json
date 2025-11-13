@@ -332,7 +332,10 @@
           "type": "column",
           "settings": {
             "image": "shopify://shop_images/Rectangle_25.png",
+            "image_width_pct": 80,
+            "image_align": "center",
             "title": "ATHLETES",
+            "title_size": "clamp(21px,3vw,40px)",
             "text": "",
             "link_label": "",
             "link": ""
@@ -342,7 +345,10 @@
           "type": "column",
           "settings": {
             "image": "shopify://shop_images/Rectangle_26.png",
+            "image_width_pct": 80,
+            "image_align": "center",
             "title": "NUTRITION",
+            "title_size": "clamp(21px,3vw,40px)",
             "text": "",
             "link_label": "",
             "link": ""
@@ -352,7 +358,10 @@
           "type": "column",
           "settings": {
             "image": "shopify://shop_images/Rectangle_27.png",
+            "image_width_pct": 80,
+            "image_align": "center",
             "title": "WELLNESS",
+            "title_size": "clamp(21px,3vw,40px)",
             "text": "",
             "link_label": "",
             "link": ""
@@ -368,6 +377,7 @@
       "settings": {
         "max_width": "1989px",
         "title": "TRENDING BUNDLES",
+        "subtitle": "",
         "heading_align": "center",
         "heading_size": "h1",
         "image_width": "full",
