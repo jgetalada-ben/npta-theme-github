@@ -14,7 +14,7 @@
       "name": "Video v2",
       "settings": {
         "media_type": "video",
-        "shopify_video": "shopify://files/videos/CA Home.mp4",
+        "shopify_video": "shopify://files/videos/CA Home Video.mp4",
         "embed_url": "",
         "alt": "Promotional video",
         "aspect_ratio": "21-9",
