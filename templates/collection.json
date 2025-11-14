@@ -21,7 +21,7 @@
     "hero_banner_v2_hHfpYR": {
       "type": "hero-banner-v2",
       "custom_css": [
-        "#hbv2-template--19848592883944__hero_banner_v2_hHfpYR.hbv2-banner {height: 62vh;}",
+        "#hbv2-template--19848592883944__hero_banner_v2_hHfpYR.hbv2-banner {height: 100vh;}",
         ".hbv2-footer {display: none;}"
       ],
       "name": "Hero Banner V2",
