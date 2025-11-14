@@ -1,0 +1,451 @@
+{% comment %}
+  Section: Offer Highlight Strip
+  - 3 columns: left image, center content, right image
+  - Center panel has heading, description, dynamic bullet list, and CTA button
+  - Mobile: columns stack, with configurable order for each column
+{% endcomment %}
+
+{%- assign sid = section.id -%}
+
+<section
+  id="offer-strip-{{ sid }}"
+  class="offer-strip"
+  style="
+    --section-bg: {{ section.settings.section_bg_color | default: '#ffffff' }};
+    --center-bg: {{ section.settings.center_bg_color | default: '#03251a' }};
+
+    --heading-color: {{ section.settings.heading_color | default: '#FFFFFF' }};
+    --heading-fs: {{ section.settings.heading_font_size | default: 'clamp(28px,3vw,44px)' }};
+
+    --desc-color: {{ section.settings.desc_color | default: '#FFFFFF' }};
+    --desc-fs: {{ section.settings.desc_font_size | default: 'clamp(14px,1.4vw,18px)' }};
+
+    --bullet-color: {{ section.settings.bullet_color | default: '#FFFFFF' }};
+    --bullet-fs: {{ section.settings.bullet_font_size | default: 'clamp(14px,1.3vw,18px)' }};
+
+    --btn-bg: {{ section.settings.button_bg_color | default: '#C8FF63' }};
+    --btn-color: {{ section.settings.button_text_color | default: '#01241E' }};
+    --btn-fs: {{ section.settings.button_font_size | default: 'clamp(14px,1.3vw,18px)' }};
+    --btn-pad-t: {{ section.settings.button_pad_top | default: 14 }}px;
+    --btn-pad-b: {{ section.settings.button_pad_bottom | default: 14 }}px;
+    --btn-pad-l: {{ section.settings.button_pad_left | default: 32 }}px;
+    --btn-pad-r: {{ section.settings.button_pad_right | default: 32 }}px;
+
+    --pad-y: {{ section.settings.pad_y | default: 60 }}px;
+    --pad-x: {{ section.settings.pad_x | default: 0 }}px;
+  "
+>
+  {%- comment -%} Resolve button URL (product beats url) {%- endcomment -%}
+  {%- assign button_url = section.settings.button_link -%}
+  {%- if section.settings.button_product != blank -%}
+    {%- assign button_url = section.settings.button_product.url -%}
+  {%- endif -%}
+
+  <div class="offer-strip__inner">
+    {%- comment -%} LEFT IMAGE COLUMN {%- endcomment -%}
+    <div
+      class="offer-strip__col offer-strip__col--image-left"
+      style="order: {{ section.settings.left_mobile_order | default: '1' }};"
+    >
+      {% if section.settings.left_image %}
+        {{ section.settings.left_image | image_url: width: 1500 | image_tag: class: 'offer-strip__image', loading: 'lazy', alt: section.settings.left_image_alt | escape }}
+      {% else %}
+        <div class="offer-strip__image offer-strip__image--placeholder" aria-hidden="true"></div>
+      {% endif %}
+    </div>
+
+    {%- comment -%} CENTER CONTENT COLUMN {%- endcomment -%}
+    <div
+      class="offer-strip__col offer-strip__col--center"
+      style="order: {{ section.settings.center_mobile_order | default: '2' }};"
+    >
+      <div class="offer-strip__card">
+        {% if section.settings.heading != blank %}
+          <h2 class="offer-strip__heading">
+            {{ section.settings.heading }}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <div class="offer-strip__description">
+            {{ section.settings.description }}
+          </div>
+        {% endif %}
+
+        {% if section.blocks.size > 0 %}
+          <div class="offer-strip__bullets">
+            {% for block in section.blocks %}
+              {% if block.type == 'bullet' %}
+                <div class="offer-bullet" {{ block.shopify_attributes }}>
+                  <div class="offer-bullet__icon">
+                    {% if block.settings.bullet_icon_override != blank %}
+                      {{ block.settings.bullet_icon_override | image_url: width: 40 | image_tag: loading: 'lazy', alt: '' }}
+                    {% elsif section.settings.bullet_icon != blank %}
+                      {{ section.settings.bullet_icon | image_url: width: 40 | image_tag: loading: 'lazy', alt: '' }}
+                    {% else %}
+                      {%- comment -%} Simple default check icon {%- endcomment -%}
+                      <span class="offer-bullet__dot"></span>
+                    {% endif %}
+                  </div>
+                  <div class="offer-bullet__text">
+                    {{ block.settings.bullet_text }}
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% if section.settings.button_text != blank and button_url != blank %}
+          <div class="offer-strip__cta">
+            <a
+              href="{{ button_url }}"
+              class="offer-strip__button"
+              {% if section.settings.button_new_tab %}
+                target="_blank" rel="noopener noreferrer"
+              {% endif %}
+            >
+              {{ section.settings.button_text }}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    {%- comment -%} RIGHT IMAGE COLUMN {%- endcomment -%}
+    <div
+      class="offer-strip__col offer-strip__col--image-right"
+      style="order: {{ section.settings.right_mobile_order | default: '3' }};"
+    >
+      {% if section.settings.right_image %}
+        {{ section.settings.right_image | image_url: width: 1500 | image_tag: class: 'offer-strip__image', loading: 'lazy', alt: section.settings.right_image_alt | escape }}
+      {% else %}
+        <div class="offer-strip__image offer-strip__image--placeholder" aria-hidden="true"></div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+  #offer-strip-{{ sid }} {
+    background: var(--section-bg);
+    padding: var(--pad-y) var(--pad-x);
+  }
+
+  #offer-strip-{{ sid }} .offer-strip__inner {
+    max-width: {{ section.settings.max_width | default: '1989px' }};
+    margin: 0 auto;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  #offer-strip-{{ sid }} .offer-strip__col {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  #offer-strip-{{ sid }} .offer-strip__col--image-left,
+  #offer-strip-{{ sid }} .offer-strip__col--image-right {
+    position: relative;
+  }
+
+  #offer-strip-{{ sid }} .offer-strip__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #offer-strip-{{ sid }} .offer-strip__image--placeholder {
+    background: #d8d8d8;
+    aspect-ratio: 3 / 4;
+  }
+
+  #offer-strip-{{ sid }} .offer-strip__col--center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--center-bg);
+  }
+
+  #offer-strip-{{ sid }} .offer-strip__card {
+    width: 100%;
+    max-width: 540px;
+    padding: clamp(32px,4vw,56px) clamp(24px,3vw,40px);
+    text-align: left;
+  }
+
+  #offer-strip-{{ sid }} .offer-strip__heading {
+    margin: 0 0 24px;
+    font-family: var(--font-anton);
+    font-weight: 400;
+    text-transform: uppercase;
+    color: var(--heading-color);
+    font-size: var(--heading-fs);
+    line-height: 1.1;
+  }
+
+  #offer-strip-{{ sid }} .offer-strip__description {
+    margin: 0 0 28px;
+    color: var(--desc-color);
+    font-size: var(--desc-fs);
+    font-family: var(--font-poppins700, var(--font-body-family));
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  #offer-strip-{{ sid }} .offer-strip__bullets {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  #offer-strip-{{ sid }} .offer-bullet {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  #offer-strip-{{ sid }} .offer-bullet__icon img {
+    display: block;
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+
+  #offer-strip-{{ sid }} .offer-bullet__dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: #C8FF63;
+    display: inline-block;
+    position: relative;
+  }
+  #offer-strip-{{ sid }} .offer-bullet__dot::after {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border-radius: inherit;
+    border: 2px solid #01241E;
+  }
+
+  #offer-strip-{{ sid }} .offer-bullet__text {
+    color: var(--bullet-color);
+    font-size: var(--bullet-fs);
+    font-family: var(--font-poppins500, var(--font-body-family));
+    line-height: 1.5;
+  }
+
+  #offer-strip-{{ sid }} .offer-strip__cta {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  #offer-strip-{{ sid }} .offer-strip__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--btn-pad-t) var(--btn-pad-r) var(--btn-pad-b) var(--btn-pad-l);
+    background: var(--btn-bg);
+    color: var(--btn-color);
+    font-size: var(--btn-fs);
+    font-family: var(--font-adirek800, var(--font-body-family));
+    font-weight: 800;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    border: none;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  #offer-strip-{{ sid }} .offer-strip__button:hover {
+    opacity: .92;
+  }
+
+  @media (max-width: 990px) {
+    #offer-strip-{{ sid }} .offer-strip__inner {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    #offer-strip-{{ sid }} .offer-strip__col {
+      flex: 0 0 auto;
+    }
+
+    #offer-strip-{{ sid }} .offer-strip__image {
+      aspect-ratio: 3 / 4;
+    }
+
+    #offer-strip-{{ sid }} .offer-strip__card {
+      max-width: 100%;
+    }
+
+    #offer-strip-{{ sid }} .offer-strip__cta {
+      justify-content: center;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Offer Highlight Strip",
+  "tag": "section",
+  "class": "offer-highlight-strip",
+  "settings": [
+    {
+      "type": "text",
+      "id": "max_width",
+      "label": "Max width (e.g. 1989px or 90%)",
+      "default": "1989px"
+    },
+
+    { "type": "color", "id": "section_bg_color", "label": "Section background", "default": "#FFFFFF" },
+    { "type": "color", "id": "center_bg_color",  "label": "Center panel background", "default": "#03251A" },
+
+    { "type": "image_picker", "id": "left_image",  "label": "Left image" },
+    { "type": "text", "id": "left_image_alt", "label": "Left image alt text" },
+
+    { "type": "image_picker", "id": "right_image", "label": "Right image" },
+    { "type": "text", "id": "right_image_alt", "label": "Right image alt text" },
+
+    { "type": "text", "id": "heading", "label": "Heading", "default": "OFFER HIGHLIGHTS" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#FFFFFF" },
+    {
+      "type": "text",
+      "id": "heading_font_size",
+      "label": "Heading font-size (accepts clamp())",
+      "default": "clamp(28px,3vw,44px)"
+    },
+
+    { "type": "richtext", "id": "description", "label": "Description (above bullets)" },
+    { "type": "color", "id": "desc_color", "label": "Description color", "default": "#FFFFFF" },
+    {
+      "type": "text",
+      "id": "desc_font_size",
+      "label": "Description font-size (accepts clamp())",
+      "default": "clamp(14px,1.4vw,18px)"
+    },
+
+    { "type": "image_picker", "id": "bullet_icon", "label": "Default bullet icon" },
+    { "type": "color", "id": "bullet_color", "label": "Bullet text color", "default": "#FFFFFF" },
+    {
+      "type": "text",
+      "id": "bullet_font_size",
+      "label": "Bullet font-size (accepts clamp())",
+      "default": "clamp(14px,1.3vw,18px)"
+    },
+
+    { "type": "text", "id": "button_text", "label": "Button text", "default": "ADD TO CART" },
+    { "type": "url",  "id": "button_link", "label": "Button link (fallback if product not set)" },
+    { "type": "product", "id": "button_product", "label": "Button product (overrides link if set)" },
+    { "type": "checkbox", "id": "button_new_tab", "label": "Open button in new tab", "default": false },
+
+    { "type": "color", "id": "button_bg_color", "label": "Button background color", "default": "#C8FF63" },
+    { "type": "color", "id": "button_text_color", "label": "Button text color", "default": "#01241E" },
+    {
+      "type": "text",
+      "id": "button_font_size",
+      "label": "Button font-size (accepts clamp())",
+      "default": "clamp(14px,1.3vw,18px)"
+    },
+    {
+      "type": "range",
+      "id": "button_pad_top",
+      "label": "Button padding top",
+      "min": 4, "max": 40, "step": 2, "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_pad_bottom",
+      "label": "Button padding bottom",
+      "min": 4, "max": 40, "step": 2, "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_pad_left",
+      "label": "Button padding left",
+      "min": 10, "max": 80, "step": 2, "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "button_pad_right",
+      "label": "Button padding right",
+      "min": 10, "max": 80, "step": 2, "unit": "px",
+      "default": 32
+    },
+
+    { "type": "range", "id": "pad_y", "label": "Section padding top & bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "pad_x", "label": "Section padding left & right", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 0 },
+
+    {
+      "type": "select",
+      "id": "left_mobile_order",
+      "label": "Mobile order – left image",
+      "options": [
+        { "value": "1", "label": "First" },
+        { "value": "2", "label": "Second" },
+        { "value": "3", "label": "Third" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "select",
+      "id": "center_mobile_order",
+      "label": "Mobile order – center content",
+      "options": [
+        { "value": "1", "label": "First" },
+        { "value": "2", "label": "Second" },
+        { "value": "3", "label": "Third" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "select",
+      "id": "right_mobile_order",
+      "label": "Mobile order – right image",
+      "options": [
+        { "value": "1", "label": "First" },
+        { "value": "2", "label": "Second" },
+        { "value": "3", "label": "Third" }
+      ],
+      "default": "3"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bullet",
+      "name": "Bullet item",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "bullet_text",
+          "label": "Bullet text",
+          "default": "<p>Example bullet text goes here.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "bullet_icon_override",
+          "label": "Bullet icon override (optional)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Offer Highlight Strip",
+      "blocks": [
+        { "type": "bullet" },
+        { "type": "bullet" },
+        { "type": "bullet" }
+      ]
+    }
+  ]
+}
+{% endschema %}
