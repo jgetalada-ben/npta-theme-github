@@ -121,7 +121,8 @@
         "text_field_LKCbCR"
       ],
       "custom_css": [
-        "#section-id-contact-us {margin-top: -30px;}"
+        "#section-id-contact-us {margin-top: -30px;}",
+        ".contact-wrapper {display: none;}"
       ],
       "settings": {
         "section_id": "section-id-contact-us",
