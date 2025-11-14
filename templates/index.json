@@ -9,6 +9,43 @@
  */
 {
   "sections": {
+    "video_v2_qzbam8": {
+      "type": "video-v2",
+      "name": "Video v2",
+      "settings": {
+        "media_type": "image",
+        "embed_url": "",
+        "cover_image": "shopify://shop_images/bfs-banner.png",
+        "alt": "Promotional video",
+        "aspect_ratio": "16-9",
+        "aspect_ratio_mobile": "16-9",
+        "height_mode": "ratio",
+        "vh_desktop": "75vh",
+        "vh_mobile": "62dvh",
+        "title": "EARLY BLACK FRIDAY ACCESS",
+        "subtitle": "SAVE UP TO $2,000",
+        "desc": "<h2>LIMITED ENROLLMENT</h2><p>Enroll in any Certified Personal Trainer (CPT) + Certified Nutrition Coach (CNC) bundle and unlock exclusive bonuses worth up to $2,000!</p>",
+        "title_size": "clamp(28px,5vw,72px)",
+        "title_color": "#FFFFFF",
+        "subtitle_size": "clamp(18px,3vw,40px)",
+        "subtitle_color": "#C8FF63",
+        "desc_size": "clamp(14px,2vw,20px)",
+        "desc_color": "#FFFFFF",
+        "align": "center",
+        "overlay_darkness": 50,
+        "show_btn1": true,
+        "btns_margin_top": "16px",
+        "btn1_label": "",
+        "btn1_link": "",
+        "btn1_bg": "#C8FF63",
+        "btn1_txt": "#0B0B0B",
+        "show_btn2": false,
+        "btn2_label": "Learn more",
+        "btn2_link": "",
+        "btn2_bg": "#FFFFFF",
+        "btn2_txt": "#0B0B0B"
+      }
+    },
     "hero_banner_VrVBf3": {
       "type": "hero-banner",
       "blocks": {
@@ -57,6 +94,7 @@
         "word_MNHVdq",
         "word_bpCGmP"
       ],
+      "disabled": true,
       "custom_css": [
         "@media (max-width: 767px) {.section--hero-badges .section--badge {display: block; text-align: center; } .section--hero-badges .section--badge span {display: inline; vertical-align: top; top: 2px; position: relative; } .section--hero-badges .section--badge img {display: none !important; } .section--hero-badges .section--badge-1 {display: none !important; }}"
       ],
@@ -776,6 +814,7 @@
     }
   },
   "order": [
+    "video_v2_qzbam8",
     "hero_banner_VrVBf3",
     "section_image_text_carousel_ARmbtF",
     "featured_programs_3Ebyx7",
