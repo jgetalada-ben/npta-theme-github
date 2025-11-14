@@ -11,6 +11,9 @@
   "sections": {
     "video_v2_qzbam8": {
       "type": "video-v2",
+      "custom_css": [
+        ".vid2__desc h2 {color: #fff;}"
+      ],
       "name": "Video v2",
       "settings": {
         "media_type": "image",
@@ -20,7 +23,7 @@
         "aspect_ratio": "16-9",
         "aspect_ratio_mobile": "16-9",
         "height_mode": "ratio",
-        "vh_desktop": "75vh",
+        "vh_desktop": "62vh",
         "vh_mobile": "62dvh",
         "title": "EARLY BLACK FRIDAY ACCESS",
         "subtitle": "SAVE UP TO $2,000",
