@@ -172,8 +172,13 @@
   #offer-strip-{{ sid }} .offer-strip__card {
     width: 100%;
     max-width: 540px;
-    padding: clamp(32px,4vw,56px) clamp(24px,3vw,40px);
+    {% comment %} padding: clamp(20px,4.5vw,56px) clamp(24px,3vw,40px); {% endcomment %}
+     padding: 0 clamp(20px,3vw,40px);
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-evenly;
   }
 
   #offer-strip-{{ sid }} .offer-strip__heading {
@@ -198,7 +203,7 @@
   #offer-strip-{{ sid }} .offer-strip__bullets {
     display: grid;
     gap: 16px;
-    margin-bottom: 32px;
+    margin-bottom: 3vw;
   }
 
   #offer-strip-{{ sid }} .offer-bullet {
@@ -288,6 +293,9 @@
 
     #offer-strip-{{ sid }} .offer-strip__cta {
       justify-content: center;
+    }
+    #offer-strip-{{ sid }} .offer-strip__bullets {
+        margin-bottom: 20px;
     }
   }
 </style>
