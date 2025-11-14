@@ -18,6 +18,31 @@
         "color_scheme": "scheme-1"
       }
     },
+    "hero_banner_v2_hHfpYR": {
+      "type": "hero-banner-v2",
+      "name": "Hero Banner V2",
+      "settings": {
+        "background_image": "shopify://shop_images/Blog_Banner_for_Website_Content_1.png",
+        "banner_bg_color": "#ffffff",
+        "headline": "",
+        "title_color": "#141414",
+        "ribbon_text": "",
+        "promo_text": "",
+        "button_1_link": "",
+        "button_1_text": "",
+        "button_2_link": "",
+        "button_2_text": "",
+        "buttons_margin_top": "",
+        "buttons_margin_bottom": "",
+        "hero_image_width": "500",
+        "hero_image_height": "500",
+        "award_text": "",
+        "award_sub_text": "",
+        "award_image_width": "0",
+        "award_image_height": "0",
+        "badge_2_text": ""
+      }
+    },
     "section_breadcrumb_JGKpdR": {
       "type": "section--breadcrumb",
       "settings": {
@@ -30,7 +55,7 @@
     "section_header_title_4R3UWU": {
       "type": "section--header-title",
       "custom_css": [
-        "h1 {font-size: clamp(21px, 9.30vw, 42px);}"
+        "h1 {font-size: clamp(21px, 9.3vw, 42px);}"
       ],
       "settings": {
         "background_color": "#ffffff",
@@ -91,6 +116,7 @@
   },
   "order": [
     "banner",
+    "hero_banner_v2_hHfpYR",
     "section_breadcrumb_JGKpdR",
     "section_header_title_4R3UWU",
     "product-grid",
