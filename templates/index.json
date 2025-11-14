@@ -81,7 +81,7 @@
       ],
       "name": "Offer Highlight Strip",
       "settings": {
-        "max_width": "1989px",
+        "max_width": "100%",
         "section_bg_color": "#ffffff",
         "center_bg_color": "#03251a",
         "left_image": "shopify://shop_images/image_8.png",
@@ -108,7 +108,7 @@
         "button_pad_bottom": 14,
         "button_pad_left": 32,
         "button_pad_right": 32,
-        "pad_y": 80,
+        "pad_y": 0,
         "pad_x": 0,
         "left_mobile_order": "1",
         "center_mobile_order": "2",
