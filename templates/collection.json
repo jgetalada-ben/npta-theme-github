@@ -20,6 +20,9 @@
     },
     "hero_banner_v2_hHfpYR": {
       "type": "hero-banner-v2",
+      "custom_css": [
+        "#hbv2-template--19848592883944__hero_banner_v2_hHfpYR.hbv2-banner {height: 100vh;}"
+      ],
       "name": "Hero Banner V2",
       "settings": {
         "background_image": "shopify://shop_images/Blog_Banner_for_Website_Content_1.png",
