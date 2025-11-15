@@ -20,13 +20,18 @@
     "section_top_banner_hJLdAL": {
       "type": "section--top-banner",
       "custom_css": [
-        ".section--top-banner {background-position: center top; background-repeat: no-repeat; background-size: cover;}"
+        ".section--top-banner {background-position: center top; background-repeat: no-repeat; background-size: cover;}",
+        ".section--top-background {display: block !important;}",
+        ".top-banner--text-content-container h1 {color: #fff;}"
       ],
       "settings": {
         "background_image": "shopify://shop_images/G_I_18.jpg",
         "title": "ABOUT NPTA",
         "subtitle": "Learn how NPTA empowers the next generation of fitness and health professionals.",
         "desc1": "",
+        "title_size": "clamp(32px,6vw,64px)",
+        "subtitle_size": "26px",
+        "desc_size": "16px",
         "button_link": "shopify://collections/all",
         "button_text": "GET CERTIFIED",
         "show_button_1": false,
@@ -35,10 +40,20 @@
         "show_button_2": false,
         "button_2_text": "Button",
         "button_2_link": "/",
+        "button_gap": 24,
+        "btn1_bg": "#c1ff72",
+        "btn1_text_color": "#01241e",
+        "btn1_font_size": "clamp(14px,1.4vw,32px)",
+        "btn2_bg": "#ffffff",
+        "btn2_text_color": "#01241e",
+        "btn2_font_size": "clamp(14px,1.4vw,32px)",
         "button_position": "left",
         "title_alignment": "left",
         "container_width": 520,
-        "alignment": "flex-start"
+        "alignment": "flex-start",
+        "banner_height": "",
+        "top_banner_align_items": "center",
+        "show_banner_gradient": true
       }
     },
     "section_breadcrumb_eFj6di": {
@@ -62,12 +77,26 @@
       "settings": {
         "section_id": "section-id",
         "heading": "WHO WE ARE",
+        "heading_color": "#01241e",
         "description": "<p>National Personal Training Academy (NPTA) is Canada’s top choice for fitness education.</p><p>A proud official distribution partner of NASM. Since 2018, we’ve offered affordable NASM certifications and specializations, bridging theory with real-world application. </p><p>Our mission is to transform your fitness passion into a rewarding career through exceptional education, hands-on training, and dedicated support. With our high standards and expert mentorship, we equip students to become successful certified personal trainers. Join NPTA to elevate your career and make a significant impact in the fitness industry.</p>",
+        "text_color": "#01241e",
         "image": "shopify://shop_images/group-of-nasm-trainers-on-beach.jpg",
         "show_buttons": false,
         "primary_button_text": "",
         "primary_button_link": "",
-        "secondary_button_text": ""
+        "primary_button_color": "#c1ff72",
+        "layout": "content-left",
+        "max_width": "1989px",
+        "pad_y": 120,
+        "pad_x": 80,
+        "bg": "#ffffff",
+        "primary_button_text_color": "#0b0b0b",
+        "secondary_prompt": "Would like to speak to a Career Advisor?",
+        "secondary_prompt_color": "#0e2a24",
+        "secondary_button_text": "Book a Free Call",
+        "secondary_button_link": "",
+        "secondary_button_color": "#efefdf",
+        "secondary_button_text_color": "#0b0b0b"
       }
     },
     "section_quote_text_VH7Afh": {
