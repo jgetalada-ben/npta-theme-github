@@ -39,7 +39,7 @@
         "show_btn1": true,
         "btns_margin_top": "16px",
         "btn1_label": "GET ACCESS CODE",
-        "btn1_link": "",
+        "btn1_link": "/?pc_preview=338932",
         "btn1_bg": "#c8ff63",
         "btn1_txt": "#0b0b0b",
         "show_btn2": false,
