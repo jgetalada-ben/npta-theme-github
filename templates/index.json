@@ -36,7 +36,7 @@
         "desc_color": "#ffffff",
         "align": "center",
         "overlay_darkness": 50,
-        "show_btn1": true,
+        "show_btn1": false,
         "btns_margin_top": "16px",
         "btn1_label": "GET ACCESS CODE",
         "btn1_link": "/?pc_preview=338932",
@@ -288,6 +288,15 @@
         "show_buttons": true
       }
     },
+    "section_collection_tabs_w8nGxt": {
+      "type": "section-collection-tabs",
+      "settings": {
+        "collection1": "certifications",
+        "collection2": "specializations",
+        "collection3": "bundles",
+        "collection4": "all-products"
+      }
+    },
     "featured_programs_3Ebyx7": {
       "type": "featured_programs",
       "settings": {
@@ -334,15 +343,6 @@
         "button_text": "View all programs",
         "program_button_link": "shopify://collections/all",
         "section_footer_description": "<p>Looking for something specific? <a href=\"/pages/contact-us\" title=\"Contact Us\">Contact us</a> to build your own bundle.</p>"
-      }
-    },
-    "section_collection_tabs_w8nGxt": {
-      "type": "section-collection-tabs",
-      "settings": {
-        "collection1": "certifications",
-        "collection2": "specializations",
-        "collection3": "bundles",
-        "collection4": "all-products"
       }
     },
     "section_certified_trainers_HNR8DL": {
