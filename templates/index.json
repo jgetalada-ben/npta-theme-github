@@ -98,7 +98,7 @@
         "bullet_color": "#ffffff",
         "bullet_font_size": "clamp(12px,2vw,18px)",
         "button_text": "SHOP NOW",
-        "button_link": "shopify://collections",
+        "button_link": "https://www.npta.ca/collections/black-friday-sale",
         "button_product": "",
         "button_new_tab": false,
         "button_bg_color": "#c8ff63",
