@@ -60,7 +60,7 @@
       "custom_css": [
         "@media (max-width: 767px) {.section--hero-badges .section--badge {display: block; text-align: center; } .section--hero-badges .section--badge span {display: inline; vertical-align: top; top: 2px; position: relative; } .section--hero-badges .section--badge img {display: none !important; } .section--hero-badges .section--badge-1 {display: none !important; }}",
         ".section--hero-background {width: 100%; height: 100vh;}",
-        ".section--hero-text h1 {color: #e9f24f;}",
+        ".section--hero-text h1 {color: #c8ff63;}",
         "@media only screen and (min-width: 981px) {.section--hero-banner {height: 80vh; }}"
       ],
       "settings": {
@@ -115,7 +115,7 @@
         "logo_NqPQWT"
       ],
       "custom_css": [
-        ".section--logo-carousel {background: #e9f24f;}"
+        ".section--logo-carousel {background: #c8ff63;}"
       ],
       "name": "Logo Carousel",
       "settings": {

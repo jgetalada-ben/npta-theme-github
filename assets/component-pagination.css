@@ -80,7 +80,7 @@ text-transform: uppercase;
 
 .pagination__item--current{
 
-background: #E9F24F;
+background: #c8ff63;
   opacity: 1 !important;
   border: 1px solid #E9F24F !important;
 }
