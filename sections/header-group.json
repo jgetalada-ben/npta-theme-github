@@ -13,9 +13,27 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
-      "disabled": true,
+      "blocks": {
+        "message_FjE4LB": {
+          "type": "message",
+          "settings": {
+            "text": "<p><strong>🎉 BLACK FRIDAY EARLY ACCESS! </strong><a href=\"/collections/black-friday-sale\" title=\"Black Friday Sale\"><strong>SHOP NOW</strong></a></p>",
+            "link_label": "",
+            "link_url": "shopify://collections/black-friday-sale"
+          }
+        }
+      },
+      "block_order": [
+        "message_FjE4LB"
+      ],
       "custom_css": [],
-      "settings": {}
+      "settings": {
+        "bg_color": "#c8ff63",
+        "text_color": "#000000",
+        "font_size": 20,
+        "padding_y": 20,
+        "rotation_ms": 5000
+      }
     },
     "header": {
       "type": "header",
