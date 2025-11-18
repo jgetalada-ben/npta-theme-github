@@ -632,9 +632,9 @@
       ],
       "name": "Newsletter v2",
       "settings": {
-        "heading": "<p>Join the NPTA Community and receive promos when you sign up!</p>",
-        "placeholder": "Email",
-        "btn_label": "Sign Up",
+        "heading": "<p>Unlock premium offers and special promos by joining the NPTA Community.</p>",
+        "placeholder": "Enter your Email",
+        "btn_label": "Unlock  Access",
         "disclaimer": "<p>By providing my email, I am consenting to receive NPTA emails and Email-Based Advertising. For additional information, please see our <a href=\"/policies/privacy-policy\">Privacy Policy</a>.</p>",
         "max_width": "70%",
         "pad_y": 48,
