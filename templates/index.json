@@ -604,7 +604,7 @@
         "btn2_font_size": "clamp(14px,1.4vw,32px)",
         "button_position": "left",
         "title_alignment": "left",
-        "container_width": 560,
+        "container_width": 700,
         "alignment": "flex-end",
         "banner_height": "64vh",
         "top_banner_align_items": "center",
