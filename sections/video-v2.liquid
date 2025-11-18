@@ -131,7 +131,7 @@
             <div class="vid2__btns" style="margin-top: {{ section.settings.btns_margin_top | default: '16px' }};">
               {%- if section.settings.show_btn1 and section.settings.btn1_label != blank -%}
                 <a href="{{ section.settings.btn1_link | default: '#' }}"
-                   class="vid2__btn"
+                   class="vid2__btn js-popconvert-trigger"
                    style="background: {{ section.settings.btn1_bg }}; color: {{ section.settings.btn1_txt }};">
                   {{ section.settings.btn1_label }}
                 </a>
