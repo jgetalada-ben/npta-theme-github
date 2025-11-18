@@ -492,6 +492,39 @@
         "trainer_GnQEiL": {
           "type": "trainer",
           "settings": {
+            "image": "shopify://shop_images/Cert-11.jpg",
+            "show_content": false,
+            "name": "",
+            "certification": "",
+            "quote": "",
+            "rating": "5"
+          }
+        },
+        "trainer_AU9GY7": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-12.jpg",
+            "show_content": false,
+            "name": "",
+            "certification": "",
+            "quote": "",
+            "rating": "5"
+          }
+        },
+        "trainer_bf7r4V": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-13.jpg",
+            "show_content": false,
+            "name": "",
+            "certification": "",
+            "quote": "",
+            "rating": "5"
+          }
+        },
+        "trainer_47Kir4": {
+          "type": "trainer",
+          "settings": {
             "image": "shopify://shop_images/Cert-7.jpg",
             "show_content": false,
             "name": "",
@@ -517,6 +550,9 @@
         "trainer_pQjW8c",
         "trainer_9kT9Xn",
         "trainer_GnQEiL",
+        "trainer_AU9GY7",
+        "trainer_bf7r4V",
+        "trainer_47Kir4",
         "trainer_tkGYB3"
       ],
       "settings": {
