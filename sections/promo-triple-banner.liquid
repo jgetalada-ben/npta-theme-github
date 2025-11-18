@@ -1,0 +1,380 @@
+{% comment %}
+  Promo Triple Banner
+  Layout:
+  - Left tall image
+  - Center tall image with overlay text
+  - Right content card with heading, description, fine print, button
+
+  Controls:
+  - Section background, max-width, height
+  - Text alignment (all content + button)
+  - Font sizes and colors for heading, subtitle, body, overlay text
+  - Button background, text color, font size
+  - Button link can be product or URL, with open-in-new-tab toggle
+{% endcomment %}
+
+{%- assign sid = section.id -%}
+
+{%- assign mw = section.settings.max_width | default: '1989px' | strip -%}
+{%- unless mw contains 'px' or mw contains '%' or mw contains 'vw' or mw contains 'rem' -%}
+  {%- assign mw = mw | append: 'px' -%}
+{%- endunless -%}
+
+{%- assign section_height = section.settings.section_height | strip -%}
+{%- if section_height == blank -%}
+  {%- assign section_height = 'auto' -%}
+{%- endif -%}
+
+{%- comment %}
+  Resolve button URL preference: product first, then custom link
+{% endcomment -%}
+{%- assign btn_href = '' -%}
+{%- if section.settings.button_product != blank -%}
+  {%- assign btn_href = section.settings.button_product.url -%}
+{%- elsif section.settings.button_link != blank -%}
+  {%- assign btn_href = section.settings.button_link -%}
+{%- endif -%}
+
+<section
+  id="promo3-{{ sid }}"
+  class="promo3-section align-{{ section.settings.content_align }}"
+  style="
+    --promo3-bg: {{ section.settings.bg_color }};
+    --promo3-max-w: {{ mw }};
+    --promo3-height: {{ section_height }};
+    --promo3-heading-size: {{ section.settings.heading_size | default: 'clamp(24px,3vw,36px)' }};
+    --promo3-heading-color: {{ section.settings.heading_color }};
+    --promo3-subtitle-size: {{ section.settings.subtitle_size | default: 'clamp(14px,1.4vw,18px)' }};
+    --promo3-subtitle-color: {{ section.settings.subtitle_color }};
+    --promo3-body-size: {{ section.settings.body_size | default: 'clamp(14px,1.3vw,18px)' }};
+    --promo3-body-color: {{ section.settings.body_color }};
+    --promo3-overlay-heading-size: {{ section.settings.overlay_heading_size | default: 'clamp(18px,2.4vw,28px)' }};
+    --promo3-overlay-heading-color: {{ section.settings.overlay_heading_color }};
+    --promo3-overlay-sub-size: {{ section.settings.overlay_sub_size | default: 'clamp(32px,5vw,64px)' }};
+    --promo3-overlay-sub-color: {{ section.settings.overlay_sub_color }};
+    --promo3-button-bg: {{ section.settings.button_bg }};
+    --promo3-button-color: {{ section.settings.button_color }};
+    --promo3-button-font-size: {{ section.settings.button_font_size | default: 'clamp(14px,1.2vw,18px)' }};
+    --promo3-button-pad-y: {{ section.settings.button_pad_y | default: 14 }}px;
+    --promo3-button-pad-x: {{ section.settings.button_pad_x | default: 32 }}px;
+  "
+>
+  <div class="promo3-wrap">
+    {%- comment -%} LEFT IMAGE COLUMN {%- endcomment -%}
+    <div class="promo3-col promo3-col--left">
+      {%- if section.settings.left_image != blank -%}
+        {{ section.settings.left_image | image_url: width: 2000 | image_tag: class: 'promo3-img', loading: 'lazy', alt: section.settings.left_image_alt | escape }}
+      {%- else -%}
+        <div class="promo3-img promo3-img--placeholder" aria-hidden="true"></div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} CENTER IMAGE WITH OVERLAY TEXT {%- endcomment -%}
+    <div class="promo3-col promo3-col--center">
+      {%- if section.settings.center_image != blank -%}
+        {{ section.settings.center_image | image_url: width: 2000 | image_tag: class: 'promo3-img', loading: 'lazy', alt: section.settings.center_image_alt | escape }}
+      {%- else -%}
+        <div class="promo3-img promo3-img--placeholder" aria-hidden="true"></div>
+      {%- endif -%}
+
+      <div class="promo3-overlay promo3-align-{{ section.settings.content_align }}">
+        {%- if section.settings.overlay_heading != blank -%}
+          <div class="promo3-overlay-heading">
+            {{ section.settings.overlay_heading }}
+          </div>
+        {%- endif -%}
+        {%- if section.settings.overlay_subheading != blank -%}
+          <div class="promo3-overlay-subheading">
+            {{ section.settings.overlay_subheading }}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- comment -%} RIGHT CONTENT CARD {%- endcomment -%}
+    <div class="promo3-col promo3-col--right">
+      <div class="promo3-card promo3-align-{{ section.settings.content_align }}">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="promo3-heading">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.subtitle != blank -%}
+          <div class="promo3-subtitle">
+            {{ section.settings.subtitle }}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.body != blank -%}
+          <div class="promo3-body">
+            {{ section.settings.body }}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.fine_print != blank -%}
+          <div class="promo3-fineprint">
+            {{ section.settings.fine_print }}
+          </div>
+        {%- endif -%}
+
+        {%- if btn_href != '' and section.settings.button_label != blank -%}
+          <div class="promo3-btn-wrap">
+            <a
+              href="{{ btn_href }}"
+              class="promo3-btn"
+              {% if section.settings.button_new_tab %}
+                target="_blank" rel="noopener noreferrer"
+              {% endif %}
+            >
+              {{ section.settings.button_label }}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #promo3-{{ sid }}.promo3-section{
+      background: var(--promo3-bg);
+      min-height: var(--promo3-height);
+      display:flex;
+      justify-content:center;
+      align-items:stretch;
+      padding: clamp(24px,4vw,48px) 0;
+    }
+    #promo3-{{ sid }} .promo3-wrap{
+      max-width: var(--promo3-max-w);
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+    }
+    #promo3-{{ sid }} .promo3-col{
+      position: relative;
+      overflow: hidden;
+    }
+    #promo3-{{ sid }} .promo3-img{
+      width: 100%;
+      height: 100%;
+      display:block;
+      object-fit: cover;
+    }
+    #promo3-{{ sid }} .promo3-img--placeholder{
+      background:#e5e5e5;
+      min-height: 320px;
+    }
+
+    /* Overlay */
+    #promo3-{{ sid }} .promo3-overlay{
+      position:absolute;
+      inset:0;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      padding: clamp(18px,3vw,32px);
+      pointer-events:none;
+    }
+    #promo3-{{ sid }} .promo3-overlay-heading{
+      font-size: var(--promo3-overlay-heading-size);
+      color: var(--promo3-overlay-heading-color);
+      font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-bottom: 0.4em;
+    }
+    #promo3-{{ sid }} .promo3-overlay-subheading{
+      font-size: var(--promo3-overlay-sub-size);
+      color: var(--promo3-overlay-sub-color);
+      font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
+      font-weight: 700;
+      line-height: .95;
+      text-transform: uppercase;
+    }
+
+    /* Card content */
+    #promo3-{{ sid }} .promo3-card{
+      background: transparent;
+      height: 100%;
+      padding: clamp(24px,3vw,40px);
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap: clamp(10px,1.8vw,18px);
+    }
+    #promo3-{{ sid }} .promo3-heading{
+      margin: 0;
+      font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
+      font-size: var(--promo3-heading-size);
+      color: var(--promo3-heading-color);
+      text-transform: uppercase;
+      line-height: 1.05;
+    }
+    #promo3-{{ sid }} .promo3-subtitle{
+      font-size: var(--promo3-subtitle-size);
+      color: var(--promo3-subtitle-color);
+      font-family: var(--font-poppins600, var(--font-body-family));
+      font-weight: 600;
+      margin: 0;
+    }
+    #promo3-{{ sid }} .promo3-body{
+      font-size: var(--promo3-body-size);
+      color: var(--promo3-body-color);
+      font-family: var(--font-poppins400, var(--font-body-family));
+      line-height: 1.5;
+    }
+    #promo3-{{ sid }} .promo3-body p{ margin:0 0 .4em; }
+    #promo3-{{ sid }} .promo3-body p:last-child{ margin-bottom:0; }
+
+    #promo3-{{ sid }} .promo3-fineprint{
+      font-size: calc(var(--promo3-body-size) * 0.85);
+      opacity:.85;
+      color: var(--promo3-body-color);
+      font-family: var(--font-poppins400, var(--font-body-family));
+      margin-top:auto;
+    }
+
+    /* Button */
+    #promo3-{{ sid }} .promo3-btn-wrap{
+      margin-top: clamp(18px,2vw,28px);
+    }
+    #promo3-{{ sid }} .promo3-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: var(--promo3-button-pad-y) var(--promo3-button-pad-x);
+      border-radius: 999px;
+      border: none;
+      background: var(--promo3-button-bg);
+      color: var(--promo3-button-color);
+      font-size: var(--promo3-button-font-size);
+      font-family: var(--font-adirek800, var(--font-body-family));
+      font-weight: 800;
+      text-decoration:none;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor:pointer;
+      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+    }
+    #promo3-{{ sid }} .promo3-btn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(0,0,0,.18);
+    }
+
+    /* Alignment helpers */
+    #promo3-{{ sid }} .promo3-align-left{ text-align:left; align-items:flex-start; }
+    #promo3-{{ sid }} .promo3-align-center{ text-align:center; align-items:center; }
+    #promo3-{{ sid }} .promo3-align-right{ text-align:right; align-items:flex-end; }
+    #promo3-{{ sid }} .promo3-align-center .promo3-btn-wrap{ text-align:center; }
+    #promo3-{{ sid }} .promo3-align-right .promo3-btn-wrap{ text-align:right; }
+
+    /* Responsive */
+    @media (max-width: 990px){
+      #promo3-{{ sid }} .promo3-wrap{
+        grid-template-columns: 1fr;
+      }
+      #promo3-{{ sid }} .promo3-col--left,
+      #promo3-{{ sid }} .promo3-col--center,
+      #promo3-{{ sid }} .promo3-col--right{
+        min-height: 260px;
+      }
+      #promo3-{{ sid }} .promo3-card{
+        padding: 24px;
+      }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Promo Triple Banner",
+  "tag": "section",
+  "class": "promo-triple-banner",
+  "settings": [
+    { "type": "text", "id": "max_width", "label": "Max width (e.g. 1989px or 90%)", "default": "1989px" },
+    {
+      "type": "text",
+      "id": "section_height",
+      "label": "Section min-height (optional)",
+      "info": "Examples: 480px, 70vh, etc. Leave blank for auto height."
+    },
+    { "type": "color", "id": "bg_color", "label": "Section background color", "default": "#F5F3EB" },
+
+    {
+      "type": "select",
+      "id": "content_align",
+      "label": "Text & button alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+
+    { "type": "header", "content": "Left image" },
+    { "type": "image_picker", "id": "left_image", "label": "Left image" },
+    { "type": "text", "id": "left_image_alt", "label": "Left image alt text" },
+
+    { "type": "header", "content": "Center image & overlay" },
+    { "type": "image_picker", "id": "center_image", "label": "Center image" },
+    { "type": "text", "id": "center_image_alt", "label": "Center image alt text" },
+    { "type": "text", "id": "overlay_heading", "label": "Overlay heading", "default": "LIVE NOW" },
+    { "type": "text", "id": "overlay_subheading", "label": "Overlay subheading", "default": "25% OFF" },
+    { "type": "text", "id": "overlay_heading_size", "label": "Overlay heading font-size (accepts clamp())", "default": "clamp(16px,2.2vw,22px)" },
+    { "type": "color", "id": "overlay_heading_color", "label": "Overlay heading color", "default": "#FFFFFF" },
+    { "type": "text", "id": "overlay_sub_size", "label": "Overlay subheading font-size (accepts clamp())", "default": "clamp(32px,5vw,64px)" },
+    { "type": "color", "id": "overlay_sub_color", "label": "Overlay subheading color", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Right content card" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "ALL BUNDLES AND SPECIALIZATIONS" },
+    { "type": "text", "id": "heading_size", "label": "Heading font-size (accepts clamp())", "default": "clamp(24px,3vw,34px)" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#01241E" },
+
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "+ your choice of GLP-1 or Mindful Stress Management" },
+    { "type": "text", "id": "subtitle_size", "label": "Subtitle font-size (accepts clamp())", "default": "clamp(14px,1.4vw,18px)" },
+    { "type": "color", "id": "subtitle_color", "label": "Subtitle color", "default": "#01241E" },
+
+    { "type": "richtext", "id": "body", "label": "Body text (above fine print)" },
+    { "type": "text", "id": "body_size", "label": "Body font-size (accepts clamp())", "default": "clamp(14px,1.3vw,18px)" },
+    { "type": "color", "id": "body_color", "label": "Body text color", "default": "#01241E" },
+
+    { "type": "richtext", "id": "fine_print", "label": "Fine print (under image)", "default": "<p>CPR, HGD, YES, and RFL *not included in sale.</p>" },
+
+    { "type": "header", "content": "Button" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "SHOP NOW" },
+    { "type": "product", "id": "button_product", "label": "Button product (optional)" },
+    { "type": "url", "id": "button_link", "label": "Button custom link (fallback if no product)" },
+    { "type": "checkbox", "id": "button_new_tab", "label": "Open button in new tab", "default": false },
+    { "type": "color", "id": "button_bg", "label": "Button background color", "default": "#C8FF63" },
+    { "type": "color", "id": "button_color", "label": "Button text color", "default": "#01241E" },
+    { "type": "text", "id": "button_font_size", "label": "Button font-size (accepts clamp())", "default": "clamp(14px,1.2vw,18px)" },
+    {
+      "type": "range",
+      "id": "button_pad_y",
+      "label": "Button padding top & bottom",
+      "min": 8,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_pad_x",
+      "label": "Button padding left & right",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    { "name": "Promo Triple Banner" }
+  ]
+}
+{% endschema %}
