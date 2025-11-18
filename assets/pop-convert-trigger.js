@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
   // 1. Find Pop Convert's trigger button
   function getPopConvertTriggerButton() {
-    // ❗ Replace this selector with the real one from Inspect
-    return document.querySelector('.pc-sticky-button');
+    // Uses the live sticky button rendered by Pop Convert
+    return document.querySelector('.pc-button.clickable-effect');
   }
 
   // 2. Attach click handler to your custom buttons
@@ -11,13 +11,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   customButtons.forEach(function (btn) {
     btn.addEventListener('click', function (event) {
-      event.preventDefault();
+      event.preventDefault(); // prevent # link jump
 
       var trigger = getPopConvertTriggerButton();
       if (trigger) {
         trigger.click(); // Open the Pop Convert popup
       } else {
-        console.warn('Pop Convert trigger button not found. Check the selector in getPopConvertTriggerButton().');
+        console.warn('Pop Convert trigger button not found. Check if the popup button is enabled.');
       }
     });
   });
