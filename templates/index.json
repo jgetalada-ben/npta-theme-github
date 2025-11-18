@@ -628,7 +628,7 @@
     "newsletter_v2_MYDzwi": {
       "type": "newsletter-v2",
       "custom_css": [
-        "h2.nlv2__title {font-size: 30px;}"
+        "h2.nlv2__title {font-size: 26px;}"
       ],
       "name": "Newsletter v2",
       "settings": {
@@ -636,7 +636,7 @@
         "placeholder": "Enter your Email",
         "btn_label": "Unlock  Access",
         "disclaimer": "<p>By providing my email, I am consenting to receive NPTA emails and Email-Based Advertising. For additional information, please see our <a href=\"/policies/privacy-policy\">Privacy Policy</a>.</p>",
-        "max_width": "70%",
+        "max_width": "60%",
         "pad_y": 48,
         "pad_x": 16,
         "bg_color": "#e6e3d7",
