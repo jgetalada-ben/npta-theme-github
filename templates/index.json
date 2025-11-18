@@ -112,7 +112,7 @@
         "desc_color": "#ffffff",
         "align": "center",
         "overlay_darkness": 50,
-        "show_btn1": false,
+        "show_btn1": true,
         "btns_margin_top": "16px",
         "btn1_label": "GET ACCESS CODE",
         "btn1_link": "#",
