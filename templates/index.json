@@ -488,48 +488,12 @@
             "quote": "\"In 2018, I became a NASM Certified Personal Trainer (CPT) and Certified Nutrition Coach (CNC), turning a hobby into a full-time job with a busy schedule across two gyms, online clients, and home visits. Being a nutrition coach has enhanced my ability to help clients and added revenue streams to my business. I’m also proud to have been a gym owner for almost a year, enjoying the responsibility and freedom of leading my own team.\"",
             "rating": "5"
           }
-        },
-        "trainer_fdV8UX": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-16.jpg",
-            "show_content": false,
-            "name": "Helen",
-            "certification": "",
-            "quote": "\"𝐃𝐫𝐞𝐚𝐦𝐬 💭 𝐝𝐨 𝐜𝐨𝐦𝐞 𝐭𝐫𝐮𝐞...𝐚𝐧𝐝 𝐈 𝐃𝐈𝐃 𝐈𝐓!⁣ Studying at 𝟓𝟕 is so very different than at 𝟏𝟗. Yet very possible.⁣\"⁠",
-            "rating": "5"
-          }
-        },
-        "trainer_i8F8Gd": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-17.jpg",
-            "show_content": false,
-            "name": "Darryl",
-            "certification": "",
-            "quote": "\"Time to pass some of this fitness energy down to our youth! Helping to make sure that they play for at least 60 minutes a day.\"",
-            "rating": "5"
-          }
-        },
-        "trainer_AkBPkW": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-18.jpg",
-            "show_content": false,
-            "name": "Kenneth",
-            "certification": "",
-            "quote": "\"You can teach an old dog new tricks 😂 something good came out of the pandemic for me!\"",
-            "rating": "5"
-          }
         }
       },
       "block_order": [
         "trainer_A9TM6F",
         "trainer_pQjW8c",
-        "trainer_GnQEiL",
-        "trainer_fdV8UX",
-        "trainer_i8F8Gd",
-        "trainer_AkBPkW"
+        "trainer_GnQEiL"
       ],
       "settings": {
         "section_id": "trainer-success-journet",
