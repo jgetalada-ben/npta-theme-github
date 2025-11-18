@@ -375,7 +375,8 @@
       ],
       "custom_css": [
         "slider-component {width: 80%; margin: 0 auto;}",
-        "@media (max-width: 749px) {slider-component {width: 100%; }}"
+        "@media (max-width: 749px) {slider-component {width: 100%; }}",
+        ".multicolumn-card__info h3 a {text-decoration: none;}"
       ],
       "name": "t:sections.multicolumn.presets.name",
       "settings": {
