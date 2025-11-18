@@ -459,7 +459,7 @@
         "trainer_A9TM6F": {
           "type": "trainer",
           "settings": {
-            "image": "shopify://shop_images/Component_2.png",
+            "image": "shopify://shop_images/Cert-18.jpg",
             "show_content": false,
             "name": "",
             "certification": "",
@@ -470,22 +470,44 @@
         "trainer_pQjW8c": {
           "type": "trainer",
           "settings": {
-            "image": "shopify://shop_images/trainer_3.png",
+            "image": "shopify://shop_images/Cert-17.jpg",
             "show_content": false,
-            "name": "Alex Jung Lee",
+            "name": "",
             "certification": "",
-            "quote": "\"Throughout the NASM CPT certification course, I've gained a comprehensive understanding of the intrinsic value associated with health and wellness. I take great pride in successfully achieving the designation of NASM CPT. I am enthusiastic about leveraging my acquired knowledge to support and enhance the well-being of my family, friends, and community as a NASM Certified Personal Trainer.\"",
+            "quote": "",
+            "rating": "5"
+          }
+        },
+        "trainer_9kT9Xn": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-16.jpg",
+            "show_content": false,
+            "name": "",
+            "certification": "",
+            "quote": "",
             "rating": "5"
           }
         },
         "trainer_GnQEiL": {
           "type": "trainer",
           "settings": {
-            "image": "shopify://shop_images/trainer_3_1.png",
+            "image": "shopify://shop_images/Cert-7.jpg",
             "show_content": false,
-            "name": "Felicitas Avendaño",
+            "name": "",
             "certification": "",
-            "quote": "\"In 2018, I became a NASM Certified Personal Trainer (CPT) and Certified Nutrition Coach (CNC), turning a hobby into a full-time job with a busy schedule across two gyms, online clients, and home visits. Being a nutrition coach has enhanced my ability to help clients and added revenue streams to my business. I’m also proud to have been a gym owner for almost a year, enjoying the responsibility and freedom of leading my own team.\"",
+            "quote": "",
+            "rating": "5"
+          }
+        },
+        "trainer_tkGYB3": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-14.jpg",
+            "show_content": false,
+            "name": "",
+            "certification": "",
+            "quote": "",
             "rating": "5"
           }
         }
@@ -493,7 +515,9 @@
       "block_order": [
         "trainer_A9TM6F",
         "trainer_pQjW8c",
-        "trainer_GnQEiL"
+        "trainer_9kT9Xn",
+        "trainer_GnQEiL",
+        "trainer_tkGYB3"
       ],
       "settings": {
         "section_id": "trainer-success-journet",
