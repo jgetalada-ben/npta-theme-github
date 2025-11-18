@@ -461,9 +461,9 @@
           "settings": {
             "image": "shopify://shop_images/Component_2.png",
             "show_content": false,
-            "name": "Savanna",
+            "name": "",
             "certification": "",
-            "quote": "\"Enrolling in NASM was one of the best decisions for my career as a Personal Trainer and Sports Nutritionist. The education provided was excellent and equipped me with essential knowledge for the fitness industry. I appreciated the focus on coaching, nutrition, and exercise techniques. Thanks to NASM, I feel empowered to pursue my passion and look forward to further education in fitness, health, and wellness. I highly recommend NASM for expanding your knowledge in the fitness industry.\"",
+            "quote": "",
             "rating": "5"
           }
         },
