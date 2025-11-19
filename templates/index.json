@@ -11,6 +11,7 @@
   "sections": {
     "video_v2_AqMBKg": {
       "type": "video-v2",
+      "disabled": true,
       "name": "Video v2",
       "settings": {
         "media_type": "video",
