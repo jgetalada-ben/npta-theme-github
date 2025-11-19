@@ -736,6 +736,7 @@
     },
     "newsletter_v2_MYDzwi": {
       "type": "newsletter-v2",
+      "disabled": true,
       "custom_css": [
         "h2.nlv2__title {font-size: 26px;}"
       ],
