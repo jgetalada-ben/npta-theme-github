@@ -110,6 +110,7 @@
         "row_P6YxJa",
         "row_iUczWx"
       ],
+      "disabled": true,
       "name": "What's New Grid",
       "settings": {
         "full_width": false,
