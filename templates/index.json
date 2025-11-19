@@ -272,6 +272,10 @@
         "product_card_PtPcUW",
         "product_card_xG8iYc"
       ],
+      "custom_css": [
+        ".tp-wrap .tp-header {max-width: 123rem; margin: 0 auto 33px;}",
+        "@media (max-width: 749px){.tp-wrap .tp-header {max-width: 100%; }}"
+      ],
       "name": "Trainer's Pick",
       "settings": {
         "kicker": "",
