@@ -274,7 +274,8 @@
       ],
       "custom_css": [
         ".tp-wrap .tp-header {max-width: 123rem; margin: 0 auto 33px;}",
-        "@media (max-width: 749px){.tp-wrap .tp-header {max-width: 100%; }}"
+        ".tp-wrap .tp-header .tp-title {font-size: clamp(21px, 4vw, 40px);}",
+        "@media (max-width: 749px) {.tp-wrap .tp-header {max-width: 100%; }}"
       ],
       "name": "Trainer's Pick",
       "settings": {
