@@ -130,11 +130,11 @@
           {%- if section.settings.show_btn1 or section.settings.show_btn2 -%}
             <div class="vid2__btns" style="margin-top: {{ section.settings.btns_margin_top | default: '16px' }};">
               {%- if section.settings.show_btn1 and section.settings.btn1_label != blank -%}
-                {% comment %} <a href="{{ section.settings.btn1_link | default: '#' }}"
+                <a href="{{ section.settings.btn1_link | default: '#' }}"
                    class="vid2__btn"
                    style="background: {{ section.settings.btn1_bg }}; color: {{ section.settings.btn1_txt }};">
                   {{ section.settings.btn1_label }}
-                </a> {% endcomment %}
+                </a>
                 {% comment %} <a
                   {% if request.page_type == 'index' %}
                     href="https://app.npta.ca/widget/form/8uVv9ds7XN9MAhpoWSsc"
@@ -146,13 +146,14 @@
                   style="background: {{ section.settings.btn1_bg }}; color: {{ section.settings.btn1_txt }};">
                   {{ section.settings.btn1_label }}
                 </a> {% endcomment %}
-                <a
+                {% comment %} <a
                   href="{{ section.settings.btn1_link | default: '#' }}"
                   class="vid2__btn"
+                  data-bfs-popup-trigger="true"
                   style="background: {{ section.settings.btn1_bg }}; color: {{ section.settings.btn1_txt }};"
                 >
                   {{ section.settings.btn1_label }}
-                </a>
+                </a> {% endcomment %}
 
               {%- endif -%}
               {%- if section.settings.show_btn2 and section.settings.btn2_label != blank -%}
