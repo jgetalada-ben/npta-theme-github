@@ -233,6 +233,45 @@
         "radius": 0
       }
     },
+    "promo_triple_banner_dkW6J8": {
+      "type": "promo-triple-banner",
+      "name": "Promo Triple Banner",
+      "settings": {
+        "max_width": "1989px",
+        "section_height": "",
+        "bg_color": "#F5F3EB",
+        "content_align": "left",
+        "left_image": "shopify://shop_images/image_9.jpg",
+        "left_image_alt": "25off",
+        "center_image": "shopify://shop_images/image_10.jpg",
+        "center_image_alt": "25%off",
+        "overlay_heading": "LIVE NOW",
+        "overlay_subheading": "25% OFF",
+        "overlay_heading_size": "clamp(16px,2.2vw,22px)",
+        "overlay_heading_color": "#FFFFFF",
+        "overlay_sub_size": "clamp(32px,5vw,64px)",
+        "overlay_sub_color": "#FFFFFF",
+        "heading": "ALL BUNDLES AND SPECIALIZATIONS",
+        "heading_size": "clamp(24px,3vw,34px)",
+        "heading_color": "#01241E",
+        "subtitle": "+ your choice of GLP-1 or Mindful Stress Management",
+        "subtitle_size": "clamp(14px,1.4vw,18px)",
+        "subtitle_color": "#01241E",
+        "body": "",
+        "body_size": "clamp(14px,1.3vw,18px)",
+        "body_color": "#01241E",
+        "fine_print": "<p>CPR, HGD, YES, and RFL *not included in sale.</p>",
+        "button_label": "SHOP NOW",
+        "button_product": "",
+        "button_link": "",
+        "button_new_tab": false,
+        "button_bg": "#C8FF63",
+        "button_color": "#01241E",
+        "button_font_size": "clamp(14px,1.2vw,18px)",
+        "button_pad_y": 14,
+        "button_pad_x": 32
+      }
+    },
     "trainers_pick_KpCy4K": {
       "type": "trainers-pick",
       "blocks": {
@@ -768,6 +807,7 @@
     "video_v2_qzbam8",
     "offer_highlight_strip_4fXkRx",
     "whats_new_grid_LhNjr7",
+    "promo_triple_banner_dkW6J8",
     "trainers_pick_KpCy4K",
     "feature_split_card_bcA9Uz",
     "section_process_PPjrLE",
