@@ -738,22 +738,14 @@
   document.addEventListener('click', function(e) {
     const link = e.target.closest('[data-elective-financing-link]');
     if (!link) return;
-
-    // If they have NOT submitted yet, let the normal popup logic run
     if (!hasSubmittedFinanceForm()) return;
-
-    // They HAVE submitted → block the popup
     e.preventDefault();
     e.stopImmediatePropagation();
-
-    // Optional: where do we send them instead?
-    // Option A: follow the href as a normal link
     const href = link.getAttribute('href');
     if (href) {
       window.location.href = href;
     }
-    // Option B: if you want to keep them on the page, just omit the redirect
-  }, true); // capture = true so we run before other click handlers
+  }, true); 
 })();
 </script>
 
