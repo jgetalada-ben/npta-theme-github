@@ -106,9 +106,11 @@
           </div>
         {%- endif -%}
 
-        {%- if section.settings.body != blank -%}
-          <div class="promo3-body">
-            {{ section.settings.body }}
+        {%- if section.settings.body_image != blank -%}
+          <div class="promo3-body-img">
+            {{ section.settings.body_image
+              | image_url: width: 1200
+              | image_tag: class: 'promo3-body-image', loading: 'lazy', alt: section.settings.body_image_alt | escape }}
           </div>
         {%- endif -%}
 
@@ -219,14 +221,16 @@
       font-weight: 600;
       margin: 0;
     }
-    #promo3-{{ sid }} .promo3-body{
-      font-size: var(--promo3-body-size);
-      color: var(--promo3-body-color);
-      font-family: var(--font-poppins400, var(--font-body-family));
-      line-height: 1.5;
+
+    #promo3-{{ sid }} .promo3-body-img{
+      margin: clamp(12px, 1.8vw, 18px) 0;
     }
-    #promo3-{{ sid }} .promo3-body p{ margin:0 0 .4em; }
-    #promo3-{{ sid }} .promo3-body p:last-child{ margin-bottom:0; }
+    #promo3-{{ sid }} .promo3-body-image{
+      display:block;
+      width:100%;
+      height:auto;
+      border-radius: 0;
+    }
 
     #promo3-{{ sid }} .promo3-fineprint{
       font-size: calc(var(--promo3-body-size) * 0.85);
@@ -337,9 +341,8 @@
     { "type": "text", "id": "subtitle_size", "label": "Subtitle font-size (accepts clamp())", "default": "clamp(14px,1.4vw,18px)" },
     { "type": "color", "id": "subtitle_color", "label": "Subtitle color", "default": "#01241E" },
 
-    { "type": "richtext", "id": "body", "label": "Body text (above fine print)" },
-    { "type": "text", "id": "body_size", "label": "Body font-size (accepts clamp())", "default": "clamp(14px,1.3vw,18px)" },
-    { "type": "color", "id": "body_color", "label": "Body text color", "default": "#01241E" },
+    { "type": "image_picker", "id": "body_image", "label": "Body image (above fine print)" },
+    { "type": "text", "id": "body_image_alt", "label": "Body image alt text" },
 
     { "type": "richtext", "id": "fine_print", "label": "Fine print (under image)", "default": "<p>CPR, HGD, YES, and RFL *not included in sale.</p>" },
 
