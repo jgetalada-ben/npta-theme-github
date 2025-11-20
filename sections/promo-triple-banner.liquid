@@ -106,13 +106,14 @@
           </div>
         {%- endif -%}
 
-        {%- if section.settings.body_image != blank -%}
-          <div class="promo3-body-img">
+        {% if section.settings.body_image != blank %}
+          <div class="promo-banner__body-image">
             {{ section.settings.body_image
-              | image_url: width: 1200
-              | image_tag: class: 'promo3-body-image', loading: 'lazy', alt: section.settings.body_image_alt | escape }}
+              | image_url: width: 1600
+              | image_tag: loading: 'lazy', alt: section.settings.subtitle | escape
+            }}
           </div>
-        {%- endif -%}
+        {% endif %}
 
         {%- if section.settings.fine_print != blank -%}
           <div class="promo3-fineprint">
@@ -225,11 +226,23 @@
     #promo3-{{ sid }} .promo3-body-img{
       margin: clamp(12px, 1.8vw, 18px) 0;
     }
-    #promo3-{{ sid }} .promo3-body-image{
+    {% comment %} #promo3-{{ sid }} .promo3-body-image{
       display:block;
       width:100%;
       height:auto;
       border-radius: 0;
+    } {% endcomment %}
+
+    .promo-banner__body-image {
+      width: 100%;
+      margin: clamp(16px, 3vw, 24px) 0;
+    }
+
+    .promo-banner__body-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
     }
 
     #promo3-{{ sid }} .promo3-fineprint{
