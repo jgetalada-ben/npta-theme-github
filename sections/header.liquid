@@ -288,20 +288,7 @@ header-drawer{
       {%- endif -%}
     {%- endif -%}
 
-<!-- 📞 Phone Icon & Number beside button -->
-    <a href="tel:+17789496782" 
-      class="header__icon header__icon--phone link focus-inset" 
-      style="display: flex; align-items: center; gap: 6px; margin-right: 15px; font-weight:500; text-decoration:none; color:inherit;width: 180px;">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
-        <path d="M6.62 10.79a15.093 15.093 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C5.923 21.762 2.238 18.077 2.238 3a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.58 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2Z" fill="#141414"/>
-      </svg>
-      <span class="phone-number">+1-778-949-6782</span>
-    </a>
-<!-- 📞 End Phone -->
 
-
-    
-    
     <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
 
          {%- if shop.customer_accounts_enabled -%}
@@ -334,6 +321,16 @@ header-drawer{
 
       {% comment %} Search {% endcomment %}
       <div class="search-container-desktop">
+<!-- 📞 Phone Icon & Number beside button -->
+    <a href="tel:+17789496782" 
+      class="header__icon header__icon--phone link focus-inset" 
+      style="display: flex; align-items: center; gap: 6px; margin-right: 15px; font-weight:500; text-decoration:none; color:inherit;width: 180px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+        <path d="M6.62 10.79a15.093 15.093 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C5.923 21.762 2.238 18.077 2.238 3a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.58 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2Z" fill="#141414"/>
+      </svg>
+      <span class="phone-number">+1-778-949-6782</span>
+    </a>
+<!-- 📞 End Phone -->
       {% comment %} {% render 'header-search', input_id: 'Search-In-Modal' %} {% endcomment %}
         <div
           class="search-modal__content{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} search-modal__content-top{% else %} search-modal__content-bottom{% endif %}"
