@@ -1,18 +1,14 @@
-{% if request.path == '/' %}
-  {% if request.host contains 'npta.com.ph' %}
-    {% assign target_url = 'https://www.npta.com.ph/collections/all-products' %}
-  {% elsif request.host contains 'npta.ph' %}
-    {% assign target_url = 'https://www.npta.ph/collections/all-products' %}
-  {% endif %}
 
-  {% if target_url %}
-    <script>
-      window.location.replace("{{ target_url }}");
-    </script>
-    <meta http-equiv="refresh" content="0; url={{ target_url }}">
-  {% endif %}
-{% endif %}
-
+<script>
+  (function(){
+    try {
+      // Mark this browser as having successfully submitted the finance form
+      localStorage.setItem('npta_finance_submitted', '1');
+    } catch (e) {
+      // localStorage might be blocked; fail silently
+    }
+  })();
+</script>
 
 <!doctype html>
 <html class="js" lang="{{ request.locale.iso_code }}">
