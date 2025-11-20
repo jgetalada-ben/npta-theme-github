@@ -273,10 +273,10 @@
         "product_card_xG8iYc"
       ],
       "custom_css": [
-        ".tp-wrap .tp-header {max-width: 2000px; margin: 0 auto 30px;}",
+        ".tp-wrap .tp-header {max-width: 2000px; margin: 0 auto 30px; width: 90%;}",
         ".tp-wrap .tp-header .tp-title {font-size: clamp(21px, 4vw, 40px);}",
         ".tp-subhead {font-size: clamp(14px, 1.4vw, 24px); line-height: 2;}",
-        "@media (max-width: 749px) {.tp-wrap .tp-header {max-width: 100%; } .tp-subhead {line-height: 1; }}"
+        "@media (max-width: 749px) {.tp-wrap .tp-header {max-width: 100%; width: 100%; } .tp-subhead {line-height: 1; }}"
       ],
       "name": "Trainer's Pick",
       "settings": {
