@@ -23,11 +23,17 @@
   }
   .ghl-modal__dialog{
     position: relative;
-    width: 43%;
+    width: 100%;
+    max-width: 600px;      /* <-- modal max width */
+    max-height: 90vh;      /* <-- modal max height */
     background: #fff;
     border-radius: 12px;
     padding: 0;
-    overflow: hidden;
+    overflow: hidden;       /* contain iframe */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
   }
   .ghl-modal__close{
     position:absolute;
