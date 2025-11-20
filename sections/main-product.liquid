@@ -770,47 +770,6 @@
     return m;
   }
 
-  // Persist + fallback UTMs
-  function getUTMs(){
-    const url = new URL(window.location.href);
-    const params = new URLSearchParams(url.search);
-    const keys = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'];
-
-    let stored = {};
-    try { stored = JSON.parse(localStorage.getItem('npta_utms') || '{}'); } catch(e){}
-
-    const out = {};
-    keys.forEach(k => {
-      const v = params.get(k) || stored[k] || '';
-      if (v) out[k] = v;
-    });
-
-    // Fallbacks for direct/admin traffic
-    if (!out.utm_source) {
-      try {
-        const ref = document.referrer ? new URL(document.referrer).hostname : '';
-        if (ref) {
-          out.utm_source = ref;
-          out.utm_medium = out.utm_medium || 'referral';
-          out.utm_campaign = out.utm_campaign || '(not set)';
-        } else {
-          out.utm_source = '(direct)';
-          out.utm_medium = 'direct';
-          out.utm_campaign = '(not set)';
-        }
-      } catch(e){}
-    }
-
-    // Store any UTMs found in the URL for future pages
-    const hadAny = keys.some(k => params.get(k));
-    if (hadAny) {
-      const toStore = {};
-      keys.forEach(k => { if (params.get(k)) toStore[k] = params.get(k); });
-      try { localStorage.setItem('npta_utms', JSON.stringify(toStore)); } catch(e){}
-    }
-    return out;
-  }
-
   function toQuery(obj){
     return Object.keys(obj)
       .filter(k => obj[k] !== undefined && obj[k] !== null && obj[k] !== '')
@@ -831,34 +790,22 @@
       const electiveUrl = a.getAttribute('href');
       if (!electiveUrl) return;
 
-      // Normalize UTMs (guarantee values)
-      const utmRaw = getUTMs();
-      const utm = {
-        utm_source:   utmRaw.utm_source   || '(direct)',
-        utm_medium:   utmRaw.utm_medium   || 'direct',
-        utm_campaign: utmRaw.utm_campaign || '(not set)',
-        utm_term:     utmRaw.utm_term     || '(not set)',
-        utm_content:  utmRaw.utm_content  || '(not set)'
-      };
-
+      // Product fields only (no UTMs)
       const prod = {
         product_title: a.dataset.productTitle || document.title || '',
         product_handle: a.dataset.productHandle || '',
         product_id: a.dataset.productId || ''
       };
 
-      // Build final Elective URL and store it for the bridge page
+      // Build Elective redirect target (append ONLY product_* params)
       const target = new URL(electiveUrl, window.location.origin);
       const targetParams = new URLSearchParams(target.search);
-      Object.entries(utm).forEach(([k,v]) => targetParams.set(k, v));
       Object.entries(prod).forEach(([k,v]) => targetParams.set(k, v));
-      targetParams.set('source', utm.utm_source); // duplicate key for compatibility
       target.search = targetParams.toString();
       sessionStorage.setItem('npta_finance_target', target.toString());
 
-      // Build the GHL form URL (NO notrack=true)
-      const formParams = { ...utm, ...prod, source: utm.utm_source };
-      const formSrc = `https://app.npta.ca/widget/form/jbeQYeHWMI1dM9tX0mYF?${toQuery(formParams)}`;
+      // Build the GHL form URL (NO UTMs, NO notrack=true)
+      const formSrc = `https://app.npta.ca/widget/form/jbeQYeHWMI1dM9tX0mYF?${toQuery(prod)}`;
 
       // Inject iframe
       mount.innerHTML = '';
@@ -868,7 +815,7 @@
       iframe.setAttribute('allowtransparency','true');
       iframe.setAttribute('scrolling','auto');
       iframe.style.width = '100%';
-      iframe.style.height = '24vh';
+      iframe.style.height = '70vh';
       iframe.style.border = '0';
       iframe.loading = 'lazy';
       mount.appendChild(iframe);
@@ -877,14 +824,14 @@
     });
   });
 
-  // Optional: close modal on overlay/close button
+  // Close modal on overlay/close button
   modal?.addEventListener('click', (e)=>{
     if (e.target.matches('[data-close-ghl], [data-close-ghl] *')) {
       closeModal();
     }
   });
 
-  // Only needed if you use /pages/ghl-thanks (postMessage). Safe to keep.
+  // Kept for compatibility if you use /pages/ghl-thanks (postMessage flow)
   window.addEventListener('message', function(e){
     if (!e || !e.data) return;
     if (e.data.npta === 'ghl_form_ok') {
