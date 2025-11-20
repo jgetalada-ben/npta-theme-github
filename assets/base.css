@@ -2618,7 +2618,13 @@ details[open] .modal-overlay::after {
   line-height: calc(1 + 0.8 / var(--font-body-scale));
   position: relative;
 }
-
+.phone-number {
+  font-weight: bold;
+    color: #0F828C;
+}
+.header__icon--phone svg path {
+  fill: #0F828C;
+}
 .search-modal__content-bottom {
   bottom: calc((var(--inputs-margin-offset) / 2));
 }
