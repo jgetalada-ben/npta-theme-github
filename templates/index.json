@@ -235,7 +235,6 @@
     },
     "promo_triple_banner_dkW6J8": {
       "type": "promo-triple-banner",
-      "disabled": true,
       "name": "Promo Triple Banner",
       "settings": {
         "max_width": "1989px",
