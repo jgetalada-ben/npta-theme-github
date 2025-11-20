@@ -164,6 +164,18 @@
       margin-bottom: 24px;
     }
   }
+  @media (min-width: 1720px) {
+    #FeatureSplit-{{ section.id }} .nl-wrap {
+      max-width: 1720px;        /* cap total width */
+      margin-left: auto;        /* center horizontally */
+      margin-right: auto;
+    }
+
+    #FeatureSplit-{{ section.id }} .nl-grid {
+      justify-content: center;  /* center grid content within that width */
+    }
+  }
+
   {% endstylesheet %}
 </section>
 
