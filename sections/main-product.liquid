@@ -722,7 +722,7 @@
 
 {%- comment -%}
   Guard script: if user already submitted the finance form,
-  we DON'T let the popup logic hijack the click.
+  block the popup and optionally just follow the link.
 {%- endcomment -%}
 <script>
 (function() {
@@ -734,32 +734,29 @@
     }
   }
 
-  const links = document.querySelectorAll('[data-elective-financing-link]');
-  if (!links.length) return;
+  // Use event delegation so this works even if links are added later
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('[data-elective-financing-link]');
+    if (!link) return;
 
-  links.forEach(function(link) {
-    link.addEventListener('click', function(e) {
-      if (hasSubmittedFinanceForm()) {
-        // User already submitted → do NOT open the modal.
+    // If they have NOT submitted yet, let the normal popup logic run
+    if (!hasSubmittedFinanceForm()) return;
 
-        // Option A (recommended):
-        // Let the link behave normally (go to its href, e.g. Elective page)
-        // => we do NOT call preventDefault here, so default navigation happens.
+    // They HAVE submitted → block the popup
+    e.preventDefault();
+    e.stopImmediatePropagation();
 
-        // If you ever want a custom redirect instead, you can uncomment:
-        // e.preventDefault();
-        // window.location.href = link.getAttribute('href');
-
-        return; // Exit early; your popup script's preventDefault won't fire.
-      }
-
-      // If they have NOT submitted yet:
-      // We do nothing special here, and your original popup script below
-      // will handle the click (preventDefault + open modal).
-    }, { capture: true }); // capture=true ensures this runs before other handlers
-  });
+    // Optional: where do we send them instead?
+    // Option A: follow the href as a normal link
+    const href = link.getAttribute('href');
+    if (href) {
+      window.location.href = href;
+    }
+    // Option B: if you want to keep them on the page, just omit the redirect
+  }, true); // capture = true so we run before other click handlers
 })();
 </script>
+
 
 {% render 'ghl-finance-modal' %}
 
