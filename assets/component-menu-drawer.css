@@ -172,7 +172,9 @@ details[open].menu-opening > .menu-drawer__submenu {
  
   position: relative;
 }
-
+.menu-drawer__utility-links .util-contact-item svg path {
+  fill: #0f828c;
+}
 .header--has-social .menu-drawer__utility-links {
   padding: 0 2rem 3rem 2rem;
 }
