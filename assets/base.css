@@ -4396,8 +4396,8 @@ margin-top:20px;
     align-items: center;
     gap: 10px;
 }
-.pc-button.clickable-effect,
-.pc-buttons-trigger-wrapper {
+.pc-buttons-trigger-wrapper[data-v-7b21e5d6],
+#pop-convert-app {
   display: none !important;
 }
 
