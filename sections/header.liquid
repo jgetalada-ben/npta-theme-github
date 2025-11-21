@@ -337,12 +337,17 @@ header-drawer{
           class="search-modal__content{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} search-modal__content-top{% else %} search-modal__content-bottom{% endif %}"
           tabindex="-1"
         >
-          <search-form class="search-modal__form">
+          <predictive-search
+            class="search-modal__form"
+            data-loading-text="{{ 'accessibility.loading' | t }}"
+          >
             <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
               <div class="field">
                 <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
                   {% render 'icon-search2' %}
                 </button>
+
+                {%- assign input_id = 'Search-In-Modal' -%}
                 <input
                   class="search__input field__input"
                   id="{{ input_id }}"
@@ -350,7 +355,7 @@ header-drawer{
                   name="q"
                   value="{{ search.terms | escape }}"
                   placeholder="{{ 'general.search.search' | t }}"
-                  {%- if settings.predictive_search_enabled -%}
+                  {% if settings.predictive_search_enabled %}
                     role="combobox"
                     aria-expanded="false"
                     aria-owns="predictive-search-results"
@@ -361,13 +366,26 @@ header-drawer{
                     autocomplete="off"
                     autocapitalize="off"
                     spellcheck="false"
-                  {%- endif -%}
+                    data-predictive-search-input
+                  {% endif %}
                 >
+
                 <label class="field__label" for="{{ input_id }}">{{ 'general.search.search' | t }}</label>
                 <input type="hidden" name="options[prefix]" value="last">
               </div>
             </form>
-          </search-form>
+
+            {% if settings.predictive_search_enabled %}
+              <div
+                id="predictive-search"
+                class="predictive-search"
+                tabindex="-1"
+                data-predictive-search
+              >
+                <div id="predictive-search-results" class="predictive-search__results" data-predictive-search-results></div>
+              </div>
+            {% endif %}
+          </predictive-search>
         </div>
       </div>
       {% comment %} Cart Icon {% endcomment %}
