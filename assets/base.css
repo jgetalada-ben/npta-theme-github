@@ -4396,7 +4396,8 @@ margin-top:20px;
     align-items: center;
     gap: 10px;
 }
-.recaptcha--error svg{
- 
+.pc-buttons-trigger-wrapper {
+  display: none !important;
 }
+
 
