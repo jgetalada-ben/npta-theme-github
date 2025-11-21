@@ -4396,10 +4396,8 @@ margin-top:20px;
     align-items: center;
     gap: 10px;
 }
-/* .pc-buttons-trigger-wrapper[data-v-7b21e5d6],
-#pop-convert-app {
-  display: none !important;
+.pc-buttons-trigger-wrapper{
   visibility: hidden;
-} */
+}
 
 
