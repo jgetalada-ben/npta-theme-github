@@ -154,6 +154,12 @@
                 >
                   {{ section.settings.btn1_label }}
                 </a> {% endcomment %}
+                <a href="{{ section.settings.btn1_link | default: '#' }}"
+                  class="vid2__btn js-popconvert-trigger"
+                  style="background: {{ section.settings.btn1_bg }}; color: {{ section.settings.btn1_txt }};">
+                  {{ section.settings.btn1_label }}
+                </a>
+
 
               {%- endif -%}
               {%- if section.settings.show_btn2 and section.settings.btn2_label != blank -%}
