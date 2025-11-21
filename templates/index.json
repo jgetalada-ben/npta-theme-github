@@ -9,44 +9,6 @@
  */
 {
   "sections": {
-    "video_v2_AqMBKg": {
-      "type": "video-v2",
-      "disabled": true,
-      "name": "Video v2",
-      "settings": {
-        "media_type": "video",
-        "shopify_video": "shopify://files/videos/CA Home Video.mp4",
-        "embed_url": "",
-        "alt": "Promotional video",
-        "aspect_ratio": "21-9",
-        "aspect_ratio_mobile": "1-1",
-        "height_mode": "vh",
-        "vh_desktop": "60vh",
-        "vh_mobile": "42dvh",
-        "title": "THE NEW STANDARD IN FITNESS EDUCATION",
-        "subtitle": "Powered by NPTA™",
-        "desc": "<p>Where credibility meets career. A complete, modern approach to fitness education: certification, mentorship, practical skills, and career pathways — built to launch leaders.</p>",
-        "title_size": "clamp(28px,5vw,60px)",
-        "title_color": "#ffffff",
-        "subtitle_size": "clamp(18px,3vw,30px)",
-        "subtitle_color": "#c8ff63",
-        "desc_size": "clamp(14px,2vw,20px)",
-        "desc_color": "#ffffff",
-        "align": "center",
-        "overlay_darkness": 50,
-        "show_btn1": true,
-        "btns_margin_top": "16px",
-        "btn1_label": "CHOOSE MY COURSE",
-        "btn1_link": "",
-        "btn1_bg": "#c8ff63",
-        "btn1_txt": "#0b0b0b",
-        "show_btn2": false,
-        "btn2_label": "Learn more",
-        "btn2_link": "",
-        "btn2_bg": "#ffffff",
-        "btn2_txt": "#0b0b0b"
-      }
-    },
     "video_v2_qzbam8": {
       "type": "video-v2",
       "custom_css": [
@@ -117,6 +79,7 @@
         "bullet_YkgzDh",
         "bullet_phQteR"
       ],
+      "disabled": true,
       "name": "Offer Highlight Strip",
       "settings": {
         "max_width": "100%",
@@ -235,7 +198,6 @@
     },
     "promo_triple_banner_dkW6J8": {
       "type": "promo-triple-banner",
-      "disabled": true,
       "name": "Promo Triple Banner",
       "settings": {
         "max_width": "1989px",
@@ -268,7 +230,7 @@
         "button_bg": "#c8ff63",
         "button_color": "#01241e",
         "button_font_size": "clamp(14px,1.2vw,18px)",
-        "button_pad_y": 14,
+        "button_pad_y": 8,
         "button_pad_x": 32
       }
     },
@@ -806,7 +768,6 @@
     }
   },
   "order": [
-    "video_v2_AqMBKg",
     "video_v2_qzbam8",
     "offer_highlight_strip_4fXkRx",
     "whats_new_grid_LhNjr7",
