@@ -11,32 +11,31 @@
   "sections": {
     "video_v2_AqMBKg": {
       "type": "video-v2",
-      "disabled": true,
       "name": "Video v2",
       "settings": {
         "media_type": "video",
-        "shopify_video": "shopify://files/videos/CA Home Video.mp4",
+        "shopify_video": "shopify://files/videos/NPTA PH Vid.mp4",
         "embed_url": "",
         "alt": "Promotional video",
-        "aspect_ratio": "21-9",
-        "aspect_ratio_mobile": "1-1",
-        "height_mode": "vh",
-        "vh_desktop": "60vh",
-        "vh_mobile": "42dvh",
-        "title": "THE NEW STANDARD IN FITNESS EDUCATION",
-        "subtitle": "Powered by NPTA™",
-        "desc": "<p>Where credibility meets career. A complete, modern approach to fitness education: certification, mentorship, practical skills, and career pathways — built to launch leaders.</p>",
-        "title_size": "clamp(28px,5vw,60px)",
+        "aspect_ratio": "16-9",
+        "aspect_ratio_mobile": "16-9",
+        "height_mode": "ratio",
+        "vh_desktop": "75vh",
+        "vh_mobile": "62dvh",
+        "title": "",
+        "subtitle": "",
+        "desc": "",
+        "title_size": "clamp(28px,5vw,72px)",
         "title_color": "#ffffff",
-        "subtitle_size": "clamp(18px,3vw,30px)",
+        "subtitle_size": "clamp(18px,3vw,40px)",
         "subtitle_color": "#c8ff63",
         "desc_size": "clamp(14px,2vw,20px)",
         "desc_color": "#ffffff",
-        "align": "center",
-        "overlay_darkness": 50,
+        "align": "left",
+        "overlay_darkness": 40,
         "show_btn1": true,
         "btns_margin_top": "16px",
-        "btn1_label": "CHOOSE MY COURSE",
+        "btn1_label": "",
         "btn1_link": "",
         "btn1_bg": "#c8ff63",
         "btn1_txt": "#0b0b0b",
@@ -45,112 +44,6 @@
         "btn2_link": "",
         "btn2_bg": "#ffffff",
         "btn2_txt": "#0b0b0b"
-      }
-    },
-    "video_v2_qzbam8": {
-      "type": "video-v2",
-      "custom_css": [
-        ".vid2__desc h2 {color: #fff;}"
-      ],
-      "name": "Video v2",
-      "settings": {
-        "media_type": "video",
-        "shopify_video": "shopify://files/videos/CA Home Video.mp4",
-        "embed_url": "",
-        "alt": "Promotional video",
-        "aspect_ratio": "21-9",
-        "aspect_ratio_mobile": "1-1",
-        "height_mode": "ratio",
-        "vh_desktop": "50vh",
-        "vh_mobile": "42dvh",
-        "title": "EARLY BLACK FRIDAY ACCESS",
-        "subtitle": "SAVE UP TO $2,000",
-        "desc": "<h2>LIMITED ENROLLMENT</h2><p>Enroll in any Certified Personal Trainer (CPT) + Certified Nutrition Coach (CNC) bundle and unlock exclusive bonuses worth up to $2,000!</p>",
-        "title_size": "clamp(28px,5vw,72px)",
-        "title_color": "#ffffff",
-        "subtitle_size": "clamp(18px,3vw,40px)",
-        "subtitle_color": "#c8ff63",
-        "desc_size": "clamp(14px,2vw,20px)",
-        "desc_color": "#ffffff",
-        "align": "center",
-        "overlay_darkness": 50,
-        "show_btn1": false,
-        "btns_margin_top": "16px",
-        "btn1_label": "GET ACCESS CODE",
-        "btn1_link": "#",
-        "btn1_bg": "#c8ff63",
-        "btn1_txt": "#0b0b0b",
-        "show_btn2": false,
-        "btn2_label": "Learn more",
-        "btn2_link": "",
-        "btn2_bg": "#ffffff",
-        "btn2_txt": "#0b0b0b"
-      }
-    },
-    "offer_highlight_strip_4fXkRx": {
-      "type": "offer-highlight-strip",
-      "blocks": {
-        "bullet_rMgMFW": {
-          "type": "bullet",
-          "settings": {
-            "bullet_text": "<p>Receive FREE choICe of weight loss or virtual coaching (save up to $1100)</p>",
-            "bullet_icon_override": "shopify://shop_images/arrow-green.png"
-          }
-        },
-        "bullet_YkgzDh": {
-          "type": "bullet",
-          "settings": {
-            "bullet_text": "<p>Get 20% off on Recertify for life</p>",
-            "bullet_icon_override": "shopify://shop_images/arrow-green.png"
-          }
-        },
-        "bullet_phQteR": {
-          "type": "bullet",
-          "settings": {
-            "bullet_text": "<p>Receive FREE GLP-1 valued at $200</p>",
-            "bullet_icon_override": "shopify://shop_images/arrow-green.png"
-          }
-        }
-      },
-      "block_order": [
-        "bullet_rMgMFW",
-        "bullet_YkgzDh",
-        "bullet_phQteR"
-      ],
-      "name": "Offer Highlight Strip",
-      "settings": {
-        "max_width": "100%",
-        "section_bg_color": "#ffffff",
-        "center_bg_color": "#03251a",
-        "left_image": "shopify://shop_images/image_8.png",
-        "left_image_alt": "",
-        "right_image": "shopify://shop_images/image_7.png",
-        "right_image_alt": "",
-        "heading": "EARLY ACCESS PERKS:",
-        "heading_color": "#ffffff",
-        "heading_font_size": "clamp(21px,4vw,46px)",
-        "description": "<p>For a limited time, purchase any CPT + CNC bundles and unlock:</p>",
-        "desc_color": "#ffffff",
-        "desc_font_size": "clamp(14px,2vw,21px)",
-        "bullet_icon": "shopify://shop_images/arrow-green.png",
-        "bullet_color": "#ffffff",
-        "bullet_font_size": "clamp(12px,2vw,18px)",
-        "button_text": "SHOP NOW",
-        "button_link": "https://www.npta.ca/collections/black-friday-sale",
-        "button_product": "",
-        "button_new_tab": false,
-        "button_bg_color": "#c8ff63",
-        "button_text_color": "#01241e",
-        "button_font_size": "clamp(14px,1.3vw,18px)",
-        "button_pad_top": 10,
-        "button_pad_bottom": 10,
-        "button_pad_left": 40,
-        "button_pad_right": 40,
-        "pad_y": 0,
-        "pad_x": 0,
-        "left_mobile_order": "1",
-        "center_mobile_order": "2",
-        "right_mobile_order": "3"
       }
     },
     "whats_new_grid_LhNjr7": {
@@ -163,22 +56,22 @@
             "row_height_desktop": 440,
             "row_height_mobile": 300,
             "left_image": "shopify://shop_images/Rectangle_2.webp",
-            "left_product": "ncsf-health-coach",
+            "left_product": "womens-fitness-specialization-wfs-ph",
             "left_variant_id_override": "",
             "left_heading": "Social Media Influencer",
             "left_body": "<p>Expand your reach, attract clients, and boost your brand with strategies top influencers use to succeed online.</p>",
-            "left_btn_label": "Add to cart",
-            "left_link": "shopify://products/ncsf-health-coach",
+            "left_btn_label": "Explore Now",
+            "left_link": "#",
             "left_text_color": "#ffffff",
             "left_overlay_color": "#000000",
             "left_overlay_opacity": 35,
             "right_image": "shopify://shop_images/Rectangle_3.png",
-            "right_product": "youth-exercise-specialization-yes",
+            "right_product": "certified-wellness-coach-ph-cwc",
             "right_variant_id_override": "",
             "right_heading": "Advanced Cardio Programming",
             "right_body": "<p>Harness cutting-edge science to design powerful, personalized programs that deliver unstoppable client results.</p>",
-            "right_btn_label": "Add to cart",
-            "right_link": "shopify://products/youth-exercise-specialization-yes",
+            "right_btn_label": "Explore Now",
+            "right_link": "#",
             "right_text_color": "#ffffff",
             "right_overlay_color": "#000000",
             "right_overlay_opacity": 35
@@ -191,22 +84,22 @@
             "row_height_desktop": 440,
             "row_height_mobile": 300,
             "left_image": "shopify://shop_images/Rectangle_4.png",
-            "left_product": "wellness-coach-cwc-bogo",
+            "left_product": "",
             "left_variant_id_override": "",
             "left_heading": "Business Blueprint",
             "left_body": "<p>Build a thriving fitness career with proven business strategies, expert coaching, and tools to grow a loyal client base.</p>",
-            "left_btn_label": "Add to cart",
-            "left_link": "shopify://products/wellness-coach-cwc-bogo",
+            "left_btn_label": "Explore Now",
+            "left_link": "",
             "left_text_color": "#ffffff",
             "left_overlay_color": "#000000",
             "left_overlay_opacity": 35,
             "right_image": "shopify://shop_images/Rectangle_5.png",
-            "right_product": "mindful-stress-management",
+            "right_product": "",
             "right_variant_id_override": "",
             "right_heading": "Mindful Stress Management",
             "right_body": "<p>Learn practical, science-backed tools to manage stress with guided sessions, gentle movement, and everyday techniques.</p>",
-            "right_btn_label": "Add to Cart",
-            "right_link": "shopify://products/mindful-stress-management",
+            "right_btn_label": "Explore Now",
+            "right_link": "",
             "right_text_color": "#ffffff",
             "right_overlay_color": "#000000",
             "right_overlay_opacity": 35
@@ -217,7 +110,6 @@
         "row_P6YxJa",
         "row_iUczWx"
       ],
-      "disabled": true,
       "name": "What's New Grid",
       "settings": {
         "full_width": false,
@@ -233,53 +125,13 @@
         "radius": 0
       }
     },
-    "promo_triple_banner_dkW6J8": {
-      "type": "promo-triple-banner",
-      "disabled": true,
-      "name": "Promo Triple Banner",
-      "settings": {
-        "max_width": "1989px",
-        "section_height": "",
-        "bg_color": "#f5f3eb",
-        "content_align": "left",
-        "left_image": "shopify://shop_images/image_9.jpg",
-        "left_image_alt": "25off",
-        "center_image": "shopify://shop_images/image_10.jpg",
-        "center_image_alt": "25%off",
-        "overlay_heading": "LIVE NOW",
-        "overlay_subheading": "25% OFF",
-        "overlay_heading_size": "clamp(16px,2.2vw,22px)",
-        "overlay_heading_color": "#ffffff",
-        "overlay_sub_size": "clamp(32px,5vw,64px)",
-        "overlay_sub_color": "#ffffff",
-        "heading": "ALL BUNDLES AND SPECIALIZATIONS",
-        "heading_size": "clamp(24px,3vw,34px)",
-        "heading_color": "#01241e",
-        "subtitle": "+ your choice of GLP-1 or Mindful Stress Management",
-        "subtitle_size": "clamp(14px,1.4vw,18px)",
-        "subtitle_color": "#01241e",
-        "body_image": "shopify://shop_images/image_11.jpg",
-        "body_image_alt": "",
-        "fine_print": "<p>CPR, HGD, YES, and RFL *not included in sale.</p>",
-        "button_label": "SHOP NOW",
-        "button_product": "",
-        "button_link": "",
-        "button_new_tab": false,
-        "button_bg": "#c8ff63",
-        "button_color": "#01241e",
-        "button_font_size": "clamp(14px,1.2vw,18px)",
-        "button_pad_y": 14,
-        "button_pad_x": 32
-      }
-    },
     "trainers_pick_KpCy4K": {
       "type": "trainers-pick",
       "blocks": {
         "product_card_9Rhb6R": {
           "type": "product_card",
           "settings": {
-            "product_handle": "career-kickstarter-plus-cpt-ces-cnc-cpr",
-            "custom_image": "shopify://shop_images/CPT_59dfedca-0a8d-49d9-bbbc-803cffd27b44.jpg",
+            "product_handle": "career-kickstarter-plus-cpt-ces-cnc-cpr-ph",
             "custom_title": "",
             "blurb": "<p>Become a Certified Personal Trainer from the world’s most trusted source of fitness...    </p>",
             "custom_price": "",
@@ -289,10 +141,9 @@
         "product_card_PtPcUW": {
           "type": "product_card",
           "settings": {
-            "product_handle": "certified-nutrition-coach-cnc",
-            "custom_image": "shopify://shop_images/CNC.jpg",
+            "product_handle": "certified-nutrition-coach-cnc-ph",
             "custom_title": "",
-            "blurb": "<p>Nutrition serves as the foundation for our health and the fuel for our ...</p>",
+            "blurb": "<p>Become a Certified Personal Trainer from the world’s most trusted source of fitness...    </p>",
             "custom_price": "",
             "custom_link": ""
           }
@@ -300,10 +151,9 @@
         "product_card_xG8iYc": {
           "type": "product_card",
           "settings": {
-            "product_handle": "cpt-essentials-cpt-cpr",
-            "custom_image": "shopify://shop_images/CPT_Ess.jpg",
+            "product_handle": "cpt-essentials-ph-cpt-cpr",
             "custom_title": "",
-            "blurb": "<p>As a Certified Wellness Coach, you're not just pursuing a career...</p>",
+            "blurb": "<p>Become a Certified Personal Trainer from the world’s most trusted source of fitness...    </p>",
             "custom_price": "",
             "custom_link": ""
           }
@@ -314,25 +164,19 @@
         "product_card_PtPcUW",
         "product_card_xG8iYc"
       ],
-      "custom_css": [
-        ".tp-wrap .tp-header {max-width: 2000px; margin: 0 auto 30px; width: 92%;}",
-        ".tp-wrap .tp-header .tp-title {font-size: clamp(21px, 4vw, 40px);}",
-        ".tp-subhead {font-size: clamp(14px, 1.4vw, 24px); line-height: 2;}",
-        "@media (max-width: 749px) {.tp-wrap .tp-header {max-width: 100%; width: 100%; } .tp-subhead {line-height: 1; }}"
-      ],
       "name": "Trainer's Pick",
       "settings": {
         "kicker": "",
         "title": "TRAINER’S PICK",
         "subhead": "Chosen by Thousands. Trusted by Trainers. Built for Your Next Step.",
         "body": "Explore our best selling products.",
-        "cta_label": "View All Course",
-        "cta_link": "https://www.npta.ca/collections/all-products",
+        "cta_label": "View All",
+        "cta_link": "#",
         "cta2_label": "Build Your Bundle",
-        "cta2_link": "shopify://collections/bundles",
+        "cta2_link": "",
         "cta2_bg": "#2e7480",
         "cta2_color": "#ffffff",
-        "max_width": "1090px",
+        "max_width": "1989px",
         "bg": "#eff0e7",
         "price_bg": "#0f828c",
         "price_color": "#ffffff",
@@ -340,11 +184,12 @@
         "pad_right": 24,
         "pad_bottom": 140,
         "pad_left": 24,
-        "gap": 20
+        "gap": 24
       }
     },
     "feature_split_card_bcA9Uz": {
       "type": "feature-split-card",
+      "disabled": true,
       "name": "Split Feature Card",
       "settings": {
         "layout": "image-left",
@@ -353,10 +198,10 @@
         "eyebrow": "Canada’s Lowest Prices",
         "body": "<p>Get the best NASM deals with zero percent interest payment plans. Found an individual NASM course at a lower price elsewhere? Let us know so we can price match and find an even better deal!</p>",
         "cta_label": "View All",
-        "cta_link": "https://www.npta.ca/collections/all-products",
+        "cta_link": "#",
         "max_width": "1989px",
-        "bg": "#ffffff",
-        "card_bg": "#f2f2e9",
+        "bg": "#e3e3d5",
+        "card_bg": "#ffffff",
         "radius": 12,
         "card_overlap": 80,
         "card_pad_y": 100,
@@ -374,7 +219,7 @@
         "step_pqbwnY": {
           "type": "step",
           "settings": {
-            "step_title": "Get  Certified",
+            "step_title": "Get Certified",
             "step_description": ""
           }
         },
@@ -399,9 +244,9 @@
         "step_G4TCdU"
       ],
       "settings": {
-        "background_color": "#0f828c",
+        "background_color": "#ffffff",
         "section_id": "homepage-trainers",
-        "section_title": "BECOME A PERSONAL TRAINER TODAY",
+        "section_title": "HOW TO BECOME A TRAINER",
         "section_description": "",
         "title_alignment": "center",
         "container_width": 2000,
@@ -418,25 +263,25 @@
       "settings": {
         "section_id": "homepage-quiz-section",
         "heading": "Discover the Right Path for You",
-        "heading_color": "#01241e",
+        "heading_color": "#ffffff",
         "description": "<p>Not sure where to begin? Take our quick quiz to find the best starting point for your goals, interests, and experience—we’ll guide you to the path that’s right for you.</p>",
-        "text_color": "#01241e",
+        "text_color": "#ffffff",
         "image": "shopify://shop_images/Rectangle_19.png",
         "show_buttons": true,
         "primary_button_text": "TAKE THE QUIZ",
-        "primary_button_link": "https://quiz.npta.ca/fitness-memberships",
-        "primary_button_color": "#0f828c",
+        "primary_button_link": "",
+        "primary_button_color": "#f2f2e9",
         "layout": "content-left",
         "max_width": "1989px",
         "pad_y": 0,
         "pad_x": 0,
-        "bg": "#f3f3eb",
-        "primary_button_text_color": "#ffffff",
+        "bg": "#0f828c",
+        "primary_button_text_color": "#0b0b0b",
         "secondary_prompt": "Would like to speak to a Career Advisor?",
         "secondary_prompt_color": "#0e2a24",
         "secondary_button_text": "Book a Free Call",
-        "secondary_button_link": "https://app.npta.ca/widget/bookings/jessica-npta-calendar",
-        "secondary_button_color": "#e0ded0",
+        "secondary_button_link": "",
+        "secondary_button_color": "#efefdf",
         "secondary_button_text_color": "#0b0b0b"
       }
     },
@@ -489,9 +334,9 @@
           "settings": {
             "image": "shopify://shop_images/Rectangle_25.png",
             "image_width_pct": 100,
-            "image_align": "center",
-            "title": "<a href=\"https://www.npta.ca/collections/bundles?filter.p.m.custom.product_focus=Athletes&filter.v.price.gte=&filter.v.price.lte=&sort_by=manual\" title=\"Athletes Bundles\">ATHLETES</a>",
-            "title_size": "clamp(18px,3vw,24px)",
+            "image_align": "left",
+            "title": "ATHLETES",
+            "title_size": "clamp(21px,3vw,40px)",
             "text": "",
             "link_label": "",
             "link": ""
@@ -502,9 +347,9 @@
           "settings": {
             "image": "shopify://shop_images/Rectangle_26.png",
             "image_width_pct": 100,
-            "image_align": "center",
-            "title": "<a href=\"https://www.npta.ca/collections/bundles?filter.p.m.custom.product_focus=Nutrition&filter.v.price.gte=&filter.v.price.lte=&sort_by=manual\" title=\"Nutrition Bundles\">NUTRITION</a>",
-            "title_size": "clamp(18px,3vw,24px)",
+            "image_align": "left",
+            "title": "NUTRITION",
+            "title_size": "clamp(21px,3vw,40px)",
             "text": "",
             "link_label": "",
             "link": ""
@@ -515,9 +360,9 @@
           "settings": {
             "image": "shopify://shop_images/Rectangle_27.png",
             "image_width_pct": 100,
-            "image_align": "center",
-            "title": "<a href=\"https://www.npta.ca/collections/bundles?filter.p.m.custom.product_focus=Wellness&filter.v.price.gte=&filter.v.price.lte=&sort_by=manual\" title=\"Wellness Bundles\">WELLNESS</a>",
-            "title_size": "clamp(18px,3vw,24px)",
+            "image_align": "left",
+            "title": "WELLNESS",
+            "title_size": "clamp(21px,3vw,40px)",
             "text": "",
             "link_label": "",
             "link": ""
@@ -529,16 +374,11 @@
         "column_ajeEYg",
         "column_qLqfqw"
       ],
-      "custom_css": [
-        "slider-component {width: 80%; margin: 0 auto;}",
-        "@media (max-width: 749px) {slider-component {width: 100%; }}",
-        ".multicolumn-card__info h3 a {text-decoration: none;}"
-      ],
       "name": "t:sections.multicolumn.presets.name",
       "settings": {
         "max_width": "1989px",
         "title": "TRENDING BUNDLES",
-        "subtitle": "Check out most trending bundles!",
+        "subtitle": "",
         "subtitle_size": "clamp(14px,1.3vw,18px)",
         "heading_align": "center",
         "heading_size": "h1",
@@ -555,8 +395,8 @@
         "padding_top": 52,
         "padding_bottom": 52,
         "col_pad": 0,
-        "grid_gap": 20,
-        "grid_row_gap": 0,
+        "grid_gap": 24,
+        "grid_row_gap": 32,
         "content_align": "center"
       }
     },
@@ -596,6 +436,7 @@
         "feature_9wpwKm",
         "feature_Mhcqpq"
       ],
+      "disabled": true,
       "name": "Payment highlights",
       "settings": {
         "heading": "Learn Now, Pay Later With",
@@ -616,88 +457,66 @@
         "trainer_A9TM6F": {
           "type": "trainer",
           "settings": {
-            "image": "shopify://shop_images/Cert-18.jpg",
+            "image": "shopify://shop_images/Component_2.png",
             "show_content": false,
-            "name": "",
+            "name": "Savanna",
             "certification": "",
-            "quote": "",
+            "quote": "\"Enrolling in NASM was one of the best decisions for my career as a Personal Trainer and Sports Nutritionist. The education provided was excellent and equipped me with essential knowledge for the fitness industry. I appreciated the focus on coaching, nutrition, and exercise techniques. Thanks to NASM, I feel empowered to pursue my passion and look forward to further education in fitness, health, and wellness. I highly recommend NASM for expanding your knowledge in the fitness industry.\"",
             "rating": "5"
           }
         },
         "trainer_pQjW8c": {
           "type": "trainer",
           "settings": {
-            "image": "shopify://shop_images/Cert-17.jpg",
+            "image": "shopify://shop_images/trainer_3.png",
             "show_content": false,
-            "name": "",
+            "name": "Alex Jung Lee",
             "certification": "",
-            "quote": "",
-            "rating": "5"
-          }
-        },
-        "trainer_9kT9Xn": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-16.jpg",
-            "show_content": false,
-            "name": "",
-            "certification": "",
-            "quote": "",
+            "quote": "\"Throughout the NASM CPT certification course, I've gained a comprehensive understanding of the intrinsic value associated with health and wellness. I take great pride in successfully achieving the designation of NASM CPT. I am enthusiastic about leveraging my acquired knowledge to support and enhance the well-being of my family, friends, and community as a NASM Certified Personal Trainer.\"",
             "rating": "5"
           }
         },
         "trainer_GnQEiL": {
           "type": "trainer",
           "settings": {
-            "image": "shopify://shop_images/Cert-11.jpg",
+            "image": "shopify://shop_images/trainer_3_1.png",
             "show_content": false,
-            "name": "",
+            "name": "Felicitas Avendaño",
             "certification": "",
-            "quote": "",
+            "quote": "\"In 2018, I became a NASM Certified Personal Trainer (CPT) and Certified Nutrition Coach (CNC), turning a hobby into a full-time job with a busy schedule across two gyms, online clients, and home visits. Being a nutrition coach has enhanced my ability to help clients and added revenue streams to my business. I’m also proud to have been a gym owner for almost a year, enjoying the responsibility and freedom of leading my own team.\"",
             "rating": "5"
           }
         },
-        "trainer_AU9GY7": {
+        "trainer_fdV8UX": {
           "type": "trainer",
           "settings": {
-            "image": "shopify://shop_images/Cert-12.jpg",
+            "image": "shopify://shop_images/Cert-16.jpg",
             "show_content": false,
-            "name": "",
+            "name": "Helen",
             "certification": "",
-            "quote": "",
+            "quote": "\"𝐃𝐫𝐞𝐚𝐦𝐬 💭 𝐝𝐨 𝐜𝐨𝐦𝐞 𝐭𝐫𝐮𝐞...𝐚𝐧𝐝 𝐈 𝐃𝐈𝐃 𝐈𝐓!⁣ Studying at 𝟓𝟕 is so very different than at 𝟏𝟗. Yet very possible.⁣\"⁠",
             "rating": "5"
           }
         },
-        "trainer_bf7r4V": {
+        "trainer_i8F8Gd": {
           "type": "trainer",
           "settings": {
-            "image": "shopify://shop_images/Cert-13.jpg",
+            "image": "shopify://shop_images/Cert-17.jpg",
             "show_content": false,
-            "name": "",
+            "name": "Darryl",
             "certification": "",
-            "quote": "",
+            "quote": "\"Time to pass some of this fitness energy down to our youth! Helping to make sure that they play for at least 60 minutes a day.\"",
             "rating": "5"
           }
         },
-        "trainer_47Kir4": {
+        "trainer_AkBPkW": {
           "type": "trainer",
           "settings": {
-            "image": "shopify://shop_images/Cert-7.jpg",
+            "image": "shopify://shop_images/Cert-18.jpg",
             "show_content": false,
-            "name": "",
+            "name": "Kenneth",
             "certification": "",
-            "quote": "",
-            "rating": "5"
-          }
-        },
-        "trainer_tkGYB3": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-14.jpg",
-            "show_content": false,
-            "name": "",
-            "certification": "",
-            "quote": "",
+            "quote": "\"You can teach an old dog new tricks 😂 something good came out of the pandemic for me!\"",
             "rating": "5"
           }
         }
@@ -705,12 +524,10 @@
       "block_order": [
         "trainer_A9TM6F",
         "trainer_pQjW8c",
-        "trainer_9kT9Xn",
         "trainer_GnQEiL",
-        "trainer_AU9GY7",
-        "trainer_bf7r4V",
-        "trainer_47Kir4",
-        "trainer_tkGYB3"
+        "trainer_fdV8UX",
+        "trainer_i8F8Gd",
+        "trainer_AkBPkW"
       ],
       "settings": {
         "section_id": "trainer-success-journet",
@@ -730,38 +547,36 @@
       "custom_css": [
         ".section--top-banner {background-color: #000000;}",
         ".section--top-banner:before {width: 100%;}",
-        ".section--top-background {width: 100%; display: block;}",
-        "h1 {color: #fff;}",
-        ".subtitle-p {line-height: normal;}",
+        ".section--top-background {width: 100%;}",
         "@media (max-width: 980px) {.section--top-banner-container {top: 15%; } .section--top-background {background-position: -100vw center; }}"
       ],
       "name": "Top Banner",
       "settings": {
         "background_image": "shopify://shop_images/Footer_Banner.png",
         "title": "Your Fitness Career Starts Here",
-        "subtitle": "Would like to speak to a Career Advisor? or Book a FREE Mentorship Call?",
+        "subtitle": "",
         "desc1": "",
         "title_size": "clamp(32px,6vw,64px)",
         "subtitle_size": "26px",
         "desc_size": "16px",
-        "button_link": "",
-        "button_text": "",
-        "show_button_1": true,
-        "button_1_text": "SPEAK TO ADVISOR",
-        "button_1_link": "https://app.npta.ca/widget/bookings/jessica-npta-calendar",
+        "button_link": "shopify://collections/all",
+        "button_text": "GET CERTIFIED",
+        "show_button_1": false,
+        "button_1_text": "Button",
+        "button_1_link": "/",
         "show_button_2": true,
-        "button_2_text": "BOOK A CALL",
-        "button_2_link": "https://app.npta.ca/widget/bookings/meet-your-mentors-at-npta",
-        "button_gap": 80,
-        "btn1_bg": "#ffffff",
+        "button_2_text": "CHOOSE MY PROGRAM",
+        "button_2_link": "/",
+        "button_gap": 24,
+        "btn1_bg": "#c1ff72",
         "btn1_text_color": "#01241e",
-        "btn1_font_size": "14px",
-        "btn2_bg": "#c1ff72",
-        "btn2_text_color": "#000000",
-        "btn2_font_size": "14px",
+        "btn1_font_size": "clamp(14px,1.4vw,32px)",
+        "btn2_bg": "#ffffff",
+        "btn2_text_color": "#01241e",
+        "btn2_font_size": "clamp(14px,1.4vw,32px)",
         "button_position": "left",
         "title_alignment": "left",
-        "container_width": 660,
+        "container_width": 800,
         "alignment": "flex-end",
         "banner_height": "64vh",
         "top_banner_align_items": "center",
@@ -785,16 +600,13 @@
     "newsletter_v2_MYDzwi": {
       "type": "newsletter-v2",
       "disabled": true,
-      "custom_css": [
-        "h2.nlv2__title {font-size: 26px;}"
-      ],
       "name": "Newsletter v2",
       "settings": {
-        "heading": "<p>Unlock premium offers and special promos by joining the NPTA Community.</p>",
-        "placeholder": "Enter your Email",
-        "btn_label": "Unlock  Access",
+        "heading": "<p><strong>Enter your email for 25$ OFF</strong> your first order, plus the latest NPTA news.</p>",
+        "placeholder": "Email",
+        "btn_label": "Sign Up",
         "disclaimer": "<p>By providing my email, I am consenting to receive NPTA emails and Email-Based Advertising. For additional information, please see our <a href=\"/policies/privacy-policy\">Privacy Policy</a>.</p>",
-        "max_width": "60%",
+        "max_width": "50%",
         "pad_y": 48,
         "pad_x": 16,
         "bg_color": "#e6e3d7",
@@ -807,10 +619,7 @@
   },
   "order": [
     "video_v2_AqMBKg",
-    "video_v2_qzbam8",
-    "offer_highlight_strip_4fXkRx",
     "whats_new_grid_LhNjr7",
-    "promo_triple_banner_dkW6J8",
     "trainers_pick_KpCy4K",
     "feature_split_card_bcA9Uz",
     "section_process_PPjrLE",
