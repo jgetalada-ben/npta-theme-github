@@ -4396,9 +4396,8 @@ margin-top:20px;
     align-items: center;
     gap: 10px;
 }
-#pop-convert-app {
-  left:-9999px;
-}
+
+#pop-convert-app,
 .pc-buttons-trigger-wrapper,
 .pc-buttons-trigger-wrapper .button-container-left{
   visibility: hidden;
