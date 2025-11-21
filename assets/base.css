@@ -4396,6 +4396,7 @@ margin-top:20px;
     align-items: center;
     gap: 10px;
 }
+.pc-button.clickable-effect,
 .pc-buttons-trigger-wrapper {
   display: none !important;
 }
