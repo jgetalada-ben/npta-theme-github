@@ -279,6 +279,7 @@
           "type": "product_card",
           "settings": {
             "product_handle": "career-kickstarter-plus-cpt-ces-cnc-cpr",
+            "custom_image": "shopify://shop_images/CPT_59dfedca-0a8d-49d9-bbbc-803cffd27b44.jpg",
             "custom_title": "",
             "blurb": "<p>Become a Certified Personal Trainer from the world’s most trusted source of fitness...    </p>",
             "custom_price": "",
@@ -289,6 +290,7 @@
           "type": "product_card",
           "settings": {
             "product_handle": "certified-nutrition-coach-cnc",
+            "custom_image": "shopify://shop_images/CNC.jpg",
             "custom_title": "",
             "blurb": "<p>Nutrition serves as the foundation for our health and the fuel for our ...</p>",
             "custom_price": "",
@@ -299,6 +301,7 @@
           "type": "product_card",
           "settings": {
             "product_handle": "cpt-essentials-cpt-cpr",
+            "custom_image": "shopify://shop_images/CPT_Ess.jpg",
             "custom_title": "",
             "blurb": "<p>As a Certified Wellness Coach, you're not just pursuing a career...</p>",
             "custom_price": "",
