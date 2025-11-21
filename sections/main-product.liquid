@@ -720,6 +720,35 @@
   </div>
 </product-info>
 
+{%- comment -%}
+  Guard script: if user already submitted the finance form,
+  block the popup and optionally just follow the link.
+{%- endcomment -%}
+<script>
+(function() {
+  function hasSubmittedFinanceForm() {
+    try {
+      return localStorage.getItem('npta_finance_submitted') === '1';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // Use event delegation so this works even if links are added later
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('[data-elective-financing-link]');
+    if (!link) return;
+    if (!hasSubmittedFinanceForm()) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    const href = link.getAttribute('href');
+    if (href) {
+      window.location.href = href;
+    }
+  }, true); 
+})();
+</script>
+
 {% render 'ghl-finance-modal' %}
 
 <script>
