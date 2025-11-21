@@ -188,10 +188,21 @@
 
   .tp-media { 
     position: relative;
-    overflow: hidden; 
+    overflow: hidden;
   }
-  .tp-img { width: 100%; height: auto; display: block; aspect-ratio: 4 / 3; object-fit: cover; }
-  .tp-img--placeholder { background: #e6e6e6; aspect-ratio: 4 / 3; }
+
+  .tp-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 1 / 1;      /* square */
+    object-fit: cover;        /* crop to fill the square */
+  }
+
+  .tp-img--placeholder {
+    background: #e6e6e6;
+    aspect-ratio: 1 / 1;      /* square placeholder too */
+  }
 
   .tp-content { 
     display: grid; 
@@ -199,14 +210,17 @@
   }
 
   .tp-card-title {
-    margin: 0;
+    margin: 0 0 20px;
     font-family: var(--font-poppins700);
     text-transform: uppercase;
     font-size: clamp(18px, 1.7vw, 28px);
     line-height: 1.2;
     color: #01241E;
-    margin-bottom: 30px;
-    min-height: 57px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: calc(1.2em * 3);
   }
   .tp-card-blurb { 
     color: #01241E;
