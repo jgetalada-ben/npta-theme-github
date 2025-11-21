@@ -4399,6 +4399,7 @@ margin-top:20px;
 .pc-buttons-trigger-wrapper[data-v-7b21e5d6],
 #pop-convert-app {
   display: none !important;
+  visibility: hidden;
 }
 
 
