@@ -1,15 +1,3 @@
-{%- if request.path == '/' and template.name == 'index' -%}
-  <link rel="canonical" href="{{ routes.collections_url }}/all-products">
-  <meta name="robots" content="noindex,follow">
-  <script>
-    var target = '{{ routes.collections_url }}/all-products' + window.location.search + window.location.hash;
-    window.location.replace(target);
-  </script>
-  <noscript>
-    <meta http-equiv="refresh" content="0; url={{ routes.collections_url }}/all-products">
-  </noscript>
-{%- endif -%}
-
 <!doctype html>
 <html class="js" lang="{{ request.locale.iso_code }}">
   <head>
