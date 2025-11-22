@@ -25,6 +25,7 @@
   display: flex;
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
   padding-bottom: 1rem;
+  flex-direction: column;
 }
 
 @media screen and (max-width: 749px) {
