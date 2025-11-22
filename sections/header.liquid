@@ -333,11 +333,76 @@ header-drawer{
     </a>
 <!-- 📞 End Phone -->
       {% comment %} {% render 'header-search', input_id: 'Search-In-Modal' %} {% endcomment %}
-        <div
-          class="search-modal__content{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} search-modal__content-top{% else %} search-modal__content-bottom{% endif %}"
-          tabindex="-1"
-        >
-          <search-form class="search-modal__form">
+        {%- if settings.predictive_search_enabled -%}
+          <predictive-search
+            class="search-modal__content{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} search-modal__content-top{% else %} search-modal__content-bottom{% endif %}"
+            tabindex="-1"
+            data-loading-text="{{ 'accessibility.loading' | t }}"
+          >
+            <search-form class="search-modal__form">
+              <form
+                action="{{ routes.search_url }}"
+                method="get"
+                role="search"
+                class="search search-modal__form"
+                autocomplete="off"
+              >
+                <div class="field">
+                  <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
+                    {% render 'icon-search2' %}
+                  </button>
+
+                  <input
+                    class="search__input field__input"
+                    id="{{ input_id }}"
+                    type="search"
+                    name="q"
+                    value="{{ search.terms | escape }}"
+                    placeholder="{{ 'general.search.search' | t }}"
+                    role="combobox"
+                    aria-expanded="false"
+                    aria-owns="predictive-search-results"
+                    aria-controls="predictive-search-results"
+                    aria-haspopup="listbox"
+                    aria-autocomplete="list"
+                    autocorrect="off"
+                    autocomplete="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                  >
+
+                  {%- comment -%} Reset button used by search-form.js {%- endcomment -%}
+                  <button
+                    type="reset"
+                    class="field__button search__reset hidden"
+                    aria-label="{{ 'general.search.clear' | t }}"
+                  >
+                    <svg aria-hidden="true" focusable="false">
+                      <use href="#icon-reset"></use>
+                    </svg>
+                  </button>
+
+                  <label class="field__label" for="{{ input_id }}">{{ 'general.search.search' | t }}</label>
+                  <input type="hidden" name="options[prefix]" value="last">
+                </div>
+              </form>
+            </search-form>
+
+            {%- comment -%} Predictive search results container {%- endcomment -%}
+            <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+              <div class="predictive-search__loading-state" aria-hidden="true">
+                {% render 'icon-spinner' %}
+              </div>
+              <div id="predictive-search-results"></div>
+            </div>
+
+            <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+          </predictive-search>
+        {%- else -%}
+          <div
+            class="search-modal__content{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} search-modal__content-top{% else %} search-modal__content-bottom{% endif %}"
+            tabindex="-1"
+          >
             <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
               <div class="field">
                 <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
@@ -350,25 +415,13 @@ header-drawer{
                   name="q"
                   value="{{ search.terms | escape }}"
                   placeholder="{{ 'general.search.search' | t }}"
-                  {%- if settings.predictive_search_enabled -%}
-                    role="combobox"
-                    aria-expanded="false"
-                    aria-owns="predictive-search-results"
-                    aria-controls="predictive-search-results"
-                    aria-haspopup="listbox"
-                    aria-autocomplete="list"
-                    autocorrect="off"
-                    autocomplete="off"
-                    autocapitalize="off"
-                    spellcheck="false"
-                  {%- endif -%}
                 >
                 <label class="field__label" for="{{ input_id }}">{{ 'general.search.search' | t }}</label>
                 <input type="hidden" name="options[prefix]" value="last">
               </div>
             </form>
-          </search-form>
-        </div>
+          </div>
+        {%- endif -%}
       </div>
       {% comment %} Cart Icon {% endcomment %}
       <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
