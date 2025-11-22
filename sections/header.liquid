@@ -337,6 +337,7 @@ header-drawer{
           class="search-modal__content{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} search-modal__content-top{% else %} search-modal__content-bottom{% endif %}"
           tabindex="-1"
         >
+          {%- if settings.predictive_search_enabled -%}
           <search-form class="search-modal__form">
             <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
               <div class="field">
@@ -379,6 +380,7 @@ header-drawer{
               </div>
             </form>
           </search-form>
+          {%- endif -%}
         </div>
       </div>
       {% comment %} Cart Icon {% endcomment %}
