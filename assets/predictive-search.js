@@ -107,16 +107,34 @@ class PredictiveSearch extends SearchForm {
 
   updateSearchForTerm(previousTerm, newTerm) {
     const searchForTextElement = this.querySelector('[data-predictive-search-search-for-text]');
-    const currentButtonText = searchForTextElement?.innerText;
-    if (currentButtonText) {
-      if (currentButtonText.match(new RegExp(previousTerm, 'g')).length > 1) {
-        // The new term matches part of the button text and not just the search term, do not replace to avoid mistakes
-        return;
-      }
-      const newButtonText = currentButtonText.replace(previousTerm, newTerm);
-      searchForTextElement.innerText = newButtonText;
+    if (!searchForTextElement) return;
+
+    const currentButtonText = searchForTextElement.innerText || '';
+
+    // If we don't have a previous term yet (first keystroke), just build the text
+    if (!previousTerm) {
+      searchForTextElement.innerText = `Search for “${newTerm}”`;
+      return;
     }
+
+    if (!currentButtonText) return;
+
+    // Safely build a regex from the previous term
+    const escapedPrevious = previousTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(escapedPrevious, 'g');
+
+    const matches = currentButtonText.match(regex);
+
+    // If there are no matches, or the term appears more than once in the string,
+    // don't try to replace (avoid weird edge-cases)
+    if (!matches || matches.length > 1) {
+      return;
+    }
+
+    const newButtonText = currentButtonText.replace(regex, newTerm);
+    searchForTextElement.innerText = newButtonText;
   }
+
 
   switchOption(direction) {
     if (!this.getAttribute('open')) return;
