@@ -4401,7 +4401,6 @@ margin-top:20px;
  
 }
 
-.search__reset.hidden,
-.predictive-search__search-for-button {
+.search__reset.hidden{
   display: none;
 }
