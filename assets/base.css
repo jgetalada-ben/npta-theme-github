@@ -4400,4 +4400,7 @@ margin-top:20px;
 .recaptcha--error svg{
  
 }
+.search__reset.hidden {
+  display: none;
+}
 
