@@ -160,8 +160,8 @@
     }
     #promo3-{{ sid }} .promo3-img{
       width: 100%;
-      height: 400px;
-      max-height: 400px;
+      height: 100%;
+      display: block;
       object-fit: cover;
       object-position: center;
     }
@@ -231,6 +231,9 @@
 
     .promo-banner__body-image {
       width: 100%;
+      max-width: 400px;
+      aspect-ratio: 4 / 3;
+      margin: clamp(12px, 1.8vw, 18px) auto 0;
       {% comment %} height: 50vh; {% endcomment %}
     }
 
