@@ -72,7 +72,7 @@
     {%- comment -%} CENTER IMAGE WITH OVERLAY TEXT {%- endcomment -%}
     <div class="promo3-col promo3-col--center">
       {%- if section.settings.center_image != blank -%}
-        {{ section.settings.center_image | image_url: width: 2000 | image_tag: class: 'promo3-img', loading: 'lazy', alt: section.settings.center_image_alt | escape }}
+        {{ section.settings.center_image | image_url: width: 1200 | image_tag: class: 'promo3-img', loading: 'lazy', alt: section.settings.center_image_alt | escape }}
       {%- else -%}
         <div class="promo3-img promo3-img--placeholder" aria-hidden="true"></div>
       {%- endif -%}
