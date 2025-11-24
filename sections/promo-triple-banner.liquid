@@ -63,7 +63,7 @@
     {%- comment -%} LEFT IMAGE COLUMN {%- endcomment -%}
     <div class="promo3-col promo3-col--left">
       {%- if section.settings.left_image != blank -%}
-        {{ section.settings.left_image | image_url: width: 2000 | image_tag: class: 'promo3-img', loading: 'lazy', alt: section.settings.left_image_alt | escape }}
+        {{ section.settings.left_image | image_url: width: 1200 | image_tag: class: 'promo3-img', loading: 'lazy', alt: section.settings.left_image_alt | escape }}
       {%- else -%}
         <div class="promo3-img promo3-img--placeholder" aria-hidden="true"></div>
       {%- endif -%}
