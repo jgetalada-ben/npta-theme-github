@@ -173,7 +173,7 @@
   .trending-card {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: end;
     background: transparent;
     border-radius: 0;
     box-shadow: none;
@@ -194,20 +194,17 @@
     border-radius: 0;            /* ✅ no rounded corners on the image */
     transition: transform 0.35s ease;
   }
-  .trending-card:hover .trending-card__image {
-    transform: scale(1.03);
-  }
 
   /* White content box under the image (like the design) */
   .trending-card__info {
     position: relative;
     background: #ffffff;
-    border-radius: 24px;
+    border-radius: 0;
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
     padding: 22px 40px 26px;
-    text-align: center;
+    text-align: right;
     width: min(520px, 78%);
-    margin-top: -48px;  /* pulls it up so it “kisses” the image */
+    margin-top: -48px;
     z-index: 1;
   }
 
