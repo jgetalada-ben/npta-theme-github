@@ -234,6 +234,48 @@
         "button_pad_x": 32
       }
     },
+    "trending_feature_row_dHmYn6": {
+      "type": "trending-feature-row",
+      "blocks": {
+        "card_fmKjEG": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/image_13_1.jpg",
+            "eyebrow": "Now trending",
+            "title": "Become a certified personal trainer",
+            "button_label": "Shop now",
+            "button_link": ""
+          }
+        },
+        "card_YKLVqJ": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/image_14_1.jpg",
+            "eyebrow": "Now trending",
+            "title": "Become a certified personal trainer",
+            "button_label": "Shop now",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_fmKjEG",
+        "card_YKLVqJ"
+      ],
+      "name": "Trending feature row",
+      "settings": {
+        "heading": "Now trending",
+        "subheading": "Discover our most popular certifications",
+        "max_width": "1200px",
+        "bg": "#FFFFFF",
+        "columns_desktop": 2,
+        "pad_top": 48,
+        "pad_right": 24,
+        "pad_bottom": 48,
+        "pad_left": 24,
+        "gap": 32
+      }
+    },
     "trainers_pick_KpCy4K": {
       "type": "trainers-pick",
       "blocks": {
@@ -772,6 +814,7 @@
     "offer_highlight_strip_4fXkRx",
     "whats_new_grid_LhNjr7",
     "promo_triple_banner_dkW6J8",
+    "trending_feature_row_dHmYn6",
     "trainers_pick_KpCy4K",
     "feature_split_card_bcA9Uz",
     "section_process_PPjrLE",
