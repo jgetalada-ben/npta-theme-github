@@ -267,7 +267,7 @@
         "heading": "Now trending",
         "subheading": "Discover our most popular certifications",
         "max_width": "1200px",
-        "bg": "#FFFFFF",
+        "bg": "#f8f8f8",
         "columns_desktop": 2,
         "pad_top": 48,
         "pad_right": 24,
