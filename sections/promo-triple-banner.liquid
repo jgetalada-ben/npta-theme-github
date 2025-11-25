@@ -1,16 +1,9 @@
 {% comment %}
   Promo Triple Banner
-  Layout:
+  New layout (matches latest design):
   - Left tall image
-  - Center tall image with overlay text
-  - Right content card with heading, description, fine print, button
-
-  Controls:
-  - Section background, max-width, height
-  - Text alignment (all content + button)
-  - Font sizes and colors for heading, subtitle, body, overlay text
-  - Button background, text color, font size
-  - Button link can be product or URL, with open-in-new-tab toggle
+  - Center tall image with overlay text (LIVE NOW / 25% OFF)
+  - Right content card with heading, description, image, fine print, button
 {% endcomment %}
 
 {%- assign sid = section.id -%}
@@ -48,9 +41,9 @@
     --promo3-subtitle-color: {{ section.settings.subtitle_color }};
     --promo3-body-size: {{ section.settings.body_size | default: 'clamp(14px,1.3vw,18px)' }};
     --promo3-body-color: {{ section.settings.body_color }};
-    --promo3-overlay-heading-size: {{ section.settings.overlay_heading_size | default: 'clamp(18px,2.4vw,28px)' }};
+    --promo3-overlay-heading-size: {{ section.settings.overlay_heading_size | default: 'clamp(16px,1.5vw,20px)' }};
     --promo3-overlay-heading-color: {{ section.settings.overlay_heading_color }};
-    --promo3-overlay-sub-size: {{ section.settings.overlay_sub_size | default: 'clamp(32px,5vw,64px)' }};
+    --promo3-overlay-sub-size: {{ section.settings.overlay_sub_size | default: 'clamp(40px,4vw,72px)' }};
     --promo3-overlay-sub-color: {{ section.settings.overlay_sub_color }};
     --promo3-button-bg: {{ section.settings.button_bg }};
     --promo3-button-color: {{ section.settings.button_color }};
@@ -63,7 +56,10 @@
     {%- comment -%} LEFT IMAGE COLUMN {%- endcomment -%}
     <div class="promo3-col promo3-col--left">
       {%- if section.settings.left_image != blank -%}
-        {{ section.settings.left_image | image_url: width: 1200 | image_tag: class: 'promo3-img', loading: 'lazy', alt: section.settings.left_image_alt | escape }}
+        {{ section.settings.left_image
+          | image_url: width: 1800
+          | image_tag: class: 'promo3-img', loading: 'lazy', alt: section.settings.left_image_alt | escape
+        }}
       {%- else -%}
         <div class="promo3-img promo3-img--placeholder" aria-hidden="true"></div>
       {%- endif -%}
@@ -72,7 +68,10 @@
     {%- comment -%} CENTER IMAGE WITH OVERLAY TEXT {%- endcomment -%}
     <div class="promo3-col promo3-col--center">
       {%- if section.settings.center_image != blank -%}
-        {{ section.settings.center_image | image_url: width: 1200 | image_tag: class: 'promo3-img', loading: 'lazy', alt: section.settings.center_image_alt | escape }}
+        {{ section.settings.center_image
+          | image_url: width: 1800
+          | image_tag: class: 'promo3-img', loading: 'lazy', alt: section.settings.center_image_alt | escape
+        }}
       {%- else -%}
         <div class="promo3-img promo3-img--placeholder" aria-hidden="true"></div>
       {%- endif -%}
@@ -109,8 +108,8 @@
         {% if section.settings.body_image != blank %}
           <div class="promo-banner__body-image">
             {{ section.settings.body_image
-              | image_url: width: 1600
-              | image_tag: loading: 'lazy', alt: section.settings.subtitle | escape
+              | image_url: width: 1200
+              | image_tag: loading: 'lazy', alt: section.settings.body_image_alt | default: section.settings.subtitle | escape
             }}
           </div>
         {% endif %}
@@ -138,7 +137,7 @@
     </div>
   </div>
 
-    <style>
+  <style>
     #promo3-{{ sid }}.promo3-section{
       background: var(--promo3-bg);
       min-height: var(--promo3-height);
@@ -152,31 +151,42 @@
       width: 100%;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      /* left & center a bit wider than right, like the design */
+      grid-template-columns: 1.2fr 1.2fr 1fr;
       gap: 0;
+      align-items: stretch;
     }
 
     #promo3-{{ sid }} .promo3-col{
       position: relative;
       overflow: hidden;
+      display: flex;
     }
 
-    /* ✅ MAIN IMAGE SIZE – left & center */
+    /* Equal-height tall images on desktop */
+    #promo3-{{ sid }} .promo3-col--left,
+    #promo3-{{ sid }} .promo3-col--center,
+    #promo3-{{ sid }} .promo3-col--right{
+      min-height: clamp(420px, 55vw, 640px);
+    }
+
+    #promo3-{{ sid }} .promo3-col--right{
+      align-items: stretch;
+    }
+
     #promo3-{{ sid }} .promo3-img{
       display: block;
       width: 100%;
-      height: 400px;          /* target height on desktop */
-      max-height: 400px;
+      height: 100%;
       object-fit: cover;
       object-position: center;
     }
 
     #promo3-{{ sid }} .promo3-img--placeholder{
       background:#e5e5e5;
-      min-height: 320px;
     }
 
-    /* Overlay */
+    /* Overlay on center image */
     #promo3-{{ sid }} .promo3-overlay{
       position:absolute;
       inset:0;
@@ -203,16 +213,17 @@
       text-transform: uppercase;
     }
 
-    /* Card content */
+    /* Card content on the right */
     #promo3-{{ sid }} .promo3-card{
       background: transparent;
-      height: 100%;
-      padding: clamp(16px,2.4vw,28px) 0;
+      padding: clamp(20px,3vw,36px) clamp(24px,3vw,40px);
       display:flex;
       flex-direction:column;
-      justify-content:space-between;
+      justify-content:flex-start;
       gap: clamp(10px,1.8vw,18px);
+      width: 100%;
     }
+
     #promo3-{{ sid }} .promo3-heading{
       margin: 0;
       font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
@@ -220,33 +231,26 @@
       color: var(--promo3-heading-color);
       text-transform: uppercase;
       line-height: 1.05;
-      padding: 0 clamp(24px,3vw,40px);
     }
+
     #promo3-{{ sid }} .promo3-subtitle{
       font-size: var(--promo3-subtitle-size);
       color: var(--promo3-subtitle-color);
       font-family: var(--font-poppins600, var(--font-body-family));
       font-weight: 600;
       margin: 0;
-      padding: 0 clamp(24px,3vw,40px);
     }
 
-    #promo3-{{ sid }} .promo3-body-img{
-      margin: clamp(12px, 1.8vw, 18px) 0;
-    }
-
-    /* Right-column body image (small card image) */
+    /* Right card image – fills the card width like the design */
     .promo-banner__body-image {
       width: 100%;
-      max-width: 300px;
-      aspect-ratio: 4 / 3;
-      margin: clamp(12px, 1.8vw, 18px) auto 0;
+      margin: clamp(12px, 1.8vw, 18px) 0;
     }
 
     .promo-banner__body-image img {
       display: block;
       width: 100%;
-      height: 100%;
+      height: auto;
       object-fit: cover;
     }
 
@@ -256,7 +260,6 @@
       color: var(--promo3-body-color);
       font-family: var(--font-poppins400, var(--font-body-family));
       margin-top:auto;
-      padding: 0 clamp(24px,3vw,40px);
     }
 
     /* Button */
@@ -293,27 +296,23 @@
     #promo3-{{ sid }} .promo3-align-center .promo3-btn-wrap{ text-align:center; }
     #promo3-{{ sid }} .promo3-align-right .promo3-btn-wrap{ text-align:right; }
 
-    /* ✅ Responsive */
+    /* Responsive */
     @media (max-width: 990px){
       #promo3-{{ sid }} .promo3-wrap{
         grid-template-columns: 1fr;
       }
 
-      /* keep left/center images from being super tall on mobile */
-      #promo3-{{ sid }} .promo3-col--left,
-      #promo3-{{ sid }} .promo3-col--center{
-        height: 320px;
-      }
-      #promo3-{{ sid }} .promo3-col--left .promo3-img,
-      #promo3-{{ sid }} .promo3-col--center .promo3-img{
-        height: 100%;
+      #promo3-{{ sid }} .promo3-col{
+        min-height: auto;
+        display:block;
       }
 
-      #promo3-{{ sid }} .promo3-col--right{
-        min-height: 260px;
+      #promo3-{{ sid }} .promo3-img{
+        height: auto;
       }
+
       #promo3-{{ sid }} .promo3-card{
-        padding: 20px 0;
+        padding: 24px 20px 32px;
       }
     }
   </style>
@@ -355,9 +354,9 @@
     { "type": "text", "id": "center_image_alt", "label": "Center image alt text" },
     { "type": "text", "id": "overlay_heading", "label": "Overlay heading", "default": "LIVE NOW" },
     { "type": "text", "id": "overlay_subheading", "label": "Overlay subheading", "default": "25% OFF" },
-    { "type": "text", "id": "overlay_heading_size", "label": "Overlay heading font-size (accepts clamp())", "default": "clamp(16px,2.2vw,22px)" },
+    { "type": "text", "id": "overlay_heading_size", "label": "Overlay heading font-size (accepts clamp())", "default": "clamp(16px,1.5vw,20px)" },
     { "type": "color", "id": "overlay_heading_color", "label": "Overlay heading color", "default": "#FFFFFF" },
-    { "type": "text", "id": "overlay_sub_size", "label": "Overlay subheading font-size (accepts clamp())", "default": "clamp(32px,5vw,64px)" },
+    { "type": "text", "id": "overlay_sub_size", "label": "Overlay subheading font-size (accepts clamp())", "default": "clamp(40px,4vw,72px)" },
     { "type": "color", "id": "overlay_sub_color", "label": "Overlay subheading color", "default": "#FFFFFF" },
 
     { "type": "header", "content": "Right content card" },
