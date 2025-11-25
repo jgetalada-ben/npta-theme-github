@@ -4327,7 +4327,7 @@ text-decoration-line: underline;
     opacity: .4;
 position:absolute;
   top:-20px;
-  
+      width: max-content;
   
 }
 
