@@ -20,6 +20,7 @@
     },
     "image_banner_6FHKCX": {
       "type": "image-banner",
+      "disabled": true,
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "image": "shopify://shop_images/PH_Website_Hero_Banner.png",
