@@ -133,7 +133,7 @@
   </div>
 
   {% stylesheet %}
-    .trending-row {
+  .trending-row {
     background: var(--bg);
     padding: var(--pt) var(--pr) var(--pb) var(--pl);
   }
@@ -142,6 +142,7 @@
     width: 100%;
   }
 
+  /* Optional header (if you use it) */
   .trending-row__header {
     text-align: center;
     margin-bottom: 32px;
@@ -167,50 +168,50 @@
     gap: var(--gap);
   }
 
-  /* ===== CARD LAYOUT (updated to match design) ===== */
-
+  /* ------- CARD LAYOUT ------- */
+  /* Card is just a column wrapper now */
   .trending-card {
-    position: relative;
     display: flex;
     flex-direction: column;
-    background: transparent;    /* no big white card */
-    box-shadow: none;
+    align-items: center;
+    background: transparent;
     border-radius: 0;
+    box-shadow: none;
   }
 
+  /* Image: no radius, no clipping, more of the head visible */
   .trending-card__image-wrapper {
-    position: relative;
-    overflow: hidden;
-    border-radius: 24px;
-    box-shadow: 0 18px 40px rgba(0,0,0,0.15);
+    width: 100%;
+    overflow: visible;
   }
-
   .trending-card__image {
-    display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 16 / 10;      /* a bit shorter like the design */
+    display: block;
+    aspect-ratio: 16 / 11;
     object-fit: cover;
+    object-position: center top; /* keeps the top of the image in frame */
+    border-radius: 0;            /* ✅ no rounded corners on the image */
     transition: transform 0.35s ease;
   }
-
   .trending-card:hover .trending-card__image {
     transform: scale(1.03);
   }
 
-  /* white content “panel” under the image */
+  /* White content box under the image (like the design) */
   .trending-card__info {
     position: relative;
-    max-width: 520px;
-    width: 80%;
-    margin: -52px auto 0;       /* pull up to overlap the image */
-    padding: 22px 40px 26px;
     background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 18px 40px rgba(0,0,0,0.10);
+    border-radius: 24px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
+    padding: 22px 40px 26px;
     text-align: center;
+    width: min(520px, 78%);
+    margin-top: -48px;  /* pulls it up so it “kisses” the image */
+    z-index: 1;
   }
 
+  /* Typography inside content box */
   .trending-card__eyebrow {
     margin: 0 0 6px;
     font-family: var(--font-poppins700);
@@ -219,7 +220,6 @@
     text-transform: uppercase;
     color: #777;
   }
-
   .trending-card__title {
     margin: 0 0 14px;
     font-family: var(--font-poppins700);
@@ -228,7 +228,6 @@
     text-transform: uppercase;
     color: #000;
   }
-
   .trending-card__link {
     display: inline-block;
     font-family: var(--font-adirek800);
@@ -240,7 +239,6 @@
     position: relative;
     padding-bottom: 2px;
   }
-
   .trending-card__link::after {
     content: "";
     position: absolute;
@@ -253,24 +251,24 @@
     transform-origin: left;
     transform: scaleX(0);
   }
-
   .trending-card__link:hover::after {
     transform: scaleX(1);
   }
 
-  /* Make cards full-width in the mobile slider */
+  /* Mobile: make each slide nicely sized */
   @media screen and (max-width: 749px) {
     .trending-row__list {
-      grid-auto-columns: minmax(75%, 1fr);
+      grid-auto-columns: minmax(80%, 1fr);
     }
 
     .trending-card__info {
-      width: 88%;
-      margin-top: -40px;        /* slightly less overlap on small screens */
-      padding: 18px 24px 22px;
+      width: 86%;
+      margin-top: -36px;
+      padding: 20px 24px 22px;
     }
   }
   {% endstylesheet %}
+
 </section>
 
 {% schema %}
