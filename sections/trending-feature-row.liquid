@@ -89,7 +89,7 @@
                   </h3>
                 {% endif %}
 
-                {% if block.settings.button_label != blank %}
+                {% if block.settings.button_link != blank %}
                   <a
                     class="trending-card__link"
                     {% if block.settings.button_link == blank %}
@@ -219,6 +219,7 @@
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: #777;
+    font-weight: bold;
   }
 
   .trending-card__title {
@@ -235,7 +236,7 @@
     font-size: var(--tr-button-size);
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    text-decoration: none;
+    text-decoration: underline;
     color: #000;
     position: relative;
     padding-bottom: 2px;
