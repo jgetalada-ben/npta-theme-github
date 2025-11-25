@@ -273,7 +273,11 @@
         "pad_right": 24,
         "pad_bottom": 48,
         "pad_left": 24,
-        "gap": 32
+        "gap": 32,
+        "card_bg": "#f8f8f8",
+        "eyebrow_size": "11px",
+        "card_title_size": "clamp(16px,1.5vw,20px)",
+        "button_font_size": "12px"
       }
     },
     "trainers_pick_KpCy4K": {
