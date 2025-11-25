@@ -122,7 +122,15 @@
 
         {%- if btn_href != '' and section.settings.button_label != blank -%}
           <div class="promo3-btn-wrap">
-            
+            <a
+              href=""
+              class="promo3-btn"
+              {% if section.settings.button_new_tab %}
+                target="_blank" rel="noopener noreferrer"
+              {% endif %}
+            >
+              
+            </a>
             <a href="{{ btn_href }}" 
               class="btn button-yg tp-cta"
               {% if section.settings.button_new_tab %}
