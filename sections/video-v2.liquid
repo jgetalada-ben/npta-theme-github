@@ -25,7 +25,12 @@
 {%- assign ov = section.settings.overlay_darkness | default: 0 | plus: 0 | divided_by: 100.0 -%}
 
 {%- assign has_content = false -%}
-{%- if section.settings.title != blank or section.settings.subtitle != blank or section.settings.desc != blank or section.settings.show_btn1 or section.settings.show_btn2 -%}
+{%- if section.settings.title != blank
+      or section.settings.promo_line != blank
+      or section.settings.subtitle != blank
+      or section.settings.desc != blank
+      or section.settings.show_btn1
+      or section.settings.show_btn2 -%}
   {%- assign has_content = true -%}
 {%- endif -%}
 
