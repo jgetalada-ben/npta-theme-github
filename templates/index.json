@@ -31,7 +31,7 @@
         "desc": "<p><strong>This is your moment. DON’T WAIT! Your future self will thank you. <br/>Sale ENDS Nov 30.</strong></p>",
         "title_size": "clamp(28px,5vw,72px)",
         "title_color": "#ffffff",
-        "promo_size": "clamp(40px,5vw,72px)",
+        "promo_size": "clamp(32px,5vw,72px)",
         "promo_color": "#c8ff63",
         "subtitle_size": "clamp(18px,3vw,40px)",
         "subtitle_color": "#c8ff63",
