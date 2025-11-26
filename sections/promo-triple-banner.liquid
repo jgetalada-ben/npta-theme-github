@@ -151,6 +151,8 @@
       width: 100%;
       margin: 0 auto;
       display: grid;
+      /* ✅ 3 equal columns */
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 0;
       align-items: stretch;
     }
@@ -158,9 +160,23 @@
     #promo3-{{ sid }} .promo3-col{
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* default image behaviour (mobile / small screens) */
+    /* ✅ one shared height for the whole row */
+    #promo3-{{ sid }} .promo3-col--left,
+    #promo3-{{ sid }} .promo3-col--center,
+    #promo3-{{ sid }} .promo3-col--right{
+      height: 100%;
+    }
+
+    /* right card always stretches to match image columns */
+    #promo3-{{ sid }} .promo3-col--right{
+      align-items: stretch;
+    }
+
+    /* ✅ default image behaviour (right card image can stay auto-height) */
     #promo3-{{ sid }} .promo3-img{
       display: block;
       width: 100%;
@@ -169,11 +185,19 @@
       object-position: center;
     }
 
+    /* ✅ force left + center to 3:4 (e.g. 300x400) */
+    #promo3-{{ sid }} .promo3-col--left .promo3-img,
+    #promo3-{{ sid }} .promo3-col--center .promo3-img{
+      width: 100%;
+      aspect-ratio: 3 / 4; /* same as 300x400 */
+      height: auto;
+    }
+
     #promo3-{{ sid }} .promo3-img--placeholder{
       background:#e5e5e5;
     }
 
-    /* Overlay on center image (you can leave fields blank if text is baked into image) */
+    /* Overlay on center image */
     #promo3-{{ sid }} .promo3-overlay{
       position:absolute;
       inset:0;
@@ -203,10 +227,11 @@
     /* Card content on the right */
     #promo3-{{ sid }} .promo3-card{
       background: transparent;
-      width: 100%;
       display:flex;
       flex-direction:column;
+      justify-content:flex-start;
       gap: clamp(10px,1.8vw,18px);
+      width: 100%;height: 100%;
     }
 
     #promo3-{{ sid }} .promo3-heading{
@@ -228,12 +253,12 @@
       padding: 0 clamp(24px, 3vw, 40px);
     }
 
-    /* Right card image */
+    /* Right card image – fills the card width like the design */
     .promo-banner__body-image {
       width: 100%;
       margin: clamp(12px, 1.8vw, 18px) 0;
-      overflow: hidden;
     }
+
     .promo-banner__body-image img {
       display: block;
       width: 100%;
@@ -255,6 +280,24 @@
       margin-bottom: 20px;
       padding: 0 clamp(24px, 3vw, 40px);
     }
+    #promo3-{{ sid }} .promo3-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: var(--promo3-button-pad-y) var(--promo3-button-pad-x);
+      border-radius: 999px;
+      border: none;
+      background: var(--promo3-button-bg);
+      color: var(--promo3-button-color);
+      font-size: var(--promo3-button-font-size);
+      font-family: var(--font-adirek800, var(--font-body-family));
+      font-weight: 800;
+      text-decoration:none;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor:pointer;
+      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+    }
 
     /* Alignment helpers */
     #promo3-{{ sid }} .promo3-align-left{ text-align:left; align-items:flex-start; }
@@ -263,57 +306,14 @@
     #promo3-{{ sid }} .promo3-align-center .promo3-btn-wrap{ text-align:center; }
     #promo3-{{ sid }} .promo3-align-right .promo3-btn-wrap{ text-align:right; }
 
-    /* ---------- DESKTOP: equal-fixed height row (400px) ---------- */
-    @media (min-width: 990px){
-      #promo3-{{ sid }} .promo3-wrap{
-        /* left & center slightly wider than right, similar to design */
-        grid-template-columns: 1.05fr 1.05fr 1fr;
-      }
-
-      #promo3-{{ sid }} .promo3-col{
-        height: 400px;           /* <- fixed row height */
-        display:flex;
-      }
-
-      #promo3-{{ sid }} .promo3-img{
-        height: 100%;            /* fill the 400px column height */
-      }
-
-      #promo3-{{ sid }} .promo3-col--right{
-        align-items:stretch;
-      }
-
-      #promo3-{{ sid }} .promo3-card{
-        height: 100%;
-        padding: 24px 32px 28px;
-      }
-
-      /* let the right-column image use the middle space, 
-         with fine print + button anchored toward the bottom */
-      .promo-banner__body-image{
-        flex: 1 1 auto;
-        margin: 16px 0;
-      }
-      .promo-banner__body-image img{
-        height: 100%;
-      }
-
-      #promo3-{{ sid }} .promo3-fineprint{
-        margin-top: auto;
-      }
-      #promo3-{{ sid }} .promo3-btn-wrap{
-        margin-top: 16px;
-      }
-    }
-
-    /* ---------- MOBILE / TABLET STACK ---------- */
-    @media (max-width: 989px){
+    /* Responsive */
+    @media (max-width: 990px){
       #promo3-{{ sid }} .promo3-wrap{
         grid-template-columns: 1fr;
       }
 
       #promo3-{{ sid }} .promo3-col{
-        height: auto;
+        min-height: auto;
         display:block;
       }
 
@@ -326,7 +326,6 @@
       }
     }
   </style>
-
 </section>
 
 {% schema %}
