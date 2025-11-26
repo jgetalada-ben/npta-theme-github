@@ -151,8 +151,7 @@
       width: 100%;
       margin: 0 auto;
       display: grid;
-      /* ✅ 3 equal columns */
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: 1fr 1fr 1fr; /* 3 equal columns */
       gap: 0;
       align-items: stretch;
     }
@@ -161,36 +160,19 @@
       position: relative;
       overflow: hidden;
       display: flex;
-      flex-direction: column;
+      height: 400px;            /* 🔒 fixed height on desktop */
     }
 
-    /* ✅ one shared height for the whole row */
-    #promo3-{{ sid }} .promo3-col--left,
-    #promo3-{{ sid }} .promo3-col--center,
-    #promo3-{{ sid }} .promo3-col--right{
-      height: 100%;
-    }
-
-    /* right card always stretches to match image columns */
     #promo3-{{ sid }} .promo3-col--right{
       align-items: stretch;
     }
 
-    /* ✅ default image behaviour (right card image can stay auto-height) */
     #promo3-{{ sid }} .promo3-img{
       display: block;
       width: 100%;
-      height: auto;
+      height: 100%;
       object-fit: cover;
       object-position: center;
-    }
-
-    /* ✅ force left + center to 3:4 (e.g. 300x400) */
-    #promo3-{{ sid }} .promo3-col--left .promo3-img,
-    #promo3-{{ sid }} .promo3-col--center .promo3-img{
-      width: 100%;
-      aspect-ratio: 3 / 4; /* same as 300x400 */
-      height: auto;
     }
 
     #promo3-{{ sid }} .promo3-img--placeholder{
@@ -229,9 +211,10 @@
       background: transparent;
       display:flex;
       flex-direction:column;
-      justify-content:flex-start;
+      justify-content:space-between;  /* spread content top–bottom */
       gap: clamp(10px,1.8vw,18px);
-      width: 100%;height: 100%;
+      width: 100%;
+      height: 100%;                   /* fill the 400px column */
     }
 
     #promo3-{{ sid }} .promo3-heading{
@@ -253,7 +236,7 @@
       padding: 0 clamp(24px, 3vw, 40px);
     }
 
-    /* Right card image – fills the card width like the design */
+    /* Right card image */
     .promo-banner__body-image {
       width: 100%;
       margin: clamp(12px, 1.8vw, 18px) 0;
@@ -280,24 +263,6 @@
       margin-bottom: 20px;
       padding: 0 clamp(24px, 3vw, 40px);
     }
-    #promo3-{{ sid }} .promo3-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding: var(--promo3-button-pad-y) var(--promo3-button-pad-x);
-      border-radius: 999px;
-      border: none;
-      background: var(--promo3-button-bg);
-      color: var(--promo3-button-color);
-      font-size: var(--promo3-button-font-size);
-      font-family: var(--font-adirek800, var(--font-body-family));
-      font-weight: 800;
-      text-decoration:none;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      cursor:pointer;
-      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
-    }
 
     /* Alignment helpers */
     #promo3-{{ sid }} .promo3-align-left{ text-align:left; align-items:flex-start; }
@@ -313,7 +278,7 @@
       }
 
       #promo3-{{ sid }} .promo3-col{
-        min-height: auto;
+        height: auto;     /* let them grow naturally on mobile */
         display:block;
       }
 
@@ -323,6 +288,7 @@
 
       #promo3-{{ sid }} .promo3-card{
         padding: 24px 20px 32px;
+        height: auto;
       }
     }
   </style>
