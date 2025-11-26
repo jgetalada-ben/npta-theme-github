@@ -1,12 +1,5 @@
-{% comment %}
-  Promo Triple Banner
-  New layout (matches latest design):
-  - Left tall image
-  - Center tall image with overlay text (LIVE NOW / 25% OFF)
-  - Right content card with heading, description, image, fine print, button
-{% endcomment %}
-
 {%- assign sid = section.id -%}
+{%- assign promo3_img_widths = '640,960,1280,1600,1920,2240' -%}
 
 {%- assign mw = section.settings.max_width | default: '1989px' | strip -%}
 {%- unless mw contains 'px' or mw contains '%' or mw contains 'vw' or mw contains 'rem' -%}
@@ -57,8 +50,13 @@
     <div class="promo3-col promo3-col--left">
       {%- if section.settings.left_image != blank -%}
         {{ section.settings.left_image
-          | image_url: width: 1800
-          | image_tag: class: 'promo3-img', loading: 'lazy', alt: section.settings.left_image_alt | escape
+          | image_url: width: 2240
+          | image_tag:
+              class: 'promo3-img',
+              loading: 'lazy',
+              widths: promo3_img_widths,
+              sizes: '(min-width: 1200px) 33vw, 100vw',
+              alt: section.settings.left_image_alt | escape
         }}
       {%- else -%}
         <div class="promo3-img promo3-img--placeholder" aria-hidden="true"></div>
@@ -69,8 +67,13 @@
     <div class="promo3-col promo3-col--center">
       {%- if section.settings.center_image != blank -%}
         {{ section.settings.center_image
-          | image_url: width: 1800
-          | image_tag: class: 'promo3-img', loading: 'lazy', alt: section.settings.center_image_alt | escape
+          | image_url: width: 2240
+          | image_tag:
+              class: 'promo3-img',
+              loading: 'lazy',
+              widths: promo3_img_widths,
+              sizes: '(min-width: 1200px) 33vw, 100vw',
+              alt: section.settings.center_image_alt | escape
         }}
       {%- else -%}
         <div class="promo3-img promo3-img--placeholder" aria-hidden="true"></div>
