@@ -151,7 +151,6 @@
       width: 100%;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr; /* 3 equal columns */
       gap: 0;
       align-items: stretch;
     }
@@ -159,18 +158,13 @@
     #promo3-{{ sid }} .promo3-col{
       position: relative;
       overflow: hidden;
-      display: flex;
-      height: 400px;            /* 🔒 fixed height on desktop */
     }
 
-    #promo3-{{ sid }} .promo3-col--right{
-      align-items: stretch;
-    }
-
+    /* default image behaviour (mobile / small screens) */
     #promo3-{{ sid }} .promo3-img{
       display: block;
       width: 100%;
-      height: 100%;
+      height: auto;
       object-fit: cover;
       object-position: center;
     }
@@ -179,7 +173,7 @@
       background:#e5e5e5;
     }
 
-    /* Overlay on center image */
+    /* Overlay on center image (you can leave fields blank if text is baked into image) */
     #promo3-{{ sid }} .promo3-overlay{
       position:absolute;
       inset:0;
@@ -209,12 +203,10 @@
     /* Card content on the right */
     #promo3-{{ sid }} .promo3-card{
       background: transparent;
+      width: 100%;
       display:flex;
       flex-direction:column;
-      justify-content:space-between;  /* spread content top–bottom */
       gap: clamp(10px,1.8vw,18px);
-      width: 100%;
-      height: 100%;                   /* fill the 400px column */
     }
 
     #promo3-{{ sid }} .promo3-heading{
@@ -240,8 +232,8 @@
     .promo-banner__body-image {
       width: 100%;
       margin: clamp(12px, 1.8vw, 18px) 0;
+      overflow: hidden;
     }
-
     .promo-banner__body-image img {
       display: block;
       width: 100%;
@@ -271,14 +263,57 @@
     #promo3-{{ sid }} .promo3-align-center .promo3-btn-wrap{ text-align:center; }
     #promo3-{{ sid }} .promo3-align-right .promo3-btn-wrap{ text-align:right; }
 
-    /* Responsive */
-    @media (max-width: 990px){
+    /* ---------- DESKTOP: equal-fixed height row (400px) ---------- */
+    @media (min-width: 990px){
+      #promo3-{{ sid }} .promo3-wrap{
+        /* left & center slightly wider than right, similar to design */
+        grid-template-columns: 1.05fr 1.05fr 1fr;
+      }
+
+      #promo3-{{ sid }} .promo3-col{
+        height: 400px;           /* <- fixed row height */
+        display:flex;
+      }
+
+      #promo3-{{ sid }} .promo3-img{
+        height: 100%;            /* fill the 400px column height */
+      }
+
+      #promo3-{{ sid }} .promo3-col--right{
+        align-items:stretch;
+      }
+
+      #promo3-{{ sid }} .promo3-card{
+        height: 100%;
+        padding: 24px 32px 28px;
+      }
+
+      /* let the right-column image use the middle space, 
+         with fine print + button anchored toward the bottom */
+      .promo-banner__body-image{
+        flex: 1 1 auto;
+        margin: 16px 0;
+      }
+      .promo-banner__body-image img{
+        height: 100%;
+      }
+
+      #promo3-{{ sid }} .promo3-fineprint{
+        margin-top: auto;
+      }
+      #promo3-{{ sid }} .promo3-btn-wrap{
+        margin-top: 16px;
+      }
+    }
+
+    /* ---------- MOBILE / TABLET STACK ---------- */
+    @media (max-width: 989px){
       #promo3-{{ sid }} .promo3-wrap{
         grid-template-columns: 1fr;
       }
 
       #promo3-{{ sid }} .promo3-col{
-        height: auto;     /* let them grow naturally on mobile */
+        height: auto;
         display:block;
       }
 
@@ -288,7 +323,6 @@
 
       #promo3-{{ sid }} .promo3-card{
         padding: 24px 20px 32px;
-        height: auto;
       }
     }
   </style>
