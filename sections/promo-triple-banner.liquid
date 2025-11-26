@@ -79,7 +79,7 @@
         <div class="promo3-img promo3-img--placeholder" aria-hidden="true"></div>
       {%- endif -%}
 
-      <div class="promo3-overlay promo3-align-{{ section.settings.content_align }}">
+      <div class="promo3-overlay promo3-overlay-container">
         {%- if section.settings.overlay_heading != blank -%}
           <div class="promo3-overlay-heading">
             {{ section.settings.overlay_heading }}
@@ -260,7 +260,6 @@
     /* Right card image – fills the card width like the design */
     .promo-banner__body-image {
       width: 100%;
-      margin: clamp(12px, 1.8vw, 18px) 0;
     }
 
     .promo-banner__body-image img {
