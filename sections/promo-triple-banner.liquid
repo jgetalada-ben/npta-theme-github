@@ -151,23 +151,23 @@
       width: 100%;
       margin: 0 auto;
       display: grid;
-      /* left & center a bit wider than right, like the design */
-      grid-template-columns: 1.2fr 1.2fr 1fr;
+      /* two fixed 300px image columns + flexible text column */
+      grid-template-columns: 300px 300px minmax(0, 1fr);
       gap: 0;
-      align-items: stretch;
+      align-items: flex-start;
     }
 
     #promo3-{{ sid }} .promo3-col{
       position: relative;
       overflow: hidden;
-      display: flex;
+      display: block;
     }
 
-    /* Equal-height tall images on desktop */
+    /* let each column size to its content */
     #promo3-{{ sid }} .promo3-col--left,
     #promo3-{{ sid }} .promo3-col--center,
     #promo3-{{ sid }} .promo3-col--right{
-      min-height: clamp(420px, 55vw, 640px);
+      min-height: 0;
     }
 
     #promo3-{{ sid }} .promo3-col--right{
@@ -177,8 +177,8 @@
     #promo3-{{ sid }} .promo3-img{
       display: block;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+      object-fit: contain;
       object-position: center;
     }
 
