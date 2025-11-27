@@ -92,7 +92,6 @@
     },
     "video_v2_qzbam8": {
       "type": "video-v2",
-      "disabled": true,
       "custom_css": [
         ".vid2__desc h2 {color: #fff;}"
       ],
@@ -107,10 +106,10 @@
         "height_mode": "ratio",
         "vh_desktop": "50vh",
         "vh_mobile": "42dvh",
-        "title": "EARLY BLACK FRIDAY ACCESS",
-        "promo_line": "",
-        "subtitle": "SAVE UP TO $2,000",
-        "desc": "<h2>LIMITED ENROLLMENT</h2><p>Enroll in any Certified Personal Trainer (CPT) + Certified Nutrition Coach (CNC) bundle and unlock exclusive bonuses worth up to $2,000!</p>",
+        "title": "BLACK FRIDAY SALE",
+        "promo_line": "25% OFF",
+        "subtitle": "ALL BUNDLES AND SPECIALIZATIONS",
+        "desc": "<p>This is your moment. <strong>DON’T WAIT!</strong> Your future self will thank you. Courses Not Included In Sale: <strong>CPR, HGD, YES,</strong> and <strong>RFL</strong>. </p><p><strong><br/>SALE ENDS ON NOV 30.<br/></strong></p>",
         "title_size": "clamp(28px,5vw,72px)",
         "title_color": "#ffffff",
         "promo_size": "clamp(32px,5vw,72px)",
@@ -121,7 +120,7 @@
         "desc_color": "#ffffff",
         "align": "center",
         "overlay_darkness": 50,
-        "show_btn1": true,
+        "show_btn1": false,
         "btns_margin_top": "16px",
         "btn1_label": "GET ACCESS CODE",
         "btn1_link": "#",
