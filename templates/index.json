@@ -52,6 +52,9 @@
     },
     "video_v2_wYJfaG": {
       "type": "video-v2",
+      "custom_css": [
+        "h2 {color:#fff;}"
+      ],
       "name": "Video v2",
       "settings": {
         "media_type": "video",
@@ -92,6 +95,7 @@
     },
     "video_v2_qzbam8": {
       "type": "video-v2",
+      "disabled": true,
       "custom_css": [
         ".vid2__desc h2 {color: #fff;}"
       ],
