@@ -18,53 +18,6 @@
         "color_scheme": "scheme-1"
       }
     },
-    "image_banner_6FHKCX": {
-      "type": "image-banner",
-      "name": "t:sections.image-banner.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/PH_Website_Hero_Banner.png",
-        "image_overlay_opacity": 0,
-        "image_height": "adapt",
-        "desktop_content_position": "middle-center",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "color_scheme": "",
-        "image_behavior": "none",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": true,
-        "show_text_below": false
-      }
-    },
-    "hero_banner_v2_hHfpYR": {
-      "type": "hero-banner-v2",
-      "disabled": true,
-      "custom_css": [
-        "#hbv2-template--19848592883944__hero_banner_v2_hHfpYR.hbv2-banner {height: 100vh;}",
-        ".hbv2-footer {display: none;}"
-      ],
-      "name": "Hero Banner V2",
-      "settings": {
-        "background_image": "shopify://shop_images/PH_Website_Hero_Banner.png",
-        "banner_bg_color": "#ffffff",
-        "headline": "",
-        "title_color": "#141414",
-        "ribbon_text": "",
-        "promo_text": "",
-        "button_1_link": "",
-        "button_1_text": "",
-        "button_2_link": "",
-        "button_2_text": "",
-        "buttons_margin_top": "",
-        "buttons_margin_bottom": "",
-        "hero_image_width": "500",
-        "hero_image_height": "500",
-        "award_text": "",
-        "award_sub_text": "",
-        "award_image_width": "0",
-        "award_image_height": "0",
-        "badge_2_text": ""
-      }
-    },
     "section_breadcrumb_JGKpdR": {
       "type": "section--breadcrumb",
       "settings": {
@@ -138,8 +91,6 @@
   },
   "order": [
     "banner",
-    "image_banner_6FHKCX",
-    "hero_banner_v2_hHfpYR",
     "section_breadcrumb_JGKpdR",
     "section_header_title_4R3UWU",
     "product-grid",
