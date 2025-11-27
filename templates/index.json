@@ -280,7 +280,7 @@
         "card_bg": "#f8f8f8",
         "eyebrow_size": "11px",
         "card_title_size": "clamp(16px,1.5vw,20px)",
-        "button_font_size": "12px"
+        "button_font_size": "clamp(12px,1.2vw,16px)"
       }
     },
     "trainers_pick_KpCy4K": {
