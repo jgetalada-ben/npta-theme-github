@@ -15,6 +15,7 @@
   }
 
   /* Heading alignment helpers */
+  multicolumn-image-link img {cursor: pointer;}
   .multicolumn__title.heading-align-left  { text-align: left; }
   .multicolumn__title.heading-align-left .title {margin:0;}
   .multicolumn__title.heading-align-center { text-align: center; }
@@ -224,14 +225,11 @@
                 <div class="col-media">
                   <div class="col-media-inner"
                        style="--imgw: {{ block.settings.image_width_pct | default: 100 }}%; --ml: {{ ml }}; --mr: {{ mr }};">
-                       <a
-                    class="link"
-                    {% if block.settings.link == blank %}
-                      role="link" aria-disabled="true"
-                    {% else %}
-                      href="{{ block.settings.link }}"
-                    {% endif %}
-                  >
+
+                      {%- if block.settings.link != blank -%}
+                        <a href="{{ block.settings.link }}" class="multicolumn-image-link" style="display:block;">
+                      {%- endif -%}
+
                     {{
                       block.settings.image
                       | image_url: width: 3200
@@ -240,7 +238,11 @@
                         class: 'multicolumn-card__image',
                         loading: 'lazy'
                     }}
-                  </a>
+
+                    {%- if block.settings.link != blank -%}
+                      </a>
+                    {%- endif -%}
+
                   </div>
                 </div>
               {%- endif -%}
