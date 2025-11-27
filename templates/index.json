@@ -52,6 +52,7 @@
     },
     "video_v2_wYJfaG": {
       "type": "video-v2",
+      "disabled": true,
       "custom_css": [
         "h2 {color: #fff;}"
       ],
@@ -95,7 +96,6 @@
     },
     "video_v2_qzbam8": {
       "type": "video-v2",
-      "disabled": true,
       "custom_css": [
         ".vid2__desc h2 {color: #fff;}"
       ],
@@ -139,7 +139,6 @@
     },
     "promo_triple_banner_dkW6J8": {
       "type": "promo-triple-banner",
-      "disabled": true,
       "name": "Promo Triple Banner",
       "settings": {
         "max_width": "1989px",
@@ -204,7 +203,6 @@
         "card_fmKjEG",
         "card_YKLVqJ"
       ],
-      "disabled": true,
       "name": "Trending feature row",
       "settings": {
         "heading": "YOUR CHOICE OF FREE COURSE",
@@ -253,6 +251,7 @@
         "bullet_YkgzDh",
         "bullet_phQteR"
       ],
+      "disabled": true,
       "name": "Offer Highlight Strip",
       "settings": {
         "max_width": "100%",
