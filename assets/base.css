@@ -4328,7 +4328,7 @@ text-decoration-line: underline;
 position:absolute;
   top:-20px;
   width: max-content;
-  
+  left: 0;
 }
 
 .card .compare-price {
