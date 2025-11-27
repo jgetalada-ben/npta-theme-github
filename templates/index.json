@@ -137,6 +137,90 @@
         "btn2_txt": "#0b0b0b"
       }
     },
+    "promo_triple_banner_dkW6J8": {
+      "type": "promo-triple-banner",
+      "name": "Promo Triple Banner",
+      "settings": {
+        "max_width": "1989px",
+        "section_height": "",
+        "bg_color": "#f5f3eb",
+        "content_align": "left",
+        "left_image": "shopify://shop_images/images.png",
+        "left_image_alt": "live now 25% off",
+        "center_image": "shopify://shop_images/live.png",
+        "center_image_alt": "live now 25% off",
+        "overlay_heading": "",
+        "overlay_subheading": "",
+        "overlay_heading_size": "clamp(16px,2.2vw,22px)",
+        "overlay_heading_color": "#ffffff",
+        "overlay_sub_size": "clamp(32px,5vw,64px)",
+        "overlay_sub_color": "#ffffff",
+        "heading": "ALL BUNDLES AND SPECIALIZATIONS",
+        "heading_size": "clamp(24px,3vw,34px)",
+        "heading_color": "#01241e",
+        "subtitle": "+ your choice of GLP-1 or Mindful Stress Management",
+        "subtitle_size": "clamp(14px,1.4vw,18px)",
+        "subtitle_color": "#01241e",
+        "body_image": "shopify://shop_images/image_11.jpg",
+        "body_image_alt": "",
+        "fine_print": "<p>Courses Not Included In Sale: CPR, HGD, YES, and RFL.</p>",
+        "button_label": "SHOP NOW",
+        "button_product": "",
+        "button_link": "shopify://collections/all-products",
+        "button_new_tab": false,
+        "button_bg": "#c8ff63",
+        "button_color": "#01241e",
+        "button_font_size": "clamp(14px,1.2vw,18px)",
+        "button_pad_y": 8,
+        "button_pad_x": 32
+      }
+    },
+    "trending_feature_row_dHmYn6": {
+      "type": "trending-feature-row",
+      "blocks": {
+        "card_fmKjEG": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/image_13.jpg",
+            "eyebrow": "FREE COURSE",
+            "title": "UNDERSTANDING WEIGHT LOSS MEDICATIONS (GLP-1)",
+            "button_label": "Shop now",
+            "button_link": "shopify://products/understanding-weight-loss-medications"
+          }
+        },
+        "card_YKLVqJ": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/image_14.jpg",
+            "eyebrow": "FREE COURSE",
+            "title": "Mindful Stress Management (MSM)",
+            "button_label": "Shop now",
+            "button_link": "shopify://products/mindful-stress-management"
+          }
+        }
+      },
+      "block_order": [
+        "card_fmKjEG",
+        "card_YKLVqJ"
+      ],
+      "name": "Trending feature row",
+      "settings": {
+        "heading": "YOUR CHOICE OF FREE COURSE",
+        "subheading": "TOGETHER WITH YOUR BUNDLE",
+        "max_width": "1200px",
+        "bg": "#f8f8f8",
+        "columns_desktop": 2,
+        "pad_top": 60,
+        "pad_right": 24,
+        "pad_bottom": 60,
+        "pad_left": 24,
+        "gap": 32,
+        "card_bg": "#f8f8f8",
+        "eyebrow_size": "11px",
+        "card_title_size": "clamp(16px,1.5vw,20px)",
+        "button_font_size": "clamp(12px,1.2vw,16px)"
+      }
+    },
     "offer_highlight_strip_4fXkRx": {
       "type": "offer-highlight-strip",
       "blocks": {
@@ -820,6 +904,8 @@
     "video_v2_AqMBKg",
     "video_v2_wYJfaG",
     "video_v2_qzbam8",
+    "promo_triple_banner_dkW6J8",
+    "trending_feature_row_dHmYn6",
     "offer_highlight_strip_4fXkRx",
     "whats_new_grid_LhNjr7",
     "trainers_pick_KpCy4K",
