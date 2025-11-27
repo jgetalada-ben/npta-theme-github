@@ -224,6 +224,14 @@
                 <div class="col-media">
                   <div class="col-media-inner"
                        style="--imgw: {{ block.settings.image_width_pct | default: 100 }}%; --ml: {{ ml }}; --mr: {{ mr }};">
+                       <a
+                    class="link"
+                    {% if block.settings.link == blank %}
+                      role="link" aria-disabled="true"
+                    {% else %}
+                      href="{{ block.settings.link }}"
+                    {% endif %}
+                  >
                     {{
                       block.settings.image
                       | image_url: width: 3200
@@ -232,6 +240,7 @@
                         class: 'multicolumn-card__image',
                         loading: 'lazy'
                     }}
+                  </a>
                   </div>
                 </div>
               {%- endif -%}
