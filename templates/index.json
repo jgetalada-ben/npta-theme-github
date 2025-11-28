@@ -113,7 +113,7 @@
         "title": "BLACK FRIDAY SALE",
         "promo_line": "25% OFF",
         "subtitle": "ALL BUNDLES AND SPECIALIZATIONS",
-        "desc": "<p>This is your moment. <strong>DON’T WAIT!</strong> Your future self will thank you. <br/>Courses Not Included In Sale: <strong>CPR, HGD, YES,</strong> and <strong>RFL</strong>. </p><p><strong><br/>SALE ENDS ON NOV 30.<br/></strong></p>",
+        "desc": "<p>This is your moment. <strong>DON’T WAIT!</strong> Your future self will thank you. <br/>Courses Not Included In Sale: <strong>CPR, HGD, YES,</strong> and <strong>RFL</strong>. <strong><br/></strong></p>",
         "title_size": "clamp(28px,5vw,72px)",
         "title_color": "#ffffff",
         "promo_size": "clamp(32px,5vw,72px)",
