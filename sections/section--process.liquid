@@ -12,7 +12,7 @@
   font-family: var(--font-anton);
   font-weight: 400;
   text-transform: uppercase;
-  color: #FFFFFF;               /* white like screenshot */
+  color: #FFFFFF;
   font-size: clamp(24px,4vw,40px);
 }
 #{{ section.settings.section_id }} .title-block--desc{
@@ -49,16 +49,14 @@
     inset: 50% auto auto calc(100% + clamp(8px,1.2vw,14px));
     transform: translateY(-50%);
     width: clamp(26px, 3.2vw, 44px);
-    aspect-ratio: 1.6 / 1;                /* matches the PNG proportions well */
+    aspect-ratio: 1.6 / 1;
     background: url('https://cdn.shopify.com/s/files/1/0617/9550/0074/files/arrow-icon-right.png?v=1762975403') no-repeat center / contain;
     pointer-events: none;
   }
 }
 
 /* ===== Step typography ===== */
-#{{ section.settings.section_id }} .step-count{
-  margin-bottom: 10px;
-}
+#{{ section.settings.section_id }} .step-count{ margin-bottom: 10px; }
 #{{ section.settings.section_id }} .step-count span{
   display:inline-block;
   font-family: var(--font-anton);
@@ -76,6 +74,36 @@
   color: #FFFFFF;
   font-size: clamp(16px,2.6vw,26px);
   line-height: normal;
+}
+
+/* --- Link + animated underline (only when a link exists) --- */
+#{{ section.settings.section_id }} .step-title.has-link a{
+  color:#fff;
+  text-decoration:none;
+  position:relative;
+  display:inline-block;
+}
+
+/* underline grows from left to right on hover/focus */
+#{{ section.settings.section_id }} .step-title.has-link a::after{
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  bottom:-2px;
+  height:2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .28s ease;
+}
+#{{ section.settings.section_id }} .step-title.has-link a:hover::after,
+#{{ section.settings.section_id }} .step-title.has-link a:focus-visible::after{
+  transform: scaleX(1);
+}
+/* improve keyboard focus without default outline glare on dark bg */
+#{{ section.settings.section_id }} .step-title.has-link a:focus-visible{
+  outline: 2px solid rgba(255,255,255,.35);
+  outline-offset: 3px;
 }
 
 #{{ section.settings.section_id }} .step-desc{
@@ -96,12 +124,12 @@
 <section class="section--process" id="{{ section.settings.section_id }}" style="background-color: {{ section.settings.background_color }};">
   <div class="section--process-container page-container " style="max-width: {{ section.settings.container_width }}px;">
 
-<div class="section--title-block page-container" style="display: flex; justify-content: {{ section.settings.alignment }};">
-  <div>
-    <h2 style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_title }}</h2>
-    <div class="title-block--desc" style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_description }}</div>
-  </div>
-</div>
+    <div class="section--title-block page-container" style="display: flex; justify-content: {{ section.settings.alignment }};">
+      <div>
+        <h2 style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_title }}</h2>
+        <div class="title-block--desc" style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_description }}</div>
+      </div>
+    </div>
     
     <div class="process-steps">
       {% for block in section.blocks %}
@@ -110,160 +138,76 @@
             <span>STEP {{ forloop.index }}</span>
           </div>
 
-          <div class="step-title">{{ block.settings.step_title }}</div>
+          <div class="step-title {% if block.settings.step_link != blank %}has-link{% endif %}">
+            {% if block.settings.step_link != blank %}
+              <a href="{{ block.settings.step_link }}"
+                {% if block.settings.step_link_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                {{ block.settings.step_title }}
+              </a>
+            {% else %}
+              {{ block.settings.step_title }}
+            {% endif %}
+          </div>
+
           <p class="step-desc">{{ block.settings.step_description }}</p>
         </div>
       {% endfor %}
     </div>
 
+
   </div>
-      {% if section.settings.show_program_button %}
-       <div class="container--footer" style="display: flex; flex-wrap:wrap; justify-content: {{ section.settings.alignment }};"> 
-    <div class="button-wrap" style="display: flex; justify-content: {{ section.settings.alignment }};">
-    <a href="{{ section.settings.program_button_link }}" class="btn button-yg">
-            <span class="btn-label-down">{{ section.settings.button_text }}</span>
-            <span class="btn-label-down">{{ section.settings.button_text }}</span>
-          
+
+  {% if section.settings.show_program_button %}
+    <div class="container--footer" style="display: flex; flex-wrap:wrap; justify-content: {{ section.settings.alignment }};"> 
+      <div class="button-wrap" style="display: flex; justify-content: {{ section.settings.alignment }};">
+        <a href="{{ section.settings.program_button_link }}" class="btn button-yg">
+          <span class="btn-label-down">{{ section.settings.button_text }}</span>
+          <span class="btn-label-down">{{ section.settings.button_text }}</span>
         </a>
-        </div>
-         <div class="section-footer-description rte-link" style="text-align: {{ section.settings.title_alignment }};">
-    {{ section.settings.section_footer_description }} 
-  </div>
-        </div>
-          {% endif %}
+      </div>
+      <div class="section-footer-description rte-link" style="text-align: {{ section.settings.title_alignment }};">
+        {{ section.settings.section_footer_description }} 
+      </div>
+    </div>
+  {% endif %}
 </section>
 
 {% schema %}
 {
   "name": "Progress Section",
   "settings": [
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background Color",
-      "default": "#ffffff"
-    },
-     {
-      "type": "text",
-      "id": "section_id",
-      "label": "Section ID",
-      "default": "certified-trainers"
-    },
-    
-   {
-      "type": "text",
-      "id": "section_title",
-      "label": "Section Title",
-      "default": "Lorem ipsum dolor sit amet"
-    },
-    {
-      "type": "richtext",
-      "id": "section_description",
-      "label": "Section Description",
-      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
-    },
-    {
-      "type": "select",
-      "id": "title_alignment",
-      "label": "Title Alignment",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
-      ],
+    { "type": "color", "id": "background_color", "label": "Background Color", "default": "#ffffff" },
+    { "type": "text", "id": "section_id", "label": "Section ID", "default": "certified-trainers" },
+    { "type": "text", "id": "section_title", "label": "Section Title", "default": "Lorem ipsum dolor sit amet" },
+    { "type": "richtext", "id": "section_description", "label": "Section Description", "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>" },
+    { "type": "select", "id": "title_alignment", "label": "Title Alignment",
+      "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" } ],
       "default": "left"
     },
-    {
-      "type": "range",
-      "id": "container_width",
-      "label": "Container width",
-      "min": 200,
-      "max": 2000,
-      "step": 20,
-      "unit": "px",
-      "default": 980
-    },
-    {
-      "type": "select",
-      "id": "alignment",
-      "label": "Alignment",
-      "options": [
-        {
-          "value": "flex-start",
-          "label": "Flex Start"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "flex-end",
-          "label": "Flex End"
-        }
-      ],
+    { "type": "range", "id": "container_width", "label": "Container width", "min": 200, "max": 2000, "step": 20, "unit": "px", "default": 980 },
+    { "type": "select", "id": "alignment", "label": "Alignment",
+      "options": [ { "value": "flex-start", "label": "Flex Start" }, { "value": "center", "label": "Center" }, { "value": "flex-end", "label": "Flex End" } ],
       "default": "center"
     },
-        {
-      "type": "checkbox",
-      "id": "show_program_button",
-      "label": "Display Program Button",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "button_text",
-      "label": "Button Text",
-      "default": "Button"
-    },
-    {
-      "type": "url",
-      "id": "program_button_link",
-      "label": "Button Link",
-      "default": "/"
-    },
-        {
-      "type": "richtext",
-      "id": "section_footer_description",
-      "label": "Section Footer Description",
-      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
-    },
-  
-       
+    { "type": "checkbox", "id": "show_program_button", "label": "Display Program Button", "default": true },
+    { "type": "text", "id": "button_text", "label": "Button Text", "default": "Button" },
+    { "type": "url", "id": "program_button_link", "label": "Button Link", "default": "/" },
+    { "type": "richtext", "id": "section_footer_description", "label": "Section Footer Description", "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>" }
   ],
   "blocks": [
     {
       "type": "step",
       "name": "Step",
       "settings": [
-        {
-          "type": "text",
-          "id": "step_title",
-          "label": "Step Title",
-          "default": "Lorem Ipsum"
-        },
-        {
-          "type": "textarea",
-          "id": "step_description",
-          "label": "Step Description",
-          "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-        }
+        { "type": "text", "id": "step_title", "label": "Step Title", "default": "Lorem Ipsum" },
+        { "type": "textarea", "id": "step_description", "label": "Step Description", "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt" },
+        { "type": "url", "id": "step_link", "label": "Step Title Link (optional)" },
+        { "type": "checkbox", "id": "step_link_new_tab", "label": "Open Step Link in new tab", "default": false }
       ]
     }
   ],
   "presets": [
-    {
-      "name": "Process Section",
-      "category": "Custom Sections"
-    }
+    { "name": "Process Section", "category": "Custom Sections" }
   ]
 }
 {% endschema %}
