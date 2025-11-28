@@ -471,21 +471,27 @@
           "type": "step",
           "settings": {
             "step_title": "Get  Certified",
-            "step_description": ""
+            "step_description": "",
+            "step_link": "https://www.npta.ca/products/certified-personal-trainer-cpt",
+            "step_link_new_tab": false
           }
         },
         "step_XzC3VX": {
           "type": "step",
           "settings": {
             "step_title": "Get Hands-On Training",
-            "step_description": ""
+            "step_description": "",
+            "step_link": "https://www.npta.ca/pages/apprenticeship-program",
+            "step_link_new_tab": false
           }
         },
         "step_G4TCdU": {
           "type": "step",
           "settings": {
             "step_title": "Get insured and employed",
-            "step_description": ""
+            "step_description": "",
+            "step_link": "https://www.npta.ca/pages/affiliate-program",
+            "step_link_new_tab": false
           }
         }
       },
