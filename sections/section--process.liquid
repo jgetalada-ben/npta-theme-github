@@ -78,7 +78,9 @@
 
 /* --- Link + animated underline (only when a link exists) --- */
 #{{ section.settings.section_id }} .step-title.has-link a{
-  color:#fff;
+  {% comment %} color:#fff; {% endcomment %}
+   color: inherit;
+   outline: none;
   text-decoration:none;
   position:relative;
   display:inline-block;
@@ -93,7 +95,7 @@
   height:2px;
   background: currentColor;
   transform: scaleX(0);
-  transform-origin: left;
+  transform-origin: left center;
   transition: transform .28s ease;
 }
 #{{ section.settings.section_id }} .step-title.has-link a:hover::after,
