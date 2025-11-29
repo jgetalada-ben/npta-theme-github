@@ -16,18 +16,8 @@
       "blocks": {
         "message_7M8RCx": {
           "type": "message",
-          "disabled": true,
           "settings": {
-            "text": "<p><strong>🎉 FLASH SALE! 🎁 BUY MORE, SAVE MORE!  </strong></p>",
-            "link_label": "Shop now",
-            "link_url": ""
-          }
-        },
-        "message_QkU6LY": {
-          "type": "message",
-          "disabled": true,
-          "settings": {
-            "text": "<p>Save more buy now</p>",
+            "text": "<p><strong>🎉 SALE HAS BEEN EXTENDED </strong><span style=\"text-decoration:underline\"><strong>TILL NOV 30</strong></span></p>",
             "link_label": "Shop now",
             "link_url": ""
           }
@@ -43,7 +33,6 @@
       },
       "block_order": [
         "message_7M8RCx",
-        "message_QkU6LY",
         "message_pDj7eD"
       ],
       "custom_css": [],
