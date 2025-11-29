@@ -106,7 +106,10 @@
 } {% endcomment %}
 #{{ section.settings.section_id }} .step-title.has-link a::before{ left: 30%; }
 #{{ section.settings.section_id }} .step-title.has-link a::after{ right: 30%; }
-
+#{{ section.settings.section_id }} .step-title.has-link a:hover::before,
+#{{ section.settings.section_id }} .step-title.has-link a:focus-visible::before{
+  width: 40%;
+}
 /* on hover/focus: draw the line from center outward */
 #{{ section.settings.section_id }} .step-title.has-link a:hover::before,
 #{{ section.settings.section_id }} .step-title.has-link a:focus-visible::before{
