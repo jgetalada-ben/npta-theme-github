@@ -86,8 +86,11 @@
   display:inline-block;
 }
 
+#{{ section.settings.section_id }} .step-title.has-link a:hover {
+  text-decoration: underline;
+}
 /* underline grows from left to right on hover/focus */
-#{{ section.settings.section_id }} .step-title.has-link a::after{
+{% comment %} #{{ section.settings.section_id }} .step-title.has-link a::after{
   content:"";
   position:absolute;
   width: 0%;
@@ -95,7 +98,7 @@
   height:2px;
   background: currentColor;
   transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
+} {% endcomment %}
 
 {% comment %} #{{ section.settings.section_id }} .step-title.has-link a:hover::after,
 #{{ section.settings.section_id }} .step-title.has-link a:focus-visible::after{
@@ -105,14 +108,14 @@
   outline: 2px solid rgba(255,255,255,.35);
   outline-offset: 3px;
 } {% endcomment %}
-#{{ section.settings.section_id }} .step-title.has-link a::before{ left: 30%; }
+{% comment %} #{{ section.settings.section_id }} .step-title.has-link a::before{ left: 30%; }
 #{{ section.settings.section_id }} .step-title.has-link a::after{ right: 30%; }
 #{{ section.settings.section_id }} .step-title.has-link a:hover::before,
 #{{ section.settings.section_id }} .step-title.has-link a:focus-visible::before{
   width: 40%;
-}
+} {% endcomment %}
 /* on hover/focus: draw the line from center outward */
-#{{ section.settings.section_id }} .step-title.has-link a:hover::before,
+{% comment %} #{{ section.settings.section_id }} .step-title.has-link a:hover::before,
 #{{ section.settings.section_id }} .step-title.has-link a:focus-visible::before{
   width: 40%;
   background: currentColor;
@@ -122,9 +125,9 @@
 #{{ section.settings.section_id }} .step-title.has-link a:hover::after,
 #{{ section.settings.section_id }} .step-title.has-link a:focus-visible::after{
   width: 40%;
-  background: transparent; /* match multicolumn behavior */
+  background: transparent;
   transition: 0s;
-}
+} {% endcomment %}
 
 #{{ section.settings.section_id }} .step-desc{
   margin: 0;
