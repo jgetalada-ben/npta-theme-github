@@ -80,7 +80,7 @@
 #{{ section.settings.section_id }} .step-title.has-link a{
   {% comment %} color:#fff; {% endcomment %}
    color: inherit;
-   outline: none;
+   
   text-decoration:none;
   position:relative;
   display:inline-block;
@@ -90,23 +90,30 @@
 #{{ section.settings.section_id }} .step-title.has-link a::after{
   content:"";
   position:absolute;
-  width: 0%;
+  left: 0;
+  width: 100%;
   bottom:-2px;
   height:2px;
   background: currentColor;
-  transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .35s ease;
 }
-{% comment %} #{{ section.settings.section_id }} .step-title.has-link a:hover::after,
+#{{ section.settings.section_id }} .step-title.has-link a:hover::after,
 #{{ section.settings.section_id }} .step-title.has-link a:focus-visible::after{
   transform: scaleX(1);
 }
-#{{ section.settings.section_id }} .step-title.has-link a:focus-visible{
+{% comment %} #{{ section.settings.section_id }} .step-title.has-link a:focus-visible{
   outline: 2px solid rgba(255,255,255,.35);
   outline-offset: 3px;
 } {% endcomment %}
 #{{ section.settings.section_id }} .step-title.has-link a::before{ left: 30%; }
 #{{ section.settings.section_id }} .step-title.has-link a::after{ right: 30%; }
-
+@media (prefers-reduced-motion: reduce){
+  #{{ section.settings.section_id }} .step-title.has-link a::after{
+    transition: none;
+  }
+}
 /* on hover/focus: draw the line from center outward */
 #{{ section.settings.section_id }} .step-title.has-link a:hover::before,
 #{{ section.settings.section_id }} .step-title.has-link a:focus-visible::before{
