@@ -16,6 +16,7 @@
       "blocks": {
         "message_7M8RCx": {
           "type": "message",
+          "disabled": true,
           "settings": {
             "text": "<p><strong>🎉 SALE HAS BEEN EXTENDED </strong><span style=\"text-decoration:underline\"><strong>TILL NOV 30</strong></span></p>",
             "link_label": "Shop now",
