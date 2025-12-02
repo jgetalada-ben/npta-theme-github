@@ -329,7 +329,7 @@
             "row_height_mobile": 300,
             "left_image": "shopify://shop_images/Rectangle_4.png",
             "left_product": "business-blueprint-bb",
-            "left_variant_id_override": "{{ block.settings.left_product.title }}",
+            "left_variant_id_override": "7755444387882",
             "left_heading": "Business Blueprint",
             "left_body": "<p>Build a thriving fitness career with proven business strategies, expert coaching, and tools to grow a loyal client base.</p>",
             "left_btn_label": "Add to cart",
