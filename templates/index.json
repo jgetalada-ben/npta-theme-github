@@ -90,6 +90,18 @@
         "button_pad_x": 32
       }
     },
+    "section_logo_carousel_hJFRJY": {
+      "type": "section--logo-carousel",
+      "custom_css": [
+        ".section--logo-carousel {background: #C1FF72;}"
+      ],
+      "name": "Logo Carousel",
+      "settings": {
+        "top_padding": 92,
+        "bottom_padding": 92,
+        "container_width": 980
+      }
+    },
     "trending_feature_row_dHmYn6": {
       "type": "trending-feature-row",
       "blocks": {
@@ -824,6 +836,7 @@
   "order": [
     "video_v2_AqMBKg",
     "promo_triple_banner_dkW6J8",
+    "section_logo_carousel_hJFRJY",
     "trending_feature_row_dHmYn6",
     "offer_highlight_strip_4fXkRx",
     "whats_new_grid_LhNjr7",
