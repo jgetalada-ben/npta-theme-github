@@ -259,7 +259,7 @@
             style="
                 --txt: {{ block.settings.left_text_color | default: '#FFFFFF' }};
                 --ovc: {{ block.settings.left_overlay_color | default: '#000000' }};
-                --ovo: {{ block.settings.left_overlay_opacity | default: 35 | divided_by: 100.0 }};
+                --ovo: {{ block.settings.left_overlay_opacity | default: 35 | times: 0.01 }};
             ">
             {% if block.settings.left_image != blank %}
                 {{ block.settings.left_image
@@ -321,7 +321,7 @@
             style="
                 --txt: {{ block.settings.right_text_color | default: '#FFFFFF' }};
                 --ovc: {{ block.settings.right_overlay_color | default: '#000000' }};
-                --ovo: {{ block.settings.right_overlay_opacity | default: 35 | divided_by: 100.0 }};
+                --ovo: {{ block.settings.right_overlay_opacity | default: 35 | times: 0.01 }};
             ">
             {% if block.settings.right_image != blank %}
                 {{ block.settings.right_image
