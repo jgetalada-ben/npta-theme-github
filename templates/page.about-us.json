@@ -19,6 +19,7 @@
     },
     "section_top_banner_hJLdAL": {
       "type": "section--top-banner",
+      "disabled": true,
       "custom_css": [
         ".section--top-banner {background-position: center top; background-repeat: no-repeat; background-size: cover;}",
         ".section--top-background {display: block !important;}",
@@ -58,11 +59,52 @@
     },
     "section_breadcrumb_eFj6di": {
       "type": "section--breadcrumb",
+      "disabled": true,
       "settings": {
         "background_color": "#ffffff",
         "enable_breadcrumbs": true,
         "breadcrumbs_home_label": "Home",
         "breadcrumbs_separator": "|"
+      }
+    },
+    "video_v2_xHtLDD": {
+      "type": "video-v2",
+      "name": "Video v2",
+      "settings": {
+        "media_type": "video",
+        "shopify_video": "shopify://files/videos/NPTA Vid.mp4",
+        "embed_url": "",
+        "alt": "Jesse Benson NPTA Founder",
+        "aspect_ratio": "21-9",
+        "aspect_ratio_mobile": "4-3",
+        "height_mode": "ratio",
+        "vh_desktop": "75vh",
+        "vh_mobile": "62dvh",
+        "title": "",
+        "promo_line": "",
+        "subtitle": "",
+        "desc": "",
+        "title_size": "clamp(28px,5vw,72px)",
+        "title_color": "#FFFFFF",
+        "promo_size": "clamp(32px,5vw,72px)",
+        "promo_color": "#C8FF63",
+        "subtitle_size": "clamp(18px,3vw,40px)",
+        "subtitle_color": "#C8FF63",
+        "desc_size": "clamp(14px,2vw,20px)",
+        "desc_color": "#FFFFFF",
+        "align": "left",
+        "overlay_darkness": 40,
+        "show_btn1": false,
+        "btns_margin_top": "16px",
+        "btn1_label": "CHOOSE MY COURSE",
+        "btn1_link": "",
+        "btn1_bg": "#C8FF63",
+        "btn1_txt": "#0B0B0B",
+        "show_btn2": false,
+        "btn2_label": "Learn more",
+        "btn2_link": "",
+        "btn2_bg": "#FFFFFF",
+        "btn2_txt": "#0B0B0B"
       }
     },
     "section_text_highlight_gBAbEw": {
@@ -242,6 +284,7 @@
     "main",
     "section_top_banner_hJLdAL",
     "section_breadcrumb_eFj6di",
+    "video_v2_xHtLDD",
     "section_text_highlight_gBAbEw",
     "section_text_image_g3MAiQ",
     "section_quote_text_VH7Afh",
