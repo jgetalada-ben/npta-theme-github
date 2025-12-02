@@ -31,7 +31,7 @@
         "title": "Real-World Training. Real-Time Mentorship. Real Fitness Careers.",
         "subtitle": "Join Canada’s most immersive Apprenticeship Program, built to turn certified trainers into confident, career-ready coaches.",
         "desc1": "",
-        "title_size": "clamp(32px,6vw,64px)",
+        "title_size": "clamp(32px,6vw,52px)",
         "subtitle_size": "26px",
         "desc_size": "16px",
         "button_link": "shopify://collections/all",
@@ -53,7 +53,7 @@
         "title_alignment": "left",
         "container_width": 580,
         "alignment": "flex-start",
-        "banner_height": "",
+        "banner_height": "70vh",
         "top_banner_align_items": "center",
         "show_banner_gradient": true
       }
