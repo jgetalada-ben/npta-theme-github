@@ -88,28 +88,30 @@
     }
 
     .wn-grid-section .wn-card__img {
-        position: absolute; inset: 0;
-        width: 100%; height: 100%;
-        object-fit: cover; object-position: center;
-        display: block;
-        z-index: 0;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    z-index: 0;
     }
 
     .wn-grid-section .wn-card__overlay {
-        position: absolute; inset: 0;
-        background: var(--ovc, #000);
-        opacity: var(--ovo, .35);
-        pointer-events: none;
-        z-index: 1;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
     }
 
     .wn-grid-section .wn-card__content {
-        position: absolute; inset: 0;
-        display: grid;
-        /* align-content: space-between; */
-        gap: 10px;
-        padding: clamp(30px,4vw,75px);
-        z-index: 2;
+    position: absolute;
+    inset: 0;
+    display: grid;
+    gap: 10px;
+    padding: clamp(30px,4vw,75px);
+    z-index: 2;
     }
     .card__item-content {
         display: flex;
@@ -259,17 +261,20 @@
             {%- endif -%}
 
             <div class="wn-card {% if block.settings.layout == 'left-large' %}is-large{% else %}is-small{% endif %}"
-            style="
-                --txt: {{ block.settings.left_text_color | default: '#FFFFFF' }};
-                --ovc: {{ block.settings.left_overlay_color | default: '#000000' }};
-                --ovo: {{ block.settings.left_overlay_opacity | default: 35 | times: 0.01 }};
-            ">
+            style="--txt: {{ block.settings.left_text_color | default: '#FFFFFF' }};">
             {% if block.settings.left_image != blank %}
                 {{ block.settings.left_image
                 | image_url: width: 2400
                 | image_tag: class: 'wn-card__img', loading: 'lazy', alt: block.settings.left_heading }}
             {% endif %}
-            <div class="wn-card__overlay"></div>
+            <div
+                class="wn-card__overlay"
+                style="
+                background: {{ block.settings.left_overlay_color | default: '#000000' }};
+                opacity: {{ block.settings.left_overlay_opacity | default: 35 | times: 0.01 }};
+                "
+            ></div>
+
 
             <div class="wn-card__content">
                 <div class="card__item-content">
@@ -321,17 +326,20 @@
             {%- endif -%}
 
             <div class="wn-card {% if block.settings.layout == 'left-large' %}is-small{% else %}is-large{% endif %}"
-            style="
-                --txt: {{ block.settings.right_text_color | default: '#FFFFFF' }};
-                --ovc: {{ block.settings.right_overlay_color | default: '#000000' }};
-                --ovo: {{ block.settings.right_overlay_opacity | default: 35 | times: 0.01 }};
-            ">
+            style="--txt: {{ block.settings.right_text_color | default: '#FFFFFF' }};">
             {% if block.settings.right_image != blank %}
                 {{ block.settings.right_image
                 | image_url: width: 2400
                 | image_tag: class: 'wn-card__img', loading: 'lazy', alt: block.settings.right_heading }}
             {% endif %}
-            <div class="wn-card__overlay"></div>
+            <div
+                class="wn-card__overlay"
+                style="
+                background: {{ block.settings.right_overlay_color | default: '#000000' }};
+                opacity: {{ block.settings.right_overlay_opacity | default: 35 | times: 0.01 }};
+                "
+            ></div>
+
 
             <div class="wn-card__content">
                 <div class="card__item-content">
