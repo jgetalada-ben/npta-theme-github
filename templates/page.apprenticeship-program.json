@@ -190,7 +190,9 @@
       "custom_css": [
         ".section--top-banner {background-color: #000000;}",
         ".section--top-banner:before {width: 100%;}",
-        ".section--top-background {width: 100%;}"
+        ".section--top-background {width: 100%; display: block;}",
+        "h1 {color: #fff;}",
+        "@media (max-width: 980px) {.section--top-banner-container {top: 10%; }}"
       ],
       "settings": {
         "background_image": "shopify://shop_images/Ap_Footer.jpg",
@@ -261,21 +263,27 @@
           "type": "step",
           "settings": {
             "step_title": "Select Your Program",
-            "step_description": "Choose the apprenticeship package that aligns with your career goals."
+            "step_description": "Choose the apprenticeship package that aligns with your career goals.",
+            "step_link": "",
+            "step_link_new_tab": false
           }
         },
         "step_ynGT9p": {
           "type": "step",
           "settings": {
             "step_title": "Gain Hands-On Experience",
-            "step_description": "Train with real clients, refine your skills, and learn from top industry mentors."
+            "step_description": "Train with real clients, refine your skills, and learn from top industry mentors.",
+            "step_link": "",
+            "step_link_new_tab": false
           }
         },
         "step_xFUnrd": {
           "type": "step",
           "settings": {
             "step_title": "Launch Your Career with Confidence",
-            "step_description": "With NPTA’s expert guidance and industry connections, you’ll step into the fitness world fully prepared to succeed."
+            "step_description": "With NPTA’s expert guidance and industry connections, you’ll step into the fitness world fully prepared to succeed.",
+            "step_link": "",
+            "step_link_new_tab": false
           }
         }
       },
