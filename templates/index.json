@@ -92,8 +92,40 @@
     },
     "section_logo_carousel_hJFRJY": {
       "type": "section--logo-carousel",
+      "blocks": {
+        "logo_d9T3Ny": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Group_12.png"
+          }
+        },
+        "logo_XcDyPd": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Group_12.png"
+          }
+        },
+        "logo_mjrAC7": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Group_12.png"
+          }
+        },
+        "logo_bwyLBr": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Group_12.png"
+          }
+        }
+      },
+      "block_order": [
+        "logo_d9T3Ny",
+        "logo_XcDyPd",
+        "logo_mjrAC7",
+        "logo_bwyLBr"
+      ],
       "custom_css": [
-        ".section--logo-carousel {background: #C1FF72;}"
+        ".section--logo-carousel {background: #c1ff72;}"
       ],
       "name": "Logo Carousel",
       "settings": {
