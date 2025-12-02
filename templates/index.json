@@ -129,9 +129,9 @@
       ],
       "name": "Logo Carousel",
       "settings": {
-        "top_padding": 92,
-        "bottom_padding": 92,
-        "container_width": 980
+        "top_padding": 5,
+        "bottom_padding": 5,
+        "container_width": 200
       }
     },
     "trending_feature_row_dHmYn6": {
