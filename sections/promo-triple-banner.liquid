@@ -96,7 +96,6 @@
     {%- comment -%} RIGHT CONTENT CARD {%- endcomment -%}
     <div class="promo3-col promo3-col--right promo3-right-layout-{{ section.settings.right_layout | default: 'classic' }}">
       {%- if section.settings.right_layout == 'split' -%}
-        {#-- SPLIT LAYOUT: text on left, image on right --#}
         <div class="promo3-card promo3-card--split promo3-align-{{ section.settings.content_align }}">
           <div class="promo3-card-split">
             <div class="promo3-card-split__text">
