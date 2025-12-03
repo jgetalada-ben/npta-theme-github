@@ -82,7 +82,7 @@
           {%- assign iframe_src = 'https://www.youtube-nocookie.com/embed/' | append: yt_id | append: yt_params -%}
         {%- elsif url contains 'vimeo.com/' -%}
           {%- assign vimeo_id = url | split: 'vimeo.com/' | last | split: '?' | first | split: '/' | last -%}
-          {%- assign iframe_src = 'https://player.vimeo.com/video/' | append: vimeo_id | append: '?background=1&autoplay=1&muted=1&loop=1' -%}
+          {%- assign iframe_src = 'https://player.vimeo.com/video/' | append: vimeo_id | append: '?background=1&autoplay=1&muted=0&loop=1' -%}
         {%- endif -%}
 
         {%- if iframe_src != blank -%}
