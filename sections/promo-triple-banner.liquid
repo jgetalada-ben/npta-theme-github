@@ -460,6 +460,85 @@
         padding: 24px 20px 28px;
       }
     }
+        /* Right column layouts */
+    #promo3-{{ sid }} .promo3-card--classic {
+      position: relative;
+    }
+
+    /* Split layout: text on left, image as bg on right */
+    #promo3-{{ sid }} .promo3-card--split {
+      position: relative;
+    }
+
+    #promo3-{{ sid }} .promo3-card--split::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 55%; /* left edge of the image area */
+      background-image: var(--promo3-bg-img);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: right bottom; /* adjust if you want head/feet framed differently */
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Make sure the text content sits above the background image */
+    #promo3-{{ sid }} .promo3-card--split .promo3-heading,
+    #promo3-{{ sid }} .promo3-card--split .promo3-subtitle,
+    #promo3-{{ sid }} .promo3-card--split .promo3-fineprint,
+    #promo3-{{ sid }} .promo3-card--split .promo3-btn-wrap {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hide the inline image when using split layout – we use it as background instead */
+    #promo3-{{ sid }} .promo3-card--split .promo-banner__body-image {
+      display: none;
+    }
+
+    {% comment %} new {% endcomment %}
+     
+    /* Right column layouts */
+    #promo3-{{ sid }} .promo3-card--classic {
+      position: relative;
+    }
+
+    /* Split layout: text on left, image as bg on right */
+    #promo3-{{ sid }} .promo3-card--split {
+      position: relative;
+    }
+
+    #promo3-{{ sid }} .promo3-card--split::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 55%; /* left edge of the image area */
+      background-image: var(--promo3-bg-img);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: right bottom; /* adjust if you want head/feet framed differently */
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Make sure the text content sits above the background image */
+    #promo3-{{ sid }} .promo3-card--split .promo3-heading,
+    #promo3-{{ sid }} .promo3-card--split .promo3-subtitle,
+    #promo3-{{ sid }} .promo3-card--split .promo3-fineprint,
+    #promo3-{{ sid }} .promo3-card--split .promo3-btn-wrap {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hide the inline image when using split layout – we use it as background instead */
+    #promo3-{{ sid }} .promo3-card--split .promo-banner__body-image {
+      display: none;
+    }
   </style>
 </section>
 
