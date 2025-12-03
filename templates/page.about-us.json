@@ -19,7 +19,6 @@
     },
     "section_top_banner_hJLdAL": {
       "type": "section--top-banner",
-      "disabled": true,
       "custom_css": [
         ".section--top-banner {background-position: center top; background-repeat: no-repeat; background-size: cover;}",
         ".section--top-background {display: block !important;}",
@@ -69,6 +68,7 @@
     },
     "video_v2_xHtLDD": {
       "type": "video-v2",
+      "disabled": true,
       "name": "Video v2",
       "settings": {
         "media_type": "video",
