@@ -43,6 +43,11 @@
     --promo3-button-font-size: {{ section.settings.button_font_size | default: 'clamp(14px,1.2vw,18px)' }};
     --promo3-button-pad-y: {{ section.settings.button_pad_y | default: 14 }}px;
     --promo3-button-pad-x: {{ section.settings.button_pad_x | default: 32 }}px;
+
+    {%- comment -%} split-layout helper vars {%- endcomment -%}
+    --promo3-right-bg-pos: {{ section.settings.right_bg_pos | default: 'right bottom' }};
+    --promo3-right-bg-size: {{ section.settings.right_bg_size | default: 'contain' }};
+    --promo3-right-valign: {{ section.settings.right_vertical_align | default: 'center' }};
   "
 >
   <div class="promo3-wrap">
@@ -95,53 +100,89 @@
 
     {%- comment -%} RIGHT CONTENT CARD {%- endcomment -%}
     <div class="promo3-col promo3-col--right">
-      <div
-        class="promo3-card promo3-align-{{ section.settings.content_align }} promo3-card--{{ section.settings.right_layout | default: 'classic' }}"
-        {% if section.settings.right_layout == 'split' and section.settings.body_image != blank %}
-          style="--promo3-bg-img: url('{{ section.settings.body_image | image_url: width: 1600 }}');"
-        {% endif %}
-      >
-        {%- if section.settings.heading != blank -%}
-          <h2 class="promo3-heading">
-            {{ section.settings.heading }}
-          </h2>
-        {%- endif -%}
+      {%- if section.settings.right_layout == 'split' -%}
+        <div
+          class="promo3-card promo3-card--split promo3-align-{{ section.settings.content_align }}"
+          {%- if section.settings.body_image != blank -%}
+            style="--promo3-bg-img: url('{{ section.settings.body_image | image_url: width: 1600 }}');"
+          {%- endif -%}
+        >
+          {%- if section.settings.heading != blank -%}
+            <h2 class="promo3-heading">
+              {{ section.settings.heading }}
+            </h2>
+          {%- endif -%}
 
-        {%- if section.settings.subtitle != blank -%}
-          <div class="promo3-subtitle">
-            {{ section.settings.subtitle }}
-          </div>
-        {%- endif -%}
+          {%- if section.settings.subtitle != blank -%}
+            <div class="promo3-subtitle">
+              {{ section.settings.subtitle }}
+            </div>
+          {%- endif -%}
 
-        {%- if section.settings.right_layout == 'classic' and section.settings.body_image != blank -%}
-          <div class="promo-banner__body-image">
-            {{ section.settings.body_image
-              | image_url: width: 1200
-              | image_tag: loading: 'lazy', alt: section.settings.body_image_alt | default: section.settings.subtitle | escape
-            }}
-          </div>
-        {%- endif -%}
+          {%- if section.settings.fine_print != blank -%}
+            <div class="promo3-fineprint">
+              {{ section.settings.fine_print }}
+            </div>
+          {%- endif -%}
 
-        {%- if section.settings.fine_print != blank -%}
-          <div class="promo3-fineprint">
-            {{ section.settings.fine_print }}
-          </div>
-        {%- endif -%}
+          {%- if btn_href != '' and section.settings.button_label != blank -%}
+            <div class="promo3-btn-wrap">
+              <a href="{{ btn_href }}" 
+                class="btn button-yg tp-cta"
+                {% if section.settings.button_new_tab %}
+                  target="_blank" rel="noopener noreferrer"
+                {% endif %}
+              >
+                <span class="btn-label-down">{{ section.settings.button_label }}</span>
+                <span class="btn-label-down">{{ section.settings.button_label }}</span>
+              </a>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- else -%}
+        <div class="promo3-card promo3-card--classic promo3-align-{{ section.settings.content_align }}">
+          {%- if section.settings.heading != blank -%}
+            <h2 class="promo3-heading">
+              {{ section.settings.heading }}
+            </h2>
+          {%- endif -%}
 
-        {%- if btn_href != '' and section.settings.button_label != blank -%}
-          <div class="promo3-btn-wrap">
-            <a href="{{ btn_href }}" 
-              class="btn button-yg tp-cta"
-              {% if section.settings.button_new_tab %}
-                target="_blank" rel="noopener noreferrer"
-              {% endif %}
-            >
-              <span class="btn-label-down">{{ section.settings.button_label }}</span>
-              <span class="btn-label-down">{{ section.settings.button_label }}</span>
-            </a>
-          </div>
-        {%- endif -%}
-      </div>
+          {%- if section.settings.subtitle != blank -%}
+            <div class="promo3-subtitle">
+              {{ section.settings.subtitle }}
+            </div>
+          {%- endif -%}
+
+          {% if section.settings.body_image != blank %}
+            <div class="promo-banner__body-image">
+              {{ section.settings.body_image
+                | image_url: width: 1200
+                | image_tag: loading: 'lazy', alt: section.settings.body_image_alt | default: section.settings.subtitle | escape
+              }}
+            </div>
+          {% endif %}
+
+          {%- if section.settings.fine_print != blank -%}
+            <div class="promo3-fineprint">
+              {{ section.settings.fine_print }}
+            </div>
+          {%- endif -%}
+
+          {%- if btn_href != '' and section.settings.button_label != blank -%}
+            <div class="promo3-btn-wrap">
+              <a href="{{ btn_href }}" 
+                class="btn button-yg tp-cta"
+                {% if section.settings.button_new_tab %}
+                  target="_blank" rel="noopener noreferrer"
+                {% endif %}
+              >
+                <span class="btn-label-down">{{ section.settings.button_label }}</span>
+                <span class="btn-label-down">{{ section.settings.button_label }}</span>
+              </a>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
     </div>
   </div>
 
@@ -227,7 +268,7 @@
       text-transform: uppercase;
     }
 
-    /* Card content on the right */
+    /* Card content on the right (shared bits) */
     #promo3-{{ sid }} .promo3-card{
       background: transparent;
       display:flex;
@@ -314,29 +355,25 @@
     #promo3-{{ sid }} .promo3-align-center .promo3-btn-wrap{ text-align:center; }
     #promo3-{{ sid }} .promo3-align-right .promo3-btn-wrap{ text-align:right; }
 
-    /* ---------- Right column layouts ---------- */
-
-    #promo3-{{ sid }} .promo3-card--classic{
-      position: relative;
-    }
-
-    /* Split layout: text on left, background image on right */
+    /* ---------- Right column SPLIT layout ---------- */
     #promo3-{{ sid }} .promo3-card--split{
       position: relative;
-      overflow: hidden;
+      padding: 25px clamp(24px, 3vw, 40px);
+      padding-right: clamp(240px, 26vw, 360px); /* space for the model image */
+      justify-content: var(--promo3-right-valign);
     }
 
     #promo3-{{ sid }} .promo3-card--split::after{
       content: "";
       position: absolute;
       top: 0;
-      right: 0;
       bottom: 0;
-      left: 55%; /* where the image starts – adjust if needed */
+      right: clamp(24px, 3vw, 40px);
+      width: min(40%, 380px);
       background-image: var(--promo3-bg-img);
-      background-size: cover;
       background-repeat: no-repeat;
-      background-position: right bottom;
+      background-position: var(--promo3-right-bg-pos);
+      background-size: var(--promo3-right-bg-size);
       pointer-events: none;
       z-index: 0;
     }
@@ -347,7 +384,12 @@
     #promo3-{{ sid }} .promo3-card--split .promo3-btn-wrap{
       position: relative;
       z-index: 1;
-      max-width: 520px; /* keeps text on the left half */
+      padding-right: 0; /* padding handled by card */
+    }
+
+    /* hide inline body image in split layout (background is used instead) */
+    #promo3-{{ sid }} .promo3-card--split .promo-banner__body-image{
+      display: none;
     }
 
     /* Responsive */
@@ -372,17 +414,19 @@
         padding: 24px 20px 32px;
       }
 
-      /* On mobile, let background image cover full width behind text if split layout is used */
-      #promo3-{{ sid }} .promo3-card--split::after{
-        left: 0;
-        opacity: 0.35; /* optional, so text stays readable */
+      #promo3-{{ sid }} .promo3-card--split{
+        padding: 24px 20px 280px;
       }
 
-      #promo3-{{ sid }} .promo3-card--split .promo3-heading,
-      #promo3-{{ sid }} .promo3-card--split .promo3-subtitle,
-      #promo3-{{ sid }} .promo3-card--split .promo3-fineprint,
-      #promo3-{{ sid }} .promo3-card--split .promo3-btn-wrap{
-        max-width: none;
+      #promo3-{{ sid }} .promo3-card--split::after{
+        right: 20px;
+        left: 20px;
+        width: auto;
+        height: 230px;
+        bottom: 24px;
+        top: auto;
+        background-position: var(--promo3-right-bg-pos);
+        background-size: var(--promo3-right-bg-size);
       }
     }
   </style>
@@ -438,10 +482,10 @@
     { "type": "text", "id": "subtitle_size", "label": "Subtitle font-size (accepts clamp())", "default": "clamp(14px,1.4vw,18px)" },
     { "type": "color", "id": "subtitle_color", "label": "Subtitle color", "default": "#01241E" },
 
-    { "type": "image_picker", "id": "body_image", "label": "Body image (used for classic or split layout)" },
+    { "type": "image_picker", "id": "body_image", "label": "Body image (right column artwork)" },
     { "type": "text", "id": "body_image_alt", "label": "Body image alt text" },
 
-    { "type": "richtext", "id": "fine_print", "label": "Fine print (under image / text)", "default": "<p>CPR, HGD, YES, and RFL *not included in sale.</p>" },
+    { "type": "richtext", "id": "fine_print", "label": "Fine print (under image)", "default": "<p>CPR, HGD, YES, and RFL *not included in sale.</p>" },
 
     {
       "type": "select",
@@ -452,6 +496,42 @@
         { "value": "split",   "label": "Split layout" }
       ],
       "default": "classic"
+    },
+    {
+      "type": "select",
+      "id": "right_bg_pos",
+      "label": "Right image position",
+      "options": [
+        { "value": "left top", "label": "Left top" },
+        { "value": "left center", "label": "Left center" },
+        { "value": "left bottom", "label": "Left bottom" },
+        { "value": "center bottom", "label": "Center bottom" },
+        { "value": "right bottom", "label": "Right bottom" },
+        { "value": "right center", "label": "Right center" },
+        { "value": "right top", "label": "Right top" }
+      ],
+      "default": "right bottom"
+    },
+    {
+      "type": "select",
+      "id": "right_bg_size",
+      "label": "Right image size",
+      "options": [
+        { "value": "cover", "label": "Cover" },
+        { "value": "contain", "label": "Contain" }
+      ],
+      "default": "contain"
+    },
+    {
+      "type": "select",
+      "id": "right_vertical_align",
+      "label": "Right text vertical",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center",     "label": "Center" },
+        { "value": "flex-end",   "label": "Bottom" }
+      ],
+      "default": "center"
     },
 
     { "type": "header", "content": "Button" },
