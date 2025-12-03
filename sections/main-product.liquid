@@ -795,7 +795,7 @@
     // Create fresh record
     const ref = document.referrer || '';
     let refHost = '';
-    try { if (ref) refHost = new URL(ref).hostname; } catch(e){ /* ignore */ }
+    try { if (ref) refHost = new URL(ref).hostname; } catch(e){}
 
     const medium = detectMediumFromRef(refHost);
     const source = refHost || '(direct)';
@@ -803,7 +803,7 @@
     const payload = {
       source,                                 // e.g. gmail.com or (direct)
       source_medium: medium,                  // email | referral | direct
-      source_referrer: ref || '',             // full referrer URL if present
+      source_referrer: ref || '',             // full referrer URL if available
       source_landing: window.location.pathname + window.location.search,
       source_page: window.location.pathname + window.location.search,
       ts: Date.now()
