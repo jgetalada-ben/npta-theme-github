@@ -355,11 +355,12 @@
     #promo3-{{ sid }} .promo3-align-center .promo3-btn-wrap{ text-align:center; }
     #promo3-{{ sid }} .promo3-align-right .promo3-btn-wrap{ text-align:right; }
 
-    /* ---------- Right column SPLIT layout ---------- */
+        /* ---------- Right column SPLIT layout ---------- */
     #promo3-{{ sid }} .promo3-card--split{
       position: relative;
-      padding: 25px clamp(24px, 3vw, 40px);
-      padding-right: clamp(240px, 26vw, 360px); /* space for the model image */
+      /* more breathing room but not too skinny */
+      padding: 40px clamp(32px, 3vw, 48px);
+      padding-right: clamp(170px, 20vw, 250px); /* smaller than before */
       justify-content: var(--promo3-right-valign);
     }
 
@@ -368,8 +369,10 @@
       position: absolute;
       top: 0;
       bottom: 0;
+      /* keep the image tight to the right edge */
       right: clamp(24px, 3vw, 40px);
-      width: min(40%, 380px);
+      /* narrower image area so text column is wider */
+      width: min(34%, 340px);
       background-image: var(--promo3-bg-img);
       background-repeat: no-repeat;
       background-position: var(--promo3-right-bg-pos);
@@ -385,6 +388,37 @@
       position: relative;
       z-index: 1;
       padding-right: 0; /* padding handled by card */
+      max-width: 460px; /* stops it getting too narrow */
+    }
+
+    /* hide inline body image in split layout (background is used instead) */
+    #promo3-{{ sid }} .promo3-card--split .promo-banner__body-image{
+      display: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 990px){
+      #promo3-{{ sid }} .promo3-card--split{
+        padding: 24px 20px 280px;
+      }
+
+      #promo3-{{ sid }} .promo3-card--split::after{
+        right: 20px;
+        left: 20px;
+        width: auto;
+        height: 230px;
+        bottom: 24px;
+        top: auto;
+        background-position: var(--promo3-right-bg-pos);
+        background-size: var(--promo3-right-bg-size);
+      }
+
+      #promo3-{{ sid }} .promo3-card--split .promo3-heading,
+      #promo3-{{ sid }} .promo3-card--split .promo3-subtitle,
+      #promo3-{{ sid }} .promo3-card--split .promo3-fineprint,
+      #promo3-{{ sid }} .promo3-card--split .promo3-btn-wrap{
+        max-width: none;
+      }
     }
 
     /* hide inline body image in split layout (background is used instead) */
