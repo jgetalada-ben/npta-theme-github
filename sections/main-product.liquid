@@ -769,6 +769,50 @@
     return m;
   }
 
+  // Derive and persist "first-touch" source without using UTMs
+  function detectMediumFromRef(refHost){
+    const h = (refHost || '').toLowerCase();
+    // quick email client/domain hints
+    const emailHints = ['mail.', 'gmail.', 'outlook.', 'yahoo.', 'protection.outlook', 'sendgrid', 'sparkpost', 'mandrill', 'mailchimp', 't.mail', 'mta.', 'mailgun', 'postmark', 'amazonses', 'email.'];
+    if (emailHints.some(seg => h.includes(seg))) return 'email';
+    if (!refHost) return 'direct';
+    return 'referral';
+  }
+
+  function getFirstTouchSource(){
+    const key = 'npta_first_touch_source';
+    // Try existing
+    try {
+      const existing = JSON.parse(localStorage.getItem(key) || 'null');
+      if (existing && existing.source && existing.source_medium) {
+        // update current page each time
+        existing.source_page = window.location.pathname + window.location.search;
+        localStorage.setItem(key, JSON.stringify(existing));
+        return existing;
+      }
+    } catch(e){}
+
+    // Create fresh record
+    const ref = document.referrer || '';
+    let refHost = '';
+    try { if (ref) refHost = new URL(ref).hostname; } catch(e){ /* ignore */ }
+
+    const medium = detectMediumFromRef(refHost);
+    const source = refHost || '(direct)';
+
+    const payload = {
+      source,                                 // e.g. gmail.com or (direct)
+      source_medium: medium,                  // email | referral | direct
+      source_referrer: ref || '',             // full referrer URL if present
+      source_landing: window.location.pathname + window.location.search,
+      source_page: window.location.pathname + window.location.search,
+      ts: Date.now()
+    };
+
+    try { localStorage.setItem(key, JSON.stringify(payload)); } catch(e){}
+    return payload;
+  }
+
   function toQuery(obj){
     return Object.keys(obj)
       .filter(k => obj[k] !== undefined && obj[k] !== null && obj[k] !== '')
@@ -789,22 +833,25 @@
       const electiveUrl = a.getAttribute('href');
       if (!electiveUrl) return;
 
-      // Product fields only (no UTMs)
+      // Product fields (kept)
       const prod = {
         product_title: a.dataset.productTitle || document.title || '',
         product_handle: a.dataset.productHandle || '',
         product_id: a.dataset.productId || ''
       };
 
-      // Build Elective redirect target (append ONLY product_* params)
+      // Non-UTM source fields (first-touch)
+      const src = getFirstTouchSource();
+
+      // Build final Elective URL and store it for the bridge page
       const target = new URL(electiveUrl, window.location.origin);
       const targetParams = new URLSearchParams(target.search);
       Object.entries(prod).forEach(([k,v]) => targetParams.set(k, v));
+      Object.entries(src).forEach(([k,v]) => targetParams.set(k, v));
       target.search = targetParams.toString();
       sessionStorage.setItem('npta_finance_target', target.toString());
-
-      // Build the GHL form URL (NO UTMs, NO notrack=true)
-      const formSrc = `https://app.npta.ca/widget/form/jbeQYeHWMI1dM9tX0mYF?${toQuery(prod)}`;
+      const formParams = { ...prod, ...src };
+      const formSrc = `https://app.npta.ca/widget/form/jbeQYeHWMI1dM9tX0mYF?${toQuery(formParams)}`;
 
       // Inject iframe
       mount.innerHTML = '';
@@ -814,7 +861,7 @@
       iframe.setAttribute('allowtransparency','true');
       iframe.setAttribute('scrolling','auto');
       iframe.style.width = '100%';
-      iframe.style.height = '634px';
+      iframe.style.height = '70vh';
       iframe.style.border = '0';
       iframe.loading = 'lazy';
       mount.appendChild(iframe);
@@ -830,7 +877,6 @@
     }
   });
 
-  // Kept for compatibility if you use /pages/ghl-thanks (postMessage flow)
   window.addEventListener('message', function(e){
     if (!e || !e.data) return;
     if (e.data.npta === 'ghl_form_ok') {
