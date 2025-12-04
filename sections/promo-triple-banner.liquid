@@ -382,10 +382,12 @@
         /* ---------- Right column SPLIT layout ---------- */
     #promo3-{{ sid }} .promo3-card--split{
       position: relative;
-      /* more breathing room but not too skinny */
       padding: 40px clamp(32px, 3vw, 48px);
-      padding-right: clamp(110px, 10vw, 135px); /* smaller than before */
       justify-content: var(--promo3-right-valign);
+    }
+
+    #promo3-{{ sid }} #promo3-wrap-width-equal .promo3-card--split {
+      padding-right: clamp(110px, 10vw, 135px);
     }
 
     #promo3-{{ sid }} .promo3-card--split::after{
