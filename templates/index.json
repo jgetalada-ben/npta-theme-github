@@ -72,7 +72,7 @@
         "overlay_sub_size": "clamp(20px,3.2vw,32px)",
         "overlay_sub_color": "#ffffff",
         "heading": "12 DAYS. 12 DEALS.",
-        "heading_size": "clamp(24px,5vw,50px)",
+        "heading_size": "clamp(24px,5vw,42px)",
         "heading_color": "#01241e",
         "subtitle": "",
         "subtitle_size": "clamp(14px,1.4vw,18px)",
