@@ -416,7 +416,7 @@
     }
     #promo3-{{ sid }} #promo3-wrap-width-left-narrow .promo3-card--split::after{
       right: -3rem;
-      width: min(75%, 360px);
+      width: min(85%, 360px);
     }
 
     #promo3-{{ sid }} .promo3-card--split .promo3-heading,
@@ -474,6 +474,7 @@
       }
       #promo3-{{ sid }} .promo3-wrap{
         grid-template-columns: 1fr;
+        height: auto;
       }
 
       #promo3-{{ sid }} .promo3-col{
@@ -490,15 +491,14 @@
       }
 
       #promo3-{{ sid }} .promo3-card--split{
-        padding: 24px 20px 280px;
+        padding: 24px 20px;
       }
 
       #promo3-{{ sid }} .promo3-card--split::after{
         right: 20px;
-        left: 20px;
-        width: auto;
-        height: 230px;
-        bottom: 24px;
+        left: 5rem;
+        height: 100%;
+        bottom: 0;
         top: auto;
         background-position: var(--promo3-right-bg-pos);
         background-size: var(--promo3-right-bg-size);
