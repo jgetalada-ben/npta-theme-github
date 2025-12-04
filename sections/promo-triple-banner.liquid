@@ -203,6 +203,7 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 0;
       align-items: stretch;
+      height: 480px;
     }
 
     #promo3-{{ sid }} .promo3-col{
@@ -234,7 +235,8 @@
     #promo3-{{ sid }} .promo3-col--center .promo3-img{
       width: 100%;
       aspect-ratio: 3 / 4;
-      height: auto;
+      {% comment %} height: auto; {% endcomment %}
+      height:100%;
     }
 
     #promo3-{{ sid }} .promo3-img--placeholder{
