@@ -12,6 +12,21 @@
 {%- endif -%}
 
 {%- comment %}
+  Column layout: decide the 3 column widths
+{%- endcomment -%}
+{%- assign layout = section.settings.column_layout | default: 'equal' -%}
+{%- case layout -%}
+  {%- when 'left-wide' -%}
+    {%- assign promo3_cols = '2fr 1fr 1fr' -%}   {# ≈ 50 / 25 / 25 #}
+  {%- when 'center-wide' -%}
+    {%- assign promo3_cols = '1fr 2fr 1fr' -%}   {# ≈ 25 / 50 / 25 #}
+  {%- when 'right-wide' -%}
+    {%- assign promo3_cols = '1fr 1fr 2fr' -%}   {# ≈ 25 / 25 / 50 #}
+  {%- else -%}
+    {%- assign promo3_cols = '1fr 1fr 1fr' -%}   {# equal #}
+{%- endcase -%}
+
+{%- comment %}
   Resolve button URL preference: product first, then custom link
 {% endcomment -%}
 {%- assign btn_href = '' -%}
@@ -27,6 +42,7 @@
   style="
     --promo3-bg: {{ section.settings.bg_color }};
     --promo3-max-w: {{ mw }};
+    --promo3-cols: {{ promo3_cols }};
     --promo3-height: {{ section_height }};
     --promo3-heading-size: {{ section.settings.heading_size | default: 'clamp(24px,3vw,36px)' }};
     --promo3-heading-color: {{ section.settings.heading_color }};
@@ -200,7 +216,7 @@
       width: 100%;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: var(--promo3-cols);
       gap: 0;
       align-items: stretch;
       height: 480px;
@@ -259,7 +275,6 @@
       font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
       text-transform: uppercase;
       letter-spacing: .04em;
-      margin-bottom: 0.4em;
     }
     #promo3-{{ sid }} .promo3-overlay-subheading{
       font-size: var(--promo3-overlay-sub-size);
@@ -369,7 +384,7 @@
       position: relative;
       /* more breathing room but not too skinny */
       padding: 40px clamp(32px, 3vw, 48px);
-      padding-right: clamp(170px, 20vw, 260px);
+      padding-right: clamp(170px, 20vw, 235px); /* smaller than before */
       justify-content: var(--promo3-right-valign);
     }
 
@@ -498,6 +513,18 @@
         { "value": "right", "label": "Right" }
       ],
       "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "column_layout",
+      "label": "Column widths",
+      "options": [
+        { "value": "equal",      "label": "Equal (33 / 33 / 33)" },
+        { "value": "left-wide",  "label": "Left wide (50 / 25 / 25)" },
+        { "value": "center-wide","label": "Center wide (25 / 50 / 25)" },
+        { "value": "right-wide", "label": "Right wide (25 / 25 / 50)" }
+      ],
+      "default": "equal"
     },
 
     { "type": "header", "content": "Left image" },
