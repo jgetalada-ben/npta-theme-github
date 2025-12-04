@@ -70,7 +70,7 @@
     --promo3-right-valign: {{ section.settings.right_vertical_align | default: 'center' }};
   "
 >
-  <div class="promo3-wrap" id="promo3-wrap-width-{{ layout }}">
+  <div class="promo3-wrap" id="promo3-wrap-width-{{ column_layout }}">
     {%- comment -%} LEFT IMAGE COLUMN {%- endcomment -%}
     <div class="promo3-col promo3-col--left">
       {%- if section.settings.left_image != blank -%}
