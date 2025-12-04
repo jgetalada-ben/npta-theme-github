@@ -17,13 +17,13 @@
 {%- assign layout = section.settings.column_layout | default: 'equal' -%}
 {%- case layout -%}
   {%- when 'left-wide' -%}
-    {%- assign promo3_cols = '2fr 1fr 1fr' -%}   {# ≈ 50 / 25 / 25 #}
+    {%- assign promo3_cols = '2fr 1fr 1fr' -%}
   {%- when 'center-wide' -%}
-    {%- assign promo3_cols = '1fr 2fr 1fr' -%}   {# ≈ 25 / 50 / 25 #}
+    {%- assign promo3_cols = '1fr 2fr 1fr' -%}
   {%- when 'right-wide' -%}
-    {%- assign promo3_cols = '1fr 1fr 2fr' -%}   {# ≈ 25 / 25 / 50 #}
+    {%- assign promo3_cols = '1fr 1fr 2fr' -%}
   {%- else -%}
-    {%- assign promo3_cols = '1fr 1fr 1fr' -%}   {# equal #}
+    {%- assign promo3_cols = '1fr 1fr 1fr' -%}
 {%- endcase -%}
 
 {%- comment %}
