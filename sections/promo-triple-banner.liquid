@@ -12,19 +12,23 @@
 {%- endif -%}
 
 {%- comment %}
-  Column layout: decide the 3 column widths
+  Column layout → CSS grid template
 {%- endcomment -%}
-{%- assign layout = section.settings.column_layout | default: 'equal' -%}
-{%- case layout -%}
+{%- assign column_layout = section.settings.column_layout | default: 'equal' -%}
+
+{%- case column_layout -%}
   {%- when 'left-wide' -%}
     {%- assign promo3_cols = '2fr 1fr 1fr' -%}
   {%- when 'center-wide' -%}
     {%- assign promo3_cols = '1fr 2fr 1fr' -%}
   {%- when 'right-wide' -%}
     {%- assign promo3_cols = '1fr 1fr 2fr' -%}
+  {%- when 'left-narrow' -%}
+    {%- assign promo3_cols = '0.85fr 1.1fr 1.1fr' -%}
   {%- else -%}
     {%- assign promo3_cols = '1fr 1fr 1fr' -%}
 {%- endcase -%}
+
 
 {%- comment %}
   Resolve button URL preference: product first, then custom link
@@ -216,7 +220,7 @@
       width: 100%;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: var(--promo3-cols);
+      grid-template-columns: var(--promo3-cols, repeat(3, minmax(0, 1fr)));
       gap: 0;
       align-items: stretch;
       height: 480px;
@@ -521,12 +525,13 @@
     {
       "type": "select",
       "id": "column_layout",
-      "label": "Column widths",
+      "label": "Column width layout",
       "options": [
         { "value": "equal",      "label": "Equal (33 / 33 / 33)" },
         { "value": "left-wide",  "label": "Left wide (50 / 25 / 25)" },
         { "value": "center-wide","label": "Center wide (25 / 50 / 25)" },
-        { "value": "right-wide", "label": "Right wide (25 / 25 / 50)" }
+        { "value": "right-wide", "label": "Right wide (25 / 25 / 50)" },
+        { "value": "left-narrow", "label": "Left narrow (25 / 37 / 37)" }
       ],
       "default": "equal"
     },
