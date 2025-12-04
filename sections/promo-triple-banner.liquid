@@ -27,6 +27,17 @@
 {%- endcase -%}
 
 {%- comment %}
+  Right column layout:
+  - If merchant chooses "split" but the right column is not the wide one,
+    automatically fall back to "classic" so the content doesn't break.
+{%- endcomment -%}
+{%- assign right_layout_setting = section.settings.right_layout | default: 'classic' -%}
+{%- assign right_layout = right_layout_setting -%}
+{%- if right_layout_setting == 'split' and layout != 'right-wide' -%}
+  {%- assign right_layout = 'classic' -%}
+{%- endif -%}
+
+{%- comment %}
   Resolve button URL preference: product first, then custom link
 {% endcomment -%}
 {%- assign btn_href = '' -%}
@@ -115,45 +126,56 @@
     </div>
 
     {%- comment -%} RIGHT CONTENT CARD {%- endcomment -%}
-    <div class="promo3-col promo3-col--right">
-      {%- if section.settings.right_layout == 'split' -%}
-        <div
-          class="promo3-card promo3-card--split promo3-align-{{ section.settings.content_align }}"
-          {%- if section.settings.body_image != blank -%}
-            style="--promo3-bg-img: url('{{ section.settings.body_image | image_url: width: 1600 }}');"
-          {%- endif -%}
-        >
-          {%- if section.settings.heading != blank -%}
-            <h2 class="promo3-heading">
-              {{ section.settings.heading }}
-            </h2>
-          {%- endif -%}
+    <div class="promo3-col promo3-col--right promo3-right-layout-{{ right_layout }}">
+      {%- if right_layout == 'split' -%}
+        <div class="promo3-card promo3-card--split promo3-align-{{ section.settings.content_align }}">
+          <!-- split layout content -->
+          <div class="promo3-card-split">
+            <div class="promo3-card-split__text">
+              {%- if section.settings.heading != blank -%}
+                <h2 class="promo3-heading">
+                  {{ section.settings.heading }}
+                </h2>
+              {%- endif -%}
 
-          {%- if section.settings.subtitle != blank -%}
-            <div class="promo3-subtitle">
-              {{ section.settings.subtitle }}
-            </div>
-          {%- endif -%}
+              {%- if section.settings.subtitle != blank -%}
+                <div class="promo3-subtitle">
+                  {{ section.settings.subtitle }}
+                </div>
+              {%- endif -%}
 
-          {%- if section.settings.fine_print != blank -%}
-            <div class="promo3-fineprint">
-              {{ section.settings.fine_print }}
-            </div>
-          {%- endif -%}
+              {%- if section.settings.fine_print != blank -%}
+                <div class="promo3-fineprint">
+                  {{ section.settings.fine_print }}
+                </div>
+              {%- endif -%}
 
-          {%- if btn_href != '' and section.settings.button_label != blank -%}
-            <div class="promo3-btn-wrap">
-              <a href="{{ btn_href }}" 
-                class="btn button-yg tp-cta"
-                {% if section.settings.button_new_tab %}
-                  target="_blank" rel="noopener noreferrer"
-                {% endif %}
-              >
-                <span class="btn-label-down">{{ section.settings.button_label }}</span>
-                <span class="btn-label-down">{{ section.settings.button_label }}</span>
-              </a>
+              {%- if btn_href != '' and section.settings.button_label != blank -%}
+                <div class="promo3-btn-wrap">
+                  <a href="{{ btn_href }}"
+                    class="btn button-yg tp-cta"
+                    {% if section.settings.button_new_tab %}
+                      target="_blank" rel="noopener noreferrer"
+                    {% endif %}
+                  >
+                    <span class="btn-label-down">{{ section.settings.button_label }}</span>
+                    <span class="btn-label-down">{{ section.settings.button_label }}</span>
+                  </a>
+                </div>
+              {%- endif -%}
             </div>
-          {%- endif -%}
+
+            {%- if section.settings.body_image != blank -%}
+              <div class="promo3-card-split__image">
+                <div class="promo-banner__body-image">
+                  {{ section.settings.body_image
+                    | image_url: width: 1200
+                    | image_tag: loading: 'lazy', alt: section.settings.body_image_alt | default: section.settings.subtitle | escape
+                  }}
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
         </div>
       {%- else -%}
         <div class="promo3-card promo3-card--classic promo3-align-{{ section.settings.content_align }}">
@@ -186,7 +208,7 @@
 
           {%- if btn_href != '' and section.settings.button_label != blank -%}
             <div class="promo3-btn-wrap">
-              <a href="{{ btn_href }}" 
+              <a href="{{ btn_href }}"
                 class="btn button-yg tp-cta"
                 {% if section.settings.button_new_tab %}
                   target="_blank" rel="noopener noreferrer"
