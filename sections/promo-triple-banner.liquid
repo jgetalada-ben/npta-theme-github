@@ -393,8 +393,10 @@
     #promo3-{{ sid }} #promo3-wrap-width-equal .promo3-card--split {
       padding-right: clamp(70px, 22vw, 150px);
     }
-    #promo3-{{ sid }} #promo3-wrap-width-center-wide .promo3-card--split {
+    #promo3-{{ sid }} #promo3-wrap-width-left-narrow .promo3-fineprint {
+      max-width: 200px;
     }
+    .promo3-btn-wrap
 
     #promo3-{{ sid }} .promo3-card--split::after{
       content: "";
@@ -419,6 +421,9 @@
       z-index: 1;
       padding-right: 0; /* padding handled by card */
       max-width: 460px; /* stops it getting too narrow */
+    }
+    #promo3-{{ sid }} .promo3-card--split .promo3-btn-wrap{
+      margin-top: auto;
     }
 
     /* hide inline body image in split layout (background is used instead) */
