@@ -791,9 +791,9 @@
 <script>
 (function(){
   const LINK_SEL = '[data-elective-financing-link]';
-  const PC_HOST_SEL = '#pop-convert-app'; // Popup Convert mounts here (shadow root)
+  const PC_HOST_SEL = '#pop-convert-app'; // Popup Convert mount (shadow root)
 
-  // Build final Elective URL – we only add product_* params
+  // Build Elective URL with ONLY product_* params
   function buildTarget(href, a){
     const u = new URL(href, window.location.origin);
     const q = u.searchParams;
@@ -805,58 +805,60 @@
     return u.toString();
   }
 
-  // Try to open Popup Convert (API → shadow root trigger → fallback)
+  function getPcRoot(){
+    const host = document.querySelector(PC_HOST_SEL);
+    return host ? (host.shadowRoot || host) : null;
+  }
+
+  // Try to open Popup Convert
   function openPopupConvert(){
     try {
       if (window.PopConvert && typeof window.PopConvert.open === 'function') { window.PopConvert.open(); return true; }
       if (window.pcApp && typeof window.pcApp.open === 'function') { window.pcApp.open(); return true; }
     } catch(e){}
-
-    const host = document.querySelector(PC_HOST_SEL);
-    if (!host) return false;
-
-    const root = host.shadowRoot || host; // Popup Convert uses an OPEN shadow root
-    // Try known trigger button inside the shadow DOM
-    const btn = root.querySelector('.pc-buttons-trigger-wrapper .pc-button, .pc-button.clickable-effect');
+    const root = getPcRoot();
+    if (!root) return false;
+    const btn = root.querySelector('.pc-buttons-trigger-wrapper .pc-button, .pc-button.clickable-effect')
+               || root.querySelector('button, [role="button"]');
     if (btn) { btn.click(); return true; }
-
-    // As a last resort, click the first button inside
-    const anyBtn = root.querySelector('button, [role="button"]');
-    if (anyBtn) { anyBtn.click(); return true; }
-
     return false;
   }
 
-  // Observe the shadow DOM for a submit/success, then resolve
-  function waitForSubmitOrClose(timeoutMs = 15000){
-    return new Promise(resolve => {
-      let submitted = false, opened = false, done = false;
+  // Wait ONLY for an actual submit in the popup, then (optionally) for the popup to close/success
+  function waitForPopupSubmit(timeoutMs=20000){
+    return new Promise(resolve=>{
+      const root = getPcRoot() || document.body;
+      let submitted = false, resolved = false, opened = false;
 
-      const host = document.querySelector(PC_HOST_SEL);
-      const root = (host && (host.shadowRoot || host)) || document.body;
-
-      // Capture real form submissions inside the popup
-      root.addEventListener('submit', function(ev){
+      // 1) capture real submit from popup form
+      const onSubmit = (ev)=>{
         if (ev && root.contains(ev.target)) submitted = true;
-      }, { capture: true });
+      };
+      root.addEventListener('submit', onSubmit, { capture:true });
 
-      const SUCCESS_RX = /(thank you|thanks|success|submitted|you’re in|you're in|done)/i;
-
-      const mo = new MutationObserver(() => {
-        const text = (root.textContent || '').toLowerCase();
+      // 2) Observe open/close + success containers
+      const mo = new MutationObserver(()=>{
         const popupOpen  = !!root.querySelector('[aria-modal="true"], .pc-modal, .pc-popup, .pc-open');
         opened = opened || popupOpen;
         const popupClosed = opened && !popupOpen;
-        const hasSuccess  = SUCCESS_RX.test(text);
 
-        if (!done && (hasSuccess || (submitted && popupClosed))) {
-          done = true; mo.disconnect(); resolve(true);
+        // Known success markers (adjust if your popup uses different class/markup)
+        const successNode = root.querySelector('.pc-success, .pc-toast--success, [data-status="success"]');
+
+        if (!resolved && submitted && (popupClosed || successNode)) {
+          resolved = true; cleanup(); resolve(true);
         }
       });
+      mo.observe(root, { childList:true, subtree:true, attributes:true });
 
-      mo.observe(root, { childList: true, subtree: true, attributes: true });
+      // 3) Safety timeout — if no submit, DO NOT redirect
+      const t = setTimeout(()=>{ if(!resolved){ cleanup(); resolve(false); } }, timeoutMs);
 
-      setTimeout(() => { if (!done) { mo.disconnect(); resolve(false); } }, timeoutMs);
+      function cleanup(){
+        try { root.removeEventListener('submit', onSubmit, { capture:true }); } catch(e){}
+        try { mo.disconnect(); } catch(e){}
+        clearTimeout(t);
+      }
     });
   }
 
@@ -866,7 +868,6 @@
     a.dataset.pcWired = '1';
 
     a.addEventListener('click', function(ev){
-      // Stop the default navigation (even with target=_blank)
       ev.preventDefault();
       ev.stopPropagation();
 
@@ -874,24 +875,20 @@
       if (!electiveHref) return;
 
       const targetUrl = buildTarget(electiveHref, a);
-      // store for safety (if you use a bridge page anywhere)
       sessionStorage.setItem('npta_finance_target', targetUrl);
 
-      // Open Popup Convert
       const opened = openPopupConvert();
-
-      // If popup didn’t open for any reason, go straight to Elective
       if (!opened) { window.location.href = targetUrl; return; }
 
-      // Wait for popup submit/success, then redirect
-      waitForSubmitOrClose().then(() => {
+      // Redirect ONLY after we detect a submit + (popup closes OR shows success)
+      waitForPopupSubmit().then((ok)=>{
+        if (!ok) return; // no submit -> stay on page
         const t = sessionStorage.getItem('npta_finance_target') || targetUrl;
         window.location.replace(t);
       });
-    }, { capture: true });
+    }, { capture:true });
   }
 
-  // Bind once per product page
   document.addEventListener('DOMContentLoaded', wire);
   document.addEventListener('shopify:section:load', wire);
 })();
