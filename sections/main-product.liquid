@@ -749,6 +749,44 @@
 })();
 </script>
 
+<script>
+(function(){
+  const SEL = '[data-elective-financing-link]';
+
+  function track(linkEl){
+    const payload = {
+      event: 'elective_financing_click',
+      event_category: 'Financing',
+      event_label: (linkEl.textContent || '').trim(),
+      page_location: window.location.href,
+      page_path: window.location.pathname,
+      product_handle: linkEl.dataset.productHandle || '',
+      product_id: linkEl.dataset.productId || '',
+      timestamp: Date.now()
+    };
+    // GTM / dataLayer
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(payload);
+    // GA4 (optional direct)
+    if (window.gtag) window.gtag('event','elective_financing_click', payload);
+    // Meta Pixel (optional)
+    if (window.fbq) window.fbq('trackCustom','ElectiveFinancingClick', payload);
+    // Shopify Web Pixel bridge (optional)
+    document.dispatchEvent(new CustomEvent('bh:elective_financing_click', { detail: payload }));
+  }
+
+  function wire(){
+    const link = document.querySelector(SEL);
+    if (!link || link.dataset.bhWired === '1') return;
+    link.dataset.bhWired = '1';
+    link.addEventListener('click', function(){ track(link); }, { capture:true });
+  }
+
+  document.addEventListener('DOMContentLoaded', wire);
+  document.addEventListener('shopify:section:load', wire);
+  document.addEventListener('shopify:section:select', wire);
+})();
+</script>
 
 {% schema %}
 {
