@@ -788,6 +788,116 @@
 })();
 </script>
 
+<script>
+(function(){
+  const LINK_SEL = '[data-elective-financing-link]';
+  const PC_HOST_SEL = '#pop-convert-app'; // Popup Convert mounts here (shadow root)
+
+  // Build final Elective URL – we only add product_* params
+  function buildTarget(href, a){
+    const u = new URL(href, window.location.origin);
+    const q = u.searchParams;
+    if (a.dataset.productHandle) q.set('product_handle', a.dataset.productHandle);
+    if (a.dataset.productId)     q.set('product_id', a.dataset.productId);
+    const title = a.dataset.productTitle || document.title || '';
+    if (title) q.set('product_title', title);
+    u.search = q.toString();
+    return u.toString();
+  }
+
+  // Try to open Popup Convert (API → shadow root trigger → fallback)
+  function openPopupConvert(){
+    try {
+      if (window.PopConvert && typeof window.PopConvert.open === 'function') { window.PopConvert.open(); return true; }
+      if (window.pcApp && typeof window.pcApp.open === 'function') { window.pcApp.open(); return true; }
+    } catch(e){}
+
+    const host = document.querySelector(PC_HOST_SEL);
+    if (!host) return false;
+
+    const root = host.shadowRoot || host; // Popup Convert uses an OPEN shadow root
+    // Try known trigger button inside the shadow DOM
+    const btn = root.querySelector('.pc-buttons-trigger-wrapper .pc-button, .pc-button.clickable-effect');
+    if (btn) { btn.click(); return true; }
+
+    // As a last resort, click the first button inside
+    const anyBtn = root.querySelector('button, [role="button"]');
+    if (anyBtn) { anyBtn.click(); return true; }
+
+    return false;
+  }
+
+  // Observe the shadow DOM for a submit/success, then resolve
+  function waitForSubmitOrClose(timeoutMs = 15000){
+    return new Promise(resolve => {
+      let submitted = false, opened = false, done = false;
+
+      const host = document.querySelector(PC_HOST_SEL);
+      const root = (host && (host.shadowRoot || host)) || document.body;
+
+      // Capture real form submissions inside the popup
+      root.addEventListener('submit', function(ev){
+        if (ev && root.contains(ev.target)) submitted = true;
+      }, { capture: true });
+
+      const SUCCESS_RX = /(thank you|thanks|success|submitted|you’re in|you're in|done)/i;
+
+      const mo = new MutationObserver(() => {
+        const text = (root.textContent || '').toLowerCase();
+        const popupOpen  = !!root.querySelector('[aria-modal="true"], .pc-modal, .pc-popup, .pc-open');
+        opened = opened || popupOpen;
+        const popupClosed = opened && !popupOpen;
+        const hasSuccess  = SUCCESS_RX.test(text);
+
+        if (!done && (hasSuccess || (submitted && popupClosed))) {
+          done = true; mo.disconnect(); resolve(true);
+        }
+      });
+
+      mo.observe(root, { childList: true, subtree: true, attributes: true });
+
+      setTimeout(() => { if (!done) { mo.disconnect(); resolve(false); } }, timeoutMs);
+    });
+  }
+
+  function wire(){
+    const a = document.querySelector(LINK_SEL);
+    if (!a || a.dataset.pcWired === '1') return;
+    a.dataset.pcWired = '1';
+
+    a.addEventListener('click', function(ev){
+      // Stop the default navigation (even with target=_blank)
+      ev.preventDefault();
+      ev.stopPropagation();
+
+      const electiveHref = a.getAttribute('href');
+      if (!electiveHref) return;
+
+      const targetUrl = buildTarget(electiveHref, a);
+      // store for safety (if you use a bridge page anywhere)
+      sessionStorage.setItem('npta_finance_target', targetUrl);
+
+      // Open Popup Convert
+      const opened = openPopupConvert();
+
+      // If popup didn’t open for any reason, go straight to Elective
+      if (!opened) { window.location.href = targetUrl; return; }
+
+      // Wait for popup submit/success, then redirect
+      waitForSubmitOrClose().then(() => {
+        const t = sessionStorage.getItem('npta_finance_target') || targetUrl;
+        window.location.replace(t);
+      });
+    }, { capture: true });
+  }
+
+  // Bind once per product page
+  document.addEventListener('DOMContentLoaded', wire);
+  document.addEventListener('shopify:section:load', wire);
+})();
+</script>
+
+
 {% schema %}
 {
   "name": "t:sections.main-product.name",
