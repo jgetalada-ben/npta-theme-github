@@ -122,7 +122,6 @@
       ],
       "custom_css": [
         "#section-id-contact-us {margin-top: -30px;}",
-        ".contact-wrapper {display: none;}",
         ".form-wrapper1 {height: 80vh;}"
       ],
       "settings": {
