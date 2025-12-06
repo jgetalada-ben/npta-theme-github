@@ -137,7 +137,7 @@
         "top_padding": 5,
         "bottom_padding": 5,
         "container_width": 200,
-        "scroll_direction": "rtl"
+        "scroll_direction": "ltr"
       }
     },
     "trending_feature_row_dHmYn6": {
