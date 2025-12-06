@@ -136,7 +136,8 @@
       "settings": {
         "top_padding": 5,
         "bottom_padding": 5,
-        "container_width": 200
+        "container_width": 200,
+        "scroll_direction": "ltr"
       }
     },
     "trending_feature_row_dHmYn6": {
@@ -545,7 +546,8 @@
       "settings": {
         "top_padding": 0,
         "bottom_padding": 0,
-        "container_width": 2000
+        "container_width": 2000,
+        "scroll_direction": "rtl"
       }
     },
     "multicolumn_4hXCqV": {
