@@ -57,7 +57,7 @@
       "name": "Promo Triple Banner",
       "settings": {
         "max_width": "1989px",
-        "section_height": "",
+        "section_height": "20vh",
         "bg_color": "#f5f3eb",
         "content_align": "left",
         "column_layout": "left-narrow",
