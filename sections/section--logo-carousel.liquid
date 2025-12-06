@@ -1,5 +1,8 @@
-<div class="section--logo-carousel   {{ section.settings.section_class }}" style="padding-top: {{ section.settings.top_padding }}px; padding-bottom: {{ section.settings.bottom_padding }}px;">
-  <div class="splide" id="logo-carousel" style="max-width: {{ section.settings.container_width }}px; margin: 0 auto;">
+<div
+  class="section--logo-carousel {{ section.settings.section_class }}"
+  style="padding-top: {{ section.settings.top_padding }}px; padding-bottom: {{ section.settings.bottom_padding }}px;"
+>
+  <div class="splide" id="logo-carousel-{{ section.id }}">
     <div class="splide__track">
       <ul class="splide__list">
         {% for block in section.blocks %}
@@ -20,11 +23,7 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // Positive speed keeps your current direction (right -> left in your case)
-    // Negative speed reverses it.
-    var scrollSpeed = {% if section.settings.scroll_direction == 'ltr' %}-0.8{% else %}0.8{% endif %};
-
-    new Splide('#logo-carousel', {
+    new Splide('#logo-carousel-{{ section.id }}', {
       autoWidth: true,
       perMove: 1,
       type: 'loop',
@@ -35,23 +34,31 @@
         speed: 0,
         rewindSpeed: 0,
         autoplay: 'pause'
-      },
-      autoScroll: {
-        speed: scrollSpeed
       }
+      {% if section.settings.scroll_direction == 'ltr' %}
+      ,autoScroll: {
+        // Left to right
+        speed: -0.8
+      }
+      {% else %}
+      ,autoScroll: {
+        // Right to left (default)
+        speed: 0.8
+      }
+      {% endif %}
     }).mount(window.splide.Extensions);
   });
 </script>
 
 <style>
-  #logo-carousel li img{
+  #logo-carousel-{{ section.id }} li img {
     max-height: clamp(40px, 35vw, 300px);
     height: 100%;
     width: 100%;
     object-fit: contain;
   }
 
-  #logo-carousel li {
+  #logo-carousel-{{ section.id }} li {
     padding: 0 30px;
     display: flex;
     align-items: center;
@@ -111,7 +118,7 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Logo Image"
+          "label": "Logo image"
         }
       ]
     }
