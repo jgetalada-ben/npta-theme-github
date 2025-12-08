@@ -12,6 +12,25 @@
 {%- endif -%}
 
 {%- comment %}
+  Column layout → CSS grid template
+{%- endcomment -%}
+{%- assign column_layout = section.settings.column_layout | default: 'equal' -%}
+
+{%- case column_layout -%}
+  {%- when 'left-wide' -%}
+    {%- assign promo3_cols = '2fr 1fr 1fr' -%}
+  {%- when 'center-wide' -%}
+    {%- assign promo3_cols = '1fr 2fr 1fr' -%}
+  {%- when 'right-wide' -%}
+    {%- assign promo3_cols = '1fr 1fr 2fr' -%}
+  {%- when 'left-narrow' -%}
+    {%- assign promo3_cols = '0.85fr 1.1fr 1.1fr' -%}
+  {%- else -%}
+    {%- assign promo3_cols = '1fr 1fr 1fr' -%}
+{%- endcase -%}
+
+
+{%- comment %}
   Resolve button URL preference: product first, then custom link
 {% endcomment -%}
 {%- assign btn_href = '' -%}
@@ -27,6 +46,7 @@
   style="
     --promo3-bg: {{ section.settings.bg_color }};
     --promo3-max-w: {{ mw }};
+    --promo3-cols: {{ promo3_cols }};
     --promo3-height: {{ section_height }};
     --promo3-heading-size: {{ section.settings.heading_size | default: 'clamp(24px,3vw,36px)' }};
     --promo3-heading-color: {{ section.settings.heading_color }};
@@ -43,9 +63,14 @@
     --promo3-button-font-size: {{ section.settings.button_font_size | default: 'clamp(14px,1.2vw,18px)' }};
     --promo3-button-pad-y: {{ section.settings.button_pad_y | default: 14 }}px;
     --promo3-button-pad-x: {{ section.settings.button_pad_x | default: 32 }}px;
+
+    {%- comment -%} split-layout helper vars {%- endcomment -%}
+    --promo3-right-bg-pos: {{ section.settings.right_bg_pos | default: 'right bottom' }};
+    --promo3-right-bg-size: {{ section.settings.right_bg_size | default: 'contain' }};
+    --promo3-right-valign: {{ section.settings.right_vertical_align | default: 'center' }};
   "
 >
-  <div class="promo3-wrap">
+  <div class="promo3-wrap" id="promo3-wrap-width-{{ column_layout }}">
     {%- comment -%} LEFT IMAGE COLUMN {%- endcomment -%}
     <div class="promo3-col promo3-col--left">
       {%- if section.settings.left_image != blank -%}
@@ -95,48 +120,89 @@
 
     {%- comment -%} RIGHT CONTENT CARD {%- endcomment -%}
     <div class="promo3-col promo3-col--right">
-      <div class="promo3-card promo3-align-{{ section.settings.content_align }}">
-        {%- if section.settings.heading != blank -%}
-          <h2 class="promo3-heading">
-            {{ section.settings.heading }}
-          </h2>
-        {%- endif -%}
+      {%- if section.settings.right_layout == 'split' -%}
+        <div
+          class="promo3-card promo3-card--split promo3-align-{{ section.settings.content_align }}"
+          {%- if section.settings.body_image != blank -%}
+            style="--promo3-bg-img: url('{{ section.settings.body_image | image_url: width: 1600 }}');"
+          {%- endif -%}
+        >
+          {%- if section.settings.heading != blank -%}
+            <h2 class="promo3-heading">
+              {{ section.settings.heading }}
+            </h2>
+          {%- endif -%}
 
-        {%- if section.settings.subtitle != blank -%}
-          <div class="promo3-subtitle">
-            {{ section.settings.subtitle }}
-          </div>
-        {%- endif -%}
+          {%- if section.settings.subtitle != blank -%}
+            <div class="promo3-subtitle">
+              {{ section.settings.subtitle }}
+            </div>
+          {%- endif -%}
 
-        {% if section.settings.body_image != blank %}
-          <div class="promo-banner__body-image">
-            {{ section.settings.body_image
-              | image_url: width: 1200
-              | image_tag: loading: 'lazy', alt: section.settings.body_image_alt | default: section.settings.subtitle | escape
-            }}
-          </div>
-        {% endif %}
+          {%- if section.settings.fine_print != blank -%}
+            <div class="promo3-fineprint">
+              {{ section.settings.fine_print }}
+            </div>
+          {%- endif -%}
 
-        {%- if section.settings.fine_print != blank -%}
-          <div class="promo3-fineprint">
-            {{ section.settings.fine_print }}
-          </div>
-        {%- endif -%}
+          {%- if btn_href != '' and section.settings.button_label != blank -%}
+            <div class="promo3-btn-wrap">
+              <a href="{{ btn_href }}" 
+                class="btn button-yg tp-cta"
+                {% if section.settings.button_new_tab %}
+                  target="_blank" rel="noopener noreferrer"
+                {% endif %}
+              >
+                <span class="btn-label-down">{{ section.settings.button_label }}</span>
+                <span class="btn-label-down">{{ section.settings.button_label }}</span>
+              </a>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- else -%}
+        <div class="promo3-card promo3-card--classic promo3-align-{{ section.settings.content_align }}">
+          {%- if section.settings.heading != blank -%}
+            <h2 class="promo3-heading">
+              {{ section.settings.heading }}
+            </h2>
+          {%- endif -%}
 
-        {%- if btn_href != '' and section.settings.button_label != blank -%}
-          <div class="promo3-btn-wrap">
-            <a href="{{ btn_href }}" 
-              class="btn button-yg tp-cta"
-              {% if section.settings.button_new_tab %}
-                target="_blank" rel="noopener noreferrer"
-              {% endif %}
-            >
-              <span class="btn-label-down">{{ section.settings.button_label }}</span>
-              <span class="btn-label-down">{{ section.settings.button_label }}</span>
-            </a>
-          </div>
-        {%- endif -%}
-      </div>
+          {%- if section.settings.subtitle != blank -%}
+            <div class="promo3-subtitle">
+              {{ section.settings.subtitle }}
+            </div>
+          {%- endif -%}
+
+          {% if section.settings.body_image != blank %}
+            <div class="promo-banner__body-image">
+              {{ section.settings.body_image
+                | image_url: width: 1200
+                | image_tag: loading: 'lazy', alt: section.settings.body_image_alt | default: section.settings.subtitle | escape
+              }}
+            </div>
+          {% endif %}
+
+          {%- if section.settings.fine_print != blank -%}
+            <div class="promo3-fineprint">
+              {{ section.settings.fine_print }}
+            </div>
+          {%- endif -%}
+
+          {%- if btn_href != '' and section.settings.button_label != blank -%}
+            <div class="promo3-btn-wrap">
+              <a href="{{ btn_href }}" 
+                class="btn button-yg tp-cta"
+                {% if section.settings.button_new_tab %}
+                  target="_blank" rel="noopener noreferrer"
+                {% endif %}
+              >
+                <span class="btn-label-down">{{ section.settings.button_label }}</span>
+                <span class="btn-label-down">{{ section.settings.button_label }}</span>
+              </a>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
     </div>
   </div>
 
@@ -154,10 +220,10 @@
       width: 100%;
       margin: 0 auto;
       display: grid;
-      /* ✅ 3 equal columns */
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: var(--promo3-cols, repeat(3, minmax(0, 1fr)));
       gap: 0;
       align-items: stretch;
+      height: 480px;
     }
 
     #promo3-{{ sid }} .promo3-col{
@@ -167,19 +233,16 @@
       flex-direction: column;
     }
 
-    /* ✅ one shared height for the whole row */
     #promo3-{{ sid }} .promo3-col--left,
     #promo3-{{ sid }} .promo3-col--center,
     #promo3-{{ sid }} .promo3-col--right{
       height: 100%;
     }
 
-    /* right card always stretches to match image columns */
     #promo3-{{ sid }} .promo3-col--right{
       align-items: stretch;
     }
 
-    /* ✅ default image behaviour (right card image can stay auto-height) */
     #promo3-{{ sid }} .promo3-img{
       display: block;
       width: 100%;
@@ -188,12 +251,12 @@
       object-position: center;
     }
 
-    /* ✅ force left + center to 3:4 (e.g. 300x400) */
     #promo3-{{ sid }} .promo3-col--left .promo3-img,
     #promo3-{{ sid }} .promo3-col--center .promo3-img{
       width: 100%;
-      aspect-ratio: 3 / 4; /* same as 300x400 */
-      height: auto;
+      aspect-ratio: 3 / 4;
+      {% comment %} height: auto; {% endcomment %}
+      height:100%;
     }
 
     #promo3-{{ sid }} .promo3-img--placeholder{
@@ -216,7 +279,6 @@
       font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
       text-transform: uppercase;
       letter-spacing: .04em;
-      margin-bottom: 0.4em;
     }
     #promo3-{{ sid }} .promo3-overlay-subheading{
       font-size: var(--promo3-overlay-sub-size);
@@ -227,14 +289,15 @@
       text-transform: uppercase;
     }
 
-    /* Card content on the right */
+    /* Card content on the right (shared bits) */
     #promo3-{{ sid }} .promo3-card{
       background: transparent;
       display:flex;
       flex-direction:column;
       justify-content:flex-start;
       gap: clamp(10px,1.8vw,18px);
-      width: 100%;height: 100%;
+      width: 100%;
+      height: 100%;
     }
 
     #promo3-{{ sid }} .promo3-heading{
@@ -245,6 +308,13 @@
       text-transform: uppercase;
       line-height: 1.05;
       padding: 25px clamp(24px, 3vw, 40px) 0;
+    }
+    #promo3-{{ sid }} .promo3-card--split .promo3-heading,
+    #promo3-{{ sid }} .promo3-card--split .promo3-subtitle,
+    #promo3-{{ sid }} .promo3-card--split .promo3-fineprint,
+    #promo3-{{ sid }} .promo3-card--split .promo3-btn-wrap {
+      padding: 0;
+      margin: 0;
     }
 
     #promo3-{{ sid }} .promo3-subtitle{
@@ -257,7 +327,6 @@
       line-height: normal;
     }
 
-    /* Right card image – fills the card width like the design */
     .promo-banner__body-image {
       width: 100%;
     }
@@ -314,6 +383,90 @@
     #promo3-{{ sid }} .promo3-align-center .promo3-btn-wrap{ text-align:center; }
     #promo3-{{ sid }} .promo3-align-right .promo3-btn-wrap{ text-align:right; }
 
+        /* ---------- Right column SPLIT layout ---------- */
+    #promo3-{{ sid }} .promo3-card--split{
+      position: relative;
+      padding: 40px clamp(32px, 3vw, 48px);
+      justify-content: var(--promo3-right-valign);
+    }
+
+    #promo3-{{ sid }} #promo3-wrap-width-equal .promo3-card--split {
+      padding-right: clamp(70px, 22vw, 150px);
+    }
+    #promo3-{{ sid }} #promo3-wrap-width-left-narrow .promo3-heading{
+      max-width: 150px;
+    }
+    #promo3-{{ sid }} #promo3-wrap-width-left-narrow .promo3-fineprint {
+      max-width: 200px;
+    }
+
+    #promo3-{{ sid }} .promo3-card--split::after{
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: min(60%, 340px);
+      background-image: var(--promo3-bg-img);
+      background-repeat: no-repeat;
+      background-position: var(--promo3-right-bg-pos);
+      background-size: var(--promo3-right-bg-size);
+      pointer-events: none;
+      z-index: 0;
+    }
+    #promo3-{{ sid }} #promo3-wrap-width-left-narrow .promo3-card--split::after{
+      right: -3rem;
+      width: min(85%, 360px);
+    }
+
+    #promo3-{{ sid }} .promo3-card--split .promo3-heading,
+    #promo3-{{ sid }} .promo3-card--split .promo3-subtitle,
+    #promo3-{{ sid }} .promo3-card--split .promo3-fineprint,
+    #promo3-{{ sid }} .promo3-card--split .promo3-btn-wrap{
+      position: relative;
+      z-index: 1;
+      padding-right: 0; /* padding handled by card */
+      max-width: 460px; /* stops it getting too narrow */
+    }
+    #promo3-{{ sid }} .promo3-card--split .promo3-btn-wrap{
+      margin-top: auto;
+    }
+
+    /* hide inline body image in split layout (background is used instead) */
+    #promo3-{{ sid }} .promo3-card--split .promo-banner__body-image{
+      display: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 990px){
+      #promo3-{{ sid }} .promo3-card--split{
+        padding: 24px 20px 280px;
+      }
+
+      #promo3-{{ sid }} .promo3-card--split::after{
+        right: 20px;
+        left: 20px;
+        width: auto;
+        height: 230px;
+        bottom: 24px;
+        top: auto;
+        background-position: var(--promo3-right-bg-pos);
+        background-size: var(--promo3-right-bg-size);
+      }
+
+      #promo3-{{ sid }} .promo3-card--split .promo3-heading,
+      #promo3-{{ sid }} .promo3-card--split .promo3-subtitle,
+      #promo3-{{ sid }} .promo3-card--split .promo3-fineprint,
+      #promo3-{{ sid }} .promo3-card--split .promo3-btn-wrap{
+        max-width: none;
+      }
+    }
+
+    /* hide inline body image in split layout (background is used instead) */
+    #promo3-{{ sid }} .promo3-card--split .promo-banner__body-image{
+      display: none;
+    }
+
     /* Responsive */
     @media (max-width: 990px){
       #promo3-{{ sid }} .promo3-btn-wrap{
@@ -321,6 +474,7 @@
       }
       #promo3-{{ sid }} .promo3-wrap{
         grid-template-columns: 1fr;
+        height: auto;
       }
 
       #promo3-{{ sid }} .promo3-col{
@@ -334,6 +488,20 @@
 
       #promo3-{{ sid }} .promo3-card{
         padding: 24px 20px 32px;
+      }
+
+      #promo3-{{ sid }} .promo3-card--split{
+        padding: 24px 20px;
+      }
+
+      #promo3-{{ sid }} .promo3-card--split::after{
+        right: 20px;
+        left: 5rem;
+        height: 100%;
+        bottom: 0;
+        top: auto;
+        background-position: var(--promo3-right-bg-pos);
+        background-size: var(--promo3-right-bg-size);
       }
     }
   </style>
@@ -365,6 +533,19 @@
       ],
       "default": "left"
     },
+    {
+      "type": "select",
+      "id": "column_layout",
+      "label": "Column width layout",
+      "options": [
+        { "value": "equal",      "label": "Equal (33 / 33 / 33)" },
+        { "value": "left-wide",  "label": "Left wide (50 / 25 / 25)" },
+        { "value": "center-wide","label": "Center wide (25 / 50 / 25)" },
+        { "value": "right-wide", "label": "Right wide (25 / 25 / 50)" },
+        { "value": "left-narrow", "label": "Left narrow (25 / 37 / 37)" }
+      ],
+      "default": "equal"
+    },
 
     { "type": "header", "content": "Left image" },
     { "type": "image_picker", "id": "left_image", "label": "Left image" },
@@ -389,10 +570,57 @@
     { "type": "text", "id": "subtitle_size", "label": "Subtitle font-size (accepts clamp())", "default": "clamp(14px,1.4vw,18px)" },
     { "type": "color", "id": "subtitle_color", "label": "Subtitle color", "default": "#01241E" },
 
-    { "type": "image_picker", "id": "body_image", "label": "Body image (above fine print)" },
+    { "type": "image_picker", "id": "body_image", "label": "Body image (right column artwork)" },
     { "type": "text", "id": "body_image_alt", "label": "Body image alt text" },
 
     { "type": "richtext", "id": "fine_print", "label": "Fine print (under image)", "default": "<p>CPR, HGD, YES, and RFL *not included in sale.</p>" },
+
+    {
+      "type": "select",
+      "id": "right_layout",
+      "label": "Right column layout",
+      "options": [
+        { "value": "classic", "label": "Stacked layout" },
+        { "value": "split",   "label": "Split layout" }
+      ],
+      "default": "classic"
+    },
+    {
+      "type": "select",
+      "id": "right_bg_pos",
+      "label": "Right image position",
+      "options": [
+        { "value": "left top", "label": "Left top" },
+        { "value": "left center", "label": "Left center" },
+        { "value": "left bottom", "label": "Left bottom" },
+        { "value": "center bottom", "label": "Center bottom" },
+        { "value": "right bottom", "label": "Right bottom" },
+        { "value": "right center", "label": "Right center" },
+        { "value": "right top", "label": "Right top" }
+      ],
+      "default": "right bottom"
+    },
+    {
+      "type": "select",
+      "id": "right_bg_size",
+      "label": "Right image size",
+      "options": [
+        { "value": "cover", "label": "Cover" },
+        { "value": "contain", "label": "Contain" }
+      ],
+      "default": "contain"
+    },
+    {
+      "type": "select",
+      "id": "right_vertical_align",
+      "label": "Right text vertical",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center",     "label": "Center" },
+        { "value": "flex-end",   "label": "Bottom" }
+      ],
+      "default": "center"
+    },
 
     { "type": "header", "content": "Button" },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "SHOP NOW" },
