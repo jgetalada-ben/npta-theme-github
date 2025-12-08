@@ -90,6 +90,23 @@
   }
   @media (max-width: 749px){
     .multicolumn__inner .multicolumn-card.content-container { padding: calc(var(--col-pad) * 0.75); }
+    #Slider-{{ section.id }}.slider {
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      scroll-padding-left: 16px;
+      gap: {{ section.settings.grid_gap | default: 16 }}px;
+      touch-action: pan-x pan-y;
+    }
+    #Slider-{{ section.id }}.slider .multicolumn-list__item {
+      flex: 0 0 calc(100% - {{ section.settings.grid_gap | default: 16 }}px);
+      scroll-snap-align: start;
+    }
+    #Slider-{{ section.id }} .multicolumn-card.content-container {
+      height: 100%;
+    }
   }
 
   .multicolumn__inner .multicolumn-card__info{
@@ -321,6 +338,56 @@
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var slider = document.getElementById('Slider-{{ section.id }}');
+    if (!slider) return;
+
+    // Only switch to native scroll on small screens and when swipe_on_mobile is enabled
+    var enableNative =
+      window.matchMedia('(max-width: 749px)').matches &&
+      {{ section.settings.swipe_on_mobile | json }};
+
+    if (!enableNative) return;
+
+    // Remove theme slider classes so Shopify's JS stops trying to control it
+    slider.classList.remove('slider', 'slider--tablet', 'grid--peek');
+
+    // Remove per-slide slider class
+    slider.querySelectorAll('.slider__slide').forEach(function (item) {
+      item.classList.remove('slider__slide');
+    });
+
+    // Add our native scroll class
+    slider.classList.add('multicolumn-native-scroll');
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var slider = document.getElementById('Slider-{{ section.id }}');
+    if (!slider) return;
+
+    // Only switch to native scroll on small screens and when swipe_on_mobile is enabled
+    var enableNative =
+      window.matchMedia('(max-width: 749px)').matches &&
+      {{ section.settings.swipe_on_mobile | json }};
+
+    if (!enableNative) return;
+
+    // Remove theme slider classes so Shopify's JS stops trying to control it
+    slider.classList.remove('slider', 'slider--tablet', 'grid--peek');
+
+    // Remove per-slide slider class
+    slider.querySelectorAll('.slider__slide').forEach(function (item) {
+      item.classList.remove('slider__slide');
+    });
+
+    // Add our native scroll class
+    slider.classList.add('multicolumn-native-scroll');
+  });
+</script>
 
 {% schema %}
 {
