@@ -836,7 +836,7 @@
         ".section--top-background {width: 100%; display: block;}",
         "h1 {color: #fff;}",
         ".subtitle-p {line-height: normal;}",
-        "@media (max-width: 980px) {.section--top-banner {height: 60vh !important; } .section--top-banner-container {top: 15%; } .section--top-background {background-position: -100vw center; }}"
+        "@media (max-width: 980px) {.section--top-banner {height: 60vh !important; padding: 40px 0; } .section--top-banner-container {top: 0%; } .section--top-background {background-position: -100vw center; }}"
       ],
       "name": "Top Banner",
       "settings": {
@@ -844,8 +844,8 @@
         "title": "Your Fitness Career Starts Here",
         "subtitle": "Would like to speak to a Career Advisor? or Book a FREE Mentorship Call?",
         "desc1": "",
-        "title_size": "clamp(32px,6vw,64px)",
-        "subtitle_size": "26px",
+        "title_size": "clamp(24px,6vw,64px)",
+        "subtitle_size": "clamp(16px,2.6vw,26px)",
         "desc_size": "16px",
         "button_link": "",
         "button_text": "",
