@@ -78,7 +78,7 @@
         {%- endif -%}
 
         {%- if yt_id -%}
-          {%- assign yt_params = '?rel=0&autoplay=1&mute=0&controls=0&modestbranding=1&playsinline=1&loop=1&playlist=' | append: yt_id -%}
+          {%- assign yt_params = '?rel=0&autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&loop=1&playlist=' | append: yt_id -%}
           {%- assign iframe_src = 'https://www.youtube-nocookie.com/embed/' | append: yt_id | append: yt_params -%}
         {%- elsif url contains 'vimeo.com/' -%}
           {%- assign vimeo_id = url | split: 'vimeo.com/' | last | split: '?' | first | split: '/' | last -%}
