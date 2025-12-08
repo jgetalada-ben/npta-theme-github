@@ -17,8 +17,8 @@
       "name": "Video v2",
       "settings": {
         "media_type": "video",
-        "shopify_video": "shopify://files/videos/A Trainer's Wishlist For The Holidays_NEW.mp4",
-        "embed_url": "",
+        "shopify_video": "shopify://files/videos/A Trainer's Wishlist For The Holidays_NEW_37cb9256-7020-4c0d-8164-96cb7c1ea1f2.mp4",
+        "embed_url": "https://cdn.shopify.com/videos/c/o/v/000bc16bd80345469871b440e7029e73.mp4",
         "alt": "holiday Sale",
         "aspect_ratio": "21-9",
         "aspect_ratio_mobile": "1-1",
