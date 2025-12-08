@@ -90,23 +90,6 @@
   }
   @media (max-width: 749px){
     .multicolumn__inner .multicolumn-card.content-container { padding: calc(var(--col-pad) * 0.75); }
-    #Slider-{{ section.id }}.slider {
-      display: flex;
-      overflow-x: auto;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch;
-      scroll-snap-type: x mandatory;
-      scroll-padding-left: 16px;
-      gap: {{ section.settings.grid_gap | default: 16 }}px;
-      touch-action: pan-x pan-y;
-    }
-    #Slider-{{ section.id }}.slider .multicolumn-list__item {
-      flex: 0 0 calc(100% - {{ section.settings.grid_gap | default: 16 }}px);
-      scroll-snap-align: start;
-    }
-    #Slider-{{ section.id }} .multicolumn-card.content-container {
-      height: 100%;
-    }
   }
 
   .multicolumn__inner .multicolumn-card__info{
