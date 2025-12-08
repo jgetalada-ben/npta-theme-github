@@ -445,6 +445,72 @@
         "gap": 20
       }
     },
+    "trainers_pick_RUYr6y": {
+      "type": "trainers-pick",
+      "blocks": {
+        "product_card_kpmUrX": {
+          "type": "product_card",
+          "settings": {
+            "product_handle": "certified-personal-trainer-cpt",
+            "custom_image": "shopify://shop_images/CPT_59dfedca-0a8d-49d9-bbbc-803cffd27b44.jpg",
+            "custom_title": "",
+            "blurb": "<p>Become a Certified Personal Trainer from the world’s source of fitness...    </p>",
+            "custom_price": "",
+            "custom_link": ""
+          }
+        },
+        "product_card_cANV7E": {
+          "type": "product_card",
+          "settings": {
+            "product_handle": "certified-nutrition-coach-cnc",
+            "custom_image": "shopify://shop_images/CNC.jpg",
+            "custom_title": "",
+            "blurb": "<p>Nutrition serves as the foundation for our health and the fuel for our ...</p>",
+            "custom_price": "",
+            "custom_link": ""
+          }
+        },
+        "product_card_8FdEtK": {
+          "type": "product_card",
+          "settings": {
+            "product_handle": "cpt-essentials-cpt-cpr",
+            "custom_image": "shopify://shop_images/CPT_Ess.jpg",
+            "custom_title": "",
+            "blurb": "<p>As a Certified Wellness Coach, you're not just pursuing a career...</p>",
+            "custom_price": "",
+            "custom_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_card_kpmUrX",
+        "product_card_cANV7E",
+        "product_card_8FdEtK"
+      ],
+      "disabled": true,
+      "name": "Trainer's Pick",
+      "settings": {
+        "kicker": "",
+        "title": "TRAINER’S PICK",
+        "subhead": "Chosen by Thousands. Trusted by Trainers. Built for Your Next Step.",
+        "body": "Explore our best selling products.",
+        "cta_label": "View All Course",
+        "cta_link": "https://www.npta.ca/collections/all-products",
+        "cta2_label": "Build Your Bundle",
+        "cta2_link": "shopify://collections/bundles",
+        "cta2_bg": "#2e7480",
+        "cta2_color": "#ffffff",
+        "max_width": "1090px",
+        "bg": "#eff0e7",
+        "price_bg": "#0f828c",
+        "price_color": "#ffffff",
+        "pad_top": 90,
+        "pad_right": 24,
+        "pad_bottom": 140,
+        "pad_left": 24,
+        "gap": 20
+      }
+    },
     "feature_split_card_bcA9Uz": {
       "type": "feature-split-card",
       "name": "Split Feature Card",
@@ -922,6 +988,7 @@
     "section_logo_carousel_hJFRJY",
     "whats_new_grid_LhNjr7",
     "trainers_pick_KpCy4K",
+    "trainers_pick_RUYr6y",
     "feature_split_card_bcA9Uz",
     "section_process_PPjrLE",
     "section_text_image_QUzLBC",
