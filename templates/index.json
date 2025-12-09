@@ -52,120 +52,6 @@
         "btn2_txt": "#0b0b0b"
       }
     },
-    "trending_feature_row_dHmYn6": {
-      "type": "trending-feature-row",
-      "blocks": {
-        "card_fmKjEG": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/image_13.jpg",
-            "eyebrow": "FREE COURSE",
-            "title": "UNDERSTANDING WEIGHT LOSS MEDICATIONS (GLP-1)",
-            "button_label": "Shop now",
-            "button_link": "shopify://products/understanding-weight-loss-medications"
-          }
-        },
-        "card_YKLVqJ": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/image_14.jpg",
-            "eyebrow": "FREE COURSE",
-            "title": "Mindful Stress Management (MSM)",
-            "button_label": "Shop now",
-            "button_link": "shopify://products/mindful-stress-management"
-          }
-        }
-      },
-      "block_order": [
-        "card_fmKjEG",
-        "card_YKLVqJ"
-      ],
-      "disabled": true,
-      "name": "Trending feature row",
-      "settings": {
-        "heading": "YOUR CHOICE OF FREE COURSE",
-        "subheading": "TOGETHER WITH YOUR BUNDLE",
-        "max_width": "1200px",
-        "bg": "#f8f8f8",
-        "columns_desktop": 2,
-        "pad_top": 60,
-        "pad_right": 24,
-        "pad_bottom": 60,
-        "pad_left": 24,
-        "gap": 32,
-        "card_bg": "#f8f8f8",
-        "eyebrow_size": "11px",
-        "card_title_size": "clamp(16px,1.5vw,20px)",
-        "button_font_size": "clamp(12px,1.2vw,16px)"
-      }
-    },
-    "offer_highlight_strip_4fXkRx": {
-      "type": "offer-highlight-strip",
-      "blocks": {
-        "bullet_rMgMFW": {
-          "type": "bullet",
-          "settings": {
-            "bullet_text": "<p>Receive FREE choICe of weight loss or virtual coaching (save up to $1100)</p>",
-            "bullet_icon_override": "shopify://shop_images/arrow-green.png"
-          }
-        },
-        "bullet_YkgzDh": {
-          "type": "bullet",
-          "settings": {
-            "bullet_text": "<p>Get 20% off on Recertify for life</p>",
-            "bullet_icon_override": "shopify://shop_images/arrow-green.png"
-          }
-        },
-        "bullet_phQteR": {
-          "type": "bullet",
-          "settings": {
-            "bullet_text": "<p>Receive FREE GLP-1 valued at $200</p>",
-            "bullet_icon_override": "shopify://shop_images/arrow-green.png"
-          }
-        }
-      },
-      "block_order": [
-        "bullet_rMgMFW",
-        "bullet_YkgzDh",
-        "bullet_phQteR"
-      ],
-      "disabled": true,
-      "name": "Offer Highlight Strip",
-      "settings": {
-        "max_width": "100%",
-        "section_bg_color": "#ffffff",
-        "center_bg_color": "#03251a",
-        "left_image": "shopify://shop_images/image_8.png",
-        "left_image_alt": "",
-        "right_image": "shopify://shop_images/image_7.png",
-        "right_image_alt": "",
-        "heading": "EARLY ACCESS PERKS:",
-        "heading_color": "#ffffff",
-        "heading_font_size": "clamp(21px,4vw,46px)",
-        "description": "<p>For a limited time, purchase any CPT + CNC bundles and unlock:</p>",
-        "desc_color": "#ffffff",
-        "desc_font_size": "clamp(14px,2vw,21px)",
-        "bullet_icon": "shopify://shop_images/arrow-green.png",
-        "bullet_color": "#ffffff",
-        "bullet_font_size": "clamp(12px,2vw,18px)",
-        "button_text": "SHOP NOW",
-        "button_link": "https://www.npta.ca/collections/black-friday-sale",
-        "button_product": "",
-        "button_new_tab": false,
-        "button_bg_color": "#c8ff63",
-        "button_text_color": "#01241e",
-        "button_font_size": "clamp(14px,1.3vw,18px)",
-        "button_pad_top": 10,
-        "button_pad_bottom": 10,
-        "button_pad_left": 40,
-        "button_pad_right": 40,
-        "pad_y": 0,
-        "pad_x": 0,
-        "left_mobile_order": "1",
-        "center_mobile_order": "2",
-        "right_mobile_order": "3"
-      }
-    },
     "promo_triple_banner_dkW6J8": {
       "type": "promo-triple-banner",
       "name": "Promo Triple Banner",
@@ -381,72 +267,6 @@
         ".tp-subhead {font-size: clamp(14px, 1.4vw, 24px); line-height: 2;}",
         "@media (max-width: 749px) {.tp-wrap .tp-header {max-width: 100%; width: 100%; } .tp-subhead {line-height: 1; }}"
       ],
-      "name": "Trainer's Pick",
-      "settings": {
-        "kicker": "",
-        "title": "TRAINER’S PICK",
-        "subhead": "Chosen by Thousands. Trusted by Trainers. Built for Your Next Step.",
-        "body": "Explore our best selling products.",
-        "cta_label": "View All Course",
-        "cta_link": "https://www.npta.ca/collections/all-products",
-        "cta2_label": "Build Your Bundle",
-        "cta2_link": "shopify://collections/bundles",
-        "cta2_bg": "#2e7480",
-        "cta2_color": "#ffffff",
-        "max_width": "1090px",
-        "bg": "#eff0e7",
-        "price_bg": "#0f828c",
-        "price_color": "#ffffff",
-        "pad_top": 90,
-        "pad_right": 24,
-        "pad_bottom": 140,
-        "pad_left": 24,
-        "gap": 20
-      }
-    },
-    "trainers_pick_RUYr6y": {
-      "type": "trainers-pick",
-      "blocks": {
-        "product_card_kpmUrX": {
-          "type": "product_card",
-          "settings": {
-            "product_handle": "certified-personal-trainer-cpt",
-            "custom_image": "shopify://shop_images/CPT_59dfedca-0a8d-49d9-bbbc-803cffd27b44.jpg",
-            "custom_title": "",
-            "blurb": "<p>Become a Certified Personal Trainer from the world’s source of fitness...    </p>",
-            "custom_price": "",
-            "custom_link": ""
-          }
-        },
-        "product_card_cANV7E": {
-          "type": "product_card",
-          "settings": {
-            "product_handle": "certified-nutrition-coach-cnc",
-            "custom_image": "shopify://shop_images/CNC.jpg",
-            "custom_title": "",
-            "blurb": "<p>Nutrition serves as the foundation for our health and the fuel for our ...</p>",
-            "custom_price": "",
-            "custom_link": ""
-          }
-        },
-        "product_card_8FdEtK": {
-          "type": "product_card",
-          "settings": {
-            "product_handle": "cpt-essentials-cpt-cpr",
-            "custom_image": "shopify://shop_images/CPT_Ess.jpg",
-            "custom_title": "",
-            "blurb": "<p>As a Certified Wellness Coach, you're not just pursuing a career...</p>",
-            "custom_price": "",
-            "custom_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "product_card_kpmUrX",
-        "product_card_cANV7E",
-        "product_card_8FdEtK"
-      ],
-      "disabled": true,
       "name": "Trainer's Pick",
       "settings": {
         "kicker": "",
@@ -902,20 +722,6 @@
         "show_banner_gradient": false
       }
     },
-    "section_newsletter_signup_LcJCrX": {
-      "type": "section--newsletter-signup",
-      "disabled": true,
-      "name": "Newsletter",
-      "settings": {
-        "heading": "Enter your email for 25$ OFF your first order, plus the latest NPTA news.",
-        "email_label": "EMAIL*",
-        "email_placeholder": "Enter your email",
-        "button_text": "SIGN UP",
-        "disclaimer_text": "By providing my email, l am consenting to receive NPTA emails and Email-Based Advertising. For additional information, please see our",
-        "privacy_policy_link": "/",
-        "privacy_policy_text": "Privacy Policy"
-      }
-    },
     "newsletter_v2_MYDzwi": {
       "type": "newsletter-v2",
       "custom_css": [
@@ -940,13 +746,10 @@
   },
   "order": [
     "video_v2_AqMBKg",
-    "trending_feature_row_dHmYn6",
-    "offer_highlight_strip_4fXkRx",
     "promo_triple_banner_dkW6J8",
     "section_logo_carousel_hJFRJY",
     "whats_new_grid_LhNjr7",
     "trainers_pick_KpCy4K",
-    "trainers_pick_RUYr6y",
     "feature_split_card_bcA9Uz",
     "section_process_PPjrLE",
     "section_text_image_QUzLBC",
@@ -955,7 +758,6 @@
     "payment_highlights_wmDcWb",
     "section_certified_trainers_6Q4NDV",
     "section_top_banner_MGfjA4",
-    "section_newsletter_signup_LcJCrX",
     "newsletter_v2_MYDzwi"
   ]
 }
