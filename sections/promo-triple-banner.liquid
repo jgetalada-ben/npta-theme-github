@@ -66,6 +66,12 @@
     --promo3-ov-a: {{ section.settings.overlay_h_align | default: 'flex-start' }};
     --promo3-ov-t: {{ section.settings.overlay_text_align | default: 'left' }};
 
+    /* ✅ Left Logo controls */
+    --promo3-left-logo-x: {{ section.settings.left_logo_h_align | default: 'flex-start' }};
+    --promo3-left-logo-y: {{ section.settings.left_logo_v_align | default: 'flex-start' }};
+    --promo3-left-logo-pad: {{ section.settings.left_logo_padding | default: 18 }}px;
+    --promo3-left-logo-width: {{ section.settings.left_logo_width | default: 140 }}px;
+
     --promo3-button-bg: {{ section.settings.button_bg }};
     --promo3-button-color: {{ section.settings.button_color }};
     --promo3-button-font-size: {{ section.settings.button_font_size | default: 'clamp(14px,1.2vw,18px)' }};
@@ -79,7 +85,7 @@
   "
 >
   <div class="promo3-wrap" id="promo3-wrap-width-{{ column_layout }}">
-    {%- comment -%} LEFT IMAGE COLUMN (NOW WITH OVERLAY) {%- endcomment -%}
+    {%- comment -%} LEFT IMAGE COLUMN (WITH LOGO + OVERLAY) {%- endcomment -%}
     <div class="promo3-col promo3-col--left">
       {%- if section.settings.left_image != blank -%}
         {{ section.settings.left_image
@@ -93,6 +99,19 @@
         }}
       {%- else -%}
         <div class="promo3-img promo3-img--placeholder" aria-hidden="true"></div>
+      {%- endif -%}
+
+      {%- comment -%} ✅ LEFT LOGO OVERLAY {%- endcomment -%}
+      {%- if section.settings.left_logo != blank -%}
+        <div class="promo3-left-logo" aria-hidden="true">
+          {{ section.settings.left_logo
+            | image_url: width: 1200
+            | image_tag:
+                class: 'promo3-left-logo__img',
+                loading: 'lazy',
+                alt: section.settings.left_logo_alt | escape
+          }}
+        </div>
       {%- endif -%}
 
       {%- if section.settings.left_overlay_heading != blank or section.settings.left_overlay_subheading != blank -%}
@@ -172,7 +191,7 @@
 
           {%- if btn_href != '' and section.settings.button_label != blank -%}
             <div class="promo3-btn-wrap">
-              <a href="{{ btn_href }}" 
+              <a href="{{ btn_href }}"
                 class="btn button-yg tp-cta"
                 {% if section.settings.button_new_tab %}
                   target="_blank" rel="noopener noreferrer"
@@ -215,7 +234,7 @@
 
           {%- if btn_href != '' and section.settings.button_label != blank -%}
             <div class="promo3-btn-wrap">
-              <a href="{{ btn_href }}" 
+              <a href="{{ btn_href }}"
                 class="btn button-yg tp-cta"
                 {% if section.settings.button_new_tab %}
                   target="_blank" rel="noopener noreferrer"
@@ -283,17 +302,37 @@
 
     #promo3-{{ sid }} .promo3-img--placeholder{ background:#e5e5e5; }
 
+    /* ✅ Left logo overlay */
+    #promo3-{{ sid }} .promo3-left-logo{
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      justify-content: var(--promo3-left-logo-x, flex-start);
+      align-items: var(--promo3-left-logo-y, flex-start);
+      padding: var(--promo3-left-logo-pad, 18px);
+      pointer-events: none;
+    }
+    #promo3-{{ sid }} .promo3-left-logo__img{
+      width: var(--promo3-left-logo-width, 140px);
+      max-width: 60%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
     /* ✅ Overlay (shared for left + center) */
     #promo3-{{ sid }} .promo3-overlay{
       position:absolute;
       inset:0;
       display:flex;
       flex-direction:column;
-      justify-content: var(--promo3-ov-j, flex-end); /* top/center/bottom */
-      align-items: var(--promo3-ov-a, flex-start);  /* left/center/right */
+      justify-content: var(--promo3-ov-j, flex-end);
+      align-items: var(--promo3-ov-a, flex-start);
       text-align: var(--promo3-ov-t, left);
       padding: clamp(18px,3vw,32px);
       pointer-events:none;
+      z-index: 4; /* above logo if needed */
     }
 
     #promo3-{{ sid }} .promo3-overlay-heading{
@@ -450,6 +489,14 @@
         bottom: 0;
         top: auto;
       }
+
+      /* keep logo spacing sane on mobile */
+      #promo3-{{ sid }} .promo3-left-logo{
+        padding: max(12px, var(--promo3-left-logo-pad, 18px));
+      }
+      #promo3-{{ sid }} .promo3-left-logo__img{
+        max-width: 70%;
+      }
     }
   </style>
 </section>
@@ -500,6 +547,52 @@
 
     { "type": "text", "id": "left_overlay_heading", "label": "Left overlay heading" },
     { "type": "text", "id": "left_overlay_subheading", "label": "Left overlay subheading" },
+
+    { "type": "header", "content": "Left logo (overlay on left image)" },
+    { "type": "image_picker", "id": "left_logo", "label": "Left logo image" },
+    { "type": "text", "id": "left_logo_alt", "label": "Left logo alt text", "default": "Logo" },
+    {
+      "type": "select",
+      "id": "left_logo_h_align",
+      "label": "Left logo horizontal position",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "select",
+      "id": "left_logo_v_align",
+      "label": "Left logo vertical position",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Bottom" }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "range",
+      "id": "left_logo_padding",
+      "label": "Left logo padding (space from edges)",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "left_logo_width",
+      "label": "Left logo width",
+      "min": 40,
+      "max": 320,
+      "step": 5,
+      "unit": "px",
+      "default": 140
+    },
 
     { "type": "header", "content": "Center image & overlay" },
     { "type": "image_picker", "id": "center_image", "label": "Center image" },
