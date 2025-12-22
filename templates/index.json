@@ -17,6 +17,50 @@
       "name": "Video v2",
       "settings": {
         "media_type": "video",
+        "shopify_video": "shopify://files/videos/CA Home Video.mp4",
+        "embed_url": "",
+        "alt": "holiday Sale",
+        "aspect_ratio": "21-9",
+        "aspect_ratio_mobile": "1-1",
+        "height_mode": "vh",
+        "vh_desktop": "70vh",
+        "vh_mobile": "45dvh",
+        "title": "The new Standard in fitness education",
+        "promo_line": "",
+        "subtitle": "Powered by NPTA",
+        "desc": "<p>Where credibility meets careers. A complete, modern approach to fitness education: certification, mentorship, practical skills and career pathways - built to launch leaders.</p>",
+        "title_size": "clamp(28px,5vw,60px)",
+        "title_color": "#ffffff",
+        "promo_size": "clamp(32px,5vw,72px)",
+        "promo_color": "#c8ff63",
+        "subtitle_size": "clamp(18px,3vw,30px)",
+        "subtitle_color": "#c8ff63",
+        "desc_size": "clamp(14px,2vw,20px)",
+        "desc_color": "#ffffff",
+        "align": "center",
+        "overlay_darkness": 50,
+        "show_btn1": true,
+        "btns_margin_top": "16px",
+        "btn1_label": "CHOOSE MY COURSE",
+        "btn1_link": "shopify://collections/all-products",
+        "btn1_bg": "#c8ff63",
+        "btn1_txt": "#0b0b0b",
+        "show_btn2": false,
+        "btn2_label": "Learn more",
+        "btn2_link": "",
+        "btn2_bg": "#ffffff",
+        "btn2_txt": "#0b0b0b"
+      }
+    },
+    "video_v2_UFygCc": {
+      "type": "video-v2",
+      "disabled": true,
+      "custom_css": [
+        "h3 {color: #c5fb9d;}"
+      ],
+      "name": "Video v2",
+      "settings": {
+        "media_type": "video",
         "shopify_video": "shopify://files/videos/A Trainer's Wishlist For The Holidays Updated.mp4",
         "embed_url": "",
         "alt": "holiday Sale",
@@ -54,6 +98,7 @@
     },
     "promo_triple_banner_dkW6J8": {
       "type": "promo-triple-banner",
+      "disabled": true,
       "name": "Promo Triple Banner",
       "settings": {
         "max_width": "1989px",
@@ -140,6 +185,7 @@
         "logo_mjrAC7",
         "logo_bwyLBr"
       ],
+      "disabled": true,
       "custom_css": [
         ".section--logo-carousel {background: #c1ff72;}"
       ],
@@ -757,6 +803,7 @@
   },
   "order": [
     "video_v2_AqMBKg",
+    "video_v2_UFygCc",
     "promo_triple_banner_dkW6J8",
     "section_logo_carousel_hJFRJY",
     "whats_new_grid_LhNjr7",
