@@ -39,6 +39,14 @@
   {%- assign btn_href = section.settings.button_link -%}
 {%- endif -%}
 
+{%- comment -%} Partner alignment mapping → flex justify-content {%- endcomment -%}
+{%- assign partner_justify = 'flex-start' -%}
+{%- if section.settings.partner_align == 'center' -%}
+  {%- assign partner_justify = 'center' -%}
+{%- elsif section.settings.partner_align == 'right' -%}
+  {%- assign partner_justify = 'flex-end' -%}
+{%- endif -%}
+
 <section
   id="promo3-{{ sid }}"
   class="promo3-section align-{{ section.settings.content_align }}"
@@ -54,6 +62,16 @@
     --promo3-subtitle-color: {{ section.settings.subtitle_color }};
     --promo3-body-size: {{ section.settings.body_size | default: 'clamp(14px,1.3vw,18px)' }};
     --promo3-body-color: {{ section.settings.body_color }};
+
+    /* ✅ Fine print style (NEW) */
+    --promo3-fine-size: {{ section.settings.fine_print_size | default: 'clamp(12px,1.2vw,16px)' }};
+    --promo3-fine-color: {{ section.settings.fine_print_color | default: '#000000' }};
+
+    /* ✅ Partner row (NEW) */
+    --promo3-partner-justify: {{ partner_justify }};
+    --promo3-partner-text-size: {{ section.settings.partner_text_size | default: 'clamp(12px,1.1vw,16px)' }};
+    --promo3-partner-text-color: {{ section.settings.partner_text_color | default: '#01241E' }};
+    --promo3-partner-icon-size: {{ section.settings.partner_icon_size | default: 28 }}px;
 
     /* Overlay settings (shared for left + center) */
     --promo3-overlay-heading-size: {{ section.settings.overlay_heading_size | default: 'clamp(16px,1.5vw,20px)' }};
@@ -189,6 +207,28 @@
             </div>
           {%- endif -%}
 
+          {%- comment -%} ✅ Partner row (FIXED Liquid condition - no parentheses) {%- endcomment -%}
+          {%- if section.settings.partner_enable -%}
+            {%- if section.settings.partner_text != blank or section.settings.partner_icon != blank -%}
+              <div class="promo3-partner">
+                {%- if section.settings.partner_icon != blank -%}
+                  {{ section.settings.partner_icon
+                    | image_url: width: 400
+                    | image_tag:
+                        class: 'promo3-partner__icon',
+                        loading: 'lazy',
+                        alt: section.settings.partner_icon_alt | escape
+                  }}
+                {%- endif -%}
+                {%- if section.settings.partner_text != blank -%}
+                  <div class="promo3-partner__text">
+                    {{ section.settings.partner_text }}
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+
           {%- if btn_href != '' and section.settings.button_label != blank -%}
             <div class="promo3-btn-wrap">
               <a href="{{ btn_href }}"
@@ -230,6 +270,28 @@
             <div class="promo3-fineprint">
               {{ section.settings.fine_print }}
             </div>
+          {%- endif -%}
+
+          {%- comment -%} ✅ Partner row (FIXED Liquid condition - no parentheses) {%- endcomment -%}
+          {%- if section.settings.partner_enable -%}
+            {%- if section.settings.partner_text != blank or section.settings.partner_icon != blank -%}
+              <div class="promo3-partner">
+                {%- if section.settings.partner_icon != blank -%}
+                  {{ section.settings.partner_icon
+                    | image_url: width: 400
+                    | image_tag:
+                        class: 'promo3-partner__icon',
+                        loading: 'lazy',
+                        alt: section.settings.partner_icon_alt | escape
+                  }}
+                {%- endif -%}
+                {%- if section.settings.partner_text != blank -%}
+                  <div class="promo3-partner__text">
+                    {{ section.settings.partner_text }}
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
           {%- endif -%}
 
           {%- if btn_href != '' and section.settings.button_label != blank -%}
@@ -332,7 +394,7 @@
       text-align: var(--promo3-ov-t, left);
       padding: clamp(18px,3vw,32px);
       pointer-events:none;
-      z-index: 4; /* above logo if needed */
+      z-index: 4;
     }
 
     #promo3-{{ sid }} .promo3-overlay-heading{
@@ -351,7 +413,7 @@
       text-transform: uppercase;
     }
 
-    /* Card content on the right (shared bits) */
+    /* Card content on the right */
     #promo3-{{ sid }} .promo3-card{
       background: transparent;
       display:flex;
@@ -397,17 +459,44 @@
       object-fit: cover;
     }
 
+    /* ✅ Fine print (UPDATED to be controllable) */
     #promo3-{{ sid }} .promo3-fineprint{
-      font-size: calc(var(--promo3-body-size) * 0.85);
-      opacity:.85;
-      color: var(--promo3-body-color);
+      font-size: var(--promo3-fine-size);
+      color: var(--promo3-fine-color);
+      opacity: 1;
       font-family: var(--font-poppins400, var(--font-body-family));
       padding: 0 clamp(24px, 3vw, 40px);
     }
     #promo3-{{ sid }} .promo3-fineprint p{
       margin: 0;
-      font-size: clamp(12px,1.2vw,16px);
-      color: #000;
+      font-size: inherit;
+      color: inherit;
+    }
+
+    /* ✅ Partner row (NEW) */
+    #promo3-{{ sid }} .promo3-partner{
+      display: flex;
+      align-items: center;
+      justify-content: var(--promo3-partner-justify, flex-start);
+      gap: 12px;
+      padding: 0 clamp(24px, 3vw, 40px);
+      margin-top: 8px;
+    }
+    #promo3-{{ sid }} .promo3-partner__icon{
+      width: var(--promo3-partner-icon-size, 28px);
+      height: auto;
+      display: block;
+      object-fit: contain;
+      flex: 0 0 auto;
+    }
+    #promo3-{{ sid }} .promo3-partner__text{
+      font-size: var(--promo3-partner-text-size);
+      color: var(--promo3-partner-text-color);
+      font-family: var(--font-poppins600, var(--font-body-family));
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      line-height: 1.2;
     }
 
     /* Button */
@@ -459,6 +548,7 @@
     #promo3-{{ sid }} .promo3-card--split .promo3-heading,
     #promo3-{{ sid }} .promo3-card--split .promo3-subtitle,
     #promo3-{{ sid }} .promo3-card--split .promo3-fineprint,
+    #promo3-{{ sid }} .promo3-card--split .promo3-partner,
     #promo3-{{ sid }} .promo3-card--split .promo3-btn-wrap{
       position: relative;
       z-index: 1;
@@ -654,6 +744,39 @@
     { "type": "text", "id": "body_image_alt", "label": "Body image alt text" },
 
     { "type": "richtext", "id": "fine_print", "label": "Fine print (under image)", "default": "<p>CPR, HGD, YES, and RFL *not included in sale.</p>" },
+
+    { "type": "header", "content": "Fine print style (NEW)" },
+    { "type": "text", "id": "fine_print_size", "label": "Fine print font-size (accepts clamp())", "default": "clamp(12px,1.2vw,16px)" },
+    { "type": "color", "id": "fine_print_color", "label": "Fine print color", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Partner row (icon + text) (NEW)" },
+    { "type": "checkbox", "id": "partner_enable", "label": "Show partner row", "default": false },
+    { "type": "image_picker", "id": "partner_icon", "label": "Partner icon" },
+    { "type": "text", "id": "partner_icon_alt", "label": "Partner icon alt text", "default": "Partner icon" },
+    {
+      "type": "range",
+      "id": "partner_icon_size",
+      "label": "Partner icon size",
+      "min": 12,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    { "type": "text", "id": "partner_text", "label": "Partner text", "default": "NASM OFFICIAL CANADIAN PARTNER" },
+    { "type": "text", "id": "partner_text_size", "label": "Partner text font-size (accepts clamp())", "default": "clamp(12px,1.1vw,16px)" },
+    { "type": "color", "id": "partner_text_color", "label": "Partner text color", "default": "#FFFFFF" },
+    {
+      "type": "select",
+      "id": "partner_align",
+      "label": "Partner row alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
 
     {
       "type": "select",
