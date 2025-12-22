@@ -91,7 +91,7 @@
         "body_image": "shopify://shop_images/image_11_8d21f32a-fbd4-47cd-b461-89ab91ff9f5d.jpg",
         "body_image_alt": "",
         "fine_print": "<p>Discover a new holiday discount each day on our top certifications.</p>",
-        "right_layout": "classic",
+        "right_layout": "split",
         "right_bg_pos": "center bottom",
         "right_bg_size": "cover",
         "right_vertical_align": "center",
