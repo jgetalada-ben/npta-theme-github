@@ -42,7 +42,7 @@
         "show_btn1": true,
         "btns_margin_top": "16px",
         "btn1_label": "SHOP NOW",
-        "btn1_link": "shopify://collections/all",
+        "btn1_link": "shopify://collections/all-products",
         "btn1_bg": "#c8ff63",
         "btn1_txt": "#0b0b0b",
         "show_btn2": false,
