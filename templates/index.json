@@ -55,7 +55,7 @@
     "promo_triple_banner_dkW6J8": {
       "type": "promo-triple-banner",
       "custom_css": [
-        "@media (min-width: 769px) {.promo3-col--left .promo3-img,.promo3-col--center .promo3-img {aspect-ratio: auto; height: auto;}.promo-banner__body-image {height: 55%; overflow: hidden;}}"
+        "@media (min-width: 769px) {.promo3-col--left .promo3-img, .promo3-col--center .promo3-img {aspect-ratio: auto; height: auto; } .promo-banner__body-image {height: 55%; overflow: hidden; }}"
       ],
       "name": "Promo Triple Banner",
       "settings": {
@@ -125,33 +125,40 @@
         "logo_d9T3Ny": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/Group_12.png"
+            "image": "shopify://shop_images/boxing-day-sale.png"
           }
         },
-        "logo_XcDyPd": {
+        "logo_aFGFV8": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/Group_12.png"
+            "image": "shopify://shop_images/boxing-day-sale.png"
           }
         },
-        "logo_mjrAC7": {
+        "logo_NWhpm9": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/Group_12.png"
+            "image": "shopify://shop_images/boxing-day-sale.png"
           }
         },
-        "logo_bwyLBr": {
+        "logo_z8VzJx": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/Group_12.png"
+            "image": "shopify://shop_images/boxing-day-sale.png"
+          }
+        },
+        "logo_tqizjY": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/boxing-day-sale.png"
           }
         }
       },
       "block_order": [
         "logo_d9T3Ny",
-        "logo_XcDyPd",
-        "logo_mjrAC7",
-        "logo_bwyLBr"
+        "logo_aFGFV8",
+        "logo_NWhpm9",
+        "logo_z8VzJx",
+        "logo_tqizjY"
       ],
       "custom_css": [
         ".section--logo-carousel {background: #c1ff72;}"
