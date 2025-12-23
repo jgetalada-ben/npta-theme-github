@@ -54,7 +54,9 @@
     },
     "promo_triple_banner_dkW6J8": {
       "type": "promo-triple-banner",
-      "custom_css": [],
+      "custom_css": [
+        ".promo3-col--left .promo3-img {aspect-ratio:auto;}"
+      ],
       "name": "Promo Triple Banner",
       "settings": {
         "max_width": "1989px",
