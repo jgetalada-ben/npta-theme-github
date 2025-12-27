@@ -160,6 +160,7 @@
         "logo_z8VzJx",
         "logo_tqizjY"
       ],
+      "disabled": true,
       "custom_css": [
         ".section--logo-carousel {background: #c1ff72;}"
       ],
