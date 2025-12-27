@@ -125,31 +125,31 @@
         "logo_d9T3Ny": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/boxing-day-sale.png"
+            "image": "shopify://shop_images/holiday-sale-extended.png"
           }
         },
         "logo_aFGFV8": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/boxing-day-sale.png"
+            "image": "shopify://shop_images/holiday-sale-extended.png"
           }
         },
         "logo_NWhpm9": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/boxing-day-sale.png"
+            "image": "shopify://shop_images/holiday-sale-extended.png"
           }
         },
         "logo_z8VzJx": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/boxing-day-sale.png"
+            "image": "shopify://shop_images/holiday-sale-extended.png"
           }
         },
         "logo_tqizjY": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/boxing-day-sale.png"
+            "image": "shopify://shop_images/holiday-sale-extended.png"
           }
         }
       },
@@ -160,7 +160,6 @@
         "logo_z8VzJx",
         "logo_tqizjY"
       ],
-      "disabled": true,
       "custom_css": [
         ".section--logo-carousel {background: #c1ff72;}"
       ],
