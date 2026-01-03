@@ -191,13 +191,7 @@
     {% assign skip_card_product_styles = true %}
 
     {% if forloop.index == 2 %}
-      <li
-        class="grid__item custom-bundle-box{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-        {% if settings.animations_reveal_on_scroll %}
-          data-cascade
-          style="--animation-order: 3;"
-        {% endif %}
-      >
+      <li class="grid__item custom-bundle-box">
         <div class="custom-bundle-box-wrapper">
           <h3>Want a Custom Bundle?</h3>
           <p><span> Email </span><a href="mailto:info@npta.ca">info@npta.ca</a></p>
