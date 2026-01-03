@@ -35,7 +35,7 @@
           <span class="compare-price">{{ original_price | floor | money }}</span>
         </div>
       {% else %}
-        <span class="price">s{{ product.price | floor | money }}</span>
+        <span class="price">{{ product.price | floor | money }}</span>
       {% endif %}
     {% if product.available %}
   <div class="add-to-cart-button">
