@@ -65,7 +65,7 @@
       {% endif %}
   {% if product.compare_at_price > product.price %}
         <div class="card-price-wrap">
-          <span class="sale-price">s{{ sale_price | floor | money  }}</span>
+          <span class="sale-price">{{ sale_price | floor | money  }}</span>
           <span class="compare-price">{{ original_price | floor | money }}</span>
         </div>
       {% else %}
