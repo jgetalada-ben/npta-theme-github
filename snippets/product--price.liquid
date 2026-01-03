@@ -66,7 +66,7 @@
   {% if product.compare_at_price > product.price %}
         <div class="card-price-wrap">
           {% comment %} <span class="sale-price">{{ sale_price | floor | money  }}</span> {% endcomment %}
-          <span class="sale-price">{{ price | money  }}</span>
+          
           <span class="compare-price">{{ original_price | floor | money }}</span>
         </div>
       {% else %}
