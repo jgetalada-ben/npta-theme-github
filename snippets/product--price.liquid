@@ -64,20 +64,13 @@
 </div>
       {% endif %}
   {% if product.compare_at_price > product.price %}
-    <!-- DEBUG
-shop_currency={{ shop.currency }}
-cart_currency={{ cart.currency.iso_code }}
-country={{ localization.country.iso_code }}
-product_price_cents={{ product.price }}
-product_compare_cents={{ product.compare_at_price }}
--->
         <div class="card-price-wrap">
-          <span class="sale-price">{{ sale_price | money  }}</span>
-          <span class="compare-price">{{ original_price | money }}</span>
+          <span class="sale-price">{{ sale_price | floor | money  }}</span>
+          <span class="compare-price">{{ original_price | floor | money }}</span>
         </div>
       {% else %}
     <div class="card-price-wrap">
-        <span class="sale-price">{{ product.price | money }}</span>
+        <span class="sale-price">{{ product.price | floor | money }}</span>
     </div>
       {% endif %}
 
