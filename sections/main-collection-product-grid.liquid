@@ -183,7 +183,7 @@
         skip_styles: skip_card_product_styles,
         quick_add: section.settings.quick_add,
         section_id: section.id,
-        product_description: product.description,
+        product_description: product.description | strip_html,
         product_tags: product.tags
       %}
     </li>
