@@ -169,7 +169,7 @@
       class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
       {% if settings.animations_reveal_on_scroll %}
         data-cascade
-        style="--animation-order: 3;"
+        style="--animation-order: {{ forloop.index }};"
       {% endif %}
     >
       {% render 'card-product',
@@ -191,7 +191,13 @@
     {% assign skip_card_product_styles = true %}
 
     {% if forloop.index == 2 %}
-      <li class="grid__item custom-bundle-box">
+      <li
+        class="grid__item custom-bundle-box{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        {% if settings.animations_reveal_on_scroll %}
+          data-cascade
+          style="--animation-order: 3;"
+        {% endif %}
+      >
         <div class="custom-bundle-box-wrapper">
           <h3>Want a Custom Bundle?</h3>
           <p><span> Email </span><a href="mailto:info@npta.ca">info@npta.ca</a></p>
