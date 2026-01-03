@@ -1,3 +1,10 @@
+<!-- DEBUG
+shop_currency={{ shop.currency }}
+cart_currency={{ cart.currency.iso_code }}
+country={{ localization.country.iso_code }}
+product_price_cents={{ product.price }}
+product_compare_cents={{ product.compare_at_price }}
+-->
 {%- liquid
   if use_variant
     assign target = product.selected_or_first_available_variant
