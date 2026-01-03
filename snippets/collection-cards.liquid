@@ -47,7 +47,7 @@
           </div>
         {% else %}
           <div class="card-price-wrap">
-          <span  class="sale-price">s{{ product.price | floor | money }}</span>
+          <span  class="sale-price">{{ product.price | floor | money }}</span>
            </div>
         {% endif %}
 
