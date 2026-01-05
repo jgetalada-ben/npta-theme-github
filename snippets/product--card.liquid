@@ -20,7 +20,7 @@
   <div class="product-tags">
     {% for tag in product.tags %}
       {% assign t = tag | downcase %}
-      {% unless t == 'all courses' or t == 'provider:nasm' %}
+      {% unless t == 'all courses' or t contains 'provider:' %}
         <span class="tag">{{ tag }}</span>
       {% endunless %}
     {% endfor %}
