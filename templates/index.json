@@ -453,6 +453,12 @@
     "section_logo_carousel_Typ4JF": {
       "type": "section--logo-carousel",
       "blocks": {
+        "logo_WRqazK": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/backfitpro-logo.png"
+          }
+        },
         "logo_daxrAW": {
           "type": "logo",
           "settings": {
@@ -479,6 +485,7 @@
         }
       },
       "block_order": [
+        "logo_WRqazK",
         "logo_daxrAW",
         "logo_tXtcJX",
         "logo_d8MRnj",
