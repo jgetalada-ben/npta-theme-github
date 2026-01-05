@@ -20,7 +20,7 @@
   <div class="product-tags">
     {% for tag in product.tags %}
       {% unless tag == "All Courses" %}
-        <span class="tag">s{{ tag }}</span>
+        <span class="tag">{{ tag }}</span>
       {% endunless %}
     {% endfor %}
   </div>
