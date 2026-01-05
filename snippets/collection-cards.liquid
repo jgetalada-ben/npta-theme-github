@@ -29,7 +29,8 @@
 {% if product.tags %}
   <div class="product-tags">
     {% for tag in product.tags %}
-      {% unless tag == "All Courses" %}
+      {% assign t = tag | downcase %}
+      {% unless t == 'all courses' or t == 'provider:nasm' %}
         <span class="tag">{{ tag }}</span>
       {% endunless %}
     {% endfor %}
