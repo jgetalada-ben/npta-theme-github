@@ -127,7 +127,10 @@ header-drawer{
     top: 8px;
   }
   .search-container-desktop .search-modal__content .search-modal__form .field__input:focus~.field__label {
-    top: 3px;
+    {% comment %} top: 3px; {% endcomment %}
+     display: none;
+  }
+  .search-container-desktop .search-modal__content .search-modal__form .field__input:focus {
   }
   .search__button #icon-search2 {
     width: 21px;
