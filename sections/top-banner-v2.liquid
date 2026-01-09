@@ -24,6 +24,7 @@
 
     --tb2-overlay: {{ section.settings.overlay_color }};
     --tb2-overlay-opacity: {{ section.settings.overlay_opacity | default: 0.0 }};
+    --overlay-opacity: {{ section.settings.overlay_opacity | times: 0.01 }};
 
     --tb2-h-align: {{ section.settings.h_align | default: 'center' }};
     --tb2-v-align: {{ section.settings.v_align | default: 'center' }};
@@ -195,7 +196,9 @@
       font-size: var(--tb2-btn-size);
       text-decoration: none;
     }
-
+    .overlay {
+      opacity: var(--overlay-opacity);
+    }
     /* MOBILE */
     @media (max-width: 749px){
       #top-banner-v2-{{ sid }}{
