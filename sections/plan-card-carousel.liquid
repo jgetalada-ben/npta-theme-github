@@ -170,8 +170,13 @@
       -webkit-overflow-scrolling: touch;
       flex: 1 1 auto;
       outline: none;
+      scrollbar-width: none;
+      -ms-overflow-style: none; 
     }
-
+    #plan-carousel-{{ sid }} .pc-viewport::-webkit-scrollbar{
+        height: 0;
+        display: none;
+    }
     #plan-carousel-{{ sid }} .pc-track{
       display: flex;
       gap: 18px;
