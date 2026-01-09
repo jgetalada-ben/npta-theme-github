@@ -4,6 +4,7 @@
   - Image upload
   - Desktop height + Mobile height
   - Mobile object-fit control
+  - Optional overlay (color + opacity)
   - Title / Subtitle / Description / Button
   - Color + font sizes for text
   - Button colors + sizes
@@ -22,9 +23,8 @@
     --tb2-height-desktop: {{ desktop_height }};
     --tb2-height-mobile: {{ mobile_height }};
 
-    --tb2-overlay: {{ section.settings.overlay_color }};
-    --tb2-overlay-opacity: {{ section.settings.overlay_opacity | default: 0.0 }};
-    --overlay-opacity: {{ section.settings.overlay_opacity | times: 0.01 }};
+    --tb2-overlay-color: {{ section.settings.overlay_color }};
+    --tb2-overlay-opacity: {{ section.settings.overlay_opacity | default: 0 }};
 
     --tb2-h-align: {{ section.settings.h_align | default: 'center' }};
     --tb2-v-align: {{ section.settings.v_align | default: 'center' }};
@@ -120,19 +120,22 @@
     #top-banner-v2-{{ sid }} .tb2-img{
       width: 100%;
       height: 100%;
-      object-fit: cover; /* desktop default is always cover */
+      object-fit: cover; /* desktop default */
       object-position: center;
       display: block;
     }
 
     #top-banner-v2-{{ sid }} .tb2-img--placeholder{
       background: #e5e5e5;
+      width: 100%;
+      height: 100%;
     }
 
+    /* OVERLAY */
     #top-banner-v2-{{ sid }} .tb2-overlay{
       position: absolute;
       inset: 0;
-      background: var(--tb2-overlay);
+      background: var(--tb2-overlay-color);
       opacity: var(--tb2-overlay-opacity);
       pointer-events: none;
     }
@@ -187,7 +190,6 @@
 
     #top-banner-v2-{{ sid }} .tb2-btn-wrap{
       display: inline-flex;
-      justify-content: inherit;
     }
 
     #top-banner-v2-{{ sid }} .tb2-btn{
@@ -196,18 +198,18 @@
       font-size: var(--tb2-btn-size);
       text-decoration: none;
     }
-    .overlay {
-      opacity: var(--overlay-opacity);
-    }
+
     /* MOBILE */
     @media (max-width: 749px){
       #top-banner-v2-{{ sid }}{
         min-height: var(--tb2-height-mobile);
       }
+
       #top-banner-v2-{{ sid }} .tb2-content-wrap{
         min-height: var(--tb2-height-mobile);
         padding: 18px 16px 22px;
       }
+
       #top-banner-v2-{{ sid }} .tb2-img{
         object-fit: {{ section.settings.mobile_object_fit | default: 'cover' }};
       }
@@ -290,14 +292,15 @@
       "default": "#000000"
     },
     {
-    "type": "range",
-    "id": "overlay_opacity",
-    "label": "Overlay opacity",
-    "min": 0,
-    "max": 1,
-    "step": 0.1,
-    "default": 0.3
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.3
     },
+
     {
       "type": "header",
       "content": "Content"
