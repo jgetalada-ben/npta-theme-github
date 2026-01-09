@@ -69,7 +69,11 @@
             <span class="price-label-month">month</span>
           </p>
           <span class="price-item price-item--payment-terms">
-            9 payments
+            {% if product.metafields.custom.payment_options %}
+              12 payments
+            {% else %}
+              9 payments
+            {% endif %}
           </span>
         </div>
     </div>
