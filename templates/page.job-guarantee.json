@@ -23,12 +23,10 @@
       "settings": {
         "image": "shopify://shop_images/job-guarantee-banner.png",
         "image_alt": "Job Guarantee",
+        "mobile_image_alt": "",
         "desktop_height": "65vh",
         "mobile_height": "40vh",
         "mobile_object_fit": "cover",
-        "enable_overlay": true,
-        "overlay_color": "#000000",
-        "overlay_opacity": 0.3,
         "subtitle": "",
         "title": "Your Certification Comes With a Career Path.",
         "description": "<p>Earn your NASM Certified Personal Trainer (CPT) with NPTA, complete our $1,500 CAD Apprenticeship Program, and unlock Canada’s only Job Guarantee for trainers.</p>",
@@ -47,6 +45,93 @@
         "button_bg": "#c8ff63",
         "button_color": "#01241e",
         "button_font_size": "16px"
+      }
+    },
+    "plan_card_carousel_mLVbki": {
+      "type": "plan-card-carousel",
+      "blocks": {
+        "slide_iFWJNb": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/image_21.png",
+            "image_alt": "whats included",
+            "show_title": true,
+            "show_bullets": true,
+            "show_description": true,
+            "show_button": true,
+            "title": "What’s Included?",
+            "bullets": "NASM Certified Personal Trainer Course\nNPTA Student Support\nFlexible Online Learning",
+            "description": "<p>This plan is best for students who want certification only.</p>",
+            "button_label": "Price: $1,599 CAD",
+            "button_link": "",
+            "button_new_tab": false,
+            "button_bg": "",
+            "button_color": ""
+          }
+        },
+        "slide_rwbrKC": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/image_22.png",
+            "image_alt": "",
+            "show_title": true,
+            "show_bullets": true,
+            "show_description": true,
+            "show_button": true,
+            "title": "What’s Included?",
+            "bullets": "NASM Certified Personal Trainer Course\nNPTA Student Support\nFlexible Online Learning",
+            "description": "<p>This plan is best for students who want certification only.</p>",
+            "button_label": "Price: $1,599 CAD",
+            "button_link": "",
+            "button_new_tab": false,
+            "button_bg": "",
+            "button_color": ""
+          }
+        },
+        "slide_AUmaa9": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/image_23.png",
+            "image_alt": "",
+            "show_title": true,
+            "show_bullets": true,
+            "show_description": true,
+            "show_button": true,
+            "title": "What’s Included?",
+            "bullets": "NASM Certified Personal Trainer Course\nNPTA Student Support\nFlexible Online Learning",
+            "description": "<p>This plan is best for students who want certification only.</p>",
+            "button_label": "Price: $1,599 CAD",
+            "button_link": "",
+            "button_new_tab": false,
+            "button_bg": "",
+            "button_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_iFWJNb",
+        "slide_rwbrKC",
+        "slide_AUmaa9"
+      ],
+      "name": "Plan Card Carousel",
+      "settings": {
+        "heading": "WHAT IS THE BEST PLAN FOR YOU?",
+        "aria_label": "Plan carousel",
+        "max_width": "2000px",
+        "section_bg": "#ffffff",
+        "card_bg": "#d9d6c7",
+        "card_radius": 14,
+        "accent_color": "#2d7a7a",
+        "title_size": "clamp(22px,2.2vw,28px)",
+        "bullet_size": "clamp(14px,1.4vw,18px)",
+        "desc_size": "clamp(14px,1.3vw,18px)",
+        "btn_size": "clamp(14px,1.3vw,18px)",
+        "default_button_bg": "#2d7a7a",
+        "default_button_color": "#ffffff",
+        "arrow_bg": "#ffffff",
+        "arrow_color": "#0b2a23",
+        "padding_y": 40,
+        "padding_y_mobile": 28
       }
     },
     "image_with_text_nitmNB": {
@@ -100,6 +185,7 @@
   "order": [
     "main",
     "top_banner_v2_8hdNVw",
+    "plan_card_carousel_mLVbki",
     "image_with_text_nitmNB"
   ]
 }
