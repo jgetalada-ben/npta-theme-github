@@ -1,10 +1,9 @@
 {%- comment -%}
-  Section: Top Banner V2
+  Section: Top Banner V2 (NO OVERLAY)
   Features:
-  - Image upload
+  - Desktop image + optional Mobile image fallback to desktop
   - Desktop height + Mobile height
   - Mobile object-fit control
-  - Optional overlay (color + opacity)
   - Title / Subtitle / Description / Button
   - Color + font sizes for text
   - Button colors + sizes
@@ -22,9 +21,6 @@
   style="
     --tb2-height-desktop: {{ desktop_height }};
     --tb2-height-mobile: {{ mobile_height }};
-
-    --tb2-overlay-color: {{ section.settings.overlay_color }};
-    --tb2-overlay-opacity: {{ section.settings.overlay_opacity | default: 0 }};
 
     --tb2-h-align: {{ section.settings.h_align | default: 'center' }};
     --tb2-v-align: {{ section.settings.v_align | default: 'center' }};
@@ -44,12 +40,17 @@
   "
 >
   <div class="tb2-media">
+    {%- comment -%}
+      We render BOTH images (desktop + optional mobile) and just toggle via CSS.
+      If no mobile image is set, we hide the mobile img tag and desktop stays visible on mobile.
+    {%- endcomment -%}
+
     {%- if section.settings.image != blank -%}
       {{
         section.settings.image
         | image_url: width: 3000
         | image_tag:
-            class: 'tb2-img',
+            class: 'tb2-img tb2-img--desktop',
             loading: 'lazy',
             sizes: '100vw',
             widths: '640,960,1280,1600,1920,2400,3000',
@@ -59,8 +60,17 @@
       <div class="tb2-img tb2-img--placeholder" aria-hidden="true"></div>
     {%- endif -%}
 
-    {%- if section.settings.enable_overlay -%}
-      <div class="tb2-overlay" aria-hidden="true"></div>
+    {%- if section.settings.mobile_image != blank -%}
+      {{
+        section.settings.mobile_image
+        | image_url: width: 2000
+        | image_tag:
+            class: 'tb2-img tb2-img--mobile',
+            loading: 'lazy',
+            sizes: '100vw',
+            widths: '360,540,720,900,1080,1440,2000',
+            alt: section.settings.mobile_image_alt | escape
+      }}
     {%- endif -%}
   </div>
 
@@ -120,24 +130,25 @@
     #top-banner-v2-{{ sid }} .tb2-img{
       width: 100%;
       height: 100%;
-      object-fit: cover; /* desktop default */
-      object-position: center;
       display: block;
+      object-position: center;
+    }
+
+    /* Desktop image defaults */
+    #top-banner-v2-{{ sid }} .tb2-img--desktop{
+      object-fit: cover;
+    }
+
+    /* Mobile image is hidden by default (only shown on mobile when set) */
+    #top-banner-v2-{{ sid }} .tb2-img--mobile{
+      display: none;
+      object-fit: cover; /* will be overridden on mobile by setting */
     }
 
     #top-banner-v2-{{ sid }} .tb2-img--placeholder{
       background: #e5e5e5;
       width: 100%;
       height: 100%;
-    }
-
-    /* OVERLAY */
-    #top-banner-v2-{{ sid }} .tb2-overlay{
-      position: absolute;
-      inset: 0;
-      background: var(--tb2-overlay-color);
-      opacity: var(--tb2-overlay-opacity);
-      pointer-events: none;
     }
 
     /* CONTENT WRAPPER */
@@ -210,9 +221,19 @@
         padding: 18px 16px 22px;
       }
 
-      #top-banner-v2-{{ sid }} .tb2-img{
-        object-fit: {{ section.settings.mobile_object_fit | default: 'cover' }};
-      }
+      /* If a mobile image exists, show it and hide desktop image */
+      {%- if section.settings.mobile_image != blank -%}
+        #top-banner-v2-{{ sid }} .tb2-img--desktop{ display: none; }
+        #top-banner-v2-{{ sid }} .tb2-img--mobile{
+          display: block;
+          object-fit: {{ section.settings.mobile_object_fit | default: 'cover' }};
+        }
+      {%- else -%}
+        /* No mobile image set: keep desktop image visible, but apply mobile object-fit to desktop */
+        #top-banner-v2-{{ sid }} .tb2-img--desktop{
+          object-fit: {{ section.settings.mobile_object_fit | default: 'cover' }};
+        }
+      {%- endif -%}
     }
   </style>
 </section>
@@ -225,17 +246,27 @@
   "settings": [
     {
       "type": "header",
-      "content": "Banner Image"
+      "content": "Banner Images"
     },
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Banner image"
+      "label": "Desktop banner image"
     },
     {
       "type": "text",
       "id": "image_alt",
-      "label": "Image alt text"
+      "label": "Desktop image alt text"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile banner image (optional)"
+    },
+    {
+      "type": "text",
+      "id": "mobile_image_alt",
+      "label": "Mobile image alt text"
     },
 
     {
@@ -273,32 +304,6 @@
         { "value": "scale-down", "label": "Scale down" }
       ],
       "default": "cover"
-    },
-
-    {
-      "type": "header",
-      "content": "Overlay (optional)"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_overlay",
-      "label": "Enable overlay",
-      "default": false
-    },
-    {
-      "type": "color",
-      "id": "overlay_color",
-      "label": "Overlay color",
-      "default": "#000000"
-    },
-    {
-      "type": "range",
-      "id": "overlay_opacity",
-      "label": "Overlay opacity",
-      "min": 0,
-      "max": 1,
-      "step": 0.1,
-      "default": 0.3
     },
 
     {
