@@ -17,6 +17,38 @@
         "padding_bottom": 28
       }
     },
+    "top_banner_v2_8hdNVw": {
+      "type": "top-banner-v2",
+      "name": "Top Banner V2",
+      "settings": {
+        "image": "shopify://shop_images/job-guarantee-banner.png",
+        "image_alt": "Job Guarantee",
+        "desktop_height": "65vh",
+        "mobile_height": "21vh",
+        "mobile_object_fit": "contain",
+        "enable_overlay": false,
+        "overlay_color": "#000000",
+        "overlay_opacity": 0.3,
+        "subtitle": "",
+        "title": "Your Certification Comes With a Career Path.",
+        "description": "<p>Earn your NASM Certified Personal Trainer (CPT) with NPTA, complete our $1,500 CAD Apprenticeship Program, and unlock Canada’s only Job Guarantee for trainers.</p>",
+        "v_align": "flex-end",
+        "h_align": "center",
+        "text_align": "center",
+        "title_color": "#FFFFFF",
+        "title_size": "clamp(32px,4vw,56px)",
+        "subtitle_color": "#FFFFFF",
+        "subtitle_size": "clamp(16px,1.8vw,22px)",
+        "desc_color": "#FFFFFF",
+        "desc_size": "clamp(14px,1.4vw,18px)",
+        "button_label": "",
+        "button_link": "",
+        "button_new_tab": false,
+        "button_bg": "#C8FF63",
+        "button_color": "#01241E",
+        "button_font_size": "16px"
+      }
+    },
     "image_banner_HhQx3F": {
       "type": "image-banner",
       "blocks": {
@@ -115,6 +147,7 @@
   },
   "order": [
     "main",
+    "top_banner_v2_8hdNVw",
     "image_banner_HhQx3F",
     "image_with_text_nitmNB"
   ]
