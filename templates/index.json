@@ -768,7 +768,7 @@
         "button_1_text": "SPEAK TO ADVISOR",
         "button_1_link": "https://app.npta.ca/widget/bookings/jessica-npta-calendar",
         "show_button_2": true,
-        "button_2_text": "BOOK A CALL",
+        "button_2_text": "BOOK MENTORSHIP",
         "button_2_link": "https://app.npta.ca/widget/bookings/meet-your-mentors-at-npta",
         "button_gap": 80,
         "btn1_bg": "#ffffff",
