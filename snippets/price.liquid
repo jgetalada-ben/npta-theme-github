@@ -68,13 +68,13 @@
             </span>
             <span class="price-label-month">month</span>
           </p>
-          <span class="price-item price-item--payment-terms">
+          {% comment %} <span class="price-item price-item--payment-terms">
             {% if product.metafields.custom.payment_options %}
               12 payments
             {% else %}
               9 payments
             {% endif %}
-          </span>
+          </span> {% endcomment %}
         </div>
     </div>
     {% endif %}
