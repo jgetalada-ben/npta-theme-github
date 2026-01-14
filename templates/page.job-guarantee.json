@@ -117,7 +117,7 @@
       "settings": {
         "heading": "WHAT IS THE BEST PLAN FOR YOU?",
         "aria_label": "Plan carousel",
-        "max_width": "2000px",
+        "max_width": "1200px",
         "section_bg": "#ffffff",
         "card_bg": "#d9d6c7",
         "card_radius": 14,
