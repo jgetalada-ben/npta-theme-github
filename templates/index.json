@@ -216,25 +216,36 @@
         "card_3qpcby": {
           "type": "card",
           "settings": {
-            "eyebrow": "Now trending",
-            "title": "Become a certified personal trainer",
-            "title_link": ""
+            "image": "shopify://shop_images/20-off-cpt-cnc.png",
+            "eyebrow": "",
+            "title": "20% OFF CPT AND CNC PROGRAM",
+            "title_link": "https://www.npta.ca/collections/cpt-and-cnc-program"
           }
         },
         "card_WC9mDP": {
           "type": "card",
           "settings": {
-            "eyebrow": "Now trending",
-            "title": "Become a certified personal trainer",
-            "title_link": ""
+            "image": "shopify://shop_images/cpt-essential-img.png",
+            "eyebrow": "",
+            "title": "CPT ESSENTIALS with AP for $1899",
+            "title_link": "https://www.npta.ca/products/apprenticeship-bundle-plus-cpt-cpr-ap"
+          }
+        },
+        "card_FDqKEU": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/20-off-bundles-img.png",
+            "eyebrow": "",
+            "title": "20% OFF ALL BUNDLES WITH CPT",
+            "title_link": "https://www.npta.ca/collections/cpt-programs"
           }
         }
       },
       "block_order": [
         "card_3qpcby",
-        "card_WC9mDP"
+        "card_WC9mDP",
+        "card_FDqKEU"
       ],
-      "disabled": true,
       "custom_css": [
         ".trending-card__image {aspect-ratio: 16 / 16;}",
         ".trending-card__title {margin: 0;}",
