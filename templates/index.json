@@ -217,14 +217,16 @@
           "type": "card",
           "settings": {
             "eyebrow": "Now trending",
-            "title": "Become a certified personal trainer"
+            "title": "Become a certified personal trainer",
+            "title_link": ""
           }
         },
         "card_WC9mDP": {
           "type": "card",
           "settings": {
             "eyebrow": "Now trending",
-            "title": "Become a certified personal trainer"
+            "title": "Become a certified personal trainer",
+            "title_link": ""
           }
         }
       },
@@ -233,12 +235,19 @@
         "card_WC9mDP"
       ],
       "disabled": true,
+      "custom_css": [
+        ".trending-card__image {aspect-ratio: 16 / 16;}",
+        ".trending-card__title {margin: 0;}",
+        ".trending-card {align-items: start; position: relative;}",
+        ".trending-card__info {text-align: center; padding: 10px; width: 70%; position: absolute; bottom: 0;}",
+        "@media screen and (max-width: 749px) {.trending-card__info {width: 70%; }}"
+      ],
       "name": "Trending feature row",
       "settings": {
         "heading": "TRAIN ANYWHERE, GAIN REAL EXPERIENCE, Land YOUR DREAM JOB.",
         "subheading": "",
         "max_width": "1200px",
-        "bg": "#FFFFFF",
+        "bg": "#ffffff",
         "columns_desktop": 3,
         "pad_top": 40,
         "pad_right": 12,
