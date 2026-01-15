@@ -3,6 +3,10 @@
   - Up to 4 feature cards
   - Desktop: inline grid
   - Mobile: slider/carousel with arrows (no autoplay)
+  Updates:
+  1) Remove button label/link, add optional title link per block
+  2) Title hover underline animation (LTR in, exits to right)
+  3) If title has link => pointer cursor
 {% endcomment %}
 
 <section
@@ -18,7 +22,6 @@
     --tr-card-bg: {{ section.settings.card_bg | default: '#ffffff' }};
     --tr-eyebrow-size: {{ section.settings.eyebrow_size | default: '11px' }};
     --tr-card-title-size: {{ section.settings.card_title_size | default: 'clamp(16px,1.5vw,20px)' }};
-    --tr-button-size: {{ section.settings.button_font_size | default: '12px' }};
   "
 >
   {%- assign mw = section.settings.max_width | default: '1200px' | strip -%}
@@ -56,6 +59,11 @@
         role="list"
       >
         {% for block in section.blocks %}
+          {%- assign has_title_link = false -%}
+          {%- if block.settings.title_link != blank -%}
+            {%- assign has_title_link = true -%}
+          {%- endif -%}
+
           <li
             id="TrendingSlide-{{ section.id }}-{{ forloop.index }}"
             class="trending-row__item grid__item{% if show_mobile_slider %} slider__slide{% endif %}"
@@ -85,21 +93,14 @@
 
                 {% if block.settings.title != blank %}
                   <h3 class="trending-card__title">
-                    {{ block.settings.title }}
-                  </h3>
-                {% endif %}
-
-                {% if block.settings.button_link != blank %}
-                  <a
-                    class="trending-card__link"
-                    {% if block.settings.button_link == blank %}
-                      role="link" aria-disabled="true"
+                    {% if has_title_link %}
+                      <a class="trending-card__title-link" href="{{ block.settings.title_link }}">
+                        {{ block.settings.title }}
+                      </a>
                     {% else %}
-                      href="{{ block.settings.button_link }}"
+                      <span class="trending-card__title-text">{{ block.settings.title }}</span>
                     {% endif %}
-                  >
-                    {{ block.settings.button_label }}
-                  </a>
+                  </h3>
                 {% endif %}
               </div>
             </div>
@@ -146,7 +147,7 @@
     width: 100%;
   }
 
-  /* Optional header (if you use it) */
+  /* Header */
   .trending-row__header {
     text-align: center;
     margin-bottom: 32px;
@@ -172,8 +173,7 @@
     gap: var(--gap);
   }
 
-  /* ------- CARD LAYOUT ------- */
-  /* Card is just a column wrapper now */
+  /* Card */
   .trending-card {
     display: flex;
     flex-direction: column;
@@ -183,7 +183,6 @@
     box-shadow: none;
   }
 
-  /* Image: no radius, no clipping, more of the head visible */
   .trending-card__image-wrapper {
     width: 100%;
     overflow: visible;
@@ -194,12 +193,11 @@
     display: block;
     aspect-ratio: 16 / 11;
     object-fit: cover;
-    object-position: center top; /* keeps the top of the image in frame */
-    border-radius: 0;            /* ✅ no rounded corners on the image */
+    object-position: center top;
+    border-radius: 0;
     transition: transform 0.35s ease;
   }
 
-  /* White content box under the image (like the design) */
   .trending-card__info {
     position: relative;
     background: var(--tr-card-bg);
@@ -207,11 +205,11 @@
     padding: 22px 40px 26px;
     text-align: right;
     width: min(520px, 78%);
-    margin-top: -48px;
+    /* margin-top: -48px; */
     z-index: 1;
+    /* transform: translateY(-35%); */
   }
 
-  /* Typography inside content box */
   .trending-card__eyebrow {
     margin: 0 0 6px;
     font-family: var(--font-poppins700);
@@ -223,45 +221,58 @@
   }
 
   .trending-card__title {
-    margin: 0 0 14px;
+    margin: 0;
     font-family: var(--font-poppins700);
     font-size: var(--tr-card-title-size);
     line-height: 1.4;
     text-transform: uppercase;
     color: #000;
+    display: inline-block; /* ensures underline length matches title */
   }
-  .trending-card__link {
+
+  /* Title link / text */
+  .trending-card__title-link,
+  .trending-card__title-text{
+    color: inherit;
+    text-decoration: none;
     display: inline-block;
-    font-family: var(--font-adirek800);
-    font-size: var(--tr-button-size);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    text-decoration: underline;
-    color: #000;
     position: relative;
     padding-bottom: 2px;
   }
-  .trending-card__link::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 1px;
-    background: #000;
-    transition: transform 0.25s ease;
-    transform-origin: left;
-    transform: scaleX(0);
-  }
-  .trending-card__link:hover::after {
-    transform: scaleX(1);
-  }
 
-  /* Mobile: swipeable horizontal slider */
+.trending-card__title-link{
+  display: inline-block;
+  position: relative;
+  color: inherit;
+  text-decoration: none !important;
+  cursor: pointer;
+
+  /* underline */
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: 0% 2px;         /* hidden */
+  background-position: 100% 100%;  /* start “from right” when hidden */
+  padding-bottom: 4px;
+
+  transition: background-size 0.28s ease, background-position 0.28s ease;
+}
+
+/* Hover IN: draw left -> right */
+.trending-card__title-link:hover{
+  background-size: 100% 2px;
+  background-position: 0% 100%;
+}
+
+/* Hover OUT: collapse to the right (exit animation) */
+.trending-card__title-link:not(:hover){
+  background-size: 0% 2px;
+  background-position: 100% 100%;
+}
+
+
+  /* Mobile slider */
   @media screen and (max-width: 749px) {
-    .trending-row__slider {
-      overflow: hidden;
-    }
+    .trending-row__slider { overflow: hidden; }
 
     .trending-row__list {
       grid-auto-flow: column;
@@ -271,18 +282,17 @@
       -webkit-overflow-scrolling: touch;
     }
 
-    .trending-row__item {
-      scroll-snap-align: start;
-    }
+    .trending-row__item { scroll-snap-align: start; }
 
     .trending-card__info {
       width: 86%;
-      margin-top: -36px;
       padding: 20px 24px 22px;
+      margin-top: 0;
+    /* transform: translateY(-28%); */
     }
   }
   {% endstylesheet %}
-  
+
   {% if show_mobile_slider %}
     <script>
       document.addEventListener('DOMContentLoaded', function () {
@@ -294,39 +304,9 @@
         if (!slides.length || slides.length === 1) return;
 
         var currentIndex = 0;
-        var autoplayId = null;
-        var delay = 5000; // 5 seconds
 
         function isMobile() {
           return window.matchMedia('(max-width: 749px)').matches;
-        }
-
-        function goToSlide(index) {
-          var slide = slides[index];
-          if (!slide) return;
-          sliderEl.scrollTo({
-            left: slide.offsetLeft,
-            behavior: 'smooth'
-          });
-        }
-
-        function startAutoplay() {
-          if (!isMobile()) {
-            stopAutoplay();
-            return;
-          }
-          if (autoplayId) return;
-          autoplayId = setInterval(function () {
-            currentIndex = (currentIndex + 1) % slides.length;
-            goToSlide(currentIndex);
-          }, delay);
-        }
-
-        function stopAutoplay() {
-          if (autoplayId) {
-            clearInterval(autoplayId);
-            autoplayId = null;
-          }
         }
 
         // Keep currentIndex in sync when user swipes
@@ -336,29 +316,13 @@
           currentIndex = Math.max(0, Math.min(slides.length - 1, idx));
         });
 
-        // Pause on user interaction
-        ['pointerdown', 'touchstart', 'mousedown'].forEach(function (evt) {
-          sliderEl.addEventListener(evt, stopAutoplay, { passive: true });
-        });
-        ['pointerup', 'touchend', 'mouseup', 'mouseleave'].forEach(function (evt) {
-          sliderEl.addEventListener(evt, startAutoplay, { passive: true });
-        });
-
-        // Handle viewport changes
+        // No autoplay (intentionally)
         window.addEventListener('resize', function () {
-          if (!isMobile()) {
-            stopAutoplay();
-          } else {
-            startAutoplay();
-          }
+          if (!isMobile()) return;
         });
-
-        // Kick things off
-        startAutoplay();
       });
     </script>
   {% endif %}
-
 </section>
 
 {% schema %}
@@ -455,7 +419,7 @@
       "label": "Card gap",
       "default": 32
     },
-        {
+    {
       "type": "header",
       "content": "Card styles"
     },
@@ -476,12 +440,6 @@
       "id": "card_title_size",
       "label": "Card title font-size (accepts clamp())",
       "default": "clamp(16px,1.5vw,20px)"
-    },
-    {
-      "type": "text",
-      "id": "button_font_size",
-      "label": "Button font-size (accepts clamp())",
-      "default": "12px"
     }
   ],
   "blocks": [
@@ -507,15 +465,9 @@
           "default": "Become a certified personal trainer"
         },
         {
-          "type": "text",
-          "id": "button_label",
-          "label": "Button label",
-          "default": "Shop now"
-        },
-        {
           "type": "url",
-          "id": "button_link",
-          "label": "Button link"
+          "id": "title_link",
+          "label": "Title link (optional)"
         }
       ]
     }
