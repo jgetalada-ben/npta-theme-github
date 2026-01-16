@@ -122,12 +122,25 @@
 
 {% if product.metafields.custom.payment_options %}
   <div class="payment-options">
-    <a
+    {% comment %} <a
       href="tel:+17789496782"
       class="btn button-b"
       >
       <span class="btn-label-down">Questions About Financing? Call (778) 949-6782</span>
       <span class="btn-label-down">Questions About Financing? Call (778) 949-6782</span>
+    </a> {% endcomment %}
+    {% comment %} Elective Button {% endcomment %}
+     <a
+      href="{{ product.metafields.custom.payment_options.value }}"
+      target="_blank"
+      rel="noopener"
+      class="btn button-b"
+      data-elective-financing-link
+      data-product-handle="{{ product.handle }}"
+      data-product-id="{{ product.id }}"
+    >
+      <span class="btn-label-down">Elective Financing Options</span>
+      <span class="btn-label-down">Elective Financing Options</span>
     </a>
   </div>
   <div class="tooltip-wrap">
