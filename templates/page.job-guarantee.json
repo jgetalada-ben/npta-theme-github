@@ -60,8 +60,8 @@
         "button_FXXLCC": {
           "type": "button",
           "settings": {
-            "button_label": "Button label",
-            "button_link": "",
+            "button_label": "Start My Career Path",
+            "button_link": "shopify://collections/all-products",
             "button_style_secondary": false
           }
         }
@@ -69,6 +69,10 @@
       "block_order": [
         "text_zzVAFc",
         "button_FXXLCC"
+      ],
+      "custom_css": [
+        ".btn.button-yg {background-color: #0f828c; color: #fff;}",
+        ".btn-label-down {color: #fff;}"
       ],
       "name": "t:sections.image-with-text.presets.name",
       "settings": {
