@@ -137,17 +137,10 @@
     "image_with_text_nitmNB": {
       "type": "image-with-text",
       "blocks": {
-        "heading_cJMemE": {
-          "type": "heading",
-          "settings": {
-            "heading": "Image with text",
-            "heading_size": "h1"
-          }
-        },
         "text_zzVAFc": {
           "type": "text",
           "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text": "<p><strong>At NPTA</strong>, we don’t just hand you a certificate—we launch your career. </p><p>Bundle your NASM CPT with our Apprenticeship Program to gain hands-on experience, mentorship, and priority job interviews with FITIN gyms. And with our Job Guarantee, if you’re not hired, we’ll refund 5% of your Apprenticeship enrollment fee.</p>",
             "text_style": "body"
           }
         },
@@ -161,14 +154,14 @@
         }
       },
       "block_order": [
-        "heading_cJMemE",
         "text_zzVAFc",
         "button_FXXLCC"
       ],
       "name": "t:sections.image-with-text.presets.name",
       "settings": {
+        "image": "shopify://shop_images/start-your-career.png",
         "height": "adapt",
-        "desktop_image_width": "medium",
+        "desktop_image_width": "small",
         "layout": "text_first",
         "desktop_content_position": "top",
         "desktop_content_alignment": "left",
