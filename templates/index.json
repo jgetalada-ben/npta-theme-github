@@ -507,7 +507,7 @@
         "image": "shopify://shop_images/Rectangle_19.png",
         "show_buttons": true,
         "primary_button_text": "TAKE THE QUIZ",
-        "primary_button_link": "https://quiz.npta.ca/fitness-memberships",
+        "primary_button_link": "https://x641if1yhwv.typeform.com/to/AMGbLYgQ",
         "primary_button_color": "#0f828c",
         "layout": "content-left",
         "max_width": "1989px",
@@ -861,6 +861,7 @@
     },
     "newsletter_v2_MYDzwi": {
       "type": "newsletter-v2",
+      "disabled": true,
       "custom_css": [
         "h2.nlv2__title {font-size: 26px;}"
       ],
