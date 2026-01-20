@@ -71,8 +71,10 @@
         "button_FXXLCC"
       ],
       "custom_css": [
-        ".btn.button-yg {background-color: #0f828c; color: #fff;}",
-        ".btn-label-down {color: #fff;}"
+        ".btn.button-yg {background-color: #0f828c; color: #fff; margin-top: 5rem;}",
+        ".btn-label-down {color: #fff;}",
+        ".image-with-text__text.rte.body p {line-height: 2;}",
+        "@media (min-width: 750px) {.image-with-text__text.rte.body {width: 80%; }}"
       ],
       "name": "t:sections.image-with-text.presets.name",
       "settings": {
