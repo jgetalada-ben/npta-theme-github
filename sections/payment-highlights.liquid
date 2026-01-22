@@ -55,19 +55,6 @@
 
     {%- if section.settings.show_cta and section.settings.cta_label != blank -%}
       <div class="payhi__cta-wrap" style="text-align: {{ section.settings.cta_align }};">
-        {% comment %} <a
-          class="payhi__cta"
-          {% if section.settings.cta_link != blank %}
-            href="{{ section.settings.cta_link }}"
-          {% else %}
-            role="link" aria-disabled="true"
-          {% endif %}
-          {% if section.settings.cta_new_tab %}
-            target="_blank" rel="noopener noreferrer"
-          {% endif %}
-        >
-          {{ section.settings.cta_label }}
-        </a> {% endcomment %}
         <a 
           {% if section.settings.cta_link != blank %}
             href="{{ section.settings.cta_link }}"
@@ -195,6 +182,13 @@
 
 .payhi__cta:hover{
   opacity: .92;
+}
+@media (max-width: 768px) {
+  .payhi__cta-wrap {
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 {% endstylesheet %}
 
