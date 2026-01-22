@@ -55,7 +55,7 @@
 
     {%- if section.settings.show_cta and section.settings.cta_label != blank -%}
       <div class="payhi__cta-wrap" style="text-align: {{ section.settings.cta_align }};">
-        <a
+        {% comment %} <a
           class="payhi__cta"
           {% if section.settings.cta_link != blank %}
             href="{{ section.settings.cta_link }}"
@@ -67,6 +67,16 @@
           {% endif %}
         >
           {{ section.settings.cta_label }}
+        </a> {% endcomment %}
+        <a 
+          {% if section.settings.cta_link != blank %}
+            href="{{ section.settings.cta_link }}"
+          {% else %}
+            role="link" aria-disabled="true"
+          {% endif %}
+          class="btn button-yg btn--primary">
+          <span class="btn-label-down">{{ section.settings.cta_label }}</span>
+          <span class="btn-label-down">{{ section.settings.cta_label }}</span>
         </a>
       </div>
     {%- endif -%}
@@ -175,7 +185,6 @@
   padding: 14px 24px;
   border-radius: 10px;
   line-height: 1;
-  font-weight: 600;
   cursor: pointer;
 }
 .payhi__cta[aria-disabled="true"]{
