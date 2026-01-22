@@ -12,6 +12,11 @@
     --txt: {{ section.settings.text_color | default: '#0b0b0b' }};
     --hdg: {{ section.settings.heading_color | default: '#01241E' }};
     --accent: {{ section.settings.accent_color | default: '#157C80' }};
+
+    --cta-mt: {{ section.settings.cta_margin_top | default: 'clamp(16px, 2vw, 28px)' }};
+    --cta-fz: {{ section.settings.cta_font_size | default: 'clamp(14px, 1.4vw, 18px)' }};
+    --cta-bg: {{ section.settings.cta_bg | default: '#157C80' }};
+    --cta-color: {{ section.settings.cta_color | default: '#FFFFFF' }};
   "
 >
   <div class="payhi__inner">
@@ -47,6 +52,25 @@
         </div>
       {% endfor %}
     </div>
+
+    {%- if section.settings.show_cta and section.settings.cta_label != blank -%}
+      <div class="payhi__cta-wrap" style="text-align: {{ section.settings.cta_align }};">
+        <a
+          class="payhi__cta"
+          {% if section.settings.cta_link != blank %}
+            href="{{ section.settings.cta_link }}"
+          {% else %}
+            role="link" aria-disabled="true"
+          {% endif %}
+          {% if section.settings.cta_new_tab %}
+            target="_blank" rel="noopener noreferrer"
+          {% endif %}
+        >
+          {{ section.settings.cta_label }}
+        </a>
+      </div>
+    {%- endif -%}
+
   </div>
 </section>
 
@@ -57,9 +81,9 @@
   padding: var(--pad-y) var(--pad-x);
 }
 @media (max-width: 768px) {
-    .payhi{
-        padding: calc(var(--pad-y)/2) calc(var(--pad-x)/2);
-    }
+  .payhi{
+    padding: calc(var(--pad-y)/2) calc(var(--pad-x)/2);
+  }
 }
 .payhi__inner{
   max-width: {{ section.settings.max_width | default: '1200px' }};
@@ -94,9 +118,9 @@
   }
 }
 @media (max-width: 768px) {
-    .payhi__grid{
-        gap: 50px;
-    }
+  .payhi__grid{
+    gap: 50px;
+  }
 }
 
 /* Item */
@@ -105,10 +129,10 @@
   display: grid;
   justify-items: center;
   gap: clamp(8px, 1.8vw, 16px);
-  padding: 0; /* no card chrome by default */
+  padding: 0;
 }
 
-/* Logo: width clamped via per-block slider (var --logo-w in px) */
+/* Logo */
 .payhi__logo img{
   display: block;
   width: clamp(32px, calc(var(--logo-w) * (100vw / 1440)), 220px);
@@ -134,6 +158,35 @@
 }
 .payhi__item-body p{ margin: 0; }
 .payhi__item-body p + p{ margin-top: 0.35rem; }
+
+/* CTA Button */
+.payhi__cta-wrap{
+  margin-top: var(--cta-mt);
+}
+
+.payhi__cta{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--cta-fz);
+  background: var(--cta-bg);
+  color: var(--cta-color);
+  text-decoration: none;
+  padding: 14px 24px;
+  border-radius: 10px;
+  line-height: 1;
+  font-weight: 600;
+  cursor: pointer;
+}
+.payhi__cta[aria-disabled="true"]{
+  opacity: .5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.payhi__cta:hover{
+  opacity: .92;
+}
 {% endstylesheet %}
 
 {% schema %}
@@ -159,7 +212,22 @@
     { "type": "header", "content": "Layout" },
     { "type": "text", "id": "max_width", "label": "Max width (px/%/vw)", "default": "1200px" },
     { "type": "range", "id": "pad_y", "label": "Padding top & bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
-    { "type": "range", "id": "pad_x", "label": "Padding left & right",  "min": 0, "max": 160, "step": 4, "unit": "px", "default": 24 }
+    { "type": "range", "id": "pad_x", "label": "Padding left & right",  "min": 0, "max": 160, "step": 4, "unit": "px", "default": 24 },
+
+    { "type": "header", "content": "CTA button" },
+    { "type": "checkbox", "id": "show_cta", "label": "Show button", "default": false },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Learn more" },
+    { "type": "url", "id": "cta_link", "label": "Button link" },
+    { "type": "checkbox", "id": "cta_new_tab", "label": "Open in new tab", "default": false },
+    { "type": "select", "id": "cta_align", "label": "Button alignment", "options": [
+      { "value": "left", "label": "Left" },
+      { "value": "center", "label": "Center" },
+      { "value": "right", "label": "Right" }
+    ], "default": "center" },
+    { "type": "text", "id": "cta_font_size", "label": "Button font-size (supports clamp())", "default": "clamp(14px, 1.4vw, 18px)" },
+    { "type": "color", "id": "cta_bg", "label": "Button background color", "default": "#157C80" },
+    { "type": "color", "id": "cta_color", "label": "Button text color", "default": "#FFFFFF" },
+    { "type": "text", "id": "cta_margin_top", "label": "Button margin-top (supports clamp())", "default": "clamp(16px, 2vw, 28px)" }
   ],
   "blocks": [
     {
