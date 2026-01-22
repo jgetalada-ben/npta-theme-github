@@ -707,7 +707,16 @@
         "bg": "#f1efe8",
         "max_width": "1200px",
         "pad_y": 100,
-        "pad_x": 100
+        "pad_x": 100,
+        "show_cta": true,
+        "cta_label": "Learn more",
+        "cta_link": "https://www.npta.ca/pages/payment-plan-options",
+        "cta_new_tab": false,
+        "cta_align": "center",
+        "cta_font_size": "clamp(14px, 1.4vw, 18px)",
+        "cta_bg": "#157c80",
+        "cta_color": "#ffffff",
+        "cta_margin_top": "clamp(20px, 5vw, 50px)"
       }
     },
     "section_certified_trainers_6Q4NDV": {
