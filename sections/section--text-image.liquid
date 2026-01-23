@@ -65,6 +65,8 @@
   {% assign mw = mw | append: 'px' %}
 {%- endunless -%}
 
+<script src="https://embed.typeform.com/next/embed.js"></script>
+
 <section
   id="{{ sid }}"
   class="section--text-image {{ section.settings.layout }}"
@@ -95,12 +97,20 @@
 
         {% if section.settings.show_buttons %}
           <div class="section--hero-buttons">
-            <!-- Primary -->
-            <a href="{{ section.settings.primary_button_link }}" class="btn button-yg btn--primary">
-              <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
-              <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+            <a 
+            href="#"
+            class="btn button-yg btn--primary"
+            data-tf-popup="01KFNVZATHJ9JMHAYX4Z3WDHT9"
+            data-tf-opacity="100"
+            data-tf-size="80"
+            data-tf-iframe-props="title=Typeform"
+            data-tf-medium="snippet"
+            >
+            <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+            <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
             </a>
           </div>
+
 
           <!-- Secondary prompt + button -->
           <div class="section--secondary">
