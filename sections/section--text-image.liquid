@@ -141,6 +141,15 @@
   </div>
 </section>
 
+<script>
+  document.addEventListener("click", function (e) {
+    if (e.target.closest('[data-tf-popup]')) {
+      e.preventDefault();
+    }
+  });
+</script>
+
+
 <style>
 .is--heading-white h1{
   color: #FFF;
