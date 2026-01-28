@@ -56,7 +56,7 @@
         "background_image": "shopify://shop_images/AP_Page_Header.jpg",
         "headline": "REAL",
         "desc1": "<p>Join Canada’s most immersive Apprenticeship Program, built to turn certified trainers into confident, career-ready coaches.</p>",
-        "desc_size": "16px",
+        "desc_size": "clamp(14px,2vw,21px)",
         "badge_1_text": "",
         "badge_2_text": "",
         "button_1_link": "https://app.npta.ca/widget/survey/sM15QBoTJbBVmC9vCifd",
