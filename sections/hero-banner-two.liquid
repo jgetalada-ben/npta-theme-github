@@ -155,7 +155,7 @@
 }
 {% endschema %}
 <section class="section--hero-banner">
-  {% if section.settings.partner_text %}
+  {% if section.settings.partner_text != blank %}
     <div class="partner partner-mobile">
       <p>{{ section.settings.partner_text }}</p>
       <img src="{{ section.settings.partner_image | img_url }}" alt="Partner Logo" width="{{ section.settings.partner_image_width }}" height="{{ section.settings.partner_image_height }}">
