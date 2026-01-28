@@ -155,10 +155,12 @@
 }
 {% endschema %}
 <section class="section--hero-banner">
-  <div class="partner partner-mobile">
-    <p>{{ section.settings.partner_text }}</p>
-    <img src="{{ section.settings.partner_image | img_url }}" alt="Partner Logo" width="{{ section.settings.partner_image_width }}" height="{{ section.settings.partner_image_height }}">
-  </div>
+  {% if section.settings.partner_text %}
+    <div class="partner partner-mobile">
+      <p>{{ section.settings.partner_text }}</p>
+      <img src="{{ section.settings.partner_image | img_url }}" alt="Partner Logo" width="{{ section.settings.partner_image_width }}" height="{{ section.settings.partner_image_height }}">
+    </div>
+  {% endif %}
   <div class="section--hero-content">
 
     <div class="section--hero-text">
@@ -516,11 +518,11 @@
     } 
   }
 
-  @media only screen and (max-width: 980px) {
+  {% comment %} @media only screen and (max-width: 980px) {
     .section--hero-banner {
       padding: 150px 20px;
     }
-  }
+  } {% endcomment %}
 
   .section--hero-text {
     max-width: 100%;
