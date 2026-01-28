@@ -212,10 +212,11 @@
         "button_NfUmti"
       ],
       "custom_css": [
-        ".btn.button-yg {background-color: #C1FF72; color: #000; margin-top: 5rem;}",
+        ".btn.button-yg {background-color: #c1ff72; color: #000; margin-top: 5rem;}",
         ".btn-label-down {color: #000;}",
         ".image-with-text__text.rte.body p {line-height: 2;}",
-        "@media (min-width: 750px) {.image-with-text__text.rte.body {width: 80%; color: #fff; }}"
+        "h2,.image-with-text__text.rte.body p {color: #fff;}",
+        "@media (min-width: 750px) {.image-with-text__text.rte.body {width: 80%; }}"
       ],
       "name": "t:sections.image-with-text.presets.name",
       "settings": {
