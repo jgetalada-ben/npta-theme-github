@@ -23,19 +23,19 @@
         "word_W4TgdT": {
           "type": "word",
           "settings": {
-            "word_text": "World Training."
+            "word_text": "-World Training."
           }
         },
         "word_Ugqe4b": {
           "type": "word",
           "settings": {
-            "word_text": "Real-Time Mentorship."
+            "word_text": "-Time Mentorship."
           }
         },
         "word_zKyWdH": {
           "type": "word",
           "settings": {
-            "word_text": "Real Fitness Careers."
+            "word_text": "Fitness Careers."
           }
         }
       },
@@ -53,7 +53,7 @@
       "name": "Hero Banner Two",
       "settings": {
         "background_image": "shopify://shop_images/AP_Page_Header.jpg",
-        "headline": "REAL-",
+        "headline": "REAL",
         "desc1": "<p>Join Canada’s most immersive Apprenticeship Program, built to turn certified trainers into confident, career-ready coaches.</p>",
         "desc_size": "16px",
         "badge_1_text": "",
