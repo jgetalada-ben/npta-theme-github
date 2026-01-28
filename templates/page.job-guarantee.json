@@ -179,12 +179,67 @@
         "padding_y": 40,
         "padding_y_mobile": 28
       }
+    },
+    "image_with_text_4Mwchi": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_yjhQQK": {
+          "type": "heading",
+          "settings": {
+            "heading": "NPTA APPRENTICESHIP PROGRAM",
+            "heading_size": "h1"
+          }
+        },
+        "text_tdcJix": {
+          "type": "text",
+          "settings": {
+            "text": "<p>This 40-hour, in-person practicum bridges the gap between certification and real-world coaching—equipping you with the confidence, skills, and community you need to thrive in the fitness industry.</p><p>You'll gain hands-on experience by training real clients on the floor at our Fit Integrated Wellness facilities, all under the guidance of top-tier educators and mentors.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_NfUmti": {
+          "type": "button",
+          "settings": {
+            "button_label": "EXPLORE PROGRAM",
+            "button_link": "shopify://collections/all-products",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_yjhQQK",
+        "text_tdcJix",
+        "button_NfUmti"
+      ],
+      "custom_css": [
+        ".btn.button-yg {background-color: #C1FF72; color: #000; margin-top: 5rem;}",
+        ".btn-label-down {color: #000;}",
+        ".image-with-text__text.rte.body p {line-height: 2;}",
+        "@media (min-width: 750px) {.image-with-text__text.rte.body {width: 80%; color: #fff; }}"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/image_21_c6a59cec-17cd-49ec-9fda-73771fac5dde.png",
+        "height": "adapt",
+        "desktop_image_width": "small",
+        "layout": "image_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "section_color_scheme": "scheme-76e804c4-3b76-41cc-a54b-439c58312f8d",
+        "color_scheme": "scheme-76e804c4-3b76-41cc-a54b-439c58312f8d",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
     "main",
     "top_banner_v2_8hdNVw",
     "image_with_text_nitmNB",
-    "plan_card_carousel_mLVbki"
+    "plan_card_carousel_mLVbki",
+    "image_with_text_4Mwchi"
   ]
 }
