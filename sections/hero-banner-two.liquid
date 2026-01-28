@@ -14,6 +14,17 @@
       "default": "GET CERTIFIED. BECOME A ______ COACH."
     },
     {
+      "type": "richtext",
+      "id": "desc1",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "desc_size",
+      "label": "Description font-size (accepts clamp())",
+      "default": "16px"
+    },
+    {
       "type": "text",
       "id": "badge_1_text",
       "label": "Badge 1 Text",
@@ -193,6 +204,12 @@
           </div>
         {% endif %}
       </div>
+      {% endif %}
+
+      {% if section.settings.desc1 != blank %}
+        <div class="top-banner-desc" style="font-size: {{ section.settings.desc_size | default: '16px' }};">
+          {{ section.settings.desc1 }}
+        </div>
       {% endif %}
 
       <div class="section--hero-buttons">
