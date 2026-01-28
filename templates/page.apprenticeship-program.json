@@ -44,8 +44,8 @@
         "word_Ugqe4b",
         "word_zKyWdH"
       ],
-      "disabled": true,
       "custom_css": [
+        ".section--hero-banner {min-height: 70vh;}",
         ".section--top-banner {background-color: #000000;}",
         ".section--top-banner:before {width: 100%;}",
         ".section--top-background {width: 100%; display: block;}"
