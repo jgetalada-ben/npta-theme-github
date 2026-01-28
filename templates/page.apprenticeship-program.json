@@ -17,6 +17,46 @@
         "padding_bottom": 28
       }
     },
+    "hero_banner_6RDpNw": {
+      "type": "hero-banner",
+      "blocks": {
+        "word_Y3P7Wd": {
+          "type": "word",
+          "settings": {
+            "word_text": "test 1"
+          }
+        },
+        "word_cDWMnB": {
+          "type": "word",
+          "settings": {
+            "word_text": "test 2"
+          }
+        }
+      },
+      "block_order": [
+        "word_Y3P7Wd",
+        "word_cDWMnB"
+      ],
+      "name": "Hero Banner Two",
+      "settings": {
+        "headline": "GET CERTIFIED. BECOME A ______ COACH.",
+        "badge_1_text": "",
+        "badge_2_text": "",
+        "button_1_link": "",
+        "button_1_text": "CHOOSE MY PROGRAM",
+        "button_2_link": "",
+        "button_2_text": "TAKE THE QUIZ",
+        "hero_image_width": "500",
+        "hero_image_height": "500",
+        "award_text": "",
+        "award_sub_text": "",
+        "award_image_width": "40",
+        "award_image_height": "40",
+        "partner_text": "OFFICIAL CANADIAN PARTNER",
+        "partner_image_width": "40",
+        "partner_image_height": "40"
+      }
+    },
     "section_top_banner_hJLdAL": {
       "type": "section--top-banner",
       "custom_css": [
@@ -99,7 +139,7 @@
       "name": "t:sections.multirow.presets.name",
       "settings": {
         "image_height": "medium",
-        "background_color": "#133257",
+        "background_color": "#01241e",
         "top_padding": 92,
         "bottom_padding": 92,
         "desktop_image_width": "medium",
@@ -486,6 +526,7 @@
   },
   "order": [
     "main",
+    "hero_banner_6RDpNw",
     "section_top_banner_hJLdAL",
     "section_blurb_apprentice_djK8pq",
     "multirow_PFhaXk",
