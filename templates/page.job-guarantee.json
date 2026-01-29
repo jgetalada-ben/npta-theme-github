@@ -216,7 +216,8 @@
         ".btn-label-down {color: #000;}",
         ".image-with-text__text.rte.body p {line-height: 2;}",
         "h2,.image-with-text__text.rte.body p {color: #fff;}",
-        "@media (min-width: 750px) {.image-with-text__text.rte.body {width: 80%; }}"
+        "@media (min-width: 750px) {.image-with-text__text.rte.body {width: 80%; }}",
+        "@media screen and (min-width: 750px) {.grid--3-col-tablet .grid__item {width: 50%; }}"
       ],
       "name": "t:sections.image-with-text.presets.name",
       "settings": {
