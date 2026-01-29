@@ -252,12 +252,12 @@
         "@media (max-width: 980px) {.section--top-banner-container {top: 10%; }}"
       ],
       "settings": {
-        "background_image": "shopify://shop_images/Ap_Footer.jpg",
+        "background_image": "shopify://shop_images/AP_Footer_Banner.png",
         "title": "Support That Meets You Where You Are",
         "subtitle": "Still feeling unsure? That’s completely okay. Starting your journey in the fitness industry is a big step—and you don’t have to take it alone. We’re here to talk it through and help you find the path that’s right for you.",
         "desc1": "",
-        "title_size": "clamp(21px,4vw,42px)",
-        "subtitle_size": "clamp(14px,2vw,21px)",
+        "title_size": "clamp(16px,3.2vw,32px)",
+        "subtitle_size": "clamp(12px,2vw,18px)",
         "desc_size": "16px",
         "button_link": "shopify://collections/all",
         "button_text": "GET CERTIFIED",
@@ -274,13 +274,13 @@
         "btn2_bg": "#ffffff",
         "btn2_text_color": "#01241e",
         "btn2_font_size": "clamp(14px,1.4vw,32px)",
-        "button_position": "left",
-        "title_alignment": "left",
-        "container_width": 520,
-        "alignment": "flex-start",
-        "banner_height": "70vh",
-        "top_banner_align_items": "center",
-        "show_banner_gradient": true
+        "button_position": "center",
+        "title_alignment": "center",
+        "container_width": 980,
+        "alignment": "center",
+        "banner_height": "80vh",
+        "top_banner_align_items": "flex-end",
+        "show_banner_gradient": false
       }
     },
     "section_breadcrumb_eFj6di": {
