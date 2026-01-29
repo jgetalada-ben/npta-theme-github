@@ -45,12 +45,13 @@
         "word_zKyWdH"
       ],
       "custom_css": [
-        ".section--hero-banner {min-height: 70vh;}",
-        ".section--hero-content {align-items: end;}"
+        ".section--hero-banner {min-height: 80vh;}",
+        ".section--hero-content {align-items: end;}",
+        ".section--hero-background::before {background: none;}"
       ],
       "name": "Hero Banner Two",
       "settings": {
-        "background_image": "shopify://shop_images/image_19.png",
+        "background_image": "shopify://shop_images/hero-banner-ap.png",
         "headline": "REAL",
         "desc1": "<p>Join Canada’s most immersive Apprenticeship Program, built to turn certified trainers into confident, career-ready coaches.</p>",
         "desc_size": "clamp(14px,2vw,21px)",
