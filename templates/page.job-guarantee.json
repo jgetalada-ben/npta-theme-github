@@ -235,6 +235,27 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "section_local_video_wgbQ6w": {
+      "type": "section--local-video",
+      "name": "t:sections.video.presets.name",
+      "settings": {
+        "section_id": "certified-trainers",
+        "heading": "Get Certified. Get Mentored. Get Hired.",
+        "short_description": "<p>Every NPTA™ student is matched with a Canadian mentor and given access to exclusive career placement opportunities through our FITIN network of partner gyms.</p><p>✅ Job Guarantee (select packages) <br/>✅ 1-on-1 Mentorship & Tutoring <br/>✅ Apprenticeship-to-Placement Pathway</p>",
+        "primary_button_text": "Get Certified",
+        "primary_button_link": "",
+        "secondary_button_text": "Schedule a Consult",
+        "secondary_button_link": "",
+        "enable_video_looping": false,
+        "video": "shopify://files/videos/AP 3 by 4.mp4",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "description": "",
+        "full_width": false,
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
@@ -242,6 +263,7 @@
     "top_banner_v2_8hdNVw",
     "image_with_text_nitmNB",
     "plan_card_carousel_mLVbki",
-    "image_with_text_4Mwchi"
+    "image_with_text_4Mwchi",
+    "section_local_video_wgbQ6w"
   ]
 }
