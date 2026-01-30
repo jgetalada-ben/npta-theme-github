@@ -432,13 +432,13 @@ Custom
 */
 .image-with-text__heading{
   color:  #141414;
-
-font-family: Montserrat;
-font-size: 42px;
-font-style: normal;
-font-weight: 800;
-line-height: 112%;
-text-transform: uppercase;
+/* font-family: Montserrat; */
+  font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
+  font-size: 42px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 112%;
+  text-transform: uppercase;
 }
 
 .image-with-text__media--adapt img {
