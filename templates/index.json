@@ -898,34 +898,6 @@
         "btn_bg": "#c8ff63",
         "btn_txt": "#0b0b0b"
       }
-    },
-    "section_text_image_bHqmQM": {
-      "type": "section--text-image",
-      "disabled": true,
-      "name": "Text Image",
-      "settings": {
-        "section_id": "section-id",
-        "heading": "Lorem ipsum dolor sit amet",
-        "heading_color": "#01241E",
-        "description": "",
-        "text_color": "#01241E",
-        "show_buttons": true,
-        "primary_button_text": "Button",
-        "primary_button_link": "",
-        "primary_button_color": "#C1FF72",
-        "layout": "content-left",
-        "max_width": "1989px",
-        "pad_y": 120,
-        "pad_x": 80,
-        "bg": "#ffffff",
-        "primary_button_text_color": "#0B0B0B",
-        "secondary_prompt": "Would like to speak to a Career Advisor?",
-        "secondary_prompt_color": "#0E2A24",
-        "secondary_button_text": "Book a Free Call",
-        "secondary_button_link": "",
-        "secondary_button_color": "#EFEFDF",
-        "secondary_button_text_color": "#0B0B0B"
-      }
     }
   },
   "order": [
@@ -944,7 +916,6 @@
     "payment_highlights_wmDcWb",
     "section_certified_trainers_6Q4NDV",
     "section_top_banner_MGfjA4",
-    "newsletter_v2_MYDzwi",
-    "section_text_image_bHqmQM"
+    "newsletter_v2_MYDzwi"
   ]
 }
