@@ -11,10 +11,10 @@
   --font-poppins500: "Poppins500", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   --font-poppins700: "Poppins700", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   --font-adirek800: "Adirek800", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  --font-proximanova: "Adirek800", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  --font-proximaregular: "Adirek800", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  --font-proximamedium: "Adirek800", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  --font-proximablack: "Adirek800", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-proximanova: "ProximaNova", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-proximaregular: "ProximaSanRegular", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-proximamedium: "ProximaSanMedium", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-proximablack: "ProximaSanBlack", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
 .product-card-wrapper .card,
