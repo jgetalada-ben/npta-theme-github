@@ -11,6 +11,10 @@
   --font-poppins500: "Poppins500", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   --font-poppins700: "Poppins700", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   --font-adirek800: "Adirek800", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-proximanova: "Adirek800", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-proximaregular: "Adirek800", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-proximamedium: "Adirek800", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-proximablack: "Adirek800", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
 .product-card-wrapper .card,
@@ -3751,7 +3755,7 @@ line-height: 150%;
 }
 
 .price-item--monthly{
-  color: #133257;
+  color: #01241E;
     font-family: var(--font-heading-family);
 font-size: 18px;
 font-style: normal;
@@ -3797,7 +3801,7 @@ line-height: 150%;
 }
 
 .price-item--one-time .comp-price{
-color:  #133257;
+color:  #01241E;
     font-family: var(--font-heading-family);
 font-size: 16px;
 font-style: normal;
@@ -3809,7 +3813,7 @@ text-transform: uppercase;
 }
 
 .price-item--compare{
-  color: #133257;
+  color: #01241E;
     font-family: var(--font-heading-family);
 font-size: 18px;
 font-style: normal;
@@ -4128,7 +4132,7 @@ height: 1px;
 
 
 .button-b {
-  background-color:#133257;
+  background-color:#01241E;
   color: #fff;
 }
 .button-b span{
@@ -4136,7 +4140,7 @@ height: 1px;
   color: #fff;
 }
 .button-b:hover {
-  background: #133257;
+  background: #01241E;
 }
   .button-b:hover .btn-label-down {
   top: 0%;
@@ -4181,7 +4185,7 @@ body p {
 /** Links **/
   .container--footer p a{
 opacity: 0.8;
-color: var(--navy, #133257);
+color: var(--navy, #01241E);
     font-family: var(--font-body-family);
 font-size: 16px;
 font-style: normal;
@@ -4210,7 +4214,7 @@ line-height: 150%;
 /** Links **/
 .section--title-block p > a {
   opacity: 0.8;
-color: #133257;
+color: #01241E;
 font-family: Montserrat, sans-serif;
 font-size: 16px;
 font-style: normal;
@@ -4237,7 +4241,7 @@ text-decoration-line: underline;
   height: 0.05em;
   bottom: 0;
   left: 0;
-  background: #133257;
+  background: #01241E;
   transform-origin: bottom left;
   transition: transform 0.25s ease-out;
 }
