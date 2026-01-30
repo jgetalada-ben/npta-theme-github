@@ -193,7 +193,7 @@
         "text_tdcJix": {
           "type": "text",
           "settings": {
-            "text": "<p>This 40-hour, in-person practicum bridges the gap between certification and real-world coaching—equipping you with the confidence, skills, and community you need to thrive in the fitness industry.</p><p>You'll gain hands-on experience by training real clients on the floor at our Fit Integrated Wellness facilities, all under the guidance of top-tier educators and mentors.</p>",
+            "text": "<p>This 40-hour, in-person practicum bridges the gap between certification and real-world coaching—equipping you with the confidence, skills, and community you need to thrive in the fitness industry.</p><p>You'll gain hands-on experience by training real clients on the floor at our <strong>Fit Integrated Wellness</strong> facilities, all under the guidance of top-tier educators and mentors.</p>",
             "text_style": "body"
           }
         },
