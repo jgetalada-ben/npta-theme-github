@@ -230,8 +230,9 @@
     #plan-carousel-{{ sid }} .pc-title{
       margin: 0;
       font-size: var(--pc-title-size);
-      font-family: var(--font-heading-family, var(--font-body-family));
-      font-weight: 800;
+      {% comment %} font-family: var(--font-heading-family, var(--font-body-family)); {% endcomment %}
+       font-family: var(--font-proximamedium);
+      font-weight: 500;
       color: #111;
     }
 
