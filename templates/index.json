@@ -11,7 +11,6 @@
   "sections": {
     "video_v2_AqMBKg": {
       "type": "video-v2",
-      "disabled": true,
       "custom_css": [
         "h3 {color: #c5fb9d;}"
       ],
@@ -59,6 +58,7 @@
     },
     "video_v2_UFygCc": {
       "type": "video-v2",
+      "disabled": true,
       "custom_css": [
         ".vid2__frame {height: 65vh;}"
       ],
@@ -208,6 +208,7 @@
         "logo_Bi8BLy",
         "logo_JNxXHJ"
       ],
+      "disabled": true,
       "custom_css": [
         ".section--logo-carousel {background: #0f828c;}"
       ],
@@ -255,6 +256,7 @@
         "card_WC9mDP",
         "card_FDqKEU"
       ],
+      "disabled": true,
       "custom_css": [
         ".trending-card__image {aspect-ratio: 16 / 16;}",
         ".trending-card__title {margin: 0;}",
