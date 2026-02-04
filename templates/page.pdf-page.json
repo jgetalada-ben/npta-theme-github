@@ -332,6 +332,86 @@
         "container_width": 980,
         "scroll_direction": "rtl"
       }
+    },
+    "helpful_content_slider_zM8VTV": {
+      "type": "helpful-content-slider",
+      "blocks": {
+        "card_GtfDak": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/0_1_1.png",
+            "title": "NASM Guide to Optimal Nutrition After 40",
+            "link": ""
+          }
+        },
+        "card_fKUyBM": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/0_3_640_N_1.png",
+            "title": "The Skill Gap: What New Personal Trainers Wish They Learned Earlier",
+            "link": ""
+          }
+        },
+        "card_rBPtfr": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/0_3_1.png",
+            "title": "How to become a Certified Personal Trainer",
+            "link": ""
+          }
+        },
+        "card_cXjiGV": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/0_1_1.png",
+            "title": "NASM Guide to Optimal Nutrition After 40",
+            "link": ""
+          }
+        },
+        "card_iapXJV": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/0_3_640_N_1.png",
+            "title": "The Skill Gap: What New Personal Trainers Wish They Learned Earlier",
+            "link": ""
+          }
+        },
+        "card_h9MExg": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/0_3_1.png",
+            "title": "How to become a Certified Personal Trainer",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_GtfDak",
+        "card_fKUyBM",
+        "card_rBPtfr",
+        "card_cXjiGV",
+        "card_iapXJV",
+        "card_h9MExg"
+      ],
+      "name": "Helpful content slider",
+      "settings": {
+        "bg": "#0A7F8A",
+        "pad_y": "clamp(28px, 5vw, 72px)",
+        "pad_x": "clamp(16px, 3vw, 40px)",
+        "max_width": "1200px",
+        "columns_desktop": 3,
+        "heading": "You should check out these other helpful content!",
+        "title_color": "#FFFFFF",
+        "title_size": "clamp(20px, 2.6vw, 34px)",
+        "card_bg": "#FFFFFF",
+        "card_radius": 0,
+        "card_title_color": "#0B0B0B",
+        "card_title_size": "clamp(14px, 1.4vw, 18px)",
+        "icon_bg": "#0A7F8A",
+        "icon_color": "#FFFFFF",
+        "arrow_color": "#FFFFFF",
+        "arrow_bg": "rgba(255,255,255,0)"
+      }
     }
   },
   "order": [
@@ -342,6 +422,7 @@
     "plan_card_carousel_mLVbki",
     "image_with_text_4Mwchi",
     "section_local_video_wgbQ6w",
-    "section_logo_carousel_NW4NRe"
+    "section_logo_carousel_NW4NRe",
+    "helpful_content_slider_zM8VTV"
   ]
 }
