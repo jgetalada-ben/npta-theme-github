@@ -404,7 +404,7 @@
         "title_size": "clamp(20px, 2.6vw, 34px)",
         "title_color": "#ffffff",
         "cards_per_view": 3,
-        "autoplay": false,
+        "autoplay": true,
         "autoplay_delay": 5,
         "card_bg": "#ffffff",
         "card_title_size": "clamp(14px, 1.4vw, 18px)",
