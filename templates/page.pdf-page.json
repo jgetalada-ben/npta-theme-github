@@ -332,70 +332,6 @@
         "container_width": 980,
         "scroll_direction": "rtl"
       }
-    },
-    "section_image_text_carousel_fGxb4H": {
-      "type": "section--image-text-carousel",
-      "blocks": {
-        "slide_dJk8Na": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Why_Certification_Alone_Isn_t_Enough_to_Get_Hired_2.png",
-            "title_prefix": "UP TO",
-            "title_highlight": "50% OFF",
-            "highlight_color": "#C1FF72",
-            "title_suffix": "on all items!",
-            "highlight_suffix_color": "#ff0000",
-            "description": "Your slide description goes here.",
-            "button_text": "Learn More",
-            "button_link": "",
-            "button_style": "button-yg"
-          }
-        },
-        "slide_d7JznB": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Why_Certification_Alone_Isn_t_Enough_to_Get_Hired_3.png",
-            "title_prefix": "UP TO",
-            "title_highlight": "50% OFF",
-            "highlight_color": "#C1FF72",
-            "title_suffix": "on all items!",
-            "highlight_suffix_color": "#ff0000",
-            "description": "Your slide description goes here.",
-            "button_text": "Learn More",
-            "button_link": "",
-            "button_style": "button-yg"
-          }
-        },
-        "slide_XPcFGy": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Why_Certification_Alone_Isn_t_Enough_to_Get_Hired.png",
-            "title_prefix": "UP TO",
-            "title_highlight": "50% OFF",
-            "highlight_color": "#C1FF72",
-            "title_suffix": "on all items!",
-            "highlight_suffix_color": "#ff0000",
-            "description": "Your slide description goes here.",
-            "button_text": "Learn More",
-            "button_link": "",
-            "button_style": "button-yg"
-          }
-        }
-      },
-      "block_order": [
-        "slide_dJk8Na",
-        "slide_d7JznB",
-        "slide_XPcFGy"
-      ],
-      "name": "Swiper Carousel",
-      "settings": {
-        "section_title": "NEW PARTNERSHIP!",
-        "section_description": "<p>Take your training to the next level with KB Stronger Method!</p>",
-        "slide_count": 2,
-        "autoplay": true,
-        "autoplay_delay": 2500,
-        "show_buttons": true
-      }
     }
   },
   "order": [
@@ -406,7 +342,6 @@
     "plan_card_carousel_mLVbki",
     "image_with_text_4Mwchi",
     "section_local_video_wgbQ6w",
-    "section_logo_carousel_NW4NRe",
-    "section_image_text_carousel_fGxb4H"
+    "section_logo_carousel_NW4NRe"
   ]
 }
