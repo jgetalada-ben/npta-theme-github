@@ -50,15 +50,23 @@
     "image_with_text_nitmNB": {
       "type": "image-with-text",
       "blocks": {
+        "heading_JXzdNG": {
+          "type": "heading",
+          "settings": {
+            "heading": "CPT EXAM PASS GUARANTEE",
+            "heading_size": "h1"
+          }
+        },
         "text_zzVAFc": {
           "type": "text",
           "settings": {
-            "text": "<p><strong>At NPTA</strong>, we don’t just hand you a certificate—we launch your career. </p><p>Bundle your NASM CPT with our Apprenticeship Program to gain hands-on experience, mentorship, and priority job interviews with FITIN gyms. And with our Job Guarantee, if you’re not hired, we’ll refund 5% of your Apprenticeship enrollment fee.</p>",
+            "text": "<p>This NASM CPT Exam Pass Guarantee Workbook is designed specifically for aspiring personal trainers who want to pass the NASM CPT exam the first time. </p><p>Inside, you’ll find a clear, structured breakdown of the concepts that actually matter on exam day, including key exercise science principles, assessment strategies, program design logic, and test-taking tips aligned with the NASM CPT 7 curriculum.</p>",
             "text_style": "body"
           }
         },
         "button_FXXLCC": {
           "type": "button",
+          "disabled": true,
           "settings": {
             "button_label": "Start My Career Path",
             "button_link": "shopify://collections/all-products",
@@ -67,13 +75,14 @@
         }
       },
       "block_order": [
+        "heading_JXzdNG",
         "text_zzVAFc",
         "button_FXXLCC"
       ],
       "custom_css": [
         ".btn.button-yg {background-color: #0f828c; color: #fff; margin-top: 5rem;}",
         ".btn-label-down {color: #fff;}",
-        ".image-with-text__text.rte.body p {line-height: 2;}",
+        ".image-with-text__text.rte.body p {line-height: 21px;}",
         "@media (min-width: 750px) {.image-with-text__text.rte.body {width: 80%; }}"
       ],
       "name": "t:sections.image-with-text.presets.name",
@@ -159,6 +168,7 @@
         "slide_rwbrKC",
         "slide_AUmaa9"
       ],
+      "disabled": true,
       "name": "Plan Card Carousel",
       "settings": {
         "heading": "WHAT IS THE BEST PLAN FOR YOU?",
@@ -211,6 +221,7 @@
         "text_tdcJix",
         "button_NfUmti"
       ],
+      "disabled": true,
       "custom_css": [
         ".btn.button-yg {background-color: #c1ff72; color: #000; margin-top: 5rem;}",
         ".btn-label-down {color: #000;}",
@@ -238,6 +249,7 @@
     },
     "section_local_video_wgbQ6w": {
       "type": "section--local-video",
+      "disabled": true,
       "name": "t:sections.video.presets.name",
       "settings": {
         "section_id": "certified-trainers",
@@ -260,6 +272,55 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "section_logo_carousel_NW4NRe": {
+      "type": "section--logo-carousel",
+      "blocks": {
+        "logo_wE4g6y": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/partner_logo_1.png"
+          }
+        },
+        "logo_nh34tN": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/ph_logo_1.png"
+          }
+        },
+        "logo_GnWFhU": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/ncsf-logo.png"
+          }
+        },
+        "logo_69pY8c": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/kbstronger-logo.png"
+          }
+        },
+        "logo_6keYNN": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/fitrec-logo.webp"
+          }
+        }
+      },
+      "block_order": [
+        "logo_wE4g6y",
+        "logo_nh34tN",
+        "logo_GnWFhU",
+        "logo_69pY8c",
+        "logo_6keYNN"
+      ],
+      "name": "Logo Carousel",
+      "settings": {
+        "top_padding": 92,
+        "bottom_padding": 92,
+        "container_width": 980,
+        "scroll_direction": "rtl"
+      }
     }
   },
   "order": [
@@ -268,6 +329,7 @@
     "image_with_text_nitmNB",
     "plan_card_carousel_mLVbki",
     "image_with_text_4Mwchi",
-    "section_local_video_wgbQ6w"
+    "section_local_video_wgbQ6w",
+    "section_logo_carousel_NW4NRe"
   ]
 }
