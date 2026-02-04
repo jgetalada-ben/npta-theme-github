@@ -362,6 +362,7 @@
         },
         "card_cXjiGV": {
           "type": "card",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/0_1_1.png",
             "title": "NASM Guide to Optimal Nutrition After 40",
@@ -370,6 +371,7 @@
         },
         "card_iapXJV": {
           "type": "card",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/0_3_640_N_1.png",
             "title": "The Skill Gap: What New Personal Trainers Wish They Learned Earlier",
@@ -378,6 +380,7 @@
         },
         "card_h9MExg": {
           "type": "card",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/0_3_1.png",
             "title": "How to become a Certified Personal Trainer",
@@ -395,22 +398,22 @@
       ],
       "name": "Helpful content slider",
       "settings": {
-        "bg": "#0A7F8A",
+        "bg": "#0a7f8a",
         "pad_y": "clamp(28px, 5vw, 72px)",
         "pad_x": "clamp(16px, 3vw, 40px)",
         "max_width": "1200px",
         "columns_desktop": 3,
         "heading": "You should check out these other helpful content!",
-        "title_color": "#FFFFFF",
+        "title_color": "#ffffff",
         "title_size": "clamp(20px, 2.6vw, 34px)",
-        "card_bg": "#FFFFFF",
+        "card_bg": "#ffffff",
         "card_radius": 0,
-        "card_title_color": "#0B0B0B",
+        "card_title_color": "#0b0b0b",
         "card_title_size": "clamp(14px, 1.4vw, 18px)",
-        "icon_bg": "#0A7F8A",
-        "icon_color": "#FFFFFF",
-        "arrow_color": "#FFFFFF",
-        "arrow_bg": "rgba(255,255,255,0)"
+        "icon_bg": "#0a7f8a",
+        "icon_color": "#ffffff",
+        "arrow_color": "#ffffff",
+        "arrow_bg": "rgba(0,0,0,0)"
       }
     }
   },
