@@ -47,7 +47,12 @@
         aria-label="Previous"
         hidden
       >
-        ‹
+        <img
+          class="hc__nav-icon hc__nav-icon--prev"
+          src="https://cdn.shopify.com/s/files/1/0617/9550/0074/files/iwwa_arrow-up.png?v=1770248098"
+          alt=""
+          loading="lazy"
+        >
       </button>
 
       <div class="hc__track-wrap">
@@ -117,7 +122,12 @@
         aria-label="Next"
         hidden
       >
-        ›
+        <img
+          class="hc__nav-icon hc__nav-icon--next"
+          src="https://cdn.shopify.com/s/files/1/0617/9550/0074/files/iwwa_arrow-up.png?v=1770248098"
+          alt=""
+          loading="lazy"
+        >
       </button>
     </div>
   </div>
@@ -273,16 +283,27 @@
     border-radius: 999px;
     border: 2px solid rgba(255,255,255,.6);
     background: transparent;
-    color: #fff;
-    font-size: 34px;
-    line-height: 1;
     display: grid;
     place-items: center;
     cursor: pointer;
     user-select: none;
+    padding: 0;
   }
+
   #HelpfulContent-{{ sid }} .hc__nav:hover{
     border-color: rgba(255,255,255,.95);
+  }
+
+  #HelpfulContent-{{ sid }} .hc__nav-icon{
+    width: 22px;
+    height: auto;
+    display: block;
+  }
+  #HelpfulContent-{{ sid }} .hc__nav-icon--prev{
+    transform: rotate(-90deg);
+  }
+  #HelpfulContent-{{ sid }} .hc__nav-icon--next{
+    transform: rotate(90deg);
   }
 
   /* Mobile: 1 per view */
@@ -305,7 +326,9 @@
     #HelpfulContent-{{ sid }} .hc__nav{
       width: 44px;
       height: 44px;
-      font-size: 30px;
+    }
+    #HelpfulContent-{{ sid }} .hc__nav-icon{
+      width: 18px;
     }
   }
   {% endstylesheet %}
