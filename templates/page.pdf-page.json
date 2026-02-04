@@ -340,6 +340,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/0_1_1.png",
+            "icon": "shopify://shop_images/simple-line-icons_book-open.png",
             "title": "NASM Guide to Optimal Nutrition After 40",
             "link": ""
           }
@@ -348,6 +349,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/0_3_640_N_1.png",
+            "icon": "shopify://shop_images/streamline-sharp_chat-bubble-square-write-remix.png",
             "title": "The Skill Gap: What New Personal Trainers Wish They Learned Earlier",
             "link": ""
           }
@@ -356,6 +358,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/0_3_1.png",
+            "icon": "shopify://shop_images/streamline-sharp_chat-bubble-square-write-remix.png",
             "title": "How to become a Certified Personal Trainer",
             "link": ""
           }
@@ -364,6 +367,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/0_1_1.png",
+            "icon": "shopify://shop_images/simple-line-icons_book-open.png",
             "title": "NASM Guide to Optimal Nutrition After 40",
             "link": ""
           }
@@ -372,6 +376,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/0_3_640_N_1.png",
+            "icon": "shopify://shop_images/streamline-sharp_chat-bubble-square-write-remix.png",
             "title": "The Skill Gap: What New Personal Trainers Wish They Learned Earlier",
             "link": ""
           }
@@ -380,6 +385,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/0_3_1.png",
+            "icon": "shopify://shop_images/streamline-sharp_chat-bubble-square-write-remix.png",
             "title": "How to become a Certified Personal Trainer",
             "link": ""
           }
