@@ -1,0 +1,367 @@
+{% comment %}
+  Section: Helpful Content Slider
+  - Optional heading
+  - Cards slider w/ arrows (Dawn slider-component)
+  - Mobile: 1 card per swipe (scroll-snap)
+  - Blocks: image, icon, title, link
+{% endcomment %}
+
+{%- assign sid = section.id -%}
+
+{%- assign maxw = section.settings.max_width | default: '1200px' | strip -%}
+{%- unless maxw contains 'px' or maxw contains '%' or maxw contains 'vw' or maxw contains 'rem' -%}
+  {%- assign maxw = maxw | append: 'px' -%}
+{%- endunless -%}
+
+{%- liquid
+  assign show_slider = false
+  if section.blocks.size > 1
+    assign show_slider = true
+  endif
+-%}
+
+<section
+  id="HelpfulSlider-{{ sid }}"
+  class="helpful"
+  style="
+    --hc-bg: {{ section.settings.bg | default: '#0A7F8A' }};
+    --hc-pad-y: {{ section.settings.pad_y | default: 'clamp(28px, 5vw, 72px)' }};
+    --hc-pad-x: {{ section.settings.pad_x | default: 'clamp(16px, 3vw, 40px)' }};
+    --hc-maxw: {{ maxw }};
+
+    --hc-title-color: {{ section.settings.title_color | default: '#FFFFFF' }};
+    --hc-title-size: {{ section.settings.title_size | default: 'clamp(20px, 2.6vw, 34px)' }};
+
+    --hc-card-bg: {{ section.settings.card_bg | default: '#FFFFFF' }};
+    --hc-card-radius: {{ section.settings.card_radius | default: 0 }}px;
+
+    --hc-card-title-color: {{ section.settings.card_title_color | default: '#0B0B0B' }};
+    --hc-card-title-size: {{ section.settings.card_title_size | default: 'clamp(14px, 1.4vw, 18px)' }};
+
+    --hc-icon-bg: {{ section.settings.icon_bg | default: '#0A7F8A' }};
+    --hc-icon-color: {{ section.settings.icon_color | default: '#FFFFFF' }};
+
+    --hc-arrow-bg: {{ section.settings.arrow_bg | default: 'rgba(255,255,255,0.0)' }};
+    --hc-arrow-color: {{ section.settings.arrow_color | default: '#FFFFFF' }};
+  "
+>
+  <div class="helpful__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="helpful__title">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <slider-component class="helpful__slider slider-mobile-gutter">
+      <ul
+        id="HelpfulTrack-{{ sid }}"
+        class="helpful__track{% if show_slider %} slider slider--tablet{% endif %}"
+        role="list"
+        aria-label="Helpful content slider"
+      >
+        {%- for block in section.blocks -%}
+          <li
+            class="helpful__item{% if show_slider %} slider__slide{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            <a
+              class="helpful__card"
+              {% if block.settings.link != blank %}
+                href="{{ block.settings.link }}"
+              {% else %}
+                role="link" aria-disabled="true"
+              {% endif %}
+            >
+              <div class="helpful__media">
+                {%- if block.settings.image != blank -%}
+                  {{
+                    block.settings.image
+                    | image_url: width: 1600
+                    | image_tag:
+                      class: 'helpful__img',
+                      loading: 'lazy',
+                      widths: '400, 600, 800, 1200, 1600',
+                      sizes: '(min-width: 990px) 30vw, 82vw',
+                      alt: block.settings.title | escape
+                  }}
+                {%- else -%}
+                  <div class="helpful__img helpful__img--ph" aria-hidden="true"></div>
+                {%- endif -%}
+              </div>
+
+              <div class="helpful__info">
+                <div class="helpful__icon" aria-hidden="true">
+                  {%- if block.settings.icon != blank -%}
+                    {{
+                      block.settings.icon
+                      | image_url: width: 120
+                      | image_tag:
+                        class: 'helpful__icon-img',
+                        loading: 'lazy',
+                        widths: '60, 90, 120',
+                        sizes: '60px',
+                        alt: ''
+                    }}
+                  {%- else -%}
+                    <svg class="helpful__icon-fallback" viewBox="0 0 24 24" fill="none">
+                      <path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2"/>
+                      <path d="M8 7h8M8 11h8M8 15h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  {%- endif -%}
+                </div>
+
+                {%- if block.settings.title != blank -%}
+                  <div class="helpful__card-title">
+                    {{ block.settings.title }}
+                  </div>
+                {%- endif -%}
+              </div>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      {%- if show_slider -%}
+        <button
+          type="button"
+          class="helpful__arrow helpful__arrow--prev"
+          name="previous"
+          aria-controls="HelpfulTrack-{{ sid }}"
+          aria-label="Previous"
+        >
+          <span aria-hidden="true">◀</span>
+        </button>
+
+        <button
+          type="button"
+          class="helpful__arrow helpful__arrow--next"
+          name="next"
+          aria-controls="HelpfulTrack-{{ sid }}"
+          aria-label="Next"
+        >
+          <span aria-hidden="true">▶</span>
+        </button>
+      {%- endif -%}
+    </slider-component>
+  </div>
+
+  <style>
+    #HelpfulSlider-{{ sid }}.helpful{
+      background: var(--hc-bg);
+      padding: var(--hc-pad-y) var(--hc-pad-x);
+    }
+
+    #HelpfulSlider-{{ sid }} .helpful__inner{
+      max-width: var(--hc-maxw);
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+    }
+
+    #HelpfulSlider-{{ sid }} .helpful__title{
+      margin: 0 0 clamp(18px, 3vw, 36px);
+      color: var(--hc-title-color);
+      font-size: var(--hc-title-size);
+      font-family: var(--font-body-family);
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    /* Track base */
+    #HelpfulSlider-{{ sid }} .helpful__track{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat({{ section.settings.columns_desktop }}, minmax(0, 1fr));
+      gap: clamp(18px, 3vw, 42px);
+      align-items: start;
+    }
+
+    /* Card */
+    #HelpfulSlider-{{ sid }} .helpful__card{
+      display: grid;
+      grid-template-rows: auto 1fr;
+      background: var(--hc-card-bg);
+      border-radius: var(--hc-card-radius);
+      text-decoration: none;
+      color: inherit;
+      overflow: hidden;
+      box-shadow: none;
+    }
+    #HelpfulSlider-{{ sid }} .helpful__card[aria-disabled="true"]{
+      cursor: default;
+      opacity: 1;
+    }
+
+    /* Image */
+    #HelpfulSlider-{{ sid }} .helpful__media{ width: 100%; }
+    #HelpfulSlider-{{ sid }} .helpful__img{
+      width: 100%;
+      height: auto;
+      display: block;
+      aspect-ratio: 16 / 8;
+      object-fit: cover;
+      object-position: center;
+    }
+    #HelpfulSlider-{{ sid }} .helpful__img--ph{
+      background: rgba(255,255,255,0.25);
+      aspect-ratio: 16 / 8;
+    }
+
+    /* Info */
+    #HelpfulSlider-{{ sid }} .helpful__info{
+      position: relative;
+      padding: 26px 22px 28px;
+      text-align: center;
+    }
+
+    /* Icon circle overlaps the image edge */
+    #HelpfulSlider-{{ sid }} .helpful__icon{
+      width: 54px;
+      height: 54px;
+      border-radius: 999px;
+      background: var(--hc-icon-bg);
+      color: var(--hc-icon-color);
+      display: grid;
+      place-items: center;
+      margin: -44px auto 14px;
+      border: 4px solid var(--hc-card-bg);
+    }
+    #HelpfulSlider-{{ sid }} .helpful__icon-img{
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      display: block;
+      filter: none;
+    }
+    #HelpfulSlider-{{ sid }} .helpful__icon-fallback{
+      width: 24px;
+      height: 24px;
+      display: block;
+      color: var(--hc-icon-color);
+    }
+
+    #HelpfulSlider-{{ sid }} .helpful__card-title{
+      font-size: var(--hc-card-title-size);
+      color: var(--hc-card-title-color);
+      font-family: var(--font-body-family);
+      font-weight: 700;
+      line-height: 1.35;
+      max-width: 34ch;
+      margin: 0 auto;
+    }
+
+    /* Arrows (position like screenshot) */
+    #HelpfulSlider-{{ sid }} .helpful__arrow{
+      position: absolute;
+      top: 58%;
+      transform: translateY(-50%);
+      width: 54px;
+      height: 54px;
+      border-radius: 999px;
+      border: 0;
+      background: var(--hc-arrow-bg);
+      color: var(--hc-arrow-color);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      z-index: 5;
+    }
+    #HelpfulSlider-{{ sid }} .helpful__arrow--prev{ left: -68px; }
+    #HelpfulSlider-{{ sid }} .helpful__arrow--next{ right: -68px; }
+
+    @media (max-width: 1100px){
+      #HelpfulSlider-{{ sid }} .helpful__arrow--prev{ left: -10px; }
+      #HelpfulSlider-{{ sid }} .helpful__arrow--next{ right: -10px; }
+    }
+
+    /* Mobile: 1 card per swipe (scroll snap) */
+    @media (max-width: 749px){
+      #HelpfulSlider-{{ sid }} .helpful__track{
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 100%;
+        gap: 0;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      #HelpfulSlider-{{ sid }} .helpful__item{
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        padding: 0 14px;
+        box-sizing: border-box;
+      }
+
+      #HelpfulSlider-{{ sid }} .helpful__track{
+        scrollbar-width: none;
+      }
+      #HelpfulSlider-{{ sid }} .helpful__track::-webkit-scrollbar{
+        display: none;
+      }
+
+      #HelpfulSlider-{{ sid }} .helpful__arrow{
+        top: 56%;
+      }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Helpful content slider",
+  "tag": "section",
+  "class": "section helpful-content-slider",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "header", "content": "Layout" },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#0A7F8A" },
+    { "type": "text", "id": "pad_y", "label": "Padding top/bottom", "default": "clamp(28px, 5vw, 72px)" },
+    { "type": "text", "id": "pad_x", "label": "Padding left/right", "default": "clamp(16px, 3vw, 40px)" },
+    { "type": "text", "id": "max_width", "label": "Max width", "default": "1200px" },
+    { "type": "range", "id": "columns_desktop", "label": "Cards per row", "min": 2, "max": 4, "step": 1, "default": 3 },
+
+    { "type": "header", "content": "Title" },
+    { "type": "text", "id": "heading", "label": "Section title", "default": "You should check out these other helpful content!" },
+    { "type": "color", "id": "title_color", "label": "Title color", "default": "#FFFFFF" },
+    { "type": "text", "id": "title_size", "label": "Title font-size", "default": "clamp(20px, 2.6vw, 34px)" },
+
+    { "type": "header", "content": "Cards" },
+    { "type": "color", "id": "card_bg", "label": "Card background", "default": "#FFFFFF" },
+    { "type": "range", "id": "card_radius", "label": "Card radius", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 0 },
+    { "type": "color", "id": "card_title_color", "label": "Card title color", "default": "#0B0B0B" },
+    { "type": "text", "id": "card_title_size", "label": "Card title font-size", "default": "clamp(14px, 1.4vw, 18px)" },
+
+    { "type": "header", "content": "Icon" },
+    { "type": "color", "id": "icon_bg", "label": "Icon circle bg", "default": "#0A7F8A" },
+    { "type": "color", "id": "icon_color", "label": "Icon color", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Arrows" },
+    { "type": "color", "id": "arrow_color", "label": "Arrow color", "default": "#FFFFFF" },
+    { "type": "color", "id": "arrow_bg", "label": "Arrow bg", "default": "rgba(255,255,255,0)" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Card image" },
+        { "type": "image_picker", "id": "icon", "label": "Icon (optional)" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Helpful article title" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Helpful content slider",
+      "blocks": [
+        { "type": "card", "settings": { "title": "NASM Guide to Optimal Nutrition After 40" } },
+        { "type": "card", "settings": { "title": "The Skill Gap: What New Personal Trainers Wish They Learned Earlier" } },
+        { "type": "card", "settings": { "title": "How to become a Certified Personal Trainer" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
