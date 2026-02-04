@@ -316,8 +316,8 @@
       ],
       "name": "Logo Carousel",
       "settings": {
-        "top_padding": 40,
-        "bottom_padding": 40,
+        "top_padding": 0,
+        "bottom_padding": 0,
         "container_width": 980,
         "scroll_direction": "rtl"
       }
