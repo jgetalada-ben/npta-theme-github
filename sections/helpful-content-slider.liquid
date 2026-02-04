@@ -280,8 +280,8 @@
   #HelpfulContent-{{ sid }} .hc__nav{
     width: 52px;
     height: 52px;
-    border-radius: 999px;
-    border: 2px solid rgba(255,255,255,.6);
+    {% comment %} border-radius: 999px;
+    border: 2px solid rgba(255,255,255,.6); {% endcomment %}
     background: transparent;
     display: grid;
     place-items: center;
@@ -290,9 +290,9 @@
     padding: 0;
   }
 
-  #HelpfulContent-{{ sid }} .hc__nav:hover{
+  {% comment %} #HelpfulContent-{{ sid }} .hc__nav:hover{
     border-color: rgba(255,255,255,.95);
-  }
+  } {% endcomment %}
 
   #HelpfulContent-{{ sid }} .hc__nav-icon{
     width: 22px;
