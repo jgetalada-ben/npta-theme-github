@@ -19,6 +19,10 @@
     },
     "top_banner_v2_8hdNVw": {
       "type": "top-banner-v2",
+      "custom_css": [
+        ".tb2-content {width: min(900px, 100%);}",
+        ".tb2-title {font-weight: 100; letter-spacing: 1px;}"
+      ],
       "name": "Top Banner V2",
       "settings": {
         "image": "shopify://shop_images/pdf-hero-banner.webp",
