@@ -21,7 +21,7 @@
         "embed_url": "",
         "alt": "Fitness Education",
         "show_sound_toggle": true,
-        "start_muted": false,
+        "start_muted": true,
         "aspect_ratio": "21-9",
         "aspect_ratio_mobile": "1-1",
         "height_mode": "vh",
