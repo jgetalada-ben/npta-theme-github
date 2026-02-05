@@ -740,11 +740,11 @@
         "trainer_pQjW8c": {
           "type": "trainer",
           "settings": {
-            "image": "shopify://shop_images/Cert-17.jpg",
-            "show_content": false,
-            "name": "",
+            "image": "shopify://shop_images/Cert-14.jpg",
+            "show_content": true,
+            "name": "Alex Jung Lee",
             "certification": "",
-            "quote": "",
+            "quote": "\"Throughout the NASM CPT certification course, I've gained a comprehensive understanding of the intrinsic value associated with health and wellness. I take great pride in successfully achieving the designation of NASM CPT. I am enthusiastic about leveraging my acquired knowledge to support and enhance the well-being of my family, friends, and community as a NASM Certified Personal Trainer.\"",
             "rating": "5"
           }
         },
@@ -752,10 +752,10 @@
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-16.jpg",
-            "show_content": false,
-            "name": "",
+            "show_content": true,
+            "name": "Helen",
             "certification": "",
-            "quote": "",
+            "quote": "\"𝐃𝐫𝐞𝐚𝐦𝐬 💭 𝐝𝐨 𝐜𝐨𝐦𝐞 𝐭𝐫𝐮𝐞...𝐚𝐧𝐝 𝐈 𝐃𝐈𝐃 𝐈𝐓!⁣ Studying at 𝟓𝟕 is so very different than at 𝟏𝟗. Yet very possible.⁣\"⁠",
             "rating": "5"
           }
         },
@@ -764,9 +764,9 @@
           "settings": {
             "image": "shopify://shop_images/Cert-11.jpg",
             "show_content": false,
-            "name": "",
+            "name": "Marina",
             "certification": "",
-            "quote": "",
+            "quote": "“I’ve been a Personal Trainer for 8 years and chose NASM for their reputation and flexible schedule. The certification took 4 months at my own pace and was applicable to both my profession and personal routines. I’m excited to use my new credentials to help people achieve their fitness goals and improve their lifestyles. Thank you, NASM!”",
             "rating": "5"
           }
         },
