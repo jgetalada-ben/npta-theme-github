@@ -16,8 +16,8 @@
 {%- comment %} overlay darkness 0–1 {% endcomment -%}
 {%- assign ov = section.settings.overlay_darkness | default: 0 | plus: 0 | divided_by: 100.0 -%}
 
-{%- assign start_muted = section.settings.start_muted | default: true -%}
-{%- assign show_sound_toggle = section.settings.show_sound_toggle | default: false -%}
+{%- comment %} Audio setting: default OFF (muted autoplay) {% endcomment -%}
+{%- assign enable_audio = section.settings.enable_audio | default: false -%}
 
 {%- assign has_content = false -%}
 {%- if section.settings.title != blank
@@ -29,11 +29,12 @@
   {%- assign has_content = true -%}
 {%- endif -%}
 
-{%- assign is_html5_video = false -%}
-{%- assign is_iframe_video = false -%}
-{%- assign show_play_button = false -%}
-
-<section id="vid2-{{ sid }}" class="vid2" data-vid2-section>
+<section
+  id="vid2-{{ sid }}"
+  class="vid2"
+  data-vid2-section
+  data-vid2-audio="{% if enable_audio %}on{% else %}off{% endif %}"
+>
   <div class="vid2__outer">
     <div class="vid2__frame {% if section.settings.height_mode == 'vh' %}vh-mode{% endif %}"
      style="--ar: {{ ar_desktop }}; --arm: {{ ar_mobile }};
@@ -51,16 +52,14 @@
           loading="eager">
 
       {%- elsif section.settings.shopify_video != blank -%}
-        {%- assign is_html5_video = true -%}
         {%- assign v = section.settings.shopify_video -%}
-
         <video
           class="vid2__media"
+          autoplay
           loop
           playsinline
           preload="metadata"
-          {% if start_muted %}autoplay muted{% endif %}
-          {% if show_sound_toggle %}data-vid2-media="html5"{% endif %}
+          {% unless enable_audio %}muted{% endunless %}
           {% if section.settings.cover_image %}
             poster="{{ section.settings.cover_image | image_url: width: 2400 }}"
           {% endif %}
@@ -72,15 +71,10 @@
 
       {%- elsif section.settings.embed_url != blank -%}
         {%- assign url = section.settings.embed_url | strip -%}
-
         {%- assign iframe_src = '' -%}
-        {%- assign iframe_src_muted_autoplay = '' -%}
-        {%- assign iframe_src_unmuted_autoplay = '' -%}
-        {%- assign iframe_src_muted_noautoplay = '' -%}
-        {%- assign iframe_src_unmuted_noautoplay = '' -%}
-
+        {%- assign iframe_src_muted = '' -%}
+        {%- assign iframe_src_unmuted = '' -%}
         {%- assign yt_id = '' -%}
-        {%- assign vimeo_id = '' -%}
 
         {%- if url contains 'youtu.be/' -%}
           {%- assign yt_id = url | split: 'youtu.be/' | last | split: '?' | first -%}
@@ -92,43 +86,33 @@
 
         {%- if yt_id != blank -%}
           {%- assign yt_base = '?rel=0&controls=0&modestbranding=1&playsinline=1&loop=1&playlist=' | append: yt_id -%}
-
-          {%- assign iframe_src_muted_autoplay   = 'https://www.youtube-nocookie.com/embed/' | append: yt_id | append: yt_base | append: '&autoplay=1&mute=1' -%}
-          {%- assign iframe_src_unmuted_autoplay = 'https://www.youtube-nocookie.com/embed/' | append: yt_id | append: yt_base | append: '&autoplay=1&mute=0' -%}
-
-          {%- assign iframe_src_muted_noautoplay   = 'https://www.youtube-nocookie.com/embed/' | append: yt_id | append: yt_base | append: '&autoplay=0&mute=1' -%}
-          {%- assign iframe_src_unmuted_noautoplay = 'https://www.youtube-nocookie.com/embed/' | append: yt_id | append: yt_base | append: '&autoplay=0&mute=0' -%}
-
-          {%- if start_muted -%}
-            {%- assign iframe_src = iframe_src_muted_autoplay -%}
+          {%- assign iframe_src_muted = 'https://www.youtube-nocookie.com/embed/' | append: yt_id | append: yt_base | append: '&autoplay=1&mute=1' -%}
+          {%- assign iframe_src_unmuted = 'https://www.youtube-nocookie.com/embed/' | append: yt_id | append: yt_base | append: '&autoplay=1&mute=0' -%}
+          {%- if enable_audio -%}
+            {%- assign iframe_src = iframe_src_unmuted -%}
           {%- else -%}
-            {%- assign iframe_src = iframe_src_unmuted_noautoplay -%}
+            {%- assign iframe_src = iframe_src_muted -%}
           {%- endif -%}
 
         {%- elsif url contains 'vimeo.com/' -%}
           {%- assign vimeo_id = url | split: 'vimeo.com/' | last | split: '?' | first | split: '/' | last -%}
 
-          {%- assign iframe_src_muted_autoplay   = 'https://player.vimeo.com/video/' | append: vimeo_id | append: '?autoplay=1&loop=1&muted=1&background=1' -%}
-          {%- assign iframe_src_unmuted_autoplay = 'https://player.vimeo.com/video/' | append: vimeo_id | append: '?autoplay=1&loop=1&muted=0&background=0&controls=0&title=0&byline=0&portrait=0' -%}
+          {%- assign iframe_src_muted = 'https://player.vimeo.com/video/' | append: vimeo_id | append: '?autoplay=1&loop=1&muted=1&background=1' -%}
+          {%- assign iframe_src_unmuted = 'https://player.vimeo.com/video/' | append: vimeo_id | append: '?autoplay=1&loop=1&muted=0&background=0&controls=0&title=0&byline=0&portrait=0' -%}
 
-          {%- assign iframe_src_muted_noautoplay   = 'https://player.vimeo.com/video/' | append: vimeo_id | append: '?autoplay=0&loop=1&muted=1&background=1' -%}
-          {%- assign iframe_src_unmuted_noautoplay = 'https://player.vimeo.com/video/' | append: vimeo_id | append: '?autoplay=0&loop=1&muted=0&background=0&controls=0&title=0&byline=0&portrait=0' -%}
-
-          {%- if start_muted -%}
-            {%- assign iframe_src = iframe_src_muted_autoplay -%}
+          {%- if enable_audio -%}
+            {%- assign iframe_src = iframe_src_unmuted -%}
           {%- else -%}
-            {%- assign iframe_src = iframe_src_unmuted_noautoplay -%}
+            {%- assign iframe_src = iframe_src_muted -%}
           {%- endif -%}
         {%- endif -%}
 
         {%- if iframe_src != blank -%}
-          {%- assign is_iframe_video = true -%}
           <iframe
             class="vid2__media vid2__embed"
             src="{{ iframe_src }}"
-            data-vid2-media="iframe"
-            data-src-muted="{{ iframe_src_muted_autoplay }}"
-            data-src-unmuted="{{ iframe_src_unmuted_autoplay }}"
+            data-src-muted="{{ iframe_src_muted }}"
+            data-src-unmuted="{{ iframe_src_unmuted }}"
             title="{{ section.settings.alt | escape }}"
             allow="autoplay; fullscreen; picture-in-picture"
             allowfullscreen
@@ -146,31 +130,6 @@
           loading="eager">
       {%- else -%}
         <div class="vid2__fallback">Add a video or image.</div>
-      {%- endif -%}
-
-      {%- unless start_muted -%}
-        {%- if is_html5_video or is_iframe_video -%}
-          {%- assign show_play_button = true -%}
-        {%- endif -%}
-      {%- endunless -%}
-
-      {%- if show_play_button -%}
-        <button type="button" class="vid2__play-btn" data-vid2-play aria-label="Play video">
-          ▶
-        </button>
-      {%- endif -%}
-
-      {%- if show_sound_toggle -%}
-        {%- if is_html5_video or is_iframe_video -%}
-          <button
-            type="button"
-            class="vid2__sound-btn {% if start_muted %}is-muted{% endif %}"
-            aria-label="{% if start_muted %}Unmute video{% else %}Mute video{% endif %}"
-            data-vid2-sound>
-            <span class="vid2__sound-icon vid2__sound-off" aria-hidden="true">🔇</span>
-            <span class="vid2__sound-icon vid2__sound-on" aria-hidden="true">🔊</span>
-          </button>
-        {%- endif -%}
       {%- endif -%}
 
       {%- if has_content -%}
@@ -255,6 +214,7 @@
           {%- endif -%}
         </div>
       {%- endif -%}
+
     </div>
   </div>
 </section>
@@ -270,7 +230,6 @@
 #vid2-{{ sid }} .vid2__frame{
   position: relative; width:100%;
 }
-/* Aspect-ratio mode (existing behavior) stays as-is */
 #vid2-{{ sid }} .vid2__frame::before{
   content:""; display:block; padding-top: calc(var(--ar,56.25%) - var(--reveal,0px));
 }
@@ -283,7 +242,6 @@
   }
 }
 
-/* Viewport-height mode */
 #vid2-{{ sid }} .vid2__frame.vh-mode::before{ content:none; display:none; }
 #vid2-{{ sid }} .vid2__frame.vh-mode{
   height: var(--vh-d, 75vh);
@@ -296,8 +254,7 @@
 
 #vid2-{{ sid }} .vid2__media{
   position:absolute;
-  inset:0;
-  width:100%;
+  inset:0; width:100%;
   height:100%;
   object-fit:cover;
   display:block;
@@ -340,12 +297,10 @@
 
 #vid2-{{ sid }} .vid2__btns{ display:flex; gap:12px; flex-wrap:wrap; }
 #vid2-{{ sid }} .vid2__btn{
-  font-family: var(--font-adirek800);
-  display:inline-flex; align-items:center; justify-content:center;
+  font-family: var(--font-adirek800);display:inline-flex; align-items:center; justify-content:center;
   padding: 14px 24px; border-radius: 10px; text-decoration:none;
   font-weight:600; line-height:1; white-space:nowrap;
 }
-
 #vid2-{{ sid }} .vid2__icon-text{
   display: inline-flex;
   align-items: center;
@@ -362,129 +317,91 @@
 #vid2-{{ sid }} .content-center .vid2__icon-text{ justify-self: center; }
 #vid2-{{ sid }} .content-right .vid2__icon-text{ justify-self: end; }
 #vid2-{{ sid }} .vid2__icon-text-text { font-weight: bold; }
-
-/* Play button (only when Start muted is OFF) */
-#vid2-{{ sid }} .vid2__play-btn{
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform: translate(-50%, -50%);
-  z-index:4;
-  width:72px;
-  height:72px;
-  border:0;
-  border-radius:999px;
-  cursor:pointer;
-  background: rgba(0,0,0,0.55);
-  color:#fff;
-  font-size: 22px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  backdrop-filter: blur(6px);
-}
-
-/* Sound toggle */
-#vid2-{{ sid }} .vid2__sound-btn{
-  position:absolute;
-  right:16px;
-  bottom:16px;
-  z-index:4;
-  border:0;
-  border-radius:999px;
-  padding:10px 12px;
-  line-height:1;
-  cursor:pointer;
-  background: rgba(0,0,0,0.55);
-  color:#fff;
-  backdrop-filter: blur(6px);
-}
-#vid2-{{ sid }} .vid2__sound-icon{ display:none; }
-#vid2-{{ sid }} .vid2__sound-btn.is-muted .vid2__sound-off{ display:inline; }
-#vid2-{{ sid }} .vid2__sound-btn:not(.is-muted) .vid2__sound-on{ display:inline; }
 {% endstylesheet %}
 
 <script>
 (function(){
   function init(sectionEl){
     if(!sectionEl) return;
+
+    var audioMode = sectionEl.getAttribute('data-vid2-audio');
+    if(audioMode !== 'on') return;
+
     var frame = sectionEl.querySelector('.vid2__frame');
     if(!frame) return;
 
-    var btnSound = frame.querySelector('[data-vid2-sound]');
-    var btnPlay  = frame.querySelector('[data-vid2-play]');
-
-    var video  = frame.querySelector('video.vid2__media');
+    var video = frame.querySelector('video.vid2__media');
     var iframe = frame.querySelector('iframe.vid2__embed');
 
-    function setSoundBtn(muted){
-      if(!btnSound) return;
-      btnSound.classList.toggle('is-muted', !!muted);
-      btnSound.setAttribute('aria-label', muted ? 'Unmute video' : 'Mute video');
-    }
-
-    function iframeIsMutedByUrl(src){
-      if(!src) return true;
-      return src.indexOf('mute=1') > -1 || src.indexOf('muted=1') > -1;
-    }
-
-    // Initial sound button state
+    // --- HTML5 video (Shopify-hosted): best effort ---
     if(video){
-      setSoundBtn(!!video.muted);
-    } else if(iframe){
-      setSoundBtn(iframeIsMutedByUrl(iframe.getAttribute('src') || ''));
-    }
+      var triedGestureBind = false;
 
-    // Play button (Start muted OFF) - click = user gesture -> allows audio
-    if(btnPlay){
-      btnPlay.addEventListener('click', function(){
-        if(video){
-          video.muted = false;
-          try { video.volume = 1; } catch(e) {}
+      function bindFirstGestureRetry(){
+        if(triedGestureBind) return;
+        triedGestureBind = true;
+
+        var handler = function(){
+          try {
+            video.muted = false;
+            video.volume = 1;
+          } catch(e) {}
+
           var p = video.play && video.play();
           if(p && p.catch) p.catch(function(){});
-          setSoundBtn(false);
-          btnPlay.style.display = 'none';
-          return;
-        }
+        };
 
-        if(iframe){
-          var srcUnmuted = iframe.getAttribute('data-src-unmuted');
-          if(srcUnmuted){
-            iframe.src = srcUnmuted; // autoplay=1, mute=0
-            setSoundBtn(false);
-          }
-          btnPlay.style.display = 'none';
+        document.addEventListener('click', handler, {capture:true, once:true});
+        document.addEventListener('touchstart', handler, {capture:true, once:true});
+        document.addEventListener('keydown', handler, {capture:true, once:true});
+      }
+
+      // Try to start with audio
+      try {
+        video.muted = false;
+        video.volume = 1;
+      } catch(e) {}
+
+      var p1 = video.play && video.play();
+      if(p1 && p1.catch){
+        p1.catch(function(){
+          // Blocked. Fallback to muted autoplay so video still plays.
+          try { video.muted = true; } catch(e) {}
+          var p2 = video.play && video.play();
+          if(p2 && p2.catch) p2.catch(function(){});
+
+          // Then retry unmute on first gesture (no icon shown)
+          bindFirstGestureRetry();
+        });
+      }
+
+      // Some browsers silently keep it muted; if so, retry after first gesture.
+      setTimeout(function(){
+        if(video && video.muted){
+          bindFirstGestureRetry();
         }
-      }, { passive:true });
+      }, 400);
+
+      return;
     }
 
-    // Sound toggle
-    if(btnSound){
-      btnSound.addEventListener('click', function(){
-        // HTML5 video toggle
-        if(video){
-          video.muted = !video.muted;
-          if(!video.muted){
-            try { video.volume = 1; } catch(e) {}
-          }
-          var p = video.play && video.play();
-          if(p && p.catch) p.catch(function(){});
-          setSoundBtn(video.muted);
-          return;
-        }
+    // --- Iframe embeds (YouTube/Vimeo): limited control without showing UI ---
+    // If browser blocks unmuted autoplay, we cannot reliably force it on.
+    // Best-effort: if it loaded muted anyway, unmute on first user gesture by swapping to the unmuted URL.
+    if(iframe){
+      var srcUnmuted = iframe.getAttribute('data-src-unmuted');
+      if(!srcUnmuted) return;
 
-        // iframe toggle = swap src (restarts)
-        if(iframe){
-          var srcMuted = iframe.getAttribute('data-src-muted');
-          var srcUnmuted = iframe.getAttribute('data-src-unmuted');
-          if(!srcMuted || !srcUnmuted) return;
+      var swapped = false;
+      function swapToUnmuted(){
+        if(swapped) return;
+        swapped = true;
+        iframe.src = srcUnmuted;
+      }
 
-          var currentlyMuted = iframeIsMutedByUrl(iframe.getAttribute('src') || '');
-          iframe.src = currentlyMuted ? srcUnmuted : srcMuted;
-          setSoundBtn(!currentlyMuted);
-        }
-      }, { passive:true });
+      document.addEventListener('click', swapToUnmuted, {capture:true, once:true});
+      document.addEventListener('touchstart', swapToUnmuted, {capture:true, once:true});
+      document.addEventListener('keydown', swapToUnmuted, {capture:true, once:true});
     }
   }
 
@@ -513,8 +430,7 @@
     { "type": "text", "id": "alt", "label": "Media alt text / title", "default": "Promotional video" },
 
     { "type": "header", "content": "Audio" },
-    { "type": "checkbox", "id": "show_sound_toggle", "label": "Show sound toggle button", "default": false },
-    { "type": "checkbox", "id": "start_muted", "label": "Start muted (recommended for autoplay)", "default": true },
+    { "type": "checkbox", "id": "enable_audio", "label": "Autoplay with Audio", "default": false },
 
     { "type": "select", "id": "aspect_ratio", "label": "Aspect ratio (desktop)", "default": "16-9",
       "options": [
