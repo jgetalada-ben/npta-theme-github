@@ -126,7 +126,6 @@
         "card_jE4Twa"
       ],
       "custom_css": [
-        ".trending-card__image {aspect-ratio: 16 / 16;}",
         ".trending-card__title {margin: 0;}",
         ".trending-card__title-text {color: #fff;}",
         ".trending-card {align-items: start; position: relative;}",
