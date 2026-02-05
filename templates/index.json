@@ -730,10 +730,10 @@
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-18.jpg",
-            "show_content": false,
-            "name": "",
+            "show_content": true,
+            "name": "Kenneth",
             "certification": "",
-            "quote": "",
+            "quote": "\"You can teach an old dog new tricks 😂 something good came out of the pandemic for me!\"",
             "rating": "5"
           }
         },
