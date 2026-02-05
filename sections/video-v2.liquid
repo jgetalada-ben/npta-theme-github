@@ -40,7 +40,7 @@
             --reveal: {{ section.settings.reveal_desktop | default: 0 }}px;
             --revealm: {{ section.settings.reveal_mobile  | default: 0 }}px;
             --vh-d: {{ section.settings.vh_desktop | default: '75vh' }};
-            --vh-m: {{ section.settings.vh_mobile  | default: '62dvh' }}px;">
+            --vh-m: {{ section.settings.vh_mobile  | default: '62dvh' }};">
       {%- if section.settings.media_type == 'image' and section.settings.cover_image != blank -%}
         <img
           class="vid2__media vid2__img"
