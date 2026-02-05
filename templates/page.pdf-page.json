@@ -26,7 +26,7 @@
       "name": "Top Banner V2",
       "settings": {
         "image": "shopify://shop_images/pdf-hero-banner.webp",
-        "image_alt": "Job Guarantee",
+        "image_alt": "{{ page.title }}",
         "mobile_image_alt": "",
         "desktop_height": "553px",
         "mobile_height": "40vh",
