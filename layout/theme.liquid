@@ -363,148 +363,122 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <script>
 (function () {
-  const STORAGE_KEY = "npta_ft_attribution_v2"; // new key so old tests don't interfere
+  const STORAGE_KEY = "npta_ft_attribution_v1";
 
-  function safeParse(val) { try { return JSON.parse(val); } catch(e) { return null; } }
+  function safeParse(val) {
+    try { return JSON.parse(val); } catch (e) { return null; }
+  }
 
   function getParams() {
-    const out = {};
-    try {
-      const sp = new URLSearchParams(window.location.search);
-      sp.forEach((v,k) => out[k] = v);
-    } catch(e) {}
-    return out;
+    const params = {};
+    const usp = new URLSearchParams(window.location.search);
+    usp.forEach((v, k) => params[k] = v);
+    return params;
   }
 
   function detectFirstTouch() {
-    const p = getParams();
-    const ref = (document.referrer || "").toLowerCase();
+    const params = getParams();
+    const ref = document.referrer || "";
 
-    // If UTMs exist, prefer them
-    if (p.utm_source) {
+    // If UTMs exist, use them
+    if (params.utm_source) {
       return {
-        utm_source: p.utm_source,
-        utm_medium: p.utm_medium || "(not set)",
-        utm_campaign: p.utm_campaign || "(not set)",
-        utm_term: p.utm_term || "",
-        utm_content: p.utm_content || ""
+        utm_source: params.utm_source,
+        utm_medium: params.utm_medium || "(not set)",
+        utm_campaign: params.utm_campaign || "(not set)",
+        utm_term: params.utm_term || "",
+        utm_content: params.utm_content || ""
       };
     }
 
-    // Organic detection (no UTMs)
-    if (ref.includes("google.")) {
-      return { utm_source: "google", utm_medium: "organic", utm_campaign: "(not set)" };
-    }
-    if (ref.includes("bing.")) {
-      return { utm_source: "bing", utm_medium: "organic", utm_campaign: "(not set)" };
-    }
-    if (ref) {
-      return { utm_source: "referral", utm_medium: "referral", utm_campaign: "(not set)" };
+    // Organic detection
+    if (ref.includes("google")) {
+      return {
+        utm_source: "google",
+        utm_medium: "organic",
+        utm_campaign: "(not set)",
+        utm_term: "",
+        utm_content: ""
+      };
     }
 
-    return { utm_source: "direct", utm_medium: "(none)", utm_campaign: "(not set)" };
+    // Referral detection
+    if (ref) {
+      return {
+        utm_source: "referral",
+        utm_medium: "referral",
+        utm_campaign: "(not set)",
+        utm_term: "",
+        utm_content: ""
+      };
+    }
+
+    // Direct
+    return {
+      utm_source: "direct",
+      utm_medium: "(none)",
+      utm_campaign: "(not set)",
+      utm_term: "",
+      utm_content: ""
+    };
   }
 
-  function storeFirstTouchOnce() {
+  function storeFirstTouch() {
     if (localStorage.getItem(STORAGE_KEY)) return;
 
     const ft = detectFirstTouch();
-    if (!ft) return;
-
-    const p = getParams();
-
-    // Preserve click IDs if present on first entry
-    if (p.gclid) ft.gclid = p.gclid;
-    if (p.fbclid) ft.fbclid = p.fbclid;
-
-    ft.landing_page = window.location.pathname;
-    ft.timestamp = new Date().toISOString();
-    ft.referrer = document.referrer || "";
+    ft.ft_landing_page = window.location.href;
+    ft.ft_referrer = document.referrer || "";
+    ft.ft_timestamp = new Date().toISOString();
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(ft));
     console.log("[ATTR] First touch stored:", ft);
   }
 
-  function getStored() {
+  function fillGHLHiddenFields() {
     const ft = safeParse(localStorage.getItem(STORAGE_KEY));
-    return (ft && ft.utm_source) ? ft : null;
-  }
-
-  function isGhlFormIframe(iframe) {
-    const src = (iframe.getAttribute("src") || "").toLowerCase();
-    return (
-      src.includes("leadconnectorhq.com") ||
-      src.includes("highlevel.com") ||
-      src.includes("/widget/form/") ||
-      src.includes("app.npta.ca/widget/form")
-    );
-  }
-
-  function updateIframeSrc(iframe) {
-    const ft = getStored();
     if (!ft) return;
 
-    const src = iframe.getAttribute("src") || "";
-    if (!src) return;
+    // These names MUST match your GHL hidden field names
+    const fieldMap = {
+      utm_source: ft.utm_source,
+      utm_medium: ft.utm_medium,
+      utm_campaign: ft.utm_campaign,
+      utm_term: ft.utm_term,
+      utm_content: ft.utm_content,
+      ft_landing_page: ft.ft_landing_page,
+      ft_referrer: ft.ft_referrer,
+      ft_timestamp: ft.ft_timestamp
+    };
 
-    // If already has utm_source, don't touch it
-    if (src.toLowerCase().includes("utm_source=")) return;
+    Object.keys(fieldMap).forEach(function (name) {
+      const val = fieldMap[name];
+      if (val == null) return;
 
-    let url;
-    try { url = new URL(src, window.location.origin); }
-    catch (e) { return; }
-
-    // Add UTMs (these drive GHL attribution)
-    ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","gclid","fbclid"].forEach((k) => {
-      if (ft[k] !== undefined && ft[k] !== null && String(ft[k]).length) {
-        url.searchParams.set(k, ft[k]);
-      }
+      // Find by name
+      const input = document.querySelector('input[name="' + name + '"]');
+      if (input) input.value = val;
     });
 
-    // Optional: extra context (won’t hurt)
-    url.searchParams.set("landing_page", ft.landing_page || "");
-    url.searchParams.set("ft_timestamp", ft.timestamp || "");
-
-    iframe.setAttribute("src", url.toString());
-    console.log("[ATTR] GHL iframe updated:", url.toString());
+    console.log("[ATTR] Hidden fields filled (if present).");
   }
 
-  function scan() {
-    document.querySelectorAll("iframe").forEach((ifr) => {
-      if (isGhlFormIframe(ifr)) updateIframeSrc(ifr);
-    });
-  }
+  // Store first touch immediately
+  storeFirstTouch();
 
-  function observe() {
-    const obs = new MutationObserver((muts) => {
-      muts.forEach((m) => {
-        (m.addedNodes || []).forEach((node) => {
-          if (!node || node.nodeType !== 1) return;
+  // Try to fill immediately
+  fillGHLHiddenFields();
 
-          if (node.tagName === "IFRAME" && isGhlFormIframe(node)) {
-            updateIframeSrc(node);
-          } else if (node.querySelectorAll) {
-            node.querySelectorAll("iframe").forEach((ifr) => {
-              if (isGhlFormIframe(ifr)) updateIframeSrc(ifr);
-            });
-          }
-        });
-      });
-    });
+  // Keep retrying because popup forms load late
+  let tries = 0;
+  const maxTries = 30;
 
-    obs.observe(document.documentElement, { childList: true, subtree: true });
-  }
+  const interval = setInterval(function () {
+    fillGHLHiddenFields();
+    tries++;
+    if (tries >= maxTries) clearInterval(interval);
+  }, 500);
 
-  // Run
-  storeFirstTouchOnce();
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () {
-      scan(); observe();
-    });
-  } else {
-    scan(); observe();
-  }
 })();
 </script>
 
