@@ -11,13 +11,98 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "top_banner_v2_JwFCpW": {
+      "type": "top-banner-v2",
+      "name": "Top Banner V2",
+      "settings": {
+        "image": "shopify://shop_images/love-your-career.png",
+        "image_alt": "{{ page.title }}",
+        "mobile_image_alt": "{{ page.title }}",
+        "desktop_height": "70vh",
+        "mobile_height": "60vh",
+        "mobile_object_fit": "cover",
+        "subtitle": "",
+        "title": "Train With a Coach.",
+        "description": "<p>This February, go beyond online study. Get hands-on training, real coaching experience, and a guaranteed job pathway with NPTA™.</p>",
+        "v_align": "flex-end",
+        "h_align": "flex-start",
+        "text_align": "left",
+        "title_color": "#FFFFFF",
+        "title_size": "clamp(32px,4vw,56px)",
+        "subtitle_color": "#FFFFFF",
+        "subtitle_size": "clamp(16px,1.8vw,22px)",
+        "desc_color": "#FFFFFF",
+        "desc_size": "clamp(14px,1.4vw,18px)",
+        "button_label": "Enroll now",
+        "button_link": "#",
+        "button_new_tab": false,
+        "button_bg": "#C8FF63",
+        "button_color": "#01241E",
+        "button_font_size": "16px"
+      }
+    },
+    "section_logo_carousel_Uae8xt": {
+      "type": "section--logo-carousel",
+      "blocks": {
+        "logo_ypgEkk": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/love-your-career-icon.png"
+          }
+        },
+        "logo_kGXear": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/love-your-career-icon.png"
+          }
+        },
+        "logo_hyzyzL": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/love-your-career-icon.png"
+          }
+        },
+        "logo_zVCk7k": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/love-your-career-icon.png"
+          }
+        },
+        "logo_Eiicm3": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/love-your-career-icon.png"
+          }
+        }
+      },
+      "block_order": [
+        "logo_ypgEkk",
+        "logo_kGXear",
+        "logo_hyzyzL",
+        "logo_zVCk7k",
+        "logo_Eiicm3"
+      ],
+      "custom_css": [
+        ".section--logo-carousel {background: #01241e;}"
+      ],
+      "name": "Logo Carousel",
+      "settings": {
+        "top_padding": 25,
+        "bottom_padding": 25,
+        "container_width": 200,
+        "scroll_direction": "ltr"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "top_banner_v2_JwFCpW",
+    "section_logo_carousel_Uae8xt"
   ]
 }
