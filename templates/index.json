@@ -763,7 +763,7 @@
           "type": "trainer",
           "settings": {
             "image": "shopify://shop_images/Cert-11.jpg",
-            "show_content": false,
+            "show_content": true,
             "name": "Marina",
             "certification": "",
             "quote": "“I’ve been a Personal Trainer for 8 years and chose NASM for their reputation and flexible schedule. The certification took 4 months at my own pace and was applicable to both my profession and personal routines. I’m excited to use my new credentials to help people achieve their fitness goals and improve their lifestyles. Thank you, NASM!”",
@@ -795,22 +795,22 @@
         "trainer_47Kir4": {
           "type": "trainer",
           "settings": {
-            "image": "shopify://shop_images/Cert-7.jpg",
+            "image": "shopify://shop_images/Cert-4.jpg",
             "show_content": false,
-            "name": "",
+            "name": "Kevin",
             "certification": "",
-            "quote": "",
+            "quote": "\"Becoming NASM Certified is a significant milestone for me. It represents the knowledge and skills I’ve acquired, and my dedication to helping others achieve their fitness goals.\"",
             "rating": "5"
           }
         },
         "trainer_tkGYB3": {
           "type": "trainer",
           "settings": {
-            "image": "shopify://shop_images/Cert-14.jpg",
-            "show_content": false,
-            "name": "",
+            "image": "shopify://shop_images/Cert-15.jpg",
+            "show_content": true,
+            "name": "Felicitas Avendaño",
             "certification": "",
-            "quote": "",
+            "quote": "\"In 2018, I became a NASM Certified Personal Trainer (CPT) and Certified Nutrition Coach (CNC), turning a hobby into a full-time job with a busy schedule across two gyms, online clients, and home visits. Being a nutrition coach has enhanced my ability to help clients and added revenue streams to my business. I’m also proud to have been a gym owner for almost a year, enjoying the responsibility and freedom of leading my own team.\"",
             "rating": "5"
           }
         }
