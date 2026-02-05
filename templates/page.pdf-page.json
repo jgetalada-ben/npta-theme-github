@@ -107,13 +107,13 @@
       "type": "form-split-v1",
       "name": "Form split v1",
       "settings": {
-        "bg": "#F1EFE8",
+        "bg": "#f1efe8",
         "pad_top": "clamp(28px, 5vw, 70px)",
         "pad_bottom": "clamp(28px, 5vw, 70px)",
         "pad_x": "clamp(16px, 3vw, 28px)",
         "max_width": "1200px",
         "gap": "clamp(18px, 4vw, 56px)",
-        "left_width": 45,
+        "left_width": 40,
         "title": "CPT Exam Pass Guarantee",
         "title_color": "#000000",
         "title_size": "clamp(24px, 3vw, 40px)",
@@ -123,21 +123,11 @@
         "text_align": "left",
         "embed_code": "<iframe src=\"https://app.npta.ca/widget/form/Vn2cWc56ny2yOMdLebJC\" style=\"width:100%;height:100%;border:none;border-radius:3px\" id=\"inline-Vn2cWc56ny2yOMdLebJC\" data-layout=\"{'id':'INLINE'}\" data-trigger-type=\"alwaysShow\" data-trigger-value=\"\" data-activation-type=\"alwaysActivated\" data-activation-value=\"\" data-deactivation-type=\"neverDeactivate\" data-deactivation-value=\"\" data-form-name=\"PDF Form\" data-height=\"492\" data-layout-iframe-id=\"inline-Vn2cWc56ny2yOMdLebJC\" data-form-id=\"Vn2cWc56ny2yOMdLebJC\" title=\"PDF Form\">\n</iframe>\n<script src=\"https://app.npta.ca/js/form_embed.js\"></script>",
         "embed_url": "",
-        "form_bg": "#FFFFFF",
+        "form_bg": "#ffffff",
         "form_pad": "0px",
         "form_radius": 0,
         "form_height": "560px",
         "form_height_mobile": "520px"
-      }
-    },
-    "section_steps_form_pgA9ge": {
-      "type": "section--steps-form",
-      "name": "Steps Form",
-      "settings": {
-        "section_id": "section-id",
-        "section_title": "CPT EXAM PASS GUARANTEE",
-        "section_description": "<p>This NASM CPT Exam Pass Guarantee Workbook is designed specifically for aspiring personal trainers who want to pass the NASM CPT exam the first time. </p><p>Inside, you’ll find a clear, structured breakdown of the concepts that actually matter on exam day, including key exercise science principles, assessment strategies, program design logic, and test-taking tips aligned with the NASM CPT 7 curriculum.</p>",
-        "webhook_url": "https://hooks.zapier.com/hooks/catch/xxxxxx/"
       }
     },
     "plan_card_carousel_mLVbki": {
@@ -452,7 +442,6 @@
     "top_banner_v2_8hdNVw",
     "image_with_text_nitmNB",
     "form_split_v1_kq9pWJ",
-    "section_steps_form_pgA9ge",
     "plan_card_carousel_mLVbki",
     "image_with_text_4Mwchi",
     "section_local_video_wgbQ6w",
