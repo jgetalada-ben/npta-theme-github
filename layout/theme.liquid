@@ -515,17 +515,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         var params = new URLSearchParams(window.location.search);
         if (params.get('download') !== '1') return;
 
-        if (sessionStorage.getItem('pdfDownloaded') === '1') return;
-        sessionStorage.setItem('pdfDownloaded', '1');
+        // Prevent repeat downloads
+        if (localStorage.getItem('pdfDownloaded') === '1') return;
+        localStorage.setItem('pdfDownloaded', '1');
 
-        var pdfUrl = sessionStorage.getItem('pendingPdfUrl');
+        var pdfUrl = localStorage.getItem('pendingPdfUrl');
         if (!pdfUrl) return;
 
-        sessionStorage.removeItem('pendingPdfUrl');
+        // Optional: clean up so refresh doesn't re-download
+        localStorage.removeItem('pendingPdfUrl');
 
+        // Try to force download
+        var a = document.createElement('a');
+        a.href = pdfUrl;
+        a.download = ''; // let browser infer filename
+        a.rel = 'noopener';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+
+        // Fallback (some browsers ignore download for cross-origin)
         setTimeout(function () {
-          window.location.href = pdfUrl;
-        }, 300);
+          // If it didn't download, at least open it
+          // window.location.href = pdfUrl;
+          window.open(pdfUrl, '_blank', 'noopener'); 
+        }, 800);
       })();
     </script>
   {% endif %}
