@@ -361,61 +361,90 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   </head>
 
-  <script>
+    <script>
 (function () {
-  const ATTR_KEY = "npta_ft_attribution_v1";
+  const STORAGE_KEY = "npta_ft_attribution_v1";
 
-  function safeParse(v){ try { return JSON.parse(v); } catch(e){ return null; } }
-
-  function getCurrentUtmParams() {
-    const url = new URL(window.location.href);
-    const sp = url.searchParams;
-    const utm_source = sp.get("utm_source");
-    if (!utm_source) return null;
-
-    return {
-      utm_source,
-      utm_medium: sp.get("utm_medium") || "(not set)",
-      utm_campaign: sp.get("utm_campaign") || "(not set)",
-      utm_term: sp.get("utm_term") || "",
-      utm_content: sp.get("utm_content") || ""
-    };
+  function safeParse(val) {
+    try { return JSON.parse(val); } catch (e) { return null; }
   }
 
-  function detectOrganicFallback() {
-    const ref = document.referrer || "";
+  function getStoredUtms() {
+    const ft = safeParse(localStorage.getItem(STORAGE_KEY));
+    if (!ft) return null;
 
-    if (/google\./i.test(ref)) return { utm_source:"google", utm_medium:"organic", utm_campaign:"(not set)", utm_term:"", utm_content:"" };
-    if (/bing\./i.test(ref))   return { utm_source:"bing", utm_medium:"organic", utm_campaign:"(not set)", utm_term:"", utm_content:"" };
-    if (/yahoo\./i.test(ref))  return { utm_source:"yahoo", utm_medium:"organic", utm_campaign:"(not set)", utm_term:"", utm_content:"" };
+    // If your storage already uses utm_* keys
+    if (ft.utm_source || ft.utm_medium || ft.utm_campaign) {
+      return {
+        utm_source: ft.utm_source || "",
+        utm_medium: ft.utm_medium || "",
+        utm_campaign: ft.utm_campaign || "",
+        utm_term: ft.utm_term || "",
+        utm_content: ft.utm_content || ""
+      };
+    }
 
-    if (ref) return { utm_source:"referral", utm_medium:"referral", utm_campaign:"(not set)", utm_term:"", utm_content:"" };
+    // If your storage uses ft_* keys, map to utm_*
+    if (ft.ft_source || ft.ft_medium || ft.ft_campaign) {
+      return {
+        utm_source: ft.ft_source || "",
+        utm_medium: ft.ft_medium || "",
+        utm_campaign: ft.ft_campaign || "",
+        utm_term: ft.ft_term || "",
+        utm_content: ft.ft_content || ""
+      };
+    }
 
-    return { utm_source:"direct", utm_medium:"(none)", utm_campaign:"(not set)", utm_term:"", utm_content:"" };
+    return null;
   }
 
-  function storeFirstTouchOnce() {
-    if (localStorage.getItem(ATTR_KEY)) return;
+  function addParamsToUrl(url, paramsObj) {
+    const u = new URL(url, window.location.origin);
+    const qs = u.searchParams;
 
-    const currentUtm = getCurrentUtmParams();
-    const ft = currentUtm || detectOrganicFallback();
+    Object.keys(paramsObj).forEach((k) => {
+      const v = paramsObj[k];
+      if (!v) return;
+      if (!qs.get(k)) qs.set(k, v); // don't overwrite existing UTMs
+    });
 
-    ft.ft_timestamp = new Date().toISOString();
-    ft.ft_landing_page = window.location.href;
-    ft.ft_referrer = document.referrer || "";
-
-    localStorage.setItem(ATTR_KEY, JSON.stringify(ft));
+    return u.toString();
   }
 
-  // Store first-touch ASAP
-  storeFirstTouchOnce();
+  function isGhlIframe(iframe) {
+    const src = iframe.getAttribute("src") || "";
+    return src.includes("app.npta.ca/widget/form/");
+  }
 
-  // Expose for other scripts (popup script will read it)
-  window.__nptaGetAttribution = function () {
-    return safeParse(localStorage.getItem(ATTR_KEY));
-  };
+  function processIframe(iframe) {
+    if (!iframe || iframe.dataset.nptaUtmInjected === "1") return;
+    if (!isGhlIframe(iframe)) return;
+
+    const utms = getStoredUtms();
+    if (!utms) return;
+
+    const src = iframe.getAttribute("src");
+    if (!src) return;
+
+    const nextSrc = addParamsToUrl(src, utms);
+
+    iframe.dataset.nptaUtmInjected = "1";
+    if (nextSrc !== src) iframe.setAttribute("src", nextSrc);
+  }
+
+  function scan() {
+    document.querySelectorAll("iframe").forEach(processIframe);
+  }
+
+  scan();
+  document.addEventListener("DOMContentLoaded", scan);
+  window.addEventListener("pageshow", scan);
+
+  const obs = new MutationObserver(scan);
+  obs.observe(document.documentElement, { childList: true, subtree: true });
 })();
 </script>
+
 
 
 
