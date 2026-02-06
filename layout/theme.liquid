@@ -510,25 +510,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   {{ 'pop-convert-trigger.js' | asset_url | script_tag }}
 
   {% if template.name == 'page' and page.handle == 'thank-you' %}
-  <script>
-    (function () {
-      var params = new URLSearchParams(window.location.search);
-      if (params.get('download') !== '1') return;
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('download') !== '1') return;
 
-      // prevent repeat download
-      if (sessionStorage.getItem('pdfDownloaded')) return;
-      sessionStorage.setItem('pdfDownloaded', '1');
+        if (sessionStorage.getItem('pdfDownloaded') === '1') return;
+        sessionStorage.setItem('pdfDownloaded', '1');
 
-      var pdfUrl = sessionStorage.getItem('pendingPdfUrl');
-      if (!pdfUrl) return;
+        var pdfUrl = sessionStorage.getItem('pendingPdfUrl');
+        if (!pdfUrl) return;
 
-      sessionStorage.removeItem('pendingPdfUrl');
+        sessionStorage.removeItem('pendingPdfUrl');
 
-      setTimeout(function () {
-        window.location.href = pdfUrl;
-      }, 300);
-    })();
-  </script>
+        setTimeout(function () {
+          window.location.href = pdfUrl;
+        }, 300);
+      })();
+    </script>
   {% endif %}
 
   </body>
