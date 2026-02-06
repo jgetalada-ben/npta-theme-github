@@ -202,7 +202,7 @@
         {% endfor %}
       </ul>
 
-      {% if show_mobile_slider %}
+      {% comment %} {% if show_mobile_slider %}
         <div class="slider-buttons large-up-hide">
           <button
             type="button"
@@ -227,7 +227,7 @@
             {% render 'icon-caret' %}
           </button>
         </div>
-      {% endif %}
+      {% endif %} {% endcomment %}
     </slider-component>
   </div>
 
