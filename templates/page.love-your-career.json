@@ -33,17 +33,17 @@
         "v_align": "flex-end",
         "h_align": "flex-start",
         "text_align": "left",
-        "title_color": "#FFFFFF",
+        "title_color": "#ffffff",
         "title_size": "clamp(32px,4vw,56px)",
-        "subtitle_color": "#FFFFFF",
+        "subtitle_color": "#ffffff",
         "subtitle_size": "clamp(16px,1.8vw,22px)",
-        "desc_color": "#FFFFFF",
+        "desc_color": "#ffffff",
         "desc_size": "clamp(14px,1.4vw,18px)",
         "button_label": "Enroll now",
         "button_link": "#",
         "button_new_tab": false,
-        "button_bg": "#C8FF63",
-        "button_color": "#01241E",
+        "button_bg": "#c8ff63",
+        "button_color": "#01241e",
         "button_font_size": "16px"
       }
     },
@@ -106,6 +106,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/kickstarter2.png",
+            "product": "",
             "eyebrow": "",
             "title": "Career Kickstarter bundle | cpt cnc ces",
             "title_link": ""
@@ -115,6 +116,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/kickstarter1.jpg",
+            "product": "",
             "eyebrow": "",
             "title": "Career Kickstarter bundle Plus| cpt cnc ces CPR",
             "title_link": ""
@@ -155,9 +157,9 @@
       "settings": {
         "section_id": "loveyourcareer-quiz-section",
         "heading": "Discover the Right Path for You",
-        "heading_color": "#01241E",
+        "heading_color": "#01241e",
         "description": "<p>Not sure where to begin? Take our quick quiz to find the best starting point for your goals, interests, and experience—we’ll guide you to the path that’s right for you.</p>",
-        "text_color": "#01241E",
+        "text_color": "#01241e",
         "image": "shopify://shop_images/Rectangle_19.png",
         "show_buttons": true,
         "primary_button_text": "TAKE THE QUIZ",
@@ -170,11 +172,11 @@
         "bg": "#f3f3eb",
         "primary_button_text_color": "#ffffff",
         "secondary_prompt": "Would like to speak to a Career Advisor?",
-        "secondary_prompt_color": "#0E2A24",
+        "secondary_prompt_color": "#0e2a24",
         "secondary_button_text": "Book a Free Call",
         "secondary_button_link": "https://app.npta.ca/widget/bookings/jessica-npta-calendar",
         "secondary_button_color": "#e0ded0",
-        "secondary_button_text_color": "#0B0B0B"
+        "secondary_button_text_color": "#0b0b0b"
       }
     }
   },
