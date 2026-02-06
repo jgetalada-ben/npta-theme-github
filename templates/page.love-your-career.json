@@ -152,7 +152,7 @@
         "columns_desktop": 2,
         "pad_top": 40,
         "pad_right": 12,
-        "pad_bottom": 0,
+        "pad_bottom": 40,
         "pad_left": 12,
         "gap": 32,
         "card_bg": "#0f828c",
