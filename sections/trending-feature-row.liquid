@@ -48,12 +48,12 @@
     --tr-card-bg: {{ section.settings.card_bg | default: '#ffffff' }};
     --tr-eyebrow-size: {{ section.settings.eyebrow_size | default: '11px' }};
     --tr-card-title-size: {{ section.settings.card_title_size | default: 'clamp(16px,1.5vw,20px)' }};
-
+    --tr-eyebrow-color: {{ section.settings.eyebrow_color | default: '#000000' }};
+    --tr-card-title-color: {{ section.settings.card_title_color | default: '#000000' }};
     --tr-info-text-align: {{ info_text_align }};
     --tr-info-self: {{ info_self }};
     --tr-prices-justify: {{ prices_justify }};
     --tr-prices-self: {{ prices_self }};
-
     --tr-price-bg: {{ section.settings.price_bg | default: '#B9F85A' }};
     --tr-price-color: {{ section.settings.price_color | default: '#000000' }};
     --tr-price-size: {{ section.settings.price_font_size | default: 'clamp(18px, 2vw, 26px)' }};
@@ -300,7 +300,7 @@
     font-size: var(--tr-eyebrow-size);
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: #000;
+    color: var(--tr-eyebrow-color);
     font-weight: bold;
   }
 
@@ -310,7 +310,7 @@
     font-size: var(--tr-card-title-size);
     line-height: 1.4;
     text-transform: uppercase;
-    color: #000;
+    color: var(--tr-card-title-color);
     display: inline-block;
   }
 
@@ -464,7 +464,9 @@
     { "type": "header", "content": "Card styles" },
     { "type": "color", "id": "card_bg", "label": "Card background color", "default": "#FFFFFF" },
     { "type": "text", "id": "eyebrow_size", "label": "Eyebrow font-size (accepts clamp())", "default": "11px" },
+    { "type": "color", "id": "eyebrow_color", "label": "Eyebrow font color", "default": "#000000" },
     { "type": "text", "id": "card_title_size", "label": "Card title font-size (accepts clamp())", "default": "clamp(16px,1.5vw,20px)" },
+    { "type": "color", "id": "card_title_color", "label": "Card title font color", "default": "#000000" },
 
     { "type": "header", "content": "Info + Price alignment" },
     {
