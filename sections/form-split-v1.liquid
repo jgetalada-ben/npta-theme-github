@@ -192,26 +192,47 @@
     }
   </style>
 
-  <script>
-    (function () {
-      var root = document.getElementById('FormSplit-{{ sid }}');
-      if (!root) return;
+<script>
+  (function () {
+    var root = document.getElementById('FormSplit-{{ sid }}');
+    if (!root) return;
 
-      var embed = root.querySelector('.js-fspl-embed');
-      if (!embed) return;
+    var embed = root.querySelector('.js-fspl-embed');
+    if (!embed) return;
 
-      var scripts = embed.querySelectorAll('script');
-      scripts.forEach(function(oldScript){
-        var s = document.createElement('script');
-        for (var i=0; i<oldScript.attributes.length; i++){
-          var a = oldScript.attributes[i];
-          s.setAttribute(a.name, a.value);
-        }
-        s.text = oldScript.text || '';
-        oldScript.parentNode.replaceChild(s, oldScript);
-      });
-    })();
-  </script>
+    var scripts = embed.querySelectorAll('script');
+    scripts.forEach(function(oldScript){
+      var s = document.createElement('script');
+      for (var i=0; i<oldScript.attributes.length; i++){
+        var a = oldScript.attributes[i];
+        s.setAttribute(a.name, a.value);
+      }
+      s.text = oldScript.text || '';
+      oldScript.parentNode.replaceChild(s, oldScript);
+    });
+  })();
+</script>
+
+{% if page.metafields.custom.pdf_download_file != blank %}
+<script>
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('download') !== '1') return;
+
+    // Prevent repeat downloads
+    if (sessionStorage.getItem('pdfDownloaded')) return;
+    sessionStorage.setItem('pdfDownloaded', '1');
+
+    const pdfUrl = "{{ page.metafields.custom.pdf_download_file | file_url }}";
+    if (!pdfUrl) return;
+
+    setTimeout(function () {
+      window.location.href = pdfUrl;
+    }, 500);
+  })();
+</script>
+{% endif %}
+
 </section>
 
 {% schema %}
