@@ -2,14 +2,38 @@
   Section: Trending Feature Row
   - Up to 4 feature cards
   - Desktop: inline grid
-  - Mobile: slider/carousel with arrows (no autoplay)
+  - Mobile: horizontal swipe row (no stacking)
 
   Updates:
-  1) Remove button label/link, add optional title link per block
-  2) Title hover underline animation (LTR in, exits to right)
-  3) If title has link => pointer cursor
-  4) NEW: Optional product picker per card. If product is selected, show price + compare-at price below card.
+  - Optional product per block to show price + compare at price
+  - Card info position setting (relative/absolute) + offsets
+  - Alignment settings (info + prices)
+  - Price styling settings
 {% endcomment %}
+
+{%- comment -%} Alignment mapping -> CSS vars {%- endcomment -%}
+{%- assign info_align = section.settings.info_align | default: 'right' -%}
+{%- assign prices_align = section.settings.prices_align | default: 'center' -%}
+
+{%- assign info_text_align = 'right' -%}
+{%- assign info_self = 'flex-end' -%}
+{%- if info_align == 'left' -%}
+  {%- assign info_text_align = 'left' -%}
+  {%- assign info_self = 'flex-start' -%}
+{%- elsif info_align == 'center' -%}
+  {%- assign info_text_align = 'center' -%}
+  {%- assign info_self = 'center' -%}
+{%- endif -%}
+
+{%- assign prices_justify = 'center' -%}
+{%- assign prices_self = 'center' -%}
+{%- if prices_align == 'left' -%}
+  {%- assign prices_justify = 'flex-start' -%}
+  {%- assign prices_self = 'flex-start' -%}
+{%- elsif prices_align == 'right' -%}
+  {%- assign prices_justify = 'flex-end' -%}
+  {%- assign prices_self = 'flex-end' -%}
+{%- endif -%}
 
 <section
   id="TrendingRow-{{ section.id }}"
@@ -24,6 +48,17 @@
     --tr-card-bg: {{ section.settings.card_bg | default: '#ffffff' }};
     --tr-eyebrow-size: {{ section.settings.eyebrow_size | default: '11px' }};
     --tr-card-title-size: {{ section.settings.card_title_size | default: 'clamp(16px,1.5vw,20px)' }};
+
+    --tr-info-text-align: {{ info_text_align }};
+    --tr-info-self: {{ info_self }};
+    --tr-prices-justify: {{ prices_justify }};
+    --tr-prices-self: {{ prices_self }};
+
+    --tr-price-bg: {{ section.settings.price_bg | default: '#B9F85A' }};
+    --tr-price-color: {{ section.settings.price_color | default: '#000000' }};
+    --tr-price-size: {{ section.settings.price_font_size | default: 'clamp(18px, 2vw, 26px)' }};
+    --tr-compare-color: {{ section.settings.compare_color | default: 'rgba(0,0,0,0.6)' }};
+    --tr-compare-size: {{ section.settings.compare_font_size | default: 'clamp(18px, 2vw, 26px)' }};
   "
 >
   {%- assign mw = section.settings.max_width | default: '1200px' | strip -%}
@@ -82,6 +117,12 @@
             {%- assign has_title_link = true -%}
           {%- endif -%}
 
+          {%- assign info_position_mode = block.settings.info_position | default: 'relative' -%}
+          {%- assign info_top = block.settings.info_top | strip -%}
+          {%- assign info_right = block.settings.info_right | strip -%}
+          {%- assign info_bottom = block.settings.info_bottom | default: '0px' | strip -%}
+          {%- assign info_left = block.settings.info_left | strip -%}
+
           <li
             id="TrendingSlide-{{ section.id }}-{{ forloop.index }}"
             class="trending-row__item grid__item{% if show_mobile_slider %} slider__slide{% endif %}"
@@ -102,7 +143,18 @@
                 </div>
               {% endif %}
 
-              <div class="trending-card__info">
+              <div
+                class="trending-card__info"
+                style="
+                  {% if info_position_mode == 'absolute' %}
+                    position: absolute;
+                    bottom: {{ info_bottom }};
+                    {% if info_top != blank %}top: {{ info_top }};{% endif %}
+                    {% if info_right != blank %}right: {{ info_right }};{% endif %}
+                    {% if info_left != blank %}left: {{ info_left }};{% endif %}
+                  {% endif %}
+                "
+              >
                 {% if block.settings.eyebrow != blank %}
                   <p class="trending-card__eyebrow">
                     {{ block.settings.eyebrow }}
@@ -122,7 +174,6 @@
                 {% endif %}
               </div>
 
-              {%- comment -%} NEW: Price row (only if product is selected) {%- endcomment -%}
               {% if p != blank and v != blank %}
                 <div class="trending-card__prices" aria-label="Product price">
                   <span class="trending-card__price">
@@ -208,9 +259,9 @@
 
   /* Card */
   .trending-card {
+    position: relative; /* needed for absolute .trending-card__info */
     display: flex;
     flex-direction: column;
-    align-items: end;
     background: transparent;
     border-radius: 0;
     box-shadow: none;
@@ -232,13 +283,15 @@
   }
 
   .trending-card__info {
-    position: relative;
+    position: relative; /* default */
     background: var(--tr-card-bg);
     border-radius: 0;
     padding: 22px 40px 26px;
-    text-align: right;
     width: min(520px, 78%);
-    z-index: 1;
+    z-index: 2;
+
+    text-align: var(--tr-info-text-align);
+    align-self: var(--tr-info-self);
   }
 
   .trending-card__eyebrow {
@@ -278,7 +331,6 @@
     text-decoration: none !important;
     cursor: pointer;
 
-    /* underline */
     background-image: linear-gradient(currentColor, currentColor);
     background-repeat: no-repeat;
     background-size: 0% 2px;
@@ -296,15 +348,15 @@
     background-position: 100% 100%;
   }
 
-  /* NEW: Price row (matches screenshot style) */
+  /* Prices */
   .trending-card__prices{
     width: 100%;
     margin-top: 26px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: var(--tr-prices-justify);
     gap: 28px;
-    align-self: center; /* overrides align-items:end on card */
+    align-self: var(--tr-prices-self);
   }
 
   .trending-card__price{
@@ -313,11 +365,11 @@
     justify-content: center;
     padding: 14px 30px;
     border-radius: 999px;
-    background: #B9F85A; /* lime pill */
-    color: #000;
+    background: var(--tr-price-bg);
+    color: var(--tr-price-color);
     font-family: var(--font-poppins700);
     font-weight: 700;
-    font-size: clamp(18px, 2vw, 26px);
+    font-size: var(--tr-price-size);
     line-height: 1;
     white-space: nowrap;
   }
@@ -325,31 +377,38 @@
   .trending-card__compare{
     font-family: var(--font-poppins700);
     font-weight: 700;
-    font-size: clamp(18px, 2vw, 26px);
-    color: #000;
-    opacity: 0.6;
+    font-size: var(--tr-compare-size);
+    color: var(--tr-compare-color);
     text-decoration: line-through;
     white-space: nowrap;
   }
 
-  /* Mobile slider */
+  /* ✅ Mobile fix: force horizontal swipe row (no stacking) */
   @media screen and (max-width: 749px) {
     .trending-row__slider { overflow: hidden; }
 
-    .trending-row__list {
-      grid-auto-flow: column;
-      grid-auto-columns: minmax(80%, 100%);
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
+    .trending-row__list{
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
       -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      gap: var(--gap);
+      padding-bottom: 10px;
     }
 
-    .trending-row__item { scroll-snap-align: start; }
+    .trending-row__item{
+      flex: 0 0 86%;
+      max-width: 86%;
+      scroll-snap-align: start;
+    }
+
+    .trending-row__list::-webkit-scrollbar{ display:none; }
+    .trending-row__list{ scrollbar-width: none; }
 
     .trending-card__info {
       width: 86%;
       padding: 20px 24px 22px;
-      margin-top: 0;
     }
 
     .trending-card__prices{
@@ -369,20 +428,12 @@
         var slides = sliderEl.querySelectorAll('.trending-row__item');
         if (!slides.length || slides.length === 1) return;
 
-        var currentIndex = 0;
-
-        function isMobile() {
-          return window.matchMedia('(max-width: 749px)').matches;
-        }
-
         sliderEl.addEventListener('scroll', function () {
           var slideWidth = slides[0].offsetWidth || 1;
           var idx = Math.round(sliderEl.scrollLeft / slideWidth);
-          currentIndex = Math.max(0, Math.min(slides.length - 1, idx));
-        });
-
-        window.addEventListener('resize', function () {
-          if (!isMobile()) return;
+          idx = Math.max(0, Math.min(slides.length - 1, idx));
+          var current = document.querySelector('#TrendingRow-' + sectionId + ' .slider-counter--current');
+          if (current) current.textContent = (idx + 1);
         });
       });
     </script>
@@ -399,6 +450,7 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "Now trending" },
     { "type": "text", "id": "subheading", "label": "Subheading", "default": "Discover our most popular certifications" },
     { "type": "text", "id": "max_width", "label": "Max width (e.g. 1200px or 90%)", "default": "1200px" },
+
     { "type": "color", "id": "bg", "label": "Section background", "default": "#FFFFFF" },
     { "type": "range", "id": "columns_desktop", "label": "Cards per row (desktop)", "min": 2, "max": 4, "step": 1, "default": 2 },
 
@@ -412,7 +464,38 @@
     { "type": "header", "content": "Card styles" },
     { "type": "color", "id": "card_bg", "label": "Card background color", "default": "#FFFFFF" },
     { "type": "text", "id": "eyebrow_size", "label": "Eyebrow font-size (accepts clamp())", "default": "11px" },
-    { "type": "text", "id": "card_title_size", "label": "Card title font-size (accepts clamp())", "default": "clamp(16px,1.5vw,20px)" }
+    { "type": "text", "id": "card_title_size", "label": "Card title font-size (accepts clamp())", "default": "clamp(16px,1.5vw,20px)" },
+
+    { "type": "header", "content": "Info + Price alignment" },
+    {
+      "type": "select",
+      "id": "info_align",
+      "label": "Info alignment",
+      "default": "right",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "prices_align",
+      "label": "Prices alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+
+    { "type": "header", "content": "Price styles" },
+    { "type": "color", "id": "price_bg", "label": "Price pill background", "default": "#B9F85A" },
+    { "type": "color", "id": "price_color", "label": "Price pill text color", "default": "#000000" },
+    { "type": "text", "id": "price_font_size", "label": "Price pill font-size (clamp ok)", "default": "clamp(18px, 2vw, 26px)" },
+    { "type": "color", "id": "compare_color", "label": "Compare-at color", "default": "rgba(0,0,0,0.6)" },
+    { "type": "text", "id": "compare_font_size", "label": "Compare-at font-size (clamp ok)", "default": "clamp(18px, 2vw, 26px)" }
   ],
   "blocks": [
     {
@@ -421,9 +504,26 @@
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image" },
         { "type": "product", "id": "product", "label": "Product (optional - shows price + compare at price)" },
+
         { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Now trending" },
         { "type": "text", "id": "title", "label": "Title (optional - uses product title if blank)", "default": "Become a certified personal trainer" },
-        { "type": "url", "id": "title_link", "label": "Title link (optional - ignored if product is selected)" }
+        { "type": "url", "id": "title_link", "label": "Title link (optional - ignored if product is selected)" },
+
+        { "type": "header", "content": "Info position" },
+        {
+          "type": "select",
+          "id": "info_position",
+          "label": "Info position mode",
+          "default": "relative",
+          "options": [
+            { "value": "relative", "label": "Relative (default)" },
+            { "value": "absolute", "label": "Absolute (overlay)" }
+          ]
+        },
+        { "type": "text", "id": "info_bottom", "label": "Absolute: bottom (default 0px)", "default": "0px" },
+        { "type": "text", "id": "info_top", "label": "Absolute: top (optional)" },
+        { "type": "text", "id": "info_left", "label": "Absolute: left (optional)" },
+        { "type": "text", "id": "info_right", "label": "Absolute: right (optional)" }
       ]
     }
   ],
