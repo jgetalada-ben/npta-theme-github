@@ -37,7 +37,6 @@
     --fspl-desc-size: {{ section.settings.desc_size }};
     --fspl-form-h: {{ section.settings.form_height }};
     --fspl-form-h-m: {{ section.settings.form_height_mobile }};
-    --fspl-card-bg: {{ section.settings.form_bg }};
     --fspl-card-radius: {{ section.settings.form_radius }}px;
     --fspl-card-pad: {{ section.settings.form_pad }};
   "
@@ -58,9 +57,14 @@
       <!-- RIGHT -->
       <div class="fspl__right">
         <div class="fspl__form-card">
-          {%- assign mf_embed = page.metafields.custom.form_embed_code.value | default: page.metafields.custom.form_embed_code | default: '' -%}
+          {%- comment -%} 1) Resolve embed sources: metafield first, then section settings {%- endcomment -%}
+          {%- assign mf_embed = page.metafields.custom.form_embed_code.value
+            | default: page.metafields.custom.form_embed_code
+            | default: '' -%}
+
           {%- assign embed_code_raw = section.settings.embed_code | default: '' -%}
           {%- assign embed_url_raw  = section.settings.embed_url  | default: '' -%}
+
           {%- assign final_embed_code = mf_embed -%}
           {%- if final_embed_code == blank -%}
             {%- assign final_embed_code = embed_code_raw -%}
@@ -73,11 +77,13 @@
 
           {% if has_form %}
             {%- if final_embed_code != blank -%}
+              <!-- IMPORTANT: js-fspl-embed enables script re-run for GHL -->
               <div class="fspl__embed js-fspl-embed">
                 {{ final_embed_code }}
               </div>
             {%- else -%}
-              <div class="fspl__embed">
+              <!-- URL mode -->
+              <div class="fspl__embed js-fspl-embed">
                 <iframe
                   class="fspl__iframe"
                   src="{{ embed_url_raw | escape }}"
@@ -93,7 +99,6 @@
               Add your form embed in the page metafield <b>custom.form_embed_code</b> (or in the section settings).
             </div>
           {% endif %}
-
         </div>
       </div>
     </div>
@@ -139,23 +144,18 @@
     #FormSplit-{{ sid }} .fspl__desc p{ margin: 0; }
     #FormSplit-{{ sid }} .fspl__desc p + p{ margin-top: 14px; }
 
-    /* Form card */
     #FormSplit-{{ sid }} .fspl__form-card{
-      {% comment %} background: var(--fspl-card-bg); {% endcomment %}
       border-radius: var(--fspl-card-radius);
       padding: var(--fspl-card-pad);
       overflow: hidden;
-      {% comment %} min-height: var(--fspl-form-h); {% endcomment %}
       display: block;
     }
 
-    /* If embed code includes its own iframe, force it to fill */
     #FormSplit-{{ sid }} .fspl__embed,
     #FormSplit-{{ sid }} .fspl__embed iframe{
       width: 100%;
     }
 
-    /* Our iframe (URL mode) */
     #FormSplit-{{ sid }} .fspl__iframe{
       width: 100%;
       height: var(--fspl-form-h);
@@ -173,67 +173,59 @@
       text-align: center;
     }
 
-    /* Mobile */
     @media (max-width: 749px){
       #FormSplit-{{ sid }} .fspl__grid{
         grid-template-columns: 1fr;
       }
 
-      #FormSplit-{{ sid }} .fspl__form-card{
-        min-height: var(--fspl-form-h-m);
-      }
-
       #FormSplit-{{ sid }} .fspl__iframe{
         height: var(--fspl-form-h-m);
       }
+
       #FormSplit-{{ sid }} .fspl__title{
         margin: 0 0 20px;
       }
     }
   </style>
 
-<script>
-  (function () {
-    var root = document.getElementById('FormSplit-{{ sid }}');
-    if (!root) return;
+  <!-- Re-run scripts inside embed code (needed for GHL embeds pasted via Liquid/metafield) -->
+  <script>
+    (function () {
+      var root = document.getElementById('FormSplit-{{ sid }}');
+      if (!root) return;
 
-    var embed = root.querySelector('.js-fspl-embed');
-    if (!embed) return;
+      var embed = root.querySelector('.js-fspl-embed');
+      if (!embed) return;
 
-    var scripts = embed.querySelectorAll('script');
-    scripts.forEach(function(oldScript){
-      var s = document.createElement('script');
-      for (var i=0; i<oldScript.attributes.length; i++){
-        var a = oldScript.attributes[i];
-        s.setAttribute(a.name, a.value);
-      }
-      s.text = oldScript.text || '';
-      oldScript.parentNode.replaceChild(s, oldScript);
-    });
-  })();
-</script>
+      var scripts = embed.querySelectorAll('script');
+      scripts.forEach(function(oldScript){
+        var s = document.createElement('script');
+        for (var i=0; i<oldScript.attributes.length; i++){
+          var a = oldScript.attributes[i];
+          s.setAttribute(a.name, a.value);
+        }
+        s.text = oldScript.text || '';
+        oldScript.parentNode.replaceChild(s, oldScript);
+      });
+    })();
+  </script>
 
-{% if page.metafields.custom.pdf_download_file != blank %}
-<script>
-  (function () {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('download') !== '1') return;
-
-    // Prevent repeat downloads
-    if (sessionStorage.getItem('pdfDownloaded')) return;
-    sessionStorage.setItem('pdfDownloaded', '1');
-
-    const pdfUrl = "{{ page.metafields.custom.pdf_download_file | file_url }}";
-    if (!pdfUrl) return;
-
-    setTimeout(function () {
-      window.location.href = pdfUrl;
-    }, 500);
-  })();
-</script>
-{% endif %}
-
+  <!-- Scenario C: Store this page's PDF URL for the thank-you page to download -->
+  {% if page.metafields.custom.pdf_download_file != blank %}
+    <script>
+      (function () {
+        try {
+          var pdfUrl = "{{ page.metafields.custom.pdf_download_file | file_url }}";
+          if (pdfUrl) {
+            sessionStorage.setItem('pendingPdfUrl', pdfUrl);
+            sessionStorage.removeItem('pdfDownloaded'); // allow new landing page to trigger once
+          }
+        } catch(e) {}
+      })();
+    </script>
+  {% endif %}
 </section>
+
 
 {% schema %}
 {
