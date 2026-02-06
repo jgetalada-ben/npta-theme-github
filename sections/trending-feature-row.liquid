@@ -3,10 +3,12 @@
   - Up to 4 feature cards
   - Desktop: inline grid
   - Mobile: slider/carousel with arrows (no autoplay)
+
   Updates:
   1) Remove button label/link, add optional title link per block
   2) Title hover underline animation (LTR in, exits to right)
   3) If title has link => pointer cursor
+  4) NEW: Optional product picker per card. If product is selected, show price + compare-at price below card.
 {% endcomment %}
 
 <section
@@ -59,8 +61,24 @@
         role="list"
       >
         {% for block in section.blocks %}
+          {%- assign p = block.settings.product -%}
+          {%- assign v = blank -%}
+          {%- if p != blank -%}
+            {%- assign v = p.selected_or_first_available_variant -%}
+          {%- endif -%}
+
+          {%- assign card_title = block.settings.title -%}
+          {%- if card_title == blank and p != blank -%}
+            {%- assign card_title = p.title -%}
+          {%- endif -%}
+
+          {%- assign card_link = block.settings.title_link -%}
+          {%- if p != blank -%}
+            {%- assign card_link = p.url -%}
+          {%- endif -%}
+
           {%- assign has_title_link = false -%}
-          {%- if block.settings.title_link != blank -%}
+          {%- if card_link != blank -%}
             {%- assign has_title_link = true -%}
           {%- endif -%}
 
@@ -91,18 +109,33 @@
                   </p>
                 {% endif %}
 
-                {% if block.settings.title != blank %}
+                {% if card_title != blank %}
                   <h3 class="trending-card__title">
                     {% if has_title_link %}
-                      <a class="trending-card__title-link" href="{{ block.settings.title_link }}">
-                        {{ block.settings.title }}
+                      <a class="trending-card__title-link" href="{{ card_link }}">
+                        {{ card_title }}
                       </a>
                     {% else %}
-                      <span class="trending-card__title-text">{{ block.settings.title }}</span>
+                      <span class="trending-card__title-text">{{ card_title }}</span>
                     {% endif %}
                   </h3>
                 {% endif %}
               </div>
+
+              {%- comment -%} NEW: Price row (only if product is selected) {%- endcomment -%}
+              {% if p != blank and v != blank %}
+                <div class="trending-card__prices" aria-label="Product price">
+                  <span class="trending-card__price">
+                    {{ v.price | money }}
+                  </span>
+
+                  {% if v.compare_at_price and v.compare_at_price > v.price %}
+                    <span class="trending-card__compare">
+                      {{ v.compare_at_price | money }}
+                    </span>
+                  {% endif %}
+                </div>
+              {% endif %}
             </div>
           </li>
         {% endfor %}
@@ -205,9 +238,7 @@
     padding: 22px 40px 26px;
     text-align: right;
     width: min(520px, 78%);
-    /* margin-top: -48px; */
     z-index: 1;
-    /* transform: translateY(-35%); */
   }
 
   .trending-card__eyebrow {
@@ -227,7 +258,7 @@
     line-height: 1.4;
     text-transform: uppercase;
     color: #000;
-    display: inline-block; /* ensures underline length matches title */
+    display: inline-block;
   }
 
   /* Title link / text */
@@ -240,35 +271,66 @@
     padding-bottom: 2px;
   }
 
-.trending-card__title-link{
-  display: inline-block;
-  position: relative;
-  color: inherit;
-  text-decoration: none !important;
-  cursor: pointer;
+  .trending-card__title-link{
+    display: inline-block;
+    position: relative;
+    color: inherit;
+    text-decoration: none !important;
+    cursor: pointer;
 
-  /* underline */
-  background-image: linear-gradient(currentColor, currentColor);
-  background-repeat: no-repeat;
-  background-size: 0% 2px;         /* hidden */
-  background-position: 100% 100%;  /* start “from right” when hidden */
-  padding-bottom: 4px;
+    /* underline */
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    background-position: 100% 100%;
+    padding-bottom: 4px;
 
-  transition: background-size 0.28s ease, background-position 0.28s ease;
-}
+    transition: background-size 0.28s ease, background-position 0.28s ease;
+  }
+  .trending-card__title-link:hover{
+    background-size: 100% 2px;
+    background-position: 0% 100%;
+  }
+  .trending-card__title-link:not(:hover){
+    background-size: 0% 2px;
+    background-position: 100% 100%;
+  }
 
-/* Hover IN: draw left -> right */
-.trending-card__title-link:hover{
-  background-size: 100% 2px;
-  background-position: 0% 100%;
-}
+  /* NEW: Price row (matches screenshot style) */
+  .trending-card__prices{
+    width: 100%;
+    margin-top: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    align-self: center; /* overrides align-items:end on card */
+  }
 
-/* Hover OUT: collapse to the right (exit animation) */
-.trending-card__title-link:not(:hover){
-  background-size: 0% 2px;
-  background-position: 100% 100%;
-}
+  .trending-card__price{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 30px;
+    border-radius: 999px;
+    background: #B9F85A; /* lime pill */
+    color: #000;
+    font-family: var(--font-poppins700);
+    font-weight: 700;
+    font-size: clamp(18px, 2vw, 26px);
+    line-height: 1;
+    white-space: nowrap;
+  }
 
+  .trending-card__compare{
+    font-family: var(--font-poppins700);
+    font-weight: 700;
+    font-size: clamp(18px, 2vw, 26px);
+    color: #000;
+    opacity: 0.6;
+    text-decoration: line-through;
+    white-space: nowrap;
+  }
 
   /* Mobile slider */
   @media screen and (max-width: 749px) {
@@ -288,7 +350,11 @@
       width: 86%;
       padding: 20px 24px 22px;
       margin-top: 0;
-    /* transform: translateY(-28%); */
+    }
+
+    .trending-card__prices{
+      margin-top: 22px;
+      gap: 18px;
     }
   }
   {% endstylesheet %}
@@ -309,14 +375,12 @@
           return window.matchMedia('(max-width: 749px)').matches;
         }
 
-        // Keep currentIndex in sync when user swipes
         sliderEl.addEventListener('scroll', function () {
           var slideWidth = slides[0].offsetWidth || 1;
           var idx = Math.round(sliderEl.scrollLeft / slideWidth);
           currentIndex = Math.max(0, Math.min(slides.length - 1, idx));
         });
 
-        // No autoplay (intentionally)
         window.addEventListener('resize', function () {
           if (!isMobile()) return;
         });
@@ -332,143 +396,34 @@
   "class": "section trending-feature-row",
   "max_blocks": 4,
   "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Now trending"
-    },
-    {
-      "type": "text",
-      "id": "subheading",
-      "label": "Subheading",
-      "default": "Discover our most popular certifications"
-    },
-    {
-      "type": "text",
-      "id": "max_width",
-      "label": "Max width (e.g. 1200px or 90%)",
-      "default": "1200px"
-    },
-    {
-      "type": "color",
-      "id": "bg",
-      "label": "Section background",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "range",
-      "id": "columns_desktop",
-      "label": "Cards per row (desktop)",
-      "min": 2,
-      "max": 4,
-      "step": 1,
-      "default": 2
-    },
-    {
-      "type": "header",
-      "content": "Spacing"
-    },
-    {
-      "type": "range",
-      "id": "pad_top",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "label": "Padding top",
-      "default": 48
-    },
-    {
-      "type": "range",
-      "id": "pad_right",
-      "min": 0,
-      "max": 80,
-      "step": 4,
-      "unit": "px",
-      "label": "Padding right",
-      "default": 24
-    },
-    {
-      "type": "range",
-      "id": "pad_bottom",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "label": "Padding bottom",
-      "default": 48
-    },
-    {
-      "type": "range",
-      "id": "pad_left",
-      "min": 0,
-      "max": 80,
-      "step": 4,
-      "unit": "px",
-      "label": "Padding left",
-      "default": 24
-    },
-    {
-      "type": "range",
-      "id": "gap",
-      "min": 8,
-      "max": 48,
-      "step": 2,
-      "unit": "px",
-      "label": "Card gap",
-      "default": 32
-    },
-    {
-      "type": "header",
-      "content": "Card styles"
-    },
-    {
-      "type": "color",
-      "id": "card_bg",
-      "label": "Card background color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "text",
-      "id": "eyebrow_size",
-      "label": "Eyebrow font-size (accepts clamp())",
-      "default": "11px"
-    },
-    {
-      "type": "text",
-      "id": "card_title_size",
-      "label": "Card title font-size (accepts clamp())",
-      "default": "clamp(16px,1.5vw,20px)"
-    }
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Now trending" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Discover our most popular certifications" },
+    { "type": "text", "id": "max_width", "label": "Max width (e.g. 1200px or 90%)", "default": "1200px" },
+    { "type": "color", "id": "bg", "label": "Section background", "default": "#FFFFFF" },
+    { "type": "range", "id": "columns_desktop", "label": "Cards per row (desktop)", "min": 2, "max": 4, "step": 1, "default": 2 },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "pad_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 48 },
+    { "type": "range", "id": "pad_right", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Padding right", "default": 24 },
+    { "type": "range", "id": "pad_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 48 },
+    { "type": "range", "id": "pad_left", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Padding left", "default": 24 },
+    { "type": "range", "id": "gap", "min": 8, "max": 48, "step": 2, "unit": "px", "label": "Card gap", "default": 32 },
+
+    { "type": "header", "content": "Card styles" },
+    { "type": "color", "id": "card_bg", "label": "Card background color", "default": "#FFFFFF" },
+    { "type": "text", "id": "eyebrow_size", "label": "Eyebrow font-size (accepts clamp())", "default": "11px" },
+    { "type": "text", "id": "card_title_size", "label": "Card title font-size (accepts clamp())", "default": "clamp(16px,1.5vw,20px)" }
   ],
   "blocks": [
     {
       "type": "card",
       "name": "Card",
       "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-        {
-          "type": "text",
-          "id": "eyebrow",
-          "label": "Eyebrow",
-          "default": "Now trending"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Become a certified personal trainer"
-        },
-        {
-          "type": "url",
-          "id": "title_link",
-          "label": "Title link (optional)"
-        }
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "product", "id": "product", "label": "Product (optional - shows price + compare at price)" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Now trending" },
+        { "type": "text", "id": "title", "label": "Title (optional - uses product title if blank)", "default": "Become a certified personal trainer" },
+        { "type": "url", "id": "title_link", "label": "Title link (optional - ignored if product is selected)" }
       ]
     }
   ],
