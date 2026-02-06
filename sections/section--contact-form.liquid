@@ -225,6 +225,62 @@
   </div>
 </section>
 
+<script>
+(function(){
+  const GHL_FORM_ID = 'FRrYnB9wktnxZdg6W8bN'; // Contact Us form ID
+  const GHL_BASE = `https://app.npta.ca/widget/form/${GHL_FORM_ID}`;
+  const MOUNT_ID = 'ghlContactFormMount';
+
+  function toQuery(obj){
+    return Object.keys(obj || {})
+      .filter(k => obj[k] != null && obj[k] !== '')
+      .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(obj[k]))
+      .join('&');
+  }
+
+  function buildFormSrc(){
+    const attr = (window.__nptaGetAttribution && window.__nptaGetAttribution()) || {};
+
+    const utm = {
+      utm_source: attr.utm_source || '',
+      utm_medium: attr.utm_medium || '',
+      utm_campaign: attr.utm_campaign || '',
+      utm_term: attr.utm_term || '',
+      utm_content: attr.utm_content || ''
+    };
+
+    const qs = toQuery(utm);
+    return qs ? `${GHL_BASE}?${qs}` : GHL_BASE;
+  }
+
+  function injectIframe(src){
+    const mount = document.getElementById(MOUNT_ID);
+    if (!mount) return;
+
+    mount.innerHTML = '';
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.title = 'Contact Us Form';
+    iframe.style.width = '100%';
+    iframe.style.height = '469px';
+    iframe.style.border = 'none';
+    iframe.style.borderRadius = '0px';
+    iframe.loading = 'lazy';
+    mount.appendChild(iframe);
+  }
+
+  function init(){
+    const mount = document.getElementById(MOUNT_ID);
+    if (!mount) return; // only run on Contact Us page where mount exists
+    injectIframe(buildFormSrc());
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+  document.addEventListener('shopify:section:load', init);
+})();
+</script>
+
+
 <script src="https://www.google.com/recaptcha/api.js?render=6Lf762AqAAAAALFi5cjMR1pDOlO3FhZx9vGGqFjJ&badge=bottomleft"></script>
 <script>
   function executeRecaptcha(action) {
