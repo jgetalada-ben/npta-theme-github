@@ -58,18 +58,23 @@
       <!-- RIGHT -->
       <div class="fspl__right">
         <div class="fspl__form-card">
+          {%- assign mf_embed = page.metafields.custom.form_embed_code.value | default: page.metafields.custom.form_embed_code | default: '' -%}
           {%- assign embed_code_raw = section.settings.embed_code | default: '' -%}
           {%- assign embed_url_raw  = section.settings.embed_url  | default: '' -%}
+          {%- assign final_embed_code = mf_embed -%}
+          {%- if final_embed_code == blank -%}
+            {%- assign final_embed_code = embed_code_raw -%}
+          {%- endif -%}
 
           {%- assign has_form = false -%}
-          {%- if embed_code_raw != blank or embed_url_raw != blank -%}
+          {%- if final_embed_code != blank or embed_url_raw != blank -%}
             {%- assign has_form = true -%}
           {%- endif -%}
 
           {% if has_form %}
-            {%- if embed_code_raw != blank -%}
+            {%- if final_embed_code != blank -%}
               <div class="fspl__embed js-fspl-embed">
-                {{ embed_code_raw }}
+                {{ final_embed_code }}
               </div>
             {%- else -%}
               <div class="fspl__embed">
@@ -85,9 +90,10 @@
             {%- endif -%}
           {% else %}
             <div class="fspl__placeholder">
-              Add your form embed in the section settings.
+              Add your form embed in the page metafield <b>custom.form_embed_code</b> (or in the section settings).
             </div>
           {% endif %}
+
         </div>
       </div>
     </div>
@@ -186,26 +192,26 @@
     }
   </style>
 
-<script>
-  (function () {
-    var root = document.getElementById('FormSplit-{{ sid }}');
-    if (!root) return;
+  <script>
+    (function () {
+      var root = document.getElementById('FormSplit-{{ sid }}');
+      if (!root) return;
 
-    var embed = root.querySelector('.js-fspl-embed');
-    if (!embed) return;
-    var scripts = embed.querySelectorAll('script');
-    scripts.forEach(function(oldScript){
-      var s = document.createElement('script');
-      for (var i=0; i<oldScript.attributes.length; i++){
-        var a = oldScript.attributes[i];
-        s.setAttribute(a.name, a.value);
-      }
-      s.text = oldScript.text || '';
-      oldScript.parentNode.replaceChild(s, oldScript);
-    });
-  })();
-</script>
+      var embed = root.querySelector('.js-fspl-embed');
+      if (!embed) return;
 
+      var scripts = embed.querySelectorAll('script');
+      scripts.forEach(function(oldScript){
+        var s = document.createElement('script');
+        for (var i=0; i<oldScript.attributes.length; i++){
+          var a = oldScript.attributes[i];
+          s.setAttribute(a.name, a.value);
+        }
+        s.text = oldScript.text || '';
+        oldScript.parentNode.replaceChild(s, oldScript);
+      });
+    })();
+  </script>
 </section>
 
 {% schema %}
