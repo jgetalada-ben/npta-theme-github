@@ -99,6 +99,98 @@
         "scroll_direction": "ltr"
       }
     },
+    "media_offer_cta_NBfj78": {
+      "type": "media-offer-cta",
+      "blocks": {
+        "bullet_WNmaaf": {
+          "type": "bullet",
+          "settings": {
+            "text": "Certified Personal Trainer Course",
+            "accent": ""
+          }
+        },
+        "bullet_6ecH3c": {
+          "type": "bullet",
+          "settings": {
+            "text": "Certified Personal Trainer Course",
+            "accent": ""
+          }
+        },
+        "bullet_aJzQ6j": {
+          "type": "bullet",
+          "settings": {
+            "text": "Certified Personal Trainer Course",
+            "accent": ""
+          }
+        }
+      },
+      "block_order": [
+        "bullet_WNmaaf",
+        "bullet_6ecH3c",
+        "bullet_aJzQ6j"
+      ],
+      "name": "Media offer CTA",
+      "settings": {
+        "layout_desktop": "media_left",
+        "layout_mobile": "content_first",
+        "max_width": "1200px",
+        "bg": "#0F7C82",
+        "pad_top": 48,
+        "pad_right": 24,
+        "pad_bottom": 48,
+        "pad_left": 24,
+        "gap": 40,
+        "top_title": "APPLIED FITNESS™: LEARN HOW TO BE A TRAINER",
+        "top_title_size": "clamp(20px, 2.2vw, 30px)",
+        "top_title_color": "#FFFFFF",
+        "top_sub": "FEBRUARY OFFER - ENROLL NOW & SAVE $700",
+        "top_sub_size": "clamp(12px, 1.2vw, 16px)",
+        "top_sub_color": "#B9F85A",
+        "media_type": "video",
+        "video_autoplay": true,
+        "video_loop": true,
+        "video_muted": true,
+        "video_controls": false,
+        "embed_url": "",
+        "media_aspect": "portrait",
+        "media_alt": "Offer media",
+        "media_caption": "",
+        "media_caption_bg": "rgba(0,0,0,0.45)",
+        "media_caption_color": "#FFFFFF",
+        "media_caption_size": "12px",
+        "media_desc": "",
+        "media_desc_color": "#FFFFFF",
+        "media_desc_size": "12px",
+        "content_title": "WHAT’S INCLUDED",
+        "content_title_size": "clamp(16px, 1.8vw, 22px)",
+        "content_title_color": "#FFFFFF",
+        "bullet_size": "clamp(13px, 1.2vw, 16px)",
+        "bullet_color": "#FFFFFF",
+        "bullet_accent_color": "#B9F85A",
+        "bullet_icon_color": "#B9F85A",
+        "show_price": true,
+        "product": "",
+        "price_text": "$1,699 CAD",
+        "compare_text": "$2,399 CAD",
+        "price_color": "#B9F85A",
+        "price_size": "clamp(16px, 1.8vw, 22px)",
+        "compare_color": "rgba(255,255,255,0.7)",
+        "compare_size": "clamp(12px, 1.2vw, 16px)",
+        "btn1_label": "ENROLL NOW",
+        "btn1_link": "",
+        "btn1_bg": "#B9F85A",
+        "btn1_color": "#0B0B0B",
+        "btn1_size": "14px",
+        "btn1_radius": 10,
+        "btn2_label": "TALK TO ADVISOR",
+        "btn2_link": "",
+        "btn2_bg": "transparent",
+        "btn2_color": "#FFFFFF",
+        "btn2_border": "#FFFFFF",
+        "btn2_size": "14px",
+        "btn2_radius": 10
+      }
+    },
     "trending_feature_row_rL3tYY": {
       "type": "trending-feature-row",
       "blocks": {
@@ -202,6 +294,7 @@
     "main",
     "top_banner_v2_JwFCpW",
     "section_logo_carousel_Uae8xt",
+    "media_offer_cta_NBfj78",
     "trending_feature_row_rL3tYY",
     "section_text_image_U6jhxq"
   ]
