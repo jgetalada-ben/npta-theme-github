@@ -207,7 +207,18 @@
     </div>
   </div>
 
-  {% stylesheet %}
+{% stylesheet %}
+#shopify-section-{{ section.id }}{
+  background: var(--cta-bg) !important;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+#shopify-section-{{ section.id }} > #OfferCTA-{{ section.id }}{
+  background: var(--cta-bg) !important;
+}
+
   #OfferCTA-{{ sid }}{
     background: var(--cta-bg);
     padding: var(--cta-pt) var(--cta-pr) var(--cta-pb) var(--cta-pl);
