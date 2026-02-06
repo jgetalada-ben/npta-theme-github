@@ -141,7 +141,7 @@
         "pad_left": 24,
         "gap": 40,
         "top_title": "APPLIED FITNESS™: LEARN HOW TO BE A TRAINER",
-        "top_title_size": "clamp(20px, 2.2vw, 30px)",
+        "top_title_size": "clamp(20px, 2.2vw, 40px)",
         "top_title_color": "#ffffff",
         "top_sub": "FEBRUARY OFFER - ENROLL NOW & SAVE $700",
         "top_sub_size": "clamp(12px, 1.2vw, 16px)",
