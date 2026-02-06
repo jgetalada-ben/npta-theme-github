@@ -522,22 +522,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         var pdfUrl = localStorage.getItem('pendingPdfUrl');
         if (!pdfUrl) return;
 
-        // Optional: clean up so refresh doesn't re-download
         localStorage.removeItem('pendingPdfUrl');
 
-        // Try to force download
         var a = document.createElement('a');
         a.href = pdfUrl;
-        a.download = ''; // let browser infer filename
+        a.download = '';
         a.rel = 'noopener';
         document.body.appendChild(a);
         a.click();
         a.remove();
 
-        // Fallback (some browsers ignore download for cross-origin)
         setTimeout(function () {
-          // If it didn't download, at least open it
-          // window.location.href = pdfUrl;
           window.open(pdfUrl, '_blank', 'noopener'); 
         }, 800);
       })();
