@@ -109,7 +109,12 @@
             "product": "career-kickstarter-bundle-cpt-cnc-ces",
             "eyebrow": "",
             "title": "Career Kickstarter bundle | cpt cnc ces",
-            "title_link": ""
+            "title_link": "",
+            "info_position": "relative",
+            "info_bottom": "0px",
+            "info_top": "",
+            "info_left": "",
+            "info_right": ""
           }
         },
         "card_jE4Twa": {
@@ -119,7 +124,12 @@
             "product": "career-kickstarter-plus-cpt-ces-cnc-cpr",
             "eyebrow": "",
             "title": "Career Kickstarter bundle Plus| cpt cnc ces CPR",
-            "title_link": ""
+            "title_link": "",
+            "info_position": "relative",
+            "info_bottom": "0px",
+            "info_top": "",
+            "info_left": "",
+            "info_right": ""
           }
         }
       },
@@ -129,9 +139,8 @@
       ],
       "custom_css": [
         ".trending-card__title {margin: 0;}",
-        ".trending-card__title-text {color: #fff;}",
         ".trending-card {align-items: start; position: relative;}",
-        ".trending-card__info {text-align: center; padding: 10px; width: 70%; position: relative; bottom: 0;}",
+        ".trending-card__info {text-align: center; padding: 10px; width: 70%; position: relative;}",
         "@media screen and (max-width: 749px) {.trending-card__info {width: 70%; }}"
       ],
       "name": "Trending feature row",
@@ -148,7 +157,16 @@
         "gap": 32,
         "card_bg": "#0f828c",
         "eyebrow_size": "11px",
-        "card_title_size": "clamp(16px,1.5vw,20px)"
+        "eyebrow_color": "#ffffff",
+        "card_title_size": "clamp(16px,1.5vw,20px)",
+        "card_title_color": "#ffffff",
+        "info_align": "left",
+        "prices_align": "left",
+        "price_bg": "#b9f85a",
+        "price_color": "#000000",
+        "price_font_size": "clamp(18px, 2vw, 26px)",
+        "compare_color": "#00000099",
+        "compare_font_size": "clamp(18px, 2vw, 26px)"
       }
     },
     "section_text_image_U6jhxq": {
