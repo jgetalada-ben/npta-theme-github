@@ -118,6 +118,10 @@
           {%- endif -%}
 
           {%- assign info_position_mode = block.settings.info_position | default: 'relative' -%}
+          {%- assign place_info_in_media = false -%}
+          {%- if info_position_mode == 'absolute' and block.settings.image != blank -%}
+            {%- assign place_info_in_media = true -%}
+          {%- endif -%}
           {%- assign info_top = block.settings.info_top | strip -%}
           {%- assign info_right = block.settings.info_right | strip -%}
           {%- assign info_bottom = block.settings.info_bottom | default: '0px' | strip -%}
@@ -129,6 +133,35 @@
             {{ block.shopify_attributes }}
           >
             <div class="trending-card">
+              {%- capture info_markup -%}
+                <div
+                  class="trending-card__info"
+                  style="
+                    {% if place_info_in_media %}
+                      position: absolute;
+                      bottom: {{ info_bottom }};
+                      {% if info_top != blank %}top: {{ info_top }};{% endif %}
+                      {% if info_right != blank %}right: {{ info_right }};{% endif %}
+                      {% if info_left != blank %}left: {{ info_left }};{% endif %}
+                    {% endif %}
+                  "
+                >
+                  {% if block.settings.eyebrow != blank %}
+                    <p class="trending-card__eyebrow">{{ block.settings.eyebrow }}</p>
+                  {% endif %}
+
+                  {% if card_title != blank %}
+                    <h3 class="trending-card__title">
+                      {% if has_title_link %}
+                        <a class="trending-card__title-link" href="{{ card_link }}">{{ card_title }}</a>
+                      {% else %}
+                        <span class="trending-card__title-text">{{ card_title }}</span>
+                      {% endif %}
+                    </h3>
+                  {% endif %}
+                </div>
+              {%- endcapture -%}
+
               {% if block.settings.image != blank %}
                 <div class="trending-card__image-wrapper">
                   {{
@@ -140,39 +173,16 @@
                       widths: '300, 450, 600, 900, 1200',
                       sizes: '(min-width: 990px) 25vw, 80vw'
                   }}
+
+                  {% if place_info_in_media %}
+                    {{ info_markup }}
+                  {% endif %}
                 </div>
               {% endif %}
 
-              <div
-                class="trending-card__info"
-                style="
-                  {% if info_position_mode == 'absolute' %}
-                    position: absolute;
-                    bottom: {{ info_bottom }};
-                    {% if info_top != blank %}top: {{ info_top }};{% endif %}
-                    {% if info_right != blank %}right: {{ info_right }};{% endif %}
-                    {% if info_left != blank %}left: {{ info_left }};{% endif %}
-                  {% endif %}
-                "
-              >
-                {% if block.settings.eyebrow != blank %}
-                  <p class="trending-card__eyebrow">
-                    {{ block.settings.eyebrow }}
-                  </p>
-                {% endif %}
-
-                {% if card_title != blank %}
-                  <h3 class="trending-card__title">
-                    {% if has_title_link %}
-                      <a class="trending-card__title-link" href="{{ card_link }}">
-                        {{ card_title }}
-                      </a>
-                    {% else %}
-                      <span class="trending-card__title-text">{{ card_title }}</span>
-                    {% endif %}
-                  </h3>
-                {% endif %}
-              </div>
+              {% unless place_info_in_media %}
+                {{ info_markup }}
+              {% endunless %}
 
               {% if p != blank and v != blank %}
                 <div class="trending-card__prices" aria-label="Product price">
@@ -270,6 +280,7 @@
   .trending-card__image-wrapper {
     width: 100%;
     overflow: visible;
+    position: relative; 
   }
   .trending-card__image {
     width: 100%;
