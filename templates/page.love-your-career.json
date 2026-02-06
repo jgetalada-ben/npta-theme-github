@@ -131,7 +131,7 @@
         ".trending-card__title {margin: 0;}",
         ".trending-card__title-text {color: #fff;}",
         ".trending-card {align-items: start; position: relative;}",
-        ".trending-card__info {text-align: center; padding: 10px; width: 70%; position: absolute; bottom: 0;}",
+        ".trending-card__info {text-align: center; padding: 10px; width: 70%; position: relative; bottom: 0;}",
         "@media screen and (max-width: 749px) {.trending-card__info {width: 70%; }}"
       ],
       "name": "Trending feature row",
