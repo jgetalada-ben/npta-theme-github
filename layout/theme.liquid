@@ -515,26 +515,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         var params = new URLSearchParams(window.location.search);
         if (params.get('download') !== '1') return;
 
-        // Prevent repeat downloads
-        if (localStorage.getItem('pdfDownloaded') === '1') return;
-        localStorage.setItem('pdfDownloaded', '1');
+        if (sessionStorage.getItem('pdfDownloaded') === '1') return;
+        sessionStorage.setItem('pdfDownloaded', '1');
 
-        var pdfUrl = localStorage.getItem('pendingPdfUrl');
+        var pdfUrl = sessionStorage.getItem('pendingPdfUrl');
         if (!pdfUrl) return;
 
-        localStorage.removeItem('pendingPdfUrl');
-
-        var a = document.createElement('a');
-        a.href = pdfUrl;
-        a.download = '';
-        a.rel = 'noopener';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
+        sessionStorage.removeItem('pendingPdfUrl');
 
         setTimeout(function () {
-          window.open(pdfUrl, '_blank', 'noopener'); 
-        }, 800);
+          window.location.href = pdfUrl;
+        }, 300);
       })();
     </script>
   {% endif %}
