@@ -124,7 +124,8 @@
         "#section-id-contact-us {margin-top: -30px;}",
         ".form-wrapper1 {height: auto;}",
         ".section--steps-form {padding-bottom: 0px;}",
-        ".contact-wrapper ul{margin-bottom: 0;}"
+        ".contact-wrapper ul {margin-bottom: 0;}",
+        "@media only screen and (min-width: 981px) {.section--steps-form-container {height: 500px; }}"
       ],
       "settings": {
         "section_id": "section-id-contact-us",
