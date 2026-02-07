@@ -123,7 +123,8 @@
       "custom_css": [
         "#section-id-contact-us {margin-top: -30px;}",
         ".form-wrapper1 {height: auto;}",
-        ".section--steps-form {padding-bottom: 0px;}"
+        ".section--steps-form {padding-bottom: 0px;}",
+        ".contact-wrapper ul{margin-bottom: 0;}"
       ],
       "settings": {
         "section_id": "section-id-contact-us",
