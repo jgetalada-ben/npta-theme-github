@@ -173,6 +173,9 @@
         "blurb_cewnDX",
         "blurb2_mtPUDE"
       ],
+      "custom_css": [
+        "@media only screen and (max-width: 980px) {.section--blurb-content {padding-top: 0; }}"
+      ],
       "name": "Contact US Blurb",
       "settings": {
         "title": "Mentorship Call with Jesse Benson: Real Support. Real Growth.",
