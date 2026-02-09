@@ -51,7 +51,8 @@
     "video_v2_iHaPQP": {
       "type": "video-v2",
       "custom_css": [
-        ".vid2__title {letter-spacing: 2px;}"
+        ".vid2__title {letter-spacing: 2px;}",
+        ".content-left {align-content: end;}"
       ],
       "name": "Video v2",
       "settings": {
