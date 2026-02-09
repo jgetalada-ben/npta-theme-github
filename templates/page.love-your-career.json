@@ -201,7 +201,7 @@
         "video_autoplay": true,
         "video_loop": true,
         "video_muted": false,
-        "video_controls": false,
+        "video_controls": true,
         "embed_url": "",
         "media_aspect": "portrait",
         "media_alt": "Offer media",
