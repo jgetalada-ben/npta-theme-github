@@ -17,37 +17,6 @@
         "padding_bottom": 28
       }
     },
-    "top_banner_v2_JwFCpW": {
-      "type": "top-banner-v2",
-      "disabled": true,
-      "name": "Top Banner V2",
-      "settings": {
-        "image": "shopify://shop_images/love-your-career.png",
-        "image_alt": "{{ page.title }}",
-        "mobile_image_alt": "{{ page.title }}",
-        "desktop_height": "70vh",
-        "mobile_height": "60vh",
-        "mobile_object_fit": "cover",
-        "subtitle": "",
-        "title": "Train With a Coach.",
-        "description": "<p>This February, go beyond online study. Get hands-on training, real coaching experience, and a guaranteed job pathway with NPTA™.</p>",
-        "v_align": "flex-end",
-        "h_align": "flex-start",
-        "text_align": "left",
-        "title_color": "#ffffff",
-        "title_size": "clamp(32px,4vw,56px)",
-        "subtitle_color": "#ffffff",
-        "subtitle_size": "clamp(16px,1.8vw,22px)",
-        "desc_color": "#ffffff",
-        "desc_size": "clamp(14px,1.4vw,18px)",
-        "button_label": "Enroll now",
-        "button_link": "#",
-        "button_new_tab": false,
-        "button_bg": "#c8ff63",
-        "button_color": "#01241e",
-        "button_font_size": "16px"
-      }
-    },
     "video_v2_iHaPQP": {
       "type": "video-v2",
       "custom_css": [
@@ -83,10 +52,10 @@
         "desc_size": "clamp(14px,1.4vw,18px)",
         "desc_color": "#ffffff",
         "align": "left",
-        "overlay_darkness": 40,
+        "overlay_darkness": 30,
         "show_btn1": true,
         "btns_margin_top": "16px",
-        "btn1_label": "Enroll now",
+        "btn1_label": "ENROLL NOW",
         "btn1_link": "shopify://collections/all-products",
         "btn1_bg": "#c1ff72",
         "btn1_txt": "#0b0b0b",
@@ -343,7 +312,6 @@
   },
   "order": [
     "main",
-    "top_banner_v2_JwFCpW",
     "video_v2_iHaPQP",
     "section_logo_carousel_Uae8xt",
     "media_offer_cta_NBfj78",
