@@ -132,7 +132,7 @@
           "type": "bullet",
           "settings": {
             "text": "10 × 30-Minute Personal Training Coaching Sessions with NPTA Coaches & Educators",
-            "accent": "(Available Online across Canada and In-Person in select locations.)"
+            "accent": "(Available Online across Canada and In - Person in select locations.)"
           }
         },
         "bullet_aJzQ6j": {
@@ -187,7 +187,7 @@
         "content_title": "WHAT’S INCLUDED",
         "content_title_size": "clamp(16px, 3vw, 32px)",
         "content_title_color": "#ffffff",
-        "bullet_size": "clamp(13px, 2.1vw, 26px)",
+        "bullet_size": "clamp(13px, 2vw, 24px)",
         "bullet_color": "#ffffff",
         "bullet_accent_color": "#b9f85a",
         "bullet_icon_color": "#0e7881",
