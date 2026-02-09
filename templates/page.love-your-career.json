@@ -149,7 +149,9 @@
         "bullet_aJzQ6j"
       ],
       "custom_css": [
-        ".cta2__check {border-radius: 50px; padding: 4px 3px; background: #c1ff72;}"
+        ".cta2__check {border-radius: 50px; padding: 4px 3px; background: #c1ff72;}",
+        ".cta2__buttons {margin-left: 6%;}",
+        "@media (max-width: 749px){.cta2__buttons {margin-left: 0;}}"
       ],
       "name": "Media offer CTA",
       "settings": {
