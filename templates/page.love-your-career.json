@@ -148,6 +148,9 @@
         "bullet_6ecH3c",
         "bullet_aJzQ6j"
       ],
+      "custom_css": [
+        ".cta2__check {border-radius: 50px; padding: 4px 3px; background: #c1ff72;}"
+      ],
       "name": "Media offer CTA",
       "settings": {
         "layout_desktop": "media_left",
@@ -187,7 +190,7 @@
         "bullet_size": "clamp(13px, 2.1vw, 26px)",
         "bullet_color": "#ffffff",
         "bullet_accent_color": "#b9f85a",
-        "bullet_icon_color": "#b9f85a",
+        "bullet_icon_color": "#0e7881",
         "show_price": true,
         "product": "",
         "price_text": "$1,699 CAD",
