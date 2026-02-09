@@ -50,6 +50,9 @@
     },
     "video_v2_iHaPQP": {
       "type": "video-v2",
+      "custom_css": [
+        ".vid2__title {letter-spacing: 2px;}"
+      ],
       "name": "Video v2",
       "settings": {
         "media_type": "video",
