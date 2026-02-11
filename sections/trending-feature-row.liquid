@@ -404,28 +404,16 @@
   }
   /* Entrance animation (optional) */
   #TrendingRow-{{ section.id }}.tr-anim .trending-row__header,
-  #TrendingRow-{{ section.id }}.tr-anim .trending-row__title,
-  #TrendingRow-{{ section.id }}.tr-anim .trending-card__info,
-  #TrendingRow-{{ section.id }}.tr-anim .trending-card__prices,
-  #TrendingRow-{{ section.id }}.tr-anim .trending-card__price,
-  #TrendingRow-{{ section.id }}.tr-anim .trending-card__compare{
+  #TrendingRow-{{ section.id }}.tr-anim .trending-row__item{
     opacity: 0;
-    transform: translate3d(0, 22px, 0);
-
-    /* slower */
+    transform: translate3d(0, 16px, 0);
     transition:
-      opacity 950ms ease,
-      transform 950ms ease;
-
+      opacity 600ms ease,
+      transform 600ms ease;
     will-change: opacity, transform;
   }
-
   #TrendingRow-{{ section.id }}.tr-anim.is-anim-in .trending-row__header,
-  #TrendingRow-{{ section.id }}.tr-anim.is-anim-in .trending-row__title,
-  #TrendingRow-{{ section.id }}.tr-anim.is-anim-in .trending-card__info,
-  #TrendingRow-{{ section.id }}.tr-anim.is-anim-in .trending-card__prices,
-  #TrendingRow-{{ section.id }}.tr-anim.is-anim-in .trending-card__price,
-  #TrendingRow-{{ section.id }}.tr-anim.is-anim-in .trending-card__compare{
+  #TrendingRow-{{ section.id }}.tr-anim.is-anim-in .trending-row__item{
     opacity: 1;
     transform: translate3d(0, 0, 0);
   }
@@ -433,11 +421,7 @@
   /* Respect reduced motion */
   @media (prefers-reduced-motion: reduce){
     #TrendingRow-{{ section.id }}.tr-anim .trending-row__header,
-    #TrendingRow-{{ section.id }}.tr-anim .trending-row__title,
-    #TrendingRow-{{ section.id }}.tr-anim .trending-card__info,
-    #TrendingRow-{{ section.id }}.tr-anim .trending-card__prices,
-    #TrendingRow-{{ section.id }}.tr-anim .trending-card__price,
-    #TrendingRow-{{ section.id }}.tr-anim .trending-card__compare{
+    #TrendingRow-{{ section.id }}.tr-anim .trending-row__item{
       transition: none;
       transform: none;
       opacity: 1;
@@ -465,7 +449,6 @@
       });
     </script>
   {% endif %}
-  
   {% if section.settings.enable_entrance_animation %}
     <script>
       (function () {
@@ -473,39 +456,24 @@
         if (!root) return;
         if (root.getAttribute('data-tr-anim') !== '1') return;
 
+        // If reduced motion, skip
         if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
           root.classList.add('is-anim-in');
           return;
         }
 
         var header = root.querySelector('.trending-row__header');
-        var title  = root.querySelector('.trending-row__title');
+        var items = root.querySelectorAll('.trending-row__item');
 
-        var infos  = root.querySelectorAll('.trending-card__info');
-        var prices = root.querySelectorAll('.trending-card__prices');
-        var pricePills = root.querySelectorAll('.trending-card__price');
-        var compares   = root.querySelectorAll('.trending-card__compare');
-
-        // stagger timing (slower + nicer)
+        // Stagger (header first, then cards)
         var delay = 0;
-
-        function setDelay(el, d){
-          if (!el) return;
-          el.style.transitionDelay = d + 'ms';
+        if (header) {
+          header.style.transitionDelay = delay + 'ms';
+          delay += 120;
         }
-        function setDelayList(list, start, step){
-          list.forEach(function(el, i){
-            el.style.transitionDelay = (start + i * step) + 'ms';
-          });
-        }
-
-        setDelay(header, delay); delay += 160;
-        setDelay(title,  delay); delay += 160;
-
-        setDelayList(infos,  delay, 140);
-        setDelayList(prices, delay + 80, 140);
-        setDelayList(pricePills, delay + 120, 140);
-        setDelayList(compares,   delay + 160, 140);
+        items.forEach(function (el, idx) {
+          el.style.transitionDelay = (delay + idx * 90) + 'ms';
+        });
 
         var io = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
