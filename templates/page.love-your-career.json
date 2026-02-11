@@ -19,6 +19,17 @@
     },
     "video_v2_iHaPQP": {
       "type": "video-v2",
+      "blocks": {
+        "rotator_item_nNU3C7": {
+          "type": "rotator_item",
+          "settings": {
+            "text": "LOVE YOUR CAREER."
+          }
+        }
+      },
+      "block_order": [
+        "rotator_item_nNU3C7"
+      ],
       "custom_css": [
         ".vid2__title {letter-spacing: 2px;}",
         ".content-left {align-content: end;}"
@@ -63,7 +74,10 @@
         "btn2_label": "Learn more",
         "btn2_link": "",
         "btn2_bg": "#ffffff",
-        "btn2_txt": "#0b0b0b"
+        "btn2_txt": "#0b0b0b",
+        "enable_title_rotator": true,
+        "rotator_interval": 2,
+        "rotator_stagger_ms": 38
       }
     },
     "section_logo_carousel_Uae8xt": {
