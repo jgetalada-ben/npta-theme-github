@@ -456,7 +456,6 @@
         if (!root) return;
         if (root.getAttribute('data-tr-anim') !== '1') return;
 
-        // If reduced motion, skip
         if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
           root.classList.add('is-anim-in');
           return;
@@ -465,7 +464,6 @@
         var header = root.querySelector('.trending-row__header');
         var items = root.querySelectorAll('.trending-row__item');
 
-        // Stagger (header first, then cards)
         var delay = 0;
         if (header) {
           header.style.transitionDelay = delay + 'ms';
@@ -479,7 +477,7 @@
           entries.forEach(function (entry) {
             if (!entry.isIntersecting) return;
             root.classList.add('is-anim-in');
-            io.disconnect(); // run once
+            io.disconnect();
           });
         }, { threshold: 0.18 });
 
