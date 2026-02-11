@@ -20,6 +20,18 @@
     "video_v2_iHaPQP": {
       "type": "video-v2",
       "blocks": {
+        "rotator_item_j8dHN7": {
+          "type": "rotator_item",
+          "settings": {
+            "text": "YOUR NEXT TITLE"
+          }
+        },
+        "rotator_item_GUtJ9x": {
+          "type": "rotator_item",
+          "settings": {
+            "text": "Train With a Coach."
+          }
+        },
         "rotator_item_nNU3C7": {
           "type": "rotator_item",
           "settings": {
@@ -28,6 +40,8 @@
         }
       },
       "block_order": [
+        "rotator_item_j8dHN7",
+        "rotator_item_GUtJ9x",
         "rotator_item_nNU3C7"
       ],
       "custom_css": [
