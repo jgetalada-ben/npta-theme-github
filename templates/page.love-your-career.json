@@ -262,6 +262,7 @@
       ],
       "name": "Trending feature row",
       "settings": {
+        "enable_entrance_animation": true,
         "heading": "All Career Kickstarter Bundles — 25% OFF",
         "subheading": "",
         "max_width": "1200px",
