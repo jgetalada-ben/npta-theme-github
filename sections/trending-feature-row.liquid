@@ -37,7 +37,8 @@
 
 <section
   id="TrendingRow-{{ section.id }}"
-  class="trending-row"
+  class="trending-row{% if section.settings.enable_entrance_animation %} tr-anim{% endif %}"
+  data-tr-anim="{% if section.settings.enable_entrance_animation %}1{% else %}0{% endif %}"
   style="
     --pt: {{ section.settings.pad_top | default: 48 }}px;
     --pr: {{ section.settings.pad_right | default: 24 }}px;
@@ -401,6 +402,31 @@
       gap: 18px;
     }
   }
+  /* Entrance animation (optional) */
+  #TrendingRow-{{ section.id }}.tr-anim .trending-row__header,
+  #TrendingRow-{{ section.id }}.tr-anim .trending-row__item{
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+    transition:
+      opacity 600ms ease,
+      transform 600ms ease;
+    will-change: opacity, transform;
+  }
+  #TrendingRow-{{ section.id }}.tr-anim.is-anim-in .trending-row__header,
+  #TrendingRow-{{ section.id }}.tr-anim.is-anim-in .trending-row__item{
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    #TrendingRow-{{ section.id }}.tr-anim .trending-row__header,
+    #TrendingRow-{{ section.id }}.tr-anim .trending-row__item{
+      transition: none;
+      transform: none;
+      opacity: 1;
+    }
+  }
   {% endstylesheet %}
 
   {% if show_mobile_slider %}
@@ -423,6 +449,44 @@
       });
     </script>
   {% endif %}
+  {% if section.settings.enable_entrance_animation %}
+    <script>
+      (function () {
+        var root = document.getElementById('TrendingRow-{{ section.id }}');
+        if (!root) return;
+        if (root.getAttribute('data-tr-anim') !== '1') return;
+
+        // If reduced motion, skip
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          root.classList.add('is-anim-in');
+          return;
+        }
+
+        var header = root.querySelector('.trending-row__header');
+        var items = root.querySelectorAll('.trending-row__item');
+
+        // Stagger (header first, then cards)
+        var delay = 0;
+        if (header) {
+          header.style.transitionDelay = delay + 'ms';
+          delay += 120;
+        }
+        items.forEach(function (el, idx) {
+          el.style.transitionDelay = (delay + idx * 90) + 'ms';
+        });
+
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            root.classList.add('is-anim-in');
+            io.disconnect(); // run once
+          });
+        }, { threshold: 0.18 });
+
+        io.observe(root);
+      })();
+    </script>
+  {% endif %}
 </section>
 
 {% schema %}
@@ -432,6 +496,8 @@
   "class": "section trending-feature-row",
   "max_blocks": 4,
   "settings": [
+    { "type": "header", "content": "Entrance animation" },
+    { "type": "checkbox", "id": "enable_entrance_animation", "label": "Enable entrance animation on scroll", "default": false },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Now trending" },
     { "type": "text", "id": "subheading", "label": "Subheading", "default": "Discover our most popular certifications" },
     { "type": "text", "id": "max_width", "label": "Max width (e.g. 1200px or 90%)", "default": "1200px" },
