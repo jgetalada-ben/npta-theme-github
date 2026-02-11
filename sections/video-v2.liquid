@@ -166,7 +166,41 @@
             {%- endif -%}
           {%- endif -%}
 
-          {%- if section.settings.title != blank -%}
+          {%- assign use_rotator = section.settings.enable_title_rotator | default: false -%}
+          {%- assign rotator_count = section.blocks | where: "type", "rotator_title" | size -%}
+
+          {%- if use_rotator and rotator_count > 0 -%}
+            <h2
+              class="vid2__title vid2__title-rotator"
+              data-vid2-rotator
+              style="
+                color: {{ section.settings.title_color }};
+                font-size: {{ section.settings.title_size | default: 'clamp(28px,5vw,72px)' }};
+                --rot-interval: {{ section.settings.rotator_interval | default: 3 }}s;
+                --rot-stagger: {{ section.settings.rotator_stagger_ms | default: 38 }}ms;
+              "
+              aria-label="{{ section.blocks | where: 'type', 'rotator_title' | first | map: 'settings' | first }}"
+            >
+              <span class="vid2__rotator-viewport" aria-hidden="true">
+                <span class="vid2__rotator-line" data-rot-line>
+                  {%- comment -%} JS will populate letters {%- endcomment -%}
+                </span>
+              </span>
+
+              <script type="application/json" data-rotator-titles>
+                [
+                  {%- assign first = true -%}
+                  {%- for block in section.blocks -%}
+                    {%- if block.type == 'rotator_title' and block.settings.text != blank -%}
+                      {%- unless first -%},{%- endunless -%}
+                      { "text": {{ block.settings.text | json }} }
+                      {%- assign first = false -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                ]
+              </script>
+            </h2>
+          {%- elsif section.settings.title != blank -%}
             <h2 class="vid2__title"
                 style="color: {{ section.settings.title_color }}; font-size: {{ section.settings.title_size | default: 'clamp(28px,5vw,72px)' }};">
               {{ section.settings.title | escape }}
@@ -317,6 +351,68 @@
 #vid2-{{ sid }} .content-center .vid2__icon-text{ justify-self: center; }
 #vid2-{{ sid }} .content-right .vid2__icon-text{ justify-self: end; }
 #vid2-{{ sid }} .vid2__icon-text-text { font-weight: bold; }
+/* ===== Animated title rotator ===== */
+#vid2-{{ sid }} .vid2__title-rotator{
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+#vid2-{{ sid }} .vid2__rotator-viewport{
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  max-width: 100%;
+}
+
+/* keep wrapping on mobile */
+#vid2-{{ sid }} .vid2__rotator-line{
+  display: inline-block;
+  white-space: normal; /* allow wrap */
+  word-break: break-word;
+}
+
+#vid2-{{ sid }} .vid2__rot-letter{
+  display: inline-block;
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+  will-change: transform, opacity;
+}
+
+/* OUT (letters go down one-by-one) */
+#vid2-{{ sid }} .vid2__rot-letter.is-out{
+  animation: vid2LetterOut 520ms ease forwards;
+  animation-delay: calc(var(--i, 0) * var(--rot-stagger, 38ms));
+}
+
+/* IN (letters go up one-by-one) */
+#vid2-{{ sid }} .vid2__rot-letter.is-in{
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  animation: vid2LetterIn 520ms ease forwards;
+  animation-delay: calc(var(--i, 0) * var(--rot-stagger, 38ms));
+}
+
+@keyframes vid2LetterOut{
+  0%   { opacity: 1; transform: translate3d(0, 0, 0); }
+  100% { opacity: 0; transform: translate3d(0, 22px, 0); }
+}
+
+@keyframes vid2LetterIn{
+  0%   { opacity: 0; transform: translate3d(0, 18px, 0); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  #vid2-{{ sid }} .vid2__rot-letter.is-out,
+  #vid2-{{ sid }} .vid2__rot-letter.is-in{
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 {% endstylesheet %}
 
 <script>
@@ -333,7 +429,6 @@
     var video = frame.querySelector('video.vid2__media');
     var iframe = frame.querySelector('iframe.vid2__embed');
 
-    // --- HTML5 video (Shopify-hosted): best effort ---
     if(video){
       var triedGestureBind = false;
 
@@ -356,7 +451,6 @@
         document.addEventListener('keydown', handler, {capture:true, once:true});
       }
 
-      // Try to start with audio
       try {
         video.muted = false;
         video.volume = 1;
@@ -365,17 +459,14 @@
       var p1 = video.play && video.play();
       if(p1 && p1.catch){
         p1.catch(function(){
-          // Blocked. Fallback to muted autoplay so video still plays.
           try { video.muted = true; } catch(e) {}
           var p2 = video.play && video.play();
           if(p2 && p2.catch) p2.catch(function(){});
 
-          // Then retry unmute on first gesture (no icon shown)
           bindFirstGestureRetry();
         });
       }
 
-      // Some browsers silently keep it muted; if so, retry after first gesture.
       setTimeout(function(){
         if(video && video.muted){
           bindFirstGestureRetry();
@@ -385,9 +476,6 @@
       return;
     }
 
-    // --- Iframe embeds (YouTube/Vimeo): limited control without showing UI ---
-    // If browser blocks unmuted autoplay, we cannot reliably force it on.
-    // Best-effort: if it loaded muted anyway, unmute on first user gesture by swapping to the unmuted URL.
     if(iframe){
       var srcUnmuted = iframe.getAttribute('data-src-unmuted');
       if(!srcUnmuted) return;
@@ -410,6 +498,157 @@
   document.addEventListener('shopify:section:load', function(evt){
     if(evt && evt.detail && evt.detail.sectionId === '{{ sid }}'){
       init(document.getElementById('vid2-{{ sid }}'));
+    }
+  });
+})();
+</script>
+<script>
+(function(){
+  function splitToLetters(text){
+    // keep spaces as non-breaking for stable layout
+    return Array.from(text).map(function(ch){
+      return ch === ' ' ? '\u00A0' : ch;
+    });
+  }
+
+  function renderLetters(lineEl, text, mode){
+    lineEl.innerHTML = '';
+    var chars = splitToLetters(text);
+
+    chars.forEach(function(ch, idx){
+      var span = document.createElement('span');
+      span.className = 'vid2__rot-letter ' + (mode || '');
+      span.style.setProperty('--i', idx);
+      span.textContent = ch;
+      lineEl.appendChild(span);
+    });
+  }
+
+  function animateOut(lineEl){
+    var letters = lineEl.querySelectorAll('.vid2__rot-letter');
+    letters.forEach(function(l){ l.classList.remove('is-in'); l.classList.add('is-out'); });
+  }
+
+  function animateIn(lineEl){
+    var letters = lineEl.querySelectorAll('.vid2__rot-letter');
+    letters.forEach(function(l){ l.classList.remove('is-out'); l.classList.add('is-in'); });
+  }
+
+  function initRotator(sectionEl){
+    if(!sectionEl) return;
+
+    var rot = sectionEl.querySelector('[data-vid2-rotator]');
+    if(!rot) return;
+
+    var dataTag = rot.querySelector('script[data-rotator-titles]');
+    var lineEl = rot.querySelector('[data-rot-line]');
+    if(!dataTag || !lineEl) return;
+
+    var titles = [];
+    try { titles = JSON.parse(dataTag.textContent || '[]'); } catch(e) { titles = []; }
+    titles = (titles || []).map(function(x){ return (x && x.text) ? String(x.text) : ''; }).filter(Boolean);
+
+    if(titles.length === 0) return;
+
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var intervalSec = 3;
+    try{
+      var cssInterval = getComputedStyle(rot).getPropertyValue('--rot-interval').trim();
+      if(cssInterval.endsWith('s')) intervalSec = parseFloat(cssInterval) || 3;
+    }catch(e){}
+
+    // timings
+    var letterDur = 520; // ms (matches CSS)
+    var staggerMs = 38;
+    try{
+      var cssStagger = getComputedStyle(rot).getPropertyValue('--rot-stagger').trim();
+      if(cssStagger.endsWith('ms')) staggerMs = parseFloat(cssStagger) || 38;
+    }catch(e){}
+
+    var maxLetters = Math.max.apply(null, titles.map(function(t){ return Array.from(t).length; }));
+    if(!isFinite(maxLetters) || maxLetters < 1) maxLetters = 1;
+
+    var outTotal = letterDur + (maxLetters * staggerMs);
+    var inTotal  = letterDur + (maxLetters * staggerMs);
+
+    var idx = 0;
+    renderLetters(lineEl, titles[idx], reduced ? '' : 'is-in');
+    if(!reduced) animateIn(lineEl);
+
+    // prevent multiple timers on theme editor reload
+    var timer = null;
+
+    function next(){
+      if(titles.length <= 1) return;
+
+      var nextIdx = (idx + 1) % titles.length;
+
+      if(reduced){
+        idx = nextIdx;
+        renderLetters(lineEl, titles[idx], '');
+        return;
+      }
+
+      // OUT
+      animateOut(lineEl);
+
+      // After OUT done, swap letters and IN
+      window.setTimeout(function(){
+        idx = nextIdx;
+        renderLetters(lineEl, titles[idx], 'is-in');
+        animateIn(lineEl);
+      }, outTotal);
+    }
+
+    function start(){
+      stop();
+      timer = window.setInterval(next, Math.max(1000, intervalSec * 1000));
+    }
+
+    function stop(){
+      if(timer) window.clearInterval(timer);
+      timer = null;
+    }
+
+    // start
+    start();
+
+    // pause when tab hidden
+    document.addEventListener('visibilitychange', function(){
+      if(document.hidden) stop(); else start();
+    });
+
+    // store on element so we can clean up on section reload
+    rot.__vid2Stop = stop;
+  }
+
+  function boot(){
+    var el = document.getElementById('vid2-{{ sid }}');
+    initRotator(el);
+  }
+
+  boot();
+
+  document.addEventListener('shopify:section:load', function(evt){
+    if(evt && evt.detail && evt.detail.sectionId === '{{ sid }}'){
+      // cleanup old if exists
+      var old = document.getElementById('vid2-{{ sid }}');
+      if(old){
+        var rot = old.querySelector('[data-vid2-rotator]');
+        if(rot && rot.__vid2Stop) rot.__vid2Stop();
+      }
+      boot();
+    }
+  });
+
+  document.addEventListener('shopify:section:unload', function(evt){
+    if(evt && evt.detail && evt.detail.sectionId === '{{ sid }}'){
+      var old = document.getElementById('vid2-{{ sid }}');
+      if(old){
+        var rot = old.querySelector('[data-vid2-rotator]');
+        if(rot && rot.__vid2Stop) rot.__vid2Stop();
+      }
     }
   });
 })();
@@ -520,7 +759,22 @@
     { "type": "text", "id": "btn2_label", "label": "Button 2 label", "default": "Learn more" },
     { "type": "url", "id": "btn2_link", "label": "Button 2 link" },
     { "type": "color", "id": "btn2_bg", "label": "Button 2 background", "default": "#FFFFFF" },
-    { "type": "color", "id": "btn2_txt", "label": "Button 2 text color", "default": "#0B0B0B" }
+    { "type": "color", "id": "btn2_txt", "label": "Button 2 text color", "default": "#0B0B0B" },
+
+    { "type": "header", "content": "Animated title rotator" },
+    { "type": "checkbox", "id": "enable_title_rotator", "label": "Enable animated title rotator", "default": false },
+    { "type": "range", "id": "rotator_interval", "label": "Change title every (seconds)", "min": 2, "max": 10, "step": 1, "unit": "s", "default": 3 },
+    { "type": "range", "id": "rotator_stagger_ms", "label": "Letter stagger speed (ms)", "min": 18, "max": 90, "step": 2, "unit": "ms", "default": 38 }
+  ],
+  "blocks": [
+    {
+      "type": "rotator_item",
+      "name": "Rotator title",
+      "limit": 5,
+      "settings": [
+        { "type": "text", "id": "text", "label": "Title text", "default": "YOUR NEXT TITLE" }
+      ]
+    }
   ],
   "presets": [{ "name": "Video v2" }]
 }
