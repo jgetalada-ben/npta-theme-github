@@ -151,7 +151,7 @@
       "custom_css": [
         ".cta2__check {border-radius: 50px; padding: 4px 3px; background: #c1ff72;}",
         ".cta2__buttons {margin-left: 6%;}",
-        "@media (max-width: 749px){.cta2__buttons {margin-left: 0;}}"
+        "@media (max-width: 749px) {.cta2__buttons {margin-left: 0; }}"
       ],
       "name": "Media offer CTA",
       "settings": {
@@ -222,7 +222,7 @@
         "card_FUJ97J": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/kickstarter2.png",
+            "image": "shopify://shop_images/image_2d4cb731-7b84-49b7-ace0-40ef614cf048.png",
             "product": "career-kickstarter-bundle-cpt-cnc-ces",
             "eyebrow": "",
             "title": "Career Kickstarter bundle | cpt cnc ces",
@@ -237,7 +237,7 @@
         "card_jE4Twa": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/kickstarter1.jpg",
+            "image": "shopify://shop_images/image_1_6350a10f-1ab6-4ad9-a9fd-f3065d166d18.png",
             "product": "career-kickstarter-plus-cpt-ces-cnc-cpr",
             "eyebrow": "",
             "title": "Career Kickstarter bundle Plus | cpt cnc ces CPR",
