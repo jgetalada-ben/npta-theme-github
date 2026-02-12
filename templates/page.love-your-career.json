@@ -50,8 +50,8 @@
         "enable_audio": false,
         "aspect_ratio": "21-9",
         "aspect_ratio_mobile": "1-1",
-        "height_mode": "ratio",
-        "vh_desktop": "70vh",
+        "height_mode": "vh",
+        "vh_desktop": "60vh",
         "vh_mobile": "62dvh",
         "show_icon_text": false,
         "icon_text": "NASM OFFICIAL CANADIAN PARTNER",
@@ -321,6 +321,8 @@
         "show_buttons": true,
         "primary_button_text": "TAKE THE QUIZ",
         "primary_button_link": "https://x641if1yhwv.typeform.com/to/AMGbLYgQ",
+        "primary_button_behavior": "typeform",
+        "primary_open_new_tab": false,
         "primary_button_color": "#0f828c",
         "layout": "content-left",
         "max_width": "1989px",
@@ -332,8 +334,12 @@
         "secondary_prompt_color": "#0e2a24",
         "secondary_button_text": "Book a Free Call",
         "secondary_button_link": "https://app.npta.ca/widget/bookings/jessica-npta-calendar",
+        "secondary_button_behavior": "modal",
+        "secondary_open_new_tab": true,
         "secondary_button_color": "#e0ded0",
-        "secondary_button_text_color": "#0b0b0b"
+        "secondary_button_text_color": "#0b0b0b",
+        "modal_max_width": "min(980px, 92vw)",
+        "modal_height": "min(80vh, 720px)"
       }
     }
   },
