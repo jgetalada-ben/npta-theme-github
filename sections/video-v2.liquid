@@ -628,7 +628,11 @@
     initRotator(el);
   }
 
-  boot();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
 
   document.addEventListener('shopify:section:load', function(evt){
     if(evt && evt.detail && evt.detail.sectionId === '{{ sid }}'){
