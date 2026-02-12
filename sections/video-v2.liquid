@@ -167,7 +167,7 @@
           {%- endif -%}
 
           {%- assign use_rotator = section.settings.enable_title_rotator | default: false -%}
-          {%- assign rotator_count = section.blocks | where: "type", "rotator_title" | size -%}
+          {%- assign rotator_count = section.blocks | where: "type", "rotator_item" | size -%}
 
           {%- if use_rotator and rotator_count > 0 -%}
             <h2
