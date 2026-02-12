@@ -12,9 +12,26 @@
     { "type": "image_picker", "id": "image", "label": "Select an image" },
 
     { "type": "checkbox", "id": "show_buttons", "label": "Show Button", "default": true },
+    { "type": "header", "content": "Primary button" },
     { "type": "text", "id": "primary_button_text", "label": "Primary Button Text", "default": "Button" },
     { "type": "url",  "id": "primary_button_link", "label": "Primary Button Link" },
-
+    {
+      "type": "select",
+      "id": "primary_button_behavior",
+      "label": "Primary button behavior",
+      "options": [
+        { "value": "link", "label": "Normal link" },
+        { "value": "typeform", "label": "Typeform popup" },
+        { "value": "modal", "label": "Popup (iframe modal)" }
+      ],
+      "default": "typeform"
+    },
+    {
+      "type": "checkbox",
+      "id": "primary_open_new_tab",
+      "label": "Open in new tab (only for Normal link)",
+      "default": false
+    },
     { "type": "color", "id": "primary_button_color", "label": "Primary button color", "default": "#C1FF72" },
 
     { "type": "header", "content": "Layout" },
@@ -38,8 +55,29 @@
 
     { "type": "text", "id": "secondary_button_text", "label": "Secondary Button Text", "default": "Book a Free Call" },
     { "type": "url",  "id": "secondary_button_link", "label": "Secondary Button Link" },
+
+    {
+      "type": "select",
+      "id": "secondary_button_behavior",
+      "label": "Secondary button behavior",
+      "options": [
+        { "value": "link", "label": "Normal link" },
+        { "value": "typeform", "label": "Typeform popup" },
+        { "value": "modal", "label": "Popup (iframe modal)" }
+      ],
+      "default": "modal"
+    },
+    {
+      "type": "checkbox",
+      "id": "secondary_open_new_tab",
+      "label": "Open in new tab (only for Normal link)",
+      "default": true
+    },
     { "type": "color", "id": "secondary_button_color", "label": "Secondary button background", "default": "#EFEFDF" },
-    { "type": "color", "id": "secondary_button_text_color", "label": "Secondary button text color", "default": "#0B0B0B" }
+    { "type": "color", "id": "secondary_button_text_color", "label": "Secondary button text color", "default": "#0B0B0B" },
+    { "type": "header", "content": "Popup modal (iframe)" },
+    { "type": "text", "id": "modal_max_width", "label": "Modal max width (CSS)", "default": "min(980px, 92vw)" },
+    { "type": "text", "id": "modal_height", "label": "Modal height (CSS)", "default": "min(80vh, 720px)" }
   ],
   "blocks": [
     {
@@ -65,7 +103,15 @@
   {% assign mw = mw | append: 'px' %}
 {%- endunless -%}
 
-<script src="https://embed.typeform.com/next/embed.js"></script>
+{%- assign needs_typeform = false -%}
+{%- if section.settings.primary_button_behavior == 'typeform' or section.settings.secondary_button_behavior == 'typeform' -%}
+  {%- assign needs_typeform = true -%}
+{%- endif -%}
+
+{% if needs_typeform %}
+  <script src="https://embed.typeform.com/next/embed.js"></script>
+{% endif %}
+
 
 <section
   id="{{ sid }}"
@@ -96,33 +142,102 @@
         </div>
 
         {% if section.settings.show_buttons %}
+          {%- assign p_link = section.settings.primary_button_link -%}
+          {%- assign p_behavior = section.settings.primary_button_behavior | default: 'link' -%}
+
+          {%- assign typeform_id_primary = '' -%}
+          {%- if p_link != blank and p_link contains 'typeform.com/to/' -%}
+            {%- assign typeform_id_primary = p_link | split: '/to/' | last | split: '?' | first | strip -%}
+          {%- endif -%}
+
           <div class="section--hero-buttons">
-            <a 
-            href="#"
-            class="btn button-yg btn--primary"
-            data-tf-popup="AMGbLYgQ"
-            data-tf-opacity="100"
-            data-tf-size="80"
-            data-tf-iframe-props="title=Typeform"
-            data-tf-medium="snippet"
-            >
-            <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
-            <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
-            </a>
+            {% if section.settings.primary_button_text != blank %}
+              {% if p_behavior == 'typeform' %}
+                <a
+                  href="#"
+                  class="btn button-yg btn--primary"
+                  data-tf-popup="{{ typeform_id_primary }}"
+                  data-tf-opacity="100"
+                  data-tf-size="80"
+                  data-tf-iframe-props="title=Typeform"
+                  data-tf-medium="snippet"
+                >
+                  <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+                  <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+                </a>
+
+              {% elsif p_behavior == 'modal' %}
+                <a
+                  href="{{ p_link | default: '#' }}"
+                  class="btn button-yg btn--primary js-ti-open-modal"
+                  data-ti-modal-url="{{ p_link }}"
+                >
+                  <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+                  <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+                </a>
+
+              {% else %}
+                <a
+                  href="{{ p_link | default: '#' }}"
+                  class="btn button-yg btn--primary"
+                  {% if section.settings.primary_open_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+                >
+                  <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+                  <span class="btn-label-down">{{ section.settings.primary_button_text }}</span>
+                </a>
+              {% endif %}
+            {% endif %}
           </div>
 
-
           <!-- Secondary prompt + button -->
+          {%- assign s_link = section.settings.secondary_button_link -%}
+          {%- assign s_behavior = section.settings.secondary_button_behavior | default: 'link' -%}
+
+          {%- assign typeform_id_secondary = '' -%}
+          {%- if s_link != blank and s_link contains 'typeform.com/to/' -%}
+            {%- assign typeform_id_secondary = s_link | split: '/to/' | last | split: '?' | first | strip -%}
+          {%- endif -%}
+
           <div class="section--secondary">
             {% if section.settings.secondary_prompt != blank %}
               <div class="secondary-prompt">{{ section.settings.secondary_prompt }}</div>
             {% endif %}
 
-            {% if section.settings.secondary_button_text != blank and section.settings.secondary_button_link != blank %}
-              <a href="{{ section.settings.secondary_button_link }}" class="btn button-yg btn--secondary">
-                <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
-                <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
-              </a>
+            {% if section.settings.secondary_button_text != blank and s_link != blank %}
+              {% if s_behavior == 'typeform' %}
+                <a
+                  href="#"
+                  class="btn button-yg btn--secondary"
+                  data-tf-popup="{{ typeform_id_secondary }}"
+                  data-tf-opacity="100"
+                  data-tf-size="80"
+                  data-tf-iframe-props="title=Typeform"
+                  data-tf-medium="snippet"
+                >
+                  <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
+                  <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
+                </a>
+
+              {% elsif s_behavior == 'modal' %}
+                <a
+                  href="{{ s_link }}"
+                  class="btn button-yg btn--secondary js-ti-open-modal"
+                  data-ti-modal-url="{{ s_link }}"
+                >
+                  <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
+                  <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
+                </a>
+
+              {% else %}
+                <a
+                  href="{{ s_link }}"
+                  class="btn button-yg btn--secondary"
+                  {% if section.settings.secondary_open_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+                >
+                  <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
+                  <span class="btn-label-down">{{ section.settings.secondary_button_text }}</span>
+                </a>
+              {% endif %}
             {% endif %}
           </div>
         {% endif %}
@@ -137,6 +252,15 @@
           {% endif %}
         </div>
       </div>
+    </div>
+  </div>
+  {% comment %} Modal {% endcomment %}
+  <div class="ti-modal" id="ti-modal-{{ sid }}" hidden>
+    <div class="ti-modal__backdrop" data-ti-close></div>
+
+    <div class="ti-modal__panel" role="dialog" aria-modal="true" aria-label="Popup">
+      <button class="ti-modal__close" type="button" aria-label="Close" data-ti-close>×</button>
+      <iframe class="ti-modal__iframe" title="Popup content" loading="lazy"></iframe>
     </div>
   </div>
 </section>
@@ -394,6 +518,60 @@
     width: fit-content;
   }
 }
+#{{ sid }} .ti-modal[hidden]{ display:none; }
+
+#{{ sid }} .ti-modal{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+#{{ sid }} .ti-modal__backdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+}
+
+#{{ sid }} .ti-modal__panel{
+  position: relative;
+  width: {{ section.settings.modal_max_width | default: 'min(980px, 92vw)' }};
+  height: {{ section.settings.modal_height | default: 'min(80vh, 720px)' }};
+  margin: 6vh auto 0;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+
+#{{ sid }} .ti-modal__iframe{
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+#{{ sid }} .ti-modal__close{
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 0;
+  background: rgba(0,0,0,.6);
+  color: #fff;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (max-width: 980px){
+  #{{ sid }} .ti-modal__panel{
+    margin-top: 10vh;
+    height: min(82vh, 720px);
+  }
+}
 
 </style>
 
@@ -421,5 +599,51 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
-
 </script>
+
+<script>
+(function(){
+  var sectionRoot = document.getElementById('{{ sid }}');
+  if (!sectionRoot) return;
+
+  var modal = sectionRoot.querySelector('#ti-modal-{{ sid }}');
+  if (!modal) return;
+
+  var iframe = modal.querySelector('.ti-modal__iframe');
+
+  function openModal(url){
+    if (!url) return;
+    iframe.src = url;
+    modal.hidden = false;
+    document.documentElement.style.overflow = 'hidden';
+  }
+
+  function closeModal(){
+    modal.hidden = true;
+    iframe.src = '';
+    document.documentElement.style.overflow = '';
+  }
+
+  sectionRoot.addEventListener('click', function(e){
+    var opener = e.target.closest('.js-ti-open-modal');
+    if (opener){
+      e.preventDefault();
+      var url = opener.getAttribute('data-ti-modal-url') || opener.getAttribute('href');
+      openModal(url);
+      return;
+    }
+
+    if (e.target.closest('[data-ti-close]')){
+      e.preventDefault();
+      closeModal();
+      return;
+    }
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (modal.hidden) return;
+    if (e.key === 'Escape') closeModal();
+  });
+})();
+</script>
+
