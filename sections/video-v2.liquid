@@ -191,7 +191,7 @@
                 [
                   {%- assign first = true -%}
                   {%- for block in section.blocks -%}
-                    {%- if block.type == 'rotator_title' and block.settings.text != blank -%}
+                    {%- if block.type == 'rotator_item' and block.settings.text != blank -%}
                       {%- unless first -%},{%- endunless -%}
                       { "text": {{ block.settings.text | json }} }
                       {%- assign first = false -%}
