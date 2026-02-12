@@ -90,8 +90,8 @@
         "btn2_bg": "#ffffff",
         "btn2_txt": "#0b0b0b",
         "enable_title_rotator": true,
-        "rotator_interval": 2,
-        "rotator_stagger_ms": 38
+        "rotator_interval": 5,
+        "rotator_stagger_ms": 46
       }
     },
     "section_logo_carousel_Uae8xt": {
