@@ -179,7 +179,7 @@
                 --rot-interval: {{ section.settings.rotator_interval | default: 3 }}s;
                 --rot-stagger: {{ section.settings.rotator_stagger_ms | default: 38 }}ms;
               "
-              aria-label="{{ section.blocks | where: 'type', 'rotator_title' | first | map: 'settings' | first }}"
+              aria-label="Rotating title"
             >
               <span class="vid2__rotator-viewport" aria-hidden="true">
                 <span class="vid2__rotator-line" data-rot-line>
