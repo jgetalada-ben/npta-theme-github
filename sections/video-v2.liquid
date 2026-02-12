@@ -642,7 +642,11 @@
         var rot = old.querySelector('[data-vid2-rotator]');
         if(rot && rot.__vid2Stop) rot.__vid2Stop();
       }
-      boot();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', boot);
+      } else {
+        boot();
+      }
     }
   });
 
