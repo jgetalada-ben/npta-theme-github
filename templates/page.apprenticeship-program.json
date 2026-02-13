@@ -228,6 +228,7 @@
           "settings": {
             "button_label": "Register Now",
             "button_link": "https://app.npta.ca/widget/survey/sM15QBoTJbBVmC9vCifd",
+            "button_behavior": "popup",
             "button_style_secondary": false
           }
         }
