@@ -48,16 +48,6 @@
       "default": "CHOOSE MY PROGRAM"
     },
     {
-      "type": "select",
-      "id": "button_1_target",
-      "label": "Button 1 Open In",
-      "default": "_blank",
-      "options": [
-        { "value": "_self", "label": "Same tab" },
-        { "value": "_blank", "label": "New tab" }
-      ]
-    },
-    {
       "type": "url",
       "id": "button_2_link",
       "label": "Button 2 Link"
@@ -67,16 +57,6 @@
       "id": "button_2_text",
       "label": "Button 2 Text",
       "default": "TAKE THE QUIZ"
-    },
-    {
-      "type": "select",
-      "id": "button_2_target",
-      "label": "Button 2 Open In",
-      "default": "_blank",
-      "options": [
-        { "value": "_self", "label": "Same tab" },
-        { "value": "_blank", "label": "New tab" }
-      ]
     },
     {
       "type": "image_picker",
@@ -236,27 +216,17 @@
 
       <div class="section--hero-buttons">
         {% if section.settings.button_1_link != blank and section.settings.button_1_text != blank %}
-          <a
-            href="{{ section.settings.button_1_link }}"
-            class="btn button-yg"
-            target="{{ section.settings.button_1_target | default: '_blank' }}"
-            {% if section.settings.button_1_target == '_blank' %}rel="noopener noreferrer"{% endif %}
-          >
-            <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
-            <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
-          </a>
+        <a href="{{ section.settings.button_1_link }}" class="btn button-yg">
+          <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
+          <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
+        </a>
         {% endif %}
 
         {% if section.settings.button_2_link != blank and section.settings.button_2_text != blank %}
-          <a
-            href="{{ section.settings.button_2_link }}"
-            class="btn button-w"
-            target="{{ section.settings.button_2_target | default: '_blank' }}"
-            {% if section.settings.button_2_target == '_blank' %}rel="noopener noreferrer"{% endif %}
-          >
-            <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
-            <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
-          </a>
+        <a href="{{ section.settings.button_2_link }}" class="btn button-w">
+          <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
+          <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
+        </a>
         {% endif %}
       </div>
 
