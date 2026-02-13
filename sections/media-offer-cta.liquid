@@ -490,9 +490,13 @@
 </div>
 
 <style>
+  body.cta2-modal-open {
+    overflow: hidden;
+    height: 100vh;
+  }
   #cta2-modal-{{ sid }}.cta2-modal { position: fixed; inset: 0; z-index: 999999; display: none; }
   #cta2-modal-{{ sid }}.cta2-modal.is-open { display: block; }
-  #cta2-modal-{{ sid }} .cta2-modal__overlay { position: absolute; inset: 0; background: rgba(0,0,0,.65); }
+  #cta2-modal-{{ sid }} .cta2-modal__overlay { position: absolute; inset: 0; background: rgba(0,0,0,.85);backdrop-filter: blur(4px); }
   #cta2-modal-{{ sid }} .cta2-modal__dialog {
     position: relative;
     width: min(920px, calc(100% - 32px));
@@ -535,6 +539,7 @@
       iframe.src = url;
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('cta2-modal-open');
     }
 
     function closeModal(){
@@ -542,6 +547,7 @@
       modal.classList.remove('is-open');
       modal.setAttribute('aria-hidden', 'true');
       iframe.src = '';
+      document.body.classList.remove('cta2-modal-open');
     }
 
     if (modal){
