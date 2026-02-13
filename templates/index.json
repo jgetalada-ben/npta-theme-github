@@ -608,6 +608,18 @@
           "settings": {
             "image": "shopify://shop_images/kbstronger-logo.png"
           }
+        },
+        "logo_pXC4Dq": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/afaa-logo.png"
+          }
+        },
+        "logo_L7hV94": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/fitin_logo.png"
+          }
         }
       },
       "block_order": [
@@ -615,7 +627,9 @@
         "logo_daxrAW",
         "logo_tXtcJX",
         "logo_d8MRnj",
-        "logo_rmVXhc"
+        "logo_rmVXhc",
+        "logo_pXC4Dq",
+        "logo_L7hV94"
       ],
       "name": "Logo Carousel",
       "settings": {
