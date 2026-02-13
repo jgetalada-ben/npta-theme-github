@@ -48,6 +48,23 @@
       "default": "CHOOSE MY PROGRAM"
     },
     {
+      "type": "select",
+      "id": "button_1_behavior",
+      "label": "Button 1 behavior",
+      "default": "normal",
+      "options": [
+        { "value": "normal", "label": "Normal link" },
+        { "value": "typeform", "label": "Typeform popup" },
+        { "value": "iframe", "label": "Popup (iframe modal)" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "button_1_new_tab",
+      "label": "Open in new tab (only for Normal link)",
+      "default": false
+    },
+    {
       "type": "url",
       "id": "button_2_link",
       "label": "Button 2 Link"
@@ -57,6 +74,23 @@
       "id": "button_2_text",
       "label": "Button 2 Text",
       "default": "TAKE THE QUIZ"
+    },
+    {
+      "type": "select",
+      "id": "button_2_behavior",
+      "label": "Button 2 behavior",
+      "default": "normal",
+      "options": [
+        { "value": "normal", "label": "Normal link" },
+        { "value": "typeform", "label": "Typeform popup" },
+        { "value": "iframe", "label": "Popup (iframe modal)" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "button_2_new_tab",
+      "label": "Open in new tab (only for Normal link)",
+      "default": false
     },
     {
       "type": "image_picker",
@@ -214,20 +248,96 @@
         </div>
       {% endif %}
 
+      {%- assign modal_btn1_id = 'hb2-modal-' | append: section.id | append: '-btn1' -%}
+      {%- assign modal_btn2_id = 'hb2-modal-' | append: section.id | append: '-btn2' -%}
+
       <div class="section--hero-buttons">
         {% if section.settings.button_1_link != blank and section.settings.button_1_text != blank %}
-        <a href="{{ section.settings.button_1_link }}" class="btn button-yg">
-          <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
-          <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
-        </a>
+          {% case section.settings.button_1_behavior %}
+            {% when 'typeform' %}
+              <a
+                href="{{ section.settings.button_1_link }}"
+                class="btn button-yg hb2-typeform-trigger"
+                data-hb2-typeform="{{ section.settings.button_1_link }}"
+              >
+                <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
+                <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
+              </a>
+
+            {% when 'iframe' %}
+              <a
+                href="{{ section.settings.button_1_link }}"
+                class="btn button-yg hb2-iframe-trigger"
+                data-hb2-modal-open="{{ modal_btn1_id }}"
+                data-hb2-iframe-src="{{ section.settings.button_1_link }}"
+              >
+                <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
+                <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
+              </a>
+
+            {% else %}
+              <a
+                href="{{ section.settings.button_1_link }}"
+                class="btn button-yg"
+                {% if section.settings.button_1_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+              >
+                <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
+                <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
+              </a>
+          {% endcase %}
         {% endif %}
 
         {% if section.settings.button_2_link != blank and section.settings.button_2_text != blank %}
-        <a href="{{ section.settings.button_2_link }}" class="btn button-w">
-          <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
-          <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
-        </a>
+          {% case section.settings.button_2_behavior %}
+            {% when 'typeform' %}
+              <a
+                href="{{ section.settings.button_2_link }}"
+                class="btn button-w hb2-typeform-trigger"
+                data-hb2-typeform="{{ section.settings.button_2_link }}"
+              >
+                <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
+                <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
+              </a>
+
+            {% when 'iframe' %}
+              <a
+                href="{{ section.settings.button_2_link }}"
+                class="btn button-w hb2-iframe-trigger"
+                data-hb2-modal-open="{{ modal_btn2_id }}"
+                data-hb2-iframe-src="{{ section.settings.button_2_link }}"
+              >
+                <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
+                <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
+              </a>
+
+            {% else %}
+              <a
+                href="{{ section.settings.button_2_link }}"
+                class="btn button-w"
+                {% if section.settings.button_2_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+              >
+                <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
+                <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
+              </a>
+          {% endcase %}
         {% endif %}
+      </div>
+
+      {%- comment -%} IFRAME MODALS (scoped per section instance) {%- endcomment -%}
+      <div id="{{ modal_btn1_id }}" class="hb2-modal" aria-hidden="true">
+        <div class="hb2-modal__overlay" data-hb2-modal-close></div>
+        <div class="hb2-modal__panel" role="dialog" aria-modal="true">
+          <button type="button" class="hb2-modal__close" data-hb2-modal-close aria-label="Close">×</button>
+          <iframe class="hb2-modal__iframe" src="" loading="lazy" allow="payment *; autoplay *; fullscreen *" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+
+      <div id="{{ modal_btn2_id }}" class="hb2-modal" aria-hidden="true">
+        <div class="hb2-modal__overlay" data-hb2-modal-close></div>
+        <div class="hb2-modal__panel" role="dialog" aria-modal="true">
+          <button type="button" class="hb2-modal__close" data-hb2-modal-close aria-label="Close">×</button>
+          <iframe class="hb2-modal__iframe" src="" loading="lazy" allow="payment *; autoplay *; fullscreen *" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
       </div>
 
       {% if section.settings.award_text != blank or section.settings.award_sub_text != blank or section.settings.partner_text != blank %}
@@ -814,6 +924,53 @@
     top: 0%;
     color: #141414;
   }
+  /* HB2 Modal (iframe) */
+.hb2-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: none;
+}
+.hb2-modal.is-open { display: block; }
+
+.hb2-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+}
+
+.hb2-modal__panel {
+  position: relative;
+  width: min(920px, calc(100% - 32px));
+  height: min(720px, calc(100% - 32px));
+  margin: 16px auto;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hb2-modal__close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 0;
+  background: rgba(0,0,0,0.08);
+  font-size: 26px;
+  line-height: 36px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.hb2-modal__iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 </style>
 
 <script>
@@ -914,5 +1071,118 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<script>
+(function () {
+  // --- IFRAME MODAL ---
+  function openModal(modalId, iframeSrc) {
+    var modal = document.getElementById(modalId);
+    if (!modal) return;
+
+    var iframe = modal.querySelector('.hb2-modal__iframe');
+    if (iframe) iframe.src = iframeSrc || '';
+
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('hb2-modal-open');
+  }
+
+  function closeModal(modal) {
+    if (!modal) return;
+
+    var iframe = modal.querySelector('.hb2-modal__iframe');
+    if (iframe) iframe.src = '';
+
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.documentElement.classList.remove('hb2-modal-open');
+  }
+
+  document.addEventListener('click', function (e) {
+    var openBtn = e.target.closest('[data-hb2-modal-open]');
+    if (openBtn) {
+      e.preventDefault();
+      openModal(openBtn.getAttribute('data-hb2-modal-open'), openBtn.getAttribute('data-hb2-iframe-src'));
+      return;
+    }
+
+    if (e.target.matches('[data-hb2-modal-close]') || e.target.closest('[data-hb2-modal-close]')) {
+      var modal = e.target.closest('.hb2-modal');
+      closeModal(modal);
+      return;
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    var openModalEl = document.querySelector('.hb2-modal.is-open');
+    if (openModalEl) closeModal(openModalEl);
+  });
+
+  // --- TYPEFORM POPUP ---
+  function ensureTypeform(cb) {
+    if (window.__hb2TypeformReady) { cb && cb(); return; }
+    if (window.__hb2TypeformLoading) {
+      document.addEventListener('hb2:typeform:ready', function once() {
+        document.removeEventListener('hb2:typeform:ready', once);
+        cb && cb();
+      });
+      return;
+    }
+
+    window.__hb2TypeformLoading = true;
+    var s = document.createElement('script');
+    s.src = 'https://embed.typeform.com/next/embed.js';
+    s.async = true;
+    s.onload = function () {
+      window.__hb2TypeformReady = true;
+      window.__hb2TypeformLoading = false;
+      document.dispatchEvent(new CustomEvent('hb2:typeform:ready'));
+      cb && cb();
+    };
+    document.head.appendChild(s);
+  }
+
+  function extractTypeformId(url) {
+    if (!url) return '';
+    try {
+      var u = new URL(url, window.location.origin);
+      // common patterns: https://form.typeform.com/to/XXXXXX or https://xxxxxx.typeform.com/to/XXXXXX
+      var parts = u.pathname.split('/').filter(Boolean);
+      var toIndex = parts.indexOf('to');
+      if (toIndex !== -1 && parts[toIndex + 1]) return parts[toIndex + 1];
+      // fallback: last segment
+      return parts[parts.length - 1] || '';
+    } catch (err) {
+      return '';
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    var tfBtn = e.target.closest('.hb2-typeform-trigger');
+    if (!tfBtn) return;
+
+    e.preventDefault();
+    var link = tfBtn.getAttribute('data-hb2-typeform') || tfBtn.getAttribute('href') || '';
+    var formId = extractTypeformId(link);
+    if (!formId) {
+      // if they pasted a non-typeform url by mistake, just follow link
+      window.location.href = link;
+      return;
+    }
+
+    ensureTypeform(function () {
+      if (!window.typeformEmbed || !window.typeformEmbed.makePopup) {
+        window.location.href = link;
+        return;
+      }
+      var popup = window.typeformEmbed.makePopup('https://form.typeform.com/to/' + formId, {
+        mode: 'popup',
+        autoClose: 0
+      });
+      popup.open();
+    });
+  });
+})();
+</script>
 
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
