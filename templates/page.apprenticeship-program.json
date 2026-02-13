@@ -280,7 +280,7 @@
         "show_button_1": true,
         "button_1_text": "Contact Us",
         "button_1_link": "shopify://pages/book-a-call",
-        "button_1_behavior": "new_tab",
+        "button_1_behavior": "popup_iframe",
         "button_1_popup_url": "",
         "button_1_popup_title": "Popup",
         "show_button_2": false,
