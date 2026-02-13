@@ -297,6 +297,48 @@ body.mr-modal-open { overflow: hidden; height: 100vh; }
 
 </style>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const modal = document.getElementById('MRModal-{{ section.id }}');
+  if (!modal) return;
+
+  const iframe = modal.querySelector('.mr-modal__iframe');
+
+  function openModal(url){
+    iframe.src = url;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('mr-modal-open');
+  }
+
+  function closeModal(){
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    iframe.src = '';
+    document.body.classList.remove('mr-modal-open');
+  }
+
+  document.addEventListener('click', function(e){
+    const popupBtn = e.target.closest('.js-mr-popup-trigger');
+    if (popupBtn){
+      e.preventDefault();
+      const url = popupBtn.getAttribute('data-mr-popup-url') || popupBtn.getAttribute('href');
+      if (url) openModal(url);
+      return;
+    }
+
+    if (e.target.closest('[data-mr-close]')) {
+      e.preventDefault();
+      closeModal();
+    }
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+  });
+});
+</script>
+
 {% schema %}
 {
   "name": "t:sections.multirow.name",
