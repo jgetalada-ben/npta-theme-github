@@ -41,6 +41,17 @@
       "label": "Button Link",
       "default": "/"
     },
+    {
+      "type": "select",
+      "id": "button_behavior",
+      "label": "Button behavior",
+      "default": "link",
+      "options": [
+        { "value": "link", "label": "Normal link (new tab)" },
+        { "value": "popup", "label": "Popup (iframe modal)" },
+        { "value": "typeform", "label": "Typeform popup" }
+      ]
+    },
 {
       "type": "range",
       "id": "top_padding",
@@ -187,14 +198,44 @@
      
      {% endfor %}
      
-            <div class="section--hero-buttons" style="margin-top:20px">
-                    <a href="{{ section.settings.button_link }}" class="btn button-yg">
-                        <span class="btn-label-down">{{ section.settings.button_text }}</span>
-                        <span class="btn-label-down">{{ section.settings.button_text }}</span>
-                    </a>
-                </div>
-    
-      
+      <div class="section--hero-buttons" style="margin-top:20px">
+        {%- assign btn_mode = section.settings.button_behavior | default: 'link' -%}
+        {%- if section.settings.button_link != blank -%}
+          {%- if btn_mode == 'popup' -%}
+            <a
+              href="{{ section.settings.button_link }}"
+              class="btn button-yg js-blurb-popup-trigger"
+              data-blurb-popup-url="{{ section.settings.button_link }}"
+              aria-haspopup="dialog"
+            >
+              <span class="btn-label-down">{{ section.settings.button_text }}</span>
+              <span class="btn-label-down">{{ section.settings.button_text }}</span>
+            </a>
+
+          {%- elsif btn_mode == 'typeform' -%}
+            <a
+              href="{{ section.settings.button_link }}"
+              class="btn button-yg js-blurb-typeform-trigger"
+              data-tf-popup="1"
+              data-tf-url="{{ section.settings.button_link }}"
+            >
+              <span class="btn-label-down">{{ section.settings.button_text }}</span>
+              <span class="btn-label-down">{{ section.settings.button_text }}</span>
+            </a>
+
+          {%- else -%}
+            <a
+              href="{{ section.settings.button_link }}"
+              target="_blank"
+              class="btn button-yg"
+            >
+              <span class="btn-label-down">{{ section.settings.button_text }}</span>
+              <span class="btn-label-down">{{ section.settings.button_text }}</span>
+            </a>
+          {%- endif -%}
+
+        {%- endif -%}
+      </div>
    </div>
 
     
