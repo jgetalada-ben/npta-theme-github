@@ -1022,7 +1022,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function animateLettersOut(callback) {
     let letters = $(".home-hero__letter");
-    let totalDuration = letters.length * delay; // Duration of exit animations
+    let totalDuration = letters.length * delay;
     letters.each(function(index) {
       setTimeout(() => {
         $(this).removeClass("active").addClass("exit");
@@ -1034,7 +1034,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function animateWordsOut(callback) {
     let wordElement = $(".home-hero__word-animate");
     wordElement.removeClass("active").addClass("exit");
-    setTimeout(callback, 800); // Adjust based on your exit animation duration
+    setTimeout(callback, 800);
   }
 
   function startAnimation() {
@@ -1049,7 +1049,7 @@ document.addEventListener('DOMContentLoaded', function() {
           showWord(currentIndex);
           animateWordsIn();
         });
-      }, 3000 + extraStay); // Interval includes the extra stay duration
+      }, 3000 + extraStay);
     } else {
       animateLettersIn();
       interval = setInterval(function() {
@@ -1058,7 +1058,7 @@ document.addEventListener('DOMContentLoaded', function() {
           showWord(currentIndex);
           animateLettersIn();
         });
-      }, 3000 + extraStay); // Interval includes the extra stay duration
+      }, 3000 + extraStay);
     }
   }
 
