@@ -718,6 +718,23 @@
 
     { "type": "text", "id": "btn2_label", "label": "Button 2 label", "default": "TALK TO ADVISOR" },
     { "type": "url", "id": "btn2_link", "label": "Button 2 link" },
+    {
+      "type": "select",
+      "id": "btn2_behavior",
+      "label": "Button 2 behavior",
+      "default": "normal",
+      "options": [
+        { "value": "normal", "label": "Normal link" },
+        { "value": "typeform_popup", "label": "Typeform popup" },
+        { "value": "iframe_modal", "label": "Popup (iframe modal)" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "btn2_new_tab",
+      "label": "Open in new tab (only for Normal link)",
+      "default": false
+    },
     { "type": "color", "id": "btn2_bg", "label": "Button 2 background", "default": "transparent" },
     { "type": "color", "id": "btn2_color", "label": "Button 2 text color", "default": "#FFFFFF" },
     { "type": "color", "id": "btn2_border", "label": "Button 2 border color", "default": "#FFFFFF" },
