@@ -158,7 +158,8 @@
             "text": "<p>At NPTA, we don't just certify trainers— we build careers. Our program goes beyond textbook learning with expert mentorship, hands-on training, and direct industry connections that set you apart.</p><ul><li>40 Hours of Hands-On Training – Work with real clients in a professional gym.</li><li>1:1 Expert Mentorship – Learn from Canada’s top personal trainers.</li><li>Career-Ready Training – Build the skills, confidence, and connections to launch your career.</li><li>Easy Setup – Quick application with no impact on your credit score</li></ul>",
             "show_buttons": true,
             "button_label": "Register now",
-            "button_link": "https://app.npta.ca/widget/survey/sM15QBoTJbBVmC9vCifd"
+            "button_link": "https://app.npta.ca/widget/survey/sM15QBoTJbBVmC9vCifd",
+            "button_behavior": "popup"
           }
         }
       },
