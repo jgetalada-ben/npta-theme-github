@@ -75,6 +75,9 @@
     },
     "form_split_v1_kq9pWJ": {
       "type": "form-split-v1",
+      "custom_css": [
+        "h2 {color: #fff;}"
+      ],
       "name": "Form split v1",
       "settings": {
         "bg": "#f1efe8",
@@ -88,7 +91,7 @@
         "title": "",
         "title_color": "#ffffff",
         "title_size": "clamp(24px, 3vw, 40px)",
-        "desc": "{{ page.content }}",
+        "desc": "<p>{{ page.content }}</p>",
         "desc_color": "#ffffff",
         "desc_size": "clamp(14px, 1.4vw, 18px)",
         "text_align": "left",
