@@ -112,6 +112,7 @@
       "name": "Form split v1",
       "settings": {
         "bg": "#f1efe8",
+        "bg_image": "{{ page.metafields.custom.pdf_landing_data.value.hero_bg_image.value }}",
         "pad_top": "clamp(28px, 5vw, 70px)",
         "pad_bottom": "clamp(28px, 5vw, 70px)",
         "pad_x": "clamp(16px, 3vw, 28px)",
