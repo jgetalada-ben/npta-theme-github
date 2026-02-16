@@ -17,40 +17,6 @@
         "padding_bottom": 28
       }
     },
-    "top_banner_v2_8hdNVw": {
-      "type": "top-banner-v2",
-      "custom_css": [
-        ".tb2-content {width: min(900px, 100%);}",
-        ".tb2-title {font-weight: 100; letter-spacing: 1px;}"
-      ],
-      "name": "Top Banner V2",
-      "settings": {
-        "image": "{{ page.metafields.custom.pdf_banner_image.value }}",
-        "image_alt": "{{ page.title }}",
-        "mobile_image_alt": "",
-        "desktop_height": "553px",
-        "mobile_height": "40vh",
-        "mobile_object_fit": "cover",
-        "subtitle": "",
-        "title": "{{ page.metafields.custom.pdf_banner_title.value }}",
-        "description": "",
-        "v_align": "flex-end",
-        "h_align": "center",
-        "text_align": "center",
-        "title_color": "#ffffff",
-        "title_size": "clamp(32px,4vw,60px)",
-        "subtitle_color": "#ffffff",
-        "subtitle_size": "clamp(16px,1.8vw,24px)",
-        "desc_color": "#ffffff",
-        "desc_size": "clamp(14px,1.4vw,24px)",
-        "button_label": "",
-        "button_link": "",
-        "button_new_tab": false,
-        "button_bg": "#c8ff63",
-        "button_color": "#01241e",
-        "button_font_size": "16px"
-      }
-    },
     "image_with_text_nitmNB": {
       "type": "image-with-text",
       "blocks": {
@@ -120,10 +86,10 @@
         "gap": "clamp(18px, 4vw, 56px)",
         "left_width": 40,
         "title": "",
-        "title_color": "#000000",
+        "title_color": "#ffffff",
         "title_size": "clamp(24px, 3vw, 40px)",
         "desc": "{{ page.content }}",
-        "desc_color": "#000000",
+        "desc_color": "#ffffff",
         "desc_size": "clamp(14px, 1.4vw, 18px)",
         "text_align": "left",
         "embed_code": "",
@@ -444,7 +410,6 @@
   },
   "order": [
     "main",
-    "top_banner_v2_8hdNVw",
     "image_with_text_nitmNB",
     "form_split_v1_kq9pWJ",
     "plan_card_carousel_mLVbki",
