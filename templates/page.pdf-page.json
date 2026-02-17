@@ -281,7 +281,8 @@
       "custom_css": [
         "h1 {font-family: var( --font-anton, var(--font-heading-family, var(--font-body-family)) ); font-size: clamp(18px, 3vw, 36px);}",
         ".rich-text__blocks .rte:nth-child(2) {font-family: var(--font-proximamedium); line-height: normal; font-size: clamp(14px, 1.4vw, 18px);}",
-        ".rich-text__blocks .rte:last-child {font-family: var(--font-proximanova); font-size: clamp(14px, 1.4vw, 18px);}"
+        ".rich-text__blocks .rte:nth-child(3) {font-family: var(--font-proximanova); font-size: clamp(14px, 1.4vw, 18px);}",
+        ".rich-text__buttons a {background: #c7ff6d; color: #141414; font-size: 14px; text-decoration: none; padding: 12px 25px; border-radius: 10px; font-weight: 800;}"
       ],
       "name": "t:sections.rich-text.presets.name",
       "settings": {
