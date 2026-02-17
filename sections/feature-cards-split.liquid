@@ -158,7 +158,7 @@
     #FeatSplit-{{ sid }} .fcs__grid{
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: var(--fcs-card-gap);
+      {% comment %} gap: var(--fcs-card-gap); {% endcomment %}
       align-items: center;
     }
     #FeatSplit-{{ sid }} .fcs__grid.is-reverse{
