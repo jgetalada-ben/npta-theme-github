@@ -26,7 +26,7 @@
       "name": "Form split v1",
       "settings": {
         "bg": "#f1efe8",
-        "bg_image": "{{ page.metafields.custom.pdf_landing_data.value.hero_bg_image.value }}",
+        "bg_image": "{{ page.metafields.custom.pdf_banner_image.value }}",
         "pad_top": "clamp(28px, 5vw, 70px)",
         "pad_bottom": "clamp(28px, 5vw, 70px)",
         "pad_x": "clamp(16px, 3vw, 28px)",
@@ -56,8 +56,8 @@
           "type": "card",
           "settings": {
             "icon_choice": "1",
-            "title": "Strategic Exam Preparation Framework",
-            "body": "<p>Add your card description here.</p>",
+            "title": "{{ page.metafields.custom.pdf_landing_page.value.whats_inside_the_guide.value.title_card_1.value }}",
+            "body": "<p>{{ page.metafields.custom.pdf_landing_page.value.whats_inside_the_guide.value.description_card_1 | metafield_tag }}</p>",
             "override_bottom_bg": "",
             "override_body_color": ""
           }
@@ -66,8 +66,8 @@
           "type": "card",
           "settings": {
             "icon_choice": "1",
-            "title": "Strategic Exam Preparation Framework",
-            "body": "<p>Add your card description here.</p>",
+            "title": "{{ page.metafields.custom.pdf_landing_page.value.whats_inside_the_guide.value.title_card_2.value }}",
+            "body": "<p>{{ page.metafields.custom.pdf_landing_page.value.whats_inside_the_guide.value.description_card_2 | metafield_tag }}</p>",
             "override_bottom_bg": "",
             "override_body_color": ""
           }
@@ -76,8 +76,8 @@
           "type": "card",
           "settings": {
             "icon_choice": "1",
-            "title": "Strategic Exam Preparation Framework",
-            "body": "<p>Add your card description here.</p>",
+            "title": "{{ page.metafields.custom.pdf_landing_page.value.whats_inside_the_guide.value.title_card_3.value }}",
+            "body": "<p>{{ page.metafields.custom.pdf_landing_page.value.whats_inside_the_guide.value.description_card_3 | metafield_tag }}</p>",
             "override_bottom_bg": "",
             "override_body_color": ""
           }
@@ -86,8 +86,8 @@
           "type": "card",
           "settings": {
             "icon_choice": "1",
-            "title": "Strategic Exam Preparation Framework",
-            "body": "<p>Add your card description here.</p>",
+            "title": "{{ page.metafields.custom.pdf_landing_page.value.whats_inside_the_guide.value.title_card_4.value }}",
+            "body": "<p>{{ page.metafields.custom.pdf_landing_page.value.whats_inside_the_guide.value.description_card_4 | metafield_tag }}</p>",
             "override_bottom_bg": "",
             "override_body_color": ""
           }
@@ -101,21 +101,21 @@
       ],
       "name": "Guide - Inside Cards",
       "settings": {
-        "section_bg": "#F1EFE8",
+        "section_bg": "#f1efe8",
         "pad_top": "clamp(40px, 6vw, 80px)",
         "pad_bottom": "clamp(40px, 6vw, 80px)",
         "pad_x": "clamp(16px, 3vw, 28px)",
         "max_width": "1280px",
         "heading": "WHAT'S INSIDE THE GUIDE?",
-        "heading_color": "#0F828C",
+        "heading_color": "#0f828c",
         "heading_size": "clamp(20px, 2.4vw, 34px)",
         "card_gap": "clamp(14px, 2vw, 24px)",
         "card_radius": 10,
-        "card_top_bg": "#FFFFFF",
-        "card_bottom_bg": "#0F828C",
+        "card_top_bg": "#ffffff",
+        "card_bottom_bg": "#0f828c",
         "card_title_color": "#141414",
         "card_title_size": "clamp(16px, 1.2vw, 20px)",
-        "card_body_color": "#FFFFFF",
+        "card_body_color": "#ffffff",
         "card_body_size": "clamp(14px, 1vw, 16px)"
       }
     },
@@ -175,11 +175,12 @@
         "card_yU3cKn": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Rectangle_96.png",
             "layout": "image_first",
-            "title": "{{ page.metafields.custom.pdf_landing_data.value.content_boxes | metafield_text: field: 'title' }}",
+            "title": "{{ page.metafields.custom.pdf_landing_page.value.exam_information.value.title_exam_card_1.value }}",
             "subtitle": "",
-            "desc": "",
-            "button_label": "Learn More",
+            "desc": "<p>{{ page.metafields.custom.pdf_landing_page.value.exam_information.value.description_exam_card_1 | metafield_tag }}</p>",
+            "button_label": "{{ page.metafields.custom.pdf_landing_page.value.exam_information.value.button_label_exam_card_1.value }}",
             "button_link": "",
             "open_new_tab": false
           }
