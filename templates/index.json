@@ -614,6 +614,7 @@
         },
         "trainer_9kT9Xn": {
           "type": "trainer",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Cert-16.jpg",
             "show_content": true,
