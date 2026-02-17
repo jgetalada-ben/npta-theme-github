@@ -625,6 +625,7 @@
         },
         "trainer_GnQEiL": {
           "type": "trainer",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Cert-11.jpg",
             "show_content": true,
