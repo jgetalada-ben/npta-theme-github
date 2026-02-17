@@ -181,19 +181,20 @@
             "subtitle": "",
             "desc": "<p>{{ page.metafields.custom.pdf_landing_page.value.exam_information.value.description_exam_card_1 | metafield_tag }}</p>",
             "button_label": "{{ page.metafields.custom.pdf_landing_page.value.exam_information.value.button_label_exam_card_1.value }}",
-            "button_link": "",
+            "button_link": "{{ page.metafields.custom.pdf_landing_page.value.exam_information.value.button_url_card_1.value }}",
             "open_new_tab": false
           }
         },
         "card_kBkRDx": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/Rectangle_99.png",
             "layout": "image_first",
-            "title": "Master the Exam with Structure and Strategy",
-            "subtitle": "Study with Purpose, Not Panic",
-            "desc": "<p>Most students fail not because they lack knowledge, but because they lack structure...</p>",
-            "button_label": "Learn More",
-            "button_link": "",
+            "title": "{{ page.metafields.custom.pdf_landing_page.value.exam_information.value.title_exam_card_2.value }}",
+            "subtitle": "",
+            "desc": "<p>{{ page.metafields.custom.pdf_landing_page.value.exam_information.value.description_exam_card_2 | metafield_tag }}</p>",
+            "button_label": "{{ page.metafields.custom.pdf_landing_page.value.exam_information.value.button_label_exam_card_1.value }}",
+            "button_link": "{{ page.metafields.custom.pdf_landing_page.value.exam_information.value.button_url_card_2.value }}",
             "open_new_tab": false
           }
         }
