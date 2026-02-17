@@ -17,62 +17,6 @@
         "padding_bottom": 28
       }
     },
-    "image_with_text_nitmNB": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading_JXzdNG": {
-          "type": "heading",
-          "settings": {
-            "heading": "CPT EXAM PASS GUARANTEE",
-            "heading_size": "h1"
-          }
-        },
-        "text_zzVAFc": {
-          "type": "text",
-          "settings": {
-            "text": "<p>This NASM CPT Exam Pass Guarantee Workbook is designed specifically for aspiring personal trainers who want to pass the NASM CPT exam the first time. </p><p>Inside, you’ll find a clear, structured breakdown of the concepts that actually matter on exam day, including key exercise science principles, assessment strategies, program design logic, and test-taking tips aligned with the NASM CPT 7 curriculum.</p>",
-            "text_style": "body"
-          }
-        },
-        "button_FXXLCC": {
-          "type": "button",
-          "disabled": true,
-          "settings": {
-            "button_label": "Start My Career Path",
-            "button_link": "shopify://collections/all-products",
-            "button_style_secondary": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_JXzdNG",
-        "text_zzVAFc",
-        "button_FXXLCC"
-      ],
-      "disabled": true,
-      "custom_css": [
-        ".btn.button-yg {background-color: #0f828c; color: #fff; margin-top: 5rem;}",
-        ".btn-label-down {color: #fff;}",
-        ".image-with-text__text.rte.body p {line-height: 21px;}",
-        "@media (min-width: 750px) {.image-with-text__text.rte.body {width: 80%; }}"
-      ],
-      "name": "t:sections.image-with-text.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/start-your-career.png",
-        "height": "adapt",
-        "desktop_image_width": "small",
-        "layout": "text_first",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "content_layout": "no-overlap",
-        "section_color_scheme": "scheme-c286aeaf-b6ef-4588-b0b7-fb115e786a20",
-        "color_scheme": "scheme-c286aeaf-b6ef-4588-b0b7-fb115e786a20",
-        "image_behavior": "none",
-        "mobile_content_alignment": "left",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "form_split_v1_kq9pWJ": {
       "type": "form-split-v1",
       "custom_css": [
@@ -103,177 +47,6 @@
         "form_radius": 0,
         "form_height": "560px",
         "form_height_mobile": "520px"
-      }
-    },
-    "plan_card_carousel_mLVbki": {
-      "type": "plan-card-carousel",
-      "blocks": {
-        "slide_iFWJNb": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/image_21.png",
-            "image_alt": "whats included",
-            "show_title": true,
-            "show_bullets": true,
-            "show_description": true,
-            "show_button": true,
-            "title": "What’s Included?",
-            "bullets": "NASM Certified Personal Trainer Course\nNPTA Student Support\nFlexible Online Learning",
-            "description": "<p>This plan is best for students who want certification only.</p>",
-            "button_label": "Price: $1,199 CAD",
-            "button_link": "#",
-            "button_new_tab": false,
-            "button_bg": "",
-            "button_color": ""
-          }
-        },
-        "slide_rwbrKC": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/image_22.png",
-            "image_alt": "",
-            "show_title": true,
-            "show_bullets": true,
-            "show_description": true,
-            "show_button": true,
-            "title": "What’s Included?",
-            "bullets": "Everything in CPT Only\n$1,500 CAD Apprenticeship Program\nHands-on Training at FITIN Gyms\nMentorship + Client-ready Skills",
-            "description": "<p>This plan is best for students who want to graduate career-ready.</p>",
-            "button_label": "Price: $2,699 CAD",
-            "button_link": "#",
-            "button_new_tab": false,
-            "button_bg": "",
-            "button_color": ""
-          }
-        },
-        "slide_AUmaa9": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/image_23.png",
-            "image_alt": "",
-            "show_title": true,
-            "show_bullets": true,
-            "show_description": true,
-            "show_button": true,
-            "title": "What’s Included?",
-            "bullets": "Everything in CPT Program\n$1,500 CAD Apprenticeship Program\nExclusive job interviews at FITIN\nJob Guarantee Promise - if not hired, receive 5% refund of Apprenticeship enrollment fee",
-            "description": "<p>This plan is best for students who want certification, skills, and career security.</p>",
-            "button_label": "Price: $2,899 CAD",
-            "button_link": "#",
-            "button_new_tab": false,
-            "button_bg": "",
-            "button_color": ""
-          }
-        }
-      },
-      "block_order": [
-        "slide_iFWJNb",
-        "slide_rwbrKC",
-        "slide_AUmaa9"
-      ],
-      "disabled": true,
-      "name": "Plan Card Carousel",
-      "settings": {
-        "heading": "WHAT IS THE BEST PLAN FOR YOU?",
-        "aria_label": "Plan carousel",
-        "max_width": "1200px",
-        "section_bg": "#ffffff",
-        "card_bg": "#d9d6c7",
-        "card_radius": 14,
-        "accent_color": "#2d7a7a",
-        "title_size": "clamp(22px,2.2vw,28px)",
-        "bullet_size": "clamp(14px,1.4vw,18px)",
-        "desc_size": "clamp(14px,1.3vw,18px)",
-        "btn_size": "clamp(14px,1.3vw,18px)",
-        "default_button_bg": "#2d7a7a",
-        "default_button_color": "#ffffff",
-        "arrow_bg": "#ffffff",
-        "arrow_color": "#0b2a23",
-        "padding_y": 40,
-        "padding_y_mobile": 28
-      }
-    },
-    "image_with_text_4Mwchi": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading_yjhQQK": {
-          "type": "heading",
-          "settings": {
-            "heading": "NPTA APPRENTICESHIP PROGRAM",
-            "heading_size": "h1"
-          }
-        },
-        "text_tdcJix": {
-          "type": "text",
-          "settings": {
-            "text": "<p>This 40-hour, in-person practicum bridges the gap between certification and real-world coaching—equipping you with the confidence, skills, and community you need to thrive in the fitness industry.</p><p>You'll gain hands-on experience by training real clients on the floor at our <strong>Fit Integrated Wellness</strong> facilities, all under the guidance of top-tier educators and mentors.</p>",
-            "text_style": "body"
-          }
-        },
-        "button_NfUmti": {
-          "type": "button",
-          "settings": {
-            "button_label": "EXPLORE PROGRAM",
-            "button_link": "shopify://collections/all-products",
-            "button_style_secondary": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_yjhQQK",
-        "text_tdcJix",
-        "button_NfUmti"
-      ],
-      "disabled": true,
-      "custom_css": [
-        ".btn.button-yg {background-color: #c1ff72; color: #000; margin-top: 5rem;}",
-        ".btn-label-down {color: #000;}",
-        ".image-with-text__text.rte.body p {line-height: 2;}",
-        "h2,.image-with-text__text.rte.body p {color: #fff;}",
-        "@media (min-width: 750px) {.image-with-text__text.rte.body {width: 80%; }}",
-        "@media screen and (min-width: 750px) {.grid--3-col-tablet .grid__item {width: 50%; }}"
-      ],
-      "name": "t:sections.image-with-text.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/image_21_c6a59cec-17cd-49ec-9fda-73771fac5dde.png",
-        "height": "adapt",
-        "desktop_image_width": "small",
-        "layout": "image_first",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "content_layout": "no-overlap",
-        "section_color_scheme": "scheme-76e804c4-3b76-41cc-a54b-439c58312f8d",
-        "color_scheme": "scheme-76e804c4-3b76-41cc-a54b-439c58312f8d",
-        "image_behavior": "none",
-        "mobile_content_alignment": "left",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "section_local_video_wgbQ6w": {
-      "type": "section--local-video",
-      "disabled": true,
-      "name": "t:sections.video.presets.name",
-      "settings": {
-        "section_id": "certified-trainers",
-        "heading": "Get Certified. Get Mentored. Get Hired.",
-        "short_description": "<p>Every NPTA™ student is matched with a Canadian mentor and given access to exclusive career placement opportunities through our FITIN network of partner gyms.</p><p>✅ Job Guarantee (select packages) <br/>✅ 1-on-1 Mentorship & Tutoring <br/>✅ Apprenticeship-to-Placement Pathway<br/></p>",
-        "primary_button_text": "Get Certified",
-        "primary_button_link": "",
-        "secondary_button_text": "Schedule a Consult",
-        "secondary_button_link": "",
-        "enable_video_looping": false,
-        "video_height_mode": "fixed",
-        "video_height_mobile": "320px",
-        "video_height_desktop": "520px",
-        "video_object_fit": "cover",
-        "video": "shopify://files/videos/AP 3 by 4.mp4",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "description": "",
-        "full_width": false,
-        "color_scheme": "scheme-c0f158bd-3321-411f-871b-1d0901e0718c",
-        "padding_top": 36,
-        "padding_bottom": 36
       }
     },
     "section_logo_carousel_NW4NRe": {
@@ -317,12 +90,80 @@
         "logo_69pY8c",
         "logo_6keYNN"
       ],
+      "disabled": true,
       "name": "Logo Carousel",
       "settings": {
         "top_padding": 0,
         "bottom_padding": 0,
         "container_width": 980,
         "scroll_direction": "rtl"
+      }
+    },
+    "feature_cards_split_XDACaA": {
+      "type": "feature-cards-split",
+      "blocks": {
+        "card_yU3cKn": {
+          "type": "card",
+          "settings": {
+            "layout": "image_first",
+            "title": "Master the Exam with Structure and Strategy",
+            "subtitle": "Study with Purpose, Not Panic",
+            "desc": "<p>Most students fail not because they lack knowledge, but because they lack structure...</p>",
+            "button_label": "Learn More",
+            "button_link": "",
+            "open_new_tab": false
+          }
+        },
+        "card_kBkRDx": {
+          "type": "card",
+          "settings": {
+            "layout": "image_first",
+            "title": "Master the Exam with Structure and Strategy",
+            "subtitle": "Study with Purpose, Not Panic",
+            "desc": "<p>Most students fail not because they lack knowledge, but because they lack structure...</p>",
+            "button_label": "Learn More",
+            "button_link": "",
+            "open_new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "card_yU3cKn",
+        "card_kBkRDx"
+      ],
+      "name": "Feature cards split",
+      "settings": {
+        "bg": "#06302C",
+        "pad_top": "clamp(30px, 5vw, 80px)",
+        "pad_bottom": "clamp(30px, 5vw, 80px)",
+        "pad_x": "clamp(16px, 3vw, 28px)",
+        "max_width": "1200px",
+        "section_gap": "clamp(22px, 4vw, 56px)",
+        "card_gap": "clamp(18px, 3vw, 44px)",
+        "card_radius": 18,
+        "card_shadow": "0 12px 30px rgba(0,0,0,0.18)",
+        "image_radius": 18,
+        "mobile_order": "image_first",
+        "heading": "",
+        "subheading": "",
+        "title_color": "#141414",
+        "title_size": "clamp(22px, 2.2vw, 32px)",
+        "subtitle_color": "#141414",
+        "subtitle_size": "clamp(14px, 1.3vw, 18px)",
+        "desc_color": "#141414",
+        "desc_size": "clamp(14px, 1.2vw, 16px)",
+        "btn_bg": "#C7FF6D",
+        "btn_color": "#141414",
+        "btn_size": "14px",
+        "btn_radius": 10,
+        "btn_pad_y": "12px",
+        "btn_pad_x": "26px",
+        "btn_hover_bg": "#B9F85B",
+        "btn_hover_color": "#141414",
+        "enable_reveal": true,
+        "reveal_distance": 24,
+        "reveal_duration": 650,
+        "reveal_delay_step": 80
       }
     },
     "helpful_content_slider_zM8VTV": {
@@ -414,12 +255,9 @@
   },
   "order": [
     "main",
-    "image_with_text_nitmNB",
     "form_split_v1_kq9pWJ",
-    "plan_card_carousel_mLVbki",
-    "image_with_text_4Mwchi",
-    "section_local_video_wgbQ6w",
     "section_logo_carousel_NW4NRe",
+    "feature_cards_split_XDACaA",
     "helpful_content_slider_zM8VTV"
   ]
 }
