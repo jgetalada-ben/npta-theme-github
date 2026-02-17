@@ -278,6 +278,9 @@
         "text_yzYyeB",
         "button_EEtFde"
       ],
+      "custom_css": [
+        "h1 {font-family: var( --font-anton, var(--font-heading-family, var(--font-body-family)) ); font-size:clamp(18px, 3vw, 36px);}"
+      ],
       "name": "t:sections.rich-text.presets.name",
       "settings": {
         "desktop_content_position": "center",
