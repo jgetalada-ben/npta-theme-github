@@ -710,6 +710,7 @@
       "blocks": {
         "trainer_6RkQ8y": {
           "type": "trainer",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/DSC04326-Edit_1.jpg",
             "show_content": true,
@@ -732,6 +733,7 @@
         },
         "trainer_EeaEDm": {
           "type": "trainer",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/IMG_3363.jpg",
             "show_content": true,
