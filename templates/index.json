@@ -691,6 +691,7 @@
         "trainer_47Kir4",
         "trainer_tkGYB3"
       ],
+      "disabled": true,
       "settings": {
         "section_id": "trainer-success-journet",
         "section_title": "Trainer Success Journeys",
