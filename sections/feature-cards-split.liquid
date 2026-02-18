@@ -66,7 +66,7 @@
         {%- endif -%}
 
         <article
-          class="fcs__card {% if section.settings.enable_reveal %}js-fcs-reveal{% endif %}"
+          class="fcs__card"
           data-reveal-index="{{ forloop.index0 }}"
           {{ block.shopify_attributes }}
         >
@@ -86,7 +86,7 @@
               {%- endif -%}
             </div>
 
-            <div class="fcs__content">
+            <div class="fcs__content {% if section.settings.enable_reveal %}js-fcs-content-reveal{% endif %}">
               {%- if block.settings.title != blank -%}
                 <h3 class="fcs__title">{{ block.settings.title }}</h3>
               {%- endif -%}
@@ -251,25 +251,24 @@
       }
     }
 
-    /* Reveal animation (TrueCoach-like) */
-    #FeatSplit-{{ sid }} .js-fcs-reveal{
-      opacity: 0;
-      transform: translateY(var(--fcs-reveal-distance));
-      transition: opacity var(--fcs-reveal-duration) ease, transform var(--fcs-reveal-duration) ease;
-      will-change: opacity, transform;
+    /* Reveal animation: CONTENT ONLY (slide from right, no fade) */
+    #FeatSplit-{{ sid }} .js-fcs-content-reveal{
+      transform: translateX(var(--fcs-reveal-distance));
+      transition: transform var(--fcs-reveal-duration) cubic-bezier(.2,.8,.2,1);
+      will-change: transform;
     }
-    #FeatSplit-{{ sid }} .js-fcs-reveal.is-inview{
-      opacity: 1;
-      transform: translateY(0);
+
+    #FeatSplit-{{ sid }} .js-fcs-content-reveal.is-inview{
+      transform: translateX(0);
     }
 
     @media (prefers-reduced-motion: reduce){
-      #FeatSplit-{{ sid }} .js-fcs-reveal{
-        opacity: 1 !important;
+      #FeatSplit-{{ sid }} .js-fcs-content-reveal{
         transform: none !important;
         transition: none !important;
       }
     }
+
   </style>
 
   {% if section.settings.enable_reveal %}
@@ -278,26 +277,32 @@
         var root = document.getElementById('FeatSplit-{{ sid }}');
         if (!root) return;
 
-        var items = root.querySelectorAll('.js-fcs-reveal');
-        if (!items.length) return;
+        var cards = root.querySelectorAll('.fcs__card');
+        if (!cards.length) return;
 
-        // stagger delay
-        items.forEach(function(el){
-          var i = parseInt(el.getAttribute('data-reveal-index') || '0', 10);
-          el.style.transitionDelay = (i * (parseInt(getComputedStyle(root).getPropertyValue('--fcs-reveal-delay-step')) || 80)) + 'ms';
+        // Apply stagger delay to CONTENT only
+        cards.forEach(function(card){
+          var i = parseInt(card.getAttribute('data-reveal-index') || '0', 10);
+          var content = card.querySelector('.js-fcs-content-reveal');
+          if (!content) return;
+
+          var step = parseInt(getComputedStyle(root).getPropertyValue('--fcs-reveal-delay-step')) || 80;
+          content.style.transitionDelay = (i * step) + 'ms';
         });
 
-        // IntersectionObserver reveal
+        // Observe each card, then animate its content
         var io = new IntersectionObserver(function(entries){
           entries.forEach(function(entry){
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-inview');
-              io.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.15 });
+            if (!entry.isIntersecting) return;
 
-        items.forEach(function(el){ io.observe(el); });
+            var content = entry.target.querySelector('.js-fcs-content-reveal');
+            if (content) content.classList.add('is-inview');
+
+            io.unobserve(entry.target);
+          });
+        }, { threshold: 0.25 });
+
+        cards.forEach(function(card){ io.observe(card); });
       })();
     </script>
   {% endif %}
