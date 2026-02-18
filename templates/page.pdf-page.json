@@ -114,7 +114,7 @@
         "card_top_bg": "#ffffff",
         "card_bottom_bg": "#0f828c",
         "card_title_color": "#141414",
-        "card_title_size": "clamp(16px, 1.2vw, 20px)",
+        "card_title_size": "clamp(14px, 1.2vw, 20px)",
         "card_body_color": "#ffffff",
         "card_body_size": "clamp(14px, 1vw, 16px)"
       }
