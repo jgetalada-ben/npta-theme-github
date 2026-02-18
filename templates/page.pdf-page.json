@@ -65,7 +65,7 @@
         "card_3KiTiU": {
           "type": "card",
           "settings": {
-            "icon_choice": "1",
+            "icon_choice": "2",
             "title": "{{ page.metafields.custom.pdf_landing_page.value.whats_inside_the_guide.value.title_card_2.value }}",
             "body": "<p>{{ page.metafields.custom.pdf_landing_page.value.whats_inside_the_guide.value.description_card_2 | metafield_tag }}</p>",
             "override_bottom_bg": "",
@@ -75,7 +75,7 @@
         "card_KFdcUG": {
           "type": "card",
           "settings": {
-            "icon_choice": "1",
+            "icon_choice": "3",
             "title": "{{ page.metafields.custom.pdf_landing_page.value.whats_inside_the_guide.value.title_card_3.value }}",
             "body": "<p>{{ page.metafields.custom.pdf_landing_page.value.whats_inside_the_guide.value.description_card_3 | metafield_tag }}</p>",
             "override_bottom_bg": "",
@@ -85,7 +85,7 @@
         "card_FVNxBx": {
           "type": "card",
           "settings": {
-            "icon_choice": "1",
+            "icon_choice": "4",
             "title": "{{ page.metafields.custom.pdf_landing_page.value.whats_inside_the_guide.value.title_card_4.value }}",
             "body": "<p>{{ page.metafields.custom.pdf_landing_page.value.whats_inside_the_guide.value.description_card_4 | metafield_tag }}</p>",
             "override_bottom_bg": "",
