@@ -86,24 +86,26 @@
               {%- endif -%}
             </div>
 
-            <div class="fcs__content {% if section.settings.enable_reveal %}js-fcs-content-reveal{% endif %}">
-              {%- if block.settings.title != blank -%}
-                <h3 class="fcs__title">{{ block.settings.title }}</h3>
-              {%- endif -%}
+            <div class="fcs__content-wrap">
+              <div class="fcs__content {% if section.settings.enable_reveal %}js-fcs-content-reveal{% endif %}">
+                {%- if block.settings.title != blank -%}
+                  <h3 class="fcs__title">{{ block.settings.title }}</h3>
+                {%- endif -%}
 
-              {%- if block.settings.subtitle != blank -%}
-                <div class="fcs__subtitle">{{ block.settings.subtitle }}</div>
-              {%- endif -%}
+                {%- if block.settings.subtitle != blank -%}
+                  <div class="fcs__subtitle">{{ block.settings.subtitle }}</div>
+                {%- endif -%}
 
-              {%- if block.settings.desc != blank -%}
-                <div class="fcs__desc rte">{{ block.settings.desc }}</div>
-              {%- endif -%}
+                {%- if block.settings.desc != blank -%}
+                  <div class="fcs__desc rte">{{ block.settings.desc }}</div>
+                {%- endif -%}
 
-              {%- if has_btn -%}
-                <a class="fcs__btn" href="{{ block.settings.button_link }}" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-                  {{ block.settings.button_label }}
-                </a>
-              {%- endif -%}
+                {%- if has_btn -%}
+                  <a class="fcs__btn" href="{{ block.settings.button_link }}" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
+                    {{ block.settings.button_label }}
+                  </a>
+                {%- endif -%}
+              </div>
             </div>
           </div>
         </article>
@@ -250,25 +252,38 @@
         gap: var(--fcs-card-gap);
       }
     }
+#FeatSplit-{{ sid }} .fcs__content-wrap{
+  z-index: 2;
+}
 
-    /* Reveal animation: CONTENT ONLY (slide from right, no fade) */
-    #FeatSplit-{{ sid }} .js-fcs-content-reveal{
-      transform: translateX(var(--fcs-reveal-distance));
-      transition: transform var(--fcs-reveal-duration) cubic-bezier(.2,.8,.2,1);
-      will-change: transform;
-    }
+#FeatSplit-{{ sid }} .fcs__media{
+  z-index: 1;
+}
 
-    #FeatSplit-{{ sid }} .js-fcs-content-reveal.is-inview{
-      transform: translateX(0);
-    }
+/* Content wrapper becomes the "viewport" that clips the sliding panel */
+#FeatSplit-{{ sid }} .fcs__content-wrap{
+  position: relative;
+  overflow: hidden;
+}
 
-    @media (prefers-reduced-motion: reduce){
-      #FeatSplit-{{ sid }} .js-fcs-content-reveal{
-        transform: none !important;
-        transition: none !important;
-      }
-    }
+/* Reveal animation: start OFF SCREEN (outside page) and slide in */
+#FeatSplit-{{ sid }} .js-fcs-content-reveal{
+  transform: translateX(calc(100vw + var(--fcs-reveal-distance)));
+  transition: transform var(--fcs-reveal-duration) cubic-bezier(.2,.8,.2,1);
+  will-change: transform;
+}
 
+/* Final position */
+#FeatSplit-{{ sid }} .js-fcs-content-reveal.is-inview{
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce){
+  #FeatSplit-{{ sid }} .js-fcs-content-reveal{
+    transform: none !important;
+    transition: none !important;
+  }
+}
   </style>
 
   {% if section.settings.enable_reveal %}
