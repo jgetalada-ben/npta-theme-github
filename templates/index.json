@@ -953,6 +953,9 @@
         "trainer_tEcriM",
         "trainer_KMc8wD"
       ],
+      "custom_css": [
+        ".trainer-info {background: #0F7C82;}"
+      ],
       "settings": {
         "section_id": "certified-trainers",
         "section_title": "Trainer Success Journeys",
