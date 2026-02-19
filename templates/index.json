@@ -708,6 +708,17 @@
     "section_certified_trainers_HNR8DL": {
       "type": "section--certified-trainers",
       "blocks": {
+        "trainer_jUHerY": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cameron.webp",
+            "show_content": true,
+            "name": "Cameron",
+            "certification": "",
+            "quote": "\"NPTA gave me the hands-on experience and mentorship I needed to confidently step into my career as a personal trainer at Fit Integrated. The apprenticeship program didn’t just teach me theory; it showed me how to coach real people, build rapport, and deliver results.\"",
+            "rating": "5"
+          }
+        },
         "trainer_6RkQ8y": {
           "type": "trainer",
           "disabled": true,
@@ -932,6 +943,7 @@
         }
       },
       "block_order": [
+        "trainer_jUHerY",
         "trainer_6RkQ8y",
         "trainer_9kA6xC",
         "trainer_EeaEDm",
@@ -954,7 +966,7 @@
         "trainer_KMc8wD"
       ],
       "custom_css": [
-        ".trainer-info {background: #0F7C82;}"
+        ".trainer-info {background: #0f7c82;}"
       ],
       "settings": {
         "section_id": "certified-trainers",
