@@ -11,6 +11,7 @@
   "sections": {
     "section_breadcrumb_wHCndx": {
       "type": "section--breadcrumb",
+      "disabled": true,
       "settings": {
         "background_color": "#f7f8fa",
         "enable_breadcrumbs": true,
@@ -81,7 +82,7 @@
         "constrain_to_viewport": true,
         "media_fit": "cover",
         "gallery_layout": "thumbnail_slider",
-        "media_position": "left",
+        "media_position": "right",
         "image_zoom": "none",
         "mobile_thumbnails": "hide",
         "hide_variants": true,
@@ -97,23 +98,6 @@
         "program_info_column_1": "<p>Lorem ipsum</p><h3>LOREM IPSUM</h3>",
         "program_info_column_2": "<p>Lorem ipsum</p><h3>LOREM IPSUM</h3>",
         "program_info_column_3": "<p>Lorem ipsum</p><h3>LOREM IPSUM</h3>"
-      }
-    },
-    "section_anchor_button_JUpJCf": {
-      "type": "section--anchor-button",
-      "settings": {
-        "link1_text": "PROGRAM DETAILS",
-        "link1_anchor": "#program-details",
-        "link2_text": "CURRICULUM",
-        "link2_anchor": "#curriculum",
-        "link3_text": "How It Works",
-        "link3_anchor": "#how_it_works",
-        "link4_text": "Testimonials",
-        "link4_anchor": "#testimonials",
-        "link5_text": "Why choose NPTA?",
-        "link5_anchor": "#why_choose_npta",
-        "link6_text": "Popular questions",
-        "link6_anchor": "#popular_questions"
       }
     },
     "section_program_details_8gPiQi": {
@@ -701,7 +685,6 @@
     "section_breadcrumb_wHCndx",
     "main",
     "section_program_info_CQ8Uhg",
-    "section_anchor_button_JUpJCf",
     "section_program_details_8gPiQi",
     "section_steps_j7BRy6",
     "section_collapsible_q4ikjm",
