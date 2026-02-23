@@ -92,6 +92,9 @@
     },
     "section_program_details_8gPiQi": {
       "type": "section--program-details",
+      "custom_css": [
+        "#program_details {background: #F2F2E9;}"
+      ],
       "settings": {
         "section_id": "program_details",
         "program_details": "<p> Lorem ipsum dolor sit amet</p>"
