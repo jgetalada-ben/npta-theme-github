@@ -124,24 +124,19 @@
     <div class="details-column-right">
       
     <div class="details-column-right-wrap">
-<div class="product--badge">
-  {% if product.compare_at_price > product.price %}
-  {% assign original_price = product.compare_at_price | floor %}
-  {% assign sale_price = product.price | floor %}
-  {% assign discount_amount = original_price | minus: sale_price %}
-  {% assign discount_percentage = discount_amount | divided_by: 100 | floor %}
+    <div class="product--badge">
+      {% if product.compare_at_price > product.price %}
+        {% assign original_price = product.compare_at_price | floor %}
+        {% assign sale_price = product.price | floor %}
+        {% assign discount_amount = original_price | minus: sale_price %}
+        {% assign discount_percentage = discount_amount | divided_by: 100 | floor %}
 
-  <div class="discount">
-    <span>SAVE ${{ discount_percentage }}</span>
-  </div>
+        <div class="discount">
+          <span>SAVE ${{ discount_percentage }}</span>
+        </div>
 
-  {% endif %}
-
-
-
-
-
-</div>
+      {% endif %}
+    </div>
       
 <div class="product-details-wrap">
   <h2 class="product-title">{{ product.title }}</h2>
@@ -220,24 +215,17 @@
     top: 20px;
   }
   @media only screen and (min-width: 768px) {
-      .details-column-right-wrap{
-padding: 40px;
-  }
+      .details-column-right-wrap{ padding: 40px;}
   }
 
     @media only screen and (max-width: 767px) {
-      .details-column-right-wrap{
-padding: 20px;
+      .details-column-right-wrap{ padding: 20px;}
   }
-  }
-  
-
   .details-column-right-wrap{
     display: flex;
     flex-wrap:wrap;
-
     border-radius: 20px;
-background: var(--grey-bg, #F7F8FA);
+    background: var(--grey-bg, #F7F8FA);
   }
 
   .product-details-wrap .product-title{
