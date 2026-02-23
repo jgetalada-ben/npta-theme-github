@@ -124,49 +124,43 @@
     <div class="details-column-right">
       
     <div class="details-column-right-wrap">
-    <div class="product--badge">
-      {% if product.compare_at_price > product.price %}
-        {% assign original_price = product.compare_at_price | floor %}
-        {% assign sale_price = product.price | floor %}
-        {% assign discount_amount = original_price | minus: sale_price %}
-        {% assign discount_percentage = discount_amount | divided_by: 100 | floor %}
+      <div class="product--badge">
+        {% if product.compare_at_price > product.price %}
+          {% assign original_price = product.compare_at_price | floor %}
+          {% assign sale_price = product.price | floor %}
+          {% assign discount_amount = original_price | minus: sale_price %}
+          {% assign discount_percentage = discount_amount | divided_by: 100 | floor %}
 
-        <div class="discount">
-          <span>SAVE ${{ discount_percentage }}</span>
-        </div>
+          <div class="discount">
+            <span>SAVE ${{ discount_percentage }}</span>
+          </div>
 
-      {% endif %}
-    </div>
+        {% endif %}
+      </div>
       
-<div class="product-details-wrap">
-  <h2 class="product-title">{{ product.title }}</h2>
-  <div class="product-description">{{ product.description }}</div>
+      <div class="product-details-wrap">
+        <h2 class="product-title">{{ product.title }}</h2>
+        <div class="product-description">{{ product.description }}</div>
 
-   <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-                    {%- render 'price',
-                      product: product,
-                      use_variant: true,
-                      show_badges: true,
-                      price_class: 'price--large'
-                    -%}
-                  </div>
-  <div class="product-button-wrap">
-       {%- render 'buy-buttons',
-                    block: block,
-                    product: product,
-                    product_form_id: product_form_id,
-                    section_id: section.id
-                  -%}
+        <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                          {%- render 'price',
+                            product: product,
+                            use_variant: true,
+                            show_badges: true,
+                            price_class: 'price--large'
+                          -%}
+                        </div>
+        <div class="product-button-wrap">
+            {%- render 'buy-buttons',
+                          block: block,
+                          product: product,
+                          product_form_id: product_form_id,
+                          section_id: section.id
+                        -%}
+          </div>
+      </div>
     </div>
-</div>
-
-
-
-   
-    </div>
-      
-    </div>
-
+  </div>
   </div>
 </section>
 
