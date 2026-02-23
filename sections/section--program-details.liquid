@@ -47,7 +47,9 @@
         {{ product.metafields.custom._program_details | metafield_tag }}
       </div>
       {% endif %}
+    </div>
 
+    <div class="details-column-right">  
       {% assign show_curriculum = false %}
       {% assign total_sections = 10 %}
       {% for i in (1..total_sections) %}
@@ -117,10 +119,6 @@
           });
         });
       </script>
-
-    </div>
-
-    <div class="details-column-right">  
     </div>
   </div>
 </section>
