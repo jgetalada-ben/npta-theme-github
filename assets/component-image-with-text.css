@@ -439,6 +439,7 @@ Custom
   font-weight: 800;
   line-height: 112%;
   text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .image-with-text__media--adapt img {
