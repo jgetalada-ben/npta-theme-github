@@ -49,49 +49,48 @@
       {% endif %}
 
       {% assign show_curriculum = false %}
-{% assign total_sections = 10 %}
-
-{% for i in (1..total_sections) %}
-  {% assign title_key = i | append: "_curriculum_title" %}
-  {% assign desc_key = i | append: "_curriculum_description" %}
-  {% if product.metafields.custom[title_key] and product.metafields.custom[desc_key] %}
-    {% assign show_curriculum = true %}
-    {% break %}
-  {% endif %}
-{% endfor %}
-
-{% if show_curriculum %}
-  <div class="section--title-block">
-    <h2 class="is--flex-start">Curriculum</h2>
-  </div>
-
-  <div class="curriculum">
-    <div class="curriculum-sections">
+      {% assign total_sections = 10 %}
       {% for i in (1..total_sections) %}
-        {% assign section_title_key = i | append: "_curriculum_title" %}
-        {% assign long_desc_key = i | append: "_curriculum_description" %}
-        {% assign section_title = product.metafields.custom[section_title_key] %}
-        {% assign long_desc = product.metafields.custom[long_desc_key] %}
-
-        {% if section_title and long_desc %}
-          <div class="curriculum-section">
-            <div class="section-header" data-target="#section{{ i }}">
-              {{ section_title | metafield_tag }}
-              <button type="button" data-toggle="collapse" data-target="#section{{ i }}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
-                  <path fill="#141414" d="M21 12a.75.75 0 0 1-.75.75h-7.5v7.5a.75.75 0 1 1-1.5 0v-7.5h-7.5a.75.75 0 1 1 0-1.5h7.5v-7.5a.75.75 0 1 1 1.5 0v7.5h7.5A.75.75 0 0 1 21 12Z" />
-                </svg>
-              </button>
-            </div>
-            <div id="section{{ i }}" class="section-body">
-              {{ long_desc | metafield_tag }}
-            </div>
-          </div>
+        {% assign title_key = i | append: "_curriculum_title" %}
+        {% assign desc_key = i | append: "_curriculum_description" %}
+        {% if product.metafields.custom[title_key] and product.metafields.custom[desc_key] %}
+          {% assign show_curriculum = true %}
+          {% break %}
         {% endif %}
       {% endfor %}
-    </div>
-  </div>
-{% endif %}
+
+      {% if show_curriculum %}
+        <div class="section--title-block">
+          <h2 class="is--flex-start">Curriculum</h2>
+        </div>
+
+        <div class="curriculum">
+          <div class="curriculum-sections">
+            {% for i in (1..total_sections) %}
+              {% assign section_title_key = i | append: "_curriculum_title" %}
+              {% assign long_desc_key = i | append: "_curriculum_description" %}
+              {% assign section_title = product.metafields.custom[section_title_key] %}
+              {% assign long_desc = product.metafields.custom[long_desc_key] %}
+
+              {% if section_title and long_desc %}
+                <div class="curriculum-section">
+                  <div class="section-header" data-target="#section{{ i }}">
+                    {{ section_title | metafield_tag }}
+                    <button type="button" data-toggle="collapse" data-target="#section{{ i }}">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+                        <path fill="#141414" d="M21 12a.75.75 0 0 1-.75.75h-7.5v7.5a.75.75 0 1 1-1.5 0v-7.5h-7.5a.75.75 0 1 1 0-1.5h7.5v-7.5a.75.75 0 1 1 1.5 0v7.5h7.5A.75.75 0 0 1 21 12Z" />
+                      </svg>
+                    </button>
+                  </div>
+                  <div id="section{{ i }}" class="section-body">
+                    {{ long_desc | metafield_tag }}
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
 
 
       <script>
@@ -121,46 +120,8 @@
 
     </div>
 
-    <div class="details-column-right">
-      
-    <div class="details-column-right-wrap">
-      <div class="product--badge">
-        {% if product.compare_at_price > product.price %}
-          {% assign original_price = product.compare_at_price | floor %}
-          {% assign sale_price = product.price | floor %}
-          {% assign discount_amount = original_price | minus: sale_price %}
-          {% assign discount_percentage = discount_amount | divided_by: 100 | floor %}
-
-          <div class="discount">
-            <span>SAVE ${{ discount_percentage }}</span>
-          </div>
-
-        {% endif %}
-      </div>
-      
-      <div class="product-details-wrap">
-        <h2 class="product-title">{{ product.title }}</h2>
-        <div class="product-description">{{ product.description }}</div>
-
-        <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-                          {%- render 'price',
-                            product: product,
-                            use_variant: true,
-                            show_badges: true,
-                            price_class: 'price--large'
-                          -%}
-                        </div>
-        <div class="product-button-wrap">
-            {%- render 'buy-buttons',
-                          block: block,
-                          product: product,
-                          product_form_id: product_form_id,
-                          section_id: section.id
-                        -%}
-          </div>
-      </div>
+    <div class="details-column-right">  
     </div>
-  </div>
   </div>
 </section>
 
@@ -204,7 +165,7 @@
     padding-top:70px;
     padding-bottom:70px;
   }
-  .details-column-right-wrap{
+  {% comment %} .details-column-right-wrap{
     position:sticky;
     top: 20px;
   }
@@ -220,7 +181,7 @@
     flex-wrap:wrap;
     border-radius: 20px;
     background: var(--grey-bg, #F7F8FA);
-  }
+  } {% endcomment %}
 
   .product-details-wrap .product-title{
     font-size: 22px;
