@@ -188,6 +188,7 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+      box-sizing: border-box;
     }
 
     #CareerPaths-{{ sid }} .cps__ct{
@@ -226,14 +227,21 @@
 
     @media (hover: hover) and (pointer: fine){
       #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay{
-        height: 72%;
+        height: 100%; 
         background: var(--cps-overlay-bg-hover);
+        pointer-events: auto;
       }
       #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay-inner{
         justify-content: flex-start;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay-inner::-webkit-scrollbar{
+        display: none;
       }
       #CareerPaths-{{ sid }} .cps__card:hover .cps__cd{
-        max-height: 500px;
+        max-height: 2000px;
         margin-top: 10px;
         opacity: 1;
         transform: translateY(0);
@@ -308,17 +316,24 @@
       #CareerPaths-{{ sid }} .cps__cd{ transition: none !important; }
       #CareerPaths-{{ sid }} .cps__cd{ opacity: 1 !important; transform: none !important; }
     }
-    
+
     @media (hover: none){
       #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay{
-        height: 72%;
+        height: 100%;
         background: var(--cps-overlay-bg-hover);
+        pointer-events: auto;
       }
       #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay-inner{
         justify-content: flex-start;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay-inner::-webkit-scrollbar{
+        display: none;
       }
       #CareerPaths-{{ sid }} .cps__card.is-open .cps__cd{
-        max-height: 500px;
+        max-height: 2000px;
         margin-top: 10px;
         opacity: 1;
         transform: translateY(0);
