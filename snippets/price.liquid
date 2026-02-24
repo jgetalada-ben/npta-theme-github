@@ -61,6 +61,7 @@
     <div class="price__monthly">
       <span class="visually-hidden">{{ 'products.product.price.monthly_price' | t }}</span>
         <div class="starting-price-wrap">
+          {% comment %} <p class="starting-price-label">Starting at:</p> {% endcomment %}
           <p class="starting-price-p"> 
             <span class="price-item price-item--monthly">
               {{ monthly_payment | divided_by: 100.0 | prepend: currency_code }} /
@@ -80,9 +81,9 @@
 
     <div class="price__one-time">
       <span class="visually-hidden">{{ 'products.product.price.one_time_price' | t }}</span>
-      <p class="price-item--one-time">
+      {% comment %} <p class="price-item--one-time">
         <span class="comp-price">{{ competitor_price }}</span> Full Price
-      </p>
+      </p> {% endcomment %}
       <p class="price-item--compare">
         <span>
           {{ price | divided_by: 100.0 | prepend: currency_code }}
@@ -93,7 +94,7 @@
       </span>
     </div>
 
-    {% if compare_at_price > 0 %}
+    {% comment %} {% if compare_at_price > 0 %}
       <div class="price__one-time comp-price">
         <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
         <p class="price-item--one-time">
@@ -105,7 +106,7 @@
           </span>
         </p>
       </div>
-    {% endif %}
+    {% endif %} {% endcomment %}
   </div>
   {% if show_badges %}
   {% endif %}
