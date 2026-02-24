@@ -3850,7 +3850,9 @@ text-transform: uppercase;
  width:33%;
 }
 .price__container .price__one-time{
- width:33%;
+     width: auto;
+    display: flex;
+    gap: 20px;
 }
 
   
