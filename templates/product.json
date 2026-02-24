@@ -176,6 +176,42 @@
         "pagi_active": "#4fb7c3"
       }
     },
+    "cta_program_advisor_i64PYf": {
+      "type": "cta-program-advisor",
+      "name": "CTA - Program Advisor",
+      "settings": {
+        "max_width": "1200px",
+        "pad_y": 40,
+        "pad_x": 24,
+        "gap": 28,
+        "bg_color": "#177F8A",
+        "text_color": "#FFFFFF",
+        "left_heading": "<p>CAN’T FIND WHAT<br>YOU’RE LOOKING FOR?</p>",
+        "left_font_size": "clamp(28px, 4vw, 54px)",
+        "left_color": "#FFFFFF",
+        "right_title": "Talk to an NPTA Program Advisor",
+        "right_title_font_size": "clamp(18px, 1.8vw, 24px)",
+        "right_title_color": "#FFFFFF",
+        "right_subtitle": "Our team are ready to help you decide which is best fit you!",
+        "right_sub_font_size": "clamp(14px, 1.3vw, 18px)",
+        "right_sub_color": "#FFFFFF",
+        "btn_label": "+1-778-949-6782",
+        "btn_tel": "+17789496782",
+        "btn_link": "",
+        "btn_bg": "#FFFFFF",
+        "btn_text_color": "#0E2A4C",
+        "btn_font_size": "clamp(16px, 1.4vw, 22px)",
+        "btn_radius": 10,
+        "btn_pad_y": 12,
+        "btn_pad_x": 18,
+        "btn_show_icon": true,
+        "btn_icon_type": "svg_phone",
+        "iconify_icon": "mdi:phone",
+        "btn_icon_size": "clamp(16px, 1.6vw, 22px)",
+        "btn_icon_gap": 10,
+        "btn_icon_color": "#0E2A4C"
+      }
+    },
     "section_steps_j7BRy6": {
       "type": "section--steps",
       "blocks": {
@@ -755,6 +791,7 @@
     "section_program_info_CQ8Uhg",
     "section_program_details_8gPiQi",
     "pdp_career_paths_slider_mtyLA8",
+    "cta_program_advisor_i64PYf",
     "section_steps_j7BRy6",
     "section_collapsible_q4ikjm",
     "section_certified_trainers_qQMF8K",
