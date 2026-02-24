@@ -80,18 +80,20 @@
     {% endif %}
 
     <div class="price__one-time">
-      <span class="visually-hidden">{{ 'products.product.price.one_time_price' | t }}</span>
-      {% comment %} <p class="price-item--one-time">
-        <span class="comp-price">{{ competitor_price }}</span> Full Price
-      </p> {% endcomment %}
-      <p class="price-item--compare">
-        <span>
-          {{ price | divided_by: 100.0 | prepend: currency_code }}
+      <div class="price__ont-time-con">
+        <span class="visually-hidden">{{ 'products.product.price.one_time_price' | t }}</span>
+        {% comment %} <p class="price-item--one-time">
+          <span class="comp-price">{{ competitor_price }}</span> Full Price
+        </p> {% endcomment %}
+        <p class="price-item--compare">
+          <span>
+            {{ price | divided_by: 100.0 | prepend: currency_code }}
+          </span>
+        </p>
+        <span class="price-item--payment-terms">
+          One-time payment
         </span>
-      </p>
-      <span class="price-item--payment-terms">
-        One-time payment
-      </span>
+      </div>
       {% if compare_at_price > 0 %}
           <span>
             {{ compare_at_price | divided_by: 100.0 | prepend: currency_code }}
