@@ -41,7 +41,7 @@
         <div class="cps__track" data-cps-track>
           {% for block in section.blocks %}
             {% if block.type == 'card' %}
-              <article class="cps__card" data-cps-card {{ block.shopify_attributes }}>
+              <article class="cps__card" data-cps-card tabindex="0" {{ block.shopify_attributes }}>
                 <div class="cps__media">
                   {% if block.settings.image != blank %}
                     {%- capture sizes -%}
@@ -169,21 +169,25 @@
     }
 
     #CareerPaths-{{ sid }} .cps__overlay{
-        position: absolute;
-        left: 0; right: 0; bottom: 0;
-        background: var(--cps-overlay-bg);
-        height: {{ section.settings.overlay_collapsed_height }};
-        transition: height 380ms cubic-bezier(.2,.8,.2,1), background 220ms ease;
-        overflow: hidden;
-
-        display: flex;
-        align-items: flex-end;
-        pointer-events: none;
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      background: var(--cps-overlay-bg);
+      height: {{ section.settings.overlay_collapsed_height }};
+      transition: height 380ms cubic-bezier(.2,.8,.2,1), background 220ms ease;
+      overflow: hidden;
+      display: flex;
+      align-items: stretch;
+      z-index: 2;
+      pointer-events: none;
     }
     #CareerPaths-{{ sid }} .cps__card{cursor: pointer;}
     #CareerPaths-{{ sid }} .cps__overlay-inner{
       width: 100%;
+      height: 100%;
       padding: {{ section.settings.overlay_padding }};
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
 
     #CareerPaths-{{ sid }} .cps__ct{
@@ -202,14 +206,20 @@
     }
 
     #CareerPaths-{{ sid }} .cps__cd{
-      margin-top: 10px;
       font-family: var(--font-body-family);
       font-size: var(--cps-card-desc-size);
       line-height: 1.55;
       color: {{ section.settings.card_desc_color }};
+      max-height: 0;
+      overflow: hidden;
       opacity: 0;
       transform: translateY(10px);
-      transition: opacity 240ms ease, transform 240ms ease;
+      margin-top: 0;
+      transition:
+        max-height 380ms cubic-bezier(.2,.8,.2,1),
+        opacity 240ms ease,
+        transform 240ms ease,
+        margin-top 240ms ease;
     }
     #CareerPaths-{{ sid }} .cps__cd p{ margin: 0; }
     #CareerPaths-{{ sid }} .cps__cd p + p{ margin-top: 10px; }
@@ -219,10 +229,28 @@
         height: 72%;
         background: var(--cps-overlay-bg-hover);
       }
+      #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay-inner{
+        justify-content: flex-start;
+      }
       #CareerPaths-{{ sid }} .cps__card:hover .cps__cd{
+        max-height: 500px;
+        margin-top: 10px;
         opacity: 1;
         transform: translateY(0);
       }
+    }
+    #CareerPaths-{{ sid }} .cps__card:focus-within .cps__overlay{
+      height: 72%;
+      background: var(--cps-overlay-bg-hover);
+    }
+    #CareerPaths-{{ sid }} .cps__card:focus-within .cps__overlay-inner{
+      justify-content: flex-start;
+    }
+    #CareerPaths-{{ sid }} .cps__card:focus-within .cps__cd{
+      max-height: 500px;
+      margin-top: 10px;
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* Nav */
@@ -279,6 +307,22 @@
       #CareerPaths-{{ sid }} .cps__overlay,
       #CareerPaths-{{ sid }} .cps__cd{ transition: none !important; }
       #CareerPaths-{{ sid }} .cps__cd{ opacity: 1 !important; transform: none !important; }
+    }
+    
+    @media (hover: none){
+      #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay{
+        height: 72%;
+        background: var(--cps-overlay-bg-hover);
+      }
+      #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay-inner{
+        justify-content: flex-start;
+      }
+      #CareerPaths-{{ sid }} .cps__card.is-open .cps__cd{
+        max-height: 500px;
+        margin-top: 10px;
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 
@@ -457,6 +501,18 @@
       layout();
       startAutoplay();
     })();
+
+    // Tap-to-toggle for touch devices
+    var isHoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!isHoverCapable) {
+      cards.forEach(function(card){
+        card.addEventListener('click', function(){
+          // close others
+          cards.forEach(function(c){ if (c !== card) c.classList.remove('is-open'); });
+          card.classList.toggle('is-open');
+        });
+      });
+    }
   </script>
 </section>
 
