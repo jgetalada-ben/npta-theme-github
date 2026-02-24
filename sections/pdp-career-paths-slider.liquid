@@ -1,0 +1,586 @@
+{% comment %}
+  Section: PDP Career Paths Slider
+  - Horizontal slider with hover-reveal overlay
+  - Mobile: swipe left/right (no stacking)
+  - Optional autoplay, nav arrows, pagination (pill active)
+{% endcomment %}
+
+{%- assign sid = section.id -%}
+
+<section
+  id="CareerPaths-{{ sid }}"
+  class="cps"
+  style="
+    --cps-bg: {{ section.settings.section_bg }};
+    --cps-overlay-bg: {{ section.settings.overlay_bg }};
+    --cps-overlay-bg-hover: {{ section.settings.overlay_bg_hover }};
+
+    --cps-title-size: {{ section.settings.section_title_size }};
+    --cps-desc-size: {{ section.settings.section_desc_size }};
+    --cps-card-title-size: {{ section.settings.card_title_size }};
+    --cps-card-desc-size: {{ section.settings.card_desc_size }};
+  "
+>
+  <div class="cps__inner">
+    {% if section.settings.heading != blank or section.settings.subheading != blank %}
+      <div class="cps__head">
+        {% if section.settings.heading != blank %}
+          <h2 class="cps__h">{{ section.settings.heading }}</h2>
+        {% endif %}
+        {% if section.settings.subheading != blank %}
+          <div class="cps__sub rte">{{ section.settings.subheading }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="cps__wrap">
+      {% if section.settings.show_arrows %}
+        <button class="cps__nav cps__nav--prev" type="button" aria-label="Previous">
+          ‹
+        </button>
+      {% endif %}
+
+      <div class="cps__viewport" data-cps-viewport>
+        <div class="cps__track" data-cps-track>
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'card' %}
+                <article class="cps__card" {{ block.shopify_attributes }}>
+                  <div class="cps__media">
+                    {% if block.settings.image != blank %}
+                      {%- capture sizes -%}
+                        (min-width: 1100px) 25vw, (min-width: 750px) 50vw, 80vw
+                      {%- endcapture -%}
+                      {{
+                        block.settings.image
+                        | image_url: width: 1600
+                        | image_tag: loading: 'lazy', sizes: sizes, widths: '360,540,720,900,1200,1600', class: 'cps__img'
+                      }}
+                    {% else %}
+                      <div class="cps__img cps__img--ph">{{ 'image' | placeholder_svg_tag }}</div>
+                    {% endif %}
+                  </div>
+
+                  <!-- Overlay (collapsed bar -> expands up on hover) -->
+                  <div class="cps__overlay">
+                    <div class="cps__overlay-inner">
+                      {% if block.settings.title != blank %}
+                        <h3 class="cps__ct">{{ block.settings.title }}</h3>
+                      {% endif %}
+                      {% if block.settings.desc != blank %}
+                        <div class="cps__cd rte">{{ block.settings.desc }}</div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </article>
+            {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+
+      {% if section.settings.show_arrows %}
+        <button class="cps__nav cps__nav--next" type="button" aria-label="Next">
+          ›
+        </button>
+      {% endif %}
+    </div>
+
+    {% if section.settings.show_pagination %}
+      <div class="cps__pagi" data-cps-pagi aria-label="Slider pagination"></div>
+    {% endif %}
+  </div>
+
+  <style>
+    /* Base */
+    #CareerPaths-{{ sid }}.cps{
+      background: var(--cps-bg);
+      padding: clamp(24px, 4vw, 48px) 0;
+    }
+    #CareerPaths-{{ sid }} .cps__inner{
+      max-width: {{ section.settings.max_width }};
+      margin: 0 auto;
+      padding: 0 clamp(16px, 3vw, 28px);
+    }
+
+    /* Header */
+    #CareerPaths-{{ sid }} .cps__head{
+      text-align: center;
+      margin-bottom: clamp(18px, 3vw, 26px);
+    }
+    #CareerPaths-{{ sid }} .cps__h{
+      margin: 0 0 8px;
+      font-family: var(--font-heading-family);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      font-size: var(--cps-title-size);
+      color: {{ section.settings.section_title_color }};
+      line-height: 1.05;
+    }
+    #CareerPaths-{{ sid }} .cps__sub{
+      margin: 0;
+      font-family: var(--font-body-family);
+      font-size: var(--cps-desc-size);
+      color: {{ section.settings.section_desc_color }};
+      line-height: 1.5;
+    }
+
+    /* Slider layout */
+    #CareerPaths-{{ sid }} .cps__wrap{
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Viewport = swipe area */
+    #CareerPaths-{{ sid }} .cps__viewport{
+      overflow: hidden;
+      width: 100%;
+    }
+
+    /* Track = horizontal scrolling content */
+    #CareerPaths-{{ sid }} .cps__track{
+      display: flex;
+      gap: {{ section.settings.card_gap }};
+      will-change: transform;
+      transform: translate3d(0,0,0);
+      transition: transform 420ms ease;
+      padding-bottom: 4px;
+    }
+
+    /* Card sizing: desktop 4, tablet 2, mobile 1 (still swipe) */
+    #CareerPaths-{{ sid }} .cps__card{
+      position: relative;
+      flex: 0 0 calc((100% - ({{ section.settings.card_gap }} * 3)) / 4);
+      border-radius: {{ section.settings.card_radius }}px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: {{ section.settings.card_shadow }};
+      min-height: 420px;
+    }
+
+    @media (max-width: 1099px){
+      #CareerPaths-{{ sid }} .cps__card{
+        flex-basis: calc((100% - ({{ section.settings.card_gap }} * 1)) / 2);
+        min-height: 420px;
+      }
+    }
+
+    @media (max-width: 749px){
+      #CareerPaths-{{ sid }} .cps__wrap{
+        grid-template-columns: 1fr;
+      }
+      #CareerPaths-{{ sid }} .cps__card{
+        flex-basis: 82%;
+        min-height: 420px;
+      }
+      /* allow natural swipe feel on mobile */
+      #CareerPaths-{{ sid }} .cps__viewport{
+        overflow-x: hidden;
+      }
+    }
+
+    /* Media */
+    #CareerPaths-{{ sid }} .cps__media,
+    #CareerPaths-{{ sid }} .cps__img{
+      width: 100%;
+      height: 100%;
+    }
+    #CareerPaths-{{ sid }} .cps__media{
+      height: 100%;
+    }
+    #CareerPaths-{{ sid }} .cps__img{
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    #CareerPaths-{{ sid }} .cps__img--ph{
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: .6;
+    }
+
+    /* Overlay: collapsed bar -> expand upward on hover */
+    #CareerPaths-{{ sid }} .cps__overlay{
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      background: var(--cps-overlay-bg);
+      color: {{ section.settings.card_text_color }};
+      transform: translate3d(0, 0, 0);
+      height: {{ section.settings.overlay_collapsed_height }};
+      transition: height 380ms cubic-bezier(.2,.8,.2,1), background 220ms ease;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    #CareerPaths-{{ sid }} .cps__overlay-inner{
+      width: 100%;
+      padding: {{ section.settings.overlay_padding }};
+    }
+
+    /* Title always visible */
+    #CareerPaths-{{ sid }} .cps__ct{
+      margin: 0;
+      font-family: var(--font-heading-family);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      font-size: var(--cps-card-title-size);
+      line-height: 1.15;
+      color: {{ section.settings.card_title_color }};
+    }
+
+    /* Description only visible when expanded */
+    #CareerPaths-{{ sid }} .cps__cd{
+      margin-top: 10px;
+      font-family: var(--font-body-family);
+      font-size: var(--cps-card-desc-size);
+      line-height: 1.55;
+      color: {{ section.settings.card_desc_color }};
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 240ms ease, transform 240ms ease;
+    }
+    #CareerPaths-{{ sid }} .cps__cd p{ margin: 0; }
+    #CareerPaths-{{ sid }} .cps__cd p + p{ margin-top: 10px; }
+
+    /* Hover expand */
+    @media (hover: hover) and (pointer: fine){
+      #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay{
+        height: 72%;
+        background: var(--cps-overlay-bg-hover);
+      }
+      #CareerPaths-{{ sid }} .cps__card:hover .cps__cd{
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Nav */
+    #CareerPaths-{{ sid }} .cps__nav{
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 0;
+      background: {{ section.settings.nav_bg }};
+      color: {{ section.settings.nav_color }};
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 24px rgba(0,0,0,.12);
+      transition: transform .2s ease, opacity .2s ease;
+      user-select: none;
+    }
+    #CareerPaths-{{ sid }} .cps__nav:hover{ transform: translateY(-1px); }
+    #CareerPaths-{{ sid }} .cps__nav[disabled]{ opacity: .4; cursor: not-allowed; transform: none; }
+
+    @media (max-width: 749px){
+      /* If arrows enabled, keep them below on mobile */
+      #CareerPaths-{{ sid }} .cps__nav{
+        display: none;
+      }
+    }
+
+    /* Pagination (dots with active pill) */
+    #CareerPaths-{{ sid }} .cps__pagi{
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: clamp(14px, 2.2vw, 18px);
+    }
+    #CareerPaths-{{ sid }} .cps__dot{
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: {{ section.settings.pagi_inactive }};
+      border: 0;
+      cursor: pointer;
+      padding: 0;
+      transition: width 220ms ease, background 220ms ease, opacity 220ms ease;
+      opacity: .75;
+    }
+    #CareerPaths-{{ sid }} .cps__dot.is-active{
+      width: 30px;               /* pill/oval */
+      background: {{ section.settings.pagi_active }};
+      opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      #CareerPaths-{{ sid }} .cps__track{ transition: none !important; }
+      #CareerPaths-{{ sid }} .cps__overlay{ transition: none !important; }
+      #CareerPaths-{{ sid }} .cps__cd{ transition: none !important; opacity: 1 !important; transform: none !important; }
+    }
+  </style>
+
+  <script>
+    (function(){
+      var root = document.getElementById('CareerPaths-{{ sid }}');
+      if (!root) return;
+
+      var track = root.querySelector('[data-cps-track]');
+      var viewport = root.querySelector('[data-cps-viewport]');
+      if (!track || !viewport) return;
+
+      var cards = Array.prototype.slice.call(root.querySelectorAll('.cps__card'));
+      if (!cards.length) return;
+
+      var showArrows = {{ section.settings.show_arrows | json }};
+      var showPagi = {{ section.settings.show_pagination | json }};
+      var autoplay = {{ section.settings.autoplay | json }};
+      var autoplayMs = {{ section.settings.autoplay_speed | times: 1000 | json }};
+
+      var btnPrev = root.querySelector('.cps__nav--prev');
+      var btnNext = root.querySelector('.cps__nav--next');
+      var pagi = root.querySelector('[data-cps-pagi]');
+
+      var index = 0;
+      var perView = 4;
+      var maxIndex = 0;
+      var timer = null;
+
+      function computePerView(){
+        var w = window.innerWidth || document.documentElement.clientWidth;
+        if (w <= 749) return 1;
+        if (w <= 1099) return 2;
+        return 4;
+      }
+
+      function pageCount(){
+        return Math.max(1, Math.ceil(cards.length / perView));
+      }
+
+      function clampIndex(i){
+        var pages = pageCount();
+        var max = pages - 1;
+        if (i < 0) i = 0;
+        if (i > max) i = max;
+        return i;
+      }
+
+      function offsetForPage(i){
+        // move by viewport width each "page"
+        return i * viewport.clientWidth;
+      }
+
+      function apply(){
+        perView = computePerView();
+        index = clampIndex(index);
+        var x = offsetForPage(index);
+        track.style.transform = 'translate3d(' + (-x) + 'px,0,0)';
+        updateNav();
+        updatePagi();
+      }
+
+      function updateNav(){
+        if (!showArrows) return;
+        var pages = pageCount();
+        if (btnPrev) btnPrev.disabled = (index <= 0);
+        if (btnNext) btnNext.disabled = (index >= pages - 1);
+      }
+
+      function buildPagi(){
+        if (!showPagi || !pagi) return;
+        pagi.innerHTML = '';
+        var pages = pageCount();
+        for (var i=0; i<pages; i++){
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'cps__dot' + (i === index ? ' is-active' : '');
+          b.setAttribute('aria-label', 'Go to slide ' + (i+1));
+          (function(ii){
+            b.addEventListener('click', function(){
+              index = ii;
+              apply();
+              restartAutoplay();
+            });
+          })(i);
+          pagi.appendChild(b);
+        }
+      }
+
+      function updatePagi(){
+        if (!showPagi || !pagi) return;
+        var dots = pagi.querySelectorAll('.cps__dot');
+        dots.forEach(function(d, i){
+          if (i === index) d.classList.add('is-active');
+          else d.classList.remove('is-active');
+        });
+      }
+
+      function next(){
+        var pages = pageCount();
+        index = (index + 1) % pages;
+        apply();
+      }
+
+      function prev(){
+        index = index - 1;
+        if (index < 0) index = 0;
+        apply();
+      }
+
+      function stopAutoplay(){
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+      }
+
+      function startAutoplay(){
+        if (!autoplay) return;
+        stopAutoplay();
+        timer = setInterval(function(){
+          next();
+        }, Math.max(2000, autoplayMs || 5000));
+      }
+
+      function restartAutoplay(){
+        if (!autoplay) return;
+        startAutoplay();
+      }
+
+      // Nav handlers
+      if (showArrows) {
+        if (btnPrev) btnPrev.addEventListener('click', function(){ prev(); restartAutoplay(); });
+        if (btnNext) btnNext.addEventListener('click', function(){ next(); restartAutoplay(); });
+      }
+
+      // Swipe support (pointer-based)
+      var startX = 0, dx = 0, isDown = false;
+      viewport.addEventListener('pointerdown', function(e){
+        isDown = true;
+        startX = e.clientX;
+        dx = 0;
+        stopAutoplay();
+      }, { passive: true });
+
+      viewport.addEventListener('pointermove', function(e){
+        if (!isDown) return;
+        dx = e.clientX - startX;
+      }, { passive: true });
+
+      viewport.addEventListener('pointerup', function(){
+        if (!isDown) return;
+        isDown = false;
+        var threshold = Math.min(90, viewport.clientWidth * 0.12);
+        if (dx <= -threshold) next();
+        else if (dx >= threshold) { index = Math.max(0, index - 1); apply(); }
+        else apply();
+        restartAutoplay();
+      }, { passive: true });
+
+      viewport.addEventListener('pointercancel', function(){
+        isDown = false;
+        apply();
+        restartAutoplay();
+      }, { passive: true });
+
+      // Build pagination after initial layout
+      function init(){
+        perView = computePerView();
+        buildPagi();
+        apply();
+        startAutoplay();
+      }
+
+      // Recompute on resize
+      var rto = null;
+      window.addEventListener('resize', function(){
+        clearTimeout(rto);
+        rto = setTimeout(function(){
+          buildPagi();
+          apply();
+        }, 120);
+      });
+
+      // Pause autoplay when user hovers the section (desktop)
+      root.addEventListener('mouseenter', function(){ stopAutoplay(); });
+      root.addEventListener('mouseleave', function(){ restartAutoplay(); });
+
+      init();
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "PDP Career paths slider",
+  "tag": "section",
+  "class": "section pdp-career-paths-slider",
+  "settings": [
+    { "type": "header", "content": "Header" },
+    { "type": "text", "id": "heading", "label": "Section title", "default": "POTENTIAL CAREER PATHS" },
+    { "type": "richtext", "id": "subheading", "label": "Section description", "default": "<p>Discover the opportunities an NASM credential can unlock.</p>" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "section_bg", "label": "Section background", "default": "#ffffff" },
+    { "type": "color", "id": "section_title_color", "label": "Section title color", "default": "#0E2A4C" },
+    { "type": "color", "id": "section_desc_color", "label": "Section description color", "default": "#0E2A4C" },
+
+    { "type": "color", "id": "overlay_bg", "label": "Overlay background (collapsed)", "default": "rgba(18,54,91,0.85)" },
+    { "type": "color", "id": "overlay_bg_hover", "label": "Overlay background (expanded/hover)", "default": "rgba(18,54,91,0.90)" },
+
+    { "type": "color", "id": "card_text_color", "label": "Card text (fallback)", "default": "#ffffff" },
+    { "type": "color", "id": "card_title_color", "label": "Card title color", "default": "#ffffff" },
+    { "type": "color", "id": "card_desc_color", "label": "Card description color", "default": "#ffffff" },
+
+    { "type": "header", "content": "Typography" },
+    { "type": "text", "id": "section_title_size", "label": "Section title font size (CSS)", "default": "clamp(28px, 3.6vw, 54px)" },
+    { "type": "text", "id": "section_desc_size", "label": "Section description font size (CSS)", "default": "clamp(14px, 1.4vw, 18px)" },
+    { "type": "text", "id": "card_title_size", "label": "Card title font size (CSS)", "default": "clamp(16px, 1.4vw, 20px)" },
+    { "type": "text", "id": "card_desc_size", "label": "Card description font size (CSS)", "default": "clamp(14px, 1.2vw, 16px)" },
+
+    { "type": "header", "content": "Layout" },
+    { "type": "text", "id": "max_width", "label": "Max width (CSS)", "default": "1200px" },
+    { "type": "text", "id": "card_gap", "label": "Gap between cards (CSS)", "default": "18px" },
+    { "type": "range", "id": "card_radius", "label": "Card radius", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 12 },
+    { "type": "text", "id": "card_shadow", "label": "Card shadow (CSS)", "default": "0 10px 26px rgba(0,0,0,0.14)" },
+
+    { "type": "text", "id": "overlay_collapsed_height", "label": "Overlay collapsed height (CSS)", "default": "72px" },
+    { "type": "text", "id": "overlay_padding", "label": "Overlay padding (CSS)", "default": "18px 18px" },
+
+    { "type": "header", "content": "Controls" },
+    { "type": "checkbox", "id": "autoplay", "label": "Enable autoplay", "default": false },
+    { "type": "range", "id": "autoplay_speed", "label": "Autoplay speed (seconds)", "min": 2, "max": 12, "step": 1, "default": 5 },
+
+    { "type": "checkbox", "id": "show_arrows", "label": "Show prev/next buttons", "default": false },
+    { "type": "color", "id": "nav_bg", "label": "Nav button background", "default": "#ffffff" },
+    { "type": "color", "id": "nav_color", "label": "Nav button color", "default": "#0E2A4C" },
+
+    { "type": "checkbox", "id": "show_pagination", "label": "Show pagination", "default": false },
+    { "type": "color", "id": "pagi_inactive", "label": "Pagination inactive", "default": "rgba(14,42,76,0.35)" },
+    { "type": "color", "id": "pagi_active", "label": "Pagination active (pill)", "default": "#4FB7C3" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Career card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Card title", "default": "PERSONAL TRAINER" },
+        { "type": "richtext", "id": "desc", "label": "Card description (revealed on hover)", "default": "<p>Add your card description here.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PDP Career paths slider",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" }
+      ]
+    }
+  ]
+}
+{% endschema %}
