@@ -168,31 +168,37 @@
       opacity: .6;
     }
 
-    /* Overlay expand up on hover */
     #CareerPaths-{{ sid }} .cps__overlay{
-      position: absolute;
-      left: 0; right: 0; bottom: 0;
-      background: var(--cps-overlay-bg);
-      height: {{ section.settings.overlay_collapsed_height }};
-      transition: height 380ms cubic-bezier(.2,.8,.2,1), background 220ms ease;
-      overflow: hidden;
-      display: flex;
-      align-items: flex-end;
+        position: absolute;
+        left: 0; right: 0; bottom: 0;
+        background: var(--cps-overlay-bg);
+        height: {{ section.settings.overlay_collapsed_height }};
+        transition: height 380ms cubic-bezier(.2,.8,.2,1), background 220ms ease;
+        overflow: hidden;
+
+        display: flex;
+        align-items: flex-end;
+        pointer-events: none;
     }
+    #CareerPaths-{{ sid }} .cps__card{cursor: pointer;}
     #CareerPaths-{{ sid }} .cps__overlay-inner{
       width: 100%;
       padding: {{ section.settings.overlay_padding }};
     }
 
     #CareerPaths-{{ sid }} .cps__ct{
-      margin: 0;
-      font-family: var(--font-heading-family);
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: .5px;
-      font-size: var(--cps-card-title-size);
-      line-height: 1.15;
-      color: {{ section.settings.card_title_color }};
+        margin: 0;
+        font-family: var(--font-heading-family);
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+        font-size: var(--cps-card-title-size);
+        line-height: 1.15;
+        color: {{ section.settings.card_title_color }};
+        opacity: 1 !important;
+        transform: none !important;
+        position: relative;
+        z-index: 2;
     }
 
     #CareerPaths-{{ sid }} .cps__cd{
