@@ -3779,12 +3779,13 @@ line-height: 150%;
 }
 
 .price-item--payment-terms{
-  color: var(--black, #141414);
+  color: #0F828C;
   font-family: var(--font-body-family);
 font-size: 14px;
 font-style: normal;
 font-weight: 400;
 line-height: 150%;
+text-transform: lowercase;
 }
 
 .price-item--one-time{
