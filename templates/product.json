@@ -169,7 +169,7 @@
         "show_arrows": false,
         "nav_bg": "#ffffff",
         "nav_color": "#0E2A4C",
-        "show_pagination": false,
+        "show_pagination": true,
         "pagi_inactive": "rgba(14,42,76,0.35)",
         "pagi_active": "#4FB7C3"
       }
