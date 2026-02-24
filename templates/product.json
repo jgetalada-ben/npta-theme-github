@@ -171,7 +171,7 @@
         "show_arrows": false,
         "nav_bg": "#ffffff",
         "nav_color": "#0e2a4c",
-        "show_pagination": true,
+        "show_pagination": false,
         "pagi_inactive": "#0e2a4c59",
         "pagi_active": "#4fb7c3"
       }
@@ -184,22 +184,22 @@
         "pad_y": 40,
         "pad_x": 24,
         "gap": 28,
-        "bg_color": "#177F8A",
-        "text_color": "#FFFFFF",
-        "left_heading": "<p>CAN’T FIND WHAT<br>YOU’RE LOOKING FOR?</p>",
+        "bg_color": "#177f8a",
+        "text_color": "#ffffff",
+        "left_heading": "<p>CAN’T FIND WHAT<br/>YOU’RE LOOKING FOR?</p>",
         "left_font_size": "clamp(28px, 4vw, 54px)",
-        "left_color": "#FFFFFF",
+        "left_color": "#ffffff",
         "right_title": "Talk to an NPTA Program Advisor",
         "right_title_font_size": "clamp(18px, 1.8vw, 24px)",
-        "right_title_color": "#FFFFFF",
+        "right_title_color": "#ffffff",
         "right_subtitle": "Our team are ready to help you decide which is best fit you!",
         "right_sub_font_size": "clamp(14px, 1.3vw, 18px)",
-        "right_sub_color": "#FFFFFF",
+        "right_sub_color": "#ffffff",
         "btn_label": "+1-778-949-6782",
         "btn_tel": "+17789496782",
         "btn_link": "",
-        "btn_bg": "#FFFFFF",
-        "btn_text_color": "#0E2A4C",
+        "btn_bg": "#ffffff",
+        "btn_text_color": "#0e2a4c",
         "btn_font_size": "clamp(16px, 1.4vw, 22px)",
         "btn_radius": 10,
         "btn_pad_y": 12,
@@ -209,7 +209,7 @@
         "iconify_icon": "mdi:phone",
         "btn_icon_size": "clamp(16px, 1.6vw, 22px)",
         "btn_icon_gap": 10,
-        "btn_icon_color": "#0E2A4C"
+        "btn_icon_color": "#0e2a4c"
       }
     },
     "section_steps_j7BRy6": {
