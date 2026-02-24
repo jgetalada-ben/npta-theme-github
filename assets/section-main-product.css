@@ -245,9 +245,8 @@ line-height: 150%;
   margin-bottom: 0;
 }
 .product__info-container .product__text {
-  font-family: "ProximaSanMedium";
   color: #0F828C;
-  
+
 }
 a.product__text {
   display: block;
