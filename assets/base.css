@@ -3852,10 +3852,11 @@ text-transform: uppercase;
 }
 .price__container .price__one-time{
      width: auto;
-    display: flex;
+}
+.price__container .price__one-time-con{
+  display: flex;
     gap: 20px;
 }
-
   
 
 .price__monthly:before{
