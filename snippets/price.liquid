@@ -95,9 +95,11 @@
         </span>
       </div>
       {% if compare_at_price > 0 %}
-          <span>
-            {{ compare_at_price | divided_by: 100.0 | prepend: currency_code }}
-          </span>
+          <p class="price-item--compare">
+            <span>
+              {{ compare_at_price | divided_by: 100.0 | prepend: currency_code }}
+            </span>
+          </p>
       {% endif %}
     </div>
   </div>
