@@ -40,6 +40,7 @@
         "embed_url": "",
         "alt": "Promotional video",
         "enable_audio": false,
+        "mute_after_first_loop": true,
         "aspect_ratio": "21-9",
         "aspect_ratio_mobile": "1-1",
         "height_mode": "vh",
@@ -789,6 +790,7 @@
         },
         "trainer_gNBkiJ": {
           "type": "trainer",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Cert-5.jpg",
             "show_content": true,
@@ -800,6 +802,7 @@
         },
         "trainer_dPMrzb": {
           "type": "trainer",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Cert-6.jpg",
             "show_content": true,
@@ -811,6 +814,7 @@
         },
         "trainer_8RVP4A": {
           "type": "trainer",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Cert-7.jpg",
             "show_content": true,
