@@ -93,8 +93,8 @@
         One-time payment
       </span>
     </div>
-
-    {% if compare_at_price > 0 %}
+  </div>
+  {% if compare_at_price > 0 %}
       <div class="price__one-time comp-price">
         <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
         <p class="price-item--one-time">
@@ -107,7 +107,6 @@
         </p>
       </div>
     {% endif %}
-  </div>
   {% if show_badges %}
   {% endif %}
 </div>
