@@ -3851,7 +3851,10 @@ text-transform: uppercase;
  width:33%;
 }
 .price__container .price__one-time{
-     width: auto;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 .price__container .price__one-time-con{
   display: flex;
