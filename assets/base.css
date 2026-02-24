@@ -3768,9 +3768,8 @@ text-transform: uppercase;
   font-family: var(--font-body-family);
 font-size: 14px;
 font-style: normal;
-font-weight: 400;
+font-weight: 700;
 line-height: 150%; 
-  opacity: 0.4;
 }
 
 .starting-price-p{
