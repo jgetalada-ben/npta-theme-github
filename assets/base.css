@@ -3813,14 +3813,15 @@ text-transform: uppercase;
 }
 
 .price-item--compare{
-  color: #01241E;
+  color: #E88077;
     font-family: var(--font-heading-family);
-font-size: 18px;
+font-size: 16px;
 font-style: normal;
-font-weight: 800;
+font-weight: 400;
 line-height: 104%; 
 text-transform: uppercase;
   margin:0;
+  text-decoration: line-through;
 }
 
 .starting-price-wrap{
