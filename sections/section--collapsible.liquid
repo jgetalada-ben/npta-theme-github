@@ -50,17 +50,16 @@
         </div>
         {%- endif -%}
       </div>
-<div class="accordion-footer-wrap">
-<p class="footer-text"> {{ section.settings.footer_text }}</p>
-
-                      <a href="{{ section.settings.button_link }}" {% if section.settings.button_text != "Contact Us" %} target="_blank" {% endif %} 
+      {%- if section.settings.button_link != blank -%}
+      <div class="accordion-footer-wrap">
+        <p class="footer-text"> {{ section.settings.footer_text }}</p>
+        <a href="{{ section.settings.button_link }}" {% if section.settings.button_text != "Contact Us" %} target="_blank" {% endif %} 
      class="btn button-yg">
-                          <span class="btn-label-down">{{ section.settings.button_text }}</span>
-                          <span class="btn-label-down">{{ section.settings.button_text }}</span>
-                      </a>
-              
-  
+            <span class="btn-label-down">{{ section.settings.button_text }}</span>
+            <span class="btn-label-down">{{ section.settings.button_text }}</span>
+        </a>
       </div>
+      {%- endif -%}
     </div>
   </div>
 </section>
