@@ -88,6 +88,7 @@
       background: var(--cps-bg);
       padding: clamp(24px, 4vw, 48px) 0;
     }
+
     #CareerPaths-{{ sid }} .cps__inner{
       max-width: {{ section.settings.max_width }};
       margin: 0 auto;
@@ -98,6 +99,7 @@
       text-align: center;
       margin-bottom: clamp(18px, 3vw, 26px);
     }
+
     #CareerPaths-{{ sid }} .cps__h{
       margin: 0 0 8px;
       font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
@@ -108,6 +110,7 @@
       color: {{ section.settings.section_title_color }};
       line-height: 1.05;
     }
+
     #CareerPaths-{{ sid }} .cps__sub{
       margin: 0;
       font-family: var(--font-body-family);
@@ -124,7 +127,6 @@
       gap: 10px;
     }
 
-    /* Scroll-based viewport */
     #CareerPaths-{{ sid }} .cps__viewport{
       overflow-x: auto;
       overflow-y: hidden;
@@ -132,7 +134,7 @@
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
     }
-    #CareerPaths-{{ sid }} .cps__viewport::-webkit-scrollbar{ display: none; }
+    #CareerPaths-{{ sid }} .cps__viewport::-webkit-scrollbar{ display:none; }
 
     #CareerPaths-{{ sid }} .cps__track{
       display: flex;
@@ -147,19 +149,20 @@
       background: #fff;
       box-shadow: {{ section.settings.card_shadow }};
       min-height: 420px;
-
-      /* Set by JS */
       flex: 0 0 var(--cps-cardw, 320px);
       scroll-snap-align: start;
+      cursor: pointer;
     }
 
     #CareerPaths-{{ sid }} .cps__media{ height: 100%; }
+
     #CareerPaths-{{ sid }} .cps__img{
       display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+
     #CareerPaths-{{ sid }} .cps__img--ph{
       height: 100%;
       display: flex;
@@ -171,8 +174,8 @@
     #CareerPaths-{{ sid }} .cps__overlay{
       position: absolute;
       left: 0; right: 0; bottom: 0;
-      background: var(--cps-overlay-bg);
       height: {{ section.settings.overlay_collapsed_height }};
+      background: var(--cps-overlay-bg);
       transition: height 380ms cubic-bezier(.2,.8,.2,1), background 220ms ease;
       overflow: hidden;
       display: flex;
@@ -180,7 +183,7 @@
       z-index: 2;
       pointer-events: none;
     }
-    #CareerPaths-{{ sid }} .cps__card{cursor: pointer;}
+
     #CareerPaths-{{ sid }} .cps__overlay-inner{
       width: 100%;
       height: 100%;
@@ -189,21 +192,21 @@
       flex-direction: column;
       justify-content: flex-end;
       box-sizing: border-box;
+      scrollbar-width: none;
     }
+    #CareerPaths-{{ sid }} .cps__overlay-inner::-webkit-scrollbar{ display:none; }
 
     #CareerPaths-{{ sid }} .cps__ct{
-        margin: 0;
-        font-family: var(--font-heading-family);
-        font-weight: 900;
-        text-transform: uppercase;
-        letter-spacing: .5px;
-        font-size: var(--cps-card-title-size);
-        line-height: 1.15;
-        color: {{ section.settings.card_title_color }};
-        opacity: 1 !important;
-        transform: none !important;
-        position: relative;
-        z-index: 2;
+      margin: 0;
+      font-family: var(--font-heading-family);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      font-size: var(--cps-card-title-size);
+      line-height: 1.15;
+      color: {{ section.settings.card_title_color }};
+      position: relative;
+      z-index: 2;
     }
 
     #CareerPaths-{{ sid }} .cps__cd{
@@ -222,46 +225,10 @@
         transform 240ms ease,
         margin-top 240ms ease;
     }
+
     #CareerPaths-{{ sid }} .cps__cd p{ margin: 0; }
     #CareerPaths-{{ sid }} .cps__cd p + p{ margin-top: 10px; }
 
-    @media (hover: hover) and (pointer: fine){
-      #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay{
-        height: 100%; 
-        background: var(--cps-overlay-bg-hover);
-        pointer-events: auto;
-      }
-      #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay-inner{
-        justify-content: flex-start;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-      }
-      #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay-inner::-webkit-scrollbar{
-        display: none;
-      }
-      #CareerPaths-{{ sid }} .cps__card:hover .cps__cd{
-        max-height: 2000px;
-        margin-top: 10px;
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    #CareerPaths-{{ sid }} .cps__card:focus-within .cps__overlay{
-      height: 72%;
-      background: var(--cps-overlay-bg-hover);
-    }
-    #CareerPaths-{{ sid }} .cps__card:focus-within .cps__overlay-inner{
-      justify-content: flex-start;
-    }
-    #CareerPaths-{{ sid }} .cps__card:focus-within .cps__cd{
-      max-height: 500px;
-      margin-top: 10px;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Nav */
     #CareerPaths-{{ sid }} .cps__nav{
       width: 44px;
       height: 44px;
@@ -282,18 +249,13 @@
     #CareerPaths-{{ sid }} .cps__nav:hover{ transform: translateY(-1px); }
     #CareerPaths-{{ sid }} .cps__nav[disabled]{ opacity: .4; cursor: not-allowed; transform: none; }
 
-    @media (max-width: 749px){
-      #CareerPaths-{{ sid }} .cps__wrap{ grid-template-columns: 1fr; }
-      #CareerPaths-{{ sid }} .cps__nav{ display: none; }
-    }
-
-    /* Pagination: active pill */
     #CareerPaths-{{ sid }} .cps__pagi{
       display: flex;
       justify-content: center;
       gap: 10px;
       margin-top: clamp(14px, 2.2vw, 18px);
     }
+
     #CareerPaths-{{ sid }} .cps__dot{
       width: 9px;
       height: 9px;
@@ -305,16 +267,40 @@
       transition: width 220ms ease, background 220ms ease, opacity 220ms ease;
       opacity: .75;
     }
+
     #CareerPaths-{{ sid }} .cps__dot.is-active{
       width: 30px;
       background: {{ section.settings.pagi_active }};
       opacity: 1;
     }
 
-    @media (prefers-reduced-motion: reduce){
-      #CareerPaths-{{ sid }} .cps__overlay,
-      #CareerPaths-{{ sid }} .cps__cd{ transition: none !important; }
-      #CareerPaths-{{ sid }} .cps__cd{ opacity: 1 !important; transform: none !important; }
+    @media (max-width: 749px){
+      #CareerPaths-{{ sid }} .cps__wrap{ grid-template-columns: 1fr; }
+      #CareerPaths-{{ sid }} .cps__nav{ display: none; }
+    }
+
+    @media (hover: hover) and (pointer: fine){
+      #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay,
+      #CareerPaths-{{ sid }} .cps__card:focus-within .cps__overlay{
+        height: 100%;
+        background: var(--cps-overlay-bg-hover);
+        pointer-events: auto;
+      }
+
+      #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay-inner,
+      #CareerPaths-{{ sid }} .cps__card:focus-within .cps__overlay-inner{
+        justify-content: flex-start;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      #CareerPaths-{{ sid }} .cps__card:hover .cps__cd,
+      #CareerPaths-{{ sid }} .cps__card:focus-within .cps__cd{
+        max-height: 3000px;
+        margin-top: 10px;
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @media (hover: none){
@@ -323,20 +309,25 @@
         background: var(--cps-overlay-bg-hover);
         pointer-events: auto;
       }
+
       #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay-inner{
         justify-content: flex-start;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
       }
-      #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay-inner::-webkit-scrollbar{
-        display: none;
-      }
+
       #CareerPaths-{{ sid }} .cps__card.is-open .cps__cd{
-        max-height: 2000px;
+        max-height: 3000px;
         margin-top: 10px;
         opacity: 1;
         transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      #CareerPaths-{{ sid }} .cps__overlay,
+      #CareerPaths-{{ sid }} .cps__cd{
+        transition: none !important;
       }
     }
   </style>
