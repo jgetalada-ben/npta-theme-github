@@ -648,79 +648,66 @@
         "program_footer_description": ""
       }
     },
-    "section_logo_carousel_XpMRMk": {
+    "section_logo_carousel_Typ4JF": {
       "type": "section--logo-carousel",
       "blocks": {
-        "logo_a9jirp": {
+        "logo_WRqazK": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/logo-carousel-placeholder-1.png"
+            "image": "shopify://shop_images/backfitpro-logo.webp"
           }
         },
-        "logo_PnDgzm": {
+        "logo_daxrAW": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/logo-carousel-place-holder-3.png"
+            "image": "shopify://shop_images/nasm-logo.png"
           }
         },
-        "logo_nyd4f9": {
+        "logo_tXtcJX": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/logo-carousel-place-holder-2.png"
+            "image": "shopify://shop_images/npta-ph-logo_61da15a0-7548-4732-becb-f2132c7cc3c8.png"
           }
         },
-        "logo_PeGztV": {
+        "logo_d8MRnj": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/logo-carousel-placeholder-1.png"
+            "image": "shopify://shop_images/ncsf-logo.png"
           }
         },
-        "logo_trn98F": {
+        "logo_rmVXhc": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/logo-carousel-place-holder-3.png"
+            "image": "shopify://shop_images/kbstronger-logo.png"
           }
         },
-        "logo_8dNGeQ": {
+        "logo_pXC4Dq": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/logo-carousel-place-holder-2.png"
+            "image": "shopify://shop_images/afaa-logo.png"
           }
         },
-        "logo_cFJaVH": {
+        "logo_L7hV94": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/logo-carousel-placeholder-1.png"
-          }
-        },
-        "logo_L8aahi": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/logo-carousel-place-holder-3.png"
-          }
-        },
-        "logo_NDGxj8": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/logo-carousel-place-holder-2.png"
+            "image": "shopify://shop_images/fitin_logo.png"
           }
         }
       },
       "block_order": [
-        "logo_a9jirp",
-        "logo_PnDgzm",
-        "logo_nyd4f9",
-        "logo_PeGztV",
-        "logo_trn98F",
-        "logo_8dNGeQ",
-        "logo_cFJaVH",
-        "logo_L8aahi",
-        "logo_NDGxj8"
+        "logo_WRqazK",
+        "logo_daxrAW",
+        "logo_tXtcJX",
+        "logo_d8MRnj",
+        "logo_rmVXhc",
+        "logo_pXC4Dq",
+        "logo_L7hV94"
       ],
+      "name": "Logo Carousel",
       "settings": {
-        "top_padding": 92,
+        "top_padding": 0,
         "bottom_padding": 0,
-        "container_width": 980,
+        "container_width": 2000,
         "scroll_direction": "rtl"
       }
     },
@@ -798,10 +785,11 @@
     "section_collapsible_q4ikjm",
     "section_certified_trainers_qQMF8K",
     "section_multicolumn_QREXdr",
-    "section_logo_carousel_XpMRMk",
+    "section_logo_carousel_Typ4JF",
     "section_related_products_aPKPXw",
     "related-products",
     "section_steps_form_P9mAVi",
     "section_banner_two_VVqGd3"
   ]
 }
+
