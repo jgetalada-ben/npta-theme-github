@@ -94,7 +94,7 @@
       </span>
     </div>
 
-    {% comment %} {% if compare_at_price > 0 %}
+    {% if compare_at_price > 0 %}
       <div class="price__one-time comp-price">
         <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
         <p class="price-item--one-time">
@@ -106,7 +106,7 @@
           </span>
         </p>
       </div>
-    {% endif %} {% endcomment %}
+    {% endif %}
   </div>
   {% if show_badges %}
   {% endif %}
