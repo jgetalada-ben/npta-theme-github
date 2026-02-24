@@ -146,12 +146,14 @@
       "settings": {
         "heading": "Discover Your Career Path With This Certification",
         "subheading": "<p>Your potential career pathways start here.</p>",
+        "items_desktop": "4",
+        "items_tablet": "2",
+        "items_mobile": "1",
         "section_bg": "#ffffff",
-        "section_title_color": "#0E2A4C",
-        "section_desc_color": "#0E2A4C",
-        "overlay_bg": "rgba(18,54,91,0.85)",
-        "overlay_bg_hover": "rgba(18,54,91,0.90)",
-        "card_text_color": "#ffffff",
+        "section_title_color": "#0e2a4c",
+        "section_desc_color": "#0e2a4c",
+        "overlay_bg": "#12365bd9",
+        "overlay_bg_hover": "#12365be6",
         "card_title_color": "#ffffff",
         "card_desc_color": "#ffffff",
         "section_title_size": "clamp(28px, 3.6vw, 54px)",
@@ -168,10 +170,10 @@
         "autoplay_speed": 5,
         "show_arrows": false,
         "nav_bg": "#ffffff",
-        "nav_color": "#0E2A4C",
+        "nav_color": "#0e2a4c",
         "show_pagination": true,
-        "pagi_inactive": "rgba(14,42,76,0.35)",
-        "pagi_active": "#4FB7C3"
+        "pagi_inactive": "#0e2a4c59",
+        "pagi_active": "#4fb7c3"
       }
     },
     "section_steps_j7BRy6": {
