@@ -338,9 +338,9 @@
         "top_padding": 90,
         "bottom_padding": 92,
         "container_width": 980,
-        "footer_text": "Can't find what you're looking for?",
-        "button_text": "Contact Us",
-        "button_link": "shopify://pages/contact-us"
+        "footer_text": "",
+        "button_text": "",
+        "button_link": ""
       }
     },
     "section_certified_trainers_qQMF8K": {
