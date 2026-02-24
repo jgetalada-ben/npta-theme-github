@@ -713,6 +713,7 @@
     },
     "section_related_products_aPKPXw": {
       "type": "section--related-products",
+      "disabled": true,
       "settings": {
         "section_id": "related_programs",
         "section_title": "More programs you may be interested in",
@@ -792,4 +793,3 @@
     "section_banner_two_VVqGd3"
   ]
 }
-
