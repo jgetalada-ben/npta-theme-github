@@ -84,9 +84,6 @@
   </div>
 
   <style>
-    #CareerPaths-{{ sid }}{
-      --cps-collapsed-h: {{ section.settings.overlay_collapsed_height }};
-    }
     #CareerPaths-{{ sid }}.cps{
       background: var(--cps-bg);
       padding: clamp(24px, 4vw, 48px) 0;
@@ -177,19 +174,14 @@
     #CareerPaths-{{ sid }} .cps__overlay{
       position: absolute;
       left: 0; right: 0; bottom: 0;
-
-      height: 100%;
+      height: {{ section.settings.overlay_collapsed_height }};
       background: transparent;
+      transition: height 380ms cubic-bezier(.2,.8,.2,1);
       overflow: hidden;
       display: flex;
       align-items: stretch;
-
       z-index: 2;
       pointer-events: none;
-
-      transform: translateY(calc(100% - var(--cps-collapsed-h)));
-      transition: transform 420ms cubic-bezier(.2,.8,.2,1);
-      will-change: transform;
     }
 
     #CareerPaths-{{ sid }} .cps__overlay::before{
@@ -208,11 +200,11 @@
       padding: {{ section.settings.overlay_padding }};
       display: flex;
       flex-direction: column;
-      justify-content: flex-end !important;
+      justify-content: flex-end;
       box-sizing: border-box;
+      scrollbar-width: none;
       position: relative;
       z-index: 1;
-      scrollbar-width: none;
     }
     
     #CareerPaths-{{ sid }} .cps__overlay-inner::-webkit-scrollbar{ display:none; }
@@ -228,9 +220,6 @@
       color: {{ section.settings.card_title_color }};
       position: relative;
       z-index: 2;
-      display: block;
-      opacity: 1 !important;
-      transform: none !important;
     }
 
     #CareerPaths-{{ sid }} .cps__cd{
@@ -306,7 +295,7 @@
     @media (hover: hover) and (pointer: fine){
       #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay,
       #CareerPaths-{{ sid }} .cps__card:focus-within .cps__overlay{
-        transform: translateY(calc(100% - var(--cps-open-h, 100%)));
+        height: 100%;
         pointer-events: auto;
       }
       #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay::before,
@@ -333,7 +322,8 @@
 
     @media (hover: none){
       #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay{
-        transform: translateY(calc(100% - var(--cps-open-h, 100%)));
+        height: 100%;
+        background: var(--cps-overlay-bg-hover);
         pointer-events: auto;
       }
       #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay::before{
@@ -341,7 +331,7 @@
         opacity: 0.78;
       }
       #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay-inner{
-        justify-content: flex-start !important;
+        justify-content: flex-start;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
       }
@@ -548,63 +538,6 @@
           card.classList.toggle('is-open');
         });
       });
-    }
-
-    function getCollapsedPx(){
-      var v = getComputedStyle(root).getPropertyValue('--cps-collapsed-h').trim();
-      var n = parseFloat(v);
-      return isFinite(n) ? n : 72;
-    }
-
-    function measureOpenHeight(card){
-      var overlayInner = card.querySelector('.cps__overlay-inner');
-      var cd = card.querySelector('.cps__cd');
-      if (!overlayInner) return;
-
-      var collapsed = getCollapsedPx();
-
-      // Temporarily expand description for accurate measurement (no visual flash)
-      var prev = {};
-      if (cd){
-        prev.maxHeight = cd.style.maxHeight;
-        prev.opacity = cd.style.opacity;
-        prev.transform = cd.style.transform;
-        prev.marginTop = cd.style.marginTop;
-        prev.transition = cd.style.transition;
-
-        cd.style.transition = 'none';
-        cd.style.maxHeight = 'none';
-        cd.style.opacity = '1';
-        cd.style.transform = 'none';
-        cd.style.marginTop = '10px';
-      }
-
-      var prevJustify = overlayInner.style.justifyContent;
-      overlayInner.style.justifyContent = 'flex-start';
-
-      var needed = overlayInner.scrollHeight;
-
-      overlayInner.style.justifyContent = prevJustify || '';
-
-      // Restore description styles
-      if (cd){
-        cd.style.maxHeight = prev.maxHeight || '';
-        cd.style.opacity = prev.opacity || '';
-        cd.style.transform = prev.transform || '';
-        cd.style.marginTop = prev.marginTop || '';
-        cd.style.transition = prev.transition || '';
-      }
-
-      // Cap to card height, but never smaller than collapsed
-      var cardH = card.clientHeight || 0;
-      if (cardH) needed = Math.min(needed, cardH);
-      needed = Math.max(needed, collapsed);
-
-      card.style.setProperty('--cps-open-h', Math.round(needed) + 'px');
-    }
-
-    function setOpenHeights(){
-      cards.forEach(measureOpenHeight);
     }
   </script>
 </section>
