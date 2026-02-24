@@ -94,19 +94,7 @@
       </span>
     </div>
   </div>
-  {% if compare_at_price > 0 %}
-      <div class="price__one-time comp-price">
-        <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
-        <p class="price-item--one-time">
-          <span class="comp-price">{{ competitor_price }}</span> Regular Price
-        </p>
-        <p class="price-item--compare">
-          <span>
-            {{ compare_at_price | divided_by: 100.0 | prepend: currency_code }}
-          </span>
-        </p>
-      </div>
-    {% endif %}
+  
   {% if show_badges %}
   {% endif %}
 </div>
