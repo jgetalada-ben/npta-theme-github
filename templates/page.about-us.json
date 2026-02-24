@@ -84,7 +84,7 @@
         "shopify_video": "shopify://files/videos/NPTA Vid.mp4",
         "embed_url": "",
         "alt": "Jesse Benson NPTA Founder",
-        "enable_audio": false,
+        "enable_audio": true,
         "aspect_ratio": "21-9",
         "aspect_ratio_mobile": "1-1",
         "height_mode": "ratio",
