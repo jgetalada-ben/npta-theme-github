@@ -293,6 +293,7 @@
     }
 
     @media (hover: hover) and (pointer: fine){
+      #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay,
       #CareerPaths-{{ sid }} .cps__card:focus-within .cps__overlay{
         height: 100%;
         background: var(--cps-overlay-bg-hover);
@@ -348,40 +349,6 @@
       #CareerPaths-{{ sid }} .cps__overlay,
       #CareerPaths-{{ sid }} .cps__cd{
         transition: none !important;
-      }
-    }
-
-    #CareerPaths-{{ sid }} .cps__overlay{
-      background: transparent !important;
-    }
-
-    #CareerPaths-{{ sid }} .cps__overlay::before{
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: var(--cps-overlay-bg);
-      opacity: 0.72; /* same transparency as collapsed */
-      transition: background 220ms ease, opacity 220ms ease;
-      z-index: 0;
-    }
-
-    #CareerPaths-{{ sid }} .cps__overlay-inner{
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (hover: hover) and (pointer: fine){
-      #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay::before,
-      #CareerPaths-{{ sid }} .cps__card:focus-within .cps__overlay::before{
-        background: var(--cps-overlay-bg-hover);
-        opacity: 0.72; /* keep transparency on hover */
-      }
-    }
-
-    @media (hover: none){
-      #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay::before{
-        background: var(--cps-overlay-bg-hover);
-        opacity: 0.72;
       }
     }
   </style>
