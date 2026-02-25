@@ -86,42 +86,41 @@
         "logo_ypgEkk": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/love-your-career-icon.png"
+            "image": "shopify://shop_images/flash-sale-50.png"
           }
         },
-        "logo_kGXear": {
+        "logo_CbmexM": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/love-your-career-icon.png"
+            "image": "shopify://shop_images/flash-sale-50.png"
           }
         },
-        "logo_hyzyzL": {
+        "logo_hHiTQP": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/love-your-career-icon.png"
+            "image": "shopify://shop_images/flash-sale-50.png"
           }
         },
-        "logo_zVCk7k": {
+        "logo_6EFn4q": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/love-your-career-icon.png"
+            "image": "shopify://shop_images/flash-sale-50.png"
           }
         },
-        "logo_Eiicm3": {
+        "logo_PrzJkY": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/love-your-career-icon.png"
+            "image": "shopify://shop_images/flash-sale-50.png"
           }
         }
       },
       "block_order": [
         "logo_ypgEkk",
-        "logo_kGXear",
-        "logo_hyzyzL",
-        "logo_zVCk7k",
-        "logo_Eiicm3"
+        "logo_CbmexM",
+        "logo_hHiTQP",
+        "logo_6EFn4q",
+        "logo_PrzJkY"
       ],
-      "disabled": true,
       "custom_css": [
         ".section--logo-carousel {background: #01241e;}"
       ],
