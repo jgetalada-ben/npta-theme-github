@@ -3775,6 +3775,7 @@ line-height: 150%;
 .starting-price-p{
   display:flex;
   align-items:center;
+  gap: 5px;
   margin:0 !important;
 }
 
