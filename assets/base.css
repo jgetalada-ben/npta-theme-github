@@ -3868,7 +3868,7 @@ text-transform: uppercase;
 }
 .price__container .price__one-time-con{
   display: flex;
-    gap: 20px;
+    gap: 10px;
 }
   
 
