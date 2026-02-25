@@ -175,7 +175,7 @@
         "card_yU3cKn": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/Rectangle_96.png",
+            "image": "{{ page.metafields.custom.pdf_landing_page.value.exam_information.value.image_1.value }}",
             "layout": "image_first",
             "title": "{{ page.metafields.custom.pdf_landing_page.value.exam_information.value.title_exam_card_1.value }}",
             "subtitle": "",
@@ -188,7 +188,7 @@
         "card_kBkRDx": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/Rectangle_99.png",
+            "image": "{{ page.metafields.custom.pdf_landing_page.value.exam_information.value.image_2.value }}",
             "layout": "image_first",
             "title": "{{ page.metafields.custom.pdf_landing_page.value.exam_information.value.title_exam_card_2.value }}",
             "subtitle": "",
