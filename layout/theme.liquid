@@ -419,14 +419,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <script>
 (function () {
-  // Uses your existing accessor:
-  // window.__nptaGetAttribution()
-
-  // Optional: also pass click IDs if present
+  const PATCHED_ATTR = "data-npta-utm-patched";
   const EXTRA_KEYS = ["gclid", "fbclid", "msclkid"];
 
-  // Map the stored first-touch object into query params Typeform can read as Hidden Fields.
-  // Make sure you create Hidden Fields in Typeform with these SAME names.
   function buildTypeformParams(attr) {
     if (!attr) return null;
 
@@ -437,13 +432,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       utm_term: attr.utm_term || "",
       utm_content: attr.utm_content || "",
 
-      // First-touch extras (optional, but very useful)
       ft_timestamp: attr.ft_timestamp || "",
       ft_landing_page: attr.ft_landing_page || "",
       ft_referrer: attr.ft_referrer || ""
     };
 
-    // Pull click IDs from either the current URL or storage if you ever add them
+    // Add click IDs from current URL if present
     try {
       const sp = new URL(window.location.href).searchParams;
       EXTRA_KEYS.forEach((k) => {
@@ -456,7 +450,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
 
   function isTypeformUrl(url) {
-    return /typeform\.com/i.test(url);
+    return typeof url === "string" && /typeform\.com/i.test(url);
   }
 
   function appendParamsToUrl(urlStr, params) {
@@ -470,8 +464,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     Object.keys(params).forEach((k) => {
       const v = params[k];
-      // Only set if we have a value and it isn't already present
-      if (v !== "" && !url.searchParams.get(k)) {
+      if (v !== "" && !url.searchParams.has(k)) {
         url.searchParams.set(k, v);
       }
     });
@@ -479,7 +472,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     return url.toString();
   }
 
-  function patchTypeformEmbeds() {
+  function patchNodeOnce(node, getUrl, setUrl) {
+    if (!node || node.getAttribute(PATCHED_ATTR) === "1") return;
+
+    const current = getUrl();
+    if (!current || !isTypeformUrl(current)) return;
+
     const attr = (typeof window.__nptaGetAttribution === "function")
       ? window.__nptaGetAttribution()
       : null;
@@ -487,40 +485,58 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     const params = buildTypeformParams(attr);
     if (!params) return;
 
-    // 1) Typeform script-based embeds
+    const updated = appendParamsToUrl(current, params);
+
+    // Only set if truly different (prevents iframe reload loops)
+    if (updated && updated !== current) {
+      setUrl(updated);
+    }
+
+    // Mark as patched so we never touch again
+    node.setAttribute(PATCHED_ATTR, "1");
+  }
+
+  function patchTypeformEmbeds() {
+    // Typeform embed elements
     const tfNodes = document.querySelectorAll(
       "[data-tf-widget],[data-tf-popup],[data-tf-slider],[data-tf-sidetab],[data-tf-button],[data-tf-chat]"
     );
 
     tfNodes.forEach((node) => {
-      const src = node.getAttribute("data-tf-src");
-      const href = node.getAttribute("href");
-
-      if (src && isTypeformUrl(src)) {
-        node.setAttribute("data-tf-src", appendParamsToUrl(src, params));
+      // Patch data-tf-src
+      if (node.hasAttribute("data-tf-src")) {
+        patchNodeOnce(
+          node,
+          () => node.getAttribute("data-tf-src"),
+          (v) => node.setAttribute("data-tf-src", v)
+        );
       }
 
-      if (href && isTypeformUrl(href)) {
-        node.setAttribute("href", appendParamsToUrl(href, params));
+      // Patch href buttons/links
+      if (node.hasAttribute("href")) {
+        patchNodeOnce(
+          node,
+          () => node.getAttribute("href"),
+          (v) => node.setAttribute("href", v)
+        );
       }
     });
 
-    // 2) Raw iframe embeds (if you used iframe)
+    // Raw iframe embeds
     const iframes = document.querySelectorAll("iframe[src*='typeform.com']");
     iframes.forEach((iframe) => {
-      const src = iframe.getAttribute("src");
-      if (!src) return;
-      iframe.setAttribute("src", appendParamsToUrl(src, params));
+      patchNodeOnce(
+        iframe,
+        () => iframe.getAttribute("src"),
+        (v) => iframe.setAttribute("src", v)
+      );
     });
   }
 
-  // Run now
+  // Run once now
   patchTypeformEmbeds();
 
-  // Run again after load (some themes/apps inject later)
-  window.addEventListener("load", patchTypeformEmbeds);
-
-  // Keep patching if embeds appear later (Typeform/app blocks)
+  // If something injects Typeform later, patch new nodes only
   const obs = new MutationObserver(function () {
     patchTypeformEmbeds();
   });
