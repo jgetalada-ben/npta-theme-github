@@ -121,6 +121,7 @@
         "logo_zVCk7k",
         "logo_Eiicm3"
       ],
+      "disabled": true,
       "custom_css": [
         ".section--logo-carousel {background: #01241e;}"
       ],
