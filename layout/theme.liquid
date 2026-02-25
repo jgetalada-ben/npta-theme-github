@@ -417,6 +417,117 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })();
 </script>
 
+<script>
+(function () {
+  // Uses your existing accessor:
+  // window.__nptaGetAttribution()
+
+  // Optional: also pass click IDs if present
+  const EXTRA_KEYS = ["gclid", "fbclid", "msclkid"];
+
+  // Map the stored first-touch object into query params Typeform can read as Hidden Fields.
+  // Make sure you create Hidden Fields in Typeform with these SAME names.
+  function buildTypeformParams(attr) {
+    if (!attr) return null;
+
+    const params = {
+      utm_source: attr.utm_source || "",
+      utm_medium: attr.utm_medium || "",
+      utm_campaign: attr.utm_campaign || "",
+      utm_term: attr.utm_term || "",
+      utm_content: attr.utm_content || "",
+
+      // First-touch extras (optional, but very useful)
+      ft_timestamp: attr.ft_timestamp || "",
+      ft_landing_page: attr.ft_landing_page || "",
+      ft_referrer: attr.ft_referrer || ""
+    };
+
+    // Pull click IDs from either the current URL or storage if you ever add them
+    try {
+      const sp = new URL(window.location.href).searchParams;
+      EXTRA_KEYS.forEach((k) => {
+        const v = sp.get(k);
+        if (v) params[k] = v;
+      });
+    } catch (e) {}
+
+    return params;
+  }
+
+  function isTypeformUrl(url) {
+    return /typeform\.com/i.test(url);
+  }
+
+  function appendParamsToUrl(urlStr, params) {
+    if (!urlStr || !params) return urlStr;
+
+    let url;
+    try { url = new URL(urlStr); }
+    catch (e) { return urlStr; }
+
+    if (!isTypeformUrl(urlStr)) return urlStr;
+
+    Object.keys(params).forEach((k) => {
+      const v = params[k];
+      // Only set if we have a value and it isn't already present
+      if (v !== "" && !url.searchParams.get(k)) {
+        url.searchParams.set(k, v);
+      }
+    });
+
+    return url.toString();
+  }
+
+  function patchTypeformEmbeds() {
+    const attr = (typeof window.__nptaGetAttribution === "function")
+      ? window.__nptaGetAttribution()
+      : null;
+
+    const params = buildTypeformParams(attr);
+    if (!params) return;
+
+    // 1) Typeform script-based embeds
+    const tfNodes = document.querySelectorAll(
+      "[data-tf-widget],[data-tf-popup],[data-tf-slider],[data-tf-sidetab],[data-tf-button],[data-tf-chat]"
+    );
+
+    tfNodes.forEach((node) => {
+      const src = node.getAttribute("data-tf-src");
+      const href = node.getAttribute("href");
+
+      if (src && isTypeformUrl(src)) {
+        node.setAttribute("data-tf-src", appendParamsToUrl(src, params));
+      }
+
+      if (href && isTypeformUrl(href)) {
+        node.setAttribute("href", appendParamsToUrl(href, params));
+      }
+    });
+
+    // 2) Raw iframe embeds (if you used iframe)
+    const iframes = document.querySelectorAll("iframe[src*='typeform.com']");
+    iframes.forEach((iframe) => {
+      const src = iframe.getAttribute("src");
+      if (!src) return;
+      iframe.setAttribute("src", appendParamsToUrl(src, params));
+    });
+  }
+
+  // Run now
+  patchTypeformEmbeds();
+
+  // Run again after load (some themes/apps inject later)
+  window.addEventListener("load", patchTypeformEmbeds);
+
+  // Keep patching if embeds appear later (Typeform/app blocks)
+  const obs = new MutationObserver(function () {
+    patchTypeformEmbeds();
+  });
+  obs.observe(document.documentElement, { childList: true, subtree: true });
+})();
+</script>
+
 
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
