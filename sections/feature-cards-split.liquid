@@ -60,56 +60,63 @@
 
     <div class="fcs__list">
       {%- for block in section.blocks -%}
-        {%- assign has_btn = false -%}
-        {%- if block.settings.button_label != blank and block.settings.button_link != blank -%}
-          {%- assign has_btn = true -%}
-        {%- endif -%}
+      {%- assign has_btn = false -%}
+      {%- if block.settings.button_label != blank and block.settings.button_link != blank -%}
+        {%- assign has_btn = true -%}
+      {%- endif -%}
 
-        <article
-          class="fcs__card"
-          data-reveal-index="{{ forloop.index0 }}"
-          {{ block.shopify_attributes }}
-        >
-          <div class="fcs__grid {% if block.settings.layout == 'content_first' %}is-reverse{% endif %} {% if section.settings.mobile_order == 'content_first' %}mobile-reverse{% endif %}">
+      {%- assign has_image = false -%}
+      {%- if block.settings.image != blank -%}
+        {%- assign has_image = true -%}
+      {%- endif -%}
+
+      <article
+        class="fcs__card"
+        data-reveal-index="{{ forloop.index0 }}"
+        {{ block.shopify_attributes }}
+      >
+        <div class="fcs__grid
+          {% if has_image and block.settings.layout == 'content_first' %} is-reverse{% endif %}
+          {% if has_image and section.settings.mobile_order == 'content_first' %} mobile-reverse{% endif %}
+          {% unless has_image %} no-media{% endunless %}
+        ">
+          {%- if has_image -%}
             <div class="fcs__media">
-              {%- if block.settings.image != blank -%}
-                {%- capture sizes -%}
-                  (min-width: 990px) 560px, 100vw
-                {%- endcapture -%}
-                {{
-                  block.settings.image
-                  | image_url: width: 1600
-                  | image_tag: loading: 'lazy', sizes: sizes, widths: '360, 540, 720, 900, 1200, 1600', class: 'fcs__img'
-                }}
-              {%- else -%}
-                <div class="fcs__img fcs__img--ph">{{ 'image' | placeholder_svg_tag }}</div>
+              {%- capture sizes -%}
+                (min-width: 990px) 560px, 100vw
+              {%- endcapture -%}
+              {{
+                block.settings.image
+                | image_url: width: 1600
+                | image_tag: loading: 'lazy', sizes: sizes, widths: '360, 540, 720, 900, 1200, 1600', class: 'fcs__img'
+              }}
+            </div>
+          {%- endif -%}
+
+          <div class="fcs__content-wrap">
+            <div class="fcs__content {% if section.settings.enable_reveal %}js-fcs-content-reveal{% endif %}">
+              {%- if block.settings.title != blank -%}
+                <h3 class="fcs__title">{{ block.settings.title }}</h3>
+              {%- endif -%}
+
+              {%- if block.settings.subtitle != blank -%}
+                <div class="fcs__subtitle">{{ block.settings.subtitle }}</div>
+              {%- endif -%}
+
+              {%- if block.settings.desc != blank -%}
+                <div class="fcs__desc rte">{{ block.settings.desc }}</div>
+              {%- endif -%}
+
+              {%- if has_btn -%}
+                <a class="fcs__btn" href="{{ block.settings.button_link }}" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
+                  {{ block.settings.button_label }}
+                </a>
               {%- endif -%}
             </div>
-
-            <div class="fcs__content-wrap">
-              <div class="fcs__content {% if section.settings.enable_reveal %}js-fcs-content-reveal{% endif %}">
-                {%- if block.settings.title != blank -%}
-                  <h3 class="fcs__title">{{ block.settings.title }}</h3>
-                {%- endif -%}
-
-                {%- if block.settings.subtitle != blank -%}
-                  <div class="fcs__subtitle">{{ block.settings.subtitle }}</div>
-                {%- endif -%}
-
-                {%- if block.settings.desc != blank -%}
-                  <div class="fcs__desc rte">{{ block.settings.desc }}</div>
-                {%- endif -%}
-
-                {%- if has_btn -%}
-                  <a class="fcs__btn" href="{{ block.settings.button_link }}" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-                    {{ block.settings.button_label }}
-                  </a>
-                {%- endif -%}
-              </div>
-            </div>
           </div>
-        </article>
-      {%- endfor -%}
+        </div>
+      </article>
+    {%- endfor -%}
     </div>
   </div>
 
@@ -160,9 +167,14 @@
     #FeatSplit-{{ sid }} .fcs__grid{
       display: grid;
       grid-template-columns: 1fr 1fr;
-      {% comment %} gap: var(--fcs-card-gap); {% endcomment %}
       align-items: center;
     }
+
+    /* If no image, make it a 1-column layout */
+    #FeatSplit-{{ sid }} .fcs__grid.no-media{
+      grid-template-columns: 1fr;
+    }
+
     #FeatSplit-{{ sid }} .fcs__grid.is-reverse{
       direction: rtl;
     }
@@ -172,7 +184,9 @@
 
     #FeatSplit-{{ sid }} .fcs__media{
       width: 100%;
+      z-index: 1;
     }
+
     #FeatSplit-{{ sid }} .fcs__img{
       width: 100%;
       height: auto;
@@ -180,9 +194,11 @@
       border-radius: var(--fcs-img-radius);
       overflow: hidden;
     }
-    #FeatSplit-{{ sid }} .fcs__img--ph{
-      background: rgba(255,255,255,.08);
-      padding: 40px;
+
+    #FeatSplit-{{ sid }} .fcs__content-wrap{
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
     }
 
     #FeatSplit-{{ sid }} .fcs__content{
@@ -241,7 +257,22 @@
       transform: translateY(-1px);
     }
 
-    /* Mobile */
+    #FeatSplit-{{ sid }} .js-fcs-content-reveal{
+      transform: translateX(calc(100vw + var(--fcs-reveal-distance)));
+      transition: transform var(--fcs-reveal-duration) cubic-bezier(.2,.8,.2,1);
+      will-change: transform;
+    }
+    #FeatSplit-{{ sid }} .js-fcs-content-reveal.is-inview{
+      transform: translateX(0);
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      #FeatSplit-{{ sid }} .js-fcs-content-reveal{
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+
     @media (max-width: 989px){
       #FeatSplit-{{ sid }} .fcs__grid{
         grid-template-columns: 1fr;
@@ -252,38 +283,6 @@
         gap: var(--fcs-card-gap);
       }
     }
-#FeatSplit-{{ sid }} .fcs__content-wrap{
-  z-index: 2;
-}
-
-#FeatSplit-{{ sid }} .fcs__media{
-  z-index: 1;
-}
-
-/* Content wrapper becomes the "viewport" that clips the sliding panel */
-#FeatSplit-{{ sid }} .fcs__content-wrap{
-  position: relative;
-  overflow: hidden;
-}
-
-/* Reveal animation: start OFF SCREEN (outside page) and slide in */
-#FeatSplit-{{ sid }} .js-fcs-content-reveal{
-  transform: translateX(calc(100vw + var(--fcs-reveal-distance)));
-  transition: transform var(--fcs-reveal-duration) cubic-bezier(.2,.8,.2,1);
-  will-change: transform;
-}
-
-/* Final position */
-#FeatSplit-{{ sid }} .js-fcs-content-reveal.is-inview{
-  transform: translateX(0);
-}
-
-@media (prefers-reduced-motion: reduce){
-  #FeatSplit-{{ sid }} .js-fcs-content-reveal{
-    transform: none !important;
-    transition: none !important;
-  }
-}
   </style>
 
   {% if section.settings.enable_reveal %}
@@ -295,7 +294,6 @@
         var cards = root.querySelectorAll('.fcs__card');
         if (!cards.length) return;
 
-        // Apply stagger delay to CONTENT only
         cards.forEach(function(card){
           var i = parseInt(card.getAttribute('data-reveal-index') || '0', 10);
           var content = card.querySelector('.js-fcs-content-reveal');
@@ -305,7 +303,6 @@
           content.style.transitionDelay = (i * step) + 'ms';
         });
 
-        // Observe each card, then animate its content
         var io = new IntersectionObserver(function(entries){
           entries.forEach(function(entry){
             if (!entry.isIntersecting) return;
