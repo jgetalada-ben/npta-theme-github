@@ -64,9 +64,9 @@
           {% comment %} <p class="starting-price-label">Starting at:</p> {% endcomment %}
           <p class="starting-price-p"> 
             <span class="price-item price-item--monthly">
-              {{ monthly_payment | divided_by: 100.0 | prepend: currency_code }} /
+              {{ monthly_payment | divided_by: 100.0 | prepend: currency_code }}
             </span>
-            <span class="price-label-month">month</span>
+            <span class="price-label-month">/ month</span>
           </p>
           {% comment %} <span class="price-item price-item--payment-terms">
             {% if product.metafields.custom.payment_options %}
