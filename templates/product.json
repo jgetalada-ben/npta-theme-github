@@ -150,14 +150,14 @@
         "items_tablet": "2",
         "items_mobile": "1",
         "section_bg": "#ffffff",
-        "section_title_color": "#0e2a4c",
-        "section_desc_color": "#0e2a4c",
+        "section_title_color": "#000000",
+        "section_desc_color": "#000000",
         "overlay_bg": "#01241e",
         "overlay_bg_hover": "#01241e",
         "card_title_color": "#ffffff",
         "card_desc_color": "#ffffff",
         "section_title_size": "clamp(28px, 3.6vw, 54px)",
-        "section_desc_size": "clamp(14px, 1.4vw, 18px)",
+        "section_desc_size": "clamp(14px, 2.4vw, 24px)",
         "card_title_size": "clamp(16px, 1.4vw, 20px)",
         "card_desc_size": "clamp(14px, 1.2vw, 16px)",
         "max_width": "1200px",
@@ -166,7 +166,7 @@
         "card_shadow": "0 10px 26px rgba(0,0,0,0.14)",
         "overlay_collapsed_height": "72px",
         "overlay_padding": "18px 18px",
-        "autoplay": false,
+        "autoplay": true,
         "autoplay_speed": 5,
         "show_arrows": false,
         "nav_bg": "#ffffff",
@@ -254,6 +254,69 @@
         "program_button_link": "/",
         "quiz_text": "",
         "quiz_link": "/"
+      }
+    },
+    "section_logo_carousel_Typ4JF": {
+      "type": "section--logo-carousel",
+      "blocks": {
+        "logo_WRqazK": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/backfitpro-logo.webp"
+          }
+        },
+        "logo_daxrAW": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/nasm-logo.png"
+          }
+        },
+        "logo_tXtcJX": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/npta-ph-logo_61da15a0-7548-4732-becb-f2132c7cc3c8.png"
+          }
+        },
+        "logo_d8MRnj": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/ncsf-logo.png"
+          }
+        },
+        "logo_rmVXhc": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/kbstronger-logo.png"
+          }
+        },
+        "logo_pXC4Dq": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/afaa-logo.png"
+          }
+        },
+        "logo_L7hV94": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/fitin_logo.png"
+          }
+        }
+      },
+      "block_order": [
+        "logo_WRqazK",
+        "logo_daxrAW",
+        "logo_tXtcJX",
+        "logo_d8MRnj",
+        "logo_rmVXhc",
+        "logo_pXC4Dq",
+        "logo_L7hV94"
+      ],
+      "name": "Logo Carousel",
+      "settings": {
+        "top_padding": 0,
+        "bottom_padding": 0,
+        "container_width": 2000,
+        "scroll_direction": "rtl"
       }
     },
     "section_collapsible_q4ikjm": {
@@ -646,69 +709,6 @@
         "view_button_text": "Buy [program name]",
         "view_all_button_link": "/",
         "program_footer_description": ""
-      }
-    },
-    "section_logo_carousel_Typ4JF": {
-      "type": "section--logo-carousel",
-      "blocks": {
-        "logo_WRqazK": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/backfitpro-logo.webp"
-          }
-        },
-        "logo_daxrAW": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/nasm-logo.png"
-          }
-        },
-        "logo_tXtcJX": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/npta-ph-logo_61da15a0-7548-4732-becb-f2132c7cc3c8.png"
-          }
-        },
-        "logo_d8MRnj": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/ncsf-logo.png"
-          }
-        },
-        "logo_rmVXhc": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/kbstronger-logo.png"
-          }
-        },
-        "logo_pXC4Dq": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/afaa-logo.png"
-          }
-        },
-        "logo_L7hV94": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/fitin_logo.png"
-          }
-        }
-      },
-      "block_order": [
-        "logo_WRqazK",
-        "logo_daxrAW",
-        "logo_tXtcJX",
-        "logo_d8MRnj",
-        "logo_rmVXhc",
-        "logo_pXC4Dq",
-        "logo_L7hV94"
-      ],
-      "name": "Logo Carousel",
-      "settings": {
-        "top_padding": 0,
-        "bottom_padding": 0,
-        "container_width": 2000,
-        "scroll_direction": "rtl"
       }
     },
     "section_related_products_aPKPXw": {
