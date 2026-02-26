@@ -25,6 +25,13 @@
   {%- assign v = p.selected_or_first_available_variant -%}
 {%- endif -%}
 
+{%- if section.settings.media_type == 'video' and section.settings.video != blank and section.settings.video_autoplay -%}
+  {%- assign __cta2_first_src = section.settings.video.sources | first -%}
+  {%- if __cta2_first_src != blank -%}
+    <link rel="preload" as="video" href="{{ __cta2_first_src.url }}" type="{{ __cta2_first_src.mime_type }}" fetchpriority="high">
+  {%- endif -%}
+{%- endif -%}
+
 <section
   id="OfferCTA-{{ sid }}"
   class="cta2
@@ -109,7 +116,7 @@
             <video
               class="cta2__media-el"
               playsinline
-              preload="metadata"
+              preload="{% if section.settings.video_autoplay %}auto{% else %}metadata{% endif %}"
               {% if section.settings.video_autoplay %}autoplay{% endif %}
               {% if section.settings.video_loop %}loop{% endif %}
               {% if section.settings.video_muted %}muted{% endif %}
@@ -530,6 +537,15 @@
   (function () {
     var root = document.getElementById('OfferCTA-{{ sid }}');
     if (!root) return;
+
+    var ctaVideo = root.querySelector('video.cta2__media-el');
+    if (ctaVideo) {
+      try { ctaVideo.preload = 'auto'; } catch(e) {}
+      try { ctaVideo.load(); } catch(e) {}
+
+      var pp = ctaVideo.play && ctaVideo.play();
+      if (pp && pp.catch) pp.catch(function(){});
+    }
 
     var modal = document.getElementById('cta2-modal-{{ sid }}');
     var iframe = modal ? modal.querySelector('.cta2-modal__iframe') : null;
