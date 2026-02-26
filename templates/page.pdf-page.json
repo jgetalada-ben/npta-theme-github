@@ -300,55 +300,46 @@
         "card_GtfDak": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/0_1_1.png",
-            "icon": "shopify://shop_images/simple-line-icons_book-open.png",
-            "title": "NASM Guide to Optimal Nutrition After 40",
-            "link": ""
+            "image": "{{ page.metafields.custom.pdf_landing_page.value.other_helpful_content.value.image_thumbnail_1.value }}",
+            "icon": "{{ page.metafields.custom.pdf_landing_page.value.other_helpful_content.value.image_icon_1.value }}",
+            "title": "{{ page.metafields.custom.pdf_landing_page.value.other_helpful_content.value.title_1.value }}",
+            "link": "{{ page.metafields.custom.pdf_landing_page.value.other_helpful_content.value.link_url_1.value }}"
           }
         },
         "card_fKUyBM": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/0_3_640_N_1.png",
-            "icon": "shopify://shop_images/streamline-sharp_chat-bubble-square-write-remix.png",
-            "title": "The Skill Gap: What New Personal Trainers Wish They Learned Earlier",
-            "link": ""
+            "image": "{{ page.metafields.custom.pdf_landing_page.value.other_helpful_content.value.image_thumbnail_2.value }}",
+            "icon": "{{ page.metafields.custom.pdf_landing_page.value.other_helpful_content.value.image_icon_2.value }}",
+            "title": "{{ page.metafields.custom.pdf_landing_page.value.other_helpful_content.value.title_2.value }}",
+            "link": "{{ page.metafields.custom.pdf_landing_page.value.other_helpful_content.value.link_url_2.value }}"
           }
         },
         "card_rBPtfr": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/0_3_1.png",
-            "icon": "shopify://shop_images/streamline-sharp_chat-bubble-square-write-remix.png",
-            "title": "How to become a Certified Personal Trainer",
-            "link": ""
+            "image": "{{ page.metafields.custom.pdf_landing_page.value.other_helpful_content.value.image_thumbnail_3.value }}",
+            "icon": "{{ page.metafields.custom.pdf_landing_page.value.other_helpful_content.value.image_icon_3.value }}",
+            "title": "{{ page.metafields.custom.pdf_landing_page.value.other_helpful_content.value.title_3.value }}",
+            "link": "{{ page.metafields.custom.pdf_landing_page.value.other_helpful_content.value.link_url_3.value }}"
           }
         },
         "card_cXjiGV": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/0_1_1.png",
-            "icon": "shopify://shop_images/simple-line-icons_book-open.png",
-            "title": "NASM Guide to Optimal Nutrition After 40",
-            "link": ""
+            "image": "{{ page.metafields.custom.pdf_landing_page.value.other_helpful_content.value.image_thumbnail_4.value }}",
+            "icon": "{{ page.metafields.custom.pdf_landing_page.value.other_helpful_content.value.image_icon_4.value }}",
+            "title": "{{ page.metafields.custom.pdf_landing_page.value.other_helpful_content.value.title_4.value }}",
+            "link": "{{ page.metafields.custom.pdf_landing_page.value.other_helpful_content.value.link_url_4.value }}"
           }
         },
         "card_iapXJV": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/0_3_640_N_1.png",
-            "icon": "shopify://shop_images/streamline-sharp_chat-bubble-square-write-remix.png",
-            "title": "The Skill Gap: What New Personal Trainers Wish They Learned Earlier",
-            "link": ""
-          }
-        },
-        "card_h9MExg": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/0_3_1.png",
-            "icon": "shopify://shop_images/streamline-sharp_chat-bubble-square-write-remix.png",
-            "title": "How to become a Certified Personal Trainer",
-            "link": ""
+            "image": "{{ page.metafields.custom.pdf_landing_page.value.other_helpful_content.value.image_thumbnail_5.value }}",
+            "icon": "{{ page.metafields.custom.pdf_landing_page.value.other_helpful_content.value.image_icon_5.value }}",
+            "title": "{{ page.metafields.custom.pdf_landing_page.value.other_helpful_content.value.title_5.value }}",
+            "link": "{{ page.metafields.custom.pdf_landing_page.value.other_helpful_content.value.link_url_5.value }}"
           }
         }
       },
@@ -357,8 +348,7 @@
         "card_fKUyBM",
         "card_rBPtfr",
         "card_cXjiGV",
-        "card_iapXJV",
-        "card_h9MExg"
+        "card_iapXJV"
       ],
       "name": "Helpful content slider",
       "settings": {
