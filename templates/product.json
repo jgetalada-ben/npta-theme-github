@@ -168,7 +168,7 @@
         "overlay_padding": "18px 18px",
         "autoplay": true,
         "autoplay_speed": 5,
-        "show_arrows": false,
+        "show_arrows": true,
         "nav_bg": "#ffffff",
         "nav_color": "#0e2a4c",
         "show_pagination": false,
