@@ -288,31 +288,38 @@
     }
 
     @media (max-width: 749px){
-      #CareerPaths-{{ sid }} .cps__wrap{ grid-template-columns: 1fr; }
-      #CareerPaths-{{ sid }} .cps__nav{ display: none; }
+      #CareerPaths-{{ sid }} .cps__wrap{
+        grid-template-columns: auto 1fr auto;
+        gap: 8px;
+      }
+      #CareerPaths-{{ sid }} .cps__nav{
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+      }
     }
 
-    @media (hover: hover) and (pointer: fine){
+    @media (hover: hover) and (pointer: fine){@media (hover: hover) and (pointer: fine){
       #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay,
-      #CareerPaths-{{ sid }} .cps__card:focus-within .cps__overlay{
+      #CareerPaths-{{ sid }} .cps__card:focus-visible .cps__overlay{
         height: 100%;
-        pointer-events: auto;
       }
+
       #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay::before,
-      #CareerPaths-{{ sid }} .cps__card:focus-within .cps__overlay::before{
+      #CareerPaths-{{ sid }} .cps__card:focus-visible .cps__overlay::before{
         background: var(--cps-overlay-bg-hover);
         opacity: 0.78;
       }
 
       #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay-inner,
-      #CareerPaths-{{ sid }} .cps__card:focus-within .cps__overlay-inner{
+      #CareerPaths-{{ sid }} .cps__card:focus-visible .cps__overlay-inner{
         justify-content: flex-start;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
       }
 
       #CareerPaths-{{ sid }} .cps__card:hover .cps__cd,
-      #CareerPaths-{{ sid }} .cps__card:focus-within .cps__cd{
+      #CareerPaths-{{ sid }} .cps__card:focus-visible .cps__cd{
         max-height: 3000px;
         margin-top: 10px;
         opacity: 1;
@@ -321,11 +328,11 @@
     }
 
     @media (hover: none){
-      #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay{
+      {% comment %} #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay{
         height: 100%;
         background: var(--cps-overlay-bg-hover);
         pointer-events: auto;
-      }
+      } {% endcomment %}
       #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay::before{
         background: var(--cps-overlay-bg-hover);
         opacity: 0.78;
@@ -350,196 +357,282 @@
         transition: none !important;
       }
     }
+    #CareerPaths-{{ sid }} .cps__viewport{
+      cursor: grab;
+      touch-action: pan-y;
+    }
+
+    #CareerPaths-{{ sid }}.is-dragging .cps__viewport{
+      cursor: grabbing;
+      scroll-snap-type: none; /* smoother drag */
+    }
+
+    #CareerPaths-{{ sid }}.is-dragging{
+      user-select: none;
+    }
   </style>
 
   <script>
-    (function(){
-      var root = document.getElementById('CareerPaths-{{ sid }}');
-      if (!root) return;
+  (function(){
+    var root = document.getElementById('CareerPaths-{{ sid }}');
+    if (!root) return;
 
-      var viewport = root.querySelector('[data-cps-viewport]');
-      var track = root.querySelector('[data-cps-track]');
-      var cards = root.querySelectorAll('[data-cps-card]');
-      if (!viewport || !track || !cards.length) return;
+    var viewport = root.querySelector('[data-cps-viewport]');
+    var track = root.querySelector('[data-cps-track]');
+    var cards = Array.prototype.slice.call(root.querySelectorAll('[data-cps-card]'));
+    if (!viewport || !track || !cards.length) return;
 
-      var showArrows = {{ section.settings.show_arrows | json }};
-      var showPagi = {{ section.settings.show_pagination | json }};
-      var autoplay = {{ section.settings.autoplay | json }};
-      var autoplayMs = ({{ section.settings.autoplay_speed | times: 1000 | json }}) || 5000;
+    var showArrows = {{ section.settings.show_arrows | json }};
+    var showPagi = {{ section.settings.show_pagination | json }};
+    var autoplay = {{ section.settings.autoplay | json }};
+    var autoplayMs = ({{ section.settings.autoplay_speed | times: 1000 | json }}) || 5000;
 
-      var perDesktop = parseFloat({{ section.settings.items_desktop | json }}) || 3.5;
-      var perTablet  = parseFloat({{ section.settings.items_tablet | json }}) || 2;
-      var perMobile  = parseFloat({{ section.settings.items_mobile | json }}) || 1;
+    var perDesktop = parseFloat({{ section.settings.items_desktop | json }}) || 3.5;
+    var perTablet  = parseFloat({{ section.settings.items_tablet | json }}) || 2;
+    var perMobile  = parseFloat({{ section.settings.items_mobile | json }}) || 1;
 
-      var btnPrev = root.querySelector('.cps__nav--prev');
-      var btnNext = root.querySelector('.cps__nav--next');
-      var pagi = root.querySelector('[data-cps-pagi]');
-      var timer = null;
+    var btnPrev = root.querySelector('.cps__nav--prev');
+    var btnNext = root.querySelector('.cps__nav--next');
+    var pagi = root.querySelector('[data-cps-pagi]');
+    var timer = null;
 
-      function getGapPx(){
-        var gap = getComputedStyle(track).gap || '0px';
-        return parseFloat(gap) || 0;
-      }
-
-      function getPerView(){
-        var w = window.innerWidth || document.documentElement.clientWidth;
-        if (w <= 749) return perMobile;
-        if (w <= 1099) return perTablet;
-        return perDesktop;
-      }
-
-      function layout(){
-        var perView = getPerView();
-        var gapPx = getGapPx();
-        var vw = viewport.clientWidth;
-
-        // card width supports decimals (e.g. 3.5)
-        var cardW = (vw - gapPx * (perView - 1)) / perView;
-        if (!isFinite(cardW) || cardW < 120) cardW = 280;
-
-        root.style.setProperty('--cps-cardw', cardW.toFixed(2) + 'px');
-        buildPagination();
-        updateUI();
-      }
-
-      function maxScroll(){
-        return Math.max(0, track.scrollWidth - viewport.clientWidth);
-      }
-
-      function stepSize(){
-        var gapPx = getGapPx();
-        var card = cards[0];
-        var w = card ? card.getBoundingClientRect().width : 0;
-        return Math.max(1, w + gapPx);
-      }
-
-      function scrollToX(x){
-        viewport.scrollTo({ left: x, behavior: 'smooth' });
-      }
-
-      function goNext(){
-        var s = stepSize();
-        var next = Math.min(maxScroll(), viewport.scrollLeft + s);
-        scrollToX(next);
-      }
-
-      function goPrev(){
-        var s = stepSize();
-        var prev = Math.max(0, viewport.scrollLeft - s);
-        scrollToX(prev);
-      }
-
-      function pageCount(){
-        // pages based on "card steps"
-        var s = stepSize();
-        if (!s) return 1;
-        return Math.max(1, Math.ceil(maxScroll() / s) + 1);
-      }
-
-      function activePage(){
-        var s = stepSize();
-        if (!s) return 0;
-        return Math.round(viewport.scrollLeft / s);
-      }
-
-      function buildPagination(){
-        if (!showPagi || !pagi) return;
-        pagi.innerHTML = '';
-        var count = pageCount();
-        for (var i=0; i<count; i++){
-          var b = document.createElement('button');
-          b.type = 'button';
-          b.className = 'cps__dot';
-          b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-          (function(ii){
-            b.addEventListener('click', function(){
-              stopAutoplay();
-              scrollToX(ii * stepSize());
-              restartAutoplay();
-            });
-          })(i);
-          pagi.appendChild(b);
-        }
-        updatePagination();
-      }
-
-      function updatePagination(){
-        if (!showPagi || !pagi) return;
-        var dots = pagi.querySelectorAll('.cps__dot');
-        var a = activePage();
-        dots.forEach(function(d, i){
-          if (i === a) d.classList.add('is-active');
-          else d.classList.remove('is-active');
-        });
-      }
-
-      function updateArrows(){
-        if (!showArrows) return;
-        var x = viewport.scrollLeft;
-        var mx = maxScroll();
-        if (btnPrev) btnPrev.disabled = (x <= 2);
-        if (btnNext) btnNext.disabled = (x >= mx - 2);
-      }
-
-      function updateUI(){
-        updateArrows();
-        updatePagination();
-      }
-
-      function stopAutoplay(){
-        if (timer) { clearInterval(timer); timer = null; }
-      }
-
-      function startAutoplay(){
-        if (!autoplay) return;
-        stopAutoplay();
-        timer = setInterval(function(){
-          // loop
-          if (viewport.scrollLeft >= maxScroll() - 2) {
-            scrollToX(0);
-          } else {
-            goNext();
-          }
-        }, Math.max(2000, autoplayMs));
-      }
-
-      function restartAutoplay(){
-        if (!autoplay) return;
-        startAutoplay();
-      }
-
-      if (showArrows){
-        if (btnPrev) btnPrev.addEventListener('click', function(){ stopAutoplay(); goPrev(); restartAutoplay(); });
-        if (btnNext) btnNext.addEventListener('click', function(){ stopAutoplay(); goNext(); restartAutoplay(); });
-      }
-
-      viewport.addEventListener('scroll', function(){ updateUI(); }, { passive: true });
-
-      root.addEventListener('mouseenter', function(){ stopAutoplay(); });
-      root.addEventListener('mouseleave', function(){ restartAutoplay(); });
-
-      var rto = null;
-      window.addEventListener('resize', function(){
-        clearTimeout(rto);
-        rto = setTimeout(function(){ layout(); }, 120);
-      });
-
-      layout();
-      startAutoplay();
-    })();
-
-    // Tap-to-toggle for touch devices
     var isHoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (!isHoverCapable) {
+
+    function getGapPx(){
+      var gap = getComputedStyle(track).gap || '0px';
+      return parseFloat(gap) || 0;
+    }
+
+    function getPerView(){
+      var w = window.innerWidth || document.documentElement.clientWidth;
+      if (w <= 749) return perMobile;
+      if (w <= 1099) return perTablet;
+      return perDesktop;
+    }
+
+    function layout(){
+      var perView = getPerView();
+      var gapPx = getGapPx();
+      var vw = viewport.clientWidth;
+
+      var cardW = (vw - gapPx * (perView - 1)) / perView;
+      if (!isFinite(cardW) || cardW < 120) cardW = 280;
+
+      root.style.setProperty('--cps-cardw', cardW.toFixed(2) + 'px');
+      buildPagination();
+      updateUI();
+    }
+
+    function maxScroll(){
+      return Math.max(0, track.scrollWidth - viewport.clientWidth);
+    }
+
+    function stepSize(){
+      var gapPx = getGapPx();
+      var card = cards[0];
+      var w = card ? card.getBoundingClientRect().width : 0;
+      return Math.max(1, w + gapPx);
+    }
+
+    function scrollToX(x, smooth){
+      viewport.scrollTo({ left: x, behavior: smooth === false ? 'auto' : 'smooth' });
+    }
+
+    function goNext(){
+      var s = stepSize();
+      scrollToX(Math.min(maxScroll(), viewport.scrollLeft + s));
+    }
+
+    function goPrev(){
+      var s = stepSize();
+      scrollToX(Math.max(0, viewport.scrollLeft - s));
+    }
+
+    function pageCount(){
+      var s = stepSize();
+      if (!s) return 1;
+      return Math.max(1, Math.ceil(maxScroll() / s) + 1);
+    }
+
+    function activePage(){
+      var s = stepSize();
+      if (!s) return 0;
+      return Math.round(viewport.scrollLeft / s);
+    }
+
+    function buildPagination(){
+      if (!showPagi || !pagi) return;
+      pagi.innerHTML = '';
+      var count = pageCount();
+      for (var i = 0; i < count; i++){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'cps__dot';
+        b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        (function(ii){
+          b.addEventListener('click', function(){
+            stopAutoplay();
+            scrollToX(ii * stepSize());
+            restartAutoplay();
+          });
+        })(i);
+        pagi.appendChild(b);
+      }
+      updatePagination();
+    }
+
+    function updatePagination(){
+      if (!showPagi || !pagi) return;
+      var dots = pagi.querySelectorAll('.cps__dot');
+      var a = activePage();
+      dots.forEach(function(d, i){
+        if (i === a) d.classList.add('is-active');
+        else d.classList.remove('is-active');
+      });
+    }
+
+    function updateArrows(){
+      if (!showArrows) return;
+      var x = viewport.scrollLeft;
+      var mx = maxScroll();
+      if (btnPrev) btnPrev.disabled = (x <= 2);
+      if (btnNext) btnNext.disabled = (x >= mx - 2);
+    }
+
+    function updateUI(){
+      updateArrows();
+      updatePagination();
+    }
+
+    function stopAutoplay(){
+      if (timer) { clearInterval(timer); timer = null; }
+    }
+
+    function startAutoplay(){
+      if (!autoplay) return;
+      stopAutoplay();
+      timer = setInterval(function(){
+        if (viewport.scrollLeft >= maxScroll() - 2) scrollToX(0);
+        else goNext();
+      }, Math.max(2000, autoplayMs));
+    }
+
+    function restartAutoplay(){
+      if (!autoplay) return;
+      startAutoplay();
+    }
+
+    if (showArrows){
+      if (btnPrev) btnPrev.addEventListener('click', function(){ stopAutoplay(); goPrev(); restartAutoplay(); });
+      if (btnNext) btnNext.addEventListener('click', function(){ stopAutoplay(); goNext(); restartAutoplay(); });
+    }
+
+    viewport.addEventListener('scroll', function(){ updateUI(); }, { passive: true });
+
+    // ---- Drag / Swipe support (mouse + touch) ----
+    var pointerDown = false;
+    var startX = 0, startY = 0, startScroll = 0;
+    var dragging = false;
+    var activeId = null;
+    var didDragRecently = false;
+
+    function onPointerDown(e){
+      if (e.button && e.button !== 0) return;
+      pointerDown = true;
+      dragging = false;
+      activeId = e.pointerId;
+      startX = e.clientX;
+      startY = e.clientY;
+      startScroll = viewport.scrollLeft;
+      didDragRecently = false;
+    }
+
+    function onPointerMove(e){
+      if (!pointerDown || e.pointerId !== activeId) return;
+
+      var dx = e.clientX - startX;
+      var dy = e.clientY - startY;
+
+      if (!dragging){
+        if (Math.abs(dx) > 6 && Math.abs(dx) > Math.abs(dy)){
+          dragging = true;
+          root.classList.add('is-dragging');
+          stopAutoplay();
+          try { viewport.setPointerCapture(e.pointerId); } catch(err){}
+        } else {
+          return;
+        }
+      }
+
+      e.preventDefault();
+      viewport.scrollLeft = startScroll - dx;
+    }
+
+    function onPointerUp(e){
+      if (!pointerDown || (activeId !== null && e.pointerId !== activeId)) return;
+      pointerDown = false;
+
+      if (dragging){
+        root.classList.remove('is-dragging');
+        dragging = false;
+        didDragRecently = true;
+
+        // snap to nearest card step
+        var s = stepSize();
+        if (s) {
+          var target = Math.round(viewport.scrollLeft / s) * s;
+          scrollToX(target, true);
+        }
+
+        restartAutoplay();
+
+        setTimeout(function(){ didDragRecently = false; }, 180);
+      }
+
+      activeId = null;
+    }
+
+    viewport.addEventListener('pointerdown', onPointerDown, { passive: true });
+    viewport.addEventListener('pointermove', onPointerMove, { passive: false });
+    viewport.addEventListener('pointerup', onPointerUp, { passive: true });
+    viewport.addEventListener('pointercancel', onPointerUp, { passive: true });
+
+    // ---- Mobile tap-to-toggle (only on touch devices) ----
+    if (!isHoverCapable){
       cards.forEach(function(card){
         card.addEventListener('click', function(){
-          // close others
+          if (didDragRecently) return; // don't toggle when user was dragging
           cards.forEach(function(c){ if (c !== card) c.classList.remove('is-open'); });
           card.classList.toggle('is-open');
         });
       });
+
+      // tap outside closes
+      document.addEventListener('click', function(e){
+        if (!root.contains(e.target)) return;
+        var insideCard = e.target.closest('[data-cps-card]');
+        if (!insideCard){
+          cards.forEach(function(c){ c.classList.remove('is-open'); });
+        }
+      });
+    } else {
+      // prevent "sticky open" from mouse click focus
+      cards.forEach(function(card){
+        card.addEventListener('mousedown', function(){ try { card.blur(); } catch(e){} });
+      });
     }
+
+    var rto = null;
+    window.addEventListener('resize', function(){
+      clearTimeout(rto);
+      rto = setTimeout(function(){ layout(); }, 120);
+    });
+
+    layout();
+    startAutoplay();
+  })();
   </script>
+
 </section>
 
 {% schema %}
