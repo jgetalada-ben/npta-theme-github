@@ -372,268 +372,268 @@
     }
   </style>
 
-</section>
+  <script>
+  (function(){
+    var root = document.getElementById('CareerPaths-{{ sid }}');
+    if (!root) return;
 
-<script>
-(function(){
-  var root = document.getElementById('CareerPaths-{{ sid }}');
-  if (!root) return;
+    var viewport = root.querySelector('[data-cps-viewport]');
+    var track = root.querySelector('[data-cps-track]');
+    var cards = Array.prototype.slice.call(root.querySelectorAll('[data-cps-card]'));
+    if (!viewport || !track || !cards.length) return;
 
-  var viewport = root.querySelector('[data-cps-viewport]');
-  var track = root.querySelector('[data-cps-track]');
-  var cards = Array.prototype.slice.call(root.querySelectorAll('[data-cps-card]'));
-  if (!viewport || !track || !cards.length) return;
+    var showArrows = {{ section.settings.show_arrows | json }};
+    var showPagi = {{ section.settings.show_pagination | json }};
+    var autoplay = {{ section.settings.autoplay | json }};
+    var autoplayMs = ({{ section.settings.autoplay_speed | times: 1000 | json }}) || 5000;
 
-  var showArrows = {{ section.settings.show_arrows | json }};
-  var showPagi = {{ section.settings.show_pagination | json }};
-  var autoplay = {{ section.settings.autoplay | json }};
-  var autoplayMs = ({{ section.settings.autoplay_speed | times: 1000 | json }}) || 5000;
+    var perDesktop = parseFloat({{ section.settings.items_desktop | json }}) || 3.5;
+    var perTablet  = parseFloat({{ section.settings.items_tablet | json }}) || 2;
+    var perMobile  = parseFloat({{ section.settings.items_mobile | json }}) || 1;
 
-  var perDesktop = parseFloat({{ section.settings.items_desktop | json }}) || 3.5;
-  var perTablet  = parseFloat({{ section.settings.items_tablet | json }}) || 2;
-  var perMobile  = parseFloat({{ section.settings.items_mobile | json }}) || 1;
+    var btnPrev = root.querySelector('.cps__nav--prev');
+    var btnNext = root.querySelector('.cps__nav--next');
+    var pagi = root.querySelector('[data-cps-pagi]');
+    var timer = null;
 
-  var btnPrev = root.querySelector('.cps__nav--prev');
-  var btnNext = root.querySelector('.cps__nav--next');
-  var pagi = root.querySelector('[data-cps-pagi]');
-  var timer = null;
+    var isHoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  var isHoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-  function getGapPx(){
-    var gap = getComputedStyle(track).gap || '0px';
-    return parseFloat(gap) || 0;
-  }
-
-  function getPerView(){
-    var w = window.innerWidth || document.documentElement.clientWidth;
-    if (w <= 749) return perMobile;
-    if (w <= 1099) return perTablet;
-    return perDesktop;
-  }
-
-  function layout(){
-    var perView = getPerView();
-    var gapPx = getGapPx();
-    var vw = viewport.clientWidth;
-
-    var cardW = (vw - gapPx * (perView - 1)) / perView;
-    if (!isFinite(cardW) || cardW < 120) cardW = 280;
-
-    root.style.setProperty('--cps-cardw', cardW.toFixed(2) + 'px');
-    buildPagination();
-    updateUI();
-  }
-
-  function maxScroll(){
-    return Math.max(0, track.scrollWidth - viewport.clientWidth);
-  }
-
-  function stepSize(){
-    var gapPx = getGapPx();
-    var card = cards[0];
-    var w = card ? card.getBoundingClientRect().width : 0;
-    return Math.max(1, w + gapPx);
-  }
-
-  function scrollToX(x, smooth){
-    viewport.scrollTo({ left: x, behavior: smooth === false ? 'auto' : 'smooth' });
-  }
-
-  function goNext(){
-    var s = stepSize();
-    scrollToX(Math.min(maxScroll(), viewport.scrollLeft + s));
-  }
-
-  function goPrev(){
-    var s = stepSize();
-    scrollToX(Math.max(0, viewport.scrollLeft - s));
-  }
-
-  function pageCount(){
-    var s = stepSize();
-    if (!s) return 1;
-    return Math.max(1, Math.ceil(maxScroll() / s) + 1);
-  }
-
-  function activePage(){
-    var s = stepSize();
-    if (!s) return 0;
-    return Math.round(viewport.scrollLeft / s);
-  }
-
-  function buildPagination(){
-    if (!showPagi || !pagi) return;
-    pagi.innerHTML = '';
-    var count = pageCount();
-    for (var i = 0; i < count; i++){
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'cps__dot';
-      b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-      (function(ii){
-        b.addEventListener('click', function(){
-          stopAutoplay();
-          scrollToX(ii * stepSize());
-          restartAutoplay();
-        });
-      })(i);
-      pagi.appendChild(b);
-    }
-    updatePagination();
-  }
-
-  function updatePagination(){
-    if (!showPagi || !pagi) return;
-    var dots = pagi.querySelectorAll('.cps__dot');
-    var a = activePage();
-    dots.forEach(function(d, i){
-      if (i === a) d.classList.add('is-active');
-      else d.classList.remove('is-active');
-    });
-  }
-
-  function updateArrows(){
-    if (!showArrows) return;
-    var x = viewport.scrollLeft;
-    var mx = maxScroll();
-    if (btnPrev) btnPrev.disabled = (x <= 2);
-    if (btnNext) btnNext.disabled = (x >= mx - 2);
-  }
-
-  function updateUI(){
-    updateArrows();
-    updatePagination();
-  }
-
-  function stopAutoplay(){
-    if (timer) { clearInterval(timer); timer = null; }
-  }
-
-  function startAutoplay(){
-    if (!autoplay) return;
-    stopAutoplay();
-    timer = setInterval(function(){
-      if (viewport.scrollLeft >= maxScroll() - 2) scrollToX(0);
-      else goNext();
-    }, Math.max(2000, autoplayMs));
-  }
-
-  function restartAutoplay(){
-    if (!autoplay) return;
-    startAutoplay();
-  }
-
-  if (showArrows){
-    if (btnPrev) btnPrev.addEventListener('click', function(){ stopAutoplay(); goPrev(); restartAutoplay(); });
-    if (btnNext) btnNext.addEventListener('click', function(){ stopAutoplay(); goNext(); restartAutoplay(); });
-  }
-
-  viewport.addEventListener('scroll', function(){ updateUI(); }, { passive: true });
-
-  // ---- Drag / Swipe support (mouse + touch) ----
-  var pointerDown = false;
-  var startX = 0, startY = 0, startScroll = 0;
-  var dragging = false;
-  var activeId = null;
-  var didDragRecently = false;
-
-  function onPointerDown(e){
-    if (e.button && e.button !== 0) return;
-    pointerDown = true;
-    dragging = false;
-    activeId = e.pointerId;
-    startX = e.clientX;
-    startY = e.clientY;
-    startScroll = viewport.scrollLeft;
-    didDragRecently = false;
-  }
-
-  function onPointerMove(e){
-    if (!pointerDown || e.pointerId !== activeId) return;
-
-    var dx = e.clientX - startX;
-    var dy = e.clientY - startY;
-
-    if (!dragging){
-      if (Math.abs(dx) > 6 && Math.abs(dx) > Math.abs(dy)){
-        dragging = true;
-        root.classList.add('is-dragging');
-        stopAutoplay();
-        try { viewport.setPointerCapture(e.pointerId); } catch(err){}
-      } else {
-        return;
-      }
+    function getGapPx(){
+      var gap = getComputedStyle(track).gap || '0px';
+      return parseFloat(gap) || 0;
     }
 
-    e.preventDefault();
-    viewport.scrollLeft = startScroll - dx;
-  }
+    function getPerView(){
+      var w = window.innerWidth || document.documentElement.clientWidth;
+      if (w <= 749) return perMobile;
+      if (w <= 1099) return perTablet;
+      return perDesktop;
+    }
 
-  function onPointerUp(e){
-    if (!pointerDown || (activeId !== null && e.pointerId !== activeId)) return;
-    pointerDown = false;
+    function layout(){
+      var perView = getPerView();
+      var gapPx = getGapPx();
+      var vw = viewport.clientWidth;
 
-    if (dragging){
-      root.classList.remove('is-dragging');
-      dragging = false;
-      didDragRecently = true;
+      var cardW = (vw - gapPx * (perView - 1)) / perView;
+      if (!isFinite(cardW) || cardW < 120) cardW = 280;
 
-      // snap to nearest card step
+      root.style.setProperty('--cps-cardw', cardW.toFixed(2) + 'px');
+      buildPagination();
+      updateUI();
+    }
+
+    function maxScroll(){
+      return Math.max(0, track.scrollWidth - viewport.clientWidth);
+    }
+
+    function stepSize(){
+      var gapPx = getGapPx();
+      var card = cards[0];
+      var w = card ? card.getBoundingClientRect().width : 0;
+      return Math.max(1, w + gapPx);
+    }
+
+    function scrollToX(x, smooth){
+      viewport.scrollTo({ left: x, behavior: smooth === false ? 'auto' : 'smooth' });
+    }
+
+    function goNext(){
       var s = stepSize();
-      if (s) {
-        var target = Math.round(viewport.scrollLeft / s) * s;
-        scrollToX(target, true);
-      }
-
-      restartAutoplay();
-
-      setTimeout(function(){ didDragRecently = false; }, 180);
+      scrollToX(Math.min(maxScroll(), viewport.scrollLeft + s));
     }
 
-    activeId = null;
-  }
+    function goPrev(){
+      var s = stepSize();
+      scrollToX(Math.max(0, viewport.scrollLeft - s));
+    }
 
-  viewport.addEventListener('pointerdown', onPointerDown, { passive: true });
-  viewport.addEventListener('pointermove', onPointerMove, { passive: false });
-  viewport.addEventListener('pointerup', onPointerUp, { passive: true });
-  viewport.addEventListener('pointercancel', onPointerUp, { passive: true });
+    function pageCount(){
+      var s = stepSize();
+      if (!s) return 1;
+      return Math.max(1, Math.ceil(maxScroll() / s) + 1);
+    }
 
-  // ---- Mobile tap-to-toggle (only on touch devices) ----
-  if (!isHoverCapable){
-    cards.forEach(function(card){
-      card.addEventListener('click', function(){
-        if (didDragRecently) return; // don't toggle when user was dragging
-        cards.forEach(function(c){ if (c !== card) c.classList.remove('is-open'); });
-        card.classList.toggle('is-open');
-      });
-    });
+    function activePage(){
+      var s = stepSize();
+      if (!s) return 0;
+      return Math.round(viewport.scrollLeft / s);
+    }
 
-    // tap outside closes
-    document.addEventListener('click', function(e){
-      if (!root.contains(e.target)) return;
-      var insideCard = e.target.closest('[data-cps-card]');
-      if (!insideCard){
-        cards.forEach(function(c){ c.classList.remove('is-open'); });
+    function buildPagination(){
+      if (!showPagi || !pagi) return;
+      pagi.innerHTML = '';
+      var count = pageCount();
+      for (var i = 0; i < count; i++){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'cps__dot';
+        b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        (function(ii){
+          b.addEventListener('click', function(){
+            stopAutoplay();
+            scrollToX(ii * stepSize());
+            restartAutoplay();
+          });
+        })(i);
+        pagi.appendChild(b);
       }
-    });
-  } else {
-    // prevent "sticky open" from mouse click focus
-    cards.forEach(function(card){
-      card.addEventListener('mousedown', function(){ try { card.blur(); } catch(e){} });
-    });
-  }
+      updatePagination();
+    }
 
-  var rto = null;
-  window.addEventListener('resize', function(){
-    clearTimeout(rto);
-    rto = setTimeout(function(){ layout(); }, 120);
-  });
+    function updatePagination(){
+      if (!showPagi || !pagi) return;
+      var dots = pagi.querySelectorAll('.cps__dot');
+      var a = activePage();
+      dots.forEach(function(d, i){
+        if (i === a) d.classList.add('is-active');
+        else d.classList.remove('is-active');
+      });
+    }
 
-  layout();
-  startAutoplay();
-})();
-</script>
+    function updateArrows(){
+      if (!showArrows) return;
+      var x = viewport.scrollLeft;
+      var mx = maxScroll();
+      if (btnPrev) btnPrev.disabled = (x <= 2);
+      if (btnNext) btnNext.disabled = (x >= mx - 2);
+    }
+
+    function updateUI(){
+      updateArrows();
+      updatePagination();
+    }
+
+    function stopAutoplay(){
+      if (timer) { clearInterval(timer); timer = null; }
+    }
+
+    function startAutoplay(){
+      if (!autoplay) return;
+      stopAutoplay();
+      timer = setInterval(function(){
+        if (viewport.scrollLeft >= maxScroll() - 2) scrollToX(0);
+        else goNext();
+      }, Math.max(2000, autoplayMs));
+    }
+
+    function restartAutoplay(){
+      if (!autoplay) return;
+      startAutoplay();
+    }
+
+    if (showArrows){
+      if (btnPrev) btnPrev.addEventListener('click', function(){ stopAutoplay(); goPrev(); restartAutoplay(); });
+      if (btnNext) btnNext.addEventListener('click', function(){ stopAutoplay(); goNext(); restartAutoplay(); });
+    }
+
+    viewport.addEventListener('scroll', function(){ updateUI(); }, { passive: true });
+
+    // ---- Drag / Swipe support (mouse + touch) ----
+    var pointerDown = false;
+    var startX = 0, startY = 0, startScroll = 0;
+    var dragging = false;
+    var activeId = null;
+    var didDragRecently = false;
+
+    function onPointerDown(e){
+      if (e.button && e.button !== 0) return;
+      pointerDown = true;
+      dragging = false;
+      activeId = e.pointerId;
+      startX = e.clientX;
+      startY = e.clientY;
+      startScroll = viewport.scrollLeft;
+      didDragRecently = false;
+    }
+
+    function onPointerMove(e){
+      if (!pointerDown || e.pointerId !== activeId) return;
+
+      var dx = e.clientX - startX;
+      var dy = e.clientY - startY;
+
+      if (!dragging){
+        if (Math.abs(dx) > 6 && Math.abs(dx) > Math.abs(dy)){
+          dragging = true;
+          root.classList.add('is-dragging');
+          stopAutoplay();
+          try { viewport.setPointerCapture(e.pointerId); } catch(err){}
+        } else {
+          return;
+        }
+      }
+
+      e.preventDefault();
+      viewport.scrollLeft = startScroll - dx;
+    }
+
+    function onPointerUp(e){
+      if (!pointerDown || (activeId !== null && e.pointerId !== activeId)) return;
+      pointerDown = false;
+
+      if (dragging){
+        root.classList.remove('is-dragging');
+        dragging = false;
+        didDragRecently = true;
+
+        // snap to nearest card step
+        var s = stepSize();
+        if (s) {
+          var target = Math.round(viewport.scrollLeft / s) * s;
+          scrollToX(target, true);
+        }
+
+        restartAutoplay();
+
+        setTimeout(function(){ didDragRecently = false; }, 180);
+      }
+
+      activeId = null;
+    }
+
+    viewport.addEventListener('pointerdown', onPointerDown, { passive: true });
+    viewport.addEventListener('pointermove', onPointerMove, { passive: false });
+    viewport.addEventListener('pointerup', onPointerUp, { passive: true });
+    viewport.addEventListener('pointercancel', onPointerUp, { passive: true });
+
+    // ---- Mobile tap-to-toggle (only on touch devices) ----
+    if (!isHoverCapable){
+      cards.forEach(function(card){
+        card.addEventListener('click', function(){
+          if (didDragRecently) return; // don't toggle when user was dragging
+          cards.forEach(function(c){ if (c !== card) c.classList.remove('is-open'); });
+          card.classList.toggle('is-open');
+        });
+      });
+
+      // tap outside closes
+      document.addEventListener('click', function(e){
+        if (!root.contains(e.target)) return;
+        var insideCard = e.target.closest('[data-cps-card]');
+        if (!insideCard){
+          cards.forEach(function(c){ c.classList.remove('is-open'); });
+        }
+      });
+    } else {
+      // prevent "sticky open" from mouse click focus
+      cards.forEach(function(card){
+        card.addEventListener('mousedown', function(){ try { card.blur(); } catch(e){} });
+      });
+    }
+
+    var rto = null;
+    window.addEventListener('resize', function(){
+      clearTimeout(rto);
+      rto = setTimeout(function(){ layout(); }, 120);
+    });
+
+    layout();
+    startAutoplay();
+  })();
+  </script>
+
+</section>
 
 {% schema %}
 {
