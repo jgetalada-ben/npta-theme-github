@@ -22,6 +22,12 @@
       "label": "Program Details",
       "default": "<p> Lorem ipsum dolor sit amet</p>",
       "info": "Enter the rich text content for the program details."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_fadeup",
+      "label": "Enable fade-up animation on scroll",
+      "default": false
     }
   ],
   "presets": [
@@ -38,7 +44,7 @@
 <section class="section--program-details" id="{{ section.settings.section_id }}">
   <div class="program-details-container page-container">
 
-    <div class="details-column-left">
+    <div class="details-column-left{% if section.settings.enable_fadeup %} pd-fadeup{% endif %}">
       <div class="section--title-block">
         <h2 class="is--flex-start program-details-h2" >Program details</h2>
       </div>
@@ -49,7 +55,7 @@
       {% endif %}
     </div>
 
-    <div class="details-column-right">  
+    <div class="details-column-right{% if section.settings.enable_fadeup %} pd-fadeup{% endif %}">
       {% assign show_curriculum = false %}
       {% assign total_sections = 10 %}
       {% for i in (1..total_sections) %}
@@ -77,7 +83,9 @@
               {% if section_title and long_desc %}
                 <div class="curriculum-section">
                   <div class="section-header" data-target="#section{{ i }}">
-                    {{ section_title | metafield_tag }}
+                    <div class="section-header__text">
+                      {{ section_title | metafield_tag }}
+                    </div>
                     <button type="button" data-toggle="collapse" data-target="#section{{ i }}">
                       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
 <path d="M14.5625 18.3125C14.6875 18.4375 14.8333 18.5 15 18.5C15.1667 18.5 15.3125 18.4375 15.4375 18.3125L18.9375 14.8125C19.1458 14.6042 19.1979 14.375 19.0938 14.125C18.9896 13.875 18.7917 13.75 18.5 13.75H11.5C11.2083 13.75 11.0104 13.875 10.9063 14.125C10.8021 14.375 10.8542 14.6042 11.0625 14.8125L14.5625 18.3125ZM15 27.5C13.2708 27.5 11.6458 27.1717 10.125 26.515C8.60417 25.8583 7.28125 24.9679 6.15625 23.8438C5.03125 22.7196 4.14084 21.3967 3.485 19.875C2.82917 18.3533 2.50083 16.7283 2.5 15C2.49917 13.2717 2.8275 11.6467 3.485 10.125C4.1425 8.60333 5.03292 7.28042 6.15625 6.15625C7.27958 5.03208 8.6025 4.14167 10.125 3.485C11.6475 2.82833 13.2725 2.5 15 2.5C16.7275 2.5 18.3525 2.82833 19.875 3.485C21.3975 4.14167 22.7204 5.03208 23.8438 6.15625C24.9671 7.28042 25.8579 8.60333 26.5163 10.125C27.1746 11.6467 27.5025 13.2717 27.5 15C27.4975 16.7283 27.1692 18.3533 26.515 19.875C25.8608 21.3967 24.9704 22.7196 23.8438 23.8438C22.7171 24.9679 21.3942 25.8587 19.875 26.5162C18.3558 27.1737 16.7308 27.5017 15 27.5Z" fill="#0F828C"/>
@@ -117,6 +125,24 @@
               }
             });
           });
+          // Fade-up on scroll (only if enabled)
+          var enableFade = {{ section.settings.enable_fadeup | json }};
+          if (enableFade) {
+            var sectionEl = document.getElementById('{{ section.settings.section_id }}');
+            if (sectionEl) {
+              var items = sectionEl.querySelectorAll('.pd-fadeup');
+              if (items.length) {
+                var io2 = new IntersectionObserver(function(entries){
+                  entries.forEach(function(entry){
+                    if (!entry.isIntersecting) return;
+                    items.forEach(function(el){ el.classList.add('is-inview'); });
+                    io2.disconnect();
+                  });
+                }, { threshold: 0.18 });
+                io2.observe(sectionEl);
+              }
+            }
+          }
         });
       </script>
     </div>
@@ -239,9 +265,21 @@
 .curriculum-sections .section-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 16px;
   cursor: pointer;
   padding: 10px 0;
+}
+.curriculum-sections .section-header__text{
+  flex: 1;
+  min-width: 0;
+}
+.section-header .metafield-rich_text_field p{
+  margin: 0;
+}
+.section-header .metafield-rich_text_field p strong{
+  display: block;
+  margin-bottom: 6px;
 }
 .curriculum-sections .section-header h3 {
   margin: 0;
@@ -412,5 +450,24 @@ line-height: 150%;
   top: 0;
   color: #fff;
 }
+/* Fade-up animation (only when enabled) */
+.pd-fadeup{
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 600ms ease, transform 600ms cubic-bezier(.2,.8,.2,1);
+  will-change: opacity, transform;
+}
 
+.pd-fadeup.is-inview{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .pd-fadeup{
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
 </style>
