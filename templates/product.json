@@ -127,11 +127,27 @@
             "desc": "<p>Use your nutrition coaching foundation to support or complement a future path in dietetics, strengthening your ability to educate clients on sustainable eating habits and behavior change. It enhances your credibility and practical coaching skills in clinical or wellness settings.</p>"
           }
         },
+        "card_Vqeimq": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_116.png",
+            "title": "NUTRITION INFLUENCER",
+            "desc": "<p>Use your nutrition coaching foundation to support or complement a future path in dietetics, strengthening your ability to educate clients on sustainable eating habits and behavior change. It enhances your credibility and practical coaching skills in clinical or wellness settings.</p>"
+          }
+        },
         "card_DGBHJn": {
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/Rectangle_120.png",
-            "title": "PERSONAL TRAINER",
+            "title": "Meal Prep Entrepreneur",
+            "desc": "<p>Use your nutrition coaching foundation to support or complement a future path in dietetics, strengthening your ability to educate clients on sustainable eating habits and behavior change. It enhances your credibility and practical coaching skills in clinical or wellness settings.</p>"
+          }
+        },
+        "card_4F6yPX": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_122.png",
+            "title": "Nutrition Blogger / Writer",
             "desc": "<p>Use your nutrition coaching foundation to support or complement a future path in dietetics, strengthening your ability to educate clients on sustainable eating habits and behavior change. It enhances your credibility and practical coaching skills in clinical or wellness settings.</p>"
           }
         }
@@ -140,7 +156,9 @@
         "card_HmYkNT",
         "card_c98EDj",
         "card_TC6dtb",
-        "card_DGBHJn"
+        "card_Vqeimq",
+        "card_DGBHJn",
+        "card_4F6yPX"
       ],
       "name": "PDP Career paths slider",
       "settings": {
