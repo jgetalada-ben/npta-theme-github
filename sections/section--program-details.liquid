@@ -67,11 +67,11 @@
         {% endif %}
       {% endfor %}
 
-      <div class="section--title-block">
-        <h2 class="is--flex-start">Curriculum</h2>
-      </div>
-
       {% if show_curriculum %}
+        <div class="section--title-block">
+          <h2 class="is--flex-start">Curriculum</h2>
+        </div>
+
         <div class="curriculum">
           <div class="curriculum-sections">
             {% for i in (1..total_sections) %}
