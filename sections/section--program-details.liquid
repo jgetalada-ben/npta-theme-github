@@ -160,8 +160,8 @@
   .details-column-right {
     width: 60%;
     max-width:650px;
-    background: #F8F8F8;
-    padding: 20px;
+    {% comment %} background: #F8F8F8;
+    padding: 20px; {% endcomment %}
     border-radius: 10px;
   }
 }
@@ -254,8 +254,15 @@
 
 .curriculum {
   margin: 20px 0;
+  background: #F8F8F8;
+  padding: 20px 40px 40px;
+  border-radius: 10px;
 }
-
+@media only screen and (max-width: 767px) {
+  .curriculum {
+    padding: 20px;
+  }
+}
 .curriculum-section:first-child {
   border-bottom: 2px solid #0F828C;
 }
@@ -303,6 +310,14 @@
 
 .program-details-h2{
   margin-top:0;
+}
+.section--title-block {
+  padding: 0 40px;
+}
+@media only screen and (max-width: 767px) {
+  .section--title-block {
+    padding: 20px;
+  }
 }
 .section--title-block h2 {
   color: #141414;
