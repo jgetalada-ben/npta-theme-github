@@ -97,7 +97,8 @@
       ],
       "settings": {
         "section_id": "program_details",
-        "program_details": "<p> Lorem ipsum dolor sit amet</p>"
+        "program_details": "<p> Lorem ipsum dolor sit amet</p>",
+        "enable_fadeup": true
       }
     },
     "pdp_career_paths_slider_mtyLA8": {
