@@ -52,8 +52,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="font" href="{{ 'Anton-Regular.woff2' | asset_url }}" type="font/woff2" crossorigin>
+    {{ 'fonts-anton.css' | asset_url | stylesheet_tag }}
 
     {{ 'fonts.css' | asset_url | stylesheet_tag }}
 
