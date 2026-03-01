@@ -85,6 +85,7 @@
         "embed_url": "",
         "alt": "Jesse Benson NPTA Founder",
         "enable_audio": true,
+        "mute_after_first_loop": true,
         "aspect_ratio": "21-9",
         "aspect_ratio_mobile": "1-1",
         "height_mode": "ratio",
@@ -236,61 +237,6 @@
         "alignment": "center"
       }
     },
-    "section_logo_carousel_t9PTHx": {
-      "type": "section--logo-carousel",
-      "blocks": {
-        "logo_jdTEpK": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/logo-carousel-placeholder-1.png"
-          }
-        },
-        "logo_6DLTX7": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/logo-carousel-place-holder-3.png"
-          }
-        },
-        "logo_9nAJxm": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/logo-carousel-place-holder-2.png"
-          }
-        },
-        "logo_89zi8a": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/logo-carousel-placeholder-1.png"
-          }
-        },
-        "logo_U6x4mq": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/logo-carousel-place-holder-3.png"
-          }
-        },
-        "logo_dMbFUR": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/logo-carousel-place-holder-2.png"
-          }
-        }
-      },
-      "block_order": [
-        "logo_jdTEpK",
-        "logo_6DLTX7",
-        "logo_9nAJxm",
-        "logo_89zi8a",
-        "logo_U6x4mq",
-        "logo_dMbFUR"
-      ],
-      "settings": {
-        "top_padding": 92,
-        "bottom_padding": 92,
-        "container_width": 980,
-        "scroll_direction": "rtl"
-      }
-    },
     "section_text_form_jeQTRd": {
       "type": "section--text-form",
       "disabled": true,
@@ -301,6 +247,74 @@
         "section_title": "Why NPTA?",
         "section_description": "<p><strong>Get Certified and Get Ahead:<br/></strong> Our comprehensive NASM certification programs will equip you with cutting-edge knowledge and skills, setting you apart in a competitive industry.</p><p><strong>Real-World Experience:<br/></strong> Dive into our hands-on apprenticeship program, gaining invaluable experience and mentorship from fitness industry leaders like Jesse Benson, so you're ready to make an impact from day one.</p><p><strong>Accelerate Your Career Growth:<br/></strong> Whether you're just starting or leveling up, our affiliate and apprenticeship programs offer unparalleled opportunities for professional development and maximizing your earning potential.</p><p><strong>Join a Vibrant Community:<br/></strong>Be part of a supportive, collaborative network that celebrates your achievements and fosters an environment of continuous learning and success.</p>",
         "webhook_url": "https://hooks.zapier.com/hooks/catch/xxxxxx/"
+      }
+    },
+    "section_logo_carousel_mjYtbr": {
+      "type": "section--logo-carousel",
+      "blocks": {
+        "logo_jQAKye": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/nasm-logo.png"
+          }
+        },
+        "logo_6bzxJG": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/afaa-logo.png"
+          }
+        },
+        "logo_T3EAjh": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/npta-ph-logo_61da15a0-7548-4732-becb-f2132c7cc3c8.png"
+          }
+        },
+        "logo_wrDbUw": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/fitin_logo.png"
+          }
+        },
+        "logo_7Xj9jR": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/backfitpro-logo.webp"
+          }
+        },
+        "logo_Y9HTPM": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/ncsf-logo.png"
+          }
+        },
+        "logo_BLBazE": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/kbstronger-logo.png"
+          }
+        },
+        "logo_V7gjJj": {
+          "type": "logo",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "logo_jQAKye",
+        "logo_6bzxJG",
+        "logo_T3EAjh",
+        "logo_wrDbUw",
+        "logo_7Xj9jR",
+        "logo_Y9HTPM",
+        "logo_BLBazE",
+        "logo_V7gjJj"
+      ],
+      "name": "Logo Carousel",
+      "settings": {
+        "top_padding": 0,
+        "bottom_padding": 0,
+        "container_width": 2000,
+        "scroll_direction": "rtl"
       }
     }
   },
@@ -314,7 +328,7 @@
     "section_quote_text_VH7Afh",
     "section_mission_vision_LzLbEt",
     "section_three_column_87RzJe",
-    "section_logo_carousel_t9PTHx",
-    "section_text_form_jeQTRd"
+    "section_text_form_jeQTRd",
+    "section_logo_carousel_mjYtbr"
   ]
 }
