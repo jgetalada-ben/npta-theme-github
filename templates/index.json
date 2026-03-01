@@ -430,7 +430,7 @@
       "settings": {
         "top_padding": 0,
         "bottom_padding": 0,
-        "container_width": 1440,
+        "container_width": 2000,
         "scroll_direction": "rtl"
       }
     },
