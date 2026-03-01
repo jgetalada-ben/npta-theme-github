@@ -306,113 +306,69 @@
         "compare_font_size": "clamp(18px, 2vw, 26px)"
       }
     },
-    "feature_split_card_ELiHdw": {
-      "type": "feature-split-card",
-      "name": "Split Feature Card",
-      "settings": {
-        "layout": "image-left",
-        "image": "shopify://shop_images/why-students-love-npta.png",
-        "title": "WHY STUDENTS LOVE NPTA",
-        "eyebrow": "Canada’s Lowest Prices",
-        "body": "<p>Get the best NASM deals with zero percent interest payment plans. Found an individual NASM course at a lower price elsewhere? Let us know so we can price match and find an even better deal!</p>",
-        "cta_label": "View All",
-        "cta_link": "https://www.npta.ca/collections/all-products",
-        "max_width": "1989px",
-        "bg": "#ffffff",
-        "card_bg": "#f2f2e9",
-        "radius": 12,
-        "card_overlap": 80,
-        "card_pad_y": 100,
-        "card_pad_x": 80,
-        "pad_top": 40,
-        "pad_right": 24,
-        "pad_bottom": 40,
-        "pad_left": 24,
-        "gap": 24
-      }
-    },
-    "section_process_PPjrLE": {
-      "type": "section--process",
+    "trainers_pick_3WFtG8": {
+      "type": "trainers-pick",
       "blocks": {
-        "step_pqbwnY": {
-          "type": "step",
+        "product_card_pyxaQx": {
+          "type": "product_card",
           "settings": {
-            "step_title": "Get  Certified",
-            "step_description": "",
-            "step_link": "https://www.npta.ca/products/certified-personal-trainer-cpt",
-            "step_link_new_tab": false
+            "product_handle": "certified-personal-trainer-cpt",
+            "custom_image": "shopify://shop_images/Rectangle_8.jpg",
+            "custom_title": "",
+            "blurb": "<p>Become a Certified Personal Trainer from the world’s source of fitness...</p>",
+            "custom_price": "",
+            "custom_link": ""
           }
         },
-        "step_XzC3VX": {
-          "type": "step",
+        "product_card_eVLRcj": {
+          "type": "product_card",
           "settings": {
-            "step_title": "Get Hands-On Training",
-            "step_description": "",
-            "step_link": "https://www.npta.ca/pages/apprenticeship-program",
-            "step_link_new_tab": false
+            "product_handle": "certified-nutrition-coach-cnc",
+            "custom_image": "shopify://shop_images/Rectangle_9.jpg",
+            "custom_title": "",
+            "blurb": "<p>Nutrition serves as the foundation for our health and the fuel for our...</p>",
+            "custom_price": "",
+            "custom_link": ""
           }
         },
-        "step_G4TCdU": {
-          "type": "step",
+        "product_card_e3Cdg4": {
+          "type": "product_card",
           "settings": {
-            "step_title": "Get insured and employed",
-            "step_description": "",
-            "step_link": "https://www.npta.ca/pages/affiliate-program",
-            "step_link_new_tab": false
+            "product_handle": "wellness-coach-cwc-bogo",
+            "custom_image": "shopify://shop_images/Rectangle_10.jpg",
+            "custom_title": "",
+            "blurb": "<p>As a Certified Wellness Coach, you're not just pursuing a career...</p>",
+            "custom_price": "",
+            "custom_link": ""
           }
         }
       },
       "block_order": [
-        "step_pqbwnY",
-        "step_XzC3VX",
-        "step_G4TCdU"
+        "product_card_pyxaQx",
+        "product_card_eVLRcj",
+        "product_card_e3Cdg4"
       ],
+      "name": "Trainer's Pick",
       "settings": {
-        "background_color": "#0f828c",
-        "section_id": "homepage-trainers",
-        "section_title": "BECOME A PERSONAL TRAINER TODAY",
-        "section_description": "",
-        "title_alignment": "center",
-        "container_width": 2000,
-        "alignment": "center",
-        "show_program_button": false,
-        "button_text": "",
-        "program_button_link": "",
-        "section_footer_description": ""
-      }
-    },
-    "section_text_image_QUzLBC": {
-      "type": "section--text-image",
-      "name": "Text Image",
-      "settings": {
-        "section_id": "homepage-quiz-section",
-        "heading": "Discover the Right Path for You",
-        "heading_color": "#01241e",
-        "description": "<p>Not sure where to begin? Take our quick quiz to find the best starting point for your goals, interests, and experience—we’ll guide you to the path that’s right for you.</p>",
-        "text_color": "#01241e",
-        "image": "shopify://shop_images/Rectangle_19.png",
-        "show_buttons": true,
-        "primary_button_text": "TAKE THE QUIZ",
-        "primary_button_link": "https://x641if1yhwv.typeform.com/to/AMGbLYgQ",
-        "primary_button_behavior": "typeform",
-        "primary_open_new_tab": false,
-        "primary_button_color": "#0f828c",
-        "layout": "content-left",
-        "max_width": "1989px",
-        "pad_y": 0,
-        "pad_x": 0,
-        "bg": "#f3f3eb",
-        "primary_button_text_color": "#ffffff",
-        "secondary_prompt": "Would like to speak to a Career Advisor?",
-        "secondary_prompt_color": "#0e2a24",
-        "secondary_button_text": "Book a Free Call",
-        "secondary_button_link": "https://app.npta.ca/widget/bookings/jessica-npta-calendar",
-        "secondary_button_behavior": "modal",
-        "secondary_open_new_tab": true,
-        "secondary_button_color": "#e0ded0",
-        "secondary_button_text_color": "#0b0b0b",
-        "modal_max_width": "min(980px, 92vw)",
-        "modal_height": "min(80vh, 720px)"
+        "kicker": "",
+        "title": "TRAINER’S PICK",
+        "subhead": "Chosen by Thousands. Trusted by Trainers. Built for Your Next Step.",
+        "body": "Explore our best selling products.",
+        "cta_label": "View All Course",
+        "cta_link": "https://www.npta.ca/collections/all-products",
+        "cta2_label": "Build Your Bundle",
+        "cta2_link": "shopify://collections/bundles",
+        "cta2_bg": "#2E7480",
+        "cta2_color": "#FFFFFF",
+        "max_width": "1090",
+        "bg": "#EFF0E7",
+        "price_bg": "#3A8D8F",
+        "price_color": "#FFFFFF",
+        "pad_top": 90,
+        "pad_right": 24,
+        "pad_bottom": 140,
+        "pad_left": 24,
+        "gap": 20
       }
     },
     "section_logo_carousel_Typ4JF": {
@@ -476,6 +432,85 @@
         "bottom_padding": 0,
         "container_width": 2000,
         "scroll_direction": "rtl"
+      }
+    },
+    "whats_new_grid_Pc3dpa": {
+      "type": "whats-new-grid",
+      "blocks": {
+        "row_wXrptG": {
+          "type": "row",
+          "settings": {
+            "layout": "right-large",
+            "row_height_desktop": 440,
+            "row_height_mobile": 300,
+            "left_image": "shopify://shop_images/Business_Blueprint_whatsnew.jpg",
+            "left_product": "business-blueprint-bb",
+            "left_variant_id_override": "",
+            "left_heading": "Business Blueprint",
+            "left_body": "<p>Build a thriving fitness career with proven business strategies, expert coaching, and tools to grow a loyal client base.</p>",
+            "left_btn_label": "Add to Cart",
+            "left_link": "shopify://products/business-blueprint-bb",
+            "left_text_color": "#FFFFFF",
+            "left_overlay_color": "#000000",
+            "left_overlay_opacity": 35,
+            "right_image": "shopify://shop_images/Rectangle_5.png",
+            "right_product": "mindful-stress-management",
+            "right_variant_id_override": "",
+            "right_heading": "Mindful Stress Management",
+            "right_body": "<p>Harness cutting-edge science to design powerful, personalized programs that deliver unstoppable client results.</p>",
+            "right_btn_label": "Add to Cart",
+            "right_link": "shopify://products/mindful-stress-management",
+            "right_text_color": "#FFFFFF",
+            "right_overlay_color": "#000000",
+            "right_overlay_opacity": 35
+          }
+        },
+        "row_MUrUxE": {
+          "type": "row",
+          "settings": {
+            "layout": "left-large",
+            "row_height_desktop": 440,
+            "row_height_mobile": 300,
+            "left_image": "shopify://shop_images/Rectangle_2.webp",
+            "left_product": "social-media-fitness-influencer-smfi",
+            "left_variant_id_override": "",
+            "left_heading": "Social Media Influencer",
+            "left_body": "<p>Expand your reach, attract clients, and boost your brand with strategies top influencers use to succeed online.</p>",
+            "left_btn_label": "Add to Cart",
+            "left_link": "shopify://products/social-media-fitness-influencer-smfi",
+            "left_text_color": "#FFFFFF",
+            "left_overlay_color": "#000000",
+            "left_overlay_opacity": 35,
+            "right_image": "shopify://shop_images/Advanced_Cardio_Programming_what_snew.jpg",
+            "right_product": "advanced-cardio-programming-acp",
+            "right_variant_id_override": "",
+            "right_heading": "Advanced Cardio Programming",
+            "right_body": "<p>Harness cutting-edge science to design powerful, personalized programs that deliver unstoppable client results.</p>",
+            "right_btn_label": "Add to Cart",
+            "right_link": "shopify://products/advanced-cardio-programming-acp",
+            "right_text_color": "#FFFFFF",
+            "right_overlay_color": "#000000",
+            "right_overlay_opacity": 35
+          }
+        }
+      },
+      "block_order": [
+        "row_wXrptG",
+        "row_MUrUxE"
+      ],
+      "name": "What's New Grid",
+      "settings": {
+        "full_width": false,
+        "max_width": "1989px",
+        "max_height": "1528px",
+        "section_title": "WHAT’S NEW",
+        "section_subtitle": "Stay ahead with the latest programs, partnerships, and exclusive deals designed to elevate your fitness career!",
+        "pad_top": 48,
+        "pad_right": 28,
+        "pad_bottom": 48,
+        "pad_left": 28,
+        "gap": 20,
+        "radius": 0
       }
     },
     "multicolumn_4hXCqV": {
@@ -555,183 +590,6 @@
         "grid_gap": 20,
         "grid_row_gap": 0,
         "content_align": "center"
-      }
-    },
-    "payment_highlights_wmDcWb": {
-      "type": "payment-highlights",
-      "blocks": {
-        "feature_edbdf4": {
-          "type": "feature",
-          "settings": {
-            "icon": "shopify://shop_images/material-symbols-light_approval-delegation-sharp.png",
-            "logo_width": 120,
-            "title": "Quick Approval",
-            "body": "<p>Get a real-time decision</p>"
-          }
-        },
-        "feature_9wpwKm": {
-          "type": "feature",
-          "settings": {
-            "icon": "shopify://shop_images/material-symbols_payments-outline-sharp.png",
-            "logo_width": 120,
-            "title": "Easy Payments",
-            "body": "<p>Split your purchase into 3, 6, 9, and 12 easy payments</p>"
-          }
-        },
-        "feature_Mhcqpq": {
-          "type": "feature",
-          "settings": {
-            "icon": "shopify://shop_images/ic_outline-money-off-csred.png",
-            "logo_width": 120,
-            "title": "No Hidden Fees",
-            "body": "<p>0% interest payments with no surprises</p>"
-          }
-        }
-      },
-      "block_order": [
-        "feature_edbdf4",
-        "feature_9wpwKm",
-        "feature_Mhcqpq"
-      ],
-      "name": "Payment highlights",
-      "settings": {
-        "heading": "Learn Now, Pay Later With",
-        "heading_accent": "ELECTIVE",
-        "heading_align": "center",
-        "heading_color": "#01241e",
-        "accent_color": "#157c80",
-        "text_color": "#0b0b0b",
-        "bg": "#f1efe8",
-        "max_width": "1200px",
-        "pad_y": 100,
-        "pad_x": 100,
-        "show_cta": true,
-        "cta_label": "Learn more",
-        "cta_link": "https://www.npta.ca/pages/payment-plan-options",
-        "cta_new_tab": false,
-        "cta_align": "center",
-        "cta_font_size": "clamp(14px, 1.4vw, 18px)",
-        "cta_bg": "#157c80",
-        "cta_color": "#ffffff",
-        "cta_margin_top": "clamp(30px, 5vw, 50px)"
-      }
-    },
-    "section_certified_trainers_6Q4NDV": {
-      "type": "section--certified-trainers",
-      "blocks": {
-        "trainer_A9TM6F": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-18.jpg",
-            "show_content": true,
-            "name": "Kenneth",
-            "certification": "",
-            "quote": "\"You can teach an old dog new tricks 😂 something good came out of the pandemic for me!\"",
-            "rating": "5"
-          }
-        },
-        "trainer_pQjW8c": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-14.jpg",
-            "show_content": true,
-            "name": "Alex Jung Lee",
-            "certification": "",
-            "quote": "\"Throughout the NASM CPT certification course, I've gained a comprehensive understanding of the intrinsic value associated with health and wellness. I take great pride in successfully achieving the designation of NASM CPT. I am enthusiastic about leveraging my acquired knowledge to support and enhance the well-being of my family, friends, and community as a NASM Certified Personal Trainer.\"",
-            "rating": "5"
-          }
-        },
-        "trainer_9kT9Xn": {
-          "type": "trainer",
-          "disabled": true,
-          "settings": {
-            "image": "shopify://shop_images/Cert-16.jpg",
-            "show_content": true,
-            "name": "Helen",
-            "certification": "",
-            "quote": "\"𝐃𝐫𝐞𝐚𝐦𝐬 💭 𝐝𝐨 𝐜𝐨𝐦𝐞 𝐭𝐫𝐮𝐞...𝐚𝐧𝐝 𝐈 𝐃𝐈𝐃 𝐈𝐓!⁣ Studying at 𝟓𝟕 is so very different than at 𝟏𝟗. Yet very possible.⁣\"⁠",
-            "rating": "5"
-          }
-        },
-        "trainer_GnQEiL": {
-          "type": "trainer",
-          "disabled": true,
-          "settings": {
-            "image": "shopify://shop_images/Cert-11.jpg",
-            "show_content": true,
-            "name": "Marina",
-            "certification": "",
-            "quote": "“I’ve been a Personal Trainer for 8 years and chose NASM for their reputation and flexible schedule. The certification took 4 months at my own pace and was applicable to both my profession and personal routines. I’m excited to use my new credentials to help people achieve their fitness goals and improve their lifestyles. Thank you, NASM!”",
-            "rating": "5"
-          }
-        },
-        "trainer_AU9GY7": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-12.jpg",
-            "show_content": true,
-            "name": "Frank",
-            "certification": "",
-            "quote": "\"Training isn't complete without nutrition. For those offering nutritional guidance, the NASM CNC is essential. In my nine years in fitness, it’s been one of the most comprehensive and insightful certifications. The sections on behavior change and coaching skills were transformative. I’m now equipped to assess client needs and provide tailored nutritional coaching for their fitness and lifestyle goals.\"",
-            "rating": "5"
-          }
-        },
-        "trainer_bf7r4V": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-13.jpg",
-            "show_content": true,
-            "name": "Savanna",
-            "certification": "",
-            "quote": "\"Enrolling in NASM was one of the best decisions for my career as a Personal Trainer and Sports Nutritionist. The education provided was excellent and equipped me with essential knowledge for the fitness industry. I appreciated the focus on coaching, nutrition, and exercise techniques. Thanks to NASM, I feel empowered to pursue my passion and look forward to further education in fitness, health, and wellness. I highly recommend NASM for expanding your knowledge in the fitness industry.\"",
-            "rating": "5"
-          }
-        },
-        "trainer_47Kir4": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-4.jpg",
-            "show_content": false,
-            "name": "Kevin",
-            "certification": "",
-            "quote": "\"Becoming NASM Certified is a significant milestone for me. It represents the knowledge and skills I’ve acquired, and my dedication to helping others achieve their fitness goals.\"",
-            "rating": "5"
-          }
-        },
-        "trainer_tkGYB3": {
-          "type": "trainer",
-          "settings": {
-            "image": "shopify://shop_images/Cert-15.jpg",
-            "show_content": true,
-            "name": "Felicitas Avendaño",
-            "certification": "",
-            "quote": "\"In 2018, I became a NASM Certified Personal Trainer (CPT) and Certified Nutrition Coach (CNC), turning a hobby into a full-time job with a busy schedule across two gyms, online clients, and home visits. Being a nutrition coach has enhanced my ability to help clients and added revenue streams to my business. I’m also proud to have been a gym owner for almost a year, enjoying the responsibility and freedom of leading my own team.\"",
-            "rating": "5"
-          }
-        }
-      },
-      "block_order": [
-        "trainer_A9TM6F",
-        "trainer_pQjW8c",
-        "trainer_9kT9Xn",
-        "trainer_GnQEiL",
-        "trainer_AU9GY7",
-        "trainer_bf7r4V",
-        "trainer_47Kir4",
-        "trainer_tkGYB3"
-      ],
-      "disabled": true,
-      "settings": {
-        "section_id": "trainer-success-journet",
-        "section_title": "Trainer Success Journeys",
-        "section_title2": "",
-        "section_description": "<h3><strong>Real Stories. Real Results.</strong></h3><p>See how NASM-certified trainers turned passion into thriving careers. With the right certification and support, you’ll gain the skills, confidence, and opportunities to shape your own path.<br/></p>",
-        "title_alignment": "left",
-        "desc_alignment": "left",
-        "container_width": 2000,
-        "alignment": "flex-start",
-        "button_1_link": "",
-        "button_1_text": ""
       }
     },
     "section_certified_trainers_HNR8DL": {
@@ -1013,6 +871,292 @@
         "button_1_text": ""
       }
     },
+    "feature_split_card_ELiHdw": {
+      "type": "feature-split-card",
+      "name": "Split Feature Card",
+      "settings": {
+        "layout": "image-left",
+        "image": "shopify://shop_images/why-students-love-npta.png",
+        "title": "WHY STUDENTS LOVE NPTA",
+        "eyebrow": "Canada’s Lowest Prices",
+        "body": "<p>Get the best NASM deals with zero percent interest payment plans. Found an individual NASM course at a lower price elsewhere? Let us know so we can price match and find an even better deal!</p>",
+        "cta_label": "View All",
+        "cta_link": "https://www.npta.ca/collections/all-products",
+        "max_width": "1989px",
+        "bg": "#ffffff",
+        "card_bg": "#f2f2e9",
+        "radius": 12,
+        "card_overlap": 80,
+        "card_pad_y": 100,
+        "card_pad_x": 80,
+        "pad_top": 40,
+        "pad_right": 24,
+        "pad_bottom": 40,
+        "pad_left": 24,
+        "gap": 24
+      }
+    },
+    "payment_highlights_wmDcWb": {
+      "type": "payment-highlights",
+      "blocks": {
+        "feature_edbdf4": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/material-symbols-light_approval-delegation-sharp.png",
+            "logo_width": 120,
+            "title": "Quick Approval",
+            "body": "<p>Get a real-time decision</p>"
+          }
+        },
+        "feature_9wpwKm": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/material-symbols_payments-outline-sharp.png",
+            "logo_width": 120,
+            "title": "Easy Payments",
+            "body": "<p>Split your purchase into 3, 6, 9, and 12 easy payments</p>"
+          }
+        },
+        "feature_Mhcqpq": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/ic_outline-money-off-csred.png",
+            "logo_width": 120,
+            "title": "No Hidden Fees",
+            "body": "<p>0% interest payments with no surprises</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_edbdf4",
+        "feature_9wpwKm",
+        "feature_Mhcqpq"
+      ],
+      "name": "Payment highlights",
+      "settings": {
+        "heading": "Learn Now, Pay Later With",
+        "heading_accent": "ELECTIVE",
+        "heading_align": "center",
+        "heading_color": "#01241e",
+        "accent_color": "#157c80",
+        "text_color": "#0b0b0b",
+        "bg": "#f1efe8",
+        "max_width": "1200px",
+        "pad_y": 100,
+        "pad_x": 100,
+        "show_cta": true,
+        "cta_label": "Learn more",
+        "cta_link": "https://www.npta.ca/pages/payment-plan-options",
+        "cta_new_tab": false,
+        "cta_align": "center",
+        "cta_font_size": "clamp(14px, 1.4vw, 18px)",
+        "cta_bg": "#157c80",
+        "cta_color": "#ffffff",
+        "cta_margin_top": "clamp(30px, 5vw, 50px)"
+      }
+    },
+    "section_process_PPjrLE": {
+      "type": "section--process",
+      "blocks": {
+        "step_pqbwnY": {
+          "type": "step",
+          "settings": {
+            "step_title": "Get  Certified",
+            "step_description": "",
+            "step_link": "https://www.npta.ca/products/certified-personal-trainer-cpt",
+            "step_link_new_tab": false
+          }
+        },
+        "step_XzC3VX": {
+          "type": "step",
+          "settings": {
+            "step_title": "Get Hands-On Training",
+            "step_description": "",
+            "step_link": "https://www.npta.ca/pages/apprenticeship-program",
+            "step_link_new_tab": false
+          }
+        },
+        "step_G4TCdU": {
+          "type": "step",
+          "settings": {
+            "step_title": "Get insured and employed",
+            "step_description": "",
+            "step_link": "https://www.npta.ca/pages/affiliate-program",
+            "step_link_new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "step_pqbwnY",
+        "step_XzC3VX",
+        "step_G4TCdU"
+      ],
+      "settings": {
+        "background_color": "#0f828c",
+        "section_id": "homepage-trainers",
+        "section_title": "BECOME A PERSONAL TRAINER TODAY",
+        "section_description": "",
+        "title_alignment": "center",
+        "container_width": 2000,
+        "alignment": "center",
+        "show_program_button": false,
+        "button_text": "",
+        "program_button_link": "",
+        "section_footer_description": ""
+      }
+    },
+    "section_text_image_QUzLBC": {
+      "type": "section--text-image",
+      "name": "Text Image",
+      "settings": {
+        "section_id": "homepage-quiz-section",
+        "heading": "Discover the Right Path for You",
+        "heading_color": "#01241e",
+        "description": "<p>Not sure where to begin? Take our quick quiz to find the best starting point for your goals, interests, and experience—we’ll guide you to the path that’s right for you.</p>",
+        "text_color": "#01241e",
+        "image": "shopify://shop_images/Rectangle_19.png",
+        "show_buttons": true,
+        "primary_button_text": "TAKE THE QUIZ",
+        "primary_button_link": "https://x641if1yhwv.typeform.com/to/AMGbLYgQ",
+        "primary_button_behavior": "typeform",
+        "primary_open_new_tab": false,
+        "primary_button_color": "#0f828c",
+        "layout": "content-left",
+        "max_width": "1989px",
+        "pad_y": 0,
+        "pad_x": 0,
+        "bg": "#f3f3eb",
+        "primary_button_text_color": "#ffffff",
+        "secondary_prompt": "Would like to speak to a Career Advisor?",
+        "secondary_prompt_color": "#0e2a24",
+        "secondary_button_text": "Book a Free Call",
+        "secondary_button_link": "https://app.npta.ca/widget/bookings/jessica-npta-calendar",
+        "secondary_button_behavior": "modal",
+        "secondary_open_new_tab": true,
+        "secondary_button_color": "#e0ded0",
+        "secondary_button_text_color": "#0b0b0b",
+        "modal_max_width": "min(980px, 92vw)",
+        "modal_height": "min(80vh, 720px)"
+      }
+    },
+    "section_certified_trainers_6Q4NDV": {
+      "type": "section--certified-trainers",
+      "blocks": {
+        "trainer_A9TM6F": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-18.jpg",
+            "show_content": true,
+            "name": "Kenneth",
+            "certification": "",
+            "quote": "\"You can teach an old dog new tricks 😂 something good came out of the pandemic for me!\"",
+            "rating": "5"
+          }
+        },
+        "trainer_pQjW8c": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-14.jpg",
+            "show_content": true,
+            "name": "Alex Jung Lee",
+            "certification": "",
+            "quote": "\"Throughout the NASM CPT certification course, I've gained a comprehensive understanding of the intrinsic value associated with health and wellness. I take great pride in successfully achieving the designation of NASM CPT. I am enthusiastic about leveraging my acquired knowledge to support and enhance the well-being of my family, friends, and community as a NASM Certified Personal Trainer.\"",
+            "rating": "5"
+          }
+        },
+        "trainer_9kT9Xn": {
+          "type": "trainer",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/Cert-16.jpg",
+            "show_content": true,
+            "name": "Helen",
+            "certification": "",
+            "quote": "\"𝐃𝐫𝐞𝐚𝐦𝐬 💭 𝐝𝐨 𝐜𝐨𝐦𝐞 𝐭𝐫𝐮𝐞...𝐚𝐧𝐝 𝐈 𝐃𝐈𝐃 𝐈𝐓!⁣ Studying at 𝟓𝟕 is so very different than at 𝟏𝟗. Yet very possible.⁣\"⁠",
+            "rating": "5"
+          }
+        },
+        "trainer_GnQEiL": {
+          "type": "trainer",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/Cert-11.jpg",
+            "show_content": true,
+            "name": "Marina",
+            "certification": "",
+            "quote": "“I’ve been a Personal Trainer for 8 years and chose NASM for their reputation and flexible schedule. The certification took 4 months at my own pace and was applicable to both my profession and personal routines. I’m excited to use my new credentials to help people achieve their fitness goals and improve their lifestyles. Thank you, NASM!”",
+            "rating": "5"
+          }
+        },
+        "trainer_AU9GY7": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-12.jpg",
+            "show_content": true,
+            "name": "Frank",
+            "certification": "",
+            "quote": "\"Training isn't complete without nutrition. For those offering nutritional guidance, the NASM CNC is essential. In my nine years in fitness, it’s been one of the most comprehensive and insightful certifications. The sections on behavior change and coaching skills were transformative. I’m now equipped to assess client needs and provide tailored nutritional coaching for their fitness and lifestyle goals.\"",
+            "rating": "5"
+          }
+        },
+        "trainer_bf7r4V": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-13.jpg",
+            "show_content": true,
+            "name": "Savanna",
+            "certification": "",
+            "quote": "\"Enrolling in NASM was one of the best decisions for my career as a Personal Trainer and Sports Nutritionist. The education provided was excellent and equipped me with essential knowledge for the fitness industry. I appreciated the focus on coaching, nutrition, and exercise techniques. Thanks to NASM, I feel empowered to pursue my passion and look forward to further education in fitness, health, and wellness. I highly recommend NASM for expanding your knowledge in the fitness industry.\"",
+            "rating": "5"
+          }
+        },
+        "trainer_47Kir4": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-4.jpg",
+            "show_content": false,
+            "name": "Kevin",
+            "certification": "",
+            "quote": "\"Becoming NASM Certified is a significant milestone for me. It represents the knowledge and skills I’ve acquired, and my dedication to helping others achieve their fitness goals.\"",
+            "rating": "5"
+          }
+        },
+        "trainer_tkGYB3": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-15.jpg",
+            "show_content": true,
+            "name": "Felicitas Avendaño",
+            "certification": "",
+            "quote": "\"In 2018, I became a NASM Certified Personal Trainer (CPT) and Certified Nutrition Coach (CNC), turning a hobby into a full-time job with a busy schedule across two gyms, online clients, and home visits. Being a nutrition coach has enhanced my ability to help clients and added revenue streams to my business. I’m also proud to have been a gym owner for almost a year, enjoying the responsibility and freedom of leading my own team.\"",
+            "rating": "5"
+          }
+        }
+      },
+      "block_order": [
+        "trainer_A9TM6F",
+        "trainer_pQjW8c",
+        "trainer_9kT9Xn",
+        "trainer_GnQEiL",
+        "trainer_AU9GY7",
+        "trainer_bf7r4V",
+        "trainer_47Kir4",
+        "trainer_tkGYB3"
+      ],
+      "disabled": true,
+      "settings": {
+        "section_id": "trainer-success-journet",
+        "section_title": "Trainer Success Journeys",
+        "section_title2": "",
+        "section_description": "<h3><strong>Real Stories. Real Results.</strong></h3><p>See how NASM-certified trainers turned passion into thriving careers. With the right certification and support, you’ll gain the skills, confidence, and opportunities to shape your own path.<br/></p>",
+        "title_alignment": "left",
+        "desc_alignment": "left",
+        "container_width": 2000,
+        "alignment": "flex-start",
+        "button_1_link": "",
+        "button_1_text": ""
+      }
+    },
     "section_top_banner_MGfjA4": {
       "type": "section--top-banner",
       "custom_css": [
@@ -1064,85 +1208,6 @@
         "popup_height_desktop": "min(80vh, 760px)",
         "popup_height_mobile": "78vh"
       }
-    },
-    "whats_new_grid_Pc3dpa": {
-      "type": "whats-new-grid",
-      "blocks": {
-        "row_wXrptG": {
-          "type": "row",
-          "settings": {
-            "layout": "right-large",
-            "row_height_desktop": 440,
-            "row_height_mobile": 300,
-            "left_image": "shopify://shop_images/Business_Blueprint_whatsnew.jpg",
-            "left_product": "business-blueprint-bb",
-            "left_variant_id_override": "",
-            "left_heading": "Business Blueprint",
-            "left_body": "<p>Build a thriving fitness career with proven business strategies, expert coaching, and tools to grow a loyal client base.</p>",
-            "left_btn_label": "Add to Cart",
-            "left_link": "shopify://products/business-blueprint-bb",
-            "left_text_color": "#FFFFFF",
-            "left_overlay_color": "#000000",
-            "left_overlay_opacity": 35,
-            "right_image": "shopify://shop_images/Rectangle_5.png",
-            "right_product": "mindful-stress-management",
-            "right_variant_id_override": "",
-            "right_heading": "Mindful Stress Management",
-            "right_body": "<p>Harness cutting-edge science to design powerful, personalized programs that deliver unstoppable client results.</p>",
-            "right_btn_label": "Add to Cart",
-            "right_link": "shopify://products/mindful-stress-management",
-            "right_text_color": "#FFFFFF",
-            "right_overlay_color": "#000000",
-            "right_overlay_opacity": 35
-          }
-        },
-        "row_MUrUxE": {
-          "type": "row",
-          "settings": {
-            "layout": "left-large",
-            "row_height_desktop": 440,
-            "row_height_mobile": 300,
-            "left_image": "shopify://shop_images/Rectangle_2.webp",
-            "left_product": "social-media-fitness-influencer-smfi",
-            "left_variant_id_override": "",
-            "left_heading": "Social Media Influencer",
-            "left_body": "<p>Expand your reach, attract clients, and boost your brand with strategies top influencers use to succeed online.</p>",
-            "left_btn_label": "Add to Cart",
-            "left_link": "shopify://products/social-media-fitness-influencer-smfi",
-            "left_text_color": "#FFFFFF",
-            "left_overlay_color": "#000000",
-            "left_overlay_opacity": 35,
-            "right_image": "shopify://shop_images/Advanced_Cardio_Programming_what_snew.jpg",
-            "right_product": "advanced-cardio-programming-acp",
-            "right_variant_id_override": "",
-            "right_heading": "Advanced Cardio Programming",
-            "right_body": "<p>Harness cutting-edge science to design powerful, personalized programs that deliver unstoppable client results.</p>",
-            "right_btn_label": "Add to Cart",
-            "right_link": "shopify://products/advanced-cardio-programming-acp",
-            "right_text_color": "#FFFFFF",
-            "right_overlay_color": "#000000",
-            "right_overlay_opacity": 35
-          }
-        }
-      },
-      "block_order": [
-        "row_wXrptG",
-        "row_MUrUxE"
-      ],
-      "name": "What's New Grid",
-      "settings": {
-        "full_width": false,
-        "max_width": "1989px",
-        "max_height": "1528px",
-        "section_title": "WHAT’S NEW",
-        "section_subtitle": "Stay ahead with the latest programs, partnerships, and exclusive deals designed to elevate your fitness career!",
-        "pad_top": 48,
-        "pad_right": 28,
-        "pad_bottom": 48,
-        "pad_left": 28,
-        "gap": 20,
-        "radius": 0
-      }
     }
   },
   "order": [
@@ -1150,15 +1215,16 @@
     "section_logo_carousel_Uae8xt",
     "media_offer_cta_NBfj78",
     "trending_feature_row_rL3tYY",
+    "trainers_pick_3WFtG8",
+    "section_logo_carousel_Typ4JF",
+    "whats_new_grid_Pc3dpa",
+    "multicolumn_4hXCqV",
+    "section_certified_trainers_HNR8DL",
     "feature_split_card_ELiHdw",
+    "payment_highlights_wmDcWb",
     "section_process_PPjrLE",
     "section_text_image_QUzLBC",
-    "section_logo_carousel_Typ4JF",
-    "multicolumn_4hXCqV",
-    "payment_highlights_wmDcWb",
     "section_certified_trainers_6Q4NDV",
-    "section_certified_trainers_HNR8DL",
-    "section_top_banner_MGfjA4",
-    "whats_new_grid_Pc3dpa"
+    "section_top_banner_MGfjA4"
   ]
 }
