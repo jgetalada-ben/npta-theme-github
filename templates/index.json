@@ -358,12 +358,12 @@
         "cta_link": "https://www.npta.ca/collections/all-products",
         "cta2_label": "Build Your Bundle",
         "cta2_link": "shopify://collections/bundles",
-        "cta2_bg": "#2E7480",
-        "cta2_color": "#FFFFFF",
+        "cta2_bg": "#2e7480",
+        "cta2_color": "#ffffff",
         "max_width": "1090",
-        "bg": "#EFF0E7",
-        "price_bg": "#3A8D8F",
-        "price_color": "#FFFFFF",
+        "bg": "#eff0e7",
+        "price_bg": "#3a8d8f",
+        "price_color": "#ffffff",
         "pad_top": 90,
         "pad_right": 24,
         "pad_bottom": 140,
@@ -430,7 +430,7 @@
       "settings": {
         "top_padding": 0,
         "bottom_padding": 0,
-        "container_width": 2000,
+        "container_width": 1440,
         "scroll_direction": "rtl"
       }
     },
@@ -450,7 +450,7 @@
             "left_body": "<p>Build a thriving fitness career with proven business strategies, expert coaching, and tools to grow a loyal client base.</p>",
             "left_btn_label": "Add to Cart",
             "left_link": "shopify://products/business-blueprint-bb",
-            "left_text_color": "#FFFFFF",
+            "left_text_color": "#ffffff",
             "left_overlay_color": "#000000",
             "left_overlay_opacity": 35,
             "right_image": "shopify://shop_images/Rectangle_5.png",
@@ -460,7 +460,7 @@
             "right_body": "<p>Harness cutting-edge science to design powerful, personalized programs that deliver unstoppable client results.</p>",
             "right_btn_label": "Add to Cart",
             "right_link": "shopify://products/mindful-stress-management",
-            "right_text_color": "#FFFFFF",
+            "right_text_color": "#ffffff",
             "right_overlay_color": "#000000",
             "right_overlay_opacity": 35
           }
@@ -478,7 +478,7 @@
             "left_body": "<p>Expand your reach, attract clients, and boost your brand with strategies top influencers use to succeed online.</p>",
             "left_btn_label": "Add to Cart",
             "left_link": "shopify://products/social-media-fitness-influencer-smfi",
-            "left_text_color": "#FFFFFF",
+            "left_text_color": "#ffffff",
             "left_overlay_color": "#000000",
             "left_overlay_opacity": 35,
             "right_image": "shopify://shop_images/Advanced_Cardio_Programming_what_snew.jpg",
@@ -488,7 +488,7 @@
             "right_body": "<p>Harness cutting-edge science to design powerful, personalized programs that deliver unstoppable client results.</p>",
             "right_btn_label": "Add to Cart",
             "right_link": "shopify://products/advanced-cardio-programming-acp",
-            "right_text_color": "#FFFFFF",
+            "right_text_color": "#ffffff",
             "right_overlay_color": "#000000",
             "right_overlay_opacity": 35
           }
