@@ -194,7 +194,7 @@
         "show_arrows": false,
         "nav_bg": "#ffffff",
         "nav_color": "#0e2a4c",
-        "show_pagination": false,
+        "show_pagination": true,
         "pagi_inactive": "#0e2a4c59",
         "pagi_active": "#4fb7c3"
       }
