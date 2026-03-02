@@ -77,7 +77,7 @@
         "mobile_thumbnails": "hide",
         "gallery_autoplay_enable": true,
         "gallery_autoplay_seconds": 5,
-        "gallery_autoplay_effect": "fade",
+        "gallery_autoplay_effect": "slide",
         "gallery_autoplay_pause_on_hover": true,
         "gallery_autoplay_enable_mobile": true,
         "hide_variants": true,
@@ -168,7 +168,7 @@
       ],
       "name": "PDP Career paths slider",
       "settings": {
-        "heading": "Discover Your Career Path With This Certification",
+        "heading": "Discover Your Career Path With This Certification{{ product.title }}",
         "subheading": "<p>Your potential career pathways start here.</p>",
         "items_desktop": "3.5",
         "items_tablet": "2",
