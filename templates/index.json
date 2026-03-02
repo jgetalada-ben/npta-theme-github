@@ -11,24 +11,6 @@
   "sections": {
     "video_v2_iHaPQP": {
       "type": "video-v2",
-      "blocks": {
-        "rotator_item_GUtJ9x": {
-          "type": "rotator_item",
-          "settings": {
-            "text": "Train With a Coach."
-          }
-        },
-        "rotator_item_nNU3C7": {
-          "type": "rotator_item",
-          "settings": {
-            "text": "LOVE YOUR CAREER."
-          }
-        }
-      },
-      "block_order": [
-        "rotator_item_GUtJ9x",
-        "rotator_item_nNU3C7"
-      ],
       "custom_css": [
         "h3 {color: #c5fb9d;}"
       ],
