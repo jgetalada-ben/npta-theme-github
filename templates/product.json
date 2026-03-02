@@ -75,7 +75,7 @@
         "media_position": "right",
         "image_zoom": "none",
         "mobile_thumbnails": "hide",
-        "gallery_autoplay_enable": false,
+        "gallery_autoplay_enable": true,
         "gallery_autoplay_seconds": 5,
         "gallery_autoplay_effect": "fade",
         "gallery_autoplay_pause_on_hover": true,
