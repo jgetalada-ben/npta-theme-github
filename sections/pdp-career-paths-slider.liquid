@@ -147,7 +147,6 @@
       border-radius: {{ section.settings.card_radius }}px;
       overflow: hidden;
       background: #fff;
-      box-shadow: {{ section.settings.card_shadow }};
       min-height: 420px;
       flex: 0 0 var(--cps-cardw, 320px);
       scroll-snap-align: start;
@@ -707,7 +706,6 @@
     { "type": "text", "id": "max_width", "label": "Max width (CSS)", "default": "1200px" },
     { "type": "text", "id": "card_gap", "label": "Gap between cards (CSS)", "default": "18px" },
     { "type": "range", "id": "card_radius", "label": "Card radius", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 18 },
-    { "type": "text", "id": "card_shadow", "label": "Card shadow (CSS)", "default": "0 10px 26px rgba(0,0,0,0.14)" },
 
     { "type": "text", "id": "overlay_collapsed_height", "label": "Overlay collapsed height (CSS)", "default": "72px" },
     { "type": "text", "id": "overlay_padding", "label": "Overlay padding (CSS)", "default": "18px 18px" },
