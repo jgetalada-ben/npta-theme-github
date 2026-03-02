@@ -1,8 +1,37 @@
 {% comment %}
-  Section: PDP Career Paths Slider (scroll-based, supports fractional per-view e.g. 3.5)
+  Section: PDP Career Paths Slider (Metaobject per product + Theme Editor fallback)
+  - If product metaobject exists -> use it
+  - Else -> use section settings/blocks as fallback
+  - Supports up to 10 slides
 {% endcomment %}
 
 {%- assign sid = section.id -%}
+
+{%- comment -%} CHANGE THIS if your metafield key is different {%- endcomment -%}
+{%- assign mo_field = product.metafields.custom.discover_your_career_path_content -%}
+{%- assign mo = mo_field.value -%}
+
+{%- assign heading_text = section.settings.heading -%}
+{%- assign subheading_html = section.settings.subheading -%}
+
+{%- if mo != blank -%}
+  {%- assign mo_heading = mo.title.value | default: mo.title -%}
+  {%- assign mo_sub = mo.subtitle.value | default: mo.subtitle -%}
+
+  {%- if mo_heading != blank -%}
+    {%- assign heading_text = mo_heading -%}
+  {%- endif -%}
+
+  {%- if mo_sub != blank -%}
+    {%- comment -%}
+      If your metaobject "Subtitle" is multi-line text, we render with newline_to_br.
+      If you switch it to rich text later, you can replace this with: {{ mo.subtitle | metafield_tag }}
+    {%- endcomment -%}
+    {%- capture subheading_html -%}
+      <p>{{ mo_sub | escape | newline_to_br }}</p>
+    {%- endcapture -%}
+  {%- endif -%}
+{%- endif -%}
 
 <section
   id="CareerPaths-{{ sid }}"
@@ -21,13 +50,13 @@
   "
 >
   <div class="cps__inner">
-    {% if section.settings.heading != blank or section.settings.subheading != blank %}
+    {% if heading_text != blank or subheading_html != blank %}
       <div class="cps__head">
-        {% if section.settings.heading != blank %}
-          <h2 class="cps__h">{{ section.settings.heading }}</h2>
+        {% if heading_text != blank %}
+          <h2 class="cps__h">{{ heading_text }}</h2>
         {% endif %}
-        {% if section.settings.subheading != blank %}
-          <div class="cps__sub rte">{{ section.settings.subheading }}</div>
+        {% if subheading_html != blank %}
+          <div class="cps__sub rte">{{ subheading_html }}</div>
         {% endif %}
       </div>
     {% endif %}
@@ -39,37 +68,104 @@
 
       <div class="cps__viewport" data-cps-viewport>
         <div class="cps__track" data-cps-track>
-          {% for block in section.blocks %}
-            {% if block.type == 'card' %}
-              <article class="cps__card" data-cps-card tabindex="0" {{ block.shopify_attributes }}>
-                <div class="cps__media">
-                  {% if block.settings.image != blank %}
+
+          {%- comment -%} 1) METAOBJECT SLIDES (your current pattern: slider_image_1..10, slider_title_1..10, slider_description_1..10) {%- endcomment -%}
+          {%- if mo != blank -%}
+            {%- assign max_slides = 10 -%}
+            {%- for i in (1..max_slides) -%}
+              {%- assign img_key  = 'slider_image_' | append: i -%}
+              {%- assign ttl_key  = 'slider_title_' | append: i -%}
+              {%- assign desc_key = 'slider_description_' | append: i -%}
+              {%- assign en_key   = 'slider_enabled_' | append: i -%}
+
+              {%- assign img_mf  = mo[img_key] -%}
+              {%- assign ttl_mf  = mo[ttl_key] -%}
+              {%- assign desc_mf = mo[desc_key] -%}
+              {%- assign en_mf   = mo[en_key] -%}
+
+              {%- assign img_val = img_mf.value | default: img_mf -%}
+              {%- assign ttl_val = ttl_mf.value | default: ttl_mf -%}
+              {%- assign desc_val = desc_mf.value | default: desc_mf -%}
+
+              {%- assign enabled = true -%}
+              {%- if en_mf != blank and en_mf.value == false -%}
+                {%- assign enabled = false -%}
+              {%- endif -%}
+
+              {%- if enabled and img_val != blank and ttl_val != blank -%}
+                <article class="cps__card" data-cps-card tabindex="0">
+                  <div class="cps__media">
                     {%- capture sizes -%}
                       (min-width: 1100px) 25vw, (min-width: 750px) 50vw, 80vw
                     {%- endcapture -%}
-                    {{
-                      block.settings.image
-                      | image_url: width: 1600
-                      | image_tag: loading: 'lazy', sizes: sizes, widths: '360,540,720,900,1200,1600', class: 'cps__img',draggable: 'false'
-                    }}
-                  {% else %}
-                    <div class="cps__img cps__img--ph">{{ 'image' | placeholder_svg_tag }}</div>
-                  {% endif %}
-                </div>
 
-                <div class="cps__overlay">
-                  <div class="cps__overlay-inner">
-                    {% if block.settings.title != blank %}
-                      <h3 class="cps__ct">{{ block.settings.title }}</h3>
-                    {% endif %}
-                    {% if block.settings.desc != blank %}
-                      <div class="cps__cd rte">{{ block.settings.desc }}</div>
-                    {% endif %}
+                    {{
+                      img_val
+                      | image_url: width: 1600
+                      | image_tag:
+                        loading: 'lazy',
+                        sizes: sizes,
+                        widths: '360,540,720,900,1200,1600',
+                        class: 'cps__img',
+                        draggable: 'false',
+                        alt: ttl_val | escape
+                    }}
                   </div>
-                </div>
-              </article>
-            {% endif %}
-          {% endfor %}
+
+                  <div class="cps__overlay">
+                    <div class="cps__overlay-inner">
+                      <h3 class="cps__ct">{{ ttl_val }}</h3>
+
+                      {%- if desc_val != blank -%}
+                        <div class="cps__cd rte">
+                          {{ desc_val | escape | newline_to_br }}
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </article>
+              {%- endif -%}
+            {%- endfor -%}
+
+          {%- else -%}
+
+            {%- comment -%} 2) FALLBACK SLIDES (Theme Editor blocks) {%- endcomment -%}
+            {% for block in section.blocks %}
+              {% if block.type == 'card' and block.settings.enabled %}
+                {%- if block.settings.image != blank and block.settings.title != blank -%}
+                  <article class="cps__card" data-cps-card tabindex="0" {{ block.shopify_attributes }}>
+                    <div class="cps__media">
+                      {%- capture sizes -%}
+                        (min-width: 1100px) 25vw, (min-width: 750px) 50vw, 80vw
+                      {%- endcapture -%}
+                      {{
+                        block.settings.image
+                        | image_url: width: 1600
+                        | image_tag:
+                          loading: 'lazy',
+                          sizes: sizes,
+                          widths: '360,540,720,900,1200,1600',
+                          class: 'cps__img',
+                          draggable: 'false',
+                          alt: block.settings.title | escape
+                      }}
+                    </div>
+
+                    <div class="cps__overlay">
+                      <div class="cps__overlay-inner">
+                        <h3 class="cps__ct">{{ block.settings.title }}</h3>
+                        {% if block.settings.desc != blank %}
+                          <div class="cps__cd rte">{{ block.settings.desc }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </article>
+                {%- endif -%}
+              {% endif %}
+            {% endfor %}
+
+          {%- endif -%}
+
         </div>
       </div>
 
@@ -88,18 +184,15 @@
       background: var(--cps-bg);
       padding: clamp(24px, 4vw, 48px) 0;
     }
-
     #CareerPaths-{{ sid }} .cps__inner{
       max-width: {{ section.settings.max_width }};
       margin: 0 auto;
       padding: 0 clamp(16px, 3vw, 28px);
     }
-
     #CareerPaths-{{ sid }} .cps__head{
       text-align: center;
       margin-bottom: clamp(18px, 3vw, 26px);
     }
-
     #CareerPaths-{{ sid }} .cps__h{
       margin: 0 0 25px;
       font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
@@ -110,7 +203,6 @@
       color: {{ section.settings.section_title_color }};
       line-height: 1.05;
     }
-
     #CareerPaths-{{ sid }} .cps__sub{
       margin: 0;
       font-family: var(--font-body-family);
@@ -133,8 +225,16 @@
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
+      cursor: grab;
+      touch-action: pan-y;
     }
     #CareerPaths-{{ sid }} .cps__viewport::-webkit-scrollbar{ display:none; }
+
+    #CareerPaths-{{ sid }}.is-dragging .cps__viewport{
+      cursor: grabbing;
+      scroll-snap-type: none;
+    }
+    #CareerPaths-{{ sid }}.is-dragging{ user-select: none; }
 
     #CareerPaths-{{ sid }} .cps__track{
       display: flex;
@@ -152,12 +252,8 @@
       scroll-snap-align: start;
       cursor: pointer;
     }
-    
-    #CareerPaths-{{ sid }} .cps__media{ 
-      height: 100%; 
-      pointer-events: auto;
-    }
 
+    #CareerPaths-{{ sid }} .cps__media{ height: 100%; pointer-events: auto; }
     #CareerPaths-{{ sid }} .cps__img{
       display: block;
       width: 100%;
@@ -166,14 +262,6 @@
       -webkit-user-drag: none;
       user-select: none;
       pointer-events: none;
-    }
-
-    #CareerPaths-{{ sid }} .cps__img--ph{
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: .6;
     }
 
     #CareerPaths-{{ sid }} .cps__overlay{
@@ -188,7 +276,6 @@
       z-index: 2;
       pointer-events: none;
     }
-
     #CareerPaths-{{ sid }} .cps__overlay::before{
       content: "";
       position: absolute;
@@ -198,7 +285,6 @@
       transition: background 220ms ease, opacity 220ms ease;
       z-index: 0;
     }
-
     #CareerPaths-{{ sid }} .cps__overlay-inner{
       width: 100%;
       height: 100%;
@@ -211,7 +297,6 @@
       position: relative;
       z-index: 1;
     }
-    
     #CareerPaths-{{ sid }} .cps__overlay-inner::-webkit-scrollbar{ display:none; }
 
     #CareerPaths-{{ sid }} .cps__ct{
@@ -244,9 +329,6 @@
         margin-top 240ms ease;
     }
 
-    #CareerPaths-{{ sid }} .cps__cd p{ margin: 0; }
-    #CareerPaths-{{ sid }} .cps__cd p + p{ margin-top: 10px; }
-
     #CareerPaths-{{ sid }} .cps__nav{
       width: 44px;
       height: 44px;
@@ -264,7 +346,6 @@
       transition: transform .2s ease, opacity .2s ease;
       user-select: none;
     }
-    #CareerPaths-{{ sid }} .cps__nav:hover{ transform: translateY(-1px); }
     #CareerPaths-{{ sid }} .cps__nav[disabled]{ opacity: .4; cursor: not-allowed; transform: none; }
 
     #CareerPaths-{{ sid }} .cps__pagi{
@@ -273,7 +354,6 @@
       gap: 10px;
       margin-top: clamp(14px, 2.2vw, 18px);
     }
-
     #CareerPaths-{{ sid }} .cps__dot{
       width: 9px;
       height: 9px;
@@ -285,7 +365,6 @@
       transition: width 220ms ease, background 220ms ease, opacity 220ms ease;
       opacity: .75;
     }
-
     #CareerPaths-{{ sid }} .cps__dot.is-active{
       width: 30px;
       background: {{ section.settings.pagi_active }};
@@ -293,22 +372,13 @@
     }
 
     @media (max-width: 749px){
-      #CareerPaths-{{ sid }} .cps__wrap{
-        grid-template-columns: auto 1fr auto;
-        gap: 8px;
-      }
-      #CareerPaths-{{ sid }} .cps__nav{
-        width: 40px;
-        height: 40px;
-        font-size: 24px;
-      }
+      #CareerPaths-{{ sid }} .cps__wrap{ grid-template-columns: auto 1fr auto; gap: 8px; }
+      #CareerPaths-{{ sid }} .cps__nav{ width: 40px; height: 40px; font-size: 24px; }
     }
 
-    @media (hover: hover) and (pointer: fine){@media (hover: hover) and (pointer: fine){
+    @media (hover: hover) and (pointer: fine){
       #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay,
-      #CareerPaths-{{ sid }} .cps__card:focus-visible .cps__overlay{
-        height: 100%;
-      }
+      #CareerPaths-{{ sid }} .cps__card:focus-visible .cps__overlay{ height: 100%; }
 
       #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay::before,
       #CareerPaths-{{ sid }} .cps__card:focus-visible .cps__overlay::before{
@@ -333,11 +403,6 @@
     }
 
     @media (hover: none){
-      {% comment %} #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay{
-        height: 100%;
-        background: var(--cps-overlay-bg-hover);
-        pointer-events: auto;
-      } {% endcomment %}
       #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay::before{
         background: var(--cps-overlay-bg-hover);
         opacity: 0.78;
@@ -347,7 +412,6 @@
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
       }
-
       #CareerPaths-{{ sid }} .cps__card.is-open .cps__cd{
         max-height: 3000px;
         margin-top: 10px;
@@ -358,22 +422,7 @@
 
     @media (prefers-reduced-motion: reduce){
       #CareerPaths-{{ sid }} .cps__overlay,
-      #CareerPaths-{{ sid }} .cps__cd{
-        transition: none !important;
-      }
-    }
-    #CareerPaths-{{ sid }} .cps__viewport{
-      cursor: grab;
-      touch-action: pan-y;
-    }
-
-    #CareerPaths-{{ sid }}.is-dragging .cps__viewport{
-      cursor: grabbing;
-      scroll-snap-type: none; /* smoother drag */
-    }
-
-    #CareerPaths-{{ sid }}.is-dragging{
-      user-select: none;
+      #CareerPaths-{{ sid }} .cps__cd{ transition: none !important; }
     }
   </style>
 
@@ -443,15 +492,8 @@
       viewport.scrollTo({ left: x, behavior: smooth === false ? 'auto' : 'smooth' });
     }
 
-    function goNext(){
-      var s = stepSize();
-      scrollToX(Math.min(maxScroll(), viewport.scrollLeft + s));
-    }
-
-    function goPrev(){
-      var s = stepSize();
-      scrollToX(Math.max(0, viewport.scrollLeft - s));
-    }
+    function goNext(){ scrollToX(Math.min(maxScroll(), viewport.scrollLeft + stepSize())); }
+    function goPrev(){ scrollToX(Math.max(0, viewport.scrollLeft - stepSize())); }
 
     function pageCount(){
       var s = stepSize();
@@ -504,14 +546,9 @@
       if (btnNext) btnNext.disabled = (x >= mx - 2);
     }
 
-    function updateUI(){
-      updateArrows();
-      updatePagination();
-    }
+    function updateUI(){ updateArrows(); updatePagination(); }
 
-    function stopAutoplay(){
-      if (timer) { clearInterval(timer); timer = null; }
-    }
+    function stopAutoplay(){ if (timer) { clearInterval(timer); timer = null; } }
 
     function startAutoplay(){
       if (!autoplay) return;
@@ -522,10 +559,7 @@
       }, Math.max(2000, autoplayMs));
     }
 
-    function restartAutoplay(){
-      if (!autoplay) return;
-      startAutoplay();
-    }
+    function restartAutoplay(){ if (autoplay) startAutoplay(); }
 
     if (showArrows){
       if (btnPrev) btnPrev.addEventListener('click', function(){ stopAutoplay(); goPrev(); restartAutoplay(); });
@@ -534,15 +568,10 @@
 
     viewport.addEventListener('scroll', function(){ updateUI(); }, { passive: true });
 
-    // ---- Drag / Swipe support (mouse + touch) with HOLD-to-drag ----
-    var pointerDown = false;
-    var startX = 0, startY = 0, startScroll = 0;
-    var dragging = false;
-    var activeId = null;
-
-    var holdTimer = null;
-    var dragReady = false;       // becomes true after holding
-    var didDragRecently = false;
+    // Drag / hold-to-drag
+    var pointerDown = false, startX = 0, startY = 0, startScroll = 0;
+    var dragging = false, activeId = null;
+    var holdTimer = null, dragReady = false, didDragRecently = false;
 
     function beginDrag(e){
       dragging = true;
@@ -564,7 +593,6 @@
       startScroll = viewport.scrollLeft;
       didDragRecently = false;
 
-      // Hold-to-drag (desktop mouse)
       clearTimeout(holdTimer);
       holdTimer = setTimeout(function(){
         if (!pointerDown || dragging) return;
@@ -579,9 +607,6 @@
       var dx = e.clientX - startX;
       var dy = e.clientY - startY;
 
-      // Start dragging either:
-      // 1) after hold (dragReady), OR
-      // 2) after a normal swipe threshold (6px, horizontal dominant)
       if (!dragging){
         if (dragReady || (Math.abs(dx) > 6 && Math.abs(dx) > Math.abs(dy))){
           clearTimeout(holdTimer);
@@ -607,12 +632,8 @@
         dragReady = false;
         didDragRecently = true;
 
-        // snap to nearest card step
         var s = stepSize();
-        if (s) {
-          var target = Math.round(viewport.scrollLeft / s) * s;
-          scrollToX(target, true);
-        }
+        if (s) scrollToX(Math.round(viewport.scrollLeft / s) * s, true);
 
         restartAutoplay();
         setTimeout(function(){ didDragRecently = false; }, 200);
@@ -623,35 +644,22 @@
       activeId = null;
     }
 
-    // IMPORTANT: pointerdown must be passive:false if we might preventDefault later
     viewport.addEventListener('pointerdown', onPointerDown, { passive: false });
     viewport.addEventListener('pointermove', onPointerMove, { passive: false });
     viewport.addEventListener('pointerup', onPointerUp, { passive: true });
     viewport.addEventListener('pointercancel', onPointerUp, { passive: true });
-
-    // Prevent native browser drag behavior just in case
     viewport.addEventListener('dragstart', function(e){ e.preventDefault(); });
 
-    // ---- Mobile tap-to-toggle (only on touch devices) ----
+    // Mobile tap-to-toggle
     if (!isHoverCapable){
       cards.forEach(function(card){
         card.addEventListener('click', function(){
-          if (didDragRecently) return; // don't toggle when user was dragging
+          if (didDragRecently) return;
           cards.forEach(function(c){ if (c !== card) c.classList.remove('is-open'); });
           card.classList.toggle('is-open');
         });
       });
-
-      // tap outside closes
-      document.addEventListener('click', function(e){
-        if (!root.contains(e.target)) return;
-        var insideCard = e.target.closest('[data-cps-card]');
-        if (!insideCard){
-          cards.forEach(function(c){ c.classList.remove('is-open'); });
-        }
-      });
     } else {
-      // prevent "sticky open" from mouse click focus
       cards.forEach(function(card){
         card.addEventListener('mousedown', function(){ try { card.blur(); } catch(e){} });
       });
@@ -667,7 +675,6 @@
     startAutoplay();
   })();
   </script>
-
 </section>
 
 {% schema %}
@@ -675,10 +682,11 @@
   "name": "PDP Career paths slider",
   "tag": "section",
   "class": "section pdp-career-paths-slider",
+  "max_blocks": 10,
   "settings": [
     { "type": "header", "content": "Header" },
-    { "type": "text", "id": "heading", "label": "Section title", "default": "DISCOVER YOUR CAREER PATH WITH THIS CERTIFICATION" },
-    { "type": "richtext", "id": "subheading", "label": "Section description", "default": "<p>Your potential career pathways start here.</p>" },
+    { "type": "text", "id": "heading", "label": "Fallback section title", "default": "DISCOVER YOUR CAREER PATH WITH THIS CERTIFICATION" },
+    { "type": "richtext", "id": "subheading", "label": "Fallback section description", "default": "<p>Your potential career pathways start here.</p>" },
 
     { "type": "header", "content": "Items visible (supports decimals)" },
     { "type": "text", "id": "items_desktop", "label": "Desktop items visible (e.g. 3.5)", "default": "3.5" },
@@ -689,10 +697,8 @@
     { "type": "color", "id": "section_bg", "label": "Section background", "default": "#ffffff" },
     { "type": "color", "id": "section_title_color", "label": "Section title color", "default": "#0E2A4C" },
     { "type": "color", "id": "section_desc_color", "label": "Section description color", "default": "#0E2A4C" },
-
     { "type": "color", "id": "overlay_bg", "label": "Overlay background (collapsed)", "default": "rgba(18,54,91,0.85)" },
     { "type": "color", "id": "overlay_bg_hover", "label": "Overlay background (expanded/hover)", "default": "rgba(18,54,91,0.90)" },
-
     { "type": "color", "id": "card_title_color", "label": "Card title color", "default": "#ffffff" },
     { "type": "color", "id": "card_desc_color", "label": "Card description color", "default": "#ffffff" },
 
@@ -706,18 +712,15 @@
     { "type": "text", "id": "max_width", "label": "Max width (CSS)", "default": "1200px" },
     { "type": "text", "id": "card_gap", "label": "Gap between cards (CSS)", "default": "18px" },
     { "type": "range", "id": "card_radius", "label": "Card radius", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 18 },
-
     { "type": "text", "id": "overlay_collapsed_height", "label": "Overlay collapsed height (CSS)", "default": "72px" },
     { "type": "text", "id": "overlay_padding", "label": "Overlay padding (CSS)", "default": "18px 18px" },
 
     { "type": "header", "content": "Controls" },
     { "type": "checkbox", "id": "autoplay", "label": "Enable autoplay", "default": false },
     { "type": "range", "id": "autoplay_speed", "label": "Autoplay speed (seconds)", "min": 2, "max": 12, "step": 1, "default": 5 },
-
     { "type": "checkbox", "id": "show_arrows", "label": "Show prev/next buttons", "default": false },
     { "type": "color", "id": "nav_bg", "label": "Nav button background", "default": "#ffffff" },
     { "type": "color", "id": "nav_color", "label": "Nav button color", "default": "#0E2A4C" },
-
     { "type": "checkbox", "id": "show_pagination", "label": "Show pagination", "default": false },
     { "type": "color", "id": "pagi_inactive", "label": "Pagination inactive", "default": "rgba(14,42,76,0.35)" },
     { "type": "color", "id": "pagi_active", "label": "Pagination active (pill)", "default": "#4FB7C3" }
@@ -725,8 +728,9 @@
   "blocks": [
     {
       "type": "card",
-      "name": "Career card",
+      "name": "Fallback career card",
       "settings": [
+        { "type": "checkbox", "id": "enabled", "label": "Enable this slide", "default": true },
         { "type": "image_picker", "id": "image", "label": "Image" },
         { "type": "text", "id": "title", "label": "Card title", "default": "PERSONAL TRAINER" },
         { "type": "richtext", "id": "desc", "label": "Card description (revealed on hover)", "default": "<p>Add your card description here.</p>" }
@@ -734,15 +738,7 @@
     }
   ],
   "presets": [
-    {
-      "name": "PDP Career paths slider",
-      "blocks": [
-        { "type": "card" },
-        { "type": "card" },
-        { "type": "card" },
-        { "type": "card" }
-      ]
-    }
+    { "name": "PDP Career paths slider", "blocks": [{ "type": "card" }, { "type": "card" }, { "type": "card" }] }
   ]
 }
 {% endschema %}
