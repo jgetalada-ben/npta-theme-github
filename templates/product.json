@@ -113,54 +113,81 @@
           "type": "card",
           "settings": {
             "enabled": true,
-            "image": "shopify://shop_images/Rectangle_108.png",
-            "title": "VIRTUAL NUTRITION COACH",
-            "desc": "<p>Use your nutrition coaching foundation to support or complement a future path in dietetics, strengthening your ability to educate clients on sustainable eating habits and behavior change.</p>"
+            "image": "shopify://shop_images/Master_Trainer.jpg",
+            "title": "Master Trainer",
+            "desc": "<p>Your NASM CPT is the essential first step toward becoming a Master Trainer—a respected leader who educates peers, mentors others, and shapes the future of fitness. By building on your CPT with advanced specializations, you evolve from a knowledgeable trainer into a recognized expert. It’s more than a career path—it’s your launchpad from trainer to trailblazer.</p>"
           }
         },
         "card_c98EDj": {
           "type": "card",
           "settings": {
             "enabled": true,
-            "image": "shopify://shop_images/Rectangle_109.png",
-            "title": "DIETITIAN",
-            "desc": "<p>Use your nutrition coaching foundation to support or complement a future path in dietetics, strengthening your ability to educate clients on sustainable eating habits and behavior change. It enhances your credibility and practical coaching skills in clinical or wellness settings.</p>"
+            "image": "shopify://shop_images/Education_Instructor.jpg",
+            "title": "Education Instructor",
+            "desc": "<p>With an NASM CPT, professionals in higher education deepen their expertise, enhance coursework development, and bring real-world application into the classroom. Whether you're designing new programs or leading hands-on labs, your certification empowers you to teach with authority. Additional certifications required.</p>"
           }
         },
         "card_TC6dtb": {
           "type": "card",
           "settings": {
             "enabled": true,
-            "image": "shopify://shop_images/Rectangle_114.png",
-            "title": "PERSONAL TRAINER",
-            "desc": "<p>Use your nutrition coaching foundation to support or complement a future path in dietetics, strengthening your ability to educate clients on sustainable eating habits and behavior change. It enhances your credibility and practical coaching skills in clinical or wellness settings.</p>"
+            "image": "shopify://shop_images/Online_Trainer.jpg",
+            "title": "Online Trainer",
+            "desc": "<p>Expand your reach beyond the gym. With NASM CPT credibility, you can deliver effective, individualized training virtually, helping clients achieve results no matter where they are. Leverage tech, build relationships, and create lasting change from any location.</p>"
           }
         },
         "card_Vqeimq": {
           "type": "card",
           "settings": {
             "enabled": true,
-            "image": "shopify://shop_images/Rectangle_116.png",
-            "title": "NUTRITION INFLUENCER",
-            "desc": "<p>Use your nutrition coaching foundation to support or complement a future path in dietetics, strengthening your ability to educate clients on sustainable eating habits and behavior change. It enhances your credibility and practical coaching skills in clinical or wellness settings.</p>"
+            "image": "shopify://shop_images/Fitness_Manager.jpg",
+            "title": "Fitness Manager",
+            "desc": "<p>Move from coaching individuals to leading entire teams. With an NASM CPT, you’ll be equipped to mentor other trainers, manage operations, and elevate client experiences. Drive excellence, promote growth, and lead with confidence.</p>"
           }
         },
         "card_DGBHJn": {
           "type": "card",
           "settings": {
             "enabled": true,
-            "image": "shopify://shop_images/Rectangle_120.png",
-            "title": "Meal Prep Entrepreneur",
-            "desc": "<p>Use your nutrition coaching foundation to support or complement a future path in dietetics, strengthening your ability to educate clients on sustainable eating habits and behavior change. It enhances your credibility and practical coaching skills in clinical or wellness settings.</p>"
+            "image": "shopify://shop_images/Social_Media_Influencer_969bcdf7-26e6-445a-91bd-eaa2a5ab8d33.jpg",
+            "title": "Social Media Influencer",
+            "desc": "<p>Build a trusted voice in the fitness space. An NASM CPT adds the credibility behind your content, giving you the authority to inspire, educate, and grow an audience that values expertise. Share your passion, spark action, and lead with authenticity.</p>"
           }
         },
         "card_4F6yPX": {
           "type": "card",
           "settings": {
             "enabled": true,
-            "image": "shopify://shop_images/Rectangle_122.png",
-            "title": "Nutrition Blogger / Writer",
-            "desc": "<p>Use your nutrition coaching foundation to support or complement a future path in dietetics, strengthening your ability to educate clients on sustainable eating habits and behavior change. It enhances your credibility and practical coaching skills in clinical or wellness settings.</p>"
+            "image": "shopify://shop_images/Gym_Personal_Trainer.jpg",
+            "title": "Gym Personal Trainer",
+            "desc": "<p>Work in a boutique studio or large gym, creating customized workouts and guiding clients toward their goals. With an NASM CPT, you’ll have the expertise and credibility to deliver real results and stand out on the gym floor. Build trust, drive transformation, and become the trainer clients seek out.</p>"
+          }
+        },
+        "card_6YRKQm": {
+          "type": "card",
+          "settings": {
+            "enabled": true,
+            "image": "shopify://shop_images/Independent_Personal_Trainer.jpg",
+            "title": "Independent Personal Trainer",
+            "desc": "<p>Build your fitness business and be your own boss. An NASM CPT gives you the knowledge and confidence to create tailored programs, attract loyal clients, and grow a career on your terms. Flex your creativity, scale your impact, and coach with purpose. Your brand. Your business. Your rules.</p>"
+          }
+        },
+        "card_hX3jB7": {
+          "type": "card",
+          "settings": {
+            "enabled": true,
+            "image": "shopify://shop_images/Corporate_Wellness_Trainer.jpg",
+            "title": "Corporate Wellness Trainer",
+            "desc": "<p>Design and lead programs that keep employees healthier, happier, and more productive. As an NASM CPT, you’ll have the skill set to make fitness part of workplace culture—boosting morale, reducing stress, and improving performance. An additional Wellness Coach certification may be needed. Strengthen workplace teams through wellness.</p>"
+          }
+        },
+        "card_mNrwDJ": {
+          "type": "card",
+          "settings": {
+            "enabled": true,
+            "image": "shopify://shop_images/Gym_Owner.jpg",
+            "title": "Gym Owner",
+            "desc": "<p>Turn your vision into reality. With an NASM CPT as your foundation, you’ll have the experience and know-how to create a space where clients come to transform—and a business built to thrive. Lead with purpose and shape your community.</p>"
           }
         }
       },
@@ -170,7 +197,10 @@
         "card_TC6dtb",
         "card_Vqeimq",
         "card_DGBHJn",
-        "card_4F6yPX"
+        "card_4F6yPX",
+        "card_6YRKQm",
+        "card_hX3jB7",
+        "card_mNrwDJ"
       ],
       "name": "PDP Career paths slider",
       "settings": {
