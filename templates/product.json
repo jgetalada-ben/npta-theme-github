@@ -112,6 +112,7 @@
         "card_HmYkNT": {
           "type": "card",
           "settings": {
+            "enabled": true,
             "image": "shopify://shop_images/Rectangle_108.png",
             "title": "VIRTUAL NUTRITION COACH",
             "desc": "<p>Use your nutrition coaching foundation to support or complement a future path in dietetics, strengthening your ability to educate clients on sustainable eating habits and behavior change.</p>"
@@ -120,6 +121,7 @@
         "card_c98EDj": {
           "type": "card",
           "settings": {
+            "enabled": true,
             "image": "shopify://shop_images/Rectangle_109.png",
             "title": "DIETITIAN",
             "desc": "<p>Use your nutrition coaching foundation to support or complement a future path in dietetics, strengthening your ability to educate clients on sustainable eating habits and behavior change. It enhances your credibility and practical coaching skills in clinical or wellness settings.</p>"
@@ -128,6 +130,7 @@
         "card_TC6dtb": {
           "type": "card",
           "settings": {
+            "enabled": true,
             "image": "shopify://shop_images/Rectangle_114.png",
             "title": "PERSONAL TRAINER",
             "desc": "<p>Use your nutrition coaching foundation to support or complement a future path in dietetics, strengthening your ability to educate clients on sustainable eating habits and behavior change. It enhances your credibility and practical coaching skills in clinical or wellness settings.</p>"
@@ -136,6 +139,7 @@
         "card_Vqeimq": {
           "type": "card",
           "settings": {
+            "enabled": true,
             "image": "shopify://shop_images/Rectangle_116.png",
             "title": "NUTRITION INFLUENCER",
             "desc": "<p>Use your nutrition coaching foundation to support or complement a future path in dietetics, strengthening your ability to educate clients on sustainable eating habits and behavior change. It enhances your credibility and practical coaching skills in clinical or wellness settings.</p>"
@@ -144,6 +148,7 @@
         "card_DGBHJn": {
           "type": "card",
           "settings": {
+            "enabled": true,
             "image": "shopify://shop_images/Rectangle_120.png",
             "title": "Meal Prep Entrepreneur",
             "desc": "<p>Use your nutrition coaching foundation to support or complement a future path in dietetics, strengthening your ability to educate clients on sustainable eating habits and behavior change. It enhances your credibility and practical coaching skills in clinical or wellness settings.</p>"
@@ -152,6 +157,7 @@
         "card_4F6yPX": {
           "type": "card",
           "settings": {
+            "enabled": true,
             "image": "shopify://shop_images/Rectangle_122.png",
             "title": "Nutrition Blogger / Writer",
             "desc": "<p>Use your nutrition coaching foundation to support or complement a future path in dietetics, strengthening your ability to educate clients on sustainable eating habits and behavior change. It enhances your credibility and practical coaching skills in clinical or wellness settings.</p>"
@@ -168,7 +174,7 @@
       ],
       "name": "PDP Career paths slider",
       "settings": {
-        "heading": "Discover Your Career Path With This Certification{{ product.title }}",
+        "heading": "Discover Your Career Path With This Certification",
         "subheading": "<p>Your potential career pathways start here.</p>",
         "items_desktop": "3.5",
         "items_tablet": "2",
