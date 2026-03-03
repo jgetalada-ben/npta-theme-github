@@ -1,20 +1,36 @@
+{% comment %}
+  Section: PDP Career Paths Slider (Metaobject per product + Theme Editor fallback)
+  - Uses product metafield (namespace: custom) pointing to metaobject "Career Paths Slider Content"
+  - Metaobject fields supported (handles):
+      Slider content: heading_title OR title OR heading, subheading OR subtitle, slides
+      Slide: enabled_slide, slide_title, slide_description, slide_image
+  - If metaobject/slides missing -> falls back to Theme Editor blocks
+  - Drag (mouse + touch) + hold-to-drag + optional arrows/pagination + autoplay
+{% endcomment %}
+
 {%- assign sid = section.id -%}
 
-{%- assign mo_key = section.settings.metaobject_key | default: 'career_paths_slider_content' -%}
+{%- comment -%} Metafield key safety: allow "career_paths_slider_content" OR "custom.career_paths_slider_content" {%- endcomment -%}
+{%- assign mo_key_raw = section.settings.metaobject_key | default: 'career_paths_slider_content' -%}
+{%- assign mo_key = mo_key_raw | strip -%}
+{%- if mo_key contains '.' -%}
+  {%- assign mo_key = mo_key | split: '.' | last -%}
+{%- endif -%}
+
 {%- assign mo_field = blank -%}
 {%- if product and product.metafields and product.metafields.custom -%}
   {%- assign mo_field = product.metafields.custom[mo_key] -%}
 {%- endif -%}
 {%- assign mo = mo_field.value -%}
 
+{%- comment -%} Default/fallback header comes from Theme Editor settings {%- endcomment -%}
 {%- assign heading_text = section.settings.heading -%}
 {%- assign subheading_html = section.settings.subheading -%}
 
+{%- comment -%} If metaobject exists, override header {%- endcomment -%}
 {%- if mo != blank -%}
-  {%- assign mo_heading = mo.heading_title.value | default: mo.heading_title -%}
-  {%- if mo_heading == blank -%}
-    {%- assign mo_heading = mo.title.value | default: mo.title -%}
-  {%- endif -%}
+  {%- assign mo_heading_mf = mo.heading_title | default: mo.title | default: mo.heading -%}
+  {%- assign mo_heading = mo_heading_mf.value | default: mo_heading_mf -%}
 
   {%- assign mo_sub_mf = mo.subheading | default: mo.subtitle -%}
 
@@ -64,17 +80,35 @@
         <div class="cps__track" data-cps-track>
 
           {%- assign used_meta = false -%}
-          {%- if mo != blank and mo.slides != blank -%}
+
+          {%- comment -%} METAOBJECT SLIDES {%- endcomment -%}
+          {%- if mo != blank and mo.slides != blank and mo.slides.value != blank -%}
             {%- assign slides = mo.slides.value -%}
 
             {%- for slide in slides -%}
-              {%- assign en_mf = slide.enabled_slide | default: slide.enabled | default: slide.enable | default: slide.is_enabled -%}
-              {%- assign enabled = en_mf.value | default: en_mf -%}
+              {%- comment -%} Slide field handles (based on your screenshots) {%- endcomment -%}
+              {%- assign en_mf = slide.enabled_slide -%}
+              {%- if en_mf == blank -%}
+                {%- assign en_mf = slide.enabled | default: slide.enable | default: slide.is_enabled -%}
+              {%- endif -%}
+              {%- assign enabled = en_mf.value -%}
               {%- if enabled == blank -%}{%- assign enabled = true -%}{%- endif -%}
+              {%- if enabled == 'false' -%}{%- assign enabled = false -%}{%- endif -%}
 
-              {%- assign img_mf = slide.slide_image  | default: slide.image   | default: slide.slider_image | default: slide.card_image -%}
-              {%- assign ttl_mf = slide.slide_title  | default: slide.title   | default: slide.card_title -%}
-              {%- assign desc_mf = slide.slide_description | default: slide.description | default: slide.desc -%}
+              {%- assign img_mf = slide.slide_image -%}
+              {%- if img_mf == blank -%}
+                {%- assign img_mf = slide.image | default: slide.slider_image | default: slide.card_image -%}
+              {%- endif -%}
+
+              {%- assign ttl_mf = slide.slide_title -%}
+              {%- if ttl_mf == blank -%}
+                {%- assign ttl_mf = slide.title | default: slide.card_title -%}
+              {%- endif -%}
+
+              {%- assign desc_mf = slide.slide_description -%}
+              {%- if desc_mf == blank -%}
+                {%- assign desc_mf = slide.description | default: slide.desc -%}
+              {%- endif -%}
 
               {%- assign img_val = img_mf.value | default: img_mf -%}
               {%- assign ttl_val = ttl_mf.value | default: ttl_mf -%}
@@ -87,7 +121,6 @@
                     {%- capture sizes -%}
                       (min-width: 1100px) 25vw, (min-width: 750px) 50vw, 80vw
                     {%- endcapture -%}
-
                     {{
                       img_val
                       | image_url: width: 1600
@@ -115,8 +148,8 @@
             {%- endfor -%}
           {%- endif -%}
 
+          {%- comment -%} FALLBACK SLIDES (Theme Editor blocks) {%- endcomment -%}
           {%- unless used_meta -%}
-            {%- comment -%} FALLBACK SLIDES (Theme Editor blocks) {%- endcomment -%}
             {% for block in section.blocks %}
               {% if block.type == 'card' and block.settings.enabled %}
                 {%- if block.settings.image != blank and block.settings.title != blank -%}
@@ -181,7 +214,7 @@
     }
     #CareerPaths-{{ sid }} .cps__h{
       margin: 0 0 25px;
-      font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
+      font-family: 'Anton', var(--font-heading-family, var(--font-body-family)));
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -237,6 +270,7 @@
       flex: 0 0 var(--cps-cardw, 320px);
       scroll-snap-align: start;
       cursor: pointer;
+      outline: none;
     }
 
     #CareerPaths-{{ sid }} .cps__media{ height: 100%; pointer-events: auto; }
@@ -332,6 +366,7 @@
       transition: transform .2s ease, opacity .2s ease;
       user-select: none;
     }
+    #CareerPaths-{{ sid }} .cps__nav:hover{ transform: translateY(-1px); }
     #CareerPaths-{{ sid }} .cps__nav[disabled]{ opacity: .4; cursor: not-allowed; transform: none; }
 
     #CareerPaths-{{ sid }} .cps__pagi{
@@ -362,9 +397,13 @@
       #CareerPaths-{{ sid }} .cps__nav{ width: 40px; height: 40px; font-size: 24px; }
     }
 
+    /* Desktop hover/focus */
     @media (hover: hover) and (pointer: fine){
       #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay,
-      #CareerPaths-{{ sid }} .cps__card:focus-visible .cps__overlay{ height: 100%; }
+      #CareerPaths-{{ sid }} .cps__card:focus-visible .cps__overlay{
+        height: 100%;
+        pointer-events: auto;
+      }
 
       #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay::before,
       #CareerPaths-{{ sid }} .cps__card:focus-visible .cps__overlay::before{
@@ -388,7 +427,12 @@
       }
     }
 
+    /* Mobile tap-to-toggle */
     @media (hover: none){
+      #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay{
+        height: 100%;
+        pointer-events: auto;
+      }
       #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay::before{
         background: var(--cps-overlay-bg-hover);
         opacity: 0.78;
@@ -423,13 +467,13 @@
     if (!viewport || !track || !cards.length) return;
 
     var showArrows = {{ section.settings.show_arrows | json }};
-    var showPagi = {{ section.settings.show_pagination | json }};
-    var autoplay = {{ section.settings.autoplay | json }};
+    var showPagi   = {{ section.settings.show_pagination | json }};
+    var autoplay   = {{ section.settings.autoplay | json }};
     var autoplayMs = ({{ section.settings.autoplay_speed | times: 1000 | json }}) || 5000;
 
     var perDesktop = parseFloat({{ section.settings.items_desktop | json }}) || 3.5;
-    var perTablet  = parseFloat({{ section.settings.items_tablet | json }}) || 2;
-    var perMobile  = parseFloat({{ section.settings.items_mobile | json }}) || 1;
+    var perTablet  = parseFloat({{ section.settings.items_tablet  | json }}) || 2;
+    var perMobile  = parseFloat({{ section.settings.items_mobile  | json }}) || 1;
 
     var btnPrev = root.querySelector('.cps__nav--prev');
     var btnNext = root.querySelector('.cps__nav--next');
@@ -439,7 +483,7 @@
     var isHoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
     function getGapPx(){
-      var gap = getComputedStyle(track).gap || '0px';
+      var gap = getComputedStyle(track).gap || getComputedStyle(track).columnGap || '0px';
       return parseFloat(gap) || 0;
     }
 
@@ -448,19 +492,6 @@
       if (w <= 749) return perMobile;
       if (w <= 1099) return perTablet;
       return perDesktop;
-    }
-
-    function layout(){
-      var perView = getPerView();
-      var gapPx = getGapPx();
-      var vw = viewport.clientWidth;
-
-      var cardW = (vw - gapPx * (perView - 1)) / perView;
-      if (!isFinite(cardW) || cardW < 120) cardW = 280;
-
-      root.style.setProperty('--cps-cardw', cardW.toFixed(2) + 'px');
-      buildPagination();
-      updateUI();
     }
 
     function maxScroll(){
@@ -478,8 +509,18 @@
       viewport.scrollTo({ left: x, behavior: smooth === false ? 'auto' : 'smooth' });
     }
 
-    function goNext(){ scrollToX(Math.min(maxScroll(), viewport.scrollLeft + stepSize())); }
-    function goPrev(){ scrollToX(Math.max(0, viewport.scrollLeft - stepSize())); }
+    function layout(){
+      var perView = getPerView();
+      var gapPx = getGapPx();
+      var vw = viewport.clientWidth;
+
+      var cardW = (vw - gapPx * (perView - 1)) / perView;
+      if (!isFinite(cardW) || cardW < 120) cardW = 280;
+
+      root.style.setProperty('--cps-cardw', cardW.toFixed(2) + 'px');
+      buildPagination();
+      updateUI();
+    }
 
     function pageCount(){
       var s = stepSize();
@@ -541,20 +582,20 @@
       stopAutoplay();
       timer = setInterval(function(){
         if (viewport.scrollLeft >= maxScroll() - 2) scrollToX(0);
-        else goNext();
+        else scrollToX(Math.min(maxScroll(), viewport.scrollLeft + stepSize()));
       }, Math.max(2000, autoplayMs));
     }
 
     function restartAutoplay(){ if (autoplay) startAutoplay(); }
 
     if (showArrows){
-      if (btnPrev) btnPrev.addEventListener('click', function(){ stopAutoplay(); goPrev(); restartAutoplay(); });
-      if (btnNext) btnNext.addEventListener('click', function(){ stopAutoplay(); goNext(); restartAutoplay(); });
+      if (btnPrev) btnPrev.addEventListener('click', function(){ stopAutoplay(); scrollToX(Math.max(0, viewport.scrollLeft - stepSize())); restartAutoplay(); });
+      if (btnNext) btnNext.addEventListener('click', function(){ stopAutoplay(); scrollToX(Math.min(maxScroll(), viewport.scrollLeft + stepSize())); restartAutoplay(); });
     }
 
     viewport.addEventListener('scroll', function(){ updateUI(); }, { passive: true });
 
-    // Drag / hold-to-drag
+    // ---- Drag / hold-to-drag (mouse + touch) ----
     var pointerDown = false, startX = 0, startY = 0, startScroll = 0;
     var dragging = false, activeId = null;
     var holdTimer = null, dragReady = false, didDragRecently = false;
@@ -622,7 +663,7 @@
         if (s) scrollToX(Math.round(viewport.scrollLeft / s) * s, true);
 
         restartAutoplay();
-        setTimeout(function(){ didDragRecently = false; }, 200);
+        setTimeout(function(){ didDragRecently = false; }, 220);
       } else {
         dragReady = false;
       }
@@ -636,7 +677,7 @@
     viewport.addEventListener('pointercancel', onPointerUp, { passive: true });
     viewport.addEventListener('dragstart', function(e){ e.preventDefault(); });
 
-    // Mobile tap-to-toggle
+    // Mobile tap-to-toggle (only on non-hover devices)
     if (!isHoverCapable){
       cards.forEach(function(card){
         card.addEventListener('click', function(){
@@ -646,8 +687,10 @@
         });
       });
     } else {
+      // Avoid "sticky" focus from mouse clicks
       cards.forEach(function(card){
         card.addEventListener('mousedown', function(){ try { card.blur(); } catch(e){} });
+        card.addEventListener('mouseup', function(){ try { card.blur(); } catch(e){} });
       });
     }
 
