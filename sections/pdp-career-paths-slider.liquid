@@ -68,13 +68,13 @@
             {%- assign slides = mo.slides.value -%}
 
             {%- for slide in slides -%}
-              {%- assign en_mf = slide.enabled | default: slide.enable | default: slide.is_enabled -%}
+              {%- assign en_mf = slide.enabled_slide | default: slide.enabled | default: slide.enable | default: slide.is_enabled -%}
               {%- assign enabled = en_mf.value | default: en_mf -%}
               {%- if enabled == blank -%}{%- assign enabled = true -%}{%- endif -%}
 
-              {%- assign img_mf = slide.image | default: slide.slider_image | default: slide.card_image -%}
-              {%- assign ttl_mf = slide.title | default: slide.slide_title | default: slide.card_title -%}
-              {%- assign desc_mf = slide.description | default: slide.slide_description | default: slide.desc -%}
+              {%- assign img_mf = slide.slide_image  | default: slide.image   | default: slide.slider_image | default: slide.card_image -%}
+              {%- assign ttl_mf = slide.slide_title  | default: slide.title   | default: slide.card_title -%}
+              {%- assign desc_mf = slide.slide_description | default: slide.description | default: slide.desc -%}
 
               {%- assign img_val = img_mf.value | default: img_mf -%}
               {%- assign ttl_val = ttl_mf.value | default: ttl_mf -%}
