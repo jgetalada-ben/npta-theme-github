@@ -54,6 +54,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     {{ 'fonts.css' | asset_url | stylesheet_tag }}
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
     <title>
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
@@ -414,6 +418,133 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   window.__nptaGetAttribution = function () {
     return safeParse(localStorage.getItem(ATTR_KEY));
   };
+})();
+</script>
+
+<script>
+(function () {
+  const PATCHED_ATTR = "data-npta-utm-patched";
+  const EXTRA_KEYS = ["gclid", "fbclid", "msclkid"];
+
+  function buildTypeformParams(attr) {
+    if (!attr) return null;
+
+    const params = {
+      utm_source: attr.utm_source || "",
+      utm_medium: attr.utm_medium || "",
+      utm_campaign: attr.utm_campaign || "",
+      utm_term: attr.utm_term || "",
+      utm_content: attr.utm_content || "",
+
+      ft_timestamp: attr.ft_timestamp || "",
+      ft_landing_page: attr.ft_landing_page || "",
+      ft_referrer: attr.ft_referrer || ""
+    };
+
+    // Add click IDs from current URL if present
+    try {
+      const sp = new URL(window.location.href).searchParams;
+      EXTRA_KEYS.forEach((k) => {
+        const v = sp.get(k);
+        if (v) params[k] = v;
+      });
+    } catch (e) {}
+
+    return params;
+  }
+
+  function isTypeformUrl(url) {
+    return typeof url === "string" && /typeform\.com/i.test(url);
+  }
+
+  function appendParamsToUrl(urlStr, params) {
+    if (!urlStr || !params) return urlStr;
+
+    let url;
+    try { url = new URL(urlStr); }
+    catch (e) { return urlStr; }
+
+    if (!isTypeformUrl(urlStr)) return urlStr;
+
+    Object.keys(params).forEach((k) => {
+      const v = params[k];
+      if (v !== "" && !url.searchParams.has(k)) {
+        url.searchParams.set(k, v);
+      }
+    });
+
+    return url.toString();
+  }
+
+  function patchNodeOnce(node, getUrl, setUrl) {
+    if (!node || node.getAttribute(PATCHED_ATTR) === "1") return;
+
+    const current = getUrl();
+    if (!current || !isTypeformUrl(current)) return;
+
+    const attr = (typeof window.__nptaGetAttribution === "function")
+      ? window.__nptaGetAttribution()
+      : null;
+
+    const params = buildTypeformParams(attr);
+    if (!params) return;
+
+    const updated = appendParamsToUrl(current, params);
+
+    // Only set if truly different (prevents iframe reload loops)
+    if (updated && updated !== current) {
+      setUrl(updated);
+    }
+
+    // Mark as patched so we never touch again
+    node.setAttribute(PATCHED_ATTR, "1");
+  }
+
+  function patchTypeformEmbeds() {
+    // Typeform embed elements
+    const tfNodes = document.querySelectorAll(
+      "[data-tf-widget],[data-tf-popup],[data-tf-slider],[data-tf-sidetab],[data-tf-button],[data-tf-chat]"
+    );
+
+    tfNodes.forEach((node) => {
+      // Patch data-tf-src
+      if (node.hasAttribute("data-tf-src")) {
+        patchNodeOnce(
+          node,
+          () => node.getAttribute("data-tf-src"),
+          (v) => node.setAttribute("data-tf-src", v)
+        );
+      }
+
+      // Patch href buttons/links
+      if (node.hasAttribute("href")) {
+        patchNodeOnce(
+          node,
+          () => node.getAttribute("href"),
+          (v) => node.setAttribute("href", v)
+        );
+      }
+    });
+
+    // Raw iframe embeds
+    const iframes = document.querySelectorAll("iframe[src*='typeform.com']");
+    iframes.forEach((iframe) => {
+      patchNodeOnce(
+        iframe,
+        () => iframe.getAttribute("src"),
+        (v) => iframe.setAttribute("src", v)
+      );
+    });
+  }
+
+  // Run once now
+  patchTypeformEmbeds();
+
+  // If something injects Typeform later, patch new nodes only
+  const obs = new MutationObserver(function () {
+    patchTypeformEmbeds();
+  });
+  obs.observe(document.documentElement, { childList: true, subtree: true });
 })();
 </script>
 
