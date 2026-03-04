@@ -4,6 +4,11 @@
   - Mobile: 1 card per view (swipe)
   - Arrows show only when slider is needed
   - Optional autoplay (off by default) with delay (default 5s)
+
+  Updates:
+  1) Section setting: enable title link
+  2) Auto open in new tab for external links; "#" scrolls to top
+  3) Hide whole card if image, title, and link are all blank
 {% endcomment %}
 
 {%- assign sid = section.id -%}
@@ -34,6 +39,8 @@
   data-per-view="{{ per_view }}"
   data-autoplay="{{ section.settings.autoplay }}"
   data-autoplay-delay="{{ section.settings.autoplay_delay | default: 5 }}"
+  data-shop-domain="{{ shop.permanent_domain }}"
+  data-link-title="{{ section.settings.enable_title_link }}"
 >
   <div class="hc__inner">
     {%- if section.settings.heading != blank -%}
@@ -58,13 +65,23 @@
       <div class="hc__track-wrap">
         <ul class="hc__track" role="list">
           {%- for block in section.blocks -%}
-            <li class="hc__item" {{ block.shopify_attributes }}>
-              {%- assign has_link = false -%}
-              {%- if block.settings.link != blank -%}{%- assign has_link = true -%}{%- endif -%}
+            {%- assign has_image = false -%}
+            {%- if block.settings.image != blank -%}{%- assign has_image = true -%}{%- endif -%}
 
+            {%- assign has_title = false -%}
+            {%- if block.settings.title != blank -%}{%- assign has_title = true -%}{%- endif -%}
+
+            {%- assign has_link = false -%}
+            {%- if block.settings.link != blank -%}{%- assign has_link = true -%}{%- endif -%}
+
+            {%- unless has_image or has_title or has_link -%}
+              {%- continue -%}
+            {%- endunless -%}
+
+            <li class="hc__item" {{ block.shopify_attributes }}>
               <div class="hc-card">
-                <div class="hc-card__media">
-                  {%- if block.settings.image != blank -%}
+                {%- if has_image -%}
+                  <div class="hc-card__media">
                     {{
                       block.settings.image
                       | image_url: width: 1600
@@ -75,10 +92,8 @@
                         sizes: '(min-width: 990px) 33vw, 90vw',
                         alt: block.settings.title | escape
                     }}
-                  {%- else -%}
-                    <div class="hc-card__img hc-card__img--placeholder" aria-hidden="true"></div>
-                  {%- endif -%}
-                </div>
+                  </div>
+                {%- endif -%}
 
                 <div class="hc-card__body">
                   <div class="hc-card__icon" aria-hidden="true">
@@ -98,9 +113,12 @@
                     {%- endif -%}
                   </div>
 
-                  {%- if block.settings.title != blank -%}
-                    {%- if has_link -%}
-                      <a class="hc-card__title" href="{{ block.settings.link }}">
+                  {%- if has_title -%}
+                    {%- if section.settings.enable_title_link and has_link -%}
+                      <a
+                        class="hc-card__title hc-card__link"
+                        href="{{ block.settings.link }}"
+                      >
                         {{ block.settings.title }}
                       </a>
                     {%- else -%}
@@ -109,6 +127,10 @@
                       </div>
                     {%- endif -%}
                   {%- endif -%}
+
+                  {%- unless has_image -%}
+                    <div class="hc-card__noimg-spacer" aria-hidden="true"></div>
+                  {%- endunless -%}
                 </div>
               </div>
             </li>
@@ -155,7 +177,6 @@
     line-height: 1.05;
   }
 
-  /* Slider shell */
   #HelpfulContent-{{ sid }} .hc__slider{
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -163,9 +184,8 @@
     gap: clamp(10px, 2vw, 22px);
   }
 
-  /* Track */
   #HelpfulContent-{{ sid }} .hc__track-wrap{
-    overflow: hidden; /* keeps arrows outside nice */
+    overflow: hidden;
   }
 
   #HelpfulContent-{{ sid }} .hc__track{
@@ -177,7 +197,6 @@
     grid-auto-flow: column;
     gap: var(--hc-gap);
 
-    /* Desktop: N per view */
     grid-auto-columns: calc((100% - (var(--hc-gap) * (var(--hc-per-view) - 1))) / var(--hc-per-view));
 
     overflow-x: auto;
@@ -194,7 +213,6 @@
     scroll-snap-stop: always;
   }
 
-  /* Card */
   #HelpfulContent-{{ sid }} .hc-card{
     background: var(--hc-card-bg);
     display: grid;
@@ -216,18 +234,13 @@
     display: block;
   }
 
-  #HelpfulContent-{{ sid }} .hc-card__img--placeholder{
-    width: 100%;
-    height: 100%;
-    background: rgba(255,255,255,.25);
-  }
-
   #HelpfulContent-{{ sid }} .hc-card__body{
     position: relative;
     padding: clamp(18px, 2.2vw, 26px) clamp(18px, 2.2vw, 28px);
     display: grid;
     place-items: center;
     gap: 14px;
+    min-height: 140px;
   }
 
   #HelpfulContent-{{ sid }} .hc-card__icon{
@@ -242,7 +255,6 @@
     top: -28px;
     left: 50%;
     transform: translateX(-50%);
-    {% comment %} box-shadow: 0 0 0 6px var(--hc-card-bg); {% endcomment %}
   }
 
   #HelpfulContent-{{ sid }} .hc-card__icon-img{
@@ -250,7 +262,6 @@
     height: 26px;
     object-fit: contain;
     display: block;
-    filter: none;
   }
 
   #HelpfulContent-{{ sid }} .hc-card__icon-fallback{
@@ -262,7 +273,7 @@
   }
 
   #HelpfulContent-{{ sid }} .hc-card__title{
-    margin-top: 18px; /* space for the floating icon */
+    margin-top: 18px;
     color: var(--hc-card-title-color);
     font-size: var(--hc-card-title-size);
     font-family: var(--font-body-family);
@@ -273,12 +284,13 @@
     max-width: 26ch;
   }
 
-  /* Arrows */
+  #HelpfulContent-{{ sid }} a.hc-card__title:hover{
+    text-decoration: underline;
+  }
+
   #HelpfulContent-{{ sid }} .hc__nav{
     width: 48px;
     height: 48px;
-    {% comment %} border-radius: 999px;
-    border: 2px solid rgba(255,255,255,.6); {% endcomment %}
     border: none;
     background: transparent;
     display: grid;
@@ -288,23 +300,14 @@
     padding: 0;
   }
 
-  {% comment %} #HelpfulContent-{{ sid }} .hc__nav:hover{
-    border-color: rgba(255,255,255,.95);
-  } {% endcomment %}
-
   #HelpfulContent-{{ sid }} .hc__nav-icon{
     width: auto;
     height: auto;
     display: block;
   }
-  #HelpfulContent-{{ sid }} .hc__nav-icon--prev{
-    transform: rotate(-180deg);
-  }
-  #HelpfulContent-{{ sid }} .hc__nav-icon--next{
-    transform: rotate(0);
-  }
+  #HelpfulContent-{{ sid }} .hc__nav-icon--prev{ transform: rotate(-180deg); }
+  #HelpfulContent-{{ sid }} .hc__nav-icon--next{ transform: rotate(0); }
 
-  /* Mobile: 1 per view */
   @media (max-width: 749px){
     #HelpfulContent-{{ sid }} .hc__slider{
       grid-template-columns: auto 1fr auto;
@@ -326,7 +329,7 @@
       height: 40px;
     }
   }
-</style>
+  </style>
 
   <script>
     (function(){
@@ -338,12 +341,62 @@
       var next = root.querySelector('.hc__nav--next');
       if(!track || !prev || !next) return;
 
-      var perView = parseInt(root.getAttribute('data-per-view') || '3', 10);
       var autoplay = (root.getAttribute('data-autoplay') === 'true');
       var delaySec = parseFloat(root.getAttribute('data-autoplay-delay') || '5');
       if(isNaN(delaySec) || delaySec <= 0) delaySec = 5;
 
+      var shopDomain = (root.getAttribute('data-shop-domain') || '').toLowerCase();
+
       var timer = null;
+
+      function isExternalUrl(href){
+        try{
+          var u = new URL(href, window.location.href);
+          var host = (u.hostname || '').toLowerCase();
+          if(!host) return false;
+          if(host === window.location.hostname.toLowerCase()) return false;
+          if(shopDomain && host === shopDomain) return false;
+          return true;
+        }catch(e){
+          return false;
+        }
+      }
+
+      function updateTitleLinks(){
+        var links = root.querySelectorAll('a.hc-card__link');
+        links.forEach(function(a){
+          var href = a.getAttribute('href') || '';
+
+          // "#" should scroll to top instead of refresh
+          if(href.trim() === '#'){
+            a.setAttribute('data-scroll-top', 'true');
+            a.removeAttribute('target');
+            a.removeAttribute('rel');
+            return;
+          }
+
+          if(isExternalUrl(href)){
+            a.setAttribute('target', '_blank');
+            a.setAttribute('rel', 'noopener');
+          } else {
+            a.removeAttribute('target');
+            a.removeAttribute('rel');
+          }
+        });
+      }
+
+      function bindScrollTop(){
+        root.addEventListener('click', function(e){
+          var a = e.target.closest('a.hc-card__link');
+          if(!a) return;
+
+          if(a.getAttribute('data-scroll-top') === 'true'){
+            e.preventDefault();
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }, true);
+      }
 
       function getStep(){
         var first = track.querySelector('.hc__item');
@@ -360,7 +413,6 @@
       }
 
       function canSlide(){
-        // If content overflows or we're on mobile (1-per-view), arrows should be available when overflow exists.
         return track.scrollWidth > (track.clientWidth + 4);
       }
 
@@ -378,21 +430,18 @@
       prev.addEventListener('click', function(){ slideBy(-1); stopAutoplay(); });
       next.addEventListener('click', function(){ slideBy(1); stopAutoplay(); });
 
-      // Keep arrows correct on load/resize
       window.addEventListener('resize', function(){
         updateArrows();
-        // restart autoplay after resize if enabled
+        updateTitleLinks();
         if(autoplay) startAutoplay();
       });
 
-      // Autoplay
       function startAutoplay(){
         stopAutoplay();
         if(!autoplay) return;
         if(!canSlide()) return;
 
         timer = setInterval(function(){
-          // if at end, loop back to start
           var atEnd = (track.scrollLeft + track.clientWidth) >= (track.scrollWidth - 6);
           if(atEnd){
             track.scrollTo({ left: 0, behavior: 'smooth' });
@@ -409,12 +458,13 @@
         }
       }
 
-      // Pause on user interaction (touch/drag/wheel)
       ['pointerdown','touchstart','wheel','keydown'].forEach(function(evt){
         track.addEventListener(evt, stopAutoplay, { passive: true });
       });
 
-      // Kick off
+      updateTitleLinks();
+      bindScrollTop();
+
       updateArrows();
       startAutoplay();
     })();
@@ -437,6 +487,7 @@
 
     { "type": "header", "content": "Title" },
     { "type": "inline_richtext", "id": "heading", "label": "Title text", "default": "You should check out these other helpful content!" },
+    { "type": "checkbox", "id": "enable_title_link", "label": "Make card title clickable (uses card link)", "default": true },
     { "type": "text", "id": "title_size", "label": "Title size (supports clamp())", "default": "clamp(26px, 4vw, 44px)" },
     { "type": "color", "id": "title_color", "label": "Title color", "default": "#FFFFFF" },
 

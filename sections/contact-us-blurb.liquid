@@ -41,6 +41,17 @@
       "label": "Button Link",
       "default": "/"
     },
+    {
+      "type": "select",
+      "id": "button_behavior",
+      "label": "Button behavior",
+      "default": "link",
+      "options": [
+        { "value": "link", "label": "Normal link (new tab)" },
+        { "value": "popup", "label": "Popup (iframe modal)" },
+        { "value": "typeform", "label": "Typeform popup" }
+      ]
+    },
 {
       "type": "range",
       "id": "top_padding",
@@ -187,14 +198,44 @@
      
      {% endfor %}
      
-            <div class="section--hero-buttons" style="margin-top:20px">
-                    <a href="{{ section.settings.button_link }}" class="btn button-yg">
-                        <span class="btn-label-down">{{ section.settings.button_text }}</span>
-                        <span class="btn-label-down">{{ section.settings.button_text }}</span>
-                    </a>
-                </div>
-    
-      
+      <div class="section--hero-buttons" style="margin-top:20px">
+        {%- assign btn_mode = section.settings.button_behavior | default: 'link' -%}
+        {%- if section.settings.button_link != blank -%}
+          {%- if btn_mode == 'popup' -%}
+            <a
+              href="{{ section.settings.button_link }}"
+              class="btn button-yg js-blurb-popup-trigger"
+              data-blurb-popup-url="{{ section.settings.button_link }}"
+              aria-haspopup="dialog"
+            >
+              <span class="btn-label-down">{{ section.settings.button_text }}</span>
+              <span class="btn-label-down">{{ section.settings.button_text }}</span>
+            </a>
+
+          {%- elsif btn_mode == 'typeform' -%}
+            <a
+              href="{{ section.settings.button_link }}"
+              class="btn button-yg js-blurb-typeform-trigger"
+              data-tf-popup="1"
+              data-tf-url="{{ section.settings.button_link }}"
+            >
+              <span class="btn-label-down">{{ section.settings.button_text }}</span>
+              <span class="btn-label-down">{{ section.settings.button_text }}</span>
+            </a>
+
+          {%- else -%}
+            <a
+              href="{{ section.settings.button_link }}"
+              target="_blank"
+              class="btn button-yg"
+            >
+              <span class="btn-label-down">{{ section.settings.button_text }}</span>
+              <span class="btn-label-down">{{ section.settings.button_text }}</span>
+            </a>
+          {%- endif -%}
+
+        {%- endif -%}
+      </div>
    </div>
 
     
@@ -415,4 +456,111 @@ width:100%;
    border-radius:20px;
       overflow:hidden;
     }
+#BlurbModal-{{ section.id }}{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:999999;
+}
+#BlurbModal-{{ section.id }}.is-open{ display:block; }
+
+#BlurbModal-{{ section.id }} .blurb-modal__overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  backdrop-filter: blur(4px);
+}
+
+#BlurbModal-{{ section.id }} .blurb-modal__dialog{
+  position:relative;
+  width:min(980px, 92vw);
+  height:min(680px, 85vh);
+  margin:6vh auto 0;
+  background:#111;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 10px 40px rgba(0,0,0,.5);
+}
+
+#BlurbModal-{{ section.id }} .blurb-modal__iframe{
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+  background:#fff;
+}
+
+#BlurbModal-{{ section.id }} .blurb-modal__close{
+  position:absolute;
+  top:20px;
+  right:12px;
+  z-index:2;
+  width:40px;
+  height:40px;
+  border:0;
+  border-radius:999px;
+  background:#000;
+  color:#fff;
+  font-size:28px;
+  cursor:pointer;
+}
+
+body.blurb-modal-open{
+  overflow:hidden;
+  height:100vh;
+}
+
 </style>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const modal = document.getElementById('BlurbModal-{{ section.id }}');
+  if (!modal) return;
+
+  const iframe = modal.querySelector('.blurb-modal__iframe');
+
+  function openModal(url){
+    iframe.src = url;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('blurb-modal-open');
+  }
+
+  function closeModal(){
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    iframe.src = '';
+    document.body.classList.remove('blurb-modal-open');
+  }
+
+  document.addEventListener('click', function(e){
+    const popupBtn = e.target.closest('.js-blurb-popup-trigger');
+    if (popupBtn){
+      e.preventDefault();
+      const url = popupBtn.getAttribute('data-blurb-popup-url') || popupBtn.getAttribute('href');
+      if (url) openModal(url);
+      return;
+    }
+
+    if (e.target.closest('[data-blurb-close]')) {
+      e.preventDefault();
+      closeModal();
+    }
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+      closeModal();
+    }
+  });
+});
+</script>
+
+
+<div class="blurb-modal" id="BlurbModal-{{ section.id }}" aria-hidden="true">
+  <div class="blurb-modal__overlay" data-blurb-close></div>
+  <div class="blurb-modal__dialog" role="dialog" aria-modal="true">
+    <button class="blurb-modal__close" type="button" data-blurb-close aria-label="Close">×</button>
+    <iframe class="blurb-modal__iframe" src="" loading="lazy" allow="fullscreen; autoplay"></iframe>
+  </div>
+</div>
+

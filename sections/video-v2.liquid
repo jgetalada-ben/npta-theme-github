@@ -34,6 +34,7 @@
   class="vid2"
   data-vid2-section
   data-vid2-audio="{% if enable_audio %}on{% else %}off{% endif %}"
+  data-vid2-mute-after-first-loop="{% if section.settings.mute_after_first_loop %}on{% else %}off{% endif %}"
 >
   <div class="vid2__outer">
     <div class="vid2__frame {% if section.settings.height_mode == 'vh' %}vh-mode{% endif %}"
@@ -423,6 +424,8 @@
     var audioMode = sectionEl.getAttribute('data-vid2-audio');
     if(audioMode !== 'on') return;
 
+    var muteAfterFirstLoop = sectionEl.getAttribute('data-vid2-mute-after-first-loop') === 'on';
+
     var frame = sectionEl.querySelector('.vid2__frame');
     if(!frame) return;
 
@@ -472,6 +475,45 @@
           bindFirstGestureRetry();
         }
       }, 400);
+
+      // Mute after first loop (Shopify <video> only)
+      if (muteAfterFirstLoop) {
+        var didMute = false;
+        var lastTime = 0;
+
+        function forceMute(){
+          if (didMute) return;
+          didMute = true;
+          try {
+            video.muted = true;
+            video.volume = 0;
+          } catch(e) {}
+        }
+
+        function onTimeUpdate(){
+          if (didMute) return;
+
+          var dur = video.duration || 0;
+          var ct  = video.currentTime || 0;
+
+          // Detect loop boundary: near end -> near start
+          if (dur > 0 && lastTime > (dur - 0.35) && ct < 0.35 && ct < lastTime) {
+            forceMute();
+          }
+
+          lastTime = ct;
+        }
+
+        video.addEventListener('timeupdate', onTimeUpdate, { passive: true });
+
+        // If anything tries to unmute after we've muted, force it back
+        video.addEventListener('volumechange', function(){
+          if (!didMute) return;
+          if (!video.muted || (video.volume && video.volume > 0)) {
+            try { video.muted = true; video.volume = 0; } catch(e) {}
+          }
+        });
+      }
 
       return;
     }
@@ -678,6 +720,7 @@
 
     { "type": "header", "content": "Audio" },
     { "type": "checkbox", "id": "enable_audio", "label": "Autoplay with Audio", "default": false },
+    { "type": "checkbox", "id": "mute_after_first_loop", "label": "Mute audio after first loop", "default": true },
 
     { "type": "select", "id": "aspect_ratio", "label": "Aspect ratio (desktop)", "default": "16-9",
       "options": [

@@ -1,9 +1,8 @@
-
 {% comment %}
-  Announcement Rotator (CSS-only)
+  Announcement Rotator (CSS-only) + Countdown Timer (JS)
   - Up to 4 rich-text announcements
-  - Fade in/out via pure CSS (no JS)
-  - Background/text color + padding + speed controls
+  - Fade in/out via pure CSS (no JS for rotation)
+  - Countdown uses tiny JS (needed for real time)
 {% endcomment %}
 
 <section
@@ -23,6 +22,18 @@
           {% if block.type == 'message' %}
           <div class="announcement" {{ block.shopify_attributes }}>
             <div class="rt">{{ block.settings.text }}</div>
+
+            {% if section.settings.countdown_enabled %}
+              <div
+                class="ann-countdown"
+                data-end="{{ section.settings.countdown_end }}"
+                data-expired-text="{{ section.settings.countdown_expired_text | escape }}"
+              >
+                <span class="ann-countdown__label">{{ section.settings.countdown_label }}</span>
+                <span class="ann-countdown__time" aria-live="polite"></span>
+              </div>
+            {% endif %}
+
             {% if block.settings.link_label != blank and block.settings.link_url != blank %}
               <a class="ann-link" href="{{ block.settings.link_url }}">{{ block.settings.link_label }}</a>
             {% endif %}
@@ -32,7 +43,19 @@
       {% else %}
         <div class="announcement">
           <div class="rt">🎉 FLASH SALE! BUY MORE, SAVE MORE!</div>
-          <a class="ann-link" href="/collections/all">Shop now</a>
+
+          {% if section.settings.countdown_enabled %}
+            <div
+              class="ann-countdown"
+              data-end="{{ section.settings.countdown_end }}"
+              data-expired-text="{{ section.settings.countdown_expired_text | escape }}"
+            >
+              <span class="ann-countdown__label">{{ section.settings.countdown_label }}</span>
+              <span class="ann-countdown__time" aria-live="polite"></span>
+            </div>
+          {% endif %}
+
+          <a class="ann-link" href="/collections/love-your-career">Shop now</a>
         </div>
       {% endif %}
     </div>
@@ -48,7 +71,7 @@
     width: 100%;
   }
   #AnnouncementBar-{{ section.id }} .announcement {
-    grid-area: 1 / 1;      /* all items overlap */
+    grid-area: 1 / 1;
     justify-self: center;
     margin: 0; text-align: center;
     opacity: 0; transform: translateY(6px);
@@ -74,7 +97,24 @@
     white-space: nowrap;
   }
 
-  /* Keyframes for each slide’s slot within the cycle */
+  #AnnouncementBar-{{ section.id }} .ann-countdown {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6px;
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+  #AnnouncementBar-{{ section.id }} .ann-countdown__label {
+    opacity: 0.9;
+  }
+  #AnnouncementBar-{{ section.id }} .ann-countdown__time {
+    font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
+    letter-spacing: 1px;
+  }
+
   @keyframes annFade {
     0%   { opacity: 0; transform: translateY(6px); }
     6%   { opacity: 1; transform: translateY(0); }
@@ -88,41 +128,30 @@
     opacity: 1; transform: none;
   }
 
-  /* 2 slides */
   #AnnouncementBar-{{ section.id }}.count-2 { --ann-cycle: calc(var(--ann-speed) * 2); }
-  #AnnouncementBar-{{ section.id }}.count-2 .announcement {
-    animation: annFade var(--ann-cycle) linear infinite both;
-  }
+  #AnnouncementBar-{{ section.id }}.count-2 .announcement { animation: annFade var(--ann-cycle) linear infinite both; }
   #AnnouncementBar-{{ section.id }}.count-2 .announcement:nth-child(1) { animation-delay: calc(var(--ann-speed) * 0); }
   #AnnouncementBar-{{ section.id }}.count-2 .announcement:nth-child(2) { animation-delay: calc(var(--ann-speed) * 1); }
 
-  /* 3 slides */
   #AnnouncementBar-{{ section.id }}.count-3 { --ann-cycle: calc(var(--ann-speed) * 3); }
-  #AnnouncementBar-{{ section.id }}.count-3 .announcement {
-    animation: annFade var(--ann-cycle) linear infinite both;
-  }
+  #AnnouncementBar-{{ section.id }}.count-3 .announcement { animation: annFade var(--ann-cycle) linear infinite both; }
   #AnnouncementBar-{{ section.id }}.count-3 .announcement:nth-child(1) { animation-delay: calc(var(--ann-speed) * 0); }
   #AnnouncementBar-{{ section.id }}.count-3 .announcement:nth-child(2) { animation-delay: calc(var(--ann-speed) * 1); }
   #AnnouncementBar-{{ section.id }}.count-3 .announcement:nth-child(3) { animation-delay: calc(var(--ann-speed) * 2); }
 
-  /* 4 slides */
   #AnnouncementBar-{{ section.id }}.count-4 { --ann-cycle: calc(var(--ann-speed) * 4); }
-  #AnnouncementBar-{{ section.id }}.count-4 .announcement {
-    animation: annFade var(--ann-cycle) linear infinite both;
-  }
+  #AnnouncementBar-{{ section.id }}.count-4 .announcement { animation: annFade var(--ann-cycle) linear infinite both; }
   #AnnouncementBar-{{ section.id }}.count-4 .announcement:nth-child(1) { animation-delay: calc(var(--ann-speed) * 0); }
   #AnnouncementBar-{{ section.id }}.count-4 .announcement:nth-child(2) { animation-delay: calc(var(--ann-speed) * 1); }
   #AnnouncementBar-{{ section.id }}.count-4 .announcement:nth-child(3) { animation-delay: calc(var(--ann-speed) * 2); }
   #AnnouncementBar-{{ section.id }}.count-4 .announcement:nth-child(4) { animation-delay: calc(var(--ann-speed) * 3); }
 
-  /* Mobile sizing */
   @media (max-width: 640px) {
     #AnnouncementBar-{{ section.id }} .rt {
       font-size: {{ section.settings.font_size | default: 20 | minus: 2 }}px;
     }
   }
 
-  /* Respect reduced motion (still rotates, but with no motion) */
   @media (prefers-reduced-motion: reduce) {
     #AnnouncementBar-{{ section.id }} .announcement { animation: none !important; }
     #AnnouncementBar-{{ section.id }}.count-2 .announcement:nth-child(1),
@@ -130,6 +159,78 @@
     #AnnouncementBar-{{ section.id }}.count-4 .announcement:nth-child(1) { opacity: 1; transform: none; }
   }
 </style>
+  {% endstylesheet %}
+
+  <script>
+  (() => {
+    const root = document.getElementById('AnnouncementBar-{{ section.id }}');
+    if (!root) return;
+
+    const timers = root.querySelectorAll('.ann-countdown');
+    if (!timers.length) return;
+
+    function parseEnd(endStr) {
+      const normalized = (endStr || '').trim().replace(' ', 'T');
+      const ms = Date.parse(normalized);
+      return Number.isFinite(ms) ? ms : null;
+    }
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function formatRemaining(totalSeconds) {
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const mins = Math.floor((totalSeconds % 3600) / 60);
+      const secs = totalSeconds % 60;
+
+      if (days > 0) return `${days}d ${pad(hours)}h ${pad(mins)}m ${pad(secs)}s`;
+      return `${pad(hours)}h ${pad(mins)}m ${pad(secs)}s`;
+    }
+
+    const config = Array.from(timers).map(el => {
+      const endStr = el.getAttribute('data-end');
+      const endMs = parseEnd(endStr);
+      const expiredText = el.getAttribute('data-expired-text') || '';
+      const timeEl = el.querySelector('.ann-countdown__time');
+      return { el, endMs, expiredText, timeEl };
+    });
+
+    if (config.every(c => !c.endMs)) {
+      config.forEach(c => c.el.style.display = 'none');
+      return;
+    }
+
+    function tick() {
+      const now = Date.now();
+
+      config.forEach(c => {
+        if (!c.endMs) {
+          c.el.style.display = 'none';
+          return;
+        }
+
+        const diff = Math.floor((c.endMs - now) / 1000);
+
+        if (diff <= 0) {
+          if (c.expiredText) {
+            c.timeEl.textContent = c.expiredText;
+          } else {
+            c.el.style.display = 'none';
+          }
+        } else {
+          c.timeEl.textContent = formatRemaining(diff);
+        }
+      });
+    }
+
+    tick();
+    const interval = setInterval(() => {
+      tick();
+      const anyActive = Array.from(config).some(c => c.endMs && (c.endMs - Date.now()) > 0);
+      if (!anyActive) clearInterval(interval);
+    }, 1000);
+  })();
+  </script>
 </section>
 
 {% schema %}
@@ -143,7 +244,12 @@
     { "type": "color", "id": "text_color", "label": "Text color", "default": "#000000" },
     { "type": "range", "id": "font_size", "label": "Font size", "min": 12, "max": 28, "step": 1, "unit": "px", "default": 20 },
     { "type": "range", "id": "padding_y", "label": "Top/bottom padding", "min": 0, "max": 48, "step": 2, "unit": "px", "default": 12 },
-    { "type": "range", "id": "rotation_ms", "label": "Rotation speed", "min": 1000, "max": 9000, "step": 250, "unit": "ms", "default": 5000 }
+    { "type": "range", "id": "rotation_ms", "label": "Rotation speed", "min": 1000, "max": 9000, "step": 250, "unit": "ms", "default": 5000 },
+
+    { "type": "checkbox", "id": "countdown_enabled", "label": "Enable countdown", "default": true },
+    { "type": "text", "id": "countdown_label", "label": "Countdown label", "default": "Ends in:" },
+    { "type": "text", "id": "countdown_end", "label": "Countdown end (ISO with timezone)", "default": "2026-03-01T23:59:59+08:00" },
+    { "type": "text", "id": "countdown_expired_text", "label": "Expired text (optional)", "default": "Sale ended" }
   ],
   "blocks": [
     {

@@ -17,7 +17,7 @@
         "message_7M8RCx": {
           "type": "message",
           "settings": {
-            "text": "<p>🔥 LAUNCH YOUR CAREER WITH 20% OFF <a href=\"/collections/all-products\" title=\"All Products\">SHOP NOW</a></p>",
+            "text": "<p>🔥 FLASH SALE UP TO 50% OFF!  <a href=\"/collections/love-your-career\" title=\"Love Your Career\">SHOP NOW</a></p>",
             "link_label": "Shop now",
             "link_url": ""
           }
@@ -33,7 +33,11 @@
         "text_color": "#000000",
         "font_size": 20,
         "padding_y": 20,
-        "rotation_ms": 5000
+        "rotation_ms": 5000,
+        "countdown_enabled": true,
+        "countdown_label": "Ends in:",
+        "countdown_end": "2026-02-28T23:59:59-08:00",
+        "countdown_expired_text": "Sale ended"
       }
     },
     "header": {

@@ -1,0 +1,263 @@
+{% comment %}
+  Section: Guide Inside Cards
+  - Matches screenshot: heading + 4 cards
+  - Icons are static (48x48) via fixed URLs
+  - All copy/content + colors/background are dynamic
+{% endcomment %}
+
+{%- assign sid = section.id -%}
+
+{%- assign maxw = section.settings.max_width | default: '1280px' | strip -%}
+{%- unless maxw contains 'px' or maxw contains '%' or maxw contains 'vw' or maxw contains 'rem' -%}
+  {%- assign maxw = maxw | append: 'px' -%}
+{%- endunless -%}
+
+{%- capture icon_1 -%}https://cdn.shopify.com/s/files/1/0617/9550/0074/files/si_ai-note-line.png?v=1771295059{%- endcapture -%}
+{%- capture icon_2 -%}https://cdn.shopify.com/s/files/1/0617/9550/0074/files/solar_card-search-outline.png?v=1771295059{%- endcapture -%}
+{%- capture icon_3 -%}https://cdn.shopify.com/s/files/1/0617/9550/0074/files/codicon_ask.png?v=1771295060{%- endcapture -%}
+{%- capture icon_4 -%}https://cdn.shopify.com/s/files/1/0617/9550/0074/files/hugeicons_brain-02.png?v=1771295059{%- endcapture -%}
+
+{%- assign icons = icon_1 | append: '||' | append: icon_2 | append: '||' | append: icon_3 | append: '||' | append: icon_4 | split: '||' -%}
+
+<section
+  id="GuideInsideCards-{{ sid }}"
+  class="gic"
+  style="
+    --gic-bg: {{ section.settings.section_bg }};
+    --gic-pt: {{ section.settings.pad_top }};
+    --gic-pb: {{ section.settings.pad_bottom }};
+    --gic-px: {{ section.settings.pad_x }};
+    --gic-maxw: {{ maxw }};
+    --gic-gap: {{ section.settings.card_gap }};
+    --gic-radius: {{ section.settings.card_radius }}px;
+
+    --gic-heading-color: {{ section.settings.heading_color }};
+    --gic-heading-size: {{ section.settings.heading_size }};
+
+    --gic-top-bg: {{ section.settings.card_top_bg }};
+    --gic-bottom-bg: {{ section.settings.card_bottom_bg }};
+
+    --gic-title-color: {{ section.settings.card_title_color }};
+    --gic-title-size: {{ section.settings.card_title_size }};
+
+    --gic-body-color: {{ section.settings.card_body_color }};
+    --gic-body-size: {{ section.settings.card_body_size }};
+  "
+>
+  <div class="gic__inner">
+    {% if section.settings.heading != blank %}
+      <h2 class="gic__heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="gic__grid">
+      {%- for block in section.blocks -%}
+        {%- assign idx = block.settings.icon_choice | plus: 0 -%}
+        {%- if idx < 1 -%}{%- assign idx = 1 -%}{%- endif -%}
+        {%- if idx > 4 -%}{%- assign idx = 4 -%}{%- endif -%}
+
+        {%- assign icon_index = idx | minus: 1 -%}
+        {%- assign icon_url = icons[icon_index] -%}
+
+        <div class="gic__card" {{ block.shopify_attributes }}>
+          <div class="gic__card-top">
+            <img
+              class="gic__icon"
+              src="{{ icon_url }}"
+              width="48"
+              height="48"
+              loading="lazy"
+              alt=""
+            />
+            {% if block.settings.title != blank %}
+              <div class="gic__title">{{ block.settings.title }}</div>
+            {% endif %}
+          </div>
+
+          <div
+            class="gic__card-bottom"
+            style="
+              {% if block.settings.override_bottom_bg %}background: {{ block.settings.override_bottom_bg }};{% endif %}
+              {% if block.settings.override_body_color %}color: {{ block.settings.override_body_color }};{% endif %}
+            "
+          >
+            {% if block.settings.body != blank %}
+              <div class="gic__body rte">{{ block.settings.body }}</div>
+            {% endif %}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <style>
+    #GuideInsideCards-{{ sid }}.gic{
+      background: var(--gic-bg);
+      padding-top: var(--gic-pt);
+      padding-bottom: var(--gic-pb);
+    }
+
+    #GuideInsideCards-{{ sid }} .gic__inner{
+      max-width: var(--gic-maxw);
+      margin: 0 auto;
+      padding-left: var(--gic-px);
+      padding-right: var(--gic-px);
+    }
+
+    #GuideInsideCards-{{ sid }} .gic__heading{
+      margin: 0 0 clamp(18px, 2.5vw, 30px);
+      text-align: center;
+      text-transform: uppercase;
+      font-family: var(--font-heading-family);
+      font-weight: 800;
+      letter-spacing: .04em;
+      color: var(--gic-heading-color);
+      font-size: var(--gic-heading-size);
+      line-height: 1.15;
+    }
+
+    #GuideInsideCards-{{ sid }} .gic__grid{
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--gic-gap);
+      align-items: stretch;
+    }
+
+    #GuideInsideCards-{{ sid }} .gic__card{
+      border-radius: var(--gic-radius);
+      overflow: hidden;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    #GuideInsideCards-{{ sid }} .gic__card-top{
+      background: var(--gic-top-bg);
+      padding: clamp(16px, 2vw, 22px);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      flex: 0 0 auto;
+    }
+
+    #GuideInsideCards-{{ sid }} .gic__icon{
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      display: block;
+    }
+
+    #GuideInsideCards-{{ sid }} .gic__title{
+      color: var(--gic-title-color);
+      font-family: var(--font-heading-family);
+      font-weight: 800;
+      font-size: var(--gic-title-size);
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    #GuideInsideCards-{{ sid }} .gic__card-bottom{
+      background: var(--gic-bottom-bg);
+      padding: clamp(16px, 2vw, 22px);
+      text-align: center;
+      color: var(--gic-body-color);
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #GuideInsideCards-{{ sid }} .gic__body{
+      font-family: var(--font-body-family);
+      font-size: var(--gic-body-size);
+      line-height: 1.5;
+    }
+    #GuideInsideCards-{{ sid }} .gic__body p{ margin: 0; }
+    #GuideInsideCards-{{ sid }} .gic__body p + p{ margin-top: 10px; }
+
+    @media (max-width: 989px){
+      #GuideInsideCards-{{ sid }} .gic__grid{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 749px){
+      #GuideInsideCards-{{ sid }} .gic__grid{
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Guide - Inside Cards",
+  "tag": "section",
+  "class": "section guide-inside-cards",
+  "settings": [
+    { "type": "header", "content": "Section" },
+    { "type": "color", "id": "section_bg", "label": "Section background", "default": "#F1EFE8" },
+    { "type": "text", "id": "pad_top", "label": "Padding top (CSS, supports clamp())", "default": "clamp(40px, 6vw, 80px)" },
+    { "type": "text", "id": "pad_bottom", "label": "Padding bottom (CSS, supports clamp())", "default": "clamp(40px, 6vw, 80px)" },
+    { "type": "text", "id": "pad_x", "label": "Side padding (CSS, supports clamp())", "default": "clamp(16px, 3vw, 28px)" },
+    { "type": "text", "id": "max_width", "label": "Content max width", "default": "1280px" },
+
+    { "type": "header", "content": "Heading" },
+    { "type": "text", "id": "heading", "label": "Heading text", "default": "WHAT'S INSIDE THE GUIDE?" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#0F828C" },
+    { "type": "text", "id": "heading_size", "label": "Heading font size (CSS, supports clamp())", "default": "clamp(20px, 2.4vw, 34px)" },
+
+    { "type": "header", "content": "Cards style" },
+    { "type": "text", "id": "card_gap", "label": "Card gap (CSS)", "default": "clamp(14px, 2vw, 24px)" },
+    { "type": "range", "id": "card_radius", "label": "Card radius", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 10 },
+    { "type": "color", "id": "card_top_bg", "label": "Card top background", "default": "#FFFFFF" },
+    { "type": "color", "id": "card_bottom_bg", "label": "Card bottom background", "default": "#0F828C" },
+
+    { "type": "header", "content": "Card typography" },
+    { "type": "color", "id": "card_title_color", "label": "Card title color", "default": "#141414" },
+    { "type": "text", "id": "card_title_size", "label": "Card title size (CSS, supports clamp())", "default": "clamp(16px, 1.2vw, 20px)" },
+    { "type": "color", "id": "card_body_color", "label": "Card body color", "default": "#FFFFFF" },
+    { "type": "text", "id": "card_body_size", "label": "Card body size (CSS, supports clamp())", "default": "clamp(14px, 1vw, 16px)" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_choice",
+          "label": "Icon (static)",
+          "default": "1",
+          "options": [
+            { "value": "1", "label": "Icon 1 (note)" },
+            { "value": "2", "label": "Icon 2 (card search)" },
+            { "value": "3", "label": "Icon 3 (ask)" },
+            { "value": "4", "label": "Icon 4 (brain)" }
+          ]
+        },
+        { "type": "text", "id": "title", "label": "Card title", "default": "Strategic Exam Preparation Framework" },
+        { "type": "richtext", "id": "body", "label": "Card description", "default": "<p>Add your card description here.</p>" },
+
+        { "type": "header", "content": "Optional per-card overrides" },
+        { "type": "color", "id": "override_bottom_bg", "label": "Override bottom background (optional)" },
+        { "type": "color", "id": "override_body_color", "label": "Override body text color (optional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Guide - Inside Cards",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

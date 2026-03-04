@@ -25,6 +25,13 @@
   {%- assign v = p.selected_or_first_available_variant -%}
 {%- endif -%}
 
+{%- if section.settings.media_type == 'video' and section.settings.video != blank and section.settings.video_autoplay -%}
+  {%- assign __cta2_first_src = section.settings.video.sources | first -%}
+  {%- if __cta2_first_src != blank -%}
+    <link rel="preload" as="video" href="{{ __cta2_first_src.url }}" type="{{ __cta2_first_src.mime_type }}" fetchpriority="high">
+  {%- endif -%}
+{%- endif -%}
+
 <section
   id="OfferCTA-{{ sid }}"
   class="cta2
@@ -109,7 +116,7 @@
             <video
               class="cta2__media-el"
               playsinline
-              preload="metadata"
+              preload="{% if section.settings.video_autoplay %}auto{% else %}metadata{% endif %}"
               {% if section.settings.video_autoplay %}autoplay{% endif %}
               {% if section.settings.video_loop %}loop{% endif %}
               {% if section.settings.video_muted %}muted{% endif %}
@@ -196,8 +203,27 @@
             </a>
           {% endif %}
 
+          {%- assign btn2_behavior = section.settings.btn2_behavior | default: 'normal' -%}
           {% if section.settings.btn2_label != blank and section.settings.btn2_link != blank %}
-            <a class="cta2__btn cta2__btn--secondary" href="{{ section.settings.btn2_link }}">
+            {%- assign btn2_href = section.settings.btn2_link -%}
+            {%- assign btn2_target = '' -%}
+            {%- assign btn2_rel = '' -%}
+
+            {%- if btn2_behavior == 'iframe_modal' -%}
+              {%- assign btn2_href = '#' -%}
+            {%- elsif btn2_behavior == 'normal' and section.settings.btn2_new_tab -%}
+              {%- assign btn2_target = ' target="_blank"' -%}
+              {%- assign btn2_rel = ' rel="noopener noreferrer"' -%}
+            {%- endif -%}
+
+            <a
+              class="cta2__btn cta2__btn--secondary"
+              href="{{ btn2_href }}"
+              {{ btn2_target }}{{ btn2_rel }}
+              data-cta2-action="{{ btn2_behavior }}"
+              {% if btn2_behavior != 'normal' %}data-cta2-url="{{ section.settings.btn2_link }}"{% endif %}
+              aria-controls="cta2-modal-{{ sid }}"
+            >
               {{ section.settings.btn2_label }}
             </a>
           {% endif %}
@@ -457,6 +483,143 @@
     }
   }
 </style>
+
+<!-- CTA2 Modal (iframe) -->
+<div id="cta2-modal-{{ sid }}" class="cta2-modal" aria-hidden="true">
+  <div class="cta2-modal__overlay" data-cta2-close></div>
+
+  <div class="cta2-modal__dialog" role="dialog" aria-modal="true" aria-label="Popup">
+    <button type="button" class="cta2-modal__close" aria-label="Close" data-cta2-close>×</button>
+    <div class="cta2-modal__frame-wrap">
+      <iframe class="cta2-modal__iframe" src="" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<style>
+  body.cta2-modal-open {
+    overflow: hidden;
+    height: 100vh;
+  }
+  #cta2-modal-{{ sid }}.cta2-modal { position: fixed; inset: 0; z-index: 999999; display: none; }
+  #cta2-modal-{{ sid }}.cta2-modal.is-open { display: block;background: rgba(0,0,0,.65);backdrop-filter: blur(4px); }
+  #cta2-modal-{{ sid }} .cta2-modal__overlay { position: absolute; inset: 0; background: rgba(0,0,0,.85);backdrop-filter: blur(4px); }
+  #cta2-modal-{{ sid }} .cta2-modal__dialog {
+    position: relative;
+    width: min(920px, calc(100% - 32px));
+    margin: 6vh auto;
+    background: #0b0b0b;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  #cta2-modal-{{ sid }} .cta2-modal__close{
+    position: absolute;
+    top: 20px; right: 10px;
+    width: 40px; height: 40px;
+    border: 0;
+    border-radius: 999px;
+    background: #000;
+    color: #fff;
+    font-size: 24px;
+    line-height: 40px;
+    cursor: pointer;
+    z-index: 2;
+  }
+  #cta2-modal-{{ sid }} .cta2-modal__frame-wrap{ aspect-ratio: 16/9; width: 100%; background: #000; }
+  #cta2-modal-{{ sid }} .cta2-modal__iframe{ width: 100%; height: 100%; border: 0; display: block; }
+  @media (max-width: 749px){
+    #cta2-modal-{{ sid }} .cta2-modal__dialog{ margin: 10vh auto; }
+    #cta2-modal-{{ sid }} .cta2-modal__frame-wrap{ aspect-ratio: 9/16; }
+  }
+</style>
+
+<script>
+  (function () {
+    var root = document.getElementById('OfferCTA-{{ sid }}');
+    if (!root) return;
+
+    var ctaVideo = root.querySelector('video.cta2__media-el');
+    if (ctaVideo) {
+      try { ctaVideo.preload = 'auto'; } catch(e) {}
+      try { ctaVideo.load(); } catch(e) {}
+
+      var pp = ctaVideo.play && ctaVideo.play();
+      if (pp && pp.catch) pp.catch(function(){});
+    }
+
+    var modal = document.getElementById('cta2-modal-{{ sid }}');
+    var iframe = modal ? modal.querySelector('.cta2-modal__iframe') : null;
+
+    function openModal(url){
+      if (!modal || !iframe) return;
+      iframe.src = url;
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('cta2-modal-open');
+    }
+
+    function closeModal(){
+      if (!modal || !iframe) return;
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      iframe.src = '';
+      document.body.classList.remove('cta2-modal-open');
+    }
+
+    if (modal){
+      modal.addEventListener('click', function(e){
+        if (e.target && e.target.hasAttribute('data-cta2-close')) closeModal();
+      });
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+      });
+    }
+
+    function loadTypeform(){
+      return new Promise(function(resolve){
+        if (window.typeformEmbed && window.typeformEmbed.makePopup) return resolve(window.typeformEmbed);
+
+        var existing = document.getElementById('typeform-embed-script');
+        if (existing) {
+          existing.addEventListener('load', function(){ resolve(window.typeformEmbed); });
+          return;
+        }
+
+        var s = document.createElement('script');
+        s.id = 'typeform-embed-script';
+        s.src = 'https://embed.typeform.com/next/embed.js';
+        s.async = true;
+        s.onload = function(){ resolve(window.typeformEmbed); };
+        document.head.appendChild(s);
+      });
+    }
+
+    root.addEventListener('click', function(e){
+      var a = e.target.closest('a[data-cta2-action]');
+      if (!a) return;
+
+      var action = a.getAttribute('data-cta2-action');
+      if (!action || action === 'normal') return;
+
+      var url = a.getAttribute('data-cta2-url');
+      if (!url) return;
+
+      if (action === 'iframe_modal') {
+        e.preventDefault();
+        openModal(url);
+      }
+
+      if (action === 'typeform_popup') {
+        e.preventDefault();
+        loadTypeform().then(function(tf){
+          if (!tf || !tf.makePopup) return;
+          tf.makePopup(url, { mode: "popup", autoClose: true }).open();
+        });
+      }
+    });
+  })();
+</script>
+
 </section>
 
 {% schema %}
@@ -577,6 +740,23 @@
 
     { "type": "text", "id": "btn2_label", "label": "Button 2 label", "default": "TALK TO ADVISOR" },
     { "type": "url", "id": "btn2_link", "label": "Button 2 link" },
+    {
+      "type": "select",
+      "id": "btn2_behavior",
+      "label": "Button 2 behavior",
+      "default": "normal",
+      "options": [
+        { "value": "normal", "label": "Normal link" },
+        { "value": "typeform_popup", "label": "Typeform popup" },
+        { "value": "iframe_modal", "label": "Popup (iframe modal)" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "btn2_new_tab",
+      "label": "Open in new tab (only for Normal link)",
+      "default": false
+    },
     { "type": "color", "id": "btn2_bg", "label": "Button 2 background", "default": "transparent" },
     { "type": "color", "id": "btn2_color", "label": "Button 2 text color", "default": "#FFFFFF" },
     { "type": "color", "id": "btn2_border", "label": "Button 2 border color", "default": "#FFFFFF" },

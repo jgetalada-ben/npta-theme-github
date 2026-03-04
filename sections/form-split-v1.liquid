@@ -3,7 +3,7 @@
   - Left: title + rich description
   - Right: embedded form (GHL / Typeform / Zapier / any iframe)
   - Supports: paste full embed code OR paste a URL
-  - Layout controls: background, padding (clamp()), max width, column ratio, alignment
+  - Layout controls: background color, background image, padding (clamp()), max width, column ratio, alignment
 {% endcomment %}
 
 {%- assign sid = section.id -%}
@@ -19,6 +19,11 @@
 {%- assign has_form = false -%}
 {%- if section.settings.embed_code != blank or section.settings.embed_url != blank -%}
   {%- assign has_form = true -%}
+{%- endif -%}
+
+{%- assign bg_img_url = '' -%}
+{%- if section.settings.bg_image != blank -%}
+  {%- assign bg_img_url = section.settings.bg_image | image_url: width: 2400 -%}
 {%- endif -%}
 
 <section
@@ -39,6 +44,7 @@
     --fspl-form-h-m: {{ section.settings.form_height_mobile }};
     --fspl-card-radius: {{ section.settings.form_radius }}px;
     --fspl-card-pad: {{ section.settings.form_pad }};
+    --fspl-form-bg: {{ section.settings.form_bg }};
   "
 >
   <div class="fspl__inner">
@@ -57,7 +63,7 @@
       <!-- RIGHT -->
       <div class="fspl__right">
         <div class="fspl__form-card">
-          {%- comment -%} 1) Resolve embed sources: metafield first, then section settings {%- endcomment -%}
+          {%- comment -%} Resolve embed sources: page metafield first, then section settings {%- endcomment -%}
           {%- assign mf_embed = page.metafields.custom.form_embed_code.value
             | default: page.metafields.custom.form_embed_code
             | default: '' -%}
@@ -106,12 +112,35 @@
 
   <style>
     #FormSplit-{{ sid }}.fspl{
-      background: var(--fspl-bg);
+      position: relative;
+      background-color: var(--fspl-bg);
       padding-top: var(--fspl-pt);
       padding-bottom: var(--fspl-pb);
+      overflow: hidden;
     }
 
+    {%- if bg_img_url != blank -%}
+      #FormSplit-{{ sid }}.fspl{
+        background-image: url('{{ bg_img_url }}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      /* Fixed overlay (not dynamic) to improve readability */
+      #FormSplit-{{ sid }}.fspl:before{
+        content:"";
+        position:absolute;
+        inset:0;
+        background: rgba(0,0,0,0.35);
+        pointer-events:none;
+        z-index:0;
+      }
+    {%- endif -%}
+
     #FormSplit-{{ sid }} .fspl__inner{
+      position: relative;
+      z-index: 1;
       max-width: var(--fspl-maxw);
       margin: 0 auto;
       padding-left: var(--fspl-px);
@@ -218,14 +247,13 @@
           var pdfUrl = "{{ page.metafields.custom.pdf_download_file | file_url }}";
           if (pdfUrl) {
             sessionStorage.setItem('pendingPdfUrl', pdfUrl);
-            sessionStorage.removeItem('pdfDownloaded'); // allow new landing page to trigger once
+            sessionStorage.removeItem('pdfDownloaded');
           }
         } catch(e) {}
       })();
     </script>
   {% endif %}
 </section>
-
 
 {% schema %}
 {
@@ -235,6 +263,13 @@
   "settings": [
     { "type": "header", "content": "Layout" },
     { "type": "color", "id": "bg", "label": "Background", "default": "#F1EFE8" },
+
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image",
+      "info": "Optional. You can connect this to a dynamic source (ex: hero_bg_image)."
+    },
 
     {
       "type": "text",
@@ -280,7 +315,12 @@
       "label": "Title font size (supports clamp())",
       "default": "clamp(24px, 3vw, 40px)"
     },
-    { "type": "richtext", "id": "desc", "label": "Description", "default": "<p>This NASM CPT Exam Pass Guarantee Workbook is designed specifically for aspiring personal trainers who want to pass the NASM CPT exam the first time.</p><p>Inside, you’ll find a clear, structured breakdown of the concepts that actually matter on exam day...</p>" },
+    {
+      "type": "richtext",
+      "id": "desc",
+      "label": "Description",
+      "default": "<p>This NASM CPT Exam Pass Guarantee Workbook is designed specifically for aspiring personal trainers who want to pass the NASM CPT exam the first time.</p><p>Inside, you’ll find a clear, structured breakdown of the concepts that actually matter on exam day...</p>"
+    },
     { "type": "color", "id": "desc_color", "label": "Description color", "default": "#000000" },
     {
       "type": "text",
@@ -350,3 +390,4 @@
   ]
 }
 {% endschema %}
+
