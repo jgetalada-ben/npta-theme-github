@@ -129,7 +129,7 @@
         "logo_PrzJkY"
       ],
       "custom_css": [
-        ".section--logo-carousel {background: #01241e;}"
+        ".section--logo-carousel {background: #0f828c;}"
       ],
       "name": "Logo Carousel",
       "settings": {
@@ -190,6 +190,58 @@
         "button_font_size": "clamp(14px,1.2vw,18px)",
         "button_pad_y": 14,
         "button_pad_x": 32
+      }
+    },
+    "section_logo_carousel_8AyVfp": {
+      "type": "section--logo-carousel",
+      "blocks": {
+        "logo_qJCeb6": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/spring-reset.png"
+          }
+        },
+        "logo_FfdgYi": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/spring-reset.png"
+          }
+        },
+        "logo_qrMgfp": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/spring-reset.png"
+          }
+        },
+        "logo_CBpwaP": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/spring-reset.png"
+          }
+        },
+        "logo_RfHRJR": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/spring-reset.png"
+          }
+        }
+      },
+      "block_order": [
+        "logo_qJCeb6",
+        "logo_FfdgYi",
+        "logo_qrMgfp",
+        "logo_CBpwaP",
+        "logo_RfHRJR"
+      ],
+      "custom_css": [
+        ".section--logo-carousel {background: #0f828c;}"
+      ],
+      "name": "Logo Carousel",
+      "settings": {
+        "top_padding": 10,
+        "bottom_padding": 0,
+        "container_width": 200,
+        "scroll_direction": "ltr"
       }
     },
     "media_offer_cta_NBfj78": {
@@ -1273,6 +1325,7 @@
     "video_v2_iHaPQP",
     "section_logo_carousel_Uae8xt",
     "promo_triple_banner_g68NGK",
+    "section_logo_carousel_8AyVfp",
     "media_offer_cta_NBfj78",
     "trending_feature_row_rL3tYY",
     "trainers_pick_3WFtG8",
