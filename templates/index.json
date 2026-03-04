@@ -11,30 +11,54 @@
   "sections": {
     "video_v2_iHaPQP": {
       "type": "video-v2",
-      "custom_css": [
-        "h3 {color: #c5fb9d;}"
+      "blocks": {
+        "rotator_item_iywwqp": {
+          "type": "rotator_item",
+          "settings": {
+            "text": "TRAIN THE BODY."
+          }
+        },
+        "rotator_item_P7x4hb": {
+          "type": "rotator_item",
+          "settings": {
+            "text": "FUEL THE BODY."
+          }
+        },
+        "rotator_item_BLYHHn": {
+          "type": "rotator_item",
+          "settings": {
+            "text": "HEAL THE MIND."
+          }
+        }
+      },
+      "block_order": [
+        "rotator_item_iywwqp",
+        "rotator_item_P7x4hb",
+        "rotator_item_BLYHHn"
       ],
+      "custom_css": [],
       "name": "Video v2",
       "settings": {
-        "media_type": "video",
+        "media_type": "image",
         "shopify_video": "shopify://files/videos/CA Home Video.mp4",
         "embed_url": "",
+        "cover_image": "shopify://shop_images/march-hero-banner.png",
         "alt": "Fitness Education",
         "enable_audio": false,
         "mute_after_first_loop": true,
         "aspect_ratio": "21-9",
         "aspect_ratio_mobile": "1-1",
-        "height_mode": "vh",
+        "height_mode": "ratio",
         "vh_desktop": "70vh",
         "vh_mobile": "60dvh",
         "show_icon_text": false,
         "icon_text": "NASM OFFICIAL CANADIAN PARTNER",
         "icon_text_size": "clamp(12px, 1.4vw, 18px)",
         "icon_text_color": "#ffffff",
-        "title": "The new Standard in fitness education",
+        "title": "",
         "promo_line": "",
-        "subtitle": "Powered by NPTA",
-        "desc": "<p>Where credibility meets careers. A complete, modern approach to fitness education: certification, mentorship, practical skills and career pathways - built to launch leaders.</p>",
+        "subtitle": "",
+        "desc": "<p>Most trainers only know fitness. Most nutritionists only know food. Most wellness coaches only know behavior. You'll know everything. </p><p>The only certification that covers fitness + nutrition + wellness + stress.</p>",
         "title_size": "clamp(28px,5vw,60px)",
         "title_color": "#ffffff",
         "promo_size": "clamp(32px,5vw,72px)",
@@ -43,21 +67,21 @@
         "subtitle_color": "#c8ff63",
         "desc_size": "clamp(14px,2vw,20px)",
         "desc_color": "#ffffff",
-        "align": "center",
-        "overlay_darkness": 50,
+        "align": "left",
+        "overlay_darkness": 0,
         "show_btn1": true,
         "btns_margin_top": "16px",
-        "btn1_label": "CHOOSE MY COURSE",
+        "btn1_label": "START TODAY",
         "btn1_link": "shopify://collections/all-products",
         "btn1_bg": "#c1ff72",
-        "btn1_txt": "#0b0b0b",
+        "btn1_txt": "#01241e",
         "show_btn2": false,
         "btn2_label": "Learn more",
         "btn2_link": "",
         "btn2_bg": "#ffffff",
         "btn2_txt": "#0b0b0b",
         "enable_title_rotator": true,
-        "rotator_interval": 3,
+        "rotator_interval": 5,
         "rotator_stagger_ms": 38
       }
     },
