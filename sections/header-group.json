@@ -27,7 +27,8 @@
         "message_7M8RCx"
       ],
       "custom_css": [
-        "a {color: #c1ff72;}"
+        ".announcement .rt p {text-transform: uppercase; letter-spacing: 0.5px;}",
+        ".announcement .rt p span {color: #c1ff72;}"
       ],
       "settings": {
         "bg_color": "#0f828c",
