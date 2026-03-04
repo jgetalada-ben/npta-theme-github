@@ -8,7 +8,7 @@
  * ------------------------------------------------------------
  */
 {
-  "parent": "index.v2.json",
+  "parent": "index.json",
   "context": {
     "market": "ca"
   },
