@@ -61,12 +61,11 @@
     <div class="price__monthly">
       <span class="visually-hidden">{{ 'products.product.price.monthly_price' | t }}</span>
         <div class="starting-price-wrap">
-          <p class="starting-price-label">Starting at:</p>
           <p class="starting-price-p"> 
             <span class="price-item price-item--monthly">
-              {{ monthly_payment | divided_by: 100.0 | prepend: currency_code }} /
+              {{ monthly_payment | divided_by: 100.0 | prepend: currency_code }}
             </span>
-            <span class="price-label-month">month</span>
+            <span class="price-label-month"> / month</span>
           </p>
           {% comment %} <span class="price-item price-item--payment-terms">
             {% if product.metafields.custom.payment_options %}
@@ -80,34 +79,39 @@
     {% endif %}
 
     <div class="price__one-time">
-      <span class="visually-hidden">{{ 'products.product.price.one_time_price' | t }}</span>
-      <p class="price-item--one-time">
-        <span class="comp-price">{{ competitor_price }}</span> Full Price
-      </p>
-      <p class="price-item--compare">
-        <span>
-          {{ price | divided_by: 100.0 | prepend: currency_code }}
-        </span>
-      </p>
-      <span class="price-item--payment-terms">
-        One-time payment
-      </span>
-    </div>
-
-    {% if compare_at_price > 0 %}
-      <div class="price__one-time comp-price">
-        <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
-        <p class="price-item--one-time">
-          <span class="comp-price">{{ competitor_price }}</span> Regular Price
-        </p>
+      <div class="price__one-time-con">
+        {% comment %} <span class="visually-hidden">{{ 'products.product.price.one_time_price' | t }}</span> {% endcomment %}
         <p class="price-item--compare">
           <span>
-            {{ compare_at_price | divided_by: 100.0 | prepend: currency_code }}
+            {{ price | divided_by: 100.0 | prepend: currency_code }}
           </span>
         </p>
+        <span class="price-item--payment-terms">
+          One-time payment
+        </span>
       </div>
-    {% endif %}
+      {% if compare_at_price > 0 %}
+          <p class="price-item--compare-discount">
+            <span>
+              {{ compare_at_price | divided_by: 100.0 | prepend: currency_code }}
+            </span>
+          </p>
+      {% endif %}
+    </div>
   </div>
+{% comment %} {% if compare_at_price > 0 %}
+  <div class="price__one-time comp-price">
+    <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+    <p class="price-item--one-time">
+      <span class="comp-price">{{ competitor_price }}</span> Regular Price
+    </p>
+    <p class="price-item--compare">
+      <span>
+        {{ compare_at_price | divided_by: 100.0 | prepend: currency_code }}
+      </span>
+    </p>
+  </div>
+{% endif %} {% endcomment %}
   {% if show_badges %}
   {% endif %}
 </div>

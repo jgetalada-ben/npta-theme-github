@@ -8,6 +8,14 @@
   {% if section.settings.image_zoom == 'hover' %}
     data-zoom-on-hover
   {% endif %}
+
+  {% if section.settings.gallery_autoplay_enable %}
+    data-gallery-autoplay="true"
+    data-gallery-autoplay-interval="{{ section.settings.gallery_autoplay_seconds | times: 1000 }}"
+    data-gallery-autoplay-effect="{{ section.settings.gallery_autoplay_effect }}"
+    data-gallery-autoplay-pause-hover="{{ section.settings.gallery_autoplay_pause_on_hover }}"
+    data-gallery-autoplay-mobile="{{ section.settings.gallery_autoplay_enable_mobile }}"
+  {% endif %}
 >
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
@@ -35,6 +43,17 @@
       .section-{{ section.id }}-padding {
         padding-top: {{ section.settings.padding_top }}px;
         padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+    #MainProduct-{{ section.id }}[data-gallery-autoplay-effect="fade"] .product__media-list {
+      transition: opacity 350ms ease;
+    }
+    #MainProduct-{{ section.id }} .product__media-list.npta-fade-out {
+      opacity: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #MainProduct-{{ section.id }}[data-gallery-autoplay-effect="fade"] .product__media-list {
+        transition: none;
       }
     }
   {%- endstyle -%}
@@ -697,6 +716,7 @@
     {%- if product.media.size > 0 -%}
       <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
       <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'product-gallery-autoplay.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
     {%- if first_3d_model -%}
@@ -2329,6 +2349,48 @@
       ],
       "default": "hide",
       "label": "t:sections.main-product.settings.mobile_thumbnails.label"
+    },
+    {
+  "type": "header",
+      "content": "Gallery autoplay"
+    },
+    {
+      "type": "checkbox",
+      "id": "gallery_autoplay_enable",
+      "default": false,
+      "label": "Auto-advance product images"
+    },
+    {
+      "type": "range",
+      "id": "gallery_autoplay_seconds",
+      "min": 2,
+      "max": 15,
+      "step": 1,
+      "unit": "s",
+      "default": 5,
+      "label": "Autoplay interval"
+    },
+    {
+      "type": "select",
+      "id": "gallery_autoplay_effect",
+      "label": "Transition effect",
+      "default": "slide",
+      "options": [
+        { "value": "slide", "label": "Slide (default)" },
+        { "value": "fade", "label": "Fade" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "gallery_autoplay_pause_on_hover",
+      "default": true,
+      "label": "Pause on hover/focus"
+    },
+    {
+      "type": "checkbox",
+      "id": "gallery_autoplay_enable_mobile",
+      "default": true,
+      "label": "Enable on mobile"
     },
     {
       "type": "checkbox",
