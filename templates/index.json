@@ -139,57 +139,90 @@
         "scroll_direction": "ltr"
       }
     },
-    "promo_triple_banner_g68NGK": {
-      "type": "promo-triple-banner",
-      "name": "Promo Triple Banner",
+    "performance_wellness_bundle_pdPxJm": {
+      "type": "performance-wellness-bundle",
+      "name": "Performance Bundle",
       "settings": {
-        "max_width": "1989px",
-        "section_height": "",
-        "bg_color": "#f5f3eb",
-        "content_align": "left",
-        "column_layout": "equal",
+        "bg_color": "#F4F2EA",
+        "max_width": "1400",
+        "desktop_min_height": "520",
+        "gap": "32",
+        "padding_top": "24",
+        "padding_bottom": "24",
+        "title": "",
+        "subtitle": "",
+        "title_size": "28",
+        "title_color": "#0B2B24",
+        "subtitle_size": "16",
+        "subtitle_color": "#0B2B24",
         "left_image": "shopify://shop_images/0_0_2.png",
-        "left_image_alt": "",
-        "left_overlay_heading": "",
-        "left_overlay_subheading": "",
-        "left_logo_alt": "Logo",
-        "left_logo_h_align": "flex-start",
-        "left_logo_v_align": "flex-start",
-        "left_logo_padding": 18,
-        "left_logo_width": 140,
-        "center_image": "shopify://shop_images/0_3_2.png",
-        "center_image_alt": "",
-        "overlay_heading": "LIVE NOW",
-        "overlay_subheading": "25% OFF",
-        "overlay_heading_size": "clamp(16px,1.5vw,20px)",
-        "overlay_heading_color": "#ffffff",
-        "overlay_sub_size": "clamp(40px,4vw,72px)",
-        "overlay_sub_color": "#ffffff",
-        "overlay_h_align": "flex-start",
-        "overlay_v_align": "flex-end",
-        "overlay_text_align": "left",
-        "heading": "ALL BUNDLES AND SPECIALIZATIONS",
-        "heading_size": "clamp(24px,3vw,34px)",
-        "heading_color": "#01241e",
-        "subtitle": "+ your choice of GLP-1 or Mindful Stress Management",
-        "subtitle_size": "clamp(14px,1.4vw,18px)",
-        "subtitle_color": "#01241e",
-        "body_image": "shopify://shop_images/0_2_1.png",
-        "body_image_alt": "",
-        "fine_print": "<p>CPR, HGD, YES, and RFL *not included in sale.</p>",
-        "right_layout": "classic",
-        "right_bg_pos": "center bottom",
-        "right_bg_size": "contain",
-        "right_vertical_align": "center",
-        "button_label": "SHOP NOW",
-        "button_product": "",
+        "middle_image": "shopify://shop_images/0_3_2.png",
+        "right_image": "shopify://shop_images/0_2_1.png",
+        "eyebrow_text": "PERFORMANCE",
+        "headline_text": "WELLNESS BUNDLE",
+        "eyebrow_size": "20",
+        "eyebrow_color": "#0B2B24",
+        "headline_size": "44",
+        "headline_color": "#0B2B24",
+        "button_text": "SHOP NOW",
         "button_link": "",
         "button_new_tab": false,
-        "button_bg": "#c8ff63",
-        "button_color": "#01241e",
-        "button_font_size": "clamp(14px,1.2vw,18px)",
-        "button_pad_y": 14,
-        "button_pad_x": 32
+        "button_font_size": "14",
+        "button_text_color": "#FFFFFF",
+        "button_bg_color": "#0B2B24",
+        "button_radius": "12",
+        "button_padding_y": "12",
+        "button_padding_x": "28",
+        "mobile_layout": "swipe",
+        "mobile_card_width": "88"
+      }
+    },
+    "image_with_text_zRBp3b": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_pT9jjP": {
+          "type": "heading",
+          "settings": {
+            "heading": "What’s included?",
+            "heading_size": "h2"
+          }
+        },
+        "text_CtiRKX": {
+          "type": "text",
+          "settings": {
+            "text": "<ul><li>NASM CPT (Certified Personal Trainer)</li><li>NASM CNC (Certified Nutrition Coach)</li><li>NASM CWC (Certified Wellness Coach)</li></ul><p><strong>FREE</strong> Mindful Stress Management Certification (MSM)</p><p><strong>SALE PRICE: $1,999 - Reg Price: 4,899</strong></p>",
+            "text_style": "body"
+          }
+        },
+        "button_Uk9UM6": {
+          "type": "button",
+          "settings": {
+            "button_label": "LEARN MORE",
+            "button_link": "shopify://collections/all",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_pT9jjP",
+        "text_CtiRKX",
+        "button_Uk9UM6"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/0_1_3.png",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "section_logo_carousel_8AyVfp": {
@@ -242,54 +275,6 @@
         "bottom_padding": 0,
         "container_width": 200,
         "scroll_direction": "ltr"
-      }
-    },
-    "image_with_text_zRBp3b": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading_pT9jjP": {
-          "type": "heading",
-          "settings": {
-            "heading": "What’s included?",
-            "heading_size": "h2"
-          }
-        },
-        "text_CtiRKX": {
-          "type": "text",
-          "settings": {
-            "text": "<ul><li>NASM CPT (Certified Personal Trainer)</li><li>NASM CNC (Certified Nutrition Coach)</li><li>NASM CWC (Certified Wellness Coach)</li></ul><p><strong>FREE</strong> Mindful Stress Management Certification (MSM)</p><p><strong>SALE PRICE: $1,999 - Reg Price: 4,899</strong></p>",
-            "text_style": "body"
-          }
-        },
-        "button_Uk9UM6": {
-          "type": "button",
-          "settings": {
-            "button_label": "LEARN MORE",
-            "button_link": "shopify://collections/all",
-            "button_style_secondary": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_pT9jjP",
-        "text_CtiRKX",
-        "button_Uk9UM6"
-      ],
-      "name": "t:sections.image-with-text.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/0_1_3.png",
-        "height": "adapt",
-        "desktop_image_width": "medium",
-        "layout": "image_first",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "content_layout": "no-overlap",
-        "section_color_scheme": "",
-        "color_scheme": "",
-        "image_behavior": "none",
-        "mobile_content_alignment": "left",
-        "padding_top": 36,
-        "padding_bottom": 36
       }
     },
     "media_offer_cta_NBfj78": {
@@ -1372,7 +1357,7 @@
   "order": [
     "video_v2_iHaPQP",
     "section_logo_carousel_Uae8xt",
-    "promo_triple_banner_g68NGK",
+    "performance_wellness_bundle_pdPxJm",
     "image_with_text_zRBp3b",
     "section_logo_carousel_8AyVfp",
     "media_offer_cta_NBfj78",
