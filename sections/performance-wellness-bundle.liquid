@@ -1,23 +1,6 @@
-{% comment %}
-  Section: Performance / Wellness Bundle (3-column promo)
-  - Desktop: 3 columns (left image, middle image+text, right image+button)
-  - Mobile: swipe (horizontal) by default, optional stack
-  - Fully dynamic in Theme Editor: images, text, font sizes/colors, button styles, background
-  - NOTE: Numeric settings are TEXT fields; we coerce + fallback in Liquid to keep it safe.
-{% endcomment %}
-
 {%- liquid
   assign sid = section.id
   assign mobile_layout = section.settings.mobile_layout
-
-  comment
-    Helper pattern:
-    - raw = strip
-    - num = raw | plus: 0
-    - if blank -> default
-    - if num == 0 and raw != '0' -> default (handles non-numeric)
-    - optional clamping
-  endcomment
 
   assign max_width_raw = section.settings.max_width | strip
   assign max_width_num = max_width_raw | plus: 0
@@ -30,38 +13,38 @@
   endif
   if pw_max_width < 900
     assign pw_max_width = 900
-  elsif pw_max_width > 1800
-    assign pw_max_width = 1800
+  elsif pw_max_width > 2000
+    assign pw_max_width = 2000
   endif
 
   assign desktop_min_height_raw = section.settings.desktop_min_height | strip
   assign desktop_min_height_num = desktop_min_height_raw | plus: 0
   if desktop_min_height_raw == blank
-    assign pw_desktop_min_height = 520
+    assign pw_desktop_min_height = 560
   elsif desktop_min_height_num == 0 and desktop_min_height_raw != '0'
-    assign pw_desktop_min_height = 520
+    assign pw_desktop_min_height = 560
   else
     assign pw_desktop_min_height = desktop_min_height_num
   endif
   if pw_desktop_min_height < 320
     assign pw_desktop_min_height = 320
-  elsif pw_desktop_min_height > 900
-    assign pw_desktop_min_height = 900
+  elsif pw_desktop_min_height > 1000
+    assign pw_desktop_min_height = 1000
   endif
 
   assign gap_raw = section.settings.gap | strip
   assign gap_num = gap_raw | plus: 0
   if gap_raw == blank
-    assign pw_gap = 32
+    assign pw_gap = 24
   elsif gap_num == 0 and gap_raw != '0'
-    assign pw_gap = 32
+    assign pw_gap = 24
   else
     assign pw_gap = gap_num
   endif
   if pw_gap < 0
     assign pw_gap = 0
-  elsif pw_gap > 80
-    assign pw_gap = 80
+  elsif pw_gap > 120
+    assign pw_gap = 120
   endif
 
   assign padding_top_raw = section.settings.padding_top | strip
@@ -75,8 +58,8 @@
   endif
   if pw_pad_top < 0
     assign pw_pad_top = 0
-  elsif pw_pad_top > 120
-    assign pw_pad_top = 120
+  elsif pw_pad_top > 200
+    assign pw_pad_top = 200
   endif
 
   assign padding_bottom_raw = section.settings.padding_bottom | strip
@@ -90,8 +73,68 @@
   endif
   if pw_pad_bottom < 0
     assign pw_pad_bottom = 0
-  elsif pw_pad_bottom > 120
-    assign pw_pad_bottom = 120
+  elsif pw_pad_bottom > 200
+    assign pw_pad_bottom = 200
+  endif
+
+  assign side_pad_raw = section.settings.side_padding | strip
+  assign side_pad_num = side_pad_raw | plus: 0
+  if side_pad_raw == blank
+    assign pw_side_pad = 32
+  elsif side_pad_num == 0 and side_pad_raw != '0'
+    assign pw_side_pad = 32
+  else
+    assign pw_side_pad = side_pad_num
+  endif
+  if pw_side_pad < 0
+    assign pw_side_pad = 0
+  elsif pw_side_pad > 120
+    assign pw_side_pad = 120
+  endif
+
+  assign side_pad_m_raw = section.settings.side_padding_mobile | strip
+  assign side_pad_m_num = side_pad_m_raw | plus: 0
+  if side_pad_m_raw == blank
+    assign pw_side_pad_m = 14
+  elsif side_pad_m_num == 0 and side_pad_m_raw != '0'
+    assign pw_side_pad_m = 14
+  else
+    assign pw_side_pad_m = side_pad_m_num
+  endif
+  if pw_side_pad_m < 0
+    assign pw_side_pad_m = 0
+  elsif pw_side_pad_m > 60
+    assign pw_side_pad_m = 60
+  endif
+
+  assign small_img_h_raw = section.settings.small_image_height | strip
+  assign small_img_h_num = small_img_h_raw | plus: 0
+  if small_img_h_raw == blank
+    assign pw_small_img_h = 440
+  elsif small_img_h_num == 0 and small_img_h_raw != '0'
+    assign pw_small_img_h = 440
+  else
+    assign pw_small_img_h = small_img_h_num
+  endif
+  if pw_small_img_h < 200
+    assign pw_small_img_h = 200
+  elsif pw_small_img_h > 900
+    assign pw_small_img_h = 900
+  endif
+
+  assign small_img_h_m_raw = section.settings.small_image_height_mobile | strip
+  assign small_img_h_m_num = small_img_h_m_raw | plus: 0
+  if small_img_h_m_raw == blank
+    assign pw_small_img_h_m = 360
+  elsif small_img_h_m_num == 0 and small_img_h_m_raw != '0'
+    assign pw_small_img_h_m = 360
+  else
+    assign pw_small_img_h_m = small_img_h_m_num
+  endif
+  if pw_small_img_h_m < 160
+    assign pw_small_img_h_m = 160
+  elsif pw_small_img_h_m > 700
+    assign pw_small_img_h_m = 700
   endif
 
   assign title_size_raw = section.settings.title_size | strip
@@ -103,11 +146,6 @@
   else
     assign pw_title_size = title_size_num
   endif
-  if pw_title_size < 10
-    assign pw_title_size = 10
-  elsif pw_title_size > 72
-    assign pw_title_size = 72
-  endif
 
   assign subtitle_size_raw = section.settings.subtitle_size | strip
   assign subtitle_size_num = subtitle_size_raw | plus: 0
@@ -117,11 +155,6 @@
     assign pw_subtitle_size = 16
   else
     assign pw_subtitle_size = subtitle_size_num
-  endif
-  if pw_subtitle_size < 10
-    assign pw_subtitle_size = 10
-  elsif pw_subtitle_size > 40
-    assign pw_subtitle_size = 40
   endif
 
   assign eyebrow_size_raw = section.settings.eyebrow_size | strip
@@ -133,11 +166,6 @@
   else
     assign pw_eyebrow_size = eyebrow_size_num
   endif
-  if pw_eyebrow_size < 10
-    assign pw_eyebrow_size = 10
-  elsif pw_eyebrow_size > 40
-    assign pw_eyebrow_size = 40
-  endif
 
   assign headline_size_raw = section.settings.headline_size | strip
   assign headline_size_num = headline_size_raw | plus: 0
@@ -147,11 +175,6 @@
     assign pw_headline_size = 44
   else
     assign pw_headline_size = headline_size_num
-  endif
-  if pw_headline_size < 14
-    assign pw_headline_size = 14
-  elsif pw_headline_size > 90
-    assign pw_headline_size = 90
   endif
 
   assign button_font_size_raw = section.settings.button_font_size | strip
@@ -163,11 +186,6 @@
   else
     assign pw_btn_font_size = button_font_size_num
   endif
-  if pw_btn_font_size < 10
-    assign pw_btn_font_size = 10
-  elsif pw_btn_font_size > 28
-    assign pw_btn_font_size = 28
-  endif
 
   assign button_radius_raw = section.settings.button_radius | strip
   assign button_radius_num = button_radius_raw | plus: 0
@@ -177,11 +195,6 @@
     assign pw_btn_radius = 12
   else
     assign pw_btn_radius = button_radius_num
-  endif
-  if pw_btn_radius < 0
-    assign pw_btn_radius = 0
-  elsif pw_btn_radius > 40
-    assign pw_btn_radius = 40
   endif
 
   assign button_padding_y_raw = section.settings.button_padding_y | strip
@@ -193,11 +206,6 @@
   else
     assign pw_btn_py = button_padding_y_num
   endif
-  if pw_btn_py < 0
-    assign pw_btn_py = 0
-  elsif pw_btn_py > 24
-    assign pw_btn_py = 24
-  endif
 
   assign button_padding_x_raw = section.settings.button_padding_x | strip
   assign button_padding_x_num = button_padding_x_raw | plus: 0
@@ -207,11 +215,6 @@
     assign pw_btn_px = 28
   else
     assign pw_btn_px = button_padding_x_num
-  endif
-  if pw_btn_px < 0
-    assign pw_btn_px = 0
-  elsif pw_btn_px > 48
-    assign pw_btn_px = 48
   endif
 
   assign mobile_card_width_raw = section.settings.mobile_card_width | strip
@@ -228,6 +231,14 @@
   elsif pw_mobile_card_width > 100
     assign pw_mobile_card_width = 100
   endif
+
+  assign btn_align = section.settings.button_align | default: 'center'
+  assign btn_justify = 'center'
+  if btn_align == 'left'
+    assign btn_justify = 'flex-start'
+  elsif btn_align == 'right'
+    assign btn_justify = 'flex-end'
+  endif
 -%}
 
 <section
@@ -239,8 +250,13 @@
     --pw-pad-top: {{ pw_pad_top }}px;
     --pw-pad-bottom: {{ pw_pad_bottom }}px;
     --pw-gap: {{ pw_gap }}px;
-
     --pw-desktop-minh: {{ pw_desktop_min_height }}px;
+
+    --pw-side-pad: {{ pw_side_pad }}px;
+    --pw-side-pad-m: {{ pw_side_pad_m }}px;
+
+    --pw-small-img-h: {{ pw_small_img_h }}px;
+    --pw-small-img-h-m: {{ pw_small_img_h_m }}px;
 
     --pw-title-size: {{ pw_title_size }}px;
     --pw-title-color: {{ section.settings.title_color }};
@@ -258,6 +274,7 @@
     --pw-btn-radius: {{ pw_btn_radius }}px;
     --pw-btn-py: {{ pw_btn_py }}px;
     --pw-btn-px: {{ pw_btn_px }}px;
+    --pw-btn-justify: {{ btn_justify }};
 
     --pw-mobile-card-width: {{ pw_mobile_card_width }}%;
   "
@@ -281,7 +298,7 @@
           {%- if section.settings.left_image != blank -%}
             {{
               section.settings.left_image
-              | image_url: width: 1800
+              | image_url: width: 2000
               | image_tag:
                 loading: 'lazy',
                 class: 'pw-bundle__img',
@@ -296,15 +313,15 @@
       <!-- MIDDLE -->
       <div class="pw-bundle__col pw-bundle__col--middle">
         <div class="pw-bundle__colInner">
-          <div class="pw-bundle__media">
+          <div class="pw-bundle__media pw-bundle__media--small">
             {%- if section.settings.middle_image != blank -%}
               {{
                 section.settings.middle_image
-                | image_url: width: 1200
+                | image_url: width: 1600
                 | image_tag:
                   loading: 'lazy',
                   class: 'pw-bundle__img',
-                  sizes: '(min-width: 990px) 25vw, 80vw'
+                  sizes: '(min-width: 990px) 28vw, 80vw'
               }}
             {%- else -%}
               {{ 'image' | placeholder_svg_tag: 'pw-bundle__img pw-bundle__placeholder' }}
@@ -325,15 +342,15 @@
       <!-- RIGHT -->
       <div class="pw-bundle__col pw-bundle__col--right">
         <div class="pw-bundle__colInner">
-          <div class="pw-bundle__media">
+          <div class="pw-bundle__media pw-bundle__media--small">
             {%- if section.settings.right_image != blank -%}
               {{
                 section.settings.right_image
-                | image_url: width: 1400
+                | image_url: width: 1600
                 | image_tag:
                   loading: 'lazy',
                   class: 'pw-bundle__img',
-                  sizes: '(min-width: 990px) 25vw, 80vw'
+                  sizes: '(min-width: 990px) 28vw, 80vw'
               }}
             {%- else -%}
               {{ 'image' | placeholder_svg_tag: 'pw-bundle__img pw-bundle__placeholder' }}
@@ -372,12 +389,11 @@
     #pw-bundle-{{ sid }} .pw-bundle__outer{
       max-width: var(--pw-max-width);
       margin: 0 auto;
-      padding: 0 20px;
+      padding-left: var(--pw-side-pad);
+      padding-right: var(--pw-side-pad);
     }
 
-    #pw-bundle-{{ sid }} .pw-bundle__heading{
-      margin-bottom: 18px;
-    }
+    #pw-bundle-{{ sid }} .pw-bundle__heading{ margin-bottom: 18px; }
 
     #pw-bundle-{{ sid }} .pw-bundle__title{
       margin: 0 0 8px 0;
@@ -403,19 +419,23 @@
     #pw-bundle-{{ sid }} .pw-bundle__col{
       position: relative;
       overflow: hidden;
+      min-width: 0;
     }
 
+    /* Make middle/right behave like "top image + bottom content" */
     #pw-bundle-{{ sid }} .pw-bundle__colInner{
       height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      gap: 18px;
+      gap: 16px;
+    }
+    #pw-bundle-{{ sid }} .pw-bundle__text,
+    #pw-bundle-{{ sid }} .pw-bundle__cta{
+      margin-top: auto;
     }
 
     #pw-bundle-{{ sid }} .pw-bundle__media{
       width: 100%;
-      border-radius: 0;
       overflow: hidden;
     }
 
@@ -423,19 +443,20 @@
       height: 100%;
     }
 
+    /* Force middle/right images to be consistent size (reduces "big empty beige gaps") */
+    #pw-bundle-{{ sid }} .pw-bundle__media--small{
+      height: var(--pw-small-img-h);
+    }
+
     #pw-bundle-{{ sid }} .pw-bundle__img{
-      width: 100%;
-      height: 100%;
-      display: block;
+      width: 100% !important;
+      height: 100% !important;
+      display: block !important;
       object-fit: cover;
     }
 
     #pw-bundle-{{ sid }} .pw-bundle__placeholder{
       background: rgba(0,0,0,.04);
-    }
-
-    #pw-bundle-{{ sid }} .pw-bundle__text{
-      padding: 0 2px;
     }
 
     #pw-bundle-{{ sid }} .pw-bundle__eyebrow{
@@ -456,8 +477,10 @@
       line-height: 1.0;
     }
 
+    /* Button alignment setting */
     #pw-bundle-{{ sid }} .pw-bundle__cta{
-      padding: 0 2px;
+      display: flex;
+      justify-content: var(--pw-btn-justify);
     }
 
     #pw-bundle-{{ sid }} .pw-bundle__btn{
@@ -476,7 +499,6 @@
       letter-spacing: .03em;
       transition: opacity .2s ease, transform .2s ease;
       min-height: 44px;
-      max-width: 100%;
       white-space: nowrap;
     }
 
@@ -493,7 +515,12 @@
     /* --- Mobile --- */
     @media (max-width: 749px){
       #pw-bundle-{{ sid }} .pw-bundle__outer{
-        padding: 0 14px;
+        padding-left: var(--pw-side-pad-m);
+        padding-right: var(--pw-side-pad-m);
+      }
+
+      #pw-bundle-{{ sid }} .pw-bundle__media--small{
+        height: var(--pw-small-img-h-m);
       }
 
       /* Default: swipe */
@@ -506,12 +533,8 @@
         padding-bottom: 8px;
       }
 
-      #pw-bundle-{{ sid }}.pw-bundle--swipe .pw-bundle__content::-webkit-scrollbar{
-        display: none;
-      }
-      #pw-bundle-{{ sid }}.pw-bundle--swipe .pw-bundle__content{
-        scrollbar-width: none;
-      }
+      #pw-bundle-{{ sid }}.pw-bundle--swipe .pw-bundle__content::-webkit-scrollbar{ display: none; }
+      #pw-bundle-{{ sid }}.pw-bundle--swipe .pw-bundle__content{ scrollbar-width: none; }
 
       #pw-bundle-{{ sid }}.pw-bundle--swipe .pw-bundle__col{
         flex: 0 0 var(--pw-mobile-card-width);
@@ -526,10 +549,6 @@
         gap: 16px;
         min-height: auto;
       }
-
-      #pw-bundle-{{ sid }} .pw-bundle__content{
-        grid-template-columns: 1fr;
-      }
     }
   </style>
 </section>
@@ -539,66 +558,27 @@
   "name": "Performance Bundle",
   "settings": [
     { "type": "header", "content": "Section layout" },
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Background color",
-      "default": "#F4F2EA"
-    },
-    {
-      "type": "text",
-      "id": "max_width",
-      "label": "Max width (px)",
-      "default": "1400",
-      "info": "Numbers only (e.g. 1400)"
-    },
-    {
-      "type": "text",
-      "id": "desktop_min_height",
-      "label": "Desktop min height (px)",
-      "default": "520",
-      "info": "Numbers only (e.g. 520)"
-    },
-    {
-      "type": "text",
-      "id": "gap",
-      "label": "Desktop column gap (px)",
-      "default": "32",
-      "info": "Numbers only (e.g. 32)"
-    },
-    {
-      "type": "text",
-      "id": "padding_top",
-      "label": "Padding top (px)",
-      "default": "24",
-      "info": "Numbers only (e.g. 24)"
-    },
-    {
-      "type": "text",
-      "id": "padding_bottom",
-      "label": "Padding bottom (px)",
-      "default": "24",
-      "info": "Numbers only (e.g. 24)"
-    },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#F4F2EA" },
+
+    { "type": "text", "id": "max_width", "label": "Max width (px)", "default": "1400", "info": "Numbers only (e.g. 1400)" },
+    { "type": "text", "id": "desktop_min_height", "label": "Desktop min height (px)", "default": "560", "info": "Numbers only (e.g. 560)" },
+    { "type": "text", "id": "gap", "label": "Desktop column gap (px)", "default": "24", "info": "Numbers only (e.g. 24)" },
+
+    { "type": "text", "id": "padding_top", "label": "Padding top (px)", "default": "24", "info": "Numbers only (e.g. 24)" },
+    { "type": "text", "id": "padding_bottom", "label": "Padding bottom (px)", "default": "24", "info": "Numbers only (e.g. 24)" },
+
+    { "type": "text", "id": "side_padding", "label": "Side padding - desktop (px)", "default": "32", "info": "Adds spacing so left/right images don't touch the page edge" },
+    { "type": "text", "id": "side_padding_mobile", "label": "Side padding - mobile (px)", "default": "14", "info": "Numbers only (e.g. 14)" },
+
+    { "type": "text", "id": "small_image_height", "label": "Middle/Right image height - desktop (px)", "default": "440", "info": "Numbers only (e.g. 440)" },
+    { "type": "text", "id": "small_image_height_mobile", "label": "Middle/Right image height - mobile (px)", "default": "360", "info": "Numbers only (e.g. 360)" },
 
     { "type": "header", "content": "Title / Subtitle (optional)" },
     { "type": "text", "id": "title", "label": "Title" },
     { "type": "richtext", "id": "subtitle", "label": "Subtitle" },
-    {
-      "type": "text",
-      "id": "title_size",
-      "label": "Title font size (px)",
-      "default": "28",
-      "info": "Numbers only (e.g. 28)"
-    },
+    { "type": "text", "id": "title_size", "label": "Title font size (px)", "default": "28", "info": "Numbers only" },
     { "type": "color", "id": "title_color", "label": "Title color", "default": "#0B2B24" },
-    {
-      "type": "text",
-      "id": "subtitle_size",
-      "label": "Subtitle font size (px)",
-      "default": "16",
-      "info": "Numbers only (e.g. 16)"
-    },
+    { "type": "text", "id": "subtitle_size", "label": "Subtitle font size (px)", "default": "16", "info": "Numbers only" },
     { "type": "color", "id": "subtitle_color", "label": "Subtitle color", "default": "#0B2B24" },
 
     { "type": "header", "content": "Images" },
@@ -609,57 +589,34 @@
     { "type": "header", "content": "Middle text" },
     { "type": "text", "id": "eyebrow_text", "label": "Top text (e.g. PERFORMANCE)", "default": "PERFORMANCE" },
     { "type": "text", "id": "headline_text", "label": "Main text (e.g. WELLNESS BUNDLE)", "default": "WELLNESS BUNDLE" },
-    {
-      "type": "text",
-      "id": "eyebrow_size",
-      "label": "Top text font size (px)",
-      "default": "20",
-      "info": "Numbers only (e.g. 20)"
-    },
+    { "type": "text", "id": "eyebrow_size", "label": "Top text font size (px)", "default": "20", "info": "Numbers only" },
     { "type": "color", "id": "eyebrow_color", "label": "Top text color", "default": "#0B2B24" },
-    {
-      "type": "text",
-      "id": "headline_size",
-      "label": "Main text font size (px)",
-      "default": "44",
-      "info": "Numbers only (e.g. 44)"
-    },
+    { "type": "text", "id": "headline_size", "label": "Main text font size (px)", "default": "44", "info": "Numbers only" },
     { "type": "color", "id": "headline_color", "label": "Main text color", "default": "#0B2B24" },
 
     { "type": "header", "content": "Button (right column)" },
     { "type": "text", "id": "button_text", "label": "Button text", "default": "SHOP NOW" },
     { "type": "url", "id": "button_link", "label": "Button link" },
     { "type": "checkbox", "id": "button_new_tab", "label": "Open link in new tab", "default": false },
+
     {
-      "type": "text",
-      "id": "button_font_size",
-      "label": "Button font size (px)",
-      "default": "14",
-      "info": "Numbers only (e.g. 14)"
+      "type": "select",
+      "id": "button_align",
+      "label": "Button alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
     },
+
+    { "type": "text", "id": "button_font_size", "label": "Button font size (px)", "default": "14", "info": "Numbers only" },
     { "type": "color", "id": "button_text_color", "label": "Button text color", "default": "#FFFFFF" },
     { "type": "color", "id": "button_bg_color", "label": "Button background color", "default": "#0B2B24" },
-    {
-      "type": "text",
-      "id": "button_radius",
-      "label": "Button border radius (px)",
-      "default": "12",
-      "info": "Numbers only (e.g. 12)"
-    },
-    {
-      "type": "text",
-      "id": "button_padding_y",
-      "label": "Button padding Y (px)",
-      "default": "12",
-      "info": "Numbers only (e.g. 12)"
-    },
-    {
-      "type": "text",
-      "id": "button_padding_x",
-      "label": "Button padding X (px)",
-      "default": "28",
-      "info": "Numbers only (e.g. 28)"
-    },
+    { "type": "text", "id": "button_radius", "label": "Button border radius (px)", "default": "12", "info": "Numbers only" },
+    { "type": "text", "id": "button_padding_y", "label": "Button padding Y (px)", "default": "12", "info": "Numbers only" },
+    { "type": "text", "id": "button_padding_x", "label": "Button padding X (px)", "default": "28", "info": "Numbers only" },
 
     { "type": "header", "content": "Mobile behavior" },
     {
@@ -672,13 +629,7 @@
         { "value": "stack", "label": "Stack (vertical)" }
       ]
     },
-    {
-      "type": "text",
-      "id": "mobile_card_width",
-      "label": "Swipe card width (%)",
-      "default": "88",
-      "info": "Numbers only (60–100 recommended)"
-    }
+    { "type": "text", "id": "mobile_card_width", "label": "Swipe card width (%)", "default": "88", "info": "Numbers only (60–100 recommended)" }
   ],
   "presets": [
     { "name": "Performance Bundle" }
