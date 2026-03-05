@@ -37,7 +37,8 @@
         "rotator_item_BLYHHn"
       ],
       "custom_css": [
-        ".vid2__content {align-content: end;}"
+        ".vid2__content {align-content: end;}",
+        "@media screen and (min-width: 1700px) {.vid2__media {object-position: top; }}"
       ],
       "name": "Video v2",
       "settings": {
