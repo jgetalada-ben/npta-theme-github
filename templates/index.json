@@ -166,7 +166,7 @@
         "headline_text": "WELLNESS BUNDLE",
         "eyebrow_size": "clamp(16px,3.2vw,32px)",
         "eyebrow_color": "#01241e",
-        "headline_size": "clamp(24px,4.8vw,48px)",
+        "headline_size": "clamp(16px,4.8vw,48px)",
         "headline_color": "#01241e",
         "button_text": "SHOP NOW",
         "button_link": "shopify://collections/all",
