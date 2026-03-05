@@ -227,15 +227,17 @@
     margin: 0 0 10px 0;
     font-size: var(--iwt2-title-size);
     line-height: 1.05;
-    font-weight: 900;
+    font-weight: 500;
     letter-spacing: .01em;
     text-transform: uppercase;
+    font-family: var(--font-anton);
   }
 
   #iwt2-{{ sid }} .iwt2__top-subtitle{
     font-size: var(--iwt2-subtitle-size);
     line-height: 1.35;
     color: var(--iwt2-muted);
+    font-family: var(--font-proximaregular);
   }
 
   #iwt2-{{ sid }} .iwt2__grid{
@@ -277,9 +279,11 @@
   #iwt2-{{ sid }} .iwt2__right-title{
     margin: 0 0 16px 0;
     font-size: var(--iwt2-right-title-size);
-    font-weight: 900;
+    font-weight: 500;
     text-transform: uppercase;
     line-height: 1.15;
+    font-family: var(--font-proximamedium);
+    color: #01241E;
   }
 
   #iwt2-{{ sid }} .iwt2__list{
@@ -292,8 +296,9 @@
   #iwt2-{{ sid }} .iwt2__list li{
     font-size: var(--iwt2-list-size);
     line-height: 1.35;
-    font-weight: 900;
+    font-weight: 400;
     text-transform: uppercase;
+    font-family: var(--font-proximanova);
   }
 
   /* Underline style like your screenshot (blue underline, dark text) */
@@ -307,10 +312,11 @@
 
   #iwt2-{{ sid }} .iwt2__extra{
     margin-top: 6px;
-    font-size: 18px;
-    font-weight: 900;
+    font-size: clamp(14px, 2.4vw, 24px);
+    font-weight: 400;
     text-transform: uppercase;
     line-height: 1.35;
+    font-family: var(--font-proximablack);
   }
 
   #iwt2-{{ sid }} .iwt2__prices{
@@ -320,14 +326,17 @@
     gap: 26px;
     align-items: baseline;
     font-size: var(--iwt2-price-size);
-    font-weight: 900;
+    font-weight: 500;
     text-transform: uppercase;
+    font-family: var(--font-proximamedium);
   }
 
   #iwt2-{{ sid }} .iwt2__prices .reg{
     color: var(--iwt2-reg-color);
     text-decoration: line-through;
     text-decoration-thickness: 3px;
+    font-size: clamp(14px, 2.4vw, 24px);
+    font-family: var(--font-proximamedium);
   }
 
   #iwt2-{{ sid }} .iwt2__cta{
@@ -345,11 +354,12 @@
     text-decoration: none;
     border-radius: var(--iwt2-btn-radius);
     padding: 16px 34px;
-    min-height: 52px;
-    font-weight: 900;
+    font-weight: 500;
     text-transform: uppercase;
     letter-spacing: .02em;
     white-space: nowrap;
+    font-family: var(--font-proximamedium);
+    font-size: clamp(14px, 2.4vw, 24px);
   }
 
   @media (max-width: 989px){
@@ -520,7 +530,7 @@
     { "type": "text", "id": "image_radius", "label": "Image corner radius (px)", "default": "12", "info": "Numbers only" },
     { "type": "text", "id": "button_radius", "label": "Button corner radius (px)", "default": "16", "info": "Numbers only" },
 
-    { "type": "header", "content": "Typography (numbers only)" },
+    { "type": "header", "content": "Typography" },
     { "type": "text", "id": "title_size", "label": "Top title font size (px)", "default": "40", "info": "Numbers only" },
     { "type": "text", "id": "subtitle_size", "label": "Top subtitle font size (px)", "default": "20", "info": "Numbers only" },
     { "type": "text", "id": "right_title_size", "label": "Right title font size (px)", "default": "28", "info": "Numbers only" },
