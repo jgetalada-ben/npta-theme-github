@@ -182,7 +182,6 @@
     --iwt2-bg: {{ section.settings.bg_color }};
     --iwt2-text: {{ section.settings.text_color }};
     --iwt2-muted: {{ section.settings.muted_color }};
-    --iwt2-underline: {{ section.settings.underline_color }};
     --iwt2-maxw: {{ maxw_n }}px;
     --iwt2-gap: {{ gap_n }}px;
     --iwt2-pad-top: {{ pad_top_n }}px;
@@ -304,10 +303,6 @@
   /* Underline style like your screenshot (blue underline, dark text) */
   #iwt2-{{ sid }} .iwt2__link{
     color: var(--iwt2-text);
-    text-decoration: underline;
-    text-decoration-color: var(--iwt2-underline);
-    text-decoration-thickness: 4px;
-    text-underline-offset: 4px;
   }
 
   #iwt2-{{ sid }} .iwt2__extra{
@@ -515,7 +510,6 @@
     { "type": "color", "id": "bg_color", "label": "Background", "default": "#FFFFFF" },
     { "type": "color", "id": "text_color", "label": "Text color", "default": "#0B2B24" },
     { "type": "color", "id": "muted_color", "label": "Muted text color", "default": "#0B2B24" },
-    { "type": "color", "id": "underline_color", "label": "Underline color", "default": "#1E79FF" },
 
     { "type": "color", "id": "badge_bg", "label": "Badge background", "default": "#B9FF66" },
     { "type": "color", "id": "badge_text_color", "label": "Badge text color", "default": "#000000" },
