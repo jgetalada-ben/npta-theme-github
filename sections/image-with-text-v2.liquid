@@ -210,6 +210,11 @@
     color: var(--iwt2-text);
     padding: var(--iwt2-pad-top) 0 var(--iwt2-pad-bottom);
   }
+  @media (max-width: 989px){
+    #iwt2-{{ sid }}{
+        padding: calc(var(--iwt2-pad-top) / 2) 0 calc(var(--iwt2-pad-bottom) / 2);
+    }
+  }
 
   #iwt2-{{ sid }} .iwt2__wrap{
     max-width: var(--iwt2-maxw);
