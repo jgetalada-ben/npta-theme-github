@@ -50,7 +50,7 @@
         "aspect_ratio": "21-9",
         "aspect_ratio_mobile": "1-1",
         "height_mode": "ratio",
-        "vh_desktop": "60vh",
+        "vh_desktop": "30vh",
         "vh_mobile": "50dvh",
         "show_icon_text": false,
         "icon_text": "NASM OFFICIAL CANADIAN PARTNER",
