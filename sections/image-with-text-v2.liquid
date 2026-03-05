@@ -79,52 +79,92 @@
   endif
 
   assign title_size_raw = section.settings.title_size | strip
-  assign title_size_n = title_size_raw | plus: 0
   if title_size_raw == blank
-    assign title_size_n = 40
-  elsif title_size_n == 0
-    if title_size_raw != '0'
-      assign title_size_n = 40
+    assign iwt2_title_size = '40px'
+  elsif title_size_raw contains 'clamp(' or title_size_raw contains 'px' or title_size_raw contains 'rem' or title_size_raw contains 'em' or title_size_raw contains 'vw'
+    assign iwt2_title_size = title_size_raw
+  else
+    assign title_size_n = title_size_raw | plus: 0
+    if title_size_n == 0
+      if title_size_raw != '0'
+        assign iwt2_title_size = '40px'
+      else
+        assign iwt2_title_size = '0px'
+      endif
+    else
+      assign iwt2_title_size = title_size_n | append: 'px'
     endif
   endif
 
   assign subtitle_size_raw = section.settings.subtitle_size | strip
-  assign subtitle_size_n = subtitle_size_raw | plus: 0
   if subtitle_size_raw == blank
-    assign subtitle_size_n = 20
-  elsif subtitle_size_n == 0
-    if subtitle_size_raw != '0'
-      assign subtitle_size_n = 20
+    assign iwt2_subtitle_size = '20px'
+  elsif subtitle_size_raw contains 'clamp(' or subtitle_size_raw contains 'px' or subtitle_size_raw contains 'rem' or subtitle_size_raw contains 'em' or subtitle_size_raw contains 'vw'
+    assign iwt2_subtitle_size = subtitle_size_raw
+  else
+    assign subtitle_size_n = subtitle_size_raw | plus: 0
+    if subtitle_size_n == 0
+      if subtitle_size_raw != '0'
+        assign iwt2_subtitle_size = '20px'
+      else
+        assign iwt2_subtitle_size = '0px'
+      endif
+    else
+      assign iwt2_subtitle_size = subtitle_size_n | append: 'px'
     endif
   endif
 
   assign right_title_size_raw = section.settings.right_title_size | strip
-  assign right_title_size_n = right_title_size_raw | plus: 0
   if right_title_size_raw == blank
-    assign right_title_size_n = 28
-  elsif right_title_size_n == 0
-    if right_title_size_raw != '0'
-      assign right_title_size_n = 28
+    assign iwt2_right_title_size = '28px'
+  elsif right_title_size_raw contains 'clamp(' or right_title_size_raw contains 'px' or right_title_size_raw contains 'rem' or right_title_size_raw contains 'em' or right_title_size_raw contains 'vw'
+    assign iwt2_right_title_size = right_title_size_raw
+  else
+    assign right_title_size_n = right_title_size_raw | plus: 0
+    if right_title_size_n == 0
+      if right_title_size_raw != '0'
+        assign iwt2_right_title_size = '28px'
+      else
+        assign iwt2_right_title_size = '0px'
+      endif
+    else
+      assign iwt2_right_title_size = right_title_size_n | append: 'px'
     endif
   endif
 
   assign list_size_raw = section.settings.list_font_size | strip
-  assign list_size_n = list_size_raw | plus: 0
   if list_size_raw == blank
-    assign list_size_n = 18
-  elsif list_size_n == 0
-    if list_size_raw != '0'
-      assign list_size_n = 18
+    assign iwt2_list_size = '18px'
+  elsif list_size_raw contains 'clamp(' or list_size_raw contains 'px' or list_size_raw contains 'rem' or list_size_raw contains 'em' or list_size_raw contains 'vw'
+    assign iwt2_list_size = list_size_raw
+  else
+    assign list_size_n = list_size_raw | plus: 0
+    if list_size_n == 0
+      if list_size_raw != '0'
+        assign iwt2_list_size = '18px'
+      else
+        assign iwt2_list_size = '0px'
+      endif
+    else
+      assign iwt2_list_size = list_size_n | append: 'px'
     endif
   endif
 
   assign price_size_raw = section.settings.price_font_size | strip
-  assign price_size_n = price_size_raw | plus: 0
   if price_size_raw == blank
-    assign price_size_n = 22
-  elsif price_size_n == 0
-    if price_size_raw != '0'
-      assign price_size_n = 22
+    assign iwt2_price_size = '22px'
+  elsif price_size_raw contains 'clamp(' or price_size_raw contains 'px' or price_size_raw contains 'rem' or price_size_raw contains 'em' or price_size_raw contains 'vw'
+    assign iwt2_price_size = price_size_raw
+  else
+    assign price_size_n = price_size_raw | plus: 0
+    if price_size_n == 0
+      if price_size_raw != '0'
+        assign iwt2_price_size = '22px'
+      else
+        assign iwt2_price_size = '0px'
+      endif
+    else
+      assign iwt2_price_size = price_size_n | append: 'px'
     endif
   endif
 
@@ -149,12 +189,12 @@
     --iwt2-pad-bottom: {{ pad_bottom_n }}px;
     --iwt2-radius: {{ radius_n }}px;
 
-    --iwt2-title-size: {{ title_size_n }}px;
-    --iwt2-subtitle-size: {{ subtitle_size_n }}px;
+    --iwt2-title-size: {{ title_size_n }};
+    --iwt2-subtitle-size: {{ subtitle_size_n }};
 
-    --iwt2-right-title-size: {{ right_title_size_n }}px;
-    --iwt2-list-size: {{ list_size_n }}px;
-    --iwt2-price-size: {{ price_size_n }}px;
+    --iwt2-right-title-size: {{ right_title_size_n }};
+    --iwt2-list-size: {{ list_size_n }};
+    --iwt2-price-size: {{ price_size_n }};
 
     --iwt2-badge-bg: {{ section.settings.badge_bg }};
     --iwt2-badge-text: {{ section.settings.badge_text_color }};
