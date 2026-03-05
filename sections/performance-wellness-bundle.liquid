@@ -157,6 +157,16 @@
     assign pw_subtitle_size = subtitle_size_num
   endif
 
+  assign eyebrow_size_raw = section.settings.eyebrow_size | strip
+  assign eyebrow_size_num = eyebrow_size_raw | plus: 0
+  if eyebrow_size_raw == blank
+    assign pw_eyebrow_size = 20
+  elsif eyebrow_size_num == 0 and eyebrow_size_raw != '0'
+    assign pw_eyebrow_size = 20
+  else
+    assign pw_eyebrow_size = eyebrow_size_num
+  endif
+
   assign headline_size_raw = section.settings.headline_size | strip
   assign headline_size_num = headline_size_raw | plus: 0
   if headline_size_raw == blank
@@ -586,7 +596,7 @@
     { "type": "header", "content": "Middle text" },
     { "type": "text", "id": "eyebrow_text", "label": "Top text (e.g. PERFORMANCE)", "default": "PERFORMANCE" },
     { "type": "text", "id": "headline_text", "label": "Main text (e.g. WELLNESS BUNDLE)", "default": "WELLNESS BUNDLE" },
-    { "type": "text", "id": "eyebrow_size", "label": "Top text font size (px)", "default": "20" },
+    { "type": "text", "id": "eyebrow_size", "label": "Top text font size (px)", "default": "20", "info": "Numbers only" },
     { "type": "color", "id": "eyebrow_color", "label": "Top text color", "default": "#0B2B24" },
     { "type": "text", "id": "headline_size", "label": "Main text font size (px)", "default": "44", "info": "Numbers only" },
     { "type": "color", "id": "headline_color", "label": "Main text color", "default": "#0B2B24" },
