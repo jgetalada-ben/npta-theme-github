@@ -138,53 +138,73 @@
   endif
 
   assign title_size_raw = section.settings.title_size | strip
-  assign title_size_num = title_size_raw | plus: 0
   if title_size_raw == blank
-    assign pw_title_size = 28
-  elsif title_size_num == 0 and title_size_raw != '0'
-    assign pw_title_size = 28
+    assign pw_title_size = '28px'
+  elsif title_size_raw contains 'clamp(' or title_size_raw contains 'px' or title_size_raw contains 'rem' or title_size_raw contains 'em' or title_size_raw contains 'vw'
+    assign pw_title_size = title_size_raw
   else
-    assign pw_title_size = title_size_num
+    assign title_size_num = title_size_raw | plus: 0
+    if title_size_num == 0 and title_size_raw != '0'
+      assign pw_title_size = '28px'
+    else
+      assign pw_title_size = title_size_num | append: 'px'
+    endif
   endif
 
   assign subtitle_size_raw = section.settings.subtitle_size | strip
-  assign subtitle_size_num = subtitle_size_raw | plus: 0
   if subtitle_size_raw == blank
-    assign pw_subtitle_size = 16
-  elsif subtitle_size_num == 0 and subtitle_size_raw != '0'
-    assign pw_subtitle_size = 16
+    assign pw_subtitle_size = '16px'
+  elsif subtitle_size_raw contains 'clamp(' or subtitle_size_raw contains 'px' or subtitle_size_raw contains 'rem' or subtitle_size_raw contains 'em' or subtitle_size_raw contains 'vw'
+    assign pw_subtitle_size = subtitle_size_raw
   else
-    assign pw_subtitle_size = subtitle_size_num
+    assign subtitle_size_num = subtitle_size_raw | plus: 0
+    if subtitle_size_num == 0 and subtitle_size_raw != '0'
+      assign pw_subtitle_size = '16px'
+    else
+      assign pw_subtitle_size = subtitle_size_num | append: 'px'
+    endif
   endif
 
   assign eyebrow_size_raw = section.settings.eyebrow_size | strip
-  assign eyebrow_size_num = eyebrow_size_raw | plus: 0
   if eyebrow_size_raw == blank
-    assign pw_eyebrow_size = 20
-  elsif eyebrow_size_num == 0 and eyebrow_size_raw != '0'
-    assign pw_eyebrow_size = 20
+    assign pw_eyebrow_size = '20px'
+  elsif eyebrow_size_raw contains 'clamp(' or eyebrow_size_raw contains 'px' or eyebrow_size_raw contains 'rem' or eyebrow_size_raw contains 'em' or eyebrow_size_raw contains 'vw'
+    assign pw_eyebrow_size = eyebrow_size_raw
   else
-    assign pw_eyebrow_size = eyebrow_size_num
+    assign eyebrow_size_num = eyebrow_size_raw | plus: 0
+    if eyebrow_size_num == 0 and eyebrow_size_raw != '0'
+      assign pw_eyebrow_size = '20px'
+    else
+      assign pw_eyebrow_size = eyebrow_size_num | append: 'px'
+    endif
   endif
 
   assign headline_size_raw = section.settings.headline_size | strip
-  assign headline_size_num = headline_size_raw | plus: 0
   if headline_size_raw == blank
-    assign pw_headline_size = 44
-  elsif headline_size_num == 0 and headline_size_raw != '0'
-    assign pw_headline_size = 44
+    assign pw_headline_size = '44px'
+  elsif headline_size_raw contains 'clamp(' or headline_size_raw contains 'px' or headline_size_raw contains 'rem' or headline_size_raw contains 'em' or headline_size_raw contains 'vw'
+    assign pw_headline_size = headline_size_raw
   else
-    assign pw_headline_size = headline_size_num
+    assign headline_size_num = headline_size_raw | plus: 0
+    if headline_size_num == 0 and headline_size_raw != '0'
+      assign pw_headline_size = '44px'
+    else
+      assign pw_headline_size = headline_size_num | append: 'px'
+    endif
   endif
 
   assign button_font_size_raw = section.settings.button_font_size | strip
-  assign button_font_size_num = button_font_size_raw | plus: 0
   if button_font_size_raw == blank
-    assign pw_btn_font_size = 14
-  elsif button_font_size_num == 0 and button_font_size_raw != '0'
-    assign pw_btn_font_size = 14
+    assign pw_btn_font_size = '14px'
+  elsif button_font_size_raw contains 'clamp(' or button_font_size_raw contains 'px' or button_font_size_raw contains 'rem' or button_font_size_raw contains 'em' or button_font_size_raw contains 'vw'
+    assign pw_btn_font_size = button_font_size_raw
   else
-    assign pw_btn_font_size = button_font_size_num
+    assign button_font_size_num = button_font_size_raw | plus: 0
+    if button_font_size_num == 0 and button_font_size_raw != '0'
+      assign pw_btn_font_size = '14px'
+    else
+      assign pw_btn_font_size = button_font_size_num | append: 'px'
+    endif
   endif
 
   assign button_radius_raw = section.settings.button_radius | strip
