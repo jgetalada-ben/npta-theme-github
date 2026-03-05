@@ -342,7 +342,7 @@
       <!-- RIGHT -->
       <div class="pw-bundle__col pw-bundle__col--right">
         <div class="pw-bundle__colInner">
-          <div class="pw-bundle__media pw-bundle__media--small">
+          <div class="pw-bundle__media pw-bundle__media--small mt40">
             {%- if section.settings.right_image != blank -%}
               {{
                 section.settings.right_image
@@ -550,6 +550,10 @@
         gap: 16px;
         min-height: auto;
       }
+    }
+    .mt40{margin-top:40px;}
+    @media (max-width: 749px){
+      .mt40{margin-top:20px;}
     }
   </style>
 </section>
