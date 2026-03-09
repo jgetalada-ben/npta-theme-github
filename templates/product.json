@@ -204,6 +204,7 @@
       ],
       "name": "PDP Career paths slider",
       "settings": {
+        "metaobject_key": "career_paths_slider_content",
         "heading": "Discover Your Career Path With This Certification",
         "subheading": "<p>Your potential career pathways start here.</p>",
         "items_desktop": "3.5",
