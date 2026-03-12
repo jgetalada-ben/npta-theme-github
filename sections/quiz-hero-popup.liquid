@@ -464,6 +464,79 @@
     .qhp .qhp__linkBtn--cta{ background: var(--qhp-accent); color: #fff; }
     .qhp .qhp__linkBtn--retake{ background: rgba(0,0,0,.08); color: #111; }
     .qhp .qhp__linkBtn[disabled]{ opacity:.6; cursor:not-allowed; }
+
+    .qhp .qhp__resultBreakdown{
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 16px;
+      padding: 14px;
+      margin: 14px 0;
+    }
+    .qhp .qhp__resultBreakdownTitle{
+      margin: 0 0 12px;
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--qhp-heading);
+    }
+    .qhp .qhp__resultGrid{
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .qhp .qhp__resultStat{
+      text-align: center;
+      border-radius: 14px;
+      padding: 16px 12px;
+      border: 1px solid rgba(0,0,0,.08);
+    }
+    .qhp .qhp__resultStat--correct{
+      background: color-mix(in srgb, var(--qhp-correct) 14%, #fff);
+    }
+    .qhp .qhp__resultStat--learn{
+      background: color-mix(in srgb, var(--qhp-wrong) 10%, #fff);
+    }
+    .qhp .qhp__resultStatValue{
+      font-size: 32px;
+      font-weight: 1000;
+      color: var(--qhp-heading);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .qhp .qhp__resultStatLabel{
+      font-size: 13px;
+      font-weight: 800;
+      opacity: .9;
+    }
+    .qhp .qhp__promo{
+      background: linear-gradient(135deg, var(--qhp-heading), var(--qhp-accent));
+      color: #fff;
+      border-radius: 16px;
+      padding: 18px;
+      margin: 14px 0;
+    }
+    .qhp .qhp__promoTitle{
+      margin: 0 0 8px;
+      font-size: 20px;
+      font-weight: 1000;
+    }
+    .qhp .qhp__promoText{
+      margin: 0 0 14px;
+      line-height: 1.6;
+      color: rgba(255,255,255,.92);
+    }
+    .qhp .qhp__promoList{
+      margin: 0;
+      padding-left: 18px;
+      color: rgba(255,255,255,.95);
+    }
+    .qhp .qhp__promoList li{
+      margin: 0 0 8px;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+    @media (max-width: 640px){
+      .qhp .qhp__resultGrid{ grid-template-columns: 1fr; }
+    }
   </style>
 
   <div class="qhp__container">
@@ -588,7 +661,7 @@
                 <p class="qhp__feedbackText" data-qhp-feedback-text></p>
               </div>
 
-              <button class="qhp__next" type="button" data-qhp-next>Next</button>
+              <button class="qhp__next" type="button" data-qhp-next>{{ section.settings.next_question_label }}</button>
             </div>
 
             <div class="qhp__powered">{{ section.settings.powered_by }}</div>
@@ -608,6 +681,42 @@
             <div data-qhp-result-message></div>
             <div style="margin-top:10px;font-weight:900;color:var(--qhp-heading)" data-qhp-result-cta></div>
           </div>
+
+          <div class="qhp__resultBreakdown">
+            <h5 class="qhp__resultBreakdownTitle">{{ section.settings.results_breakdown_heading }}</h5>
+            <div class="qhp__resultGrid">
+              <div class="qhp__resultStat qhp__resultStat--correct">
+                <div class="qhp__resultStatValue" data-qhp-correct-count>0</div>
+                <div class="qhp__resultStatLabel">{{ section.settings.results_correct_label }}</div>
+              </div>
+              <div class="qhp__resultStat qhp__resultStat--learn">
+                <div class="qhp__resultStatValue" data-qhp-incorrect-count>0</div>
+                <div class="qhp__resultStatLabel">{{ section.settings.results_incorrect_label }}</div>
+              </div>
+            </div>
+          </div>
+
+          {% assign promo_points = section.settings.results_promo_points | newline_to_br | split: '<br />' %}
+          {% if section.settings.results_promo_title != blank or section.settings.results_promo_text != blank or section.settings.results_promo_points != blank %}
+            <div class="qhp__promo">
+              {% if section.settings.results_promo_title != blank %}
+                <h5 class="qhp__promoTitle">{{ section.settings.results_promo_title }}</h5>
+              {% endif %}
+              {% if section.settings.results_promo_text != blank %}
+                <p class="qhp__promoText">{{ section.settings.results_promo_text }}</p>
+              {% endif %}
+              {% if section.settings.results_promo_points != blank %}
+                <ul class="qhp__promoList">
+                  {% for point in promo_points %}
+                    {% assign clean_point = point | strip %}
+                    {% if clean_point != blank %}
+                      <li>{{ clean_point }}</li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+          {% endif %}
 
           <div class="qhp__resultBtns">
             {% if section.settings.send_enabled %}
@@ -657,6 +766,83 @@
           ]
         </script>
 
+        <script type="application/json" data-qhp-default-questions>
+[
+            {
+                        "question": "Which energy system is primarily used during the first 10 seconds of high-intensity exercise?",
+                        "options_raw": "Aerobic system\nATP-PCr (phosphagen) system\nGlycolytic system\nOxidative system",
+                        "correct": 2,
+                        "explanation": "The ATP-PCr system provides immediate energy for short bursts of intense activity (0-10 seconds). This is why sprinters and powerlifters rely heavily on this system!"
+            },
+            {
+                        "question": "What is the recommended rest time between sets for muscle hypertrophy (growth)?",
+                        "options_raw": "15-30 seconds\n30-60 seconds\n60-90 seconds\n3-5 minutes",
+                        "correct": 3,
+                        "explanation": "For muscle hypertrophy, 60-90 seconds of rest allows partial recovery while maintaining metabolic stress, which is key for muscle growth. Shorter rest is for endurance, longer rest is for strength/power."
+            },
+            {
+                        "question": "Which muscle group is NOT part of the core stabilizers?",
+                        "options_raw": "Transverse abdominis\nMultifidus\nBiceps femoris\nPelvic floor muscles",
+                        "correct": 3,
+                        "explanation": "The biceps femoris is part of the hamstring group, not a core stabilizer. The core includes the transverse abdominis, multifidus, diaphragm, and pelvic floor - all crucial for spinal stability!"
+            },
+            {
+                        "question": "What percentage of total daily calories should come from protein for general fitness?",
+                        "options_raw": "5-10%\n10-15%\n15-30%\n40-50%",
+                        "correct": 3,
+                        "explanation": "Most fitness professionals recommend 15-30% of daily calories from protein. This supports muscle repair, satiety, and overall health without going overboard."
+            },
+            {
+                        "question": "Which training principle states that adaptations are specific to the type of training performed?",
+                        "options_raw": "Progressive overload\nReversibility\nSpecificity (SAID principle)\nIndividuality",
+                        "correct": 3,
+                        "explanation": "The SAID principle (Specific Adaptation to Imposed Demands) means your body adapts specifically to how you train it. Want to run faster? Train speed. Want bigger muscles? Train hypertrophy!"
+            },
+            {
+                        "question": "True or False: You can spot-reduce fat from specific body areas through targeted exercises.",
+                        "options_raw": "True - doing crunches burns belly fat\nFalse - fat loss occurs systemically\nTrue - but only with high reps\nTrue - for women but not men",
+                        "correct": 2,
+                        "explanation": "This is one of the biggest fitness myths! Spot reduction is not possible. Fat loss occurs throughout the body based on genetics, hormones, and overall calorie deficit. Targeted exercises build muscle but do not specifically burn fat in that area."
+            },
+            {
+                        "question": "What is the primary movement pattern in a deadlift?",
+                        "options_raw": "Squat pattern\nHinge pattern\nPush pattern\nLunge pattern",
+                        "correct": 2,
+                        "explanation": "The deadlift is a hip hinge pattern, where the movement is dominated by hip extension (glutes and hamstrings). This is different from a squat, which emphasizes knee flexion and extension."
+            },
+            {
+                        "question": "Which adaptation occurs FIRST when beginning a resistance training program?",
+                        "options_raw": "Muscle hypertrophy\nIncreased capillary density\nNeural adaptations\nBone density improvements",
+                        "correct": 3,
+                        "explanation": "Neural adaptations happen first (within 2-8 weeks)! Your nervous system learns to recruit muscle fibers more efficiently. Muscle growth typically follows after 6-8 weeks of consistent training."
+            },
+            {
+                        "question": "What does RPE stand for in fitness training?",
+                        "options_raw": "Reps Per Exercise\nRate of Perceived Exertion\nResistance Power Efficiency\nRest Period Emphasis",
+                        "correct": 2,
+                        "explanation": "RPE (Rate of Perceived Exertion) is a subjective scale (usually 1-10) used to gauge exercise intensity. It is a valuable tool for trainers to monitor and adjust client workouts!"
+            },
+            {
+                        "question": "Which of the following is a contraindication for performing a Valsalva maneuver?",
+                        "options_raw": "Advanced lifters doing maximal lifts\nIndividuals with high blood pressure\nAthletes during explosive movements\nPowerlifters during competition",
+                        "correct": 2,
+                        "explanation": "The Valsalva maneuver (holding breath while bearing down) dramatically increases blood pressure. It is contraindicated for people with hypertension or cardiovascular issues, even though it can help stabilize the spine in healthy lifters."
+            },
+            {
+                        "question": "What is the recommended weekly aerobic exercise duration for general health according to health guidelines?",
+                        "options_raw": "75 minutes of moderate intensity\n150 minutes of moderate intensity\n300 minutes of moderate intensity\n60 minutes of moderate intensity",
+                        "correct": 2,
+                        "explanation": "The standard recommendation is 150 minutes (2.5 hours) of moderate-intensity aerobic activity per week, or 75 minutes of vigorous-intensity activity. As a trainer, you will help clients achieve this goal!"
+            },
+            {
+                        "question": "Which fitness assessment would be MOST appropriate for measuring upper body muscular endurance?",
+                        "options_raw": "1-rep max bench press\nPush-up test to fatigue\nGrip strength test\nVertical jump test",
+                        "correct": 2,
+                        "explanation": "The push-up test to fatigue measures muscular endurance (how many reps you can perform). A 1-rep max tests strength, grip strength tests grip strength, and vertical jump tests power. Understanding these distinctions is crucial for trainers!"
+            }
+]
+        </script>
+
         <script>
           (function(){
             var root = document.getElementById('QuizHeroPopup-{{ section.id }}');
@@ -669,6 +855,8 @@
             var msgLeadRequired = {{ section.settings.lead_required_msg | json }};
             var msgSendSuccess = {{ section.settings.send_success_text | json }};
             var msgSendError = {{ section.settings.send_error_text | json }};
+            var nextQuestionLabel = {{ section.settings.next_question_label | json }};
+            var seeResultsLabel = {{ section.settings.see_results_label | json }};
 
             var openBtns = root.querySelectorAll('[data-qhp-open]');
             var backdrop = root.querySelector('[data-qhp-backdrop]');
@@ -694,6 +882,8 @@
             var resPct = root.querySelector('[data-qhp-result-pct]');
             var resMsg = root.querySelector('[data-qhp-result-message]');
             var resCta = root.querySelector('[data-qhp-result-cta]');
+            var resCorrectCount = root.querySelector('[data-qhp-correct-count]');
+            var resIncorrectCount = root.querySelector('[data-qhp-incorrect-count]');
             var retakeBtn = root.querySelector('[data-qhp-retake]');
 
             // Lead UI
@@ -711,22 +901,40 @@
             var formBody = root.querySelector('[data-qhp-form-body]');
 
             var dataEl = root.querySelector('script[type="application/json"][data-qhp-questions]');
+            var defaultDataEl = root.querySelector('script[type="application/json"][data-qhp-default-questions]');
             var raw = [];
+            var defaultRaw = [];
             try { raw = JSON.parse(dataEl.textContent || '[]'); } catch(e){ raw = []; }
+            try { defaultRaw = JSON.parse(defaultDataEl.textContent || '[]'); } catch(e){ defaultRaw = []; }
 
-            // Normalize questions
-            var questions = raw.map(function(q){
-              var opts = (q.options_raw || '')
+            function normalizeOptionsRaw(value){
+              return (value || '')
                 .split('\n')
                 .map(function(s){ return (s || '').trim(); })
-                .filter(Boolean);
-              return {
-                question: q.question || '',
-                options: opts,
-                correct: Math.max(0, (parseInt(q.correct,10) || 1) - 1), // 1-based -> 0-based
-                explanation: q.explanation || ''
-              };
-            }).filter(function(q){ return q.question && q.options.length >= 2; });
+                .filter(Boolean)
+                .join('\n');
+            }
+
+            function isPlaceholderQuestion(q){
+              return (q.question || '').trim() === 'Your question here...' &&
+                normalizeOptionsRaw(q.options_raw || '') === 'Option 1\nOption 2\nOption 3\nOption 4' &&
+                (q.explanation || '').trim() === 'Explanation text...';
+            }
+
+            function normalizeQuestions(items){
+              return (items || []).map(function(q){
+                var opts = normalizeOptionsRaw(q.options_raw || '').split('\n').filter(Boolean);
+                return {
+                  question: q.question || '',
+                  options: opts,
+                  correct: Math.max(0, (parseInt(q.correct,10) || 1) - 1),
+                  explanation: q.explanation || ''
+                };
+              }).filter(function(q){ return q.question && q.options.length >= 2; });
+            }
+
+            var customRaw = (raw || []).filter(function(q){ return !isPlaceholderQuestion(q); });
+            var questions = customRaw.length ? normalizeQuestions(customRaw) : normalizeQuestions(defaultRaw);
 
             // State
             var started = false;
@@ -857,6 +1065,7 @@
 
                 renderFeedback();
                 renderOptionsState();
+                nextBtn.textContent = idx < questions.length - 1 ? nextQuestionLabel : seeResultsLabel;
                 nextBtn.classList.add('is-visible');
                 updateProgress();
               });
@@ -908,6 +1117,7 @@
 
               feedback.classList.remove('is-visible');
               nextBtn.classList.remove('is-visible');
+              nextBtn.textContent = nextQuestionLabel;
               showFeedback = false;
               selected = null;
               updateProgress();
@@ -937,6 +1147,8 @@
 
               resMsg.textContent = bucket.message || '';
               resCta.textContent = bucket.cta || '';
+              if(resCorrectCount) resCorrectCount.textContent = score;
+              if(resIncorrectCount) resIncorrectCount.textContent = Math.max(total - score, 0);
 
               quizWrap.style.display = 'none';
               resultsWrap.style.display = '';
@@ -1103,95 +1315,859 @@
 {
   "name": "Quiz Hero + Popup",
   "settings": [
-    { "type": "range", "id": "max_width", "label": "Max width", "min": 900, "max": 1600, "step": 50, "default": 1200 },
-    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 120, "step": 4, "default": 48 },
-    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 4, "default": 48 },
-
-    { "type": "color", "id": "section_bg", "label": "Section background", "default": "#f2f2e9" },
-    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#01241e" },
-    { "type": "color", "id": "text_color", "label": "Text color", "default": "#01241e" },
-
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow (optional)" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "DISCOVER THE RIGHT PATH FOR YOU" },
-    { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Not sure where to begin? Take our quick quiz to find the best starting point for your goals, interests, and experience—we’ll guide you to the path that’s right for you.</p>" },
-
-    { "type": "text", "id": "primary_btn_label", "label": "Primary button label", "default": "TAKE THE QUIZ" },
-    { "type": "color", "id": "primary_btn_bg", "label": "Primary button background", "default": "#0f828c" },
-    { "type": "color", "id": "primary_btn_text", "label": "Primary button text", "default": "#ffffff" },
-
-    { "type": "text", "id": "secondary_btn_label", "label": "Secondary button label", "default": "BOOK A FREE CALL" },
-    { "type": "url", "id": "secondary_btn_url", "label": "Secondary button link" },
-    { "type": "color", "id": "secondary_btn_bg", "label": "Secondary button background", "default": "#e0ded0" },
-    { "type": "color", "id": "secondary_btn_text", "label": "Secondary button text", "default": "#01241e" },
-
-    { "type": "text", "id": "advisor_text", "label": "Advisor text", "default": "Would like to speak to a Career Advisor?" },
-    { "type": "image_picker", "id": "image", "label": "Right image" },
-
-    { "type": "header", "content": "Popup / Quiz" },
-    { "type": "color", "id": "modal_bg", "label": "Modal background", "default": "#ffffff" },
-    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#0f828c" },
-    { "type": "color", "id": "correct_color", "label": "Correct color", "default": "#a6da18" },
-    { "type": "color", "id": "wrong_color", "label": "Wrong color", "default": "#28666e" },
-
-    { "type": "text", "id": "quiz_title", "label": "Modal title (top bar)", "default": "Fitness Quiz" },
-    { "type": "text", "id": "quiz_header", "label": "Quiz header", "default": "How Much Do You Really Know About Fitness?" },
-    { "type": "text", "id": "quiz_subheader", "label": "Quiz subheader", "default": "Take the Knowledge Challenge" },
-    { "type": "text", "id": "powered_by", "label": "Powered by text", "default": "Powered by NPTA™ Canada - National Personal Training Academy" },
-
-    { "type": "checkbox", "id": "close_resets", "label": "Reset quiz when modal is closed", "default": true },
-
-    { "type": "header", "content": "Lead capture (before quiz)" },
-    { "type": "checkbox", "id": "lead_enabled", "label": "Require name + email before quiz", "default": true },
-    { "type": "text", "id": "lead_title", "label": "Lead title", "default": "Before you start" },
-    { "type": "text", "id": "lead_desc", "label": "Lead description", "default": "Enter your details to begin the quiz." },
-    { "type": "text", "id": "lead_name_label", "label": "Name label", "default": "Name" },
-    { "type": "text", "id": "lead_email_label", "label": "Email label", "default": "Email" },
-    { "type": "text", "id": "lead_name_placeholder", "label": "Name placeholder", "default": "Your name" },
-    { "type": "text", "id": "lead_email_placeholder", "label": "Email placeholder", "default": "you@email.com" },
-    { "type": "text", "id": "lead_start_label", "label": "Start button label", "default": "Start Quiz" },
-    { "type": "text", "id": "lead_required_msg", "label": "Validation message", "default": "Please enter your name and a valid email to begin." },
-
-    { "type": "header", "content": "Send results to admin (Shopify contact email)" },
-    { "type": "checkbox", "id": "send_enabled", "label": "Enable sending results to admin", "default": true },
-    { "type": "select", "id": "send_mode", "label": "Send mode", "default": "auto", "options": [
-      { "value": "auto", "label": "Auto-send when finished" },
-      { "value": "button", "label": "Send only when button is clicked" }
-    ]},
-    { "type": "text", "id": "send_btn_label", "label": "Send button label", "default": "Send my results" },
-    { "type": "text", "id": "send_success_text", "label": "Success message", "default": "Sent! Our team received your quiz results." },
-    { "type": "text", "id": "send_error_text", "label": "Error message", "default": "Sorry, we could not send your results. Please try again." },
-
-    { "type": "header", "content": "Results CTA (button)" },
-    { "type": "text", "id": "results_cta_label", "label": "Results CTA label", "default": "Explore Certification Programs" },
-    { "type": "url", "id": "results_cta_url", "label": "Results CTA link" },
-    { "type": "text", "id": "retake_label", "label": "Retake button label", "default": "Retake Quiz" },
-
-    { "type": "header", "content": "Result Tiers (messages)" },
-    { "type": "text", "id": "tier1_title", "label": "Tier 1 title (>=90%)", "default": "🏆 Elite Fitness Knowledge!" },
-    { "type": "textarea", "id": "tier1_message", "label": "Tier 1 message", "default": "Wow! You scored in the top tier. You have what it takes to be an exceptional fitness professional." },
-    { "type": "text", "id": "tier1_cta", "label": "Tier 1 CTA line", "default": "You're already thinking like a certified trainer!" },
-
-    { "type": "text", "id": "tier2_title", "label": "Tier 2 title (>=75%)", "default": "💪 Future Trainer Material!" },
-    { "type": "textarea", "id": "tier2_message", "label": "Tier 2 message", "default": "Impressive! You have a solid foundation in fitness knowledge. With certification, you could turn this passion into a rewarding career." },
-    { "type": "text", "id": "tier2_cta", "label": "Tier 2 CTA line", "default": "Imagine what you'll know after certification!" },
-
-    { "type": "text", "id": "tier3_title", "label": "Tier 3 title (>=60%)", "default": "🎯 Fitness Enthusiast!" },
-    { "type": "textarea", "id": "tier3_message", "label": "Tier 3 message", "default": "Great job! You know more than the average gym-goer. There’s so much more to discover about the science of fitness." },
-    { "type": "text", "id": "tier3_cta", "label": "Tier 3 CTA line", "default": "Ready to fill in the knowledge gaps?" },
-
-    { "type": "text", "id": "tier4_title", "label": "Tier 4 title (<60%)", "default": "🌟 Curious Beginner!" },
-    { "type": "textarea", "id": "tier4_message", "label": "Tier 4 message", "default": "Everyone starts somewhere! Your curiosity about fitness is the first step. A whole world of knowledge is waiting for you." },
-    { "type": "text", "id": "tier4_cta", "label": "Tier 4 CTA line", "default": "Turn your curiosity into expertise!" }
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Max width",
+      "min": 900,
+      "max": 1600,
+      "step": 50,
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section background",
+      "default": "#f2f2e9"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#01241e"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#01241e"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow (optional)",
+      "default": "NPTA™ Knowledge Challenge"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How Much Do You Really Know About Fitness?"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Take the NPTA™ Knowledge Challenge and see how strong your fitness knowledge really is.</p>"
+    },
+    {
+      "type": "text",
+      "id": "primary_btn_label",
+      "label": "Primary button label",
+      "default": "Take the Quiz"
+    },
+    {
+      "type": "color",
+      "id": "primary_btn_bg",
+      "label": "Primary button background",
+      "default": "#0f828c"
+    },
+    {
+      "type": "color",
+      "id": "primary_btn_text",
+      "label": "Primary button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "secondary_btn_label",
+      "label": "Secondary button label",
+      "default": "Book a Free Call"
+    },
+    {
+      "type": "url",
+      "id": "secondary_btn_url",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "color",
+      "id": "secondary_btn_bg",
+      "label": "Secondary button background",
+      "default": "#e0ded0"
+    },
+    {
+      "type": "color",
+      "id": "secondary_btn_text",
+      "label": "Secondary button text",
+      "default": "#01241e"
+    },
+    {
+      "type": "text",
+      "id": "advisor_text",
+      "label": "Advisor text",
+      "default": "Would you like to speak to a Career Advisor?"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Right image"
+    },
+    {
+      "type": "header",
+      "content": "Popup / Quiz"
+    },
+    {
+      "type": "color",
+      "id": "modal_bg",
+      "label": "Modal background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#0f828c"
+    },
+    {
+      "type": "color",
+      "id": "correct_color",
+      "label": "Correct color",
+      "default": "#a6da18"
+    },
+    {
+      "type": "color",
+      "id": "wrong_color",
+      "label": "Wrong color",
+      "default": "#28666e"
+    },
+    {
+      "type": "text",
+      "id": "quiz_title",
+      "label": "Modal title (top bar)",
+      "default": "Fitness Quiz"
+    },
+    {
+      "type": "text",
+      "id": "quiz_header",
+      "label": "Quiz header",
+      "default": "How Much Do You Really Know About Fitness?"
+    },
+    {
+      "type": "text",
+      "id": "quiz_subheader",
+      "label": "Quiz subheader",
+      "default": "Take the NPTA™ Knowledge Challenge"
+    },
+    {
+      "type": "text",
+      "id": "powered_by",
+      "label": "Powered by text",
+      "default": "Powered by NPTA™ Canada - National Personal Training Academy"
+    },
+    {
+      "type": "text",
+      "id": "next_question_label",
+      "label": "Next question button label",
+      "default": "Next Question"
+    },
+    {
+      "type": "text",
+      "id": "see_results_label",
+      "label": "Final button label",
+      "default": "See Results"
+    },
+    {
+      "type": "checkbox",
+      "id": "close_resets",
+      "label": "Reset quiz when modal is closed",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Lead capture (before quiz)"
+    },
+    {
+      "type": "checkbox",
+      "id": "lead_enabled",
+      "label": "Require name + email before quiz",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "lead_title",
+      "label": "Lead title",
+      "default": "Before you start"
+    },
+    {
+      "type": "text",
+      "id": "lead_desc",
+      "label": "Lead description",
+      "default": "Enter your details to begin the quiz."
+    },
+    {
+      "type": "text",
+      "id": "lead_name_label",
+      "label": "Name label",
+      "default": "Name"
+    },
+    {
+      "type": "text",
+      "id": "lead_email_label",
+      "label": "Email label",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "lead_name_placeholder",
+      "label": "Name placeholder",
+      "default": "Your name"
+    },
+    {
+      "type": "text",
+      "id": "lead_email_placeholder",
+      "label": "Email placeholder",
+      "default": "you@email.com"
+    },
+    {
+      "type": "text",
+      "id": "lead_start_label",
+      "label": "Start button label",
+      "default": "Start Quiz"
+    },
+    {
+      "type": "text",
+      "id": "lead_required_msg",
+      "label": "Validation message",
+      "default": "Please enter your name and a valid email to begin."
+    },
+    {
+      "type": "header",
+      "content": "Send results to admin (Shopify contact email)"
+    },
+    {
+      "type": "checkbox",
+      "id": "send_enabled",
+      "label": "Enable sending results to admin",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "send_mode",
+      "label": "Send mode",
+      "default": "auto",
+      "options": [
+        {
+          "value": "auto",
+          "label": "Auto-send when finished"
+        },
+        {
+          "value": "button",
+          "label": "Send only when button is clicked"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "send_btn_label",
+      "label": "Send button label",
+      "default": "Send my results"
+    },
+    {
+      "type": "text",
+      "id": "send_success_text",
+      "label": "Success message",
+      "default": "Sent! Our team received your quiz results."
+    },
+    {
+      "type": "text",
+      "id": "send_error_text",
+      "label": "Error message",
+      "default": "Sorry, we could not send your results. Please try again."
+    },
+    {
+      "type": "header",
+      "content": "Results content"
+    },
+    {
+      "type": "text",
+      "id": "results_breakdown_heading",
+      "label": "Breakdown heading",
+      "default": "Your Results Breakdown:"
+    },
+    {
+      "type": "text",
+      "id": "results_correct_label",
+      "label": "Correct label",
+      "default": "Correct"
+    },
+    {
+      "type": "text",
+      "id": "results_incorrect_label",
+      "label": "Incorrect label",
+      "default": "To Learn"
+    },
+    {
+      "type": "text",
+      "id": "results_promo_title",
+      "label": "Promo title",
+      "default": "Ready to Become a Certified Fitness Professional?"
+    },
+    {
+      "type": "textarea",
+      "id": "results_promo_text",
+      "label": "Promo description",
+      "default": "NPTA offers comprehensive certification programs that will take your knowledge to the next level. Whether you want to launch your own fitness business or work with established gyms, we will give you the tools, knowledge, and credentials to succeed."
+    },
+    {
+      "type": "textarea",
+      "id": "results_promo_points",
+      "label": "Promo bullet points (one per line)",
+      "default": "Nationally recognized certification\nEvidence-based curriculum\nBusiness and entrepreneurship training\nOngoing support and continuing education"
+    },
+    {
+      "type": "header",
+      "content": "Results CTA (button)"
+    },
+    {
+      "type": "text",
+      "id": "results_cta_label",
+      "label": "Results CTA label",
+      "default": "Explore NPTA Certification Programs"
+    },
+    {
+      "type": "url",
+      "id": "results_cta_url",
+      "label": "Results CTA link"
+    },
+    {
+      "type": "text",
+      "id": "retake_label",
+      "label": "Retake button label",
+      "default": "Retake Quiz"
+    },
+    {
+      "type": "header",
+      "content": "Result Tiers (messages)"
+    },
+    {
+      "type": "text",
+      "id": "tier1_title",
+      "label": "Tier 1 title (>=90%)",
+      "default": "🏆 Elite Fitness Knowledge!"
+    },
+    {
+      "type": "textarea",
+      "id": "tier1_message",
+      "label": "Tier 1 message",
+      "default": "Wow! You scored in the top tier. You have what it takes to be an exceptional fitness professional. Your deep understanding of exercise science shows you are ready to take the next step."
+    },
+    {
+      "type": "text",
+      "id": "tier1_cta",
+      "label": "Tier 1 CTA line",
+      "default": "You're already thinking like a certified trainer!"
+    },
+    {
+      "type": "text",
+      "id": "tier2_title",
+      "label": "Tier 2 title (>=75%)",
+      "default": "💪 Future Trainer Material!"
+    },
+    {
+      "type": "textarea",
+      "id": "tier2_message",
+      "label": "Tier 2 message",
+      "default": "Impressive! You have a solid foundation in fitness knowledge. With professional training and certification, you could turn this passion into a rewarding career helping others achieve their goals."
+    },
+    {
+      "type": "text",
+      "id": "tier2_cta",
+      "label": "Tier 2 CTA line",
+      "default": "Imagine what you'll know after NPTA™ certification!"
+    },
+    {
+      "type": "text",
+      "id": "tier3_title",
+      "label": "Tier 3 title (>=60%)",
+      "default": "🎯 Fitness Enthusiast!"
+    },
+    {
+      "type": "textarea",
+      "id": "tier3_message",
+      "label": "Tier 3 message",
+      "default": "Great job! You know more than the average gym-goer. There is so much more to discover about the science of fitness. The questions you missed reveal exciting areas you could master with proper education."
+    },
+    {
+      "type": "text",
+      "id": "tier3_cta",
+      "label": "Tier 3 CTA line",
+      "default": "Ready to fill in the knowledge gaps?"
+    },
+    {
+      "type": "text",
+      "id": "tier4_title",
+      "label": "Tier 4 title (<60%)",
+      "default": "🌟 Curious Beginner!"
+    },
+    {
+      "type": "textarea",
+      "id": "tier4_message",
+      "label": "Tier 4 message",
+      "default": "Everyone starts somewhere! Your curiosity about fitness is the first step. The science behind effective training is fascinating, and there is a whole world of knowledge waiting for you to explore."
+    },
+    {
+      "type": "text",
+      "id": "tier4_cta",
+      "label": "Tier 4 CTA line",
+      "default": "Turn your curiosity into expertise!"
+    }
   ],
   "blocks": [
     {
       "type": "question",
-      "name": "Question",
+      "name": "Custom Question",
       "settings": [
-        { "type": "textarea", "id": "question", "label": "Question", "default": "Your question here..." },
-        { "type": "textarea", "id": "options", "label": "Options (one per line)", "default": "Option 1\nOption 2\nOption 3\nOption 4" },
-        { "type": "range", "id": "correct_option", "label": "Correct option number (1 = first)", "min": 1, "max": 10, "step": 1, "default": 1 },
-        { "type": "textarea", "id": "explanation", "label": "Explanation shown after answering", "default": "Explanation text..." }
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "Your question here..."
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "Option 1\nOption 2\nOption 3\nOption 4"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 1
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "Explanation text..."
+        }
+      ]
+    },
+    {
+      "type": "question_1",
+      "name": "Default Question 1",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "Which energy system is primarily used during the first 10 seconds of high-intensity exercise?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "Aerobic system\nATP-PCr (phosphagen) system\nGlycolytic system\nOxidative system"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "The ATP-PCr system provides immediate energy for short bursts of intense activity (0-10 seconds). This is why sprinters and powerlifters rely heavily on this system!"
+        }
+      ]
+    },
+    {
+      "type": "question_2",
+      "name": "Default Question 2",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "What is the recommended rest time between sets for muscle hypertrophy (growth)?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "15-30 seconds\n30-60 seconds\n60-90 seconds\n3-5 minutes"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 3
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "For muscle hypertrophy, 60-90 seconds of rest allows partial recovery while maintaining metabolic stress, which is key for muscle growth. Shorter rest is for endurance, longer rest is for strength/power."
+        }
+      ]
+    },
+    {
+      "type": "question_3",
+      "name": "Default Question 3",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "Which muscle group is NOT part of the core stabilizers?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "Transverse abdominis\nMultifidus\nBiceps femoris\nPelvic floor muscles"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 3
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "The biceps femoris is part of the hamstring group, not a core stabilizer. The core includes the transverse abdominis, multifidus, diaphragm, and pelvic floor - all crucial for spinal stability!"
+        }
+      ]
+    },
+    {
+      "type": "question_4",
+      "name": "Default Question 4",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "What percentage of total daily calories should come from protein for general fitness?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "5-10%\n10-15%\n15-30%\n40-50%"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 3
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "Most fitness professionals recommend 15-30% of daily calories from protein. This supports muscle repair, satiety, and overall health without going overboard."
+        }
+      ]
+    },
+    {
+      "type": "question_5",
+      "name": "Default Question 5",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "Which training principle states that adaptations are specific to the type of training performed?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "Progressive overload\nReversibility\nSpecificity (SAID principle)\nIndividuality"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 3
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "The SAID principle (Specific Adaptation to Imposed Demands) means your body adapts specifically to how you train it. Want to run faster? Train speed. Want bigger muscles? Train hypertrophy!"
+        }
+      ]
+    },
+    {
+      "type": "question_6",
+      "name": "Default Question 6",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "True or False: You can spot-reduce fat from specific body areas through targeted exercises."
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "True - doing crunches burns belly fat\nFalse - fat loss occurs systemically\nTrue - but only with high reps\nTrue - for women but not men"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "This is one of the biggest fitness myths! Spot reduction is not possible. Fat loss occurs throughout the body based on genetics, hormones, and overall calorie deficit. Targeted exercises build muscle but do not specifically burn fat in that area."
+        }
+      ]
+    },
+    {
+      "type": "question_7",
+      "name": "Default Question 7",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "What is the primary movement pattern in a deadlift?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "Squat pattern\nHinge pattern\nPush pattern\nLunge pattern"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "The deadlift is a hip hinge pattern, where the movement is dominated by hip extension (glutes and hamstrings). This is different from a squat, which emphasizes knee flexion and extension."
+        }
+      ]
+    },
+    {
+      "type": "question_8",
+      "name": "Default Question 8",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "Which adaptation occurs FIRST when beginning a resistance training program?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "Muscle hypertrophy\nIncreased capillary density\nNeural adaptations\nBone density improvements"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 3
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "Neural adaptations happen first (within 2-8 weeks)! Your nervous system learns to recruit muscle fibers more efficiently. Muscle growth typically follows after 6-8 weeks of consistent training."
+        }
+      ]
+    },
+    {
+      "type": "question_9",
+      "name": "Default Question 9",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "What does RPE stand for in fitness training?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "Reps Per Exercise\nRate of Perceived Exertion\nResistance Power Efficiency\nRest Period Emphasis"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "RPE (Rate of Perceived Exertion) is a subjective scale (usually 1-10) used to gauge exercise intensity. It is a valuable tool for trainers to monitor and adjust client workouts!"
+        }
+      ]
+    },
+    {
+      "type": "question_10",
+      "name": "Default Question 10",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "Which of the following is a contraindication for performing a Valsalva maneuver?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "Advanced lifters doing maximal lifts\nIndividuals with high blood pressure\nAthletes during explosive movements\nPowerlifters during competition"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "The Valsalva maneuver (holding breath while bearing down) dramatically increases blood pressure. It is contraindicated for people with hypertension or cardiovascular issues, even though it can help stabilize the spine in healthy lifters."
+        }
+      ]
+    },
+    {
+      "type": "question_11",
+      "name": "Default Question 11",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "What is the recommended weekly aerobic exercise duration for general health according to health guidelines?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "75 minutes of moderate intensity\n150 minutes of moderate intensity\n300 minutes of moderate intensity\n60 minutes of moderate intensity"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "The standard recommendation is 150 minutes (2.5 hours) of moderate-intensity aerobic activity per week, or 75 minutes of vigorous-intensity activity. As a trainer, you will help clients achieve this goal!"
+        }
+      ]
+    },
+    {
+      "type": "question_12",
+      "name": "Default Question 12",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "Which fitness assessment would be MOST appropriate for measuring upper body muscular endurance?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "1-rep max bench press\nPush-up test to fatigue\nGrip strength test\nVertical jump test"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "The push-up test to fatigue measures muscular endurance (how many reps you can perform). A 1-rep max tests strength, grip strength tests grip strength, and vertical jump tests power. Understanding these distinctions is crucial for trainers!"
+        }
       ]
     }
   ],
@@ -1199,9 +2175,42 @@
     {
       "name": "Quiz Hero + Popup",
       "blocks": [
-        { "type": "question" },
-        { "type": "question" },
-        { "type": "question" }
+        {
+          "type": "question_1"
+        },
+        {
+          "type": "question_2"
+        },
+        {
+          "type": "question_3"
+        },
+        {
+          "type": "question_4"
+        },
+        {
+          "type": "question_5"
+        },
+        {
+          "type": "question_6"
+        },
+        {
+          "type": "question_7"
+        },
+        {
+          "type": "question_8"
+        },
+        {
+          "type": "question_9"
+        },
+        {
+          "type": "question_10"
+        },
+        {
+          "type": "question_11"
+        },
+        {
+          "type": "question_12"
+        }
       ]
     }
   ]
