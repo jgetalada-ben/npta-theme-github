@@ -746,7 +746,7 @@
           <input type="hidden" name="utf8" value="✓">
           <input type="hidden" name="contact[name]" data-qhp-form-name>
           <input type="hidden" name="contact[email]" data-qhp-form-email>
-          <input type="hidden" name="contact[subject]" value="Quiz Result Submission">
+          <input type="hidden" name="contact[subject]" data-qhp-form-subject value="Quiz Result Submission">
           <textarea name="contact[body]" data-qhp-form-body></textarea>
 
           <!-- Honeypot -->
@@ -851,6 +851,11 @@
             var leadEnabled = {{ section.settings.lead_enabled | json }};
             var sendEnabled = {{ section.settings.send_enabled | json }};
             var sendMode = {{ section.settings.send_mode | json }}; // "auto" or "button"
+            var sendProvider = {{ section.settings.send_provider | json }}; // "shopify_contact" or "webhook"
+            var sendToEmail = {{ section.settings.send_to_email | json }};
+            var sendCcEmails = {{ section.settings.send_cc_emails | json }};
+            var sendSubject = {{ section.settings.send_subject | json }};
+            var sendWebhookUrl = {{ section.settings.send_webhook_url | json }};
 
             var msgLeadRequired = {{ section.settings.lead_required_msg | json }};
             var msgSendSuccess = {{ section.settings.send_success_text | json }};
@@ -898,6 +903,7 @@
             var submitForm = root.querySelector('[data-qhp-submit-form]');
             var formName = root.querySelector('[data-qhp-form-name]');
             var formEmail = root.querySelector('[data-qhp-form-email]');
+            var formSubject = root.querySelector('[data-qhp-form-subject]');
             var formBody = root.querySelector('[data-qhp-form-body]');
 
             var dataEl = root.querySelector('script[type="application/json"][data-qhp-questions]');
@@ -1136,6 +1142,74 @@
               return { title: {{ section.settings.tier4_title | json }}, message: {{ section.settings.tier4_message | json }}, cta: {{ section.settings.tier4_cta | json }} };
             }
 
+            function splitEmails(value){
+              return String(value || '')
+                .split(/[\n,;]/)
+                .map(function(item){ return item.trim(); })
+                .filter(Boolean);
+            }
+
+            function buildResultPayload(){
+              var total = questions.length;
+              var pct = total ? Math.round((score / total) * 100) : 0;
+              var bucket = getResultBucket(pct);
+
+              return {
+                quiz_title: {{ section.settings.quiz_title | json }},
+                page_url: window.location.href,
+                sent_via: sendProvider,
+                to: splitEmails(sendToEmail),
+                cc: splitEmails(sendCcEmails),
+                subject: sendSubject || 'Quiz Result Submission',
+                participant: {
+                  name: lead.name || '',
+                  email: lead.email || ''
+                },
+                result: {
+                  score: score,
+                  total_questions: total,
+                  percentage: pct,
+                  tier_title: bucket.title || '',
+                  tier_message: bucket.message || '',
+                  tier_cta: bucket.cta || ''
+                },
+                breakdown_text: correctByQ.map(function(isCorrect, i){
+                  return 'Q' + (i + 1) + ': ' + (isCorrect ? 'Correct' : 'Incorrect');
+                }).join('\n'),
+                answers: questions.map(function(question, i){
+                  return {
+                    index: i + 1,
+                    question: question.question,
+                    correct_option: question.options[question.correct] || '',
+                    is_correct: !!correctByQ[i]
+                  };
+                })
+              };
+            }
+
+            function buildResultBody(payload){
+              return [
+                payload.subject || 'Quiz Result Submission',
+                '-----------------------',
+                'Send To: ' + (payload.to && payload.to.length ? payload.to.join(', ') : 'Store contact email'),
+                'CC: ' + (payload.cc && payload.cc.length ? payload.cc.join(', ') : 'None'),
+                'Name: ' + (payload.participant.name || ''),
+                'Email: ' + (payload.participant.email || ''),
+                'Score: ' + payload.result.score + '/' + payload.result.total_questions + ' (' + payload.result.percentage + '%)',
+                'Result Tier: ' + (payload.result.tier_title || ''),
+                'Page URL: ' + payload.page_url,
+                '',
+                'Breakdown:',
+                payload.breakdown_text || '',
+                '',
+                'Message:',
+                payload.result.tier_message || '',
+                '',
+                'CTA:',
+                payload.result.tier_cta || ''
+              ].join('\n');
+            }
+
             function showResults(){
               var total = questions.length;
               var pct = total ? Math.round((score / total) * 100) : 0;
@@ -1233,29 +1307,40 @@
               if(sendBtn) sendBtn.disabled = true;
               if(sendStatus) sendStatus.textContent = 'Sending results…';
 
-              var total = questions.length;
-              var pct = total ? Math.round((score / total) * 100) : 0;
-              var bucket = getResultBucket(pct);
-
-              var breakdown = correctByQ.map(function(isCorrect, i){
-                return 'Q' + (i+1) + ': ' + (isCorrect ? 'Correct' : 'Incorrect');
-              }).join('\n');
-
-              var body =
-                'Quiz Results Submission\n' +
-                '-----------------------\n' +
-                'Name: ' + (lead.name || '') + '\n' +
-                'Email: ' + (lead.email || '') + '\n' +
-                'Score: ' + score + '/' + total + ' (' + pct + '%)\n' +
-                'Result Tier: ' + (bucket.title || '') + '\n' +
-                'Page URL: ' + window.location.href + '\n' +
-                '\nBreakdown:\n' + breakdown + '\n' +
-                '\nMessage:\n' + (bucket.message || '') + '\n' +
-                '\nCTA:\n' + (bucket.cta || '') + '\n';
+              var payloadData = buildResultPayload();
+              var body = buildResultBody(payloadData);
 
               try{
+                if(sendProvider === 'webhook'){
+                  if(!sendWebhookUrl){
+                    throw new Error('Missing webhook URL');
+                  }
+
+                  var webhookResp = await fetch(sendWebhookUrl, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Accept': 'application/json, text/plain, */*'
+                    },
+                    body: JSON.stringify(payloadData)
+                  });
+
+                  if(!webhookResp || !webhookResp.ok){
+                    throw new Error('Webhook request failed');
+                  }
+
+                  sent = true;
+                  if(sendStatus) sendStatus.textContent = msgSendSuccess || 'Sent! Our team received your quiz results.';
+                  return;
+                }
+
+                if(!payloadData.participant.email){
+                  throw new Error('Participant email is required for Shopify contact delivery');
+                }
+
                 if(formName) formName.value = lead.name || 'Quiz Participant';
                 if(formEmail) formEmail.value = lead.email || '';
+                if(formSubject) formSubject.value = payloadData.subject || 'Quiz Result Submission';
                 if(formBody) formBody.value = body;
 
                 var fd = new FormData(submitForm);
@@ -1272,8 +1357,7 @@
                   sent = true;
                   if(sendStatus) sendStatus.textContent = msgSendSuccess || 'Sent! Our team received your quiz results.';
                 } else {
-                  if(sendBtn) sendBtn.disabled = false;
-                  if(sendStatus) sendStatus.textContent = msgSendError || 'Sorry, we could not send your results. Please try again.';
+                  throw new Error('Shopify contact request failed');
                 }
               } catch(err){
                 if(sendBtn) sendBtn.disabled = false;
@@ -1560,7 +1644,11 @@
     },
     {
       "type": "header",
-      "content": "Send results to admin (Shopify contact email)"
+      "content": "Send results"
+    },
+    {
+      "type": "paragraph",
+      "content": "Shopify contact delivery sends to your store contact email. To use custom To and CC recipients, switch the delivery method to Webhook / custom endpoint and add a webhook URL that accepts POST requests."
     },
     {
       "type": "checkbox",
@@ -1583,6 +1671,43 @@
           "label": "Send only when button is clicked"
         }
       ]
+    },
+    {
+      "type": "select",
+      "id": "send_provider",
+      "label": "Delivery method",
+      "default": "shopify_contact",
+      "options": [
+        {
+          "value": "shopify_contact",
+          "label": "Shopify contact email"
+        },
+        {
+          "value": "webhook",
+          "label": "Webhook / custom endpoint"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "send_to_email",
+      "label": "Send results to (To)"
+    },
+    {
+      "type": "textarea",
+      "id": "send_cc_emails",
+      "label": "CC email(s)"
+    },
+    {
+      "type": "text",
+      "id": "send_subject",
+      "label": "Email subject",
+      "default": "Quiz Result Submission"
+    },
+    {
+      "type": "url",
+      "id": "send_webhook_url",
+      "label": "Webhook URL"
     },
     {
       "type": "text",
