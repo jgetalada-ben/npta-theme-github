@@ -109,6 +109,10 @@
         "filter_type": "vertical",
         "enable_sorting": true,
         "columns_mobile": "1",
+        "custom_bundle_button_label": "Speak to an advisor",
+        "custom_bundle_button_url": "https://app.npta.ca/widget/bookings/jessica-npta-calendar",
+        "custom_bundle_button_action": "popup",
+        "custom_bundle_popup_heading": "Book a call",
         "padding_top": 36,
         "padding_bottom": 92
       }
