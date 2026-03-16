@@ -156,7 +156,7 @@
         "included_item_T6U3iV"
       ],
       "custom_css": [
-        ".iwt2__badge {bottom: 15px;top:auto}"
+        ".iwt2__badge {bottom: 15px; top: auto;}"
       ],
       "name": "Image with text V2",
       "settings": {
@@ -171,7 +171,7 @@
         "reg_label": "REG PRICE:",
         "reg_price": "4,899",
         "button_label": "LEARN MORE",
-        "button_link": "https://www.npta.ca/products/performance-wellness-bundle",
+        "button_link": "https://www.npta.ca/products/npta-elite-bundle",
         "button_align": "left",
         "bg_color": "#ffffff",
         "text_color": "#0b2b24",
