@@ -11,10 +11,11 @@
   "sections": {
     "video_v2_iHaPQP": {
       "type": "video-v2",
-      "disabled": true,
       "custom_css": [
         ".vid2__content {align-content: end;}",
         ".vid2__btn {font-size: clamp(14px, 2vw, 20px);}",
+        ".vid2__title {font-family: \"ProximaNova\"; font-weight: bolder;}",
+        ".vid2__promo {letter-spacing: 2px; font-weight: 500;}",
         "@media screen and (min-width: 1700px) {.vid2__media {object-position: top; }}"
       ],
       "name": "Video v2",
@@ -91,6 +92,7 @@
         "rotator_item_Wwxyn4",
         "rotator_item_jKDfnP"
       ],
+      "disabled": true,
       "custom_css": [
         ".vid2__content {align-content: end;}",
         "@media screen and (min-width: 1700px) {.vid2__media {object-position: top; }}"
