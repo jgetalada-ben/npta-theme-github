@@ -722,60 +722,26 @@
 
 {% render 'ghl-finance-modal' %}
 
-<script>
+  <script>
 (function(){
   const LINK_SEL = '[data-elective-financing-link]';
   const GHL_FORM_ID = 'jbeQYeHWMI1dM9tX0mYF';
   const GHL_BASE = `https://app.npta.ca/widget/form/${GHL_FORM_ID}`;
 
-  const MODAL_ID = 'ghlFinanceModal';
-  const MOUNT_ID = 'ghlFormMount';
-
-  const TARGET_KEY = 'npta_finance_target';
-  const SUBMITTED_KEY = 'npta_finance_submitted_ts';
-
-  const SUBMIT_TTL_DAYS = 0;
-
-  function getModal(){ return document.getElementById(MODAL_ID); }
-  function getMount(){ return document.getElementById(MOUNT_ID); }
-
   function openModal(){
-    const m = getModal();
+    const m = document.getElementById('ghlFinanceModal');
     if(!m) return;
     m.hidden = false;
     m.setAttribute('aria-hidden','false');
     document.body.style.overflow = 'hidden';
   }
 
-  function closeModal(opts){
-    const m = getModal();
+  function closeModal(){
+    const m = document.getElementById('ghlFinanceModal');
     if(!m) return;
-
     m.hidden = true;
     m.setAttribute('aria-hidden','true');
     document.body.style.overflow = '';
-
-    const mount = getMount();
-    if (mount && (!opts || opts.clear !== false)) mount.innerHTML = '';
-  }
-
-  function isSubmitted(){
-    try {
-      const v = localStorage.getItem(SUBMITTED_KEY);
-      if (!v) return false;
-
-      const ts = parseInt(v, 10);
-      if (!Number.isFinite(ts)) return true;
-
-      if (SUBMIT_TTL_DAYS && SUBMIT_TTL_DAYS > 0) {
-        const ttlMs = SUBMIT_TTL_DAYS * 24 * 60 * 60 * 1000;
-        if (Date.now() - ts > ttlMs) return false;
-      }
-
-      return true;
-    } catch(e){
-      return false;
-    }
   }
 
   function toQuery(obj){
@@ -785,6 +751,7 @@
       .join('&');
   }
 
+  // Build Elective checkout target URL
   function buildTarget(href, a){
     const u = new URL(href, window.location.origin);
     const q = u.searchParams;
@@ -799,9 +766,11 @@
     return u.toString();
   }
 
+  // Build the GHL iframe URL (includes stored first-touch UTMs for hidden fields)
   function buildFormSrc(a){
     const attr = (window.__nptaGetAttribution && window.__nptaGetAttribution()) || {};
 
+    // IMPORTANT: these key names match your hidden fields exactly
     const utm = {
       utm_source: attr.utm_source || '',
       utm_medium: attr.utm_medium || '',
@@ -821,7 +790,7 @@
   }
 
   function injectIframe(src){
-    const mount = getMount();
+    const mount = document.getElementById('ghlFormMount');
     if (!mount) return;
 
     mount.innerHTML = '';
@@ -834,56 +803,37 @@
     mount.appendChild(iframe);
   }
 
-  function wire(root){
-    root = root || document;
-    const links = root.querySelectorAll(LINK_SEL);
-    if (!links.length) return;
+  function wire(){
+    const a = document.querySelector(LINK_SEL);
+    if (!a || a.dataset.ghlWired === '1') return;
+    a.dataset.ghlWired = '1';
 
-    links.forEach((a) => {
-      if (a.dataset.ghlWired === '1') return;
-      a.dataset.ghlWired = '1';
+    a.addEventListener('click', function(ev){
+      ev.preventDefault();
+      ev.stopPropagation();
 
-      a.addEventListener('click', function(ev){
-        ev.preventDefault();
-        ev.stopPropagation();
+      // Save final checkout target
+      const targetUrl = buildTarget(a.getAttribute('href'), a);
+      sessionStorage.setItem('npta_finance_target', targetUrl);
 
-        const targetUrl = buildTarget(a.getAttribute('href'), a);
-        sessionStorage.setItem(TARGET_KEY, targetUrl);
-
-        if (isSubmitted()) {
-          window.location.href = targetUrl;
-          return;
-        }
-
-        const src = buildFormSrc(a);
-        injectIframe(src);
-        openModal();
-      }, { capture:true });
-    });
+      // Load iframe with attribution params
+      const src = buildFormSrc(a);
+      injectIframe(src);
+      openModal();
+    }, { capture:true });
   }
 
+  // Close modal (button/overlay)
   document.addEventListener('click', function(e){
-    if (e.target.matches('[data-close-ghl], [data-close-ghl] *')) closeModal({ clear:true });
+    if (e.target.matches('[data-close-ghl], [data-close-ghl] *')) closeModal();
   });
 
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape') closeModal({ clear:true });
-  });
-
-  document.addEventListener('DOMContentLoaded', function(){
-    closeModal({ clear:true });
-    wire(document);
-  });
-  window.addEventListener('pageshow', function(){
-    closeModal({ clear:true });
-  });
-
-  document.addEventListener('shopify:section:load', function(e){
-    closeModal({ clear:true });
-    wire(e.target);
-  });
+  document.addEventListener('DOMContentLoaded', wire);
+  document.addEventListener('shopify:section:load', wire);
 })();
 </script>
+
+
 
 {% schema %}
 {
