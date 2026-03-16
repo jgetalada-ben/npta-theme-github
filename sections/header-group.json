@@ -14,8 +14,17 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
+        "message_XtU6jK": {
+          "type": "message",
+          "settings": {
+            "text": "<p>🌸  SPRING INTO ACTION Sale  - <span style=\"text-decoration:underline\">UP TO 50% Discount now</span>  🌸</p>",
+            "link_label": "Shop now",
+            "link_url": ""
+          }
+        },
         "message_7M8RCx": {
           "type": "message",
+          "disabled": true,
           "settings": {
             "text": "<p>🌸  SPRING RESET Flash Sale  - <a href=\"https://www.npta.ca/products/performance-wellness-bundle\" title=\"Performance Wellness Bundle\"><span style=\"text-decoration:underline\">SAVE $2,899 now</span></a>  🌸</p>",
             "link_label": "Shop now",
@@ -24,6 +33,7 @@
         }
       },
       "block_order": [
+        "message_XtU6jK",
         "message_7M8RCx"
       ],
       "custom_css": [
