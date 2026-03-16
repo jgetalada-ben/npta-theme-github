@@ -722,26 +722,43 @@
 
 {% render 'ghl-finance-modal' %}
 
-  <script>
+<script>
 (function(){
   const LINK_SEL = '[data-elective-financing-link]';
   const GHL_FORM_ID = 'jbeQYeHWMI1dM9tX0mYF';
   const GHL_BASE = `https://app.npta.ca/widget/form/${GHL_FORM_ID}`;
 
+  const MODAL_ID = 'ghlFinanceModal';
+  const MOUNT_ID = 'ghlFormMount';
+
+  const TARGET_KEY = 'npta_finance_target';
+  const SUBMITTED_KEY = 'npta_finance_submitted';
+
+  function getModal(){ return document.getElementById(MODAL_ID); }
+  function getMount(){ return document.getElementById(MOUNT_ID); }
+
   function openModal(){
-    const m = document.getElementById('ghlFinanceModal');
+    const m = getModal();
     if(!m) return;
     m.hidden = false;
     m.setAttribute('aria-hidden','false');
     document.body.style.overflow = 'hidden';
   }
 
-  function closeModal(){
-    const m = document.getElementById('ghlFinanceModal');
+  function closeModal(opts){
+    const m = getModal();
     if(!m) return;
+
     m.hidden = true;
     m.setAttribute('aria-hidden','true');
     document.body.style.overflow = '';
+
+    const mount = getMount();
+    if (mount && (!opts || opts.clear !== false)) mount.innerHTML = '';
+  }
+
+  function hardResetModal(){
+    closeModal({ clear: true });
   }
 
   function toQuery(obj){
@@ -751,7 +768,6 @@
       .join('&');
   }
 
-  // Build Elective checkout target URL
   function buildTarget(href, a){
     const u = new URL(href, window.location.origin);
     const q = u.searchParams;
@@ -766,11 +782,9 @@
     return u.toString();
   }
 
-  // Build the GHL iframe URL (includes stored first-touch UTMs for hidden fields)
   function buildFormSrc(a){
     const attr = (window.__nptaGetAttribution && window.__nptaGetAttribution()) || {};
 
-    // IMPORTANT: these key names match your hidden fields exactly
     const utm = {
       utm_source: attr.utm_source || '',
       utm_medium: attr.utm_medium || '',
@@ -790,7 +804,7 @@
   }
 
   function injectIframe(src){
-    const mount = document.getElementById('ghlFormMount');
+    const mount = getMount();
     if (!mount) return;
 
     mount.innerHTML = '';
@@ -803,37 +817,70 @@
     mount.appendChild(iframe);
   }
 
-  function wire(){
-    const a = document.querySelector(LINK_SEL);
-    if (!a || a.dataset.ghlWired === '1') return;
-    a.dataset.ghlWired = '1';
+  function wire(root){
+    root = root || document;
 
-    a.addEventListener('click', function(ev){
-      ev.preventDefault();
-      ev.stopPropagation();
+    const links = root.querySelectorAll(LINK_SEL);
+    if (!links.length) return;
 
-      // Save final checkout target
-      const targetUrl = buildTarget(a.getAttribute('href'), a);
-      sessionStorage.setItem('npta_finance_target', targetUrl);
+    links.forEach((a) => {
+      if (a.dataset.ghlWired === '1') return;
+      a.dataset.ghlWired = '1';
 
-      // Load iframe with attribution params
-      const src = buildFormSrc(a);
-      injectIframe(src);
-      openModal();
-    }, { capture:true });
+      a.addEventListener('click', function(ev){
+        ev.preventDefault();
+        ev.stopPropagation();
+
+        const targetUrl = buildTarget(a.getAttribute('href'), a);
+        sessionStorage.setItem(TARGET_KEY, targetUrl);
+
+        const src = buildFormSrc(a);
+        injectIframe(src);
+        openModal();
+      }, { capture:true });
+    });
   }
 
-  // Close modal (button/overlay)
   document.addEventListener('click', function(e){
-    if (e.target.matches('[data-close-ghl], [data-close-ghl] *')) closeModal();
+    if (e.target.matches('[data-close-ghl], [data-close-ghl] *')) closeModal({ clear:true });
   });
 
-  document.addEventListener('DOMContentLoaded', wire);
-  document.addEventListener('shopify:section:load', wire);
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeModal({ clear:true });
+  });
+
+  document.addEventListener('DOMContentLoaded', function(){
+    hardResetModal();
+    wire(document);
+  });
+
+  window.addEventListener('pageshow', function(){
+    hardResetModal();
+  });
+
+  window.addEventListener('storage', function(e){
+    if (e.key === SUBMITTED_KEY && e.newValue) {
+      closeModal({ clear:true });
+      try { sessionStorage.removeItem(TARGET_KEY); } catch(_) {}
+    }
+  });
+
+  window.addEventListener('message', function(e){
+    if (!e || !e.data) return;
+    if (e.origin !== window.location.origin) return;
+
+    if (e.data && e.data.type === 'npta_finance_submitted') {
+      closeModal({ clear:true });
+      try { sessionStorage.removeItem(TARGET_KEY); } catch(_) {}
+    }
+  });
+
+  document.addEventListener('shopify:section:load', function(e){
+    hardResetModal();
+    wire(e.target);
+  });
 })();
 </script>
-
-
 
 {% schema %}
 {
