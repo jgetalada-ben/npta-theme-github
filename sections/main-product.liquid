@@ -732,7 +732,9 @@
   const MOUNT_ID = 'ghlFormMount';
 
   const TARGET_KEY = 'npta_finance_target';
-  const SUBMITTED_KEY = 'npta_finance_submitted';
+  const SUBMITTED_KEY = 'npta_finance_submitted_ts';
+
+  const SUBMIT_TTL_DAYS = 0;
 
   function getModal(){ return document.getElementById(MODAL_ID); }
   function getMount(){ return document.getElementById(MOUNT_ID); }
@@ -757,8 +759,23 @@
     if (mount && (!opts || opts.clear !== false)) mount.innerHTML = '';
   }
 
-  function hardResetModal(){
-    closeModal({ clear: true });
+  function isSubmitted(){
+    try {
+      const v = localStorage.getItem(SUBMITTED_KEY);
+      if (!v) return false;
+
+      const ts = parseInt(v, 10);
+      if (!Number.isFinite(ts)) return true;
+
+      if (SUBMIT_TTL_DAYS && SUBMIT_TTL_DAYS > 0) {
+        const ttlMs = SUBMIT_TTL_DAYS * 24 * 60 * 60 * 1000;
+        if (Date.now() - ts > ttlMs) return false;
+      }
+
+      return true;
+    } catch(e){
+      return false;
+    }
   }
 
   function toQuery(obj){
@@ -819,7 +836,6 @@
 
   function wire(root){
     root = root || document;
-
     const links = root.querySelectorAll(LINK_SEL);
     if (!links.length) return;
 
@@ -833,6 +849,11 @@
 
         const targetUrl = buildTarget(a.getAttribute('href'), a);
         sessionStorage.setItem(TARGET_KEY, targetUrl);
+
+        if (isSubmitted()) {
+          window.location.href = targetUrl;
+          return;
+        }
 
         const src = buildFormSrc(a);
         injectIframe(src);
@@ -850,33 +871,15 @@
   });
 
   document.addEventListener('DOMContentLoaded', function(){
-    hardResetModal();
+    closeModal({ clear:true });
     wire(document);
   });
-
   window.addEventListener('pageshow', function(){
-    hardResetModal();
-  });
-
-  window.addEventListener('storage', function(e){
-    if (e.key === SUBMITTED_KEY && e.newValue) {
-      closeModal({ clear:true });
-      try { sessionStorage.removeItem(TARGET_KEY); } catch(_) {}
-    }
-  });
-
-  window.addEventListener('message', function(e){
-    if (!e || !e.data) return;
-    if (e.origin !== window.location.origin) return;
-
-    if (e.data && e.data.type === 'npta_finance_submitted') {
-      closeModal({ clear:true });
-      try { sessionStorage.removeItem(TARGET_KEY); } catch(_) {}
-    }
+    closeModal({ clear:true });
   });
 
   document.addEventListener('shopify:section:load', function(e){
-    hardResetModal();
+    closeModal({ clear:true });
     wire(e.target);
   });
 })();
