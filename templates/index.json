@@ -14,6 +14,7 @@
       "disabled": true,
       "custom_css": [
         ".vid2__content {align-content: end;}",
+        ".vid2__btn {font-size: clamp(14px, 2vw, 20px);}",
         "@media screen and (min-width: 1700px) {.vid2__media {object-position: top; }}"
       ],
       "name": "Video v2",
