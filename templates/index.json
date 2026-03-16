@@ -52,7 +52,7 @@
         "show_btn1": true,
         "btns_margin_top": "0",
         "btn1_label": "START TODAY",
-        "btn1_link": "shopify://collections/all-products",
+        "btn1_link": "https://www.npta.ca/collections/certifications?filter.p.tag=Certification&filter.v.price.gte=&filter.v.price.lte=&sort_by=manual",
         "btn1_bg": "#c1ff72",
         "btn1_txt": "#01241e",
         "show_btn2": false,
