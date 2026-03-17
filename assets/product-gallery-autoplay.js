@@ -10,7 +10,6 @@
   }
 
   function getThumbButtons(root) {
-    // Dawn-style thumbnails (covers most OS2 themes based on Dawn)
     const selectors = [
       '.thumbnail-list button',
       'button.thumbnail',
@@ -23,7 +22,6 @@
       if (found.length) return found;
     }
 
-    // Fallback: clickable elements inside thumbnail list items
     const fallback = Array.from(root.querySelectorAll('.thumbnail-list [data-media-id]'))
       .map((el) => el.querySelector('button, a'))
       .filter(Boolean);
@@ -43,10 +41,24 @@
     return idx >= 0 ? idx : 0;
   }
 
+  function safeClick(el) {
+    // Prefer dispatchEvent over .click() to reduce focus/scroll side effects
+    el.dispatchEvent(
+      new MouseEvent('click', { bubbles: true, cancelable: true, view: window })
+    );
+  }
+
+  function restoreScrollIfJumped(yBefore, xBefore) {
+    // Only restore if the page jumped UP significantly
+    const yAfter = window.scrollY;
+    if (yAfter < yBefore - 20) {
+      window.scrollTo(xBefore, yBefore);
+    }
+  }
+
   class GalleryAutoplay {
     constructor(productInfoEl) {
       this.el = productInfoEl;
-      this.sectionId = productInfoEl.getAttribute('data-section') || '';
       this.intervalMs = parseInt(productInfoEl.getAttribute('data-gallery-autoplay-interval') || '5000', 10);
       this.effect = productInfoEl.getAttribute('data-gallery-autoplay-effect') || 'slide';
       this.pauseOnHover = isTrue(productInfoEl.getAttribute('data-gallery-autoplay-pause-hover'));
@@ -55,46 +67,56 @@
       this.timer = null;
       this.resumeTimer = null;
 
-      this.galleryRoot =
+      this.galleryEl =
         productInfoEl.querySelector('media-gallery') ||
         productInfoEl.querySelector(`[id^="MediaGallery-"]`) ||
         productInfoEl.querySelector('.product__media-wrapper') ||
         productInfoEl;
 
+      // If the page is using stacked layout, autoplay tends to cause scrollIntoView jumps.
+      // We’ll still allow it ONLY when gallery is visible; otherwise we pause.
       this.fadeTarget =
         productInfoEl.querySelector('.product__media-list') ||
-        this.galleryRoot.querySelector?.('.product__media-list');
+        this.galleryEl.querySelector?.('.product__media-list');
 
       this._boundTick = this.tick.bind(this);
-      this._boundPause = this.pause.bind(this);
-      this._boundResume = this.resume.bind(this);
-
       this._io = null;
       this._visible = true;
     }
 
     init() {
-      // Respect mobile setting
       if (!this.enableMobile && isMobile()) return;
 
-      // Don’t run if there’s only 0–1 thumbnails
-      const btns = getThumbButtons(this.galleryRoot);
+      const btns = getThumbButtons(this.galleryEl);
       if (!btns || btns.length <= 1) return;
 
-      // Avoid double-init
       if (this.el.dataset.nptaGalleryAutoplayInit === '1') return;
       this.el.dataset.nptaGalleryAutoplayInit = '1';
 
-      // Pause on hover/focus
-      if (this.pauseOnHover) {
-        this.galleryRoot.addEventListener('mouseenter', this._boundPause);
-        this.galleryRoot.addEventListener('mouseleave', this._boundResume);
-        this.galleryRoot.addEventListener('focusin', this._boundPause);
-        this.galleryRoot.addEventListener('focusout', this._boundResume);
+      // ✅ Pause autoplay when gallery is NOT visible (prevents scroll-jump while user reads below)
+      if ('IntersectionObserver' in window) {
+        this._io = new IntersectionObserver(
+          (entries) => {
+            const entry = entries[0];
+            this._visible = !!(entry && entry.isIntersecting);
+            if (!this._visible) this.pause();
+            else this.resume(true);
+          },
+          { threshold: 0.25 }
+        );
+        this._io.observe(this.galleryEl);
       }
 
-      // Pause briefly on user interaction (click/touch) so it doesn’t “fight” the user
-      this.galleryRoot.addEventListener(
+      // Pause on hover/focus
+      if (this.pauseOnHover) {
+        this.galleryEl.addEventListener('mouseenter', () => this.pause());
+        this.galleryEl.addEventListener('mouseleave', () => this.resume(true));
+        this.galleryEl.addEventListener('focusin', () => this.pause());
+        this.galleryEl.addEventListener('focusout', () => this.resume(true));
+      }
+
+      // Pause briefly on user interaction
+      this.galleryEl.addEventListener(
         'pointerdown',
         () => {
           this.pause();
@@ -103,40 +125,25 @@
         { passive: true }
       );
 
-      // Pause when tab hidden
+      // Stop when tab hidden
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) this.pause();
-        else this.resume();
+        else this.resume(true);
       });
 
-      // Stop when out of view (good for performance)
-      if ('IntersectionObserver' in window) {
-        this._io = new IntersectionObserver(
-          (entries) => {
-            const entry = entries[0];
-            this._visible = !!(entry && entry.isIntersecting);
-            if (!this._visible) this.pause();
-            else this.resume();
-          },
-          { threshold: 0.15 }
-        );
-        this._io.observe(this.el);
-      }
-
-      // Re-scan thumbnails on DOM changes (variant changes can swap media)
+      // If gallery DOM changes (variant/media updates), restart safely
       const mo = new MutationObserver(() => {
-        // If media count changes, restart safely
         this.pause();
         this.resume(true);
       });
-      mo.observe(this.galleryRoot, { childList: true, subtree: true });
+      mo.observe(this.galleryEl, { childList: true, subtree: true });
 
       this.resume(true);
     }
 
     scheduleResume(ms) {
       clearTimeout(this.resumeTimer);
-      this.resumeTimer = setTimeout(() => this.resume(), ms);
+      this.resumeTimer = setTimeout(() => this.resume(true), ms);
     }
 
     pause() {
@@ -151,7 +158,7 @@
       if (document.hidden) return;
       if (this._io && !this._visible) return;
 
-      const btns = getThumbButtons(this.galleryRoot);
+      const btns = getThumbButtons(this.galleryEl);
       if (!btns || btns.length <= 1) return;
 
       clearInterval(this.timer);
@@ -159,7 +166,9 @@
     }
 
     tick() {
-      const buttons = getThumbButtons(this.galleryRoot);
+      if (this._io && !this._visible) return;
+
+      const buttons = getThumbButtons(this.galleryEl);
       if (!buttons || buttons.length <= 1) return;
 
       const activeIdx = getActiveIndex(buttons);
@@ -167,25 +176,28 @@
       const nextBtn = buttons[nextIdx];
       if (!nextBtn) return;
 
+      // ✅ Save scroll position before switching
+      const yBefore = window.scrollY;
+      const xBefore = window.scrollX;
+
+      const doSwitch = () => {
+        safeClick(nextBtn);
+
+        // ✅ Restore scroll if theme/browser jumped the page upward
+        requestAnimationFrame(() => restoreScrollIfJumped(yBefore, xBefore));
+        setTimeout(() => restoreScrollIfJumped(yBefore, xBefore), 60);
+        setTimeout(() => restoreScrollIfJumped(yBefore, xBefore), 180);
+      };
+
       if (this.effect === 'fade' && this.fadeTarget) {
         this.fadeTarget.classList.add('npta-fade-out');
-        // fade out → switch → fade in
         setTimeout(() => {
-          nextBtn.click();
-          requestAnimationFrame(() => {
-            this.fadeTarget.classList.remove('npta-fade-out');
-          });
+          doSwitch();
+          requestAnimationFrame(() => this.fadeTarget.classList.remove('npta-fade-out'));
         }, 180);
       } else {
-        nextBtn.click();
+        doSwitch();
       }
-    }
-
-    destroy() {
-      this.pause();
-      clearTimeout(this.resumeTimer);
-      if (this._io) this._io.disconnect();
-      delete this.el.dataset.nptaGalleryAutoplayInit;
     }
   }
 
@@ -197,7 +209,5 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => initAll());
-
-  // Theme editor support
   document.addEventListener('shopify:section:load', (e) => initAll(e.target));
 })();
