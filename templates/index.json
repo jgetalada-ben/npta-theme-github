@@ -157,7 +157,8 @@
       ],
       "custom_css": [
         ".iwt2__badge {bottom: 15px; top: auto;}",
-        ".iwt2__img {height: 548px;}"
+        ".iwt2__img {height: 548px;}",
+        ".iwt2__prices .reg {font-size: clamp(12px, 2.4vw, 24px);}"
       ],
       "name": "Image with text V2",
       "settings": {
@@ -188,9 +189,9 @@
         "button_radius": "16",
         "title_size": "clamp(24px, 4.8vw, 48px)",
         "subtitle_size": "clamp(12px, 2vw, 20px)",
-        "right_title_size": "clamp(16px, 2.8vw, 28px)",
-        "list_font_size": "clamp(12px, 2vw, 20px)",
-        "price_font_size": "clamp(14px, 2.4vw, 24px)",
+        "right_title_size": "clamp(16px, 3.2vw, 32px)",
+        "list_font_size": "clamp(12px, 2.4vw, 24px)",
+        "price_font_size": "clamp(14px, 2.8vw, 28px)",
         "padding_top": "80",
         "padding_bottom": "80"
       }
