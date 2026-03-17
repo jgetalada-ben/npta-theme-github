@@ -156,7 +156,8 @@
         "included_item_T6U3iV"
       ],
       "custom_css": [
-        ".iwt2__badge {bottom: 15px; top: auto;}"
+        ".iwt2__badge {bottom: 15px; top: auto;}",
+        ".iwt2__img {height: 548px;}"
       ],
       "name": "Image with text V2",
       "settings": {
