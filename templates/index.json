@@ -158,7 +158,7 @@
       "custom_css": [
         ".iwt2__badge {bottom: 15px; top: auto;}",
         ".iwt2__img {height: 548px;}",
-        ".iwt2__prices .reg {font-size: clamp(12px, 2.4vw, 24px);}"
+        ".iwt2__prices .reg,.iwt2__btn {font-size: clamp(12px, 2.4vw, 24px);}"
       ],
       "name": "Image with text V2",
       "settings": {
