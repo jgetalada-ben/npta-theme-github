@@ -1,0 +1,567 @@
+{{ 'component-image-with-text.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign sid = section.id
+
+  assign pad_top_raw = section.settings.padding_top | strip
+  assign pad_top_n = pad_top_raw | plus: 0
+  if pad_top_raw == blank
+    assign pad_top_n = 48
+  elsif pad_top_n == 0
+    if pad_top_raw != '0'
+      assign pad_top_n = 48
+    endif
+  endif
+
+  assign pad_bottom_raw = section.settings.padding_bottom | strip
+  assign pad_bottom_n = pad_bottom_raw | plus: 0
+  if pad_bottom_raw == blank
+    assign pad_bottom_n = 48
+  elsif pad_bottom_n == 0
+    if pad_bottom_raw != '0'
+      assign pad_bottom_n = 48
+    endif
+  endif
+
+  assign maxw_raw = section.settings.max_width | strip
+  assign maxw_n = maxw_raw | plus: 0
+  if maxw_raw == blank
+    assign maxw_n = 1200
+  elsif maxw_n == 0
+    if maxw_raw != '0'
+      assign maxw_n = 1200
+    endif
+  endif
+  if maxw_n < 900
+    assign maxw_n = 900
+  elsif maxw_n > 1600
+    assign maxw_n = 1600
+  endif
+
+  assign gap_raw = section.settings.grid_gap | strip
+  assign gap_n = gap_raw | plus: 0
+  if gap_raw == blank
+    assign gap_n = 56
+  elsif gap_n == 0
+    if gap_raw != '0'
+      assign gap_n = 56
+    endif
+  endif
+  if gap_n < 10
+    assign gap_n = 10
+  elsif gap_n > 140
+    assign gap_n = 140
+  endif
+
+  assign radius_raw = section.settings.image_radius | strip
+  assign radius_n = radius_raw | plus: 0
+  if radius_raw == blank
+    assign radius_n = 12
+  elsif radius_n == 0
+    if radius_raw != '0'
+      assign radius_n = 12
+    endif
+  endif
+  if radius_n < 0
+    assign radius_n = 0
+  elsif radius_n > 40
+    assign radius_n = 40
+  endif
+
+  assign btn_radius_raw = section.settings.button_radius | strip
+  assign btn_radius_n = btn_radius_raw | plus: 0
+  if btn_radius_raw == blank
+    assign btn_radius_n = 16
+  elsif btn_radius_n == 0
+    if btn_radius_raw != '0'
+      assign btn_radius_n = 16
+    endif
+  endif
+
+  assign title_size_raw = section.settings.title_size | strip
+  if title_size_raw == blank
+    assign iwt2_title_size = '40px'
+  elsif title_size_raw contains 'clamp(' or title_size_raw contains 'px' or title_size_raw contains 'rem' or title_size_raw contains 'em' or title_size_raw contains 'vw'
+    assign iwt2_title_size = title_size_raw
+  else
+    assign title_size_n = title_size_raw | plus: 0
+    if title_size_n == 0
+      if title_size_raw != '0'
+        assign iwt2_title_size = '40px'
+      else
+        assign iwt2_title_size = '0px'
+      endif
+    else
+      assign iwt2_title_size = title_size_n | append: 'px'
+    endif
+  endif
+
+  assign subtitle_size_raw = section.settings.subtitle_size | strip
+  if subtitle_size_raw == blank
+    assign iwt2_subtitle_size = '20px'
+  elsif subtitle_size_raw contains 'clamp(' or subtitle_size_raw contains 'px' or subtitle_size_raw contains 'rem' or subtitle_size_raw contains 'em' or subtitle_size_raw contains 'vw'
+    assign iwt2_subtitle_size = subtitle_size_raw
+  else
+    assign subtitle_size_n = subtitle_size_raw | plus: 0
+    if subtitle_size_n == 0
+      if subtitle_size_raw != '0'
+        assign iwt2_subtitle_size = '20px'
+      else
+        assign iwt2_subtitle_size = '0px'
+      endif
+    else
+      assign iwt2_subtitle_size = subtitle_size_n | append: 'px'
+    endif
+  endif
+
+  assign right_title_size_raw = section.settings.right_title_size | strip
+  if right_title_size_raw == blank
+    assign iwt2_right_title_size = '28px'
+  elsif right_title_size_raw contains 'clamp(' or right_title_size_raw contains 'px' or right_title_size_raw contains 'rem' or right_title_size_raw contains 'em' or right_title_size_raw contains 'vw'
+    assign iwt2_right_title_size = right_title_size_raw
+  else
+    assign right_title_size_n = right_title_size_raw | plus: 0
+    if right_title_size_n == 0
+      if right_title_size_raw != '0'
+        assign iwt2_right_title_size = '28px'
+      else
+        assign iwt2_right_title_size = '0px'
+      endif
+    else
+      assign iwt2_right_title_size = right_title_size_n | append: 'px'
+    endif
+  endif
+
+  assign list_size_raw = section.settings.list_font_size | strip
+  if list_size_raw == blank
+    assign iwt2_list_size = '18px'
+  elsif list_size_raw contains 'clamp(' or list_size_raw contains 'px' or list_size_raw contains 'rem' or list_size_raw contains 'em' or list_size_raw contains 'vw'
+    assign iwt2_list_size = list_size_raw
+  else
+    assign list_size_n = list_size_raw | plus: 0
+    if list_size_n == 0
+      if list_size_raw != '0'
+        assign iwt2_list_size = '18px'
+      else
+        assign iwt2_list_size = '0px'
+      endif
+    else
+      assign iwt2_list_size = list_size_n | append: 'px'
+    endif
+  endif
+
+  assign price_size_raw = section.settings.price_font_size | strip
+  if price_size_raw == blank
+    assign iwt2_price_size = '22px'
+  elsif price_size_raw contains 'clamp(' or price_size_raw contains 'px' or price_size_raw contains 'rem' or price_size_raw contains 'em' or price_size_raw contains 'vw'
+    assign iwt2_price_size = price_size_raw
+  else
+    assign price_size_n = price_size_raw | plus: 0
+    if price_size_n == 0
+      if price_size_raw != '0'
+        assign iwt2_price_size = '22px'
+      else
+        assign iwt2_price_size = '0px'
+      endif
+    else
+      assign iwt2_price_size = price_size_n | append: 'px'
+    endif
+  endif
+
+  assign btn_align = section.settings.button_align | default: 'left'
+  assign btn_justify = 'flex-start'
+  if btn_align == 'center'
+    assign btn_justify = 'center'
+  elsif btn_align == 'right'
+    assign btn_justify = 'flex-end'
+  endif
+-%}
+
+{%- style -%}
+  #iwt2-{{ sid }}{
+    --iwt2-bg: {{ section.settings.bg_color }};
+    --iwt2-text: {{ section.settings.text_color }};
+    --iwt2-muted: {{ section.settings.muted_color }};
+    --iwt2-maxw: {{ maxw_n }}px;
+    --iwt2-gap: {{ gap_n }}px;
+    --iwt2-pad-top: {{ pad_top_n }}px;
+    --iwt2-pad-bottom: {{ pad_bottom_n }}px;
+    --iwt2-radius: {{ radius_n }}px;
+
+    --iwt2-title-size: {{ iwt2_title_size }};
+    --iwt2-subtitle-size: {{ iwt2_subtitle_size }};
+
+    --iwt2-right-title-size: {{ iwt2_right_title_size }};
+    --iwt2-list-size: {{ iwt2_list_size }};
+    --iwt2-price-size: {{ iwt2_price_size }};
+
+    --iwt2-badge-bg: {{ section.settings.badge_bg }};
+    --iwt2-badge-text: {{ section.settings.badge_text_color }};
+
+    --iwt2-btn-bg: {{ section.settings.button_bg }};
+    --iwt2-btn-text: {{ section.settings.button_text_color }};
+    --iwt2-btn-radius: {{ btn_radius_n }}px;
+    --iwt2-btn-justify: {{ btn_justify }};
+    --iwt2-reg-color: {{ section.settings.reg_price_color }};
+  }
+
+  #iwt2-{{ sid }}{
+    background: var(--iwt2-bg);
+    color: var(--iwt2-text);
+    padding: var(--iwt2-pad-top) 0 var(--iwt2-pad-bottom);
+  }
+  @media (max-width: 989px){
+    #iwt2-{{ sid }}{
+        padding: calc(var(--iwt2-pad-top) / 2) 0 calc(var(--iwt2-pad-bottom) / 2);
+    }
+  }
+
+  #iwt2-{{ sid }} .iwt2__wrap{
+    max-width: var(--iwt2-maxw);
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  #iwt2-{{ sid }} .iwt2__top{
+    text-align: center;
+    margin-bottom: 34px;
+  }
+
+  #iwt2-{{ sid }} .iwt2__top-title{
+    margin: 0 0 10px 0;
+    font-size: var(--iwt2-title-size);
+    line-height: 1.05;
+    font-weight: 500;
+    letter-spacing: .01em;
+    text-transform: uppercase;
+    font-family: var(--font-anton);
+  }
+
+  #iwt2-{{ sid }} .iwt2__top-subtitle{
+    font-size: var(--iwt2-subtitle-size);
+    line-height: 1.35;
+    color: var(--iwt2-muted);
+    font-family: var(--font-proximaregular);
+  }
+
+  #iwt2-{{ sid }} .iwt2__grid{
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: var(--iwt2-gap);
+    align-items: start;
+  }
+
+  #iwt2-{{ sid }} .iwt2__mediaWrap{
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--iwt2-radius);
+  }
+
+  #iwt2-{{ sid }} .iwt2__img{
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  #iwt2-{{ sid }} .iwt2__badge{
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: var(--iwt2-badge-bg);
+    color: var(--iwt2-badge-text);
+    border-radius: 999px;
+    padding: 10px 16px;
+    text-transform: uppercase;
+    line-height: 1;
+    font-size: clamp(12px, 2vw, 20px);
+    box-shadow: 0 10px 22px rgba(0,0,0,.12);
+    white-space: nowrap;
+    font-family: "ProximaSanMedium";
+  }
+
+  #iwt2-{{ sid }} .iwt2__right-title{
+    margin: 0 0 16px 0;
+    font-size: var(--iwt2-right-title-size);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.15;
+    font-family: var(--font-proximamedium);
+    color: #01241E;
+  }
+
+  #iwt2-{{ sid }} .iwt2__list{
+    margin: 0 0 18px 0;
+    padding-left: 18px;
+    display: grid;
+    gap: 12px;
+  }
+
+  #iwt2-{{ sid }} .iwt2__list li{
+    font-size: var(--iwt2-list-size);
+    line-height: 1.35;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-family: "ProximaNova";
+  }
+
+  /* Underline style like your screenshot (blue underline, dark text) */
+  #iwt2-{{ sid }} .iwt2__link{
+    color: var(--iwt2-text);
+  }
+
+  #iwt2-{{ sid }} .iwt2__extra p{
+    margin-top: 6px;
+    font-size: clamp(12px, 2vw, 20px);
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 1.35;
+    font-family: "ProximaNova";
+  }
+  #iwt2-{{ sid }} .iwt2__extra p strong {
+    font-family: var(--font-proximablack);
+  }
+
+  #iwt2-{{ sid }} .iwt2__prices{
+    margin-top: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 26px;
+    align-items: baseline;
+    font-size: var(--iwt2-price-size);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-family: var(--font-proximamedium);
+  }
+
+  #iwt2-{{ sid }} .iwt2__prices .reg{
+    color: var(--iwt2-reg-color);
+    text-decoration: line-through;
+    text-decoration-thickness: 3px;
+    font-size: clamp(12px, 2vw, 20px);
+    font-family: var(--font-proximamedium);
+  }
+
+  #iwt2-{{ sid }} .iwt2__cta{
+    margin-top: 22px;
+    display: flex;
+    justify-content: var(--iwt2-btn-justify);
+  }
+
+  #iwt2-{{ sid }} .iwt2__btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--iwt2-btn-bg);
+    color: var(--iwt2-btn-text);
+    text-decoration: none;
+    border-radius: var(--iwt2-btn-radius);
+    padding: 5px 30px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    white-space: nowrap;
+    font-family: var(--font-proximamedium);
+    font-size: clamp(12px, 2vw, 20px);
+  }
+
+  @media (max-width: 989px){
+    #iwt2-{{ sid }} .iwt2__grid{
+      grid-template-columns: 1fr;
+      gap: 26px;
+    }
+    #iwt2-{{ sid }} .iwt2__top{
+      margin-bottom: 22px;
+    }
+    #iwt2-{{ sid }} .iwt2__prices{
+      gap: 16px;
+      font-size: 20px;
+    }
+    #iwt2-{{ sid }} .iwt2__badge{
+      font-size: 16px;
+      padding: 9px 14px;
+    }
+  }
+{%- endstyle -%}
+
+<section id="iwt2-{{ sid }}" class="section">
+  <div class="iwt2__wrap">
+    {%- if section.settings.top_title != blank or section.settings.top_subtitle != blank -%}
+      <div class="iwt2__top">
+        {%- if section.settings.top_title != blank -%}
+          <h2 class="iwt2__top-title">{{ section.settings.top_title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.top_subtitle != blank -%}
+          <div class="iwt2__top-subtitle rte">{{ section.settings.top_subtitle }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="iwt2__grid">
+      <div class="iwt2__media">
+        <div class="iwt2__mediaWrap">
+          {%- if section.settings.image != blank -%}
+            {{
+              section.settings.image
+              | image_url: width: 1800
+              | image_tag:
+                loading: 'lazy',
+                class: 'iwt2__img',
+                sizes: '(min-width: 990px) 55vw, 92vw'
+            }}
+          {%- else -%}
+            {{ 'detailed-apparel-1' | placeholder_svg_tag: 'iwt2__img placeholder-svg' }}
+          {%- endif -%}
+
+          {%- if section.settings.badge_text != blank -%}
+            <div class="iwt2__badge">{{ section.settings.badge_text }}</div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="iwt2__content">
+        {%- if section.settings.right_title != blank -%}
+          <h3 class="iwt2__right-title">{{ section.settings.right_title }}</h3>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <ul class="iwt2__list">
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'included_item' -%}
+                  {%- assign item_text = block.settings.text | strip -%}
+                  {%- if item_text != blank -%}
+                    <li {{ block.shopify_attributes }}>
+                      {%- if block.settings.url != blank -%}
+                        <a class="iwt2__link" href="{{ block.settings.url }}">{{ item_text }}</a>
+                      {%- else -%}
+                        <span class="iwt2__link">{{ item_text }}</span>
+                      {%- endif -%}
+                    </li>
+                  {%- endif -%}
+              {%- endcase -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if section.settings.extra_text != blank -%}
+          <div class="iwt2__extra rte">{{ section.settings.extra_text }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.sale_price != blank or section.settings.reg_price != blank -%}
+          <div class="iwt2__prices">
+            {%- if section.settings.sale_price != blank -%}
+              <div class="sale">{{ section.settings.sale_label }} <span>{{ section.settings.sale_price }}</span></div>
+            {%- endif -%}
+            {%- if section.settings.reg_price != blank -%}
+              <div class="reg">{{ section.settings.reg_label }} <span>{{ section.settings.reg_price }}</span></div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank -%}
+          <div class="iwt2__cta">
+            <a
+              class="iwt2__btn"
+              {% if section.settings.button_link == blank %}
+                role="link" aria-disabled="true"
+              {% else %}
+                href="{{ section.settings.button_link }}"
+              {% endif %}
+            >
+              {{ section.settings.button_label }}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image with text V2",
+  "class": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "top_title", "label": "Top title", "default": "ONE BUNDLE. ONE CAREER." },
+    { "type": "richtext", "id": "top_subtitle", "label": "Top subtitle", "default": "<p>Spring reset starts <strong>NOW</strong>.</p>" },
+
+    { "type": "image_picker", "id": "image", "label": "Left image" },
+
+    { "type": "text", "id": "badge_text", "label": "Badge text (optional)", "default": "SAVE $2,899" },
+
+    { "type": "text", "id": "right_title", "label": "Right title", "default": "WHAT’S INCLUDED?" },
+    { "type": "richtext", "id": "extra_text", "label": "Extra text (optional)", "default": "<p>FREE MINDFUL STRESS MANAGEMENT CERTIFICATION (MSM)</p>" },
+
+    { "type": "text", "id": "sale_label", "label": "Sale label", "default": "SALE PRICE:" },
+    { "type": "text", "id": "sale_price", "label": "Sale price", "default": "$1,999" },
+    { "type": "text", "id": "reg_label", "label": "Reg label", "default": "REG PRICE:" },
+    { "type": "text", "id": "reg_price", "label": "Reg price", "default": "4,899" },
+
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "LEARN MORE" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    {
+      "type": "select",
+      "id": "button_align",
+      "label": "Button alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FFFFFF" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#0B2B24" },
+    { "type": "color", "id": "muted_color", "label": "Muted text color", "default": "#0B2B24" },
+
+    { "type": "color", "id": "badge_bg", "label": "Badge background", "default": "#B9FF66" },
+    { "type": "color", "id": "badge_text_color", "label": "Badge text color", "default": "#000000" },
+
+    { "type": "color", "id": "button_bg", "label": "Button background", "default": "#0B2B24" },
+    { "type": "color", "id": "button_text_color", "label": "Button text color", "default": "#FFFFFF" },
+    { "type": "color", "id": "reg_price_color", "label": "Reg price color", "default": "#E53935" },
+
+    { "type": "header", "content": "Layout (numbers only)" },
+    { "type": "text", "id": "max_width", "label": "Max width (px)", "default": "1200", "info": "Numbers only" },
+    { "type": "text", "id": "grid_gap", "label": "Column gap (px)", "default": "56", "info": "Numbers only" },
+    { "type": "text", "id": "image_radius", "label": "Image corner radius (px)", "default": "12", "info": "Numbers only" },
+    { "type": "text", "id": "button_radius", "label": "Button corner radius (px)", "default": "16", "info": "Numbers only" },
+
+    { "type": "header", "content": "Typography" },
+    { "type": "text", "id": "title_size", "label": "Top title font size (px)", "default": "40", "info": "Numbers only" },
+    { "type": "text", "id": "subtitle_size", "label": "Top subtitle font size (px)", "default": "20", "info": "Numbers only" },
+    { "type": "text", "id": "right_title_size", "label": "Right title font size (px)", "default": "28", "info": "Numbers only" },
+    { "type": "text", "id": "list_font_size", "label": "List font size (px)", "default": "18", "info": "Numbers only" },
+    { "type": "text", "id": "price_font_size", "label": "Price font size (px)", "default": "22", "info": "Numbers only" },
+
+    { "type": "header", "content": "Section padding (numbers only)" },
+    { "type": "text", "id": "padding_top", "label": "Padding top (px)", "default": "48", "info": "Numbers only" },
+    { "type": "text", "id": "padding_bottom", "label": "Padding bottom (px)", "default": "48", "info": "Numbers only" }
+  ],
+  "blocks": [
+    {
+      "type": "included_item",
+      "name": "Included item",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "NASM CPT (CERTIFIED PERSONAL TRAINER)" },
+        { "type": "url", "id": "url", "label": "Link (optional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with text V2",
+      "blocks": [
+        { "type": "included_item" },
+        { "type": "included_item" },
+        { "type": "included_item" }
+      ]
+    }
+  ]
+}
+{% endschema %}

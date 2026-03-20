@@ -22,6 +22,12 @@
       "label": "Program Details",
       "default": "<p> Lorem ipsum dolor sit amet</p>",
       "info": "Enter the rich text content for the program details."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_fadeup",
+      "label": "Enable fade-up animation on scroll",
+      "default": false
     }
   ],
   "presets": [
@@ -38,7 +44,7 @@
 <section class="section--program-details" id="{{ section.settings.section_id }}">
   <div class="program-details-container page-container">
 
-    <div class="details-column-left">
+    <div class="details-column-left{% if section.settings.enable_fadeup %} pd-fadeup{% endif %}">
       <div class="section--title-block">
         <h2 class="is--flex-start program-details-h2" >Program details</h2>
       </div>
@@ -47,51 +53,54 @@
         {{ product.metafields.custom._program_details | metafield_tag }}
       </div>
       {% endif %}
+    </div>
 
+    <div class="details-column-right{% if section.settings.enable_fadeup %} pd-fadeup{% endif %}">
       {% assign show_curriculum = false %}
-{% assign total_sections = 10 %}
-
-{% for i in (1..total_sections) %}
-  {% assign title_key = i | append: "_curriculum_title" %}
-  {% assign desc_key = i | append: "_curriculum_description" %}
-  {% if product.metafields.custom[title_key] and product.metafields.custom[desc_key] %}
-    {% assign show_curriculum = true %}
-    {% break %}
-  {% endif %}
-{% endfor %}
-
-{% if show_curriculum %}
-  <div class="section--title-block">
-    <h2 class="is--flex-start">Curriculum</h2>
-  </div>
-
-  <div class="curriculum">
-    <div class="curriculum-sections">
+      {% assign total_sections = 10 %}
       {% for i in (1..total_sections) %}
-        {% assign section_title_key = i | append: "_curriculum_title" %}
-        {% assign long_desc_key = i | append: "_curriculum_description" %}
-        {% assign section_title = product.metafields.custom[section_title_key] %}
-        {% assign long_desc = product.metafields.custom[long_desc_key] %}
-
-        {% if section_title and long_desc %}
-          <div class="curriculum-section">
-            <div class="section-header" data-target="#section{{ i }}">
-              {{ section_title | metafield_tag }}
-              <button type="button" data-toggle="collapse" data-target="#section{{ i }}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
-                  <path fill="#141414" d="M21 12a.75.75 0 0 1-.75.75h-7.5v7.5a.75.75 0 1 1-1.5 0v-7.5h-7.5a.75.75 0 1 1 0-1.5h7.5v-7.5a.75.75 0 1 1 1.5 0v7.5h7.5A.75.75 0 0 1 21 12Z" />
-                </svg>
-              </button>
-            </div>
-            <div id="section{{ i }}" class="section-body">
-              {{ long_desc | metafield_tag }}
-            </div>
-          </div>
+        {% assign title_key = i | append: "_curriculum_title" %}
+        {% assign desc_key = i | append: "_curriculum_description" %}
+        {% if product.metafields.custom[title_key] and product.metafields.custom[desc_key] %}
+          {% assign show_curriculum = true %}
+          {% break %}
         {% endif %}
       {% endfor %}
-    </div>
-  </div>
-{% endif %}
+
+      {% if show_curriculum %}
+        <div class="section--title-block">
+          <h2 class="is--flex-start">Curriculum</h2>
+        </div>
+
+        <div class="curriculum">
+          <div class="curriculum-sections">
+            {% for i in (1..total_sections) %}
+              {% assign section_title_key = i | append: "_curriculum_title" %}
+              {% assign long_desc_key = i | append: "_curriculum_description" %}
+              {% assign section_title = product.metafields.custom[section_title_key] %}
+              {% assign long_desc = product.metafields.custom[long_desc_key] %}
+
+              {% if section_title and long_desc %}
+                <div class="curriculum-section">
+                  <div class="section-header" data-target="#section{{ i }}">
+                    <div class="section-header__text">
+                      {{ section_title | metafield_tag }}
+                    </div>
+                    <button type="button" data-toggle="collapse" data-target="#section{{ i }}">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+<path d="M14.5625 18.3125C14.6875 18.4375 14.8333 18.5 15 18.5C15.1667 18.5 15.3125 18.4375 15.4375 18.3125L18.9375 14.8125C19.1458 14.6042 19.1979 14.375 19.0938 14.125C18.9896 13.875 18.7917 13.75 18.5 13.75H11.5C11.2083 13.75 11.0104 13.875 10.9063 14.125C10.8021 14.375 10.8542 14.6042 11.0625 14.8125L14.5625 18.3125ZM15 27.5C13.2708 27.5 11.6458 27.1717 10.125 26.515C8.60417 25.8583 7.28125 24.9679 6.15625 23.8438C5.03125 22.7196 4.14084 21.3967 3.485 19.875C2.82917 18.3533 2.50083 16.7283 2.5 15C2.49917 13.2717 2.8275 11.6467 3.485 10.125C4.1425 8.60333 5.03292 7.28042 6.15625 6.15625C7.27958 5.03208 8.6025 4.14167 10.125 3.485C11.6475 2.82833 13.2725 2.5 15 2.5C16.7275 2.5 18.3525 2.82833 19.875 3.485C21.3975 4.14167 22.7204 5.03208 23.8438 6.15625C24.9671 7.28042 25.8579 8.60333 26.5163 10.125C27.1746 11.6467 27.5025 13.2717 27.5 15C27.4975 16.7283 27.1692 18.3533 26.515 19.875C25.8608 21.3967 24.9704 22.7196 23.8438 23.8438C22.7171 24.9679 21.3942 25.8587 19.875 26.5162C18.3558 27.1737 16.7308 27.5017 15 27.5Z" fill="#0F828C"/>
+</svg>
+                    </button>
+                  </div>
+                  <div id="section{{ i }}" class="section-body">
+                    {{ long_desc | metafield_tag }}
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
 
 
       <script>
@@ -101,8 +110,8 @@
               var target = this.getAttribute('data-target');
               var body = document.querySelector(target);
               // SVG icons for plus and minus
-              var plusSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><path fill="#141414" d="M21 12a.75.75 0 0 1-.75.75h-7.5v7.5a.75.75 0 1 1-1.5 0v-7.5h-7.5a.75.75 0 1 1 0-1.5h7.5v-7.5a.75.75 0 1 1 1.5 0v7.5h7.5A.75.75 0 0 1 21 12Z"/></svg>';
-              var minusSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><path fill="#1D1D1B" d="M20.212 12.377H4.656a.656.656 0 1 1 0-1.312h15.556a.656.656 0 1 1 0 1.312Z"/></svg>';
+              var plusSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M14.5625 18.3125C14.6875 18.4375 14.8333 18.5 15 18.5C15.1667 18.5 15.3125 18.4375 15.4375 18.3125L18.9375 14.8125C19.1458 14.6042 19.1979 14.375 19.0938 14.125C18.9896 13.875 18.7917 13.75 18.5 13.75H11.5C11.2083 13.75 11.0104 13.875 10.9063 14.125C10.8021 14.375 10.8542 14.6042 11.0625 14.8125L14.5625 18.3125ZM15 27.5C13.2708 27.5 11.6458 27.1717 10.125 26.515C8.60417 25.8583 7.28125 24.9679 6.15625 23.8438C5.03125 22.7196 4.14084 21.3967 3.485 19.875C2.82917 18.3533 2.50083 16.7283 2.5 15C2.49917 13.2717 2.8275 11.6467 3.485 10.125C4.1425 8.60333 5.03292 7.28042 6.15625 6.15625C7.27958 5.03208 8.6025 4.14167 10.125 3.485C11.6475 2.82833 13.2725 2.5 15 2.5C16.7275 2.5 18.3525 2.82833 19.875 3.485C21.3975 4.14167 22.7204 5.03208 23.8438 6.15625C24.9671 7.28042 25.8579 8.60333 26.5163 10.125C27.1746 11.6467 27.5025 13.2717 27.5 15C27.4975 16.7283 27.1692 18.3533 26.515 19.875C25.8608 21.3967 24.9704 22.7196 23.8438 23.8438C22.7171 24.9679 21.3942 25.8587 19.875 26.5162C18.3558 27.1737 16.7308 27.5017 15 27.5Z" fill="#0F828C"/></svg>';
+              var minusSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M11.6875 15.4375C11.5625 15.3125 11.5 15.1667 11.5 15C11.5 14.8333 11.5625 14.6875 11.6875 14.5625L15.1875 11.0625C15.3958 10.8542 15.625 10.8021 15.875 10.9063C16.125 11.0104 16.25 11.2083 16.25 11.5L16.25 18.5C16.25 18.7917 16.125 18.9896 15.875 19.0937C15.625 19.1979 15.3958 19.1458 15.1875 18.9375L11.6875 15.4375ZM2.5 15C2.5 16.7292 2.82833 18.3542 3.485 19.875C4.14167 21.3958 5.03208 22.7187 6.15625 23.8437C7.28042 24.9687 8.60333 25.8592 10.125 26.515C11.6467 27.1708 13.2717 27.4992 15 27.5C16.7283 27.5008 18.3533 27.1725 19.875 26.515C21.3967 25.8575 22.7196 24.9671 23.8437 23.8437C24.9679 22.7204 25.8583 21.3975 26.515 19.875C27.1717 18.3525 27.5 16.7275 27.5 15C27.5 13.2725 27.1717 11.6475 26.515 10.125C25.8583 8.6025 24.9679 7.27958 23.8437 6.15625C22.7196 5.03291 21.3967 4.14208 19.875 3.48375C18.3533 2.82541 16.7283 2.4975 15 2.5C13.2717 2.5025 11.6467 2.83083 10.125 3.485C8.60333 4.13916 7.28042 5.02958 6.15625 6.15625C5.03208 7.28291 4.14125 8.60583 3.48375 10.125C2.82625 11.6442 2.49833 13.2692 2.5 15Z" fill="#0F828C"/></svg>';
               if (body.classList.contains('collapse')) {
                 body.classList.remove('collapse');
                 this.querySelector('button').innerHTML = plusSvg; // Change to plus SVG
@@ -116,171 +125,117 @@
               }
             });
           });
+          // Fade-up on scroll (only if enabled)
+          var enableFade = {{ section.settings.enable_fadeup | json }};
+          if (enableFade) {
+            var sectionEl = document.getElementById('{{ section.settings.section_id }}');
+            if (sectionEl) {
+              var items = sectionEl.querySelectorAll('.pd-fadeup');
+              if (items.length) {
+                var io2 = new IntersectionObserver(function(entries){
+                  entries.forEach(function(entry){
+                    if (!entry.isIntersecting) return;
+                    items.forEach(function(el){ el.classList.add('is-inview'); });
+                    io2.disconnect();
+                  });
+                }, { threshold: 0.18 });
+                io2.observe(sectionEl);
+              }
+            }
+          }
         });
       </script>
-
     </div>
-
-    <div class="details-column-right">
-      
-    <div class="details-column-right-wrap">
-<div class="product--badge">
-  {% if product.compare_at_price > product.price %}
-  {% assign original_price = product.compare_at_price | floor %}
-  {% assign sale_price = product.price | floor %}
-  {% assign discount_amount = original_price | minus: sale_price %}
-  {% assign discount_percentage = discount_amount | divided_by: 100 | floor %}
-
-  <div class="discount">
-    <span>SAVE ${{ discount_percentage }}</span>
-  </div>
-
-  {% endif %}
-
-
-
-
-
-</div>
-      
-<div class="product-details-wrap">
-  <h2 class="product-title">{{ product.title }}</h2>
-  <div class="product-description">{{ product.description }}</div>
-
-   <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-                    {%- render 'price',
-                      product: product,
-                      use_variant: true,
-                      show_badges: true,
-                      price_class: 'price--large'
-                    -%}
-                  </div>
-  <div class="product-button-wrap">
-       {%- render 'buy-buttons',
-                    block: block,
-                    product: product,
-                    product_form_id: product_form_id,
-                    section_id: section.id
-                  -%}
-    </div>
-</div>
-
-
-
-   
-    </div>
-      
-    </div>
-
   </div>
 </section>
 
 
 
 <style>
-  
-  @media only screen and (min-width: 981px) {
-    .program-details-container {
-
+@media only screen and (min-width: 981px) {
+  .program-details-container {
     gap: 70px;
-
-}
-    .details-column-left {
-  width: 50%;
-}
-
-.details-column-right {
-  width: 60%;
-  max-width:650px;
-}
   }
-
-  @media only screen and (max-width: 980px) {
-    .program-details-container {
-
-    gap: 50px;
+  .details-column-left { width: 50%;}
+  .details-column-right {
+    width: 60%;
+    max-width:650px;
+    {% comment %} background: #F8F8F8;
+    padding: 20px; {% endcomment %}
+    border-radius: 10px;
+  }
+}
+@media only screen and (max-width: 980px) {
+  .program-details-container {
+    gap: 10px !important;
     flex-wrap: wrap;
-}
-    .details-column-left {
-  width: 100%;
-}
-
-.details-column-right {
-  width: 100%;
-  max-width:100%;
-}
   }
-  
-  .section--program-details{
-    padding-top:70px;
-    padding-bottom:70px;
+  .details-column-left { width: 100%;}
+  .details-column-right {
+    width: 100%;
+    max-width:100%;
   }
-  .details-column-right-wrap{
+}
+.section--program-details{
+  padding-top:70px;
+  padding-bottom:70px;
+}
+  {% comment %} .details-column-right-wrap{
     position:sticky;
     top: 20px;
   }
   @media only screen and (min-width: 768px) {
-      .details-column-right-wrap{
-padding: 40px;
-  }
+      .details-column-right-wrap{ padding: 40px;}
   }
 
     @media only screen and (max-width: 767px) {
-      .details-column-right-wrap{
-padding: 20px;
+      .details-column-right-wrap{ padding: 20px;}
   }
-  }
-  
-
   .details-column-right-wrap{
     display: flex;
     flex-wrap:wrap;
-
     border-radius: 20px;
-background: var(--grey-bg, #F7F8FA);
-  }
+    background: var(--grey-bg, #F7F8FA);
+  } {% endcomment %}
 
-  .product-details-wrap .product-title{
-    font-size: 22px;
-font-style: normal;
-font-weight: 800;
-line-height: 104%; /* 22.88px */
-text-transform: uppercase;
-  }
-    .product-details-wrap .product-description{
-color: #141414;
-    font-family: var(--font-body-family);
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: 150%; /* 24px */
-  }
-
-      .product-details-wrap .product-description ul {
-    list-style: none;
-    padding: 0;
-  }
-
-     .product-details-wrap .product-description ul li{
+.product-details-wrap .product-title{
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 104%; /* 22.88px */
+  text-transform: uppercase;
+}
+.product-details-wrap .product-description{
+  color: #141414;
+  font-family: var(--font-body-family);
   font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 10px;
-    position: relative;
-    padding-left: 30px;
-  }
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 24px */
+}
+.product-details-wrap .product-description ul {
+  list-style: none;
+  padding: 0;
+}
 
-
-       .product-details-wrap .product-description ul li:before{
-    content: "";
-    position: absolute;
-    left: 0;
-    background-size: 100%;
-    background-fit: contain;
-    width: 24px;
-    height: 24px;
-    background-position: center;
-    margin-top: 0px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 2.25C10.0716 2.25 8.18657 2.82183 6.58319 3.89317C4.97982 4.96451 3.73013 6.48726 2.99218 8.26884C2.25422 10.0504 2.06114 12.0108 2.43735 13.9021C2.81355 15.7934 3.74215 17.5307 5.10571 18.8943C6.46928 20.2579 8.20656 21.1865 10.0979 21.5627C11.9892 21.9389 13.9496 21.7458 15.7312 21.0078C17.5127 20.2699 19.0355 19.0202 20.1068 17.4168C21.1782 15.8134 21.75 13.9284 21.75 12C21.7473 9.41498 20.7192 6.93661 18.8913 5.10872C17.0634 3.28084 14.585 2.25273 12 2.25ZM16.2806 10.2806L11.0306 15.5306C10.961 15.6004 10.8783 15.6557 10.7872 15.6934C10.6962 15.7312 10.5986 15.7506 10.5 15.7506C10.4014 15.7506 10.3038 15.7312 10.2128 15.6934C10.1218 15.6557 10.039 15.6004 9.96938 15.5306L7.71938 13.2806C7.57865 13.1399 7.49959 12.949 7.49959 12.75C7.49959 12.551 7.57865 12.3601 7.71938 12.2194C7.86011 12.0786 8.05098 11.9996 8.25 11.9996C8.44903 11.9996 8.6399 12.0786 8.78063 12.2194L10.5 13.9397L15.2194 9.21937C15.2891 9.14969 15.3718 9.09442 15.4628 9.0567C15.5539 9.01899 15.6515 8.99958 15.75 8.99958C15.8486 8.99958 15.9461 9.01899 16.0372 9.0567C16.1282 9.09442 16.2109 9.14969 16.2806 9.21937C16.3503 9.28906 16.4056 9.37178 16.4433 9.46283C16.481 9.55387 16.5004 9.65145 16.5004 9.75C16.5004 9.84855 16.481 9.94613 16.4433 10.0372C16.4056 10.1282 16.3503 10.2109 16.2806 10.2806Z' fill='%23141414'/%3E%3C/svg%3E");
+.product-details-wrap .product-description ul li{
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  position: relative;
+  padding-left: 30px;
+}
+.product-details-wrap .product-description ul li:before{
+  content: "";
+  position: absolute;
+  left: 0;
+  background-size: 100%;
+  background-fit: contain;
+  width: 24px;
+  height: 24px;
+  background-position: center;
+  margin-top: 0px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 2.25C10.0716 2.25 8.18657 2.82183 6.58319 3.89317C4.97982 4.96451 3.73013 6.48726 2.99218 8.26884C2.25422 10.0504 2.06114 12.0108 2.43735 13.9021C2.81355 15.7934 3.74215 17.5307 5.10571 18.8943C6.46928 20.2579 8.20656 21.1865 10.0979 21.5627C11.9892 21.9389 13.9496 21.7458 15.7312 21.0078C17.5127 20.2699 19.0355 19.0202 20.1068 17.4168C21.1782 15.8134 21.75 13.9284 21.75 12C21.7473 9.41498 20.7192 6.93661 18.8913 5.10872C17.0634 3.28084 14.585 2.25273 12 2.25ZM16.2806 10.2806L11.0306 15.5306C10.961 15.6004 10.8783 15.6557 10.7872 15.6934C10.6962 15.7312 10.5986 15.7506 10.5 15.7506C10.4014 15.7506 10.3038 15.7312 10.2128 15.6934C10.1218 15.6557 10.039 15.6004 9.96938 15.5306L7.71938 13.2806C7.57865 13.1399 7.49959 12.949 7.49959 12.75C7.49959 12.551 7.57865 12.3601 7.71938 12.2194C7.86011 12.0786 8.05098 11.9996 8.25 11.9996C8.44903 11.9996 8.6399 12.0786 8.78063 12.2194L10.5 13.9397L15.2194 9.21937C15.2891 9.14969 15.3718 9.09442 15.4628 9.0567C15.5539 9.01899 15.6515 8.99958 15.75 8.99958C15.8486 8.99958 15.9461 9.01899 16.0372 9.0567C16.1282 9.09442 16.2109 9.14969 16.2806 9.21937C16.3503 9.28906 16.4056 9.37178 16.4433 9.46283C16.481 9.55387 16.5004 9.65145 16.5004 9.75C16.5004 9.84855 16.481 9.94613 16.4433 10.0372C16.4056 10.1282 16.3503 10.2109 16.2806 10.2806Z' fill='%23141414'/%3E%3C/svg%3E");
 }
 .product-button-wrap{
   margin-top:35px;
@@ -299,19 +254,39 @@ line-height: 150%; /* 24px */
 
 .curriculum {
   margin: 20px 0;
+  background: #F8F8F8;
+  padding: 20px 40px 40px;
+  border-radius: 10px;
 }
-.curriculum-sections {
-  border-top: 1px solid #ddd;
+@media only screen and (max-width: 767px) {
+  .curriculum {
+    padding: 20px;
+  }
+}
+.curriculum-section:first-child {
+  border-bottom: 2px solid #0F828C;
 }
 .curriculum-section {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 2px solid #B3B9B9;
 }
 .curriculum-sections .section-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 16px;
   cursor: pointer;
-  padding: 10px 0;
+  padding: 20px 0;
+}
+.curriculum-sections .section-header__text{
+  flex: 1;
+  min-width: 0;
+}
+.section-header .metafield-rich_text_field p{
+  margin: 0;
+}
+.section-header .metafield-rich_text_field p strong{
+  display: block;
+  margin-bottom: 6px;
 }
 .curriculum-sections .section-header h3 {
   margin: 0;
@@ -336,12 +311,24 @@ line-height: 150%; /* 24px */
 .program-details-h2{
   margin-top:0;
 }
+.details-column-right .section--title-block {
+  padding: 0 40px;
+}
+@media only screen and (max-width: 767px) {
+  .details-column-right .section--title-block {
+    padding: 20px 20px 0;
+  }
+  .details-column-right .section--title-block h2 {
+    margin: 0;
+  }
+}
 .section--title-block h2 {
   color: #141414;
-  font-family: var(--font-heading-family);
+  font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
   font-size: 42px;
   font-style: normal;
-  font-weight: 800;
+  font-weight: 500;
+  letter-spacing: 2px;
   line-height: 112%; /* 47.04px */
   text-transform: uppercase;
 }
@@ -401,13 +388,13 @@ line-height: 150%; /* 24px */
   content: "" !important;
   position: absolute;
   left: 0;
-  background-size: 100%;
-  background-fit: contain;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
   width: 24px;
   height: 24px;
-  background-position: center;
   margin-top: 0px !important;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 2.25C10.0716 2.25 8.18657 2.82183 6.58319 3.89317C4.97982 4.96451 3.73013 6.48726 2.99218 8.26884C2.25422 10.0504 2.06114 12.0108 2.43735 13.9021C2.81355 15.7934 3.74215 17.5307 5.10571 18.8943C6.46928 20.2579 8.20656 21.1865 10.0979 21.5627C11.9892 21.9389 13.9496 21.7458 15.7312 21.0078C17.5127 20.2699 19.0355 19.0202 20.1068 17.4168C21.1782 15.8134 21.75 13.9284 21.75 12C21.7473 9.41498 20.7192 6.93661 18.8913 5.10872C17.0634 3.28084 14.585 2.25273 12 2.25ZM16.2806 10.2806L11.0306 15.5306C10.961 15.6004 10.8783 15.6557 10.7872 15.6934C10.6962 15.7312 10.5986 15.7506 10.5 15.7506C10.4014 15.7506 10.3038 15.7312 10.2128 15.6934C10.1218 15.6557 10.039 15.6004 9.96938 15.5306L7.71938 13.2806C7.57865 13.1399 7.49959 12.949 7.49959 12.75C7.49959 12.551 7.57865 12.3601 7.71938 12.2194C7.86011 12.0786 8.05098 11.9996 8.25 11.9996C8.44903 11.9996 8.6399 12.0786 8.78063 12.2194L10.5 13.9397L15.2194 9.21937C15.2891 9.14969 15.3718 9.09442 15.4628 9.0567C15.5539 9.01899 15.6515 8.99958 15.75 8.99958C15.8486 8.99958 15.9461 9.01899 16.0372 9.0567C16.1282 9.09442 16.2109 9.14969 16.2806 9.21937C16.3503 9.28906 16.4056 9.37178 16.4433 9.46283C16.481 9.55387 16.5004 9.65145 16.5004 9.75C16.5004 9.84855 16.481 9.94613 16.4433 10.0372C16.4056 10.1282 16.3503 10.2109 16.2806 10.2806Z' fill='%23141414'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2720%27%20height%3D%2720%27%20viewBox%3D%270%200%2020%2020%27%20fill%3D%27none%27%3E%3Cpath%20fill-rule%3D%27evenodd%27%20clip-rule%3D%27evenodd%27%20d%3D%27M10%2017.5C10.9849%2017.5%2011.9602%2017.306%2012.8701%2016.9291C13.7801%2016.5522%2014.6069%2015.9997%2015.3033%2015.3033C15.9997%2014.6069%2016.5522%2013.7801%2016.9291%2012.8701C17.306%2011.9602%2017.5%2010.9849%2017.5%2010C17.5%209.01509%2017.306%208.03982%2016.9291%207.12987C16.5522%206.21993%2015.9997%205.39314%2015.3033%204.6967C14.6069%204.00026%2013.7801%203.44781%2012.8701%203.0709C11.9602%202.69399%2010.9849%202.5%2010%202.5C8.01088%202.5%206.10322%203.29018%204.6967%204.6967C3.29018%206.10322%202.5%208.01088%202.5%2010C2.5%2011.9891%203.29018%2013.8968%204.6967%2015.3033C6.10322%2016.7098%208.01088%2017.5%2010%2017.5ZM9.80667%2013.0333L13.9733%208.03333L12.6933%206.96667L9.11%2011.2658L7.25583%209.41083L6.0775%2010.5892L8.5775%2013.0892L9.2225%2013.7342L9.80667%2013.0333Z%27%20fill%3D%27%230F828C%27/%3E%3C/svg%3E");
 }
 
 .product__description.rte ul li {
@@ -463,7 +450,7 @@ text-transform: uppercase;
 }
 
 .program-details ul li {
-color:  #141414;
+color:  #000000;
     font-family: var(--font-body-family);
 font-size: 16px;
 font-style: normal;
@@ -479,7 +466,26 @@ line-height: 150%;
   position: absolute;
   left: 0;
   top: 0;
-  color: #000;
+  color: #fff;
+}
+/* Fade-up animation (only when enabled) */
+.pd-fadeup{
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 600ms ease, transform 600ms cubic-bezier(.2,.8,.2,1);
+  will-change: opacity, transform;
 }
 
+.pd-fadeup.is-inview{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .pd-fadeup{
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
 </style>

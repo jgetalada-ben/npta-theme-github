@@ -1,0 +1,2343 @@
+<section
+  id="QuizHeroPopup-{{ section.id }}"
+  class="qhp qhp--{{ section.id }}"
+  data-qhp-root
+  style="
+    --qhp-bg: {{ section.settings.section_bg }};
+    --qhp-heading: {{ section.settings.heading_color }};
+    --qhp-text: {{ section.settings.text_color }};
+    --qhp-primary-bg: {{ section.settings.primary_btn_bg }};
+    --qhp-primary-text: {{ section.settings.primary_btn_text }};
+    --qhp-secondary-bg: {{ section.settings.secondary_btn_bg }};
+    --qhp-secondary-text: {{ section.settings.secondary_btn_text }};
+    --qhp-modal-bg: {{ section.settings.modal_bg }};
+    --qhp-accent: {{ section.settings.accent_color }};
+    --qhp-correct: {{ section.settings.correct_color }};
+    --qhp-wrong: {{ section.settings.wrong_color }};
+  "
+>
+  <style>
+    .qhp{
+      background: var(--qhp-bg);
+      color: var(--qhp-text);
+      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    }
+    .qhp .qhp__container{
+      max-width: {{ section.settings.max_width }}px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .qhp .qhp__grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .qhp .qhp__content{ max-width: 560px; }
+
+    .qhp .qhp__eyebrow{
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      opacity: .85;
+      margin: 0 0 10px;
+    }
+
+    .qhp .qhp__heading{
+      font-size: clamp(28px, 3.3vw, 44px);
+      line-height: 1.05;
+      margin: 0 0 14px;
+      color: var(--qhp-heading);
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .qhp .qhp__desc{
+      font-size: 16px;
+      line-height: 1.55;
+      margin: 0 0 22px;
+      max-width: 520px;
+      opacity: .95;
+    }
+
+    .qhp .qhp__actions{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 0 0 26px;
+    }
+
+    .qhp .qhp__btn{
+      appearance: none;
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-weight: 800;
+      letter-spacing: .02em;
+      cursor: pointer;
+      transition: transform .12s ease, opacity .12s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+    }
+    .qhp .qhp__btn:active{ transform: translateY(1px); }
+    .qhp .qhp__btn:hover{ opacity: .92; }
+    .qhp .qhp__btn[disabled]{ opacity: .6; cursor: not-allowed; }
+
+    .qhp .qhp__btn--primary{ background: var(--qhp-primary-bg); color: var(--qhp-primary-text); }
+    .qhp .qhp__btn--secondary{ background: var(--qhp-secondary-bg); color: var(--qhp-secondary-text); }
+
+    .qhp .qhp__advisor{ margin-top: 10px; font-size: 15px; opacity: .95; }
+
+    .qhp .qhp__media{
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(0,0,0,.04);
+      min-height: 260px;
+    }
+    .qhp .qhp__media img{
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    @media (max-width: 900px){
+      .qhp .qhp__grid{ grid-template-columns: 1fr; }
+      .qhp .qhp__content{ max-width: 100%; }
+      .qhp .qhp__media{ min-height: 220px; }
+    }
+
+    /* Modal */
+    .qhp .qhp__backdrop{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .18s ease, visibility .18s ease;
+      z-index: 9998;
+    }
+    .qhp .qhp__modal{
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .18s ease, visibility .18s ease;
+      z-index: 9999;
+    }
+    .qhp.qhp--open .qhp__backdrop,
+    .qhp.qhp--open .qhp__modal{
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .qhp .qhp__dialog{
+      width: min(900px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      background: var(--qhp-modal-bg);
+      border-radius: 18px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.25);
+      border: 1px solid rgba(0,0,0,.08);
+    }
+
+    .qhp .qhp__dialogHeader{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(0,0,0,.08);
+      position: sticky;
+      top: 0;
+      background: var(--qhp-modal-bg);
+      z-index: 2;
+    }
+
+    .qhp .qhp__dialogTitle{
+      margin: 0;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: .02em;
+      color: var(--qhp-heading);
+    }
+    .qhp .qhp__dialogClose{
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,.12);
+      background: rgba(0,0,0,.03);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+    }
+
+    .qhp .qhp__dialogBody{ padding: 18px; }
+
+    /* Lead gate + Send status */
+    .qhp [data-qhp-quiz-ui]{ display:none; }
+    .qhp.qhp--started [data-qhp-quiz-ui]{ display:block; }
+    .qhp.qhp--started [data-qhp-lead]{ display:none; }
+
+    .qhp .qhp__leadCard{
+      background:#fff;
+      border:1px solid rgba(0,0,0,.08);
+      border-radius:16px;
+      padding:16px;
+      margin-bottom:14px;
+    }
+    .qhp .qhp__leadTitle{
+      margin:0 0 6px;
+      font-size:18px;
+      font-weight:1000;
+      color:var(--qhp-heading);
+    }
+    .qhp .qhp__leadDesc{ margin:0 0 12px; opacity:.9; }
+
+    .qhp .qhp__fieldGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-bottom: 12px;
+    }
+    @media(max-width:720px){
+      .qhp .qhp__fieldGrid{ grid-template-columns:1fr; }
+    }
+    .qhp .qhp__label{
+      display:block;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.02em;
+      margin-bottom:6px;
+      color:var(--qhp-heading);
+    }
+    .qhp .qhp__input{
+      width:100%;
+      border-radius:12px;
+      border:1px solid rgba(0,0,0,.14);
+      padding:12px 12px;
+      font-weight:700;
+      outline:none;
+    }
+    .qhp .qhp__input:focus{
+      border-color:var(--qhp-accent);
+      box-shadow:0 0 0 3px rgba(15,130,140,.18);
+    }
+    .qhp .qhp__leadError{
+      margin:10px 0 0;
+      color:#b42318;
+      font-weight:800;
+      display:none;
+    }
+    .qhp .qhp__leadError.is-visible{ display:block; }
+
+    .qhp .qhp__sendStatus{
+      margin:10px 0 0;
+      font-weight:800;
+      opacity:.95;
+    }
+    .qhp .qhp__hp{
+      position:absolute!important;
+      left:-9999px!important;
+      top:auto!important;
+      width:1px!important;
+      height:1px!important;
+      overflow:hidden!important;
+    }
+
+    /* Quiz UI */
+    .qhp .qhp__quizHeader{
+      background: rgba(0,0,0,.03);
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+    .qhp .qhp__quizH1{
+      margin: 0 0 6px;
+      font-size: 22px;
+      color: var(--qhp-heading);
+      font-weight: 900;
+    }
+    .qhp .qhp__quizSub{ margin: 0; font-size: 14px; opacity: .9; }
+
+    .qhp .qhp__progressCard{
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+    .qhp .qhp__progressRow{
+      display:flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--qhp-heading);
+    }
+    .qhp .qhp__bar{
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.08);
+      overflow: hidden;
+    }
+    .qhp .qhp__barFill{
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--qhp-accent), rgba(0,0,0,.25));
+      border-radius: 999px;
+      transition: width .35s ease;
+    }
+
+    .qhp .qhp__questionCard{
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 16px;
+      padding: 16px;
+    }
+    .qhp .qhp__qTitle{
+      margin: 0 0 14px;
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--qhp-heading);
+    }
+
+    .qhp .qhp__options{
+      display: grid;
+      gap: 10px;
+      margin: 0 0 14px;
+    }
+    .qhp .qhp__option{
+      width: 100%;
+      text-align: left;
+      border-radius: 14px;
+      border: 2px solid rgba(0,0,0,.10);
+      padding: 12px 12px;
+      background: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: border-color .12s ease, background .12s ease, transform .12s ease;
+      font-weight: 700;
+      color: #0d2b28;
+    }
+    .qhp .qhp__option:hover{ border-color: var(--qhp-accent); background: rgba(0,0,0,.02); }
+    .qhp .qhp__option[disabled]{ cursor: not-allowed; opacity: .95; }
+
+    .qhp .qhp__option--correct{
+      border-color: var(--qhp-correct);
+      background: rgba(0,0,0,.02);
+      background: color-mix(in srgb, var(--qhp-correct) 15%, #fff);
+    }
+    .qhp .qhp__option--wrong{
+      border-color: var(--qhp-wrong);
+      background: rgba(0,0,0,.02);
+      background: color-mix(in srgb, var(--qhp-wrong) 12%, #fff);
+    }
+
+    .qhp .qhp__badge{
+      display: inline-flex;
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 900;
+      border: 1px solid rgba(0,0,0,.12);
+      background: rgba(0,0,0,.03);
+      flex: 0 0 auto;
+    }
+
+    .qhp .qhp__feedback{
+      border-radius: 14px;
+      padding: 14px;
+      border: 2px solid rgba(0,0,0,.10);
+      background: rgba(0,0,0,.02);
+      display: none;
+      margin-bottom: 12px;
+    }
+    .qhp .qhp__feedback.is-visible{ display:block; }
+    .qhp .qhp__feedbackTitle{
+      margin: 0 0 6px;
+      font-weight: 900;
+      color: var(--qhp-heading);
+    }
+    .qhp .qhp__feedbackText{ margin: 0; line-height: 1.5; }
+
+    .qhp .qhp__next{
+      width: 100%;
+      border-radius: 14px;
+      padding: 14px 16px;
+      background: var(--qhp-heading);
+      color: #fff;
+      border: 0;
+      font-weight: 900;
+      cursor: pointer;
+      display: none;
+    }
+    .qhp .qhp__next.is-visible{ display:block; }
+    .qhp .qhp__next:hover{ opacity: .92; }
+
+    .qhp .qhp__powered{
+      text-align:center;
+      margin-top: 12px;
+      font-size: 12px;
+      opacity: .8;
+    }
+
+    /* Results */
+    .qhp .qhp__results{ display:none; }
+    .qhp .qhp__results.is-visible{ display:block; }
+
+    .qhp .qhp__resultTop{
+      text-align:center;
+      padding: 10px 0 6px;
+    }
+    .qhp .qhp__trophy{
+      width: 74px;
+      height: 74px;
+      border-radius: 999px;
+      margin: 0 auto 10px;
+      display:grid;
+      place-items:center;
+      background: linear-gradient(135deg, var(--qhp-accent), rgba(0,0,0,.25));
+      color: #fff;
+      font-size: 34px;
+      font-weight: 900;
+    }
+    .qhp .qhp__resultTitle{
+      margin: 0 0 8px;
+      font-size: 22px;
+      font-weight: 1000;
+      color: var(--qhp-heading);
+    }
+    .qhp .qhp__resultScore{
+      font-size: 46px;
+      font-weight: 1000;
+      color: var(--qhp-accent);
+      margin: 0 0 4px;
+    }
+    .qhp .qhp__resultPct{
+      margin: 0;
+      opacity: .9;
+      font-weight: 800;
+    }
+    .qhp .qhp__resultMsg{
+      background: rgba(0,0,0,.03);
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 16px;
+      padding: 14px;
+      margin: 14px 0;
+      line-height: 1.6;
+    }
+    .qhp .qhp__resultBtns{
+      display:grid;
+      gap: 10px;
+    }
+    .qhp .qhp__linkBtn{
+      width: 100%;
+      border-radius: 14px;
+      padding: 14px 16px;
+      text-decoration: none;
+      text-align:center;
+      font-weight: 1000;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height: 46px;
+      border: 0;
+      cursor: pointer;
+    }
+    .qhp .qhp__linkBtn--cta{ background: var(--qhp-accent); color: #fff; }
+    .qhp .qhp__linkBtn--retake{ background: rgba(0,0,0,.08); color: #111; }
+    .qhp .qhp__linkBtn[disabled]{ opacity:.6; cursor:not-allowed; }
+
+    .qhp .qhp__resultBreakdown{
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 16px;
+      padding: 14px;
+      margin: 14px 0;
+    }
+    .qhp .qhp__resultBreakdownTitle{
+      margin: 0 0 12px;
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--qhp-heading);
+    }
+    .qhp .qhp__resultGrid{
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .qhp .qhp__resultStat{
+      text-align: center;
+      border-radius: 14px;
+      padding: 16px 12px;
+      border: 1px solid rgba(0,0,0,.08);
+    }
+    .qhp .qhp__resultStat--correct{
+      background: color-mix(in srgb, var(--qhp-correct) 14%, #fff);
+    }
+    .qhp .qhp__resultStat--learn{
+      background: color-mix(in srgb, var(--qhp-wrong) 10%, #fff);
+    }
+    .qhp .qhp__resultStatValue{
+      font-size: 32px;
+      font-weight: 1000;
+      color: var(--qhp-heading);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .qhp .qhp__resultStatLabel{
+      font-size: 13px;
+      font-weight: 800;
+      opacity: .9;
+    }
+    .qhp .qhp__promo{
+      background: linear-gradient(135deg, var(--qhp-heading), var(--qhp-accent));
+      color: #fff;
+      border-radius: 16px;
+      padding: 18px;
+      margin: 14px 0;
+    }
+    .qhp .qhp__promoTitle{
+      margin: 0 0 8px;
+      font-size: 20px;
+      font-weight: 1000;
+    }
+    .qhp .qhp__promoText{
+      margin: 0 0 14px;
+      line-height: 1.6;
+      color: rgba(255,255,255,.92);
+    }
+    .qhp .qhp__promoList{
+      margin: 0;
+      padding-left: 18px;
+      color: rgba(255,255,255,.95);
+    }
+    .qhp .qhp__promoList li{
+      margin: 0 0 8px;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+    @media (max-width: 640px){
+      .qhp .qhp__resultGrid{ grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <div class="qhp__container">
+    <div class="qhp__grid">
+      <div class="qhp__content">
+        {% if section.settings.eyebrow != blank %}
+          <p class="qhp__eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="qhp__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.description != blank %}
+          <div class="qhp__desc">{{ section.settings.description }}</div>
+        {% endif %}
+
+        <div class="qhp__actions">
+          <button
+            type="button"
+            class="qhp__btn qhp__btn--primary"
+            data-qhp-open
+            {% if section.blocks.size == 0 %}disabled{% endif %}
+          >
+            {{ section.settings.primary_btn_label }}
+          </button>
+
+          {% if section.settings.secondary_btn_label != blank and section.settings.secondary_btn_url != blank %}
+            <a class="qhp__btn qhp__btn--secondary" href="{{ section.settings.secondary_btn_url }}">
+              {{ section.settings.secondary_btn_label }}
+            </a>
+          {% endif %}
+        </div>
+
+        {% if section.settings.advisor_text != blank %}
+          <div class="qhp__advisor">{{ section.settings.advisor_text }}</div>
+        {% endif %}
+      </div>
+
+      <div class="qhp__media">
+        {% if section.settings.image != blank %}
+          {{
+            section.settings.image
+            | image_url: width: 1600
+            | image_tag:
+              loading: 'lazy',
+              widths: '480, 720, 960, 1200, 1600',
+              sizes: '(min-width: 900px) 50vw, 100vw',
+              alt: section.settings.image.alt | escape
+          }}
+        {% else %}
+          <div style="padding: 26px; opacity: .7;">
+            Upload an image in section settings.
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Backdrop + Modal -->
+  <div class="qhp__backdrop" data-qhp-backdrop aria-hidden="true"></div>
+
+  <div class="qhp__modal" data-qhp-modal aria-hidden="true">
+    <div class="qhp__dialog" role="dialog" aria-modal="true" aria-label="Quiz">
+      <div class="qhp__dialogHeader">
+        <h3 class="qhp__dialogTitle">{{ section.settings.quiz_title }}</h3>
+        <button type="button" class="qhp__dialogClose" data-qhp-close aria-label="Close">✕</button>
+      </div>
+
+      <div class="qhp__dialogBody">
+        <!-- Quiz View -->
+        <div class="qhp__quiz" data-qhp-quiz>
+
+          <!-- Lead Gate (Name + Email) -->
+          <div class="qhp__lead" data-qhp-lead>
+            <div class="qhp__leadCard">
+              <h4 class="qhp__leadTitle">{{ section.settings.lead_title }}</h4>
+              <p class="qhp__leadDesc">{{ section.settings.lead_desc }}</p>
+
+              <div class="qhp__fieldGrid">
+                <label>
+                  <span class="qhp__label">{{ section.settings.lead_name_label }}</span>
+                  <input class="qhp__input" type="text" data-qhp-lead-name placeholder="{{ section.settings.lead_name_placeholder | escape }}">
+                </label>
+
+                <label>
+                  <span class="qhp__label">{{ section.settings.lead_email_label }}</span>
+                  <input class="qhp__input" type="email" data-qhp-lead-email placeholder="{{ section.settings.lead_email_placeholder | escape }}">
+                </label>
+              </div>
+
+              <p class="qhp__leadError" data-qhp-lead-error></p>
+
+              <button type="button" class="qhp__btn qhp__btn--primary" data-qhp-start>
+                {{ section.settings.lead_start_label }}
+              </button>
+            </div>
+          </div>
+
+          <!-- Quiz UI (hidden until started when lead is enabled) -->
+          <div data-qhp-quiz-ui>
+            <div class="qhp__quizHeader">
+              <h4 class="qhp__quizH1">{{ section.settings.quiz_header }}</h4>
+              <p class="qhp__quizSub">{{ section.settings.quiz_subheader }}</p>
+            </div>
+
+            <div class="qhp__progressCard">
+              <div class="qhp__progressRow">
+                <span data-qhp-progress-text>Question 1 of 1</span>
+                <span data-qhp-score-text>Score: 0/0</span>
+              </div>
+              <div class="qhp__bar"><div class="qhp__barFill" data-qhp-bar></div></div>
+            </div>
+
+            <div class="qhp__questionCard">
+              <h5 class="qhp__qTitle" data-qhp-question></h5>
+
+              <div class="qhp__options" data-qhp-options></div>
+
+              <div class="qhp__feedback" data-qhp-feedback>
+                <p class="qhp__feedbackTitle" data-qhp-feedback-title></p>
+                <p class="qhp__feedbackText" data-qhp-feedback-text></p>
+              </div>
+
+              <button class="qhp__next" type="button" data-qhp-next>{{ section.settings.next_question_label }}</button>
+            </div>
+
+            <div class="qhp__powered">{{ section.settings.powered_by }}</div>
+          </div>
+        </div>
+
+        <!-- Results View -->
+        <div class="qhp__results" data-qhp-results>
+          <div class="qhp__resultTop">
+            <div class="qhp__trophy">🏆</div>
+            <h4 class="qhp__resultTitle" data-qhp-result-title></h4>
+            <p class="qhp__resultScore" data-qhp-result-score></p>
+            <p class="qhp__resultPct" data-qhp-result-pct></p>
+          </div>
+
+          <div class="qhp__resultMsg">
+            <div data-qhp-result-message></div>
+            <div style="margin-top:10px;font-weight:900;color:var(--qhp-heading)" data-qhp-result-cta></div>
+          </div>
+
+          <div class="qhp__resultBreakdown">
+            <h5 class="qhp__resultBreakdownTitle">{{ section.settings.results_breakdown_heading }}</h5>
+            <div class="qhp__resultGrid">
+              <div class="qhp__resultStat qhp__resultStat--correct">
+                <div class="qhp__resultStatValue" data-qhp-correct-count>0</div>
+                <div class="qhp__resultStatLabel">{{ section.settings.results_correct_label }}</div>
+              </div>
+              <div class="qhp__resultStat qhp__resultStat--learn">
+                <div class="qhp__resultStatValue" data-qhp-incorrect-count>0</div>
+                <div class="qhp__resultStatLabel">{{ section.settings.results_incorrect_label }}</div>
+              </div>
+            </div>
+          </div>
+
+          {% assign promo_points = section.settings.results_promo_points | newline_to_br | split: '<br />' %}
+          {% if section.settings.results_promo_title != blank or section.settings.results_promo_text != blank or section.settings.results_promo_points != blank %}
+            <div class="qhp__promo">
+              {% if section.settings.results_promo_title != blank %}
+                <h5 class="qhp__promoTitle">{{ section.settings.results_promo_title }}</h5>
+              {% endif %}
+              {% if section.settings.results_promo_text != blank %}
+                <p class="qhp__promoText">{{ section.settings.results_promo_text }}</p>
+              {% endif %}
+              {% if section.settings.results_promo_points != blank %}
+                <ul class="qhp__promoList">
+                  {% for point in promo_points %}
+                    {% assign clean_point = point | strip %}
+                    {% if clean_point != blank %}
+                      <li>{{ clean_point }}</li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          <div class="qhp__resultBtns">
+            {% if section.settings.send_enabled %}
+              <button class="qhp__linkBtn qhp__linkBtn--cta" type="button" data-qhp-send>
+                {{ section.settings.send_btn_label }}
+              </button>
+              <div class="qhp__sendStatus" data-qhp-send-status></div>
+            {% endif %}
+
+            {% if section.settings.results_cta_label != blank and section.settings.results_cta_url != blank %}
+              <a class="qhp__linkBtn qhp__linkBtn--cta" href="{{ section.settings.results_cta_url }}">
+                {{ section.settings.results_cta_label }}
+              </a>
+            {% endif %}
+
+            <button class="qhp__linkBtn qhp__linkBtn--retake" type="button" data-qhp-retake>
+              {{ section.settings.retake_label }}
+            </button>
+          </div>
+
+          <div class="qhp__powered" style="margin-top:10px">{{ section.settings.powered_by }}</div>
+        </div>
+
+        <!-- Hidden Shopify contact form (emails store customer email) -->
+        <form data-qhp-submit-form method="post" action="/contact" accept-charset="UTF-8" style="display:none;">
+          <input type="hidden" name="form_type" value="contact">
+          <input type="hidden" name="utf8" value="✓">
+          <input type="hidden" name="contact[name]" data-qhp-form-name>
+          <input type="hidden" name="contact[email]" data-qhp-form-email>
+          <input type="hidden" name="contact[subject]" data-qhp-form-subject value="Quiz Result Submission">
+          <textarea name="contact[body]" data-qhp-form-body></textarea>
+
+          <!-- Honeypot -->
+          <input class="qhp__hp" type="text" name="contact[company]" tabindex="-1" autocomplete="off" aria-hidden="true">
+        </form>
+
+        <script type="application/json" data-qhp-questions>
+          [
+            {%- for block in section.blocks -%}
+              {
+                "question": {{ block.settings.question | json }},
+                "options_raw": {{ block.settings.options | json }},
+                "correct": {{ block.settings.correct_option | plus: 0 }},
+                "explanation": {{ block.settings.explanation | json }}
+              }{%- unless forloop.last -%},{%- endunless -%}
+            {%- endfor -%}
+          ]
+        </script>
+
+        <script type="application/json" data-qhp-default-questions>
+[
+            {
+                        "question": "Which energy system is primarily used during the first 10 seconds of high-intensity exercise?",
+                        "options_raw": "Aerobic system\nATP-PCr (phosphagen) system\nGlycolytic system\nOxidative system",
+                        "correct": 2,
+                        "explanation": "The ATP-PCr system provides immediate energy for short bursts of intense activity (0-10 seconds). This is why sprinters and powerlifters rely heavily on this system!"
+            },
+            {
+                        "question": "What is the recommended rest time between sets for muscle hypertrophy (growth)?",
+                        "options_raw": "15-30 seconds\n30-60 seconds\n60-90 seconds\n3-5 minutes",
+                        "correct": 3,
+                        "explanation": "For muscle hypertrophy, 60-90 seconds of rest allows partial recovery while maintaining metabolic stress, which is key for muscle growth. Shorter rest is for endurance, longer rest is for strength/power."
+            },
+            {
+                        "question": "Which muscle group is NOT part of the core stabilizers?",
+                        "options_raw": "Transverse abdominis\nMultifidus\nBiceps femoris\nPelvic floor muscles",
+                        "correct": 3,
+                        "explanation": "The biceps femoris is part of the hamstring group, not a core stabilizer. The core includes the transverse abdominis, multifidus, diaphragm, and pelvic floor - all crucial for spinal stability!"
+            },
+            {
+                        "question": "What percentage of total daily calories should come from protein for general fitness?",
+                        "options_raw": "5-10%\n10-15%\n15-30%\n40-50%",
+                        "correct": 3,
+                        "explanation": "Most fitness professionals recommend 15-30% of daily calories from protein. This supports muscle repair, satiety, and overall health without going overboard."
+            },
+            {
+                        "question": "Which training principle states that adaptations are specific to the type of training performed?",
+                        "options_raw": "Progressive overload\nReversibility\nSpecificity (SAID principle)\nIndividuality",
+                        "correct": 3,
+                        "explanation": "The SAID principle (Specific Adaptation to Imposed Demands) means your body adapts specifically to how you train it. Want to run faster? Train speed. Want bigger muscles? Train hypertrophy!"
+            },
+            {
+                        "question": "True or False: You can spot-reduce fat from specific body areas through targeted exercises.",
+                        "options_raw": "True - doing crunches burns belly fat\nFalse - fat loss occurs systemically\nTrue - but only with high reps\nTrue - for women but not men",
+                        "correct": 2,
+                        "explanation": "This is one of the biggest fitness myths! Spot reduction is not possible. Fat loss occurs throughout the body based on genetics, hormones, and overall calorie deficit. Targeted exercises build muscle but do not specifically burn fat in that area."
+            },
+            {
+                        "question": "What is the primary movement pattern in a deadlift?",
+                        "options_raw": "Squat pattern\nHinge pattern\nPush pattern\nLunge pattern",
+                        "correct": 2,
+                        "explanation": "The deadlift is a hip hinge pattern, where the movement is dominated by hip extension (glutes and hamstrings). This is different from a squat, which emphasizes knee flexion and extension."
+            },
+            {
+                        "question": "Which adaptation occurs FIRST when beginning a resistance training program?",
+                        "options_raw": "Muscle hypertrophy\nIncreased capillary density\nNeural adaptations\nBone density improvements",
+                        "correct": 3,
+                        "explanation": "Neural adaptations happen first (within 2-8 weeks)! Your nervous system learns to recruit muscle fibers more efficiently. Muscle growth typically follows after 6-8 weeks of consistent training."
+            },
+            {
+                        "question": "What does RPE stand for in fitness training?",
+                        "options_raw": "Reps Per Exercise\nRate of Perceived Exertion\nResistance Power Efficiency\nRest Period Emphasis",
+                        "correct": 2,
+                        "explanation": "RPE (Rate of Perceived Exertion) is a subjective scale (usually 1-10) used to gauge exercise intensity. It is a valuable tool for trainers to monitor and adjust client workouts!"
+            },
+            {
+                        "question": "Which of the following is a contraindication for performing a Valsalva maneuver?",
+                        "options_raw": "Advanced lifters doing maximal lifts\nIndividuals with high blood pressure\nAthletes during explosive movements\nPowerlifters during competition",
+                        "correct": 2,
+                        "explanation": "The Valsalva maneuver (holding breath while bearing down) dramatically increases blood pressure. It is contraindicated for people with hypertension or cardiovascular issues, even though it can help stabilize the spine in healthy lifters."
+            },
+            {
+                        "question": "What is the recommended weekly aerobic exercise duration for general health according to health guidelines?",
+                        "options_raw": "75 minutes of moderate intensity\n150 minutes of moderate intensity\n300 minutes of moderate intensity\n60 minutes of moderate intensity",
+                        "correct": 2,
+                        "explanation": "The standard recommendation is 150 minutes (2.5 hours) of moderate-intensity aerobic activity per week, or 75 minutes of vigorous-intensity activity. As a trainer, you will help clients achieve this goal!"
+            },
+            {
+                        "question": "Which fitness assessment would be MOST appropriate for measuring upper body muscular endurance?",
+                        "options_raw": "1-rep max bench press\nPush-up test to fatigue\nGrip strength test\nVertical jump test",
+                        "correct": 2,
+                        "explanation": "The push-up test to fatigue measures muscular endurance (how many reps you can perform). A 1-rep max tests strength, grip strength tests grip strength, and vertical jump tests power. Understanding these distinctions is crucial for trainers!"
+            }
+]
+        </script>
+
+        <script>
+          (function(){
+            var root = document.getElementById('QuizHeroPopup-{{ section.id }}');
+            if(!root) return;
+
+            var leadEnabled = {{ section.settings.lead_enabled | json }};
+            var sendEnabled = {{ section.settings.send_enabled | json }};
+            var sendMode = {{ section.settings.send_mode | json }}; // "auto" or "button"
+            var sendProvider = {{ section.settings.send_provider | json }}; // "shopify_contact" or "webhook"
+            var sendToEmail = {{ section.settings.send_to_email | json }};
+            var sendCcEmails = {{ section.settings.send_cc_emails | json }};
+            var sendSubject = {{ section.settings.send_subject | json }};
+            var sendWebhookUrl = {{ section.settings.send_webhook_url | json }};
+
+            var msgLeadRequired = {{ section.settings.lead_required_msg | json }};
+            var msgSendSuccess = {{ section.settings.send_success_text | json }};
+            var msgSendError = {{ section.settings.send_error_text | json }};
+            var nextQuestionLabel = {{ section.settings.next_question_label | json }};
+            var seeResultsLabel = {{ section.settings.see_results_label | json }};
+
+            var openBtns = root.querySelectorAll('[data-qhp-open]');
+            var backdrop = root.querySelector('[data-qhp-backdrop]');
+            var modal = root.querySelector('[data-qhp-modal]');
+            var closeBtn = root.querySelector('[data-qhp-close]');
+
+            var quizWrap = root.querySelector('[data-qhp-quiz]');
+            var resultsWrap = root.querySelector('[data-qhp-results]');
+
+            var qText = root.querySelector('[data-qhp-question]');
+            var optionsWrap = root.querySelector('[data-qhp-options]');
+            var feedback = root.querySelector('[data-qhp-feedback]');
+            var feedbackTitle = root.querySelector('[data-qhp-feedback-title]');
+            var feedbackText = root.querySelector('[data-qhp-feedback-text]');
+            var nextBtn = root.querySelector('[data-qhp-next]');
+
+            var progressText = root.querySelector('[data-qhp-progress-text]');
+            var scoreText = root.querySelector('[data-qhp-score-text]');
+            var bar = root.querySelector('[data-qhp-bar]');
+
+            var resTitle = root.querySelector('[data-qhp-result-title]');
+            var resScore = root.querySelector('[data-qhp-result-score]');
+            var resPct = root.querySelector('[data-qhp-result-pct]');
+            var resMsg = root.querySelector('[data-qhp-result-message]');
+            var resCta = root.querySelector('[data-qhp-result-cta]');
+            var resCorrectCount = root.querySelector('[data-qhp-correct-count]');
+            var resIncorrectCount = root.querySelector('[data-qhp-incorrect-count]');
+            var retakeBtn = root.querySelector('[data-qhp-retake]');
+
+            // Lead UI
+            var leadNameInput = root.querySelector('[data-qhp-lead-name]');
+            var leadEmailInput = root.querySelector('[data-qhp-lead-email]');
+            var leadStartBtn = root.querySelector('[data-qhp-start]');
+            var leadError = root.querySelector('[data-qhp-lead-error]');
+
+            // Submit UI
+            var sendBtn = root.querySelector('[data-qhp-send]');
+            var sendStatus = root.querySelector('[data-qhp-send-status]');
+            var submitForm = root.querySelector('[data-qhp-submit-form]');
+            var formName = root.querySelector('[data-qhp-form-name]');
+            var formEmail = root.querySelector('[data-qhp-form-email]');
+            var formSubject = root.querySelector('[data-qhp-form-subject]');
+            var formBody = root.querySelector('[data-qhp-form-body]');
+
+            var dataEl = root.querySelector('script[type="application/json"][data-qhp-questions]');
+            var defaultDataEl = root.querySelector('script[type="application/json"][data-qhp-default-questions]');
+            var raw = [];
+            var defaultRaw = [];
+            try { raw = JSON.parse(dataEl.textContent || '[]'); } catch(e){ raw = []; }
+            try { defaultRaw = JSON.parse(defaultDataEl.textContent || '[]'); } catch(e){ defaultRaw = []; }
+
+            function normalizeOptionsRaw(value){
+              return (value || '')
+                .split('\n')
+                .map(function(s){ return (s || '').trim(); })
+                .filter(Boolean)
+                .join('\n');
+            }
+
+            function isPlaceholderQuestion(q){
+              return (q.question || '').trim() === 'Your question here...' &&
+                normalizeOptionsRaw(q.options_raw || '') === 'Option 1\nOption 2\nOption 3\nOption 4' &&
+                (q.explanation || '').trim() === 'Explanation text...';
+            }
+
+            function normalizeQuestions(items){
+              return (items || []).map(function(q){
+                var opts = normalizeOptionsRaw(q.options_raw || '').split('\n').filter(Boolean);
+                return {
+                  question: q.question || '',
+                  options: opts,
+                  correct: Math.max(0, (parseInt(q.correct,10) || 1) - 1),
+                  explanation: q.explanation || ''
+                };
+              }).filter(function(q){ return q.question && q.options.length >= 2; });
+            }
+
+            var customRaw = (raw || []).filter(function(q){ return !isPlaceholderQuestion(q); });
+            var questions = customRaw.length ? normalizeQuestions(customRaw) : normalizeQuestions(defaultRaw);
+
+            // State
+            var started = false;
+            var lead = { name: '', email: '' };
+
+            var idx = 0;
+            var selected = null;
+            var showFeedback = false;
+            var score = 0;
+
+            var correctByQ = []; // boolean per question
+            var sent = false;
+
+            var closeResets = {{ section.settings.close_resets | json }};
+
+            function lockScroll(locked){
+              if(locked){
+                root._qhpPrevOverflow = document.body.style.overflow;
+                document.body.style.overflow = 'hidden';
+              } else {
+                document.body.style.overflow = root._qhpPrevOverflow || '';
+              }
+            }
+
+            function openModal(){
+              if(!questions.length) return;
+
+              root.classList.add('qhp--open');
+              backdrop.setAttribute('aria-hidden','false');
+              modal.setAttribute('aria-hidden','false');
+              lockScroll(true);
+
+              resultsWrap.classList.remove('is-visible');
+              resultsWrap.style.display = 'none';
+              quizWrap.style.display = '';
+
+              if(leadEnabled){
+                root.classList.remove('qhp--started');
+                started = false;
+                if(leadError){ leadError.classList.remove('is-visible'); leadError.textContent=''; }
+              } else {
+                started = true;
+                root.classList.add('qhp--started');
+              }
+
+              resetQuizStateOnly();
+              setTimeout(function(){ closeBtn && closeBtn.focus(); }, 0);
+            }
+
+            function closeModal(){
+              root.classList.remove('qhp--open');
+              backdrop.setAttribute('aria-hidden','true');
+              modal.setAttribute('aria-hidden','true');
+              lockScroll(false);
+
+              if(closeResets){
+                resetAll();
+              }
+            }
+
+            function resetQuizStateOnly(){
+              idx = 0;
+              selected = null;
+              showFeedback = false;
+              score = 0;
+              correctByQ = [];
+              sent = false;
+
+              if(sendStatus) sendStatus.textContent = '';
+              if(sendBtn) sendBtn.disabled = false;
+
+              feedback.classList.remove('is-visible');
+              nextBtn.classList.remove('is-visible');
+
+              render();
+            }
+
+            function resetAll(){
+              lead = { name:'', email:'' };
+              if(leadNameInput) leadNameInput.value = '';
+              if(leadEmailInput) leadEmailInput.value = '';
+              if(leadError){ leadError.classList.remove('is-visible'); leadError.textContent=''; }
+
+              started = !leadEnabled;
+              root.classList.toggle('qhp--started', started);
+
+              resetQuizStateOnly();
+            }
+
+            function updateProgress(){
+              var total = questions.length;
+              progressText.textContent = 'Question ' + (idx + 1) + ' of ' + total;
+              var answeredCount = idx + (showFeedback ? 1 : 0);
+              scoreText.textContent = 'Score: ' + score + '/' + (answeredCount || 0);
+              bar.style.width = ((idx + 1) / total * 100) + '%';
+            }
+
+            function clearOptions(){
+              while(optionsWrap.firstChild) optionsWrap.removeChild(optionsWrap.firstChild);
+            }
+
+            function makeOptionBtn(label, optIndex){
+              var btn = document.createElement('button');
+              btn.type = 'button';
+              btn.className = 'qhp__option';
+              btn.setAttribute('data-opt', String(optIndex));
+
+              var left = document.createElement('span');
+              left.textContent = label;
+
+              var badge = document.createElement('span');
+              badge.className = 'qhp__badge';
+              badge.textContent = '';
+
+              btn.appendChild(left);
+              btn.appendChild(badge);
+
+              btn.addEventListener('click', function(){
+                if(showFeedback) return;
+
+                selected = optIndex;
+                showFeedback = true;
+
+                var isCorrect = selected === questions[idx].correct;
+                correctByQ[idx] = isCorrect;
+
+                if(isCorrect) score++;
+
+                renderFeedback();
+                renderOptionsState();
+                nextBtn.textContent = idx < questions.length - 1 ? nextQuestionLabel : seeResultsLabel;
+                nextBtn.classList.add('is-visible');
+                updateProgress();
+              });
+
+              return btn;
+            }
+
+            function renderOptionsState(){
+              var q = questions[idx];
+              var buttons = optionsWrap.querySelectorAll('.qhp__option');
+
+              buttons.forEach(function(b){
+                b.disabled = true;
+                var i = parseInt(b.getAttribute('data-opt'), 10);
+                var badge = b.querySelector('.qhp__badge');
+
+                b.classList.remove('qhp__option--correct','qhp__option--wrong');
+                if(badge) badge.textContent = '';
+
+                if(showFeedback){
+                  if(i === q.correct){
+                    b.classList.add('qhp__option--correct');
+                    if(badge) badge.textContent = '✓';
+                  } else if(i === selected){
+                    b.classList.add('qhp__option--wrong');
+                    if(badge) badge.textContent = '✕';
+                  }
+                }
+              });
+            }
+
+            function renderFeedback(){
+              var q = questions[idx];
+              var isCorrect = selected === q.correct;
+
+              feedbackTitle.textContent = isCorrect ? 'Correct! 🎉' : 'Not quite, but great try!';
+              feedbackText.textContent = q.explanation || '';
+              feedback.classList.add('is-visible');
+            }
+
+            function renderQuestion(){
+              var q = questions[idx];
+              qText.textContent = q.question;
+
+              clearOptions();
+              q.options.forEach(function(opt, i){
+                optionsWrap.appendChild(makeOptionBtn(opt, i));
+              });
+
+              feedback.classList.remove('is-visible');
+              nextBtn.classList.remove('is-visible');
+              nextBtn.textContent = nextQuestionLabel;
+              showFeedback = false;
+              selected = null;
+              updateProgress();
+            }
+
+            function getResultBucket(pct){
+              if(pct >= 90){
+                return { title: {{ section.settings.tier1_title | json }}, message: {{ section.settings.tier1_message | json }}, cta: {{ section.settings.tier1_cta | json }} };
+              }
+              if(pct >= 75){
+                return { title: {{ section.settings.tier2_title | json }}, message: {{ section.settings.tier2_message | json }}, cta: {{ section.settings.tier2_cta | json }} };
+              }
+              if(pct >= 60){
+                return { title: {{ section.settings.tier3_title | json }}, message: {{ section.settings.tier3_message | json }}, cta: {{ section.settings.tier3_cta | json }} };
+              }
+              return { title: {{ section.settings.tier4_title | json }}, message: {{ section.settings.tier4_message | json }}, cta: {{ section.settings.tier4_cta | json }} };
+            }
+
+            function splitEmails(value){
+              return String(value || '')
+                .split(/[\n,;]/)
+                .map(function(item){ return item.trim(); })
+                .filter(Boolean);
+            }
+
+            function buildResultPayload(){
+              var total = questions.length;
+              var pct = total ? Math.round((score / total) * 100) : 0;
+              var bucket = getResultBucket(pct);
+
+              return {
+                quiz_title: {{ section.settings.quiz_title | json }},
+                page_url: window.location.href,
+                sent_via: sendProvider,
+                to: splitEmails(sendToEmail),
+                cc: splitEmails(sendCcEmails),
+                subject: sendSubject || 'Quiz Result Submission',
+                participant: {
+                  name: lead.name || '',
+                  email: lead.email || ''
+                },
+                result: {
+                  score: score,
+                  total_questions: total,
+                  percentage: pct,
+                  tier_title: bucket.title || '',
+                  tier_message: bucket.message || '',
+                  tier_cta: bucket.cta || ''
+                },
+                breakdown_text: correctByQ.map(function(isCorrect, i){
+                  return 'Q' + (i + 1) + ': ' + (isCorrect ? 'Correct' : 'Incorrect');
+                }).join('\n'),
+                answers: questions.map(function(question, i){
+                  return {
+                    index: i + 1,
+                    question: question.question,
+                    correct_option: question.options[question.correct] || '',
+                    is_correct: !!correctByQ[i]
+                  };
+                })
+              };
+            }
+
+            function buildResultBody(payload){
+              return [
+                payload.subject || 'Quiz Result Submission',
+                '-----------------------',
+                'Send To: ' + (payload.to && payload.to.length ? payload.to.join(', ') : 'Store contact email'),
+                'CC: ' + (payload.cc && payload.cc.length ? payload.cc.join(', ') : 'None'),
+                'Name: ' + (payload.participant.name || ''),
+                'Email: ' + (payload.participant.email || ''),
+                'Score: ' + payload.result.score + '/' + payload.result.total_questions + ' (' + payload.result.percentage + '%)',
+                'Result Tier: ' + (payload.result.tier_title || ''),
+                'Page URL: ' + payload.page_url,
+                '',
+                'Breakdown:',
+                payload.breakdown_text || '',
+                '',
+                'Message:',
+                payload.result.tier_message || '',
+                '',
+                'CTA:',
+                payload.result.tier_cta || ''
+              ].join('\n');
+            }
+
+            function showResults(){
+              var total = questions.length;
+              var pct = total ? Math.round((score / total) * 100) : 0;
+              var bucket = getResultBucket(pct);
+
+              resTitle.textContent = bucket.title || 'Your Results';
+              resScore.textContent = score + '/' + total;
+              resPct.textContent = pct + '% Correct';
+
+              resMsg.textContent = bucket.message || '';
+              resCta.textContent = bucket.cta || '';
+              if(resCorrectCount) resCorrectCount.textContent = score;
+              if(resIncorrectCount) resIncorrectCount.textContent = Math.max(total - score, 0);
+
+              quizWrap.style.display = 'none';
+              resultsWrap.style.display = '';
+              resultsWrap.classList.add('is-visible');
+
+              if(sendEnabled && sendMode === 'auto' && !sent){
+                submitResults();
+              }
+            }
+
+            function render(){
+              if(!questions.length){
+                qText.textContent = 'No quiz questions found. Please add question blocks.';
+                clearOptions();
+                return;
+              }
+              renderQuestion();
+            }
+
+            function onNext(){
+              if(!showFeedback) return;
+
+              if(idx < questions.length - 1){
+                idx++;
+                renderQuestion();
+              } else {
+                showResults();
+              }
+            }
+
+            function validateLead(){
+              var name = (leadNameInput && leadNameInput.value || '').trim();
+              var email = (leadEmailInput && leadEmailInput.value || '').trim();
+
+              var ok = name.length > 1 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+              if(!ok){
+                if(leadError){
+                  leadError.textContent = msgLeadRequired || 'Please enter your name and a valid email to begin.';
+                  leadError.classList.add('is-visible');
+                }
+                return null;
+              }
+              if(leadError){
+                leadError.textContent = '';
+                leadError.classList.remove('is-visible');
+              }
+              return { name: name, email: email };
+            }
+
+            function startQuiz(){
+              if(!leadEnabled){
+                started = true;
+                root.classList.add('qhp--started');
+                resetQuizStateOnly();
+                return;
+              }
+
+              var v = validateLead();
+              if(!v) return;
+
+              lead = v;
+              started = true;
+              root.classList.add('qhp--started');
+              resetQuizStateOnly();
+            }
+
+            async function submitResults(){
+              if(!sendEnabled) return;
+              if(sent) return;
+
+              if(submitForm){
+                var hp = submitForm.querySelector('input[name="contact[company]"]');
+                if(hp && hp.value) return;
+              }
+
+              if(leadEnabled && (!lead.email || !lead.name)){
+                var v = validateLead();
+                if(!v) return;
+                lead = v;
+              }
+
+              if(sendBtn) sendBtn.disabled = true;
+              if(sendStatus) sendStatus.textContent = 'Sending results…';
+
+              var payloadData = buildResultPayload();
+              var body = buildResultBody(payloadData);
+
+              try{
+                if(sendProvider === 'webhook'){
+                  if(!sendWebhookUrl){
+                    throw new Error('Missing webhook URL');
+                  }
+
+                  var webhookResp = await fetch(sendWebhookUrl, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Accept': 'application/json, text/plain, */*'
+                    },
+                    body: JSON.stringify(payloadData)
+                  });
+
+                  if(!webhookResp || !webhookResp.ok){
+                    throw new Error('Webhook request failed');
+                  }
+
+                  sent = true;
+                  if(sendStatus) sendStatus.textContent = msgSendSuccess || 'Sent! Our team received your quiz results.';
+                  return;
+                }
+
+                if(!payloadData.participant.email){
+                  throw new Error('Participant email is required for Shopify contact delivery');
+                }
+
+                if(formName) formName.value = lead.name || 'Quiz Participant';
+                if(formEmail) formEmail.value = lead.email || '';
+                if(formSubject) formSubject.value = payloadData.subject || 'Quiz Result Submission';
+                if(formBody) formBody.value = body;
+
+                var fd = new FormData(submitForm);
+                var payload = new URLSearchParams();
+                fd.forEach(function(v,k){ payload.append(k, v); });
+
+                var resp = await fetch('/contact', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+                  body: payload.toString()
+                });
+
+                if(resp && (resp.ok || resp.status === 200)){
+                  sent = true;
+                  if(sendStatus) sendStatus.textContent = msgSendSuccess || 'Sent! Our team received your quiz results.';
+                } else {
+                  throw new Error('Shopify contact request failed');
+                }
+              } catch(err){
+                if(sendBtn) sendBtn.disabled = false;
+                if(sendStatus) sendStatus.textContent = msgSendError || 'Sorry, we could not send your results. Please try again.';
+              }
+            }
+
+            // Bindings
+            openBtns.forEach(function(btn){ btn.addEventListener('click', openModal); });
+            closeBtn.addEventListener('click', closeModal);
+            backdrop.addEventListener('click', closeModal);
+            nextBtn.addEventListener('click', onNext);
+
+            if(leadStartBtn) leadStartBtn.addEventListener('click', startQuiz);
+            if(sendBtn) sendBtn.addEventListener('click', submitResults);
+
+            retakeBtn && retakeBtn.addEventListener('click', function(){
+              resetQuizStateOnly();
+              quizWrap.style.display = '';
+              resultsWrap.style.display = 'none';
+              resultsWrap.classList.remove('is-visible');
+            });
+
+            document.addEventListener('keydown', function(e){
+              if(!root.classList.contains('qhp--open')) return;
+              if(e.key === 'Escape') closeModal();
+            });
+
+            // initial
+            render();
+          })();
+        </script>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Quiz Hero + Popup",
+  "settings": [
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Max width",
+      "min": 900,
+      "max": 1600,
+      "step": 50,
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section background",
+      "default": "#f2f2e9"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#01241e"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#01241e"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow (optional)",
+      "default": "NPTA™ Knowledge Challenge"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How Much Do You Really Know About Fitness?"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Take the NPTA™ Knowledge Challenge and see how strong your fitness knowledge really is.</p>"
+    },
+    {
+      "type": "text",
+      "id": "primary_btn_label",
+      "label": "Primary button label",
+      "default": "Take the Quiz"
+    },
+    {
+      "type": "color",
+      "id": "primary_btn_bg",
+      "label": "Primary button background",
+      "default": "#0f828c"
+    },
+    {
+      "type": "color",
+      "id": "primary_btn_text",
+      "label": "Primary button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "secondary_btn_label",
+      "label": "Secondary button label",
+      "default": "Book a Free Call"
+    },
+    {
+      "type": "url",
+      "id": "secondary_btn_url",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "color",
+      "id": "secondary_btn_bg",
+      "label": "Secondary button background",
+      "default": "#e0ded0"
+    },
+    {
+      "type": "color",
+      "id": "secondary_btn_text",
+      "label": "Secondary button text",
+      "default": "#01241e"
+    },
+    {
+      "type": "text",
+      "id": "advisor_text",
+      "label": "Advisor text",
+      "default": "Would you like to speak to a Career Advisor?"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Right image"
+    },
+    {
+      "type": "header",
+      "content": "Popup / Quiz"
+    },
+    {
+      "type": "color",
+      "id": "modal_bg",
+      "label": "Modal background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#0f828c"
+    },
+    {
+      "type": "color",
+      "id": "correct_color",
+      "label": "Correct color",
+      "default": "#a6da18"
+    },
+    {
+      "type": "color",
+      "id": "wrong_color",
+      "label": "Wrong color",
+      "default": "#28666e"
+    },
+    {
+      "type": "text",
+      "id": "quiz_title",
+      "label": "Modal title (top bar)",
+      "default": "Fitness Quiz"
+    },
+    {
+      "type": "text",
+      "id": "quiz_header",
+      "label": "Quiz header",
+      "default": "How Much Do You Really Know About Fitness?"
+    },
+    {
+      "type": "text",
+      "id": "quiz_subheader",
+      "label": "Quiz subheader",
+      "default": "Take the NPTA™ Knowledge Challenge"
+    },
+    {
+      "type": "text",
+      "id": "powered_by",
+      "label": "Powered by text",
+      "default": "Powered by NPTA™ Canada - National Personal Training Academy"
+    },
+    {
+      "type": "text",
+      "id": "next_question_label",
+      "label": "Next question button label",
+      "default": "Next Question"
+    },
+    {
+      "type": "text",
+      "id": "see_results_label",
+      "label": "Final button label",
+      "default": "See Results"
+    },
+    {
+      "type": "checkbox",
+      "id": "close_resets",
+      "label": "Reset quiz when modal is closed",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Lead capture (before quiz)"
+    },
+    {
+      "type": "checkbox",
+      "id": "lead_enabled",
+      "label": "Require name + email before quiz",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "lead_title",
+      "label": "Lead title",
+      "default": "Before you start"
+    },
+    {
+      "type": "text",
+      "id": "lead_desc",
+      "label": "Lead description",
+      "default": "Enter your details to begin the quiz."
+    },
+    {
+      "type": "text",
+      "id": "lead_name_label",
+      "label": "Name label",
+      "default": "Name"
+    },
+    {
+      "type": "text",
+      "id": "lead_email_label",
+      "label": "Email label",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "lead_name_placeholder",
+      "label": "Name placeholder",
+      "default": "Your name"
+    },
+    {
+      "type": "text",
+      "id": "lead_email_placeholder",
+      "label": "Email placeholder",
+      "default": "you@email.com"
+    },
+    {
+      "type": "text",
+      "id": "lead_start_label",
+      "label": "Start button label",
+      "default": "Start Quiz"
+    },
+    {
+      "type": "text",
+      "id": "lead_required_msg",
+      "label": "Validation message",
+      "default": "Please enter your name and a valid email to begin."
+    },
+    {
+      "type": "header",
+      "content": "Send results"
+    },
+    {
+      "type": "paragraph",
+      "content": "Shopify contact delivery sends to your store contact email. To use custom To and CC recipients, switch the delivery method to Webhook / custom endpoint and add a webhook URL that accepts POST requests."
+    },
+    {
+      "type": "checkbox",
+      "id": "send_enabled",
+      "label": "Enable sending results to admin",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "send_mode",
+      "label": "Send mode",
+      "default": "auto",
+      "options": [
+        {
+          "value": "auto",
+          "label": "Auto-send when finished"
+        },
+        {
+          "value": "button",
+          "label": "Send only when button is clicked"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "send_provider",
+      "label": "Delivery method",
+      "default": "shopify_contact",
+      "options": [
+        {
+          "value": "shopify_contact",
+          "label": "Shopify contact email"
+        },
+        {
+          "value": "webhook",
+          "label": "Webhook / custom endpoint"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "send_to_email",
+      "label": "Send results to (To)"
+    },
+    {
+      "type": "textarea",
+      "id": "send_cc_emails",
+      "label": "CC email(s)"
+    },
+    {
+      "type": "text",
+      "id": "send_subject",
+      "label": "Email subject",
+      "default": "Quiz Result Submission"
+    },
+    {
+      "type": "url",
+      "id": "send_webhook_url",
+      "label": "Webhook URL"
+    },
+    {
+      "type": "text",
+      "id": "send_btn_label",
+      "label": "Send button label",
+      "default": "Send my results"
+    },
+    {
+      "type": "text",
+      "id": "send_success_text",
+      "label": "Success message",
+      "default": "Sent! Our team received your quiz results."
+    },
+    {
+      "type": "text",
+      "id": "send_error_text",
+      "label": "Error message",
+      "default": "Sorry, we could not send your results. Please try again."
+    },
+    {
+      "type": "header",
+      "content": "Results content"
+    },
+    {
+      "type": "text",
+      "id": "results_breakdown_heading",
+      "label": "Breakdown heading",
+      "default": "Your Results Breakdown:"
+    },
+    {
+      "type": "text",
+      "id": "results_correct_label",
+      "label": "Correct label",
+      "default": "Correct"
+    },
+    {
+      "type": "text",
+      "id": "results_incorrect_label",
+      "label": "Incorrect label",
+      "default": "To Learn"
+    },
+    {
+      "type": "text",
+      "id": "results_promo_title",
+      "label": "Promo title",
+      "default": "Ready to Become a Certified Fitness Professional?"
+    },
+    {
+      "type": "textarea",
+      "id": "results_promo_text",
+      "label": "Promo description",
+      "default": "NPTA offers comprehensive certification programs that will take your knowledge to the next level. Whether you want to launch your own fitness business or work with established gyms, we will give you the tools, knowledge, and credentials to succeed."
+    },
+    {
+      "type": "textarea",
+      "id": "results_promo_points",
+      "label": "Promo bullet points (one per line)",
+      "default": "Nationally recognized certification\nEvidence-based curriculum\nBusiness and entrepreneurship training\nOngoing support and continuing education"
+    },
+    {
+      "type": "header",
+      "content": "Results CTA (button)"
+    },
+    {
+      "type": "text",
+      "id": "results_cta_label",
+      "label": "Results CTA label",
+      "default": "Explore NPTA Certification Programs"
+    },
+    {
+      "type": "url",
+      "id": "results_cta_url",
+      "label": "Results CTA link"
+    },
+    {
+      "type": "text",
+      "id": "retake_label",
+      "label": "Retake button label",
+      "default": "Retake Quiz"
+    },
+    {
+      "type": "header",
+      "content": "Result Tiers (messages)"
+    },
+    {
+      "type": "text",
+      "id": "tier1_title",
+      "label": "Tier 1 title (>=90%)",
+      "default": "🏆 Elite Fitness Knowledge!"
+    },
+    {
+      "type": "textarea",
+      "id": "tier1_message",
+      "label": "Tier 1 message",
+      "default": "Wow! You scored in the top tier. You have what it takes to be an exceptional fitness professional. Your deep understanding of exercise science shows you are ready to take the next step."
+    },
+    {
+      "type": "text",
+      "id": "tier1_cta",
+      "label": "Tier 1 CTA line",
+      "default": "You're already thinking like a certified trainer!"
+    },
+    {
+      "type": "text",
+      "id": "tier2_title",
+      "label": "Tier 2 title (>=75%)",
+      "default": "💪 Future Trainer Material!"
+    },
+    {
+      "type": "textarea",
+      "id": "tier2_message",
+      "label": "Tier 2 message",
+      "default": "Impressive! You have a solid foundation in fitness knowledge. With professional training and certification, you could turn this passion into a rewarding career helping others achieve their goals."
+    },
+    {
+      "type": "text",
+      "id": "tier2_cta",
+      "label": "Tier 2 CTA line",
+      "default": "Imagine what you'll know after NPTA™ certification!"
+    },
+    {
+      "type": "text",
+      "id": "tier3_title",
+      "label": "Tier 3 title (>=60%)",
+      "default": "🎯 Fitness Enthusiast!"
+    },
+    {
+      "type": "textarea",
+      "id": "tier3_message",
+      "label": "Tier 3 message",
+      "default": "Great job! You know more than the average gym-goer. There is so much more to discover about the science of fitness. The questions you missed reveal exciting areas you could master with proper education."
+    },
+    {
+      "type": "text",
+      "id": "tier3_cta",
+      "label": "Tier 3 CTA line",
+      "default": "Ready to fill in the knowledge gaps?"
+    },
+    {
+      "type": "text",
+      "id": "tier4_title",
+      "label": "Tier 4 title (<60%)",
+      "default": "🌟 Curious Beginner!"
+    },
+    {
+      "type": "textarea",
+      "id": "tier4_message",
+      "label": "Tier 4 message",
+      "default": "Everyone starts somewhere! Your curiosity about fitness is the first step. The science behind effective training is fascinating, and there is a whole world of knowledge waiting for you to explore."
+    },
+    {
+      "type": "text",
+      "id": "tier4_cta",
+      "label": "Tier 4 CTA line",
+      "default": "Turn your curiosity into expertise!"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Custom Question",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "Your question here..."
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "Option 1\nOption 2\nOption 3\nOption 4"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 1
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "Explanation text..."
+        }
+      ]
+    },
+    {
+      "type": "question_1",
+      "name": "Default Question 1",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "Which energy system is primarily used during the first 10 seconds of high-intensity exercise?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "Aerobic system\nATP-PCr (phosphagen) system\nGlycolytic system\nOxidative system"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "The ATP-PCr system provides immediate energy for short bursts of intense activity (0-10 seconds). This is why sprinters and powerlifters rely heavily on this system!"
+        }
+      ]
+    },
+    {
+      "type": "question_2",
+      "name": "Default Question 2",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "What is the recommended rest time between sets for muscle hypertrophy (growth)?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "15-30 seconds\n30-60 seconds\n60-90 seconds\n3-5 minutes"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 3
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "For muscle hypertrophy, 60-90 seconds of rest allows partial recovery while maintaining metabolic stress, which is key for muscle growth. Shorter rest is for endurance, longer rest is for strength/power."
+        }
+      ]
+    },
+    {
+      "type": "question_3",
+      "name": "Default Question 3",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "Which muscle group is NOT part of the core stabilizers?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "Transverse abdominis\nMultifidus\nBiceps femoris\nPelvic floor muscles"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 3
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "The biceps femoris is part of the hamstring group, not a core stabilizer. The core includes the transverse abdominis, multifidus, diaphragm, and pelvic floor - all crucial for spinal stability!"
+        }
+      ]
+    },
+    {
+      "type": "question_4",
+      "name": "Default Question 4",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "What percentage of total daily calories should come from protein for general fitness?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "5-10%\n10-15%\n15-30%\n40-50%"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 3
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "Most fitness professionals recommend 15-30% of daily calories from protein. This supports muscle repair, satiety, and overall health without going overboard."
+        }
+      ]
+    },
+    {
+      "type": "question_5",
+      "name": "Default Question 5",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "Which training principle states that adaptations are specific to the type of training performed?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "Progressive overload\nReversibility\nSpecificity (SAID principle)\nIndividuality"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 3
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "The SAID principle (Specific Adaptation to Imposed Demands) means your body adapts specifically to how you train it. Want to run faster? Train speed. Want bigger muscles? Train hypertrophy!"
+        }
+      ]
+    },
+    {
+      "type": "question_6",
+      "name": "Default Question 6",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "True or False: You can spot-reduce fat from specific body areas through targeted exercises."
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "True - doing crunches burns belly fat\nFalse - fat loss occurs systemically\nTrue - but only with high reps\nTrue - for women but not men"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "This is one of the biggest fitness myths! Spot reduction is not possible. Fat loss occurs throughout the body based on genetics, hormones, and overall calorie deficit. Targeted exercises build muscle but do not specifically burn fat in that area."
+        }
+      ]
+    },
+    {
+      "type": "question_7",
+      "name": "Default Question 7",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "What is the primary movement pattern in a deadlift?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "Squat pattern\nHinge pattern\nPush pattern\nLunge pattern"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "The deadlift is a hip hinge pattern, where the movement is dominated by hip extension (glutes and hamstrings). This is different from a squat, which emphasizes knee flexion and extension."
+        }
+      ]
+    },
+    {
+      "type": "question_8",
+      "name": "Default Question 8",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "Which adaptation occurs FIRST when beginning a resistance training program?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "Muscle hypertrophy\nIncreased capillary density\nNeural adaptations\nBone density improvements"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 3
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "Neural adaptations happen first (within 2-8 weeks)! Your nervous system learns to recruit muscle fibers more efficiently. Muscle growth typically follows after 6-8 weeks of consistent training."
+        }
+      ]
+    },
+    {
+      "type": "question_9",
+      "name": "Default Question 9",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "What does RPE stand for in fitness training?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "Reps Per Exercise\nRate of Perceived Exertion\nResistance Power Efficiency\nRest Period Emphasis"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "RPE (Rate of Perceived Exertion) is a subjective scale (usually 1-10) used to gauge exercise intensity. It is a valuable tool for trainers to monitor and adjust client workouts!"
+        }
+      ]
+    },
+    {
+      "type": "question_10",
+      "name": "Default Question 10",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "Which of the following is a contraindication for performing a Valsalva maneuver?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "Advanced lifters doing maximal lifts\nIndividuals with high blood pressure\nAthletes during explosive movements\nPowerlifters during competition"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "The Valsalva maneuver (holding breath while bearing down) dramatically increases blood pressure. It is contraindicated for people with hypertension or cardiovascular issues, even though it can help stabilize the spine in healthy lifters."
+        }
+      ]
+    },
+    {
+      "type": "question_11",
+      "name": "Default Question 11",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "What is the recommended weekly aerobic exercise duration for general health according to health guidelines?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "75 minutes of moderate intensity\n150 minutes of moderate intensity\n300 minutes of moderate intensity\n60 minutes of moderate intensity"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "The standard recommendation is 150 minutes (2.5 hours) of moderate-intensity aerobic activity per week, or 75 minutes of vigorous-intensity activity. As a trainer, you will help clients achieve this goal!"
+        }
+      ]
+    },
+    {
+      "type": "question_12",
+      "name": "Default Question 12",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "question",
+          "label": "Question",
+          "default": "Which fitness assessment would be MOST appropriate for measuring upper body muscular endurance?"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (one per line)",
+          "default": "1-rep max bench press\nPush-up test to fatigue\nGrip strength test\nVertical jump test"
+        },
+        {
+          "type": "range",
+          "id": "correct_option",
+          "label": "Correct option number (1 = first)",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "textarea",
+          "id": "explanation",
+          "label": "Explanation shown after answering",
+          "default": "The push-up test to fatigue measures muscular endurance (how many reps you can perform). A 1-rep max tests strength, grip strength tests grip strength, and vertical jump tests power. Understanding these distinctions is crucial for trainers!"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quiz Hero + Popup",
+      "blocks": [
+        {
+          "type": "question_1"
+        },
+        {
+          "type": "question_2"
+        },
+        {
+          "type": "question_3"
+        },
+        {
+          "type": "question_4"
+        },
+        {
+          "type": "question_5"
+        },
+        {
+          "type": "question_6"
+        },
+        {
+          "type": "question_7"
+        },
+        {
+          "type": "question_8"
+        },
+        {
+          "type": "question_9"
+        },
+        {
+          "type": "question_10"
+        },
+        {
+          "type": "question_11"
+        },
+        {
+          "type": "question_12"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

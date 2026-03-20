@@ -244,7 +244,10 @@ line-height: 150%;
 .product__text {
   margin-bottom: 0;
 }
+.product__info-container .product__text {
+  color: #0F828C;
 
+}
 a.product__text {
   display: block;
   text-decoration: none;

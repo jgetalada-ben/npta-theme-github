@@ -1,0 +1,531 @@
+{% comment %}
+  Section: Helpful content slider
+  - Desktop: shows N cards per view (setting: 3 default, max 4)
+  - Mobile: 1 card per view (swipe)
+  - Arrows show only when slider is needed
+  - Optional autoplay (off by default) with delay (default 5s)
+
+  Updates:
+  1) Section setting: enable title link
+  2) Auto open in new tab for external links; "#" scrolls to top
+  3) Hide whole card if image, title, and link are all blank
+{% endcomment %}
+
+{%- assign sid = section.id -%}
+{%- assign per_view = section.settings.cards_per_view | default: 3 -%}
+
+<section
+  id="HelpfulContent-{{ sid }}"
+  class="hc"
+  style="
+    --hc-bg: {{ section.settings.bg_color }};
+    --hc-pad-y: {{ section.settings.pad_y }};
+    --hc-pad-x: {{ section.settings.pad_x }};
+    --hc-maxw: {{ section.settings.max_width }};
+    --hc-gap: {{ section.settings.gap }}px;
+
+    --hc-title-color: {{ section.settings.title_color }};
+    --hc-title-size: {{ section.settings.title_size }};
+
+    --hc-card-bg: {{ section.settings.card_bg }};
+    --hc-card-title-color: {{ section.settings.card_title_color }};
+    --hc-card-title-size: {{ section.settings.card_title_size }};
+
+    --hc-icon-bg: {{ section.settings.icon_bg }};
+    --hc-icon-color: {{ section.settings.icon_color }};
+
+    --hc-per-view: {{ per_view }};
+  "
+  data-per-view="{{ per_view }}"
+  data-autoplay="{{ section.settings.autoplay }}"
+  data-autoplay-delay="{{ section.settings.autoplay_delay | default: 5 }}"
+  data-shop-domain="{{ shop.permanent_domain }}"
+  data-link-title="{{ section.settings.enable_title_link }}"
+>
+  <div class="hc__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="hc__title">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="hc__slider">
+      <button
+        class="hc__nav hc__nav--prev"
+        type="button"
+        aria-label="Previous"
+        hidden
+      >
+        <img
+          class="hc__nav-icon hc__nav-icon--prev"
+          src="https://cdn.shopify.com/s/files/1/0617/9550/0074/files/iwwa_arrow-up.png?v=1770248098"
+          alt=""
+          loading="lazy"
+        >
+      </button>
+
+      <div class="hc__track-wrap">
+        <ul class="hc__track" role="list">
+          {%- for block in section.blocks -%}
+            {%- assign has_image = false -%}
+            {%- if block.settings.image != blank -%}{%- assign has_image = true -%}{%- endif -%}
+
+            {%- assign has_title = false -%}
+            {%- if block.settings.title != blank -%}{%- assign has_title = true -%}{%- endif -%}
+
+            {%- assign has_link = false -%}
+            {%- if block.settings.link != blank -%}{%- assign has_link = true -%}{%- endif -%}
+
+            {%- unless has_image or has_title or has_link -%}
+              {%- continue -%}
+            {%- endunless -%}
+
+            <li class="hc__item" {{ block.shopify_attributes }}>
+              <div class="hc-card">
+                {%- if has_image -%}
+                  <div class="hc-card__media">
+                    {{
+                      block.settings.image
+                      | image_url: width: 1600
+                      | image_tag:
+                        loading: 'lazy',
+                        class: 'hc-card__img',
+                        widths: '480, 720, 960, 1200, 1600',
+                        sizes: '(min-width: 990px) 33vw, 90vw',
+                        alt: block.settings.title | escape
+                    }}
+                  </div>
+                {%- endif -%}
+
+                <div class="hc-card__body">
+                  <div class="hc-card__icon" aria-hidden="true">
+                    {%- if block.settings.icon != blank -%}
+                      {{
+                        block.settings.icon
+                        | image_url: width: 120
+                        | image_tag:
+                          loading: 'lazy',
+                          class: 'hc-card__icon-img',
+                          widths: '60, 90, 120',
+                          sizes: '60px',
+                          alt: ''
+                      }}
+                    {%- else -%}
+                      <span class="hc-card__icon-fallback"></span>
+                    {%- endif -%}
+                  </div>
+
+                  {%- if has_title -%}
+                    {%- if section.settings.enable_title_link and has_link -%}
+                      <a
+                        class="hc-card__title hc-card__link"
+                        href="{{ block.settings.link }}"
+                      >
+                        {{ block.settings.title }}
+                      </a>
+                    {%- else -%}
+                      <div class="hc-card__title">
+                        {{ block.settings.title }}
+                      </div>
+                    {%- endif -%}
+                  {%- endif -%}
+
+                  {%- unless has_image -%}
+                    <div class="hc-card__noimg-spacer" aria-hidden="true"></div>
+                  {%- endunless -%}
+                </div>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <button
+        class="hc__nav hc__nav--next"
+        type="button"
+        aria-label="Next"
+        hidden
+      >
+        <img
+          class="hc__nav-icon hc__nav-icon--next"
+          src="https://cdn.shopify.com/s/files/1/0617/9550/0074/files/iwwa_arrow-up.png?v=1770248098"
+          alt=""
+          loading="lazy"
+        >
+      </button>
+    </div>
+  </div>
+
+  <style>
+  #HelpfulContent-{{ sid }}.hc{
+    background: var(--hc-bg);
+    padding: var(--hc-pad-y) var(--hc-pad-x);
+  }
+
+  #HelpfulContent-{{ sid }} .hc__inner{
+    max-width: var(--hc-maxw);
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+  }
+
+  #HelpfulContent-{{ sid }} .hc__title{
+    margin: 0 0 clamp(18px, 2.8vw, 34px);
+    color: var(--hc-title-color);
+    font-size: var(--hc-title-size);
+    font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 1.05;
+  }
+
+  #HelpfulContent-{{ sid }} .hc__slider{
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: clamp(10px, 2vw, 22px);
+  }
+
+  #HelpfulContent-{{ sid }} .hc__track-wrap{
+    overflow: hidden;
+  }
+
+  #HelpfulContent-{{ sid }} .hc__track{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    display: grid;
+    grid-auto-flow: column;
+    gap: var(--hc-gap);
+
+    grid-auto-columns: calc((100% - (var(--hc-gap) * (var(--hc-per-view) - 1))) / var(--hc-per-view));
+
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+
+    scrollbar-width: none;
+  }
+  #HelpfulContent-{{ sid }} .hc__track::-webkit-scrollbar{ display: none; }
+
+  #HelpfulContent-{{ sid }} .hc__item{
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  #HelpfulContent-{{ sid }} .hc-card{
+    background: var(--hc-card-bg);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+  }
+
+  #HelpfulContent-{{ sid }} .hc-card__media{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  #HelpfulContent-{{ sid }} .hc-card__img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #HelpfulContent-{{ sid }} .hc-card__body{
+    position: relative;
+    padding: clamp(18px, 2.2vw, 26px) clamp(18px, 2.2vw, 28px);
+    display: grid;
+    place-items: center;
+    gap: 14px;
+    min-height: 140px;
+  }
+
+  #HelpfulContent-{{ sid }} .hc-card__icon{
+    width: 56px;
+    height: 56px;
+    border-radius: 999px;
+    background: var(--hc-icon-bg);
+    color: var(--hc-icon-color);
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  #HelpfulContent-{{ sid }} .hc-card__icon-img{
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    display: block;
+  }
+
+  #HelpfulContent-{{ sid }} .hc-card__icon-fallback{
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    background: currentColor;
+    opacity: .3;
+  }
+
+  #HelpfulContent-{{ sid }} .hc-card__title{
+    margin-top: 18px;
+    color: var(--hc-card-title-color);
+    font-size: var(--hc-card-title-size);
+    font-family: var(--font-body-family);
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    display: inline-block;
+    max-width: 26ch;
+  }
+
+  #HelpfulContent-{{ sid }} a.hc-card__title:hover{
+    text-decoration: underline;
+  }
+
+  #HelpfulContent-{{ sid }} .hc__nav{
+    width: 48px;
+    height: 48px;
+    border: none;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    user-select: none;
+    padding: 0;
+  }
+
+  #HelpfulContent-{{ sid }} .hc__nav-icon{
+    width: auto;
+    height: auto;
+    display: block;
+  }
+  #HelpfulContent-{{ sid }} .hc__nav-icon--prev{ transform: rotate(-180deg); }
+  #HelpfulContent-{{ sid }} .hc__nav-icon--next{ transform: rotate(0); }
+
+  @media (max-width: 749px){
+    #HelpfulContent-{{ sid }} .hc__slider{
+      grid-template-columns: auto 1fr auto;
+      gap: 10px;
+    }
+
+    #HelpfulContent-{{ sid }} .hc__track{
+      grid-auto-columns: 100%;
+      gap: 0;
+    }
+
+    #HelpfulContent-{{ sid }} .hc__item{
+      padding: 0 14px;
+      box-sizing: border-box;
+    }
+
+    #HelpfulContent-{{ sid }} .hc__nav{
+      width: 40px;
+      height: 40px;
+    }
+  }
+  </style>
+
+  <script>
+    (function(){
+      var root = document.getElementById('HelpfulContent-{{ sid }}');
+      if(!root) return;
+
+      var track = root.querySelector('.hc__track');
+      var prev = root.querySelector('.hc__nav--prev');
+      var next = root.querySelector('.hc__nav--next');
+      if(!track || !prev || !next) return;
+
+      var autoplay = (root.getAttribute('data-autoplay') === 'true');
+      var delaySec = parseFloat(root.getAttribute('data-autoplay-delay') || '5');
+      if(isNaN(delaySec) || delaySec <= 0) delaySec = 5;
+
+      var shopDomain = (root.getAttribute('data-shop-domain') || '').toLowerCase();
+
+      var timer = null;
+
+      function isExternalUrl(href){
+        try{
+          var u = new URL(href, window.location.href);
+          var host = (u.hostname || '').toLowerCase();
+          if(!host) return false;
+          if(host === window.location.hostname.toLowerCase()) return false;
+          if(shopDomain && host === shopDomain) return false;
+          return true;
+        }catch(e){
+          return false;
+        }
+      }
+
+      function updateTitleLinks(){
+        var links = root.querySelectorAll('a.hc-card__link');
+        links.forEach(function(a){
+          var href = a.getAttribute('href') || '';
+
+          // "#" should scroll to top instead of refresh
+          if(href.trim() === '#'){
+            a.setAttribute('data-scroll-top', 'true');
+            a.removeAttribute('target');
+            a.removeAttribute('rel');
+            return;
+          }
+
+          if(isExternalUrl(href)){
+            a.setAttribute('target', '_blank');
+            a.setAttribute('rel', 'noopener');
+          } else {
+            a.removeAttribute('target');
+            a.removeAttribute('rel');
+          }
+        });
+      }
+
+      function bindScrollTop(){
+        root.addEventListener('click', function(e){
+          var a = e.target.closest('a.hc-card__link');
+          if(!a) return;
+
+          if(a.getAttribute('data-scroll-top') === 'true'){
+            e.preventDefault();
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }, true);
+      }
+
+      function getStep(){
+        var first = track.querySelector('.hc__item');
+        if(!first) return track.clientWidth;
+
+        var itemRect = first.getBoundingClientRect();
+        var gap = 0;
+        try{
+          var cs = window.getComputedStyle(track);
+          gap = parseFloat(cs.columnGap || cs.gap || '0') || 0;
+        }catch(e){}
+
+        return itemRect.width + gap;
+      }
+
+      function canSlide(){
+        return track.scrollWidth > (track.clientWidth + 4);
+      }
+
+      function updateArrows(){
+        var show = canSlide();
+        prev.hidden = !show;
+        next.hidden = !show;
+      }
+
+      function slideBy(dir){
+        var step = getStep();
+        track.scrollBy({ left: dir * step, behavior: 'smooth' });
+      }
+
+      prev.addEventListener('click', function(){ slideBy(-1); stopAutoplay(); });
+      next.addEventListener('click', function(){ slideBy(1); stopAutoplay(); });
+
+      window.addEventListener('resize', function(){
+        updateArrows();
+        updateTitleLinks();
+        if(autoplay) startAutoplay();
+      });
+
+      function startAutoplay(){
+        stopAutoplay();
+        if(!autoplay) return;
+        if(!canSlide()) return;
+
+        timer = setInterval(function(){
+          var atEnd = (track.scrollLeft + track.clientWidth) >= (track.scrollWidth - 6);
+          if(atEnd){
+            track.scrollTo({ left: 0, behavior: 'smooth' });
+          }else{
+            slideBy(1);
+          }
+        }, delaySec * 1000);
+      }
+
+      function stopAutoplay(){
+        if(timer){
+          clearInterval(timer);
+          timer = null;
+        }
+      }
+
+      ['pointerdown','touchstart','wheel','keydown'].forEach(function(evt){
+        track.addEventListener(evt, stopAutoplay, { passive: true });
+      });
+
+      updateTitleLinks();
+      bindScrollTop();
+
+      updateArrows();
+      startAutoplay();
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Helpful content slider",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "header", "content": "Layout" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#0A7F8A" },
+    { "type": "text", "id": "pad_y", "label": "Padding top/bottom (CSS)", "default": "clamp(36px, 5vw, 70px)" },
+    { "type": "text", "id": "pad_x", "label": "Padding left/right (CSS)", "default": "clamp(16px, 3vw, 40px)" },
+    { "type": "text", "id": "max_width", "label": "Max width", "default": "1200px" },
+    { "type": "range", "id": "gap", "label": "Gap (desktop)", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 40 },
+
+    { "type": "header", "content": "Title" },
+    { "type": "inline_richtext", "id": "heading", "label": "Title text", "default": "You should check out these other helpful content!" },
+    { "type": "checkbox", "id": "enable_title_link", "label": "Make card title clickable (uses card link)", "default": true },
+    { "type": "text", "id": "title_size", "label": "Title size (supports clamp())", "default": "clamp(26px, 4vw, 44px)" },
+    { "type": "color", "id": "title_color", "label": "Title color", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Slider" },
+    { "type": "range", "id": "cards_per_view", "label": "Cards to show (desktop)", "min": 1, "max": 4, "step": 1, "default": 3 },
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": false },
+    { "type": "range", "id": "autoplay_delay", "label": "Autoplay delay (seconds)", "min": 2, "max": 12, "step": 1, "default": 5 },
+
+    { "type": "header", "content": "Card" },
+    { "type": "color", "id": "card_bg", "label": "Card background", "default": "#FFFFFF" },
+    { "type": "text", "id": "card_title_size", "label": "Card title size (supports clamp())", "default": "clamp(16px, 1.6vw, 20px)" },
+    { "type": "color", "id": "card_title_color", "label": "Card title color", "default": "#0B0B0B" },
+
+    { "type": "header", "content": "Icon" },
+    { "type": "color", "id": "icon_bg", "label": "Icon circle background", "default": "#0A7F8A" },
+    { "type": "color", "id": "icon_color", "label": "Icon color (fallback)", "default": "#FFFFFF" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Card image" },
+        { "type": "image_picker", "id": "icon", "label": "Icon (optional)" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Example helpful content title" },
+        { "type": "url", "id": "link", "label": "Link (optional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Helpful content slider",
+      "blocks": [
+        { "type": "card", "settings": { "title": "NASM Guide to Optimal Nutrition After 40" } },
+        { "type": "card", "settings": { "title": "The Skill Gap: What New Personal Trainers Wish They Learned Earlier" } },
+        { "type": "card", "settings": { "title": "How to become a Certified Personal Trainer" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

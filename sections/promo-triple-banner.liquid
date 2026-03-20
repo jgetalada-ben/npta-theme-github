@@ -1,0 +1,739 @@
+{%- assign sid = section.id -%}
+{%- assign promo3_img_widths = '640,960,1280,1600,1920,2240' -%}
+
+{%- assign mw = section.settings.max_width | default: '1989px' | strip -%}
+{%- unless mw contains 'px' or mw contains '%' or mw contains 'vw' or mw contains 'rem' -%}
+  {%- assign mw = mw | append: 'px' -%}
+{%- endunless -%}
+
+{%- assign section_height = section.settings.section_height | strip -%}
+{%- if section_height == blank -%}
+  {%- assign section_height = 'auto' -%}
+{%- endif -%}
+
+{%- comment %}
+  Column layout → CSS grid template
+{%- endcomment -%}
+{%- assign column_layout = section.settings.column_layout | default: 'equal' -%}
+
+{%- case column_layout -%}
+  {%- when 'left-wide' -%}
+    {%- assign promo3_cols = '2fr 1fr 1fr' -%}
+  {%- when 'center-wide' -%}
+    {%- assign promo3_cols = '1fr 2fr 1fr' -%}
+  {%- when 'right-wide' -%}
+    {%- assign promo3_cols = '1fr 1fr 2fr' -%}
+  {%- when 'left-narrow' -%}
+    {%- assign promo3_cols = '0.85fr 1.1fr 1.1fr' -%}
+  {%- else -%}
+    {%- assign promo3_cols = '1fr 1fr 1fr' -%}
+{%- endcase -%}
+
+{%- comment %}
+  Resolve button URL preference: product first, then custom link
+{% endcomment -%}
+{%- assign btn_href = '' -%}
+{%- if section.settings.button_product != blank -%}
+  {%- assign btn_href = section.settings.button_product.url -%}
+{%- elsif section.settings.button_link != blank -%}
+  {%- assign btn_href = section.settings.button_link -%}
+{%- endif -%}
+
+<section
+  id="promo3-{{ sid }}"
+  class="promo3-section align-{{ section.settings.content_align }}"
+  style="
+    --promo3-bg: {{ section.settings.bg_color }};
+    --promo3-max-w: {{ mw }};
+    --promo3-cols: {{ promo3_cols }};
+    --promo3-height: {{ section_height }};
+
+    --promo3-heading-size: {{ section.settings.heading_size | default: 'clamp(24px,3vw,36px)' }};
+    --promo3-heading-color: {{ section.settings.heading_color }};
+    --promo3-subtitle-size: {{ section.settings.subtitle_size | default: 'clamp(14px,1.4vw,18px)' }};
+    --promo3-subtitle-color: {{ section.settings.subtitle_color }};
+    --promo3-body-size: {{ section.settings.body_size | default: 'clamp(14px,1.3vw,18px)' }};
+    --promo3-body-color: {{ section.settings.body_color }};
+
+    /* Overlay settings (shared for left + center) */
+    --promo3-overlay-heading-size: {{ section.settings.overlay_heading_size | default: 'clamp(16px,1.5vw,20px)' }};
+    --promo3-overlay-heading-color: {{ section.settings.overlay_heading_color }};
+    --promo3-overlay-sub-size: {{ section.settings.overlay_sub_size | default: 'clamp(40px,4vw,72px)' }};
+    --promo3-overlay-sub-color: {{ section.settings.overlay_sub_color }};
+
+    /* Overlay alignment controls */
+    --promo3-ov-j: {{ section.settings.overlay_v_align | default: 'flex-end' }};
+    --promo3-ov-a: {{ section.settings.overlay_h_align | default: 'flex-start' }};
+    --promo3-ov-t: {{ section.settings.overlay_text_align | default: 'left' }};
+
+    /* ✅ Left Logo controls */
+    --promo3-left-logo-x: {{ section.settings.left_logo_h_align | default: 'flex-start' }};
+    --promo3-left-logo-y: {{ section.settings.left_logo_v_align | default: 'flex-start' }};
+    --promo3-left-logo-pad: {{ section.settings.left_logo_padding | default: 18 }}px;
+    --promo3-left-logo-width: {{ section.settings.left_logo_width | default: 140 }}px;
+
+    --promo3-button-bg: {{ section.settings.button_bg }};
+    --promo3-button-color: {{ section.settings.button_color }};
+    --promo3-button-font-size: {{ section.settings.button_font_size | default: 'clamp(14px,1.2vw,18px)' }};
+    --promo3-button-pad-y: {{ section.settings.button_pad_y | default: 14 }}px;
+    --promo3-button-pad-x: {{ section.settings.button_pad_x | default: 32 }}px;
+
+    /* split-layout helper vars */
+    --promo3-right-bg-pos: {{ section.settings.right_bg_pos | default: 'right bottom' }};
+    --promo3-right-bg-size: {{ section.settings.right_bg_size | default: 'contain' }};
+    --promo3-right-valign: {{ section.settings.right_vertical_align | default: 'center' }};
+  "
+>
+  <div class="promo3-wrap" id="promo3-wrap-width-{{ column_layout }}">
+    {%- comment -%} LEFT IMAGE COLUMN (WITH LOGO + OVERLAY) {%- endcomment -%}
+    <div class="promo3-col promo3-col--left">
+      {%- if section.settings.left_image != blank -%}
+        {{ section.settings.left_image
+          | image_url: width: 2240
+          | image_tag:
+              class: 'promo3-img',
+              loading: 'lazy',
+              widths: promo3_img_widths,
+              sizes: '(min-width: 1200px) 33vw, 100vw',
+              alt: section.settings.left_image_alt | escape
+        }}
+      {%- else -%}
+        <div class="promo3-img promo3-img--placeholder" aria-hidden="true"></div>
+      {%- endif -%}
+
+      {%- comment -%} ✅ LEFT LOGO OVERLAY {%- endcomment -%}
+      {%- if section.settings.left_logo != blank -%}
+        <div class="promo3-left-logo" aria-hidden="true">
+          {{ section.settings.left_logo
+            | image_url: width: 1200
+            | image_tag:
+                class: 'promo3-left-logo__img',
+                loading: 'lazy',
+                alt: section.settings.left_logo_alt | escape
+          }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.left_overlay_heading != blank or section.settings.left_overlay_subheading != blank -%}
+        <div class="promo3-overlay promo3-overlay--left">
+          {%- if section.settings.left_overlay_heading != blank -%}
+            <div class="promo3-overlay-heading">
+              {{ section.settings.left_overlay_heading }}
+            </div>
+          {%- endif -%}
+          {%- if section.settings.left_overlay_subheading != blank -%}
+            <div class="promo3-overlay-subheading">
+              {{ section.settings.left_overlay_subheading }}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} CENTER IMAGE WITH OVERLAY TEXT {%- endcomment -%}
+    <div class="promo3-col promo3-col--center">
+      {%- if section.settings.center_image != blank -%}
+        {{ section.settings.center_image
+          | image_url: width: 2240
+          | image_tag:
+              class: 'promo3-img',
+              loading: 'lazy',
+              widths: promo3_img_widths,
+              sizes: '(min-width: 1200px) 33vw, 100vw',
+              alt: section.settings.center_image_alt | escape
+        }}
+      {%- else -%}
+        <div class="promo3-img promo3-img--placeholder" aria-hidden="true"></div>
+      {%- endif -%}
+
+      {%- if section.settings.overlay_heading != blank or section.settings.overlay_subheading != blank -%}
+        <div class="promo3-overlay promo3-overlay--center">
+          {%- if section.settings.overlay_heading != blank -%}
+            <div class="promo3-overlay-heading">
+              {{ section.settings.overlay_heading }}
+            </div>
+          {%- endif -%}
+          {%- if section.settings.overlay_subheading != blank -%}
+            <div class="promo3-overlay-subheading">
+              {{ section.settings.overlay_subheading }}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} RIGHT CONTENT CARD {%- endcomment -%}
+    <div class="promo3-col promo3-col--right">
+      {%- if section.settings.right_layout == 'split' -%}
+        <div
+          class="promo3-card promo3-card--split promo3-align-{{ section.settings.content_align }}"
+          {%- if section.settings.body_image != blank -%}
+            style="--promo3-bg-img: url('{{ section.settings.body_image | image_url: width: 1600 }}');"
+          {%- endif -%}
+        >
+          {%- if section.settings.heading != blank -%}
+            <h2 class="promo3-heading">
+              {{ section.settings.heading }}
+            </h2>
+          {%- endif -%}
+
+          {%- if section.settings.subtitle != blank -%}
+            <div class="promo3-subtitle">
+              {{ section.settings.subtitle }}
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.fine_print != blank -%}
+            <div class="promo3-fineprint">
+              {{ section.settings.fine_print }}
+            </div>
+          {%- endif -%}
+
+          {%- if btn_href != '' and section.settings.button_label != blank -%}
+            <div class="promo3-btn-wrap">
+              <a href="{{ btn_href }}"
+                class="btn button-yg tp-cta"
+                {% if section.settings.button_new_tab %}
+                  target="_blank" rel="noopener noreferrer"
+                {% endif %}
+              >
+                <span class="btn-label-down">{{ section.settings.button_label }}</span>
+                <span class="btn-label-down">{{ section.settings.button_label }}</span>
+              </a>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- else -%}
+        <div class="promo3-card promo3-card--classic promo3-align-{{ section.settings.content_align }}">
+          {%- if section.settings.heading != blank -%}
+            <h2 class="promo3-heading">
+              {{ section.settings.heading }}
+            </h2>
+          {%- endif -%}
+
+          {%- if section.settings.subtitle != blank -%}
+            <div class="promo3-subtitle">
+              {{ section.settings.subtitle }}
+            </div>
+          {%- endif -%}
+
+          {% if section.settings.body_image != blank %}
+            <div class="promo-banner__body-image">
+              {{ section.settings.body_image
+                | image_url: width: 1200
+                | image_tag: loading: 'lazy', alt: section.settings.body_image_alt | default: section.settings.subtitle | escape
+              }}
+            </div>
+          {% endif %}
+
+          {%- if section.settings.fine_print != blank -%}
+            <div class="promo3-fineprint">
+              {{ section.settings.fine_print }}
+            </div>
+          {%- endif -%}
+
+          {%- if btn_href != '' and section.settings.button_label != blank -%}
+            <div class="promo3-btn-wrap">
+              <a href="{{ btn_href }}"
+                class="btn button-yg tp-cta"
+                {% if section.settings.button_new_tab %}
+                  target="_blank" rel="noopener noreferrer"
+                {% endif %}
+              >
+                <span class="btn-label-down">{{ section.settings.button_label }}</span>
+                <span class="btn-label-down">{{ section.settings.button_label }}</span>
+              </a>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <style>
+    #promo3-{{ sid }}.promo3-section{
+      background: var(--promo3-bg);
+      min-height: var(--promo3-height);
+      display:flex;
+      justify-content:center;
+      align-items:stretch;
+    }
+
+    #promo3-{{ sid }} .promo3-wrap{
+      max-width: var(--promo3-max-w);
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: var(--promo3-cols, repeat(3, minmax(0, 1fr)));
+      gap: 0;
+      align-items: stretch;
+      height: 480px;
+    }
+
+    #promo3-{{ sid }} .promo3-col{
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #promo3-{{ sid }} .promo3-col--left,
+    #promo3-{{ sid }} .promo3-col--center,
+    #promo3-{{ sid }} .promo3-col--right{
+      height: 100%;
+    }
+
+    #promo3-{{ sid }} .promo3-col--right{ align-items: stretch; }
+
+    #promo3-{{ sid }} .promo3-img{
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    #promo3-{{ sid }} .promo3-col--left .promo3-img,
+    #promo3-{{ sid }} .promo3-col--center .promo3-img{
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      height:100%;
+    }
+
+    #promo3-{{ sid }} .promo3-img--placeholder{ background:#e5e5e5; }
+
+    /* ✅ Left logo overlay */
+    #promo3-{{ sid }} .promo3-left-logo{
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      justify-content: var(--promo3-left-logo-x, flex-start);
+      align-items: var(--promo3-left-logo-y, flex-start);
+      padding: var(--promo3-left-logo-pad, 18px);
+      pointer-events: none;
+    }
+    #promo3-{{ sid }} .promo3-left-logo__img{
+      width: var(--promo3-left-logo-width, 140px);
+      max-width: 60%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    /* ✅ Overlay (shared for left + center) */
+    #promo3-{{ sid }} .promo3-overlay{
+      position:absolute;
+      inset:0;
+      display:flex;
+      flex-direction:column;
+      justify-content: var(--promo3-ov-j, flex-end);
+      align-items: var(--promo3-ov-a, flex-start);
+      text-align: var(--promo3-ov-t, left);
+      padding: clamp(18px,3vw,32px);
+      pointer-events:none;
+      z-index: 4; /* above logo if needed */
+    }
+
+    #promo3-{{ sid }} .promo3-overlay-heading{
+      font-size: var(--promo3-overlay-heading-size);
+      color: var(--promo3-overlay-heading-color);
+      font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    #promo3-{{ sid }} .promo3-overlay-subheading{
+      font-size: var(--promo3-overlay-sub-size);
+      color: var(--promo3-overlay-sub-color);
+      font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
+      font-weight: 700;
+      line-height: .95;
+      text-transform: uppercase;
+    }
+
+    /* Card content on the right (shared bits) */
+    #promo3-{{ sid }} .promo3-card{
+      background: transparent;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+      gap: clamp(10px,1.8vw,18px);
+      width: 100%;
+      height: 100%;
+    }
+
+    #promo3-{{ sid }} .promo3-heading{
+      margin: 0;
+      font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
+      font-size: var(--promo3-heading-size);
+      color: var(--promo3-heading-color);
+      text-transform: uppercase;
+      line-height: 1.05;
+      padding: 25px clamp(24px, 3vw, 40px) 0;
+    }
+    #promo3-{{ sid }} .promo3-card--split .promo3-heading,
+    #promo3-{{ sid }} .promo3-card--split .promo3-subtitle,
+    #promo3-{{ sid }} .promo3-card--split .promo3-fineprint,
+    #promo3-{{ sid }} .promo3-card--split .promo3-btn-wrap {
+      padding: 0;
+      margin: 0;
+    }
+
+    #promo3-{{ sid }} .promo3-subtitle{
+      font-size: var(--promo3-subtitle-size);
+      color: var(--promo3-subtitle-color);
+      font-family: var(--font-poppins600, var(--font-body-family));
+      font-weight: 600;
+      margin: 0;
+      padding: 0 clamp(24px, 3vw, 40px);
+      line-height: normal;
+    }
+
+    .promo-banner__body-image { width: 100%; }
+    .promo-banner__body-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    #promo3-{{ sid }} .promo3-fineprint{
+      font-size: calc(var(--promo3-body-size) * 0.85);
+      opacity:.85;
+      color: var(--promo3-body-color);
+      font-family: var(--font-poppins400, var(--font-body-family));
+      padding: 0 clamp(24px, 3vw, 40px);
+    }
+    #promo3-{{ sid }} .promo3-fineprint p{
+      margin: 0;
+      font-size: clamp(12px,1.2vw,16px);
+      color: #000;
+    }
+
+    /* Button */
+    #promo3-{{ sid }} .promo3-btn-wrap{
+      margin-left: auto;
+      margin-bottom: 20px;
+      padding: 0 clamp(24px, 3vw, 40px);
+    }
+
+    /* Alignment helpers */
+    #promo3-{{ sid }} .promo3-align-left{ text-align:left; align-items:flex-start; }
+    #promo3-{{ sid }} .promo3-align-center{ text-align:center; align-items:center; }
+    #promo3-{{ sid }} .promo3-align-right{ text-align:right; align-items:flex-end; }
+    #promo3-{{ sid }} .promo3-align-center .promo3-btn-wrap{ text-align:center; }
+    #promo3-{{ sid }} .promo3-align-right .promo3-btn-wrap{ text-align:right; }
+
+    /* ---------- Right column SPLIT layout ---------- */
+    #promo3-{{ sid }} .promo3-card--split{
+      position: relative;
+      padding: 40px clamp(32px, 3vw, 48px);
+      justify-content: var(--promo3-right-valign);
+    }
+
+    #promo3-{{ sid }} #promo3-wrap-width-equal .promo3-card--split {
+      padding-right: clamp(70px, 22vw, 150px);
+    }
+    #promo3-{{ sid }} #promo3-wrap-width-left-narrow .promo3-heading{ max-width: 150px; }
+    #promo3-{{ sid }} #promo3-wrap-width-left-narrow .promo3-fineprint { max-width: 200px; }
+
+    #promo3-{{ sid }} .promo3-card--split::after{
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: min(60%, 340px);
+      background-image: var(--promo3-bg-img);
+      background-repeat: no-repeat;
+      background-position: var(--promo3-right-bg-pos);
+      background-size: var(--promo3-right-bg-size);
+      pointer-events: none;
+      z-index: 0;
+    }
+    #promo3-{{ sid }} #promo3-wrap-width-left-narrow .promo3-card--split::after{
+      right: -3rem;
+      width: min(85%, 360px);
+    }
+
+    #promo3-{{ sid }} .promo3-card--split .promo3-heading,
+    #promo3-{{ sid }} .promo3-card--split .promo3-subtitle,
+    #promo3-{{ sid }} .promo3-card--split .promo3-fineprint,
+    #promo3-{{ sid }} .promo3-card--split .promo3-btn-wrap{
+      position: relative;
+      z-index: 1;
+      padding-right: 0;
+      max-width: 460px;
+    }
+    #promo3-{{ sid }} .promo3-card--split .promo3-btn-wrap{ margin-top: auto; }
+
+    #promo3-{{ sid }} .promo3-card--split .promo-banner__body-image{ display: none; }
+
+    @media (max-width: 990px){
+      #promo3-{{ sid }} .promo3-btn-wrap{ margin-right: auto; }
+      #promo3-{{ sid }} .promo3-wrap{
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+
+      #promo3-{{ sid }} .promo3-col{ min-height: auto; display:block; }
+      #promo3-{{ sid }} .promo3-img{ height: auto; }
+
+      #promo3-{{ sid }} .promo3-card{ padding: 24px 20px 32px; }
+      #promo3-{{ sid }} .promo3-card--split{ padding: 24px 20px; }
+
+      #promo3-{{ sid }} .promo3-card--split::after{
+        right: 20px;
+        left: 5rem;
+        height: 100%;
+        bottom: 0;
+        top: auto;
+      }
+
+      /* keep logo spacing sane on mobile */
+      #promo3-{{ sid }} .promo3-left-logo{
+        padding: max(12px, var(--promo3-left-logo-pad, 18px));
+      }
+      #promo3-{{ sid }} .promo3-left-logo__img{
+        max-width: 70%;
+      }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Promo Triple Banner",
+  "tag": "section",
+  "class": "promo-triple-banner",
+  "settings": [
+    { "type": "text", "id": "max_width", "label": "Max width (e.g. 1989px or 90%)", "default": "1989px" },
+    {
+      "type": "text",
+      "id": "section_height",
+      "label": "Section min-height (optional)",
+      "info": "Examples: 480px, 70vh, etc. Leave blank for auto height."
+    },
+    { "type": "color", "id": "bg_color", "label": "Section background color", "default": "#F5F3EB" },
+
+    {
+      "type": "select",
+      "id": "content_align",
+      "label": "Text & button alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "column_layout",
+      "label": "Column width layout",
+      "options": [
+        { "value": "equal",      "label": "Equal (33 / 33 / 33)" },
+        { "value": "left-wide",  "label": "Left wide (50 / 25 / 25)" },
+        { "value": "center-wide","label": "Center wide (25 / 50 / 25)" },
+        { "value": "right-wide", "label": "Right wide (25 / 25 / 50)" },
+        { "value": "left-narrow", "label": "Left narrow (25 / 37 / 37)" }
+      ],
+      "default": "equal"
+    },
+
+    { "type": "header", "content": "Left image" },
+    { "type": "image_picker", "id": "left_image", "label": "Left image" },
+    { "type": "text", "id": "left_image_alt", "label": "Left image alt text" },
+
+    { "type": "text", "id": "left_overlay_heading", "label": "Left overlay heading" },
+    { "type": "text", "id": "left_overlay_subheading", "label": "Left overlay subheading" },
+
+    { "type": "header", "content": "Left logo (overlay on left image)" },
+    { "type": "image_picker", "id": "left_logo", "label": "Left logo image" },
+    { "type": "text", "id": "left_logo_alt", "label": "Left logo alt text", "default": "Logo" },
+    {
+      "type": "select",
+      "id": "left_logo_h_align",
+      "label": "Left logo horizontal position",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "select",
+      "id": "left_logo_v_align",
+      "label": "Left logo vertical position",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Bottom" }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "range",
+      "id": "left_logo_padding",
+      "label": "Left logo padding (space from edges)",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "left_logo_width",
+      "label": "Left logo width",
+      "min": 40,
+      "max": 320,
+      "step": 5,
+      "unit": "px",
+      "default": 140
+    },
+
+    { "type": "header", "content": "Center image & overlay" },
+    { "type": "image_picker", "id": "center_image", "label": "Center image" },
+    { "type": "text", "id": "center_image_alt", "label": "Center image alt text" },
+    { "type": "text", "id": "overlay_heading", "label": "Center overlay heading", "default": "LIVE NOW" },
+    { "type": "text", "id": "overlay_subheading", "label": "Center overlay subheading", "default": "25% OFF" },
+
+    { "type": "header", "content": "Overlay style (applies to Left + Center)" },
+    { "type": "text", "id": "overlay_heading_size", "label": "Overlay heading font-size (accepts clamp())", "default": "clamp(16px,1.5vw,20px)" },
+    { "type": "color", "id": "overlay_heading_color", "label": "Overlay heading color", "default": "#FFFFFF" },
+    { "type": "text", "id": "overlay_sub_size", "label": "Overlay subheading font-size (accepts clamp())", "default": "clamp(40px,4vw,72px)" },
+    { "type": "color", "id": "overlay_sub_color", "label": "Overlay subheading color", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Overlay alignment (applies to Left + Center)" },
+    {
+      "type": "select",
+      "id": "overlay_h_align",
+      "label": "Overlay horizontal align",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center",     "label": "Center" },
+        { "value": "flex-end",   "label": "Right" }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "select",
+      "id": "overlay_v_align",
+      "label": "Overlay vertical align",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center",     "label": "Center" },
+        { "value": "flex-end",   "label": "Bottom" }
+      ],
+      "default": "flex-end"
+    },
+    {
+      "type": "select",
+      "id": "overlay_text_align",
+      "label": "Overlay text align",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "left"
+    },
+
+    { "type": "header", "content": "Right content card" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "ALL BUNDLES AND SPECIALIZATIONS" },
+    { "type": "text", "id": "heading_size", "label": "Heading font-size (accepts clamp())", "default": "clamp(24px,3vw,34px)" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#01241E" },
+
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "+ your choice of GLP-1 or Mindful Stress Management" },
+    { "type": "text", "id": "subtitle_size", "label": "Subtitle font-size (accepts clamp())", "default": "clamp(14px,1.4vw,18px)" },
+    { "type": "color", "id": "subtitle_color", "label": "Subtitle color", "default": "#01241E" },
+
+    { "type": "image_picker", "id": "body_image", "label": "Body image (right column artwork)" },
+    { "type": "text", "id": "body_image_alt", "label": "Body image alt text" },
+
+    { "type": "richtext", "id": "fine_print", "label": "Fine print (under image)", "default": "<p>CPR, HGD, YES, and RFL *not included in sale.</p>" },
+
+    {
+      "type": "select",
+      "id": "right_layout",
+      "label": "Right column layout",
+      "options": [
+        { "value": "classic", "label": "Stacked layout" },
+        { "value": "split",   "label": "Split layout" }
+      ],
+      "default": "classic"
+    },
+    {
+      "type": "select",
+      "id": "right_bg_pos",
+      "label": "Right image position",
+      "options": [
+        { "value": "left top", "label": "Left top" },
+        { "value": "left center", "label": "Left center" },
+        { "value": "left bottom", "label": "Left bottom" },
+        { "value": "center bottom", "label": "Center bottom" },
+        { "value": "right bottom", "label": "Right bottom" },
+        { "value": "right center", "label": "Right center" },
+        { "value": "right top", "label": "Right top" }
+      ],
+      "default": "right bottom"
+    },
+    {
+      "type": "select",
+      "id": "right_bg_size",
+      "label": "Right image size",
+      "options": [
+        { "value": "cover", "label": "Cover" },
+        { "value": "contain", "label": "Contain" }
+      ],
+      "default": "contain"
+    },
+    {
+      "type": "select",
+      "id": "right_vertical_align",
+      "label": "Right text vertical",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center",     "label": "Center" },
+        { "value": "flex-end",   "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+
+    { "type": "header", "content": "Button" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "SHOP NOW" },
+    { "type": "product", "id": "button_product", "label": "Button product (optional)" },
+    { "type": "url", "id": "button_link", "label": "Button custom link (fallback if no product)" },
+    { "type": "checkbox", "id": "button_new_tab", "label": "Open button in new tab", "default": false },
+    { "type": "color", "id": "button_bg", "label": "Button background color", "default": "#C8FF63" },
+    { "type": "color", "id": "button_color", "label": "Button text color", "default": "#01241E" },
+    { "type": "text", "id": "button_font_size", "label": "Button font-size (accepts clamp())", "default": "clamp(14px,1.2vw,18px)" },
+    {
+      "type": "range",
+      "id": "button_pad_y",
+      "label": "Button padding top & bottom",
+      "min": 8,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_pad_x",
+      "label": "Button padding left & right",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    { "name": "Promo Triple Banner" }
+  ]
+}
+{% endschema %}

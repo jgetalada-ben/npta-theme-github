@@ -1,0 +1,774 @@
+{% comment %}
+  Section: PDP Career Paths Slider (Metaobject per product + Theme Editor fallback)
+  - Uses product metafield (namespace: custom) pointing to metaobject "Career Paths Slider Content"
+  - Metaobject fields supported (handles):
+      Slider content: heading_title OR title OR heading, subheading OR subtitle, slides
+      Slide: enabled_slide, slide_title, slide_description, slide_image
+  - If metaobject/slides missing -> falls back to Theme Editor blocks
+  - Drag (mouse + touch) + hold-to-drag + optional arrows/pagination + autoplay
+{% endcomment %}
+
+{%- assign sid = section.id -%}
+
+{%- comment -%} Metafield key safety: allow "career_paths_slider_content" OR "custom.career_paths_slider_content" {%- endcomment -%}
+{%- assign mo_key_raw = section.settings.metaobject_key | default: 'career_paths_slider_content' -%}
+{%- assign mo_key = mo_key_raw | strip -%}
+{%- if mo_key contains '.' -%}
+  {%- assign mo_key = mo_key | split: '.' | last -%}
+{%- endif -%}
+
+{%- assign mo_field = blank -%}
+{%- if product and product.metafields and product.metafields.custom -%}
+  {%- assign mo_field = product.metafields.custom[mo_key] -%}
+{%- endif -%}
+{%- assign mo = mo_field.value -%}
+
+{%- comment -%} Default/fallback header comes from Theme Editor settings {%- endcomment -%}
+{%- assign heading_text = section.settings.heading -%}
+{%- assign subheading_html = section.settings.subheading -%}
+
+{%- comment -%} If metaobject exists, override header {%- endcomment -%}
+{%- if mo != blank -%}
+  {%- assign mo_heading_mf = mo.heading_title | default: mo.title | default: mo.heading -%}
+  {%- assign mo_heading = mo_heading_mf.value | default: mo_heading_mf -%}
+
+  {%- assign mo_sub_mf = mo.subheading | default: mo.subtitle -%}
+
+  {%- if mo_heading != blank -%}
+    {%- assign heading_text = mo_heading -%}
+  {%- endif -%}
+
+  {%- if mo_sub_mf != blank -%}
+    {%- capture subheading_html -%}{{ mo_sub_mf | metafield_tag }}{%- endcapture -%}
+  {%- endif -%}
+{%- endif -%}
+
+<section
+  id="CareerPaths-{{ sid }}"
+  class="cps"
+  style="
+    --cps-bg: {{ section.settings.section_bg }};
+    --cps-overlay-bg: {{ section.settings.overlay_bg }};
+    --cps-overlay-bg-hover: {{ section.settings.overlay_bg_hover }};
+
+    --cps-title-size: {{ section.settings.section_title_size }};
+    --cps-desc-size: {{ section.settings.section_desc_size }};
+    --cps-card-title-size: {{ section.settings.card_title_size }};
+    --cps-card-desc-size: {{ section.settings.card_desc_size }};
+
+    --cps-gap: {{ section.settings.card_gap }};
+  "
+>
+  <div class="cps__inner">
+    {% if heading_text != blank or subheading_html != blank %}
+      <div class="cps__head">
+        {% if heading_text != blank %}
+          <h2 class="cps__h">{{ heading_text }}</h2>
+        {% endif %}
+        {% if subheading_html != blank %}
+          <div class="cps__sub rte">{{ subheading_html }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="cps__wrap">
+      {% if section.settings.show_arrows %}
+        <button class="cps__nav cps__nav--prev" type="button" aria-label="Previous">‹</button>
+      {% endif %}
+
+      <div class="cps__viewport" data-cps-viewport>
+        <div class="cps__track" data-cps-track>
+
+          {%- assign used_meta = false -%}
+
+          {%- comment -%} METAOBJECT SLIDES {%- endcomment -%}
+          {%- if mo != blank and mo.slides != blank and mo.slides.value != blank -%}
+            {%- assign slides = mo.slides.value -%}
+
+            {%- for slide in slides -%}
+              {%- comment -%} Slide field handles (based on your screenshots) {%- endcomment -%}
+              {%- assign en_mf = slide.enabled_slide -%}
+              {%- if en_mf == blank -%}
+                {%- assign en_mf = slide.enabled | default: slide.enable | default: slide.is_enabled -%}
+              {%- endif -%}
+              {%- assign enabled = en_mf.value -%}
+              {%- if enabled == blank -%}{%- assign enabled = true -%}{%- endif -%}
+              {%- if enabled == 'false' -%}{%- assign enabled = false -%}{%- endif -%}
+
+              {%- assign img_mf = slide.slide_image -%}
+              {%- if img_mf == blank -%}
+                {%- assign img_mf = slide.image | default: slide.slider_image | default: slide.card_image -%}
+              {%- endif -%}
+
+              {%- assign ttl_mf = slide.slide_title -%}
+              {%- if ttl_mf == blank -%}
+                {%- assign ttl_mf = slide.title | default: slide.card_title -%}
+              {%- endif -%}
+
+              {%- assign desc_mf = slide.slide_description -%}
+              {%- if desc_mf == blank -%}
+                {%- assign desc_mf = slide.description | default: slide.desc -%}
+              {%- endif -%}
+
+              {%- assign img_val = img_mf.value | default: img_mf -%}
+              {%- assign ttl_val = ttl_mf.value | default: ttl_mf -%}
+
+              {%- if enabled and img_val != blank and ttl_val != blank -%}
+                {%- assign used_meta = true -%}
+
+                <article class="cps__card" data-cps-card tabindex="0">
+                  <div class="cps__media">
+                    {%- capture sizes -%}
+                      (min-width: 1100px) 25vw, (min-width: 750px) 50vw, 80vw
+                    {%- endcapture -%}
+                    {{
+                      img_val
+                      | image_url: width: 1600
+                      | image_tag:
+                        loading: 'lazy',
+                        sizes: sizes,
+                        widths: '360,540,720,900,1200,1600',
+                        class: 'cps__img',
+                        draggable: 'false',
+                        alt: ttl_val | escape
+                    }}
+                  </div>
+
+                  <div class="cps__overlay">
+                    <div class="cps__overlay-inner">
+                      <h3 class="cps__ct">{{ ttl_val }}</h3>
+
+                      {%- if desc_mf != blank -%}
+                        <div class="cps__cd rte">{{ desc_mf | metafield_tag }}</div>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </article>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+
+          {%- comment -%} FALLBACK SLIDES (Theme Editor blocks) {%- endcomment -%}
+          {%- unless used_meta -%}
+            {% for block in section.blocks %}
+              {% if block.type == 'card' and block.settings.enabled %}
+                {%- if block.settings.image != blank and block.settings.title != blank -%}
+                  <article class="cps__card" data-cps-card tabindex="0" {{ block.shopify_attributes }}>
+                    <div class="cps__media">
+                      {%- capture sizes -%}
+                        (min-width: 1100px) 25vw, (min-width: 750px) 50vw, 80vw
+                      {%- endcapture -%}
+                      {{
+                        block.settings.image
+                        | image_url: width: 1600
+                        | image_tag:
+                          loading: 'lazy',
+                          sizes: sizes,
+                          widths: '360,540,720,900,1200,1600',
+                          class: 'cps__img',
+                          draggable: 'false',
+                          alt: block.settings.title | escape
+                      }}
+                    </div>
+
+                    <div class="cps__overlay">
+                      <div class="cps__overlay-inner">
+                        <h3 class="cps__ct">{{ block.settings.title }}</h3>
+                        {% if block.settings.desc != blank %}
+                          <div class="cps__cd rte">{{ block.settings.desc }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </article>
+                {%- endif -%}
+              {% endif %}
+            {% endfor %}
+          {%- endunless -%}
+
+        </div>
+      </div>
+
+      {% if section.settings.show_arrows %}
+        <button class="cps__nav cps__nav--next" type="button" aria-label="Next">›</button>
+      {% endif %}
+    </div>
+
+    {% if section.settings.show_pagination %}
+      <div class="cps__pagi" data-cps-pagi aria-label="Slider pagination"></div>
+    {% endif %}
+  </div>
+
+  <style>
+    #CareerPaths-{{ sid }}.cps{
+      background: var(--cps-bg);
+      padding: clamp(24px, 4vw, 48px) 0;
+    }
+    #CareerPaths-{{ sid }} .cps__inner{
+      max-width: {{ section.settings.max_width }};
+      margin: 0 auto;
+      padding: 0 clamp(16px, 3vw, 28px);
+    }
+    #CareerPaths-{{ sid }} .cps__head{
+      text-align: center;
+      margin-bottom: clamp(18px, 3vw, 26px);
+    }
+    #CareerPaths-{{ sid }} .cps__h{
+      margin: 0 0 25px;
+      font-family: 'Anton';
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: var(--cps-title-size);
+      color: {{ section.settings.section_title_color }};
+      line-height: 1.05;
+    }
+    #CareerPaths-{{ sid }} .cps__sub{
+      margin: 0;
+      font-family: var(--font-body-family);
+      font-size: var(--cps-desc-size);
+      color: {{ section.settings.section_desc_color }};
+      line-height: 1.5;
+    }
+
+    #CareerPaths-{{ sid }} .cps__wrap{
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #CareerPaths-{{ sid }} .cps__viewport{
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      cursor: grab;
+      touch-action: pan-y;
+    }
+    #CareerPaths-{{ sid }} .cps__viewport::-webkit-scrollbar{ display:none; }
+
+    #CareerPaths-{{ sid }}.is-dragging .cps__viewport{
+      cursor: grabbing;
+      scroll-snap-type: none;
+    }
+    #CareerPaths-{{ sid }}.is-dragging{ user-select: none; }
+
+    #CareerPaths-{{ sid }} .cps__track{
+      display: flex;
+      gap: var(--cps-gap);
+      padding-bottom: 4px;
+    }
+
+    #CareerPaths-{{ sid }} .cps__card{
+      position: relative;
+      border-radius: {{ section.settings.card_radius }}px;
+      overflow: hidden;
+      background: #fff;
+      min-height: 420px;
+      flex: 0 0 var(--cps-cardw, 320px);
+      scroll-snap-align: start;
+      cursor: pointer;
+      outline: none;
+    }
+
+    #CareerPaths-{{ sid }} .cps__media{ height: 100%; pointer-events: auto; }
+    #CareerPaths-{{ sid }} .cps__img{
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      -webkit-user-drag: none;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    #CareerPaths-{{ sid }} .cps__overlay{
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: {{ section.settings.overlay_collapsed_height }};
+      background: transparent;
+      transition: height 380ms cubic-bezier(.2,.8,.2,1);
+      overflow: hidden;
+      display: flex;
+      align-items: stretch;
+      z-index: 2;
+      pointer-events: none;
+    }
+    #CareerPaths-{{ sid }} .cps__overlay::before{
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--cps-overlay-bg);
+      opacity: 0.7;
+      transition: background 220ms ease, opacity 220ms ease;
+      z-index: 0;
+    }
+    #CareerPaths-{{ sid }} .cps__overlay-inner{
+      width: 100%;
+      height: 100%;
+      padding: {{ section.settings.overlay_padding }};
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      box-sizing: border-box;
+      scrollbar-width: none;
+      position: relative;
+      z-index: 1;
+    }
+    #CareerPaths-{{ sid }} .cps__overlay-inner::-webkit-scrollbar{ display:none; }
+
+    #CareerPaths-{{ sid }} .cps__ct{
+      margin: 0;
+      font-family: var(--font-heading-family);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      font-size: var(--cps-card-title-size);
+      line-height: 1.15;
+      color: {{ section.settings.card_title_color }};
+      position: relative;
+      z-index: 2;
+    }
+
+    #CareerPaths-{{ sid }} .cps__cd{
+      font-family: var(--font-body-family);
+      font-size: var(--cps-card-desc-size);
+      line-height: 1.55;
+      color: {{ section.settings.card_desc_color }};
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(10px);
+      margin-top: 0;
+      transition:
+        max-height 380ms cubic-bezier(.2,.8,.2,1),
+        opacity 240ms ease,
+        transform 240ms ease,
+        margin-top 240ms ease;
+    }
+
+    #CareerPaths-{{ sid }} .cps__nav{
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 0;
+      background: {{ section.settings.nav_bg }};
+      color: {{ section.settings.nav_color }};
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 24px rgba(0,0,0,.12);
+      transition: transform .2s ease, opacity .2s ease;
+      user-select: none;
+    }
+    #CareerPaths-{{ sid }} .cps__nav:hover{ transform: translateY(-1px); }
+    #CareerPaths-{{ sid }} .cps__nav[disabled]{ opacity: .4; cursor: not-allowed; transform: none; }
+
+    #CareerPaths-{{ sid }} .cps__pagi{
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: clamp(14px, 2.2vw, 18px);
+    }
+    #CareerPaths-{{ sid }} .cps__dot{
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: {{ section.settings.pagi_inactive }};
+      border: 0;
+      cursor: pointer;
+      padding: 0;
+      transition: width 220ms ease, background 220ms ease, opacity 220ms ease;
+      opacity: .75;
+    }
+    #CareerPaths-{{ sid }} .cps__dot.is-active{
+      width: 30px;
+      background: {{ section.settings.pagi_active }};
+      opacity: 1;
+    }
+
+    @media (max-width: 749px){
+      #CareerPaths-{{ sid }} .cps__wrap{ grid-template-columns: auto 1fr auto; gap: 8px; }
+      #CareerPaths-{{ sid }} .cps__nav{ width: 40px; height: 40px; font-size: 24px; }
+    }
+
+    /* Desktop hover/focus */
+    @media (hover: hover) and (pointer: fine){
+      #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay,
+      #CareerPaths-{{ sid }} .cps__card:focus-visible .cps__overlay{
+        height: 100%;
+        pointer-events: auto;
+      }
+
+      #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay::before,
+      #CareerPaths-{{ sid }} .cps__card:focus-visible .cps__overlay::before{
+        background: var(--cps-overlay-bg-hover);
+        opacity: 0.78;
+      }
+
+      #CareerPaths-{{ sid }} .cps__card:hover .cps__overlay-inner,
+      #CareerPaths-{{ sid }} .cps__card:focus-visible .cps__overlay-inner{
+        justify-content: flex-start;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      #CareerPaths-{{ sid }} .cps__card:hover .cps__cd,
+      #CareerPaths-{{ sid }} .cps__card:focus-visible .cps__cd{
+        max-height: 3000px;
+        margin-top: 10px;
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Mobile tap-to-toggle */
+    @media (hover: none){
+      #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay{
+        height: 100%;
+        pointer-events: auto;
+      }
+      #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay::before{
+        background: var(--cps-overlay-bg-hover);
+        opacity: 0.78;
+      }
+      #CareerPaths-{{ sid }} .cps__card.is-open .cps__overlay-inner{
+        justify-content: flex-start;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      #CareerPaths-{{ sid }} .cps__card.is-open .cps__cd{
+        max-height: 3000px;
+        margin-top: 10px;
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      #CareerPaths-{{ sid }} .cps__overlay,
+      #CareerPaths-{{ sid }} .cps__cd{ transition: none !important; }
+    }
+  </style>
+
+  <script>
+  (function(){
+    var root = document.getElementById('CareerPaths-{{ sid }}');
+    if (!root) return;
+
+    var viewport = root.querySelector('[data-cps-viewport]');
+    var track = root.querySelector('[data-cps-track]');
+    var cards = Array.prototype.slice.call(root.querySelectorAll('[data-cps-card]'));
+    if (!viewport || !track || !cards.length) return;
+
+    var showArrows = {{ section.settings.show_arrows | json }};
+    var showPagi   = {{ section.settings.show_pagination | json }};
+    var autoplay   = {{ section.settings.autoplay | json }};
+    var autoplayMs = ({{ section.settings.autoplay_speed | times: 1000 | json }}) || 5000;
+
+    var perDesktop = parseFloat({{ section.settings.items_desktop | json }}) || 3.5;
+    var perTablet  = parseFloat({{ section.settings.items_tablet  | json }}) || 2;
+    var perMobile  = parseFloat({{ section.settings.items_mobile  | json }}) || 1;
+
+    var btnPrev = root.querySelector('.cps__nav--prev');
+    var btnNext = root.querySelector('.cps__nav--next');
+    var pagi = root.querySelector('[data-cps-pagi]');
+    var timer = null;
+
+    var isHoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    function getGapPx(){
+      var gap = getComputedStyle(track).gap || getComputedStyle(track).columnGap || '0px';
+      return parseFloat(gap) || 0;
+    }
+
+    function getPerView(){
+      var w = window.innerWidth || document.documentElement.clientWidth;
+      if (w <= 749) return perMobile;
+      if (w <= 1099) return perTablet;
+      return perDesktop;
+    }
+
+    function maxScroll(){
+      return Math.max(0, track.scrollWidth - viewport.clientWidth);
+    }
+
+    function stepSize(){
+      var gapPx = getGapPx();
+      var card = cards[0];
+      var w = card ? card.getBoundingClientRect().width : 0;
+      return Math.max(1, w + gapPx);
+    }
+
+    function scrollToX(x, smooth){
+      viewport.scrollTo({ left: x, behavior: smooth === false ? 'auto' : 'smooth' });
+    }
+
+    function layout(){
+      var perView = getPerView();
+      var gapPx = getGapPx();
+      var vw = viewport.clientWidth;
+
+      var cardW = (vw - gapPx * (perView - 1)) / perView;
+      if (!isFinite(cardW) || cardW < 120) cardW = 280;
+
+      root.style.setProperty('--cps-cardw', cardW.toFixed(2) + 'px');
+      buildPagination();
+      updateUI();
+    }
+
+    function pageCount(){
+      var s = stepSize();
+      if (!s) return 1;
+      return Math.max(1, Math.ceil(maxScroll() / s) + 1);
+    }
+
+    function activePage(){
+      var s = stepSize();
+      if (!s) return 0;
+      return Math.round(viewport.scrollLeft / s);
+    }
+
+    function buildPagination(){
+      if (!showPagi || !pagi) return;
+      pagi.innerHTML = '';
+      var count = pageCount();
+      for (var i = 0; i < count; i++){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'cps__dot';
+        b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        (function(ii){
+          b.addEventListener('click', function(){
+            stopAutoplay();
+            scrollToX(ii * stepSize());
+            restartAutoplay();
+          });
+        })(i);
+        pagi.appendChild(b);
+      }
+      updatePagination();
+    }
+
+    function updatePagination(){
+      if (!showPagi || !pagi) return;
+      var dots = pagi.querySelectorAll('.cps__dot');
+      var a = activePage();
+      dots.forEach(function(d, i){
+        if (i === a) d.classList.add('is-active');
+        else d.classList.remove('is-active');
+      });
+    }
+
+    function updateArrows(){
+      if (!showArrows) return;
+      var x = viewport.scrollLeft;
+      var mx = maxScroll();
+      if (btnPrev) btnPrev.disabled = (x <= 2);
+      if (btnNext) btnNext.disabled = (x >= mx - 2);
+    }
+
+    function updateUI(){ updateArrows(); updatePagination(); }
+
+    function stopAutoplay(){ if (timer) { clearInterval(timer); timer = null; } }
+
+    function startAutoplay(){
+      if (!autoplay) return;
+      stopAutoplay();
+      timer = setInterval(function(){
+        if (viewport.scrollLeft >= maxScroll() - 2) scrollToX(0);
+        else scrollToX(Math.min(maxScroll(), viewport.scrollLeft + stepSize()));
+      }, Math.max(2000, autoplayMs));
+    }
+
+    function restartAutoplay(){ if (autoplay) startAutoplay(); }
+
+    if (showArrows){
+      if (btnPrev) btnPrev.addEventListener('click', function(){ stopAutoplay(); scrollToX(Math.max(0, viewport.scrollLeft - stepSize())); restartAutoplay(); });
+      if (btnNext) btnNext.addEventListener('click', function(){ stopAutoplay(); scrollToX(Math.min(maxScroll(), viewport.scrollLeft + stepSize())); restartAutoplay(); });
+    }
+
+    viewport.addEventListener('scroll', function(){ updateUI(); }, { passive: true });
+
+    // ---- Drag / hold-to-drag (mouse + touch) ----
+    var pointerDown = false, startX = 0, startY = 0, startScroll = 0;
+    var dragging = false, activeId = null;
+    var holdTimer = null, dragReady = false, didDragRecently = false;
+
+    function beginDrag(e){
+      dragging = true;
+      root.classList.add('is-dragging');
+      stopAutoplay();
+      try { viewport.setPointerCapture(e.pointerId); } catch(err){}
+    }
+
+    function onPointerDown(e){
+      if (e.button && e.button !== 0) return;
+
+      pointerDown = true;
+      dragging = false;
+      dragReady = false;
+      activeId = e.pointerId;
+
+      startX = e.clientX;
+      startY = e.clientY;
+      startScroll = viewport.scrollLeft;
+      didDragRecently = false;
+
+      clearTimeout(holdTimer);
+      holdTimer = setTimeout(function(){
+        if (!pointerDown || dragging) return;
+        dragReady = true;
+        beginDrag(e);
+      }, 140);
+    }
+
+    function onPointerMove(e){
+      if (!pointerDown || e.pointerId !== activeId) return;
+
+      var dx = e.clientX - startX;
+      var dy = e.clientY - startY;
+
+      if (!dragging){
+        if (dragReady || (Math.abs(dx) > 6 && Math.abs(dx) > Math.abs(dy))){
+          clearTimeout(holdTimer);
+          beginDrag(e);
+        } else {
+          return;
+        }
+      }
+
+      e.preventDefault();
+      viewport.scrollLeft = startScroll - dx;
+    }
+
+    function onPointerUp(e){
+      if (!pointerDown || (activeId !== null && e.pointerId !== activeId)) return;
+
+      pointerDown = false;
+      clearTimeout(holdTimer);
+
+      if (dragging){
+        root.classList.remove('is-dragging');
+        dragging = false;
+        dragReady = false;
+        didDragRecently = true;
+
+        var s = stepSize();
+        if (s) scrollToX(Math.round(viewport.scrollLeft / s) * s, true);
+
+        restartAutoplay();
+        setTimeout(function(){ didDragRecently = false; }, 220);
+      } else {
+        dragReady = false;
+      }
+
+      activeId = null;
+    }
+
+    viewport.addEventListener('pointerdown', onPointerDown, { passive: false });
+    viewport.addEventListener('pointermove', onPointerMove, { passive: false });
+    viewport.addEventListener('pointerup', onPointerUp, { passive: true });
+    viewport.addEventListener('pointercancel', onPointerUp, { passive: true });
+    viewport.addEventListener('dragstart', function(e){ e.preventDefault(); });
+
+    // Mobile tap-to-toggle (only on non-hover devices)
+    if (!isHoverCapable){
+      cards.forEach(function(card){
+        card.addEventListener('click', function(){
+          if (didDragRecently) return;
+          cards.forEach(function(c){ if (c !== card) c.classList.remove('is-open'); });
+          card.classList.toggle('is-open');
+        });
+      });
+    } else {
+      // Avoid "sticky" focus from mouse clicks
+      cards.forEach(function(card){
+        card.addEventListener('mousedown', function(){ try { card.blur(); } catch(e){} });
+        card.addEventListener('mouseup', function(){ try { card.blur(); } catch(e){} });
+      });
+    }
+
+    var rto = null;
+    window.addEventListener('resize', function(){
+      clearTimeout(rto);
+      rto = setTimeout(function(){ layout(); }, 120);
+    });
+
+    layout();
+    startAutoplay();
+  })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "PDP Career paths slider",
+  "tag": "section",
+  "class": "section pdp-career-paths-slider",
+  "max_blocks": 10,
+  "settings": [
+    { "type": "header", "content": "Header" },
+    { "type": "text", "id": "metaobject_key", "label": "Product metafield key (namespace: custom)", "default": "career_paths_slider_content" },
+    { "type": "text", "id": "heading", "label": "Fallback section title", "default": "DISCOVER YOUR CAREER PATH WITH THIS CERTIFICATION" },
+    { "type": "richtext", "id": "subheading", "label": "Fallback section description", "default": "<p>Your potential career pathways start here.</p>" },
+
+    { "type": "header", "content": "Items visible (supports decimals)" },
+    { "type": "text", "id": "items_desktop", "label": "Desktop items visible (e.g. 3.5)", "default": "3.5" },
+    { "type": "text", "id": "items_tablet", "label": "Tablet items visible (e.g. 2)", "default": "2" },
+    { "type": "text", "id": "items_mobile", "label": "Mobile items visible (e.g. 1)", "default": "1" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "section_bg", "label": "Section background", "default": "#ffffff" },
+    { "type": "color", "id": "section_title_color", "label": "Section title color", "default": "#0E2A4C" },
+    { "type": "color", "id": "section_desc_color", "label": "Section description color", "default": "#0E2A4C" },
+    { "type": "color", "id": "overlay_bg", "label": "Overlay background (collapsed)", "default": "rgba(18,54,91,0.85)" },
+    { "type": "color", "id": "overlay_bg_hover", "label": "Overlay background (expanded/hover)", "default": "rgba(18,54,91,0.90)" },
+    { "type": "color", "id": "card_title_color", "label": "Card title color", "default": "#ffffff" },
+    { "type": "color", "id": "card_desc_color", "label": "Card description color", "default": "#ffffff" },
+
+    { "type": "header", "content": "Typography" },
+    { "type": "text", "id": "section_title_size", "label": "Section title font size (CSS)", "default": "clamp(28px, 3.6vw, 54px)" },
+    { "type": "text", "id": "section_desc_size", "label": "Section description font size (CSS)", "default": "clamp(14px, 1.4vw, 18px)" },
+    { "type": "text", "id": "card_title_size", "label": "Card title font size (CSS)", "default": "clamp(16px, 1.4vw, 20px)" },
+    { "type": "text", "id": "card_desc_size", "label": "Card description font size (CSS)", "default": "clamp(14px, 1.2vw, 16px)" },
+
+    { "type": "header", "content": "Layout" },
+    { "type": "text", "id": "max_width", "label": "Max width (CSS)", "default": "1200px" },
+    { "type": "text", "id": "card_gap", "label": "Gap between cards (CSS)", "default": "18px" },
+    { "type": "range", "id": "card_radius", "label": "Card radius", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 18 },
+    { "type": "text", "id": "overlay_collapsed_height", "label": "Overlay collapsed height (CSS)", "default": "72px" },
+    { "type": "text", "id": "overlay_padding", "label": "Overlay padding (CSS)", "default": "18px 18px" },
+
+    { "type": "header", "content": "Controls" },
+    { "type": "checkbox", "id": "autoplay", "label": "Enable autoplay", "default": false },
+    { "type": "range", "id": "autoplay_speed", "label": "Autoplay speed (seconds)", "min": 2, "max": 12, "step": 1, "default": 5 },
+    { "type": "checkbox", "id": "show_arrows", "label": "Show prev/next buttons", "default": false },
+    { "type": "color", "id": "nav_bg", "label": "Nav button background", "default": "#ffffff" },
+    { "type": "color", "id": "nav_color", "label": "Nav button color", "default": "#0E2A4C" },
+    { "type": "checkbox", "id": "show_pagination", "label": "Show pagination", "default": false },
+    { "type": "color", "id": "pagi_inactive", "label": "Pagination inactive", "default": "rgba(14,42,76,0.35)" },
+    { "type": "color", "id": "pagi_active", "label": "Pagination active (pill)", "default": "#4FB7C3" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Fallback career card",
+      "settings": [
+        { "type": "checkbox", "id": "enabled", "label": "Enable this slide", "default": true },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Card title", "default": "PERSONAL TRAINER" },
+        { "type": "richtext", "id": "desc", "label": "Card description (revealed on hover)", "default": "<p>Add your card description here.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "PDP Career paths slider", "blocks": [{ "type": "card" }, { "type": "card" }, { "type": "card" }] }
+  ]
+}
+{% endschema %}

@@ -432,13 +432,14 @@ Custom
 */
 .image-with-text__heading{
   color:  #141414;
-
-font-family: Montserrat;
-font-size: 42px;
-font-style: normal;
-font-weight: 800;
-line-height: 112%;
-text-transform: uppercase;
+/* font-family: Montserrat; */
+  font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
+  font-size: 42px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 112%;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .image-with-text__media--adapt img {
@@ -447,11 +448,12 @@ text-transform: uppercase;
 }
 
 .image-with-text__text p {
-  font-family: Inter;
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: 150%; 
+  /* font-family: Montserrat, sans-serif; */
+  font-family: var(--font-proximaregular);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; 
   color: var(--black, #141414);
   opacity: 0.8;
 }

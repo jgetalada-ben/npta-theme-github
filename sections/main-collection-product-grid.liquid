@@ -22,6 +22,11 @@
   <script src="{{ 'quick-order-list.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
+{%- assign custom_bundle_button_url = section.settings.custom_bundle_button_url | default: 'https://app.npta.ca/widget/bookings/jessica-npta-calendar' -%}
+{%- assign custom_bundle_button_label = section.settings.custom_bundle_button_label | default: 'Speak to an advisor' -%}
+{%- assign custom_bundle_button_action = section.settings.custom_bundle_button_action | default: 'same_tab' -%}
+{%- assign custom_bundle_popup_heading = section.settings.custom_bundle_popup_heading | default: custom_bundle_button_label -%}
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -34,21 +39,105 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  html.custom-bundle-popup-open,
+  body.custom-bundle-popup-open {
+    overflow: hidden;
+  }
+
+  .custom-bundle-popup[hidden] {
+    display: none !important;
+  }
+
+  .custom-bundle-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+  }
+
+  .custom-bundle-popup__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  .custom-bundle-popup__dialog {
+    position: relative;
+    width: min(960px, calc(100vw - 2rem));
+    height: min(80vh, 820px);
+    margin: 5vh auto 0;
+    background: rgb(var(--color-background));
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .custom-bundle-popup__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+  }
+
+  .custom-bundle-popup__title {
+    margin: 0;
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+
+  .custom-bundle-popup__close {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    background: transparent;
+    color: rgb(var(--color-foreground));
+    font-size: 2.4rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0.25rem;
+  }
+
+  .custom-bundle-popup__body {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .custom-bundle-popup__iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #fff;
+  }
+
+  @media screen and (max-width: 749px) {
+    .custom-bundle-popup__dialog {
+      width: calc(100vw - 1rem);
+      height: 85vh;
+      margin-top: 2.5vh;
+      border-radius: 12px;
+    }
+
+    .custom-bundle-popup__header {
+      padding: 1rem;
+    }
+
+    .custom-bundle-popup__title {
+      font-size: 1.6rem;
+    }
+  }
 {%- endstyle -%}
-
-{% liquid
-  assign country_code = localization.country.iso_code | upcase
-%}
-
 
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
   {%- paginate collection.products by section.settings.products_per_page -%}
-    {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
- 
-
-    <div class="{% if section.settings.filter_type == 'vertical' %} facets-vertical page-container{% endif %}">
+    <div class="{% if section.settings.filter_type == 'vertical' %}facets-vertical page-container{% endif %}">
       {{ 'component-facets.css' | asset_url | stylesheet_tag }}
       <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
+
       {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
         <aside
           aria-labelledby="verticalTitle"
@@ -73,64 +162,55 @@
           data-cascade
         {% endif %}
       >
+        {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
+          <facet-filters-form class="facets facets-vertical-sort page-width small-hide">
+            <form class="facets-vertical-form" id="FacetSortForm">
+              <div class="product-count-vertical light" role="status">
+                <p class="product-count__text text-body">
+                  <span id="ProductCountDesktop">
+                    {%- assign current_page = paginate.current_offset | plus: paginate.page_size -%}
+                    {%- if current_page > collection.all_products_count -%}
+                      {%- assign current_page = collection.all_products_count -%}
+                    {%- endif -%}
+                    Showing {{ paginate.current_offset | plus: 1 }} - {{ current_page }} of {{ collection.all_products_count }}
+                  </span>
+                </p>
 
-
-
-{%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
-      <facet-filters-form class="facets facets-vertical-sort page-width small-hide">
-        <form class="facets-vertical-form" id="FacetSortForm">
-          
-          <div class="product-count-vertical light" role="status">
-<p class="product-count__text text-body">
-    <span id="ProductCountDesktop">
-        {%- assign current_page = paginate.current_offset | plus: paginate.page_size -%}
-        {%- if current_page > collection.all_products_count -%}
-            {%- assign current_page = collection.all_products_count -%}
-        {%- endif -%}
-        
-        Showing {{ paginate.current_offset | plus: 1 }} - {{ current_page }} of {{ collection.all_products_count }}
-    </span>
-</p>
-
-
-            {%- render 'loading-spinner' -%}
-          </div>
-          <div class="facet-filters sorting caption">
-            <div class="facet-filters__field">
-              <h2 class="facet-filters__label caption-large text-body">
-                <label for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
-              </h2>
-              <div class="select">
-                {%- assign sort_by = collection.sort_by | default: 'manually' -%}
-                <select
-                  name="sort_by"
-                  class="facet-filters__sort select__select caption-large"
-                  id="SortBy"
-                  aria-describedby="a11y-refresh-page-message"
-                >
-                  {%- for option in collection.sort_options -%}
-                    <option
-                      value="{{ option.value | escape }}"
-                      {% if option.value == sort_by %}
-                        selected="selected"
-                      {% endif %}
-                    >
-                      {{ option.name | escape }}
-                    </option>
-                  {%- endfor -%}
-                </select>
-                {% render 'icon-caret' %}
+                {%- render 'loading-spinner' -%}
               </div>
-            </div>
-          </div>
 
-        </form>
-      </facet-filters-form>
-    {%- endif -%}
+              <div class="facet-filters sorting caption">
+                <div class="facet-filters__field">
+                  <h2 class="facet-filters__label caption-large text-body">
+                    <label for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
+                  </h2>
+                  <div class="select">
+                    {%- assign sort_by = collection.sort_by | default: 'manually' -%}
+                    <select
+                      name="sort_by"
+                      class="facet-filters__sort select__select caption-large"
+                      id="SortBy"
+                      aria-describedby="a11y-refresh-page-message"
+                    >
+                      {%- for option in collection.sort_options -%}
+                        <option
+                          value="{{ option.value | escape }}"
+                          {% if option.value == sort_by %}
+                            selected="selected"
+                          {% endif %}
+                        >
+                          {{ option.name | escape }}
+                        </option>
+                      {%- endfor -%}
+                    </select>
+                    {% render 'icon-caret' %}
+                  </div>
+                </div>
+              </div>
+            </form>
+          </facet-filters-form>
+        {%- endif -%}
 
-        
-
-        
         {%- if collection.products.size == 0 -%}
           <div class="collection collection--empty page-width" id="product-grid" data-id="{{ section.id }}">
             <div class="loading-overlay gradient"></div>
@@ -146,83 +226,148 @@
             </div>
           </div>
         {%- else -%}
-          <div
-            class="collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
-          >
+          <div class="collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}">
             <div class="loading-overlay product-filter-bg">
               <div class="loading-wrap">
-<lottie-player src="https://lottie.host/f7b52321-e7d4-490f-a76b-3567bcf2f8fb/MQNlzaFADp.json" background="transparent" speed="1" style="width: 300px; height: 300px" direction="1" mode="normal" loop autoplay></lottie-player> </div>
-</div>
+                <lottie-player src="https://lottie.host/f7b52321-e7d4-490f-a76b-3567bcf2f8fb/MQNlzaFADp.json" background="transparent" speed="1" style="width: 300px; height: 300px" direction="1" mode="normal" loop autoplay></lottie-player>
+              </div>
+            </div>
 
+            <ul
+              id="product-grid"
+              data-id="{{ section.id }}"
+              class="
+                grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
+                grid--{{ section.settings.columns_desktop }}-col-desktop
+                {% if section.settings.quick_add == 'bulk' %} collection-quick-add-bulk{% endif %}
+              "
+            >
+              {% assign skip_card_product_styles = false %}
 
-<ul
-  id="product-grid"
-  data-id="{{ section.id }}"
-  class="
-    grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
-    grid--{{ section.settings.columns_desktop }}-col-desktop
-    {% if section.settings.quick_add == 'bulk' %} collection-quick-add-bulk{% endif %}
-  "
->
-  {% assign skip_card_product_styles = false %}
-  {%- for product in collection.products -%}
-    {% assign lazy_load = false %}
-    {%- if forloop.index > 2 -%}
-      {%- assign lazy_load = true -%}
-    {%- endif -%}
-    <li
-      class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-      {% if settings.animations_reveal_on_scroll %}
-        data-cascade
-        style="--animation-order: {{ forloop.index }};"
-      {% endif %}
-    >
-      {% render 'card-product',
-        card_product: product,
-        media_aspect_ratio: section.settings.image_ratio,
-        image_shape: section.settings.image_shape,
-        show_secondary_image: section.settings.show_secondary_image,
-        show_vendor: section.settings.show_vendor,
-        show_rating: section.settings.show_rating,
-        lazy_load: lazy_load,
-        skip_styles: skip_card_product_styles,
-        quick_add: section.settings.quick_add,
-        section_id: section.id,
-        product_description: product.description,
-        product_tags: product.tags
-      %}
-    </li>
+              {%- for product in collection.products -%}
+                {% assign lazy_load = false %}
+                {%- if forloop.index > 2 -%}
+                  {%- assign lazy_load = true -%}
+                {%- endif -%}
 
-    {% assign skip_card_product_styles = true %}
+                <li
+                  class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                  {% if settings.animations_reveal_on_scroll %}
+                    data-cascade
+                    style="--animation-order: {{ forloop.index }};"
+                  {% endif %}
+                >
+                  {% render 'card-product',
+                    card_product: product,
+                    media_aspect_ratio: section.settings.image_ratio,
+                    image_shape: section.settings.image_shape,
+                    show_secondary_image: section.settings.show_secondary_image,
+                    show_vendor: section.settings.show_vendor,
+                    show_rating: section.settings.show_rating,
+                    lazy_load: lazy_load,
+                    skip_styles: skip_card_product_styles,
+                    quick_add: section.settings.quick_add,
+                    section_id: section.id,
+                    product_description: product.description,
+                    product_tags: product.tags
+                  %}
+                </li>
 
-    {% if forloop.index == 2 %}
-      <li class="grid__item custom-bundle-box">
-        <div class="custom-bundle-box-wrapper">
-          <h3 >Want a Custom Bundle?</h3>
-          <p>
-           <span> Email </span>{% if country_code == 'PH' %}<a href="mailto:info@npta.ph">info@npta.ph</a>{% else %}<a href="mailto:info@npta.ca">info@npta.ca</a>{% endif %}
-         </p>
-         {% if country_code == 'CA' %}
-         <p>
-          <span>  or </span>
-          </p>
-         <p>
-            <span>  Call </span><a href="tel:+17789496782" >+1 778-949-6782</a>
-          </p>
-        {% endif %}
-        </div>
-      </li>
-    {% endif %}
+                {% assign skip_card_product_styles = true %}
 
-  {%- endfor -%}
-</ul>
+                {% if forloop.index == 2 %}
+                  <li class="grid__item custom-bundle-box" style="--animation-order: 3;">
+                    <div class="custom-bundle-box-wrapper">
+                      <h3>Want a Custom Bundle?</h3>
+                      <p><span>Email </span><a href="mailto:info@npta.ca">info@npta.ca</a></p>
+                      <p><span>or </span></p>
+                      <p><span>Call </span><a href="tel:+17789496782">+1 778-949-6782</a></p>
+                      <p><span>or </span></p>
 
+                      <div class="button-wrapper" style="margin-top:10px;">
+                        {%- case custom_bundle_button_action -%}
+                          {%- when 'popup' -%}
+                            <a
+                              href="{{ custom_bundle_button_url }}"
+                              class="btn button-yg"
+                              data-custom-bundle-trigger
+                              data-custom-bundle-section="{{ section.id }}"
+                              data-custom-bundle-url="{{ custom_bundle_button_url | escape }}"
+                              aria-haspopup="dialog"
+                              aria-controls="CustomBundlePopup-{{ section.id }}"
+                            >
+                              <span class="btn-label-down">{{ custom_bundle_button_label }}</span>
+                              <span class="btn-label-down">{{ custom_bundle_button_label }}</span>
+                            </a>
 
+                          {%- when 'new_tab' -%}
+                            <a
+                              href="{{ custom_bundle_button_url }}"
+                              class="btn button-yg"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <span class="btn-label-down">{{ custom_bundle_button_label }}</span>
+                              <span class="btn-label-down">{{ custom_bundle_button_label }}</span>
+                            </a>
 
+                          {%- else -%}
+                            <a href="{{ custom_bundle_button_url }}" class="btn button-yg">
+                              <span class="btn-label-down">{{ custom_bundle_button_label }}</span>
+                              <span class="btn-label-down">{{ custom_bundle_button_label }}</span>
+                            </a>
+                        {%- endcase -%}
+                      </div>
+                    </div>
+                  </li>
+                {% endif %}
+              {%- endfor -%}
+            </ul>
 
+            {% if custom_bundle_button_action == 'popup' %}
+              <div
+                id="CustomBundlePopup-{{ section.id }}"
+                class="custom-bundle-popup"
+                data-custom-bundle-popup="{{ section.id }}"
+                hidden
+                aria-hidden="true"
+              >
+                <div class="custom-bundle-popup__backdrop" data-custom-bundle-close></div>
 
+                <div
+                  class="custom-bundle-popup__dialog"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="CustomBundlePopupTitle-{{ section.id }}"
+                >
+                  <div class="custom-bundle-popup__header">
+                    <h3 id="CustomBundlePopupTitle-{{ section.id }}" class="custom-bundle-popup__title">
+                      {{ custom_bundle_popup_heading }}
+                    </h3>
 
-            
+                    <button
+                      type="button"
+                      class="custom-bundle-popup__close"
+                      aria-label="Close popup"
+                      data-custom-bundle-close
+                    >
+                      &times;
+                    </button>
+                  </div>
+
+                  <div class="custom-bundle-popup__body">
+                    <iframe
+                      id="CustomBundlePopupFrame-{{ section.id }}"
+                      class="custom-bundle-popup__iframe"
+                      title="{{ custom_bundle_popup_heading | escape }}"
+                      loading="lazy"
+                      allow="camera; microphone; fullscreen; payment"
+                      referrerpolicy="strict-origin-when-cross-origin"
+                    ></iframe>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
 
             {%- if paginate.pages > 1 -%}
               {% render 'pagination', paginate: paginate, anchor: '' %}
@@ -232,10 +377,90 @@
       </div>
     </div>
   {%- endpaginate -%}
+
   {% if section.settings.image_shape == 'arch' %}
     {% render 'mask-arch' %}
   {%- endif -%}
 </div>
+
+<script>
+  (function() {
+    if (window.customBundlePopupInitialized) return;
+    window.customBundlePopupInitialized = true;
+
+    var activeTrigger = null;
+
+    function getPopup(sectionId) {
+      return document.querySelector('[data-custom-bundle-popup="' + sectionId + '"]');
+    }
+
+    function getFrame(sectionId) {
+      return document.getElementById('CustomBundlePopupFrame-' + sectionId);
+    }
+
+    function openPopup(sectionId, url, trigger) {
+      var popup = getPopup(sectionId);
+      var frame = getFrame(sectionId);
+
+      if (!popup || !frame || !url) return;
+
+      activeTrigger = trigger || null;
+      frame.setAttribute('src', url);
+      popup.hidden = false;
+      popup.setAttribute('aria-hidden', 'false');
+      document.documentElement.classList.add('custom-bundle-popup-open');
+      document.body.classList.add('custom-bundle-popup-open');
+
+      var closeButton = popup.querySelector('.custom-bundle-popup__close');
+      if (closeButton) closeButton.focus();
+    }
+
+    function closePopup(popup) {
+      if (!popup) return;
+
+      var frame = popup.querySelector('.custom-bundle-popup__iframe');
+      if (frame) frame.setAttribute('src', '');
+
+      popup.hidden = true;
+      popup.setAttribute('aria-hidden', 'true');
+      document.documentElement.classList.remove('custom-bundle-popup-open');
+      document.body.classList.remove('custom-bundle-popup-open');
+
+      if (activeTrigger && typeof activeTrigger.focus === 'function') {
+        activeTrigger.focus();
+      }
+
+      activeTrigger = null;
+    }
+
+    document.addEventListener('click', function(event) {
+      var trigger = event.target.closest('[data-custom-bundle-trigger]');
+      if (trigger) {
+        event.preventDefault();
+        openPopup(
+          trigger.getAttribute('data-custom-bundle-section'),
+          trigger.getAttribute('data-custom-bundle-url'),
+          trigger
+        );
+        return;
+      }
+
+      var closeTarget = event.target.closest('[data-custom-bundle-close]');
+      if (closeTarget) {
+        closePopup(closeTarget.closest('.custom-bundle-popup'));
+      }
+    });
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key !== 'Escape') return;
+
+      var openPopupElement = document.querySelector('.custom-bundle-popup:not([hidden])');
+      if (openPopupElement) {
+        closePopup(openPopupElement);
+      }
+    });
+  })();
+</script>
 
 {% schema %}
 {
@@ -429,6 +654,47 @@
           "label": "t:sections.main-collection-product-grid.settings.columns_mobile.options__2.label"
         }
       ]
+    },
+    {
+      "type": "header",
+      "content": "Custom bundle box"
+    },
+    {
+      "type": "text",
+      "id": "custom_bundle_button_label",
+      "label": "Button label",
+      "default": "Speak to an advisor"
+    },
+    {
+      "type": "url",
+      "id": "custom_bundle_button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "select",
+      "id": "custom_bundle_button_action",
+      "label": "Button action",
+      "default": "same_tab",
+      "options": [
+        {
+          "value": "same_tab",
+          "label": "Open in same tab"
+        },
+        {
+          "value": "new_tab",
+          "label": "Open in new tab"
+        },
+        {
+          "value": "popup",
+          "label": "Open in popup"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "custom_bundle_popup_heading",
+      "label": "Popup heading",
+      "default": "Book a call"
     },
     {
       "type": "header",

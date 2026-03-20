@@ -10,7 +10,7 @@
   text-align: var(--text-alignment);
 }
 .card:hover .quick-add__submit {
-  background-color: #E9F24F;
+  background-color: #C1FF72;
   transition:300ms;
 }
 

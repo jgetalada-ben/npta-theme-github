@@ -1,115 +1,117 @@
+{% comment %}
+  Section: Top Banner
+  Update: Add per-button behavior (normal / new tab / popup iframe)
+  - Safe when multiple popup sections exist on the same page (scoped by section.id)
+{% endcomment %}
+
+{%- assign sid = section.id -%}
+{%- assign modal_id_1 = 'tbModal1-' | append: sid -%}
+{%- assign modal_id_2 = 'tbModal2-' | append: sid -%}
+
 {% schema %}
 {
   "name": "Top Banner",
   "settings": [
-    {
-      "type": "image_picker",
-      "id": "background_image",
-      "label": "Background Image"
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Title",
-      "default": "Lorem ipsum dolor sit amet"
-    },
-    {
-      "type": "text",
-      "id": "subtitle",
-      "label": "Subtitle",
-    },
+    { "type": "image_picker", "id": "background_image", "label": "Background Image" },
+
+    { "type": "text", "id": "title", "label": "Title", "default": "Lorem ipsum dolor sit amet" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle" },
+    { "type": "richtext", "id": "desc1", "label": "Description 1" },
+
+    { "type": "text", "id": "title_size", "label": "Title font-size (accepts clamp())", "default": "clamp(32px,6vw,64px)" },
+    { "type": "text", "id": "subtitle_size", "label": "Subtitle font-size (accepts clamp())", "default": "26px" },
+    { "type": "text", "id": "desc_size", "label": "Description font-size (accepts clamp())", "default": "16px" },
+
+    { "type": "url", "id": "button_link", "label": "Button Link (legacy)", "default": "/collections/all", "info": "Legacy – current banner uses Button 1 and Button 2 settings below." },
+    { "type": "text", "id": "button_text", "label": "Button Text (legacy)", "default": "GET CERTIFIED" },
+
+    { "type": "checkbox", "id": "show_button_1", "label": "Show Button 1", "default": true },
+    { "type": "text", "id": "button_1_text", "label": "Button 1 Text", "default": "Button" },
+    { "type": "url", "id": "button_1_link", "label": "Button 1 Link", "default": "/" },
 
     {
-      "type": "richtext",
-      "id": "desc1",
-      "label": "Description 1",
+      "type": "select",
+      "id": "button_1_behavior",
+      "label": "Button 1 behavior",
+      "default": "new_tab",
+      "options": [
+        { "value": "same_tab", "label": "Open link (same tab)" },
+        { "value": "new_tab", "label": "Open link (new tab)" },
+        { "value": "popup_iframe", "label": "Open in popup (iframe)" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "button_1_popup_url",
+      "label": "Button 1 popup URL (iframe src)",
+      "info": "Used only if behavior is Popup. Paste the full link (Typeform, booking widget, etc.)."
+    },
+    {
+      "type": "text",
+      "id": "button_1_popup_title",
+      "label": "Button 1 popup title (accessibility)",
+      "default": "Popup"
     },
 
+    { "type": "checkbox", "id": "show_button_2", "label": "Show Button 2", "default": true },
+    { "type": "text", "id": "button_2_text", "label": "Button 2 Text", "default": "Button" },
+    { "type": "url", "id": "button_2_link", "label": "Button 2 Link", "default": "/" },
+
     {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button Link",
-      "default": "/collections/all"
+      "type": "select",
+      "id": "button_2_behavior",
+      "label": "Button 2 behavior",
+      "default": "new_tab",
+      "options": [
+        { "value": "same_tab", "label": "Open link (same tab)" },
+        { "value": "new_tab", "label": "Open link (new tab)" },
+        { "value": "popup_iframe", "label": "Open in popup (iframe)" }
+      ]
     },
     {
       "type": "text",
-      "id": "button_text",
-      "label": "Button Text",
-      "default": "GET CERTIFIED"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_button_1",
-      "label": "Show Button 1",
-      "default": true
+      "id": "button_2_popup_url",
+      "label": "Button 2 popup URL (iframe src)",
+      "info": "Used only if behavior is Popup. Paste the full link (Typeform, booking widget, etc.)."
     },
     {
       "type": "text",
-      "id": "button_1_text",
-      "label": "Button Text",
-      "default": "Button"
+      "id": "button_2_popup_title",
+      "label": "Button 2 popup title (accessibility)",
+      "default": "Popup"
     },
-    {
-      "type": "url",
-      "id": "button_1_link",
-      "label": "Button Link",
-      "default": "/"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_button_2",
-      "label": "Show Button 2",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "button_2_text",
-      "label": "Button Text",
-      "default": "Button"
-    },
-    {
-      "type": "url",
-      "id": "button_2_link",
-      "label": "Button 2 Link",
-      "default": "/"
-    },
+
+    { "type": "range", "id": "button_gap", "label": "Gap between buttons", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 24 },
+
+    { "type": "header", "content": "Button 1 style" },
+    { "type": "color", "id": "btn1_bg", "label": "Button 1 background", "default": "#C1FF72" },
+    { "type": "color", "id": "btn1_text_color", "label": "Button 1 text color", "default": "#01241E" },
+    { "type": "text", "id": "btn1_font_size", "label": "Button 1 font-size (accepts clamp())", "default": "clamp(14px,1.4vw,32px)" },
+
+    { "type": "header", "content": "Button 2 style" },
+    { "type": "color", "id": "btn2_bg", "label": "Button 2 background", "default": "#FFFFFF" },
+    { "type": "color", "id": "btn2_text_color", "label": "Button 2 text color", "default": "#01241E" },
+    { "type": "text", "id": "btn2_font_size", "label": "Button 2 font-size (accepts clamp())", "default": "clamp(14px,1.4vw,32px)" },
+
     {
       "type": "select",
       "id": "button_position",
       "label": "Button Position",
       "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
       ],
       "default": "center"
     },
-      {
+    {
       "type": "select",
       "id": "title_alignment",
       "label": "Title Alignment",
       "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
       ],
       "default": "left"
     },
@@ -128,18 +130,9 @@
       "id": "alignment",
       "label": "Alignment",
       "options": [
-        {
-          "value": "flex-start",
-          "label": "Flex Start"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "flex-end",
-          "label": "Flex End"
-        }
+        { "value": "flex-start", "label": "Flex Start" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Flex End" }
       ],
       "default": "center"
     },
@@ -161,84 +154,161 @@
       ],
       "default": "center"
     },
-    {
-      "type": "checkbox",
-      "id": "show_banner_gradient",
-      "label": "Show background gradient overlay",
-      "default": true
-    }
+    { "type": "checkbox", "id": "show_banner_gradient", "label": "Show background gradient overlay", "default": true },
+
+    { "type": "header", "content": "Popup style (both buttons)" },
+    { "type": "range", "id": "popup_max_width", "label": "Popup max width (px)", "min": 320, "max": 1200, "step": 20, "unit": "px", "default": 980 },
+    { "type": "text", "id": "popup_height_desktop", "label": "Popup height desktop (CSS)", "default": "min(80vh, 760px)" },
+    { "type": "text", "id": "popup_height_mobile", "label": "Popup height mobile (CSS)", "default": "78vh" }
   ],
   "presets": [
-    {
-      "name": "Top Banner",
-      "category": "Custom"
-    }
+    { "name": "Top Banner", "category": "Custom" }
   ]
 }
 {% endschema %}
 
+{%- assign has_both_buttons = false -%}
+{%- if section.settings.show_button_1 and section.settings.show_button_2 -%}
+  {%- assign has_both_buttons = true -%}
+{%- endif -%}
 
-    <div class="section--title-block " style="display: flex; justify-content: {{ section.settings.alignment }};">
-  <div style="max-width: {{ section.settings.container_width }}px;">
-    <h2 style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_title }}</h2>
-    <div style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_description }}</div>
-  </div>
-</div>
+{%- assign btn1_is_popup = false -%}
+{%- if section.settings.button_1_behavior == 'popup_iframe' and section.settings.button_1_popup_url != blank -%}
+  {%- assign btn1_is_popup = true -%}
+{%- endif -%}
 
-
-
+{%- assign btn2_is_popup = false -%}
+{%- if section.settings.button_2_behavior == 'popup_iframe' and section.settings.button_2_popup_url != blank -%}
+  {%- assign btn2_is_popup = true -%}
+{%- endif -%}
 
 <section
+  id="TopBanner-{{ sid }}"
   class="section--top-banner {% if section.settings.show_banner_gradient %}has-gradient{% endif %}"
   {% if section.settings.banner_height != blank %}
     style="height: {{ section.settings.banner_height }}; display:flex; flex-direction:row; align-items: {{ section.settings.top_banner_align_items }};"
   {% endif %}
+  data-topbanner-root
 >
-  <div class="section--top-banner-container" >
+  <div class="section--top-banner-container">
     <div class="top-banner--text-content" style="display: flex; justify-content: {{ section.settings.alignment }};">
-        <div class="top-banner--text-content-container" style="max-width: {{ section.settings.container_width }}px;">
-      <h1>{{ section.settings.title }}</h1>
-      {% if section.settings.subtitle != blank %}
-        <p class="subtitle-p">{{ section.settings.subtitle }}</p>
-      {% endif %}
-      {% if section.settings.desc1 != blank %}
-        <p>{{ section.settings.desc1 }}</p>
-      {% endif %}
-          
-      <div class="button-wrapper">
-  {% if section.settings.show_button_1 %}
-    <a href="{{ section.settings.button_1_link }}" target="_blank" class="btn button-yg">
-      <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
-      <span class="btn-label-down">{{ section.settings.button_1_text }}</span>
-    </a>
-  {% endif %}
-  
-  {% if section.settings.show_button_2 %}
-    <a href="{{ section.settings.button_2_link }}" target="_blank" class="btn button-w">
-      <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
-      <span class="btn-label-down">{{ section.settings.button_2_text }}</span>
-    </a>
-  {% endif %}
-</div>
-</div>
-      
+      <div class="top-banner--text-content-container" style="max-width: {{ section.settings.container_width }}px; text-align: {{ section.settings.title_alignment }};">
+
+        <h1 style="font-size: {{ section.settings.title_size | default: 'clamp(32px,6vw,64px)' }};">
+          {{ section.settings.title }}
+        </h1>
+
+        {% if section.settings.subtitle != blank %}
+          <p class="subtitle-p" style="font-size: {{ section.settings.subtitle_size | default: '26px' }};">
+            {{ section.settings.subtitle }}
+          </p>
+        {% endif %}
+
+        {% if section.settings.desc1 != blank %}
+          <div class="top-banner-desc" style="font-size: {{ section.settings.desc_size | default: '16px' }};">
+            {{ section.settings.desc1 }}
+          </div>
+        {% endif %}
+
+        <div
+          class="button-wrapper"
+          style="justify-content: {{ section.settings.button_position }}; --btn-gap: {% if has_both_buttons %}{{ section.settings.button_gap | default: 24 }}px{% else %}0px{% endif %};"
+        >
+          {% if section.settings.show_button_1 %}
+            {%- assign btn1_href = section.settings.button_1_link -%}
+            {%- assign btn1_target = '' -%}
+            {%- if section.settings.button_1_behavior == 'new_tab' -%}
+              {%- assign btn1_target = '_blank' -%}
+            {%- endif -%}
+
+            <a
+              {% if btn1_is_popup %}
+                href="#"
+                class="btn button-yg top-btn1 js-tb-open"
+                data-tb-open="{{ modal_id_1 }}"
+                data-tb-src="{{ section.settings.button_1_popup_url | escape }}"
+                aria-haspopup="dialog"
+                aria-controls="{{ modal_id_1 }}"
+              {% else %}
+                href="{{ btn1_href }}"
+                class="btn button-yg top-btn1"
+                {% if btn1_target != blank %}target="{{ btn1_target }}"{% endif %}
+                {% if btn1_target == '_blank' %}rel="noopener noreferrer"{% endif %}
+              {% endif %}
+              style="background-color: {{ section.settings.btn1_bg | default: '#C1FF72' }}; border-color: {{ section.settings.btn1_bg | default: '#C1FF72' }};"
+            >
+              <span class="btn-label-down" style="color: {{ section.settings.btn1_text_color | default: '#01241E' }}; font-size: {{ section.settings.btn1_font_size | default: 'clamp(14px,1.4vw,32px)' }};">
+                {{ section.settings.button_1_text }}
+              </span>
+              <span class="btn-label-down" style="color: {{ section.settings.btn1_text_color | default: '#01241E' }}; font-size: {{ section.settings.btn1_font_size | default: 'clamp(14px,1.4vw,32px)' }};">
+                {{ section.settings.button_1_text }}
+              </span>
+            </a>
+          {% endif %}
+
+          {% if section.settings.show_button_2 %}
+            {%- assign btn2_href = section.settings.button_2_link -%}
+            {%- assign btn2_target = '' -%}
+            {%- if section.settings.button_2_behavior == 'new_tab' -%}
+              {%- assign btn2_target = '_blank' -%}
+            {%- endif -%}
+
+            <a
+              {% if btn2_is_popup %}
+                href="#"
+                class="btn button-b top-btn2 js-tb-open"
+                data-tb-open="{{ modal_id_2 }}"
+                data-tb-src="{{ section.settings.button_2_popup_url | escape }}"
+                aria-haspopup="dialog"
+                aria-controls="{{ modal_id_2 }}"
+              {% else %}
+                href="{{ btn2_href }}"
+                class="btn button-b top-btn2"
+                {% if btn2_target != blank %}target="{{ btn2_target }}"{% endif %}
+                {% if btn2_target == '_blank' %}rel="noopener noreferrer"{% endif %}
+              {% endif %}
+              style="background-color: {{ section.settings.btn2_bg | default: '#FFFFFF' }};"
+            >
+              <span class="btn-label-down" style="color: {{ section.settings.btn2_text_color | default: '#01241E' }}; font-size: {{ section.settings.btn2_font_size | default: 'clamp(14px,1.4vw,32px)' }};">
+                {{ section.settings.button_2_text }}
+              </span>
+              <span class="btn-label-down" style="color: {{ section.settings.btn2_text_color | default: '#01241E' }}; font-size: {{ section.settings.btn2_font_size | default: 'clamp(14px,1.4vw,32px)' }};">
+                {{ section.settings.button_2_text }}
+              </span>
+            </a>
+          {% endif %}
+        </div>
+
+      </div>
     </div>
-
-
-    
-
   </div>
-  
 
-  <div class="section--top-background" style="background-image: url({{ section.settings.background_image | img_url: 'master' }});">
+  <div class="section--top-background" style="background-image: url({{ section.settings.background_image | img_url: 'master' }});"></div>
 
-  </div>
-  
+  {%- if btn1_is_popup -%}
+    <div id="{{ modal_id_1 }}" class="tb-modal" role="dialog" aria-modal="true" aria-label="{{ section.settings.button_1_popup_title | escape }}" hidden>
+      <div class="tb-modal__overlay" data-tb-close></div>
+      <div class="tb-modal__panel" role="document">
+        <button type="button" class="tb-modal__close" aria-label="Close popup" data-tb-close>&times;</button>
+        <iframe class="tb-modal__iframe" title="{{ section.settings.button_1_popup_title | escape }}" loading="lazy"></iframe>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if btn2_is_popup -%}
+    <div id="{{ modal_id_2 }}" class="tb-modal" role="dialog" aria-modal="true" aria-label="{{ section.settings.button_2_popup_title | escape }}" hidden>
+      <div class="tb-modal__overlay" data-tb-close></div>
+      <div class="tb-modal__panel" role="document">
+        <button type="button" class="tb-modal__close" aria-label="Close popup" data-tb-close>&times;</button>
+        <iframe class="tb-modal__iframe" title="{{ section.settings.button_2_popup_title | escape }}" loading="lazy"></iframe>
+      </div>
+    </div>
+  {%- endif -%}
 </section>
 
 <style>
-
-.section--top-background{
+/* Existing styles (kept) */
+#TopBanner-{{ sid }} .section--top-background{
   background-size: cover;
   background-position: right;
   background-repeat: no-repeat;
@@ -248,29 +318,21 @@
   top: 0;
   width: 50%;
 }
-.subtitle-p {
-  font-size: 26px;
-}
 @media (max-width: 768px) {
-  .section--top-background{
-    background-position: center;
-  }
-  .subtitle-p {
-    font-size: 18px;
-  }
+  #TopBanner-{{ sid }} .section--top-background{ background-position: center; }
 }
-  
-.section--top-banner{
-  background-color: #133257;
 
+#TopBanner-{{ sid }}.section--top-banner{
+  background-color: #01241E;
   color: #fff;
   text-align: left;
   position: relative;
+  padding: 90px 0;
 }
-.section--top-banner.has-gradient:before {
+#TopBanner-{{ sid }}.section--top-banner.has-gradient:before {
   content: "";
   position: absolute;
-background: linear-gradient(90deg, #133257 1%, rgba(19, 50, 87, 0.9) 7.34%, rgba(19, 50, 87, 0.50) 15%, rgba(19, 50, 87, 0.00) 50%);
+  background: linear-gradient(90deg, #01241E 1%, rgba(19, 50, 87, 0.9) 7.34%, rgba(19, 50, 87, 0.50) 15%, rgba(19, 50, 87, 0.00) 50%);
   width: 49%;
   height: 100%;
   top: 0;
@@ -280,36 +342,183 @@ background: linear-gradient(90deg, #133257 1%, rgba(19, 50, 87, 0.9) 7.34%, rgba
   z-index: 1;
   background-fit:cover;
 }
-.section--top-banner .section--top-banner-container {
+#TopBanner-{{ sid }} .section--top-banner-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1280px;
-  width:90%;
+  max-width: 1989px;
+  width: 90%;
   margin: 0 auto;
-  z-index: 99999;
+  z-index: 2;
   position: relative;
 }
-.top-banner--text-content {
-  width: 100%;
-}
-.section--top-banner .top-banner--text-content h1 {
+#TopBanner-{{ sid }} .top-banner--text-content { width: 100%; }
+#TopBanner-{{ sid }} .top-banner-desc {
   color: #fff;
-  font-family: Montserrat;
-  font-size: 42px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: 112%; /* 47.04px */
-  text-transform: uppercase;
-  margin-bottom: 20px;
-}
-.section--top-banner .text-content p {
-  color: #fff;
-  font-family: Inter;
-  font-size: 16px;
+  font-family: var(--font-poppins500);
   font-style: normal;
   font-weight: 500;
-  line-height: 150%; /* 24px */
-  margin-bottom: 40px;
+  line-height: 150%;
+  margin-top: 16px;
+}
+#TopBanner-{{ sid }} .subtitle-p { margin: 0 0 16px 0; }
+
+#TopBanner-{{ sid }} .button-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--btn-gap, 0);
+  margin-top: clamp(24px,5vh,60px);
+}
+#TopBanner-{{ sid }} .button-wrapper .top-btn1 .btn-label-down{
+  font-family: var(--font-adirek800);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+#TopBanner-{{ sid }} .button-wrapper .btn.button-b{ border-radius: 10px; }
+#TopBanner-{{ sid }} .button-wrapper .btn.button-b span{
+  font-family: var(--font-adirek800);
+  font-weight: 600;
+  text-decoration: none;
+}
+@media (max-width: 990px) {
+  #TopBanner-{{ sid }} .button-wrapper { justify-content: center; }
+  #TopBanner-{{ sid }} .button-wrapper .btn.button-b { width: auto; }
+  #TopBanner-{{ sid }} .button-wrapper{
+    gap: 20px !important;
+    display: inline-flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+}
+
+/* ===== Popup modal (scoped, safe for multiple sections) ===== */
+#TopBanner-{{ sid }} .tb-modal[hidden]{ display:none !important; }
+#TopBanner-{{ sid }} .tb-modal{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,.65);backdrop-filter: blur(4px);
+}
+#TopBanner-{{ sid }} .tb-modal__overlay{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+}
+#TopBanner-{{ sid }} .tb-modal__panel{
+  position: relative;
+  width: min({{ section.settings.popup_max_width | default: 980 }}px, calc(100vw - 24px));
+  height: {{ section.settings.popup_height_desktop | default: 'min(80vh, 760px)' }};
+  margin: 6vh auto 0;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  z-index: 1;
+}
+#TopBanner-{{ sid }} .tb-modal__close{
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(0,0,0,.08);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+}
+#TopBanner-{{ sid }} .tb-modal__iframe{
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+@media (max-width: 749px){
+  #TopBanner-{{ sid }} .tb-modal__panel{
+    height: {{ section.settings.popup_height_mobile | default: '78vh' }};
+    margin-top: 8vh;
+  }
 }
 </style>
+
+<script>
+(function(){
+  var root = document.getElementById('TopBanner-{{ sid }}');
+  if(!root) return;
+
+  function openModal(modalId, src){
+    var modal = document.getElementById(modalId);
+    if(!modal) return;
+
+    var iframe = modal.querySelector('.tb-modal__iframe');
+    if(iframe){
+      // only set src when opening (prevents multiple widgets loading in background)
+      if(src) iframe.src = src;
+    }
+
+    modal.hidden = false;
+    document.documentElement.classList.add('tb-modal-open');
+    document.body.style.overflow = 'hidden';
+
+    // focus close
+    var closeBtn = modal.querySelector('[data-tb-close]');
+    if(closeBtn) closeBtn.focus();
+  }
+
+  function closeModal(modal){
+    if(!modal) return;
+
+    var iframe = modal.querySelector('.tb-modal__iframe');
+    if(iframe){
+      // stop video/widget
+      iframe.src = 'about:blank';
+    }
+
+    modal.hidden = true;
+    document.documentElement.classList.remove('tb-modal-open');
+    document.body.style.overflow = '';
+  }
+
+  // open buttons (scoped)
+  root.addEventListener('click', function(e){
+    var btn = e.target.closest('.js-tb-open');
+    if(!btn) return;
+    e.preventDefault();
+
+    var modalId = btn.getAttribute('data-tb-open');
+    var src = btn.getAttribute('data-tb-src') || '';
+    openModal(modalId, src);
+  });
+
+  // close clicks (overlay / close button)
+  document.addEventListener('click', function(e){
+    var closer = e.target.closest('[data-tb-close]');
+    if(!closer) return;
+
+    var modal = e.target.closest('.tb-modal');
+    if(modal) closeModal(modal);
+  });
+
+  // ESC closes ONLY this section's modals
+  document.addEventListener('keydown', function(e){
+    if(e.key !== 'Escape') return;
+
+    var m1 = document.getElementById('{{ modal_id_1 }}');
+    var m2 = document.getElementById('{{ modal_id_2 }}');
+
+    if(m1 && !m1.hidden) closeModal(m1);
+    if(m2 && !m2.hidden) closeModal(m2);
+  });
+
+  // Theme editor support
+  document.addEventListener('shopify:section:unload', function(evt){
+    if(!evt || !evt.detail || evt.detail.sectionId !== '{{ sid }}') return;
+
+    var m1 = document.getElementById('{{ modal_id_1 }}');
+    var m2 = document.getElementById('{{ modal_id_2 }}');
+    if(m1 && !m1.hidden) closeModal(m1);
+    if(m2 && !m2.hidden) closeModal(m2);
+  });
+})();
+</script>

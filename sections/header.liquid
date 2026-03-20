@@ -18,6 +18,7 @@
   {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
 
+
 <style>
   header-drawer {
     justify-self: start;
@@ -67,6 +68,9 @@ header-drawer{
        .account-login-mobile{
         display:flex !important;
       }
+      .header__icon--phone-mobile{
+        display:flex !important;
+      }
         }
   
   .list-menu {
@@ -103,13 +107,45 @@ header-drawer{
       padding-top: 0.5rem;
     }
   }
+  .search-container-desktop .search-modal__content {
+    padding: 0;
+  }
+  .search-container-desktop .search__button {
+    z-index: 9999;
+    right: unset;
+    left: 0;
+    top: -3px;
+  }
+  .search-container-desktop .search__input {
+    padding-right: 0;
+    padding-left: 45px;
+    color: #fff;
+    background: #0F828C;
+    border-radius: 30px;
+    height: 36px;
+  }
+  .search-container-desktop .search-modal__content .search-modal__form .field__label {
+    left: 45px;
+    color: #fff;
+    top: 8px;
+  }
+  .search-container-desktop .search-modal__content .search-modal__form .field__input:focus~.field__label {
+    {% comment %} top: 3px; {% endcomment %}
+     display: none;
+  }
+  .search-container-desktop .search-modal__content .search-modal__form .field__input:focus {
+    padding-top: .8rem;
+  }
+  .search__button #icon-search2 {
+    width: 21px;
+    height: 21px;
+  }
 </style>
 
 {%- style -%}
   .header {
     padding:0;
   }
-
   .section-header {
     position: sticky; /* This is for fixing a Safari z-index issue. PR #2147 */
     margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
@@ -261,11 +297,17 @@ header-drawer{
     {%- endif -%}
 
 
-
-
-    
-    
     <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
+
+      <!-- 📞 Mobile Phone Number -->
+      <a href="tel:+17789496782"
+        class="header__icon header__icon--phone-mobile link focus-inset"
+        style="display: none; align-items: center; gap: 4px; margin-right: 8px; font-weight: 500; text-decoration: none; color: inherit;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+          <path d="M6.62 10.79a15.093 15.093 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C5.923 21.762 2.238 18.077 2.238 3a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.58 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2Z" fill="#141414"/>
+        </svg>
+      </a>
+      <!-- 📞 End Mobile Phone -->
 
          {%- if shop.customer_accounts_enabled -%}
         <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account header__icon--account-desktop link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}">
@@ -295,50 +337,111 @@ header-drawer{
         </a>
       {%- endif -%}
 
-      
-      <div class="desktop-localization-wrapper header-button-wrap">
-            <!-- 📞 Phone Icon & Number beside button -->
-                <a href="tel:+17789496782" 
-                  class="header__icon header__icon--phone link focus-inset" 
-                  style="display: flex; align-items: center; gap: 6px; margin-right: 15px; font-weight:500; text-decoration:none; color:inherit;width: 180px;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
-                    <path d="M6.62 10.79a15.093 15.093 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C5.923 21.762 2.238 18.077 2.238 3a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.58 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2Z" fill="#141414"/>
-                  </svg>
-                  <span class="phone-number">+1-778-949-6782</span>
-                </a>
-            <!-- 📞 End Phone -->
-           <a href="/collections/all" class="btn button-yg header-btn-desktop">
-            <span class="btn-label-down">Get Certified Now</span>
-            <span class="btn-label-down">Get Certified Now</span>
-          
-        </a>
-        
-        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
-          <localization-form class="small-hide medium-hide" data-prevent-hide>
-            {%- form 'localization', id: 'HeaderCountryForm', class: 'localization-form' -%}
-              <div>
-                <h2 class="visually-hidden" id="HeaderCountryLabel">{{ 'localization.country_label' | t }}</h2>
-                {%- render 'country-localization', localPosition: 'HeaderCountry' -%}
-              </div>
-            {%- endform -%}
-          </localization-form>
-        {% endif %}
+      {% comment %} Search {% endcomment %}
+      <div class="search-container-desktop">
+<!-- 📞 Phone Icon & Number beside button -->
+    <a href="tel:+17789496782" 
+      class="header__icon header__icon--phone link focus-inset" 
+      style="display: flex; align-items: center; gap: 6px; margin-right: 15px; font-weight:500; text-decoration:none; color:inherit;width: 180px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+        <path d="M6.62 10.79a15.093 15.093 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C5.923 21.762 2.238 18.077 2.238 3a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.58 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2Z" fill="#141414"/>
+      </svg>
+      <span class="phone-number">+1-778-949-6782</span>
+    </a>
+<!-- 📞 End Phone -->
+      {% comment %} {% render 'header-search', input_id: 'Search-In-Modal' %} {% endcomment %}
+        {%- if settings.predictive_search_enabled -%}
+          <predictive-search
+            class="search-modal__content{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} search-modal__content-top{% else %} search-modal__content-bottom{% endif %}"
+            tabindex="-1"
+            data-loading-text="{{ 'accessibility.loading' | t }}"
+          >
+            <search-form class="search-modal__form">
+              <form
+                action="{{ routes.search_url }}"
+                method="get"
+                role="search"
+                class="search search-modal__form"
+                autocomplete="off"
+              >
+                <div class="field">
+                  <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
+                    {% render 'icon-search2' %}
+                  </button>
 
-        
+                  <input
+                    class="search__input field__input"
+                    id="{{ input_id }}"
+                    type="search"
+                    name="q"
+                    value="{{ search.terms | escape }}"
+                    placeholder="{{ 'general.search.search' | t }}"
+                    role="combobox"
+                    aria-expanded="false"
+                    aria-owns="predictive-search-results"
+                    aria-controls="predictive-search-results"
+                    aria-haspopup="listbox"
+                    aria-autocomplete="list"
+                    autocorrect="off"
+                    autocomplete="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                  >
 
-        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
-          <localization-form class="small-hide medium-hide" data-prevent-hide>
-            {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form' -%}
-              <div>
-                <h2 class="visually-hidden" id="HeaderLanguageLabel">{{ 'localization.language_label' | t }}</h2>
-                {%- render 'language-localization', localPosition: 'HeaderLanguage' -%}
+                  {%- comment -%} Reset button used by search-form.js {%- endcomment -%}
+                  <button
+                    type="reset"
+                    class="field__button search__reset hidden"
+                    aria-label="{{ 'general.search.clear' | t }}"
+                  >
+                    <svg aria-hidden="true" focusable="false">
+                      <use href="#icon-reset"></use>
+                    </svg>
+                  </button>
+
+                  <label class="field__label" for="{{ input_id }}">{{ 'general.search.search' | t }}</label>
+                  <input type="hidden" name="options[prefix]" value="last">
+                </div>
+              </form>
+            </search-form>
+
+            {%- comment -%} Predictive search results container {%- endcomment -%}
+            <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+              <div class="predictive-search__loading-state" aria-hidden="true">
+                {% render 'loading-spinner' %}
               </div>
-            {%- endform -%}
-          </localization-form>
+              <div id="predictive-search-results"></div>
+            </div>
+
+            <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+          </predictive-search>
+        {%- else -%}
+          <div
+            class="search-modal__content{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} search-modal__content-top{% else %} search-modal__content-bottom{% endif %}"
+            tabindex="-1"
+          >
+            <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+              <div class="field">
+                <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
+                  {% render 'icon-search2' %}
+                </button>
+                <input
+                  class="search__input field__input"
+                  id="{{ input_id }}"
+                  type="search"
+                  name="q"
+                  value="{{ search.terms | escape }}"
+                  placeholder="{{ 'general.search.search' | t }}"
+                >
+                <label class="field__label" for="{{ input_id }}">{{ 'general.search.search' | t }}</label>
+                <input type="hidden" name="options[prefix]" value="last">
+              </div>
+            </form>
+          </div>
         {%- endif -%}
       </div>
-
-        <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
+      {% comment %} Cart Icon {% endcomment %}
+      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
         {%- liquid
           if cart == empty
             render 'icon-cart-empty'
@@ -356,12 +459,6 @@ header-drawer{
           </div>
         {%- endif -%}
       </a>
-
-      
-   <div class="search-container-desktop">
-  {% render 'header-search', input_id: 'Search-In-Modal' %}
-</div>
-
    
 
       {%- for block in section.blocks -%}
