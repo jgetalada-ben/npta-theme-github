@@ -102,7 +102,7 @@
             if (!this._visible) this.pause();
             else this.resume(true);
           },
-          { threshold: 0.25 }
+          { threshold: 0.75 }
         );
         this._io.observe(this.galleryEl);
       }
