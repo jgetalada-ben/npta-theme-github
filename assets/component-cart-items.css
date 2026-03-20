@@ -257,6 +257,7 @@ grid-template-rows: repeat(2, 1fr);
 grid-column-gap: 0px;
 grid-row-gap: 0px;
     margin-bottom: 3.5rem;
+    gap: 10px;
   }
 
   .cart-item:last-child {
