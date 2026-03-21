@@ -194,7 +194,7 @@
         setTimeout(() => {
           doSwitch();
           requestAnimationFrame(() => this.fadeTarget.classList.remove('npta-fade-out'));
-        }, 180);
+        }, 650);
       } else {
         doSwitch();
       }
