@@ -129,20 +129,22 @@
             </button>
 
             {% if product.metafields.custom.payment_options %}
-              <a
-                href="{{ product.metafields.custom.payment_options.value }}"
-                target="_blank"
-                rel="noopener"
-                class="btn button-b financing-btn-inline"
-                data-elective-financing-link
-                data-product-handle="{{ product.handle }}"
-                data-product-id="{{ product.id }}"
-              >
-                <span class="btn-label-down">Elective Financing Options</span>
-                <span class="btn-label-down">Elective Financing Options</span>
-              </a>
-              <div class="tooltip-wrap-inline">
-                <a href="/pages/payment-plan-options" target="_blank" class="payment-options-tooltip"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><g clip-path="url(#a)"><path d="M12 2C6.475 2 2 6.475 2 12s4.475 10 10 10 10-4.475 10-10S17.525 2 12 2Zm1 15h-2v-6h2v6Zm0-8h-2V7h2v2Z" /></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h24v24H0z"/></clipPath></defs></svg></a>
+              <div class="financing-group">
+                <a
+                  href="{{ product.metafields.custom.payment_options.value }}"
+                  target="_blank"
+                  rel="noopener"
+                  class="btn button-b financing-btn-inline"
+                  data-elective-financing-link
+                  data-product-handle="{{ product.handle }}"
+                  data-product-id="{{ product.id }}"
+                >
+                  <span class="btn-label-down">Elective Financing Options</span>
+                  <span class="btn-label-down">Elective Financing Options</span>
+                </a>
+                <div class="tooltip-wrap-inline">
+                  <a href="/pages/payment-plan-options" target="_blank" class="payment-options-tooltip"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><g clip-path="url(#a)"><path d="M12 2C6.475 2 2 6.475 2 12s4.475 10 10 10 10-4.475 10-10S17.525 2 12 2Zm1 15h-2v-6h2v6Zm0-8h-2V7h2v2Z" /></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h24v24H0z"/></clipPath></defs></svg></a>
+                </div>
               </div>
             {% endif %}
           </div>
@@ -234,6 +236,14 @@
       min-width: 180px;
     }
 
+    /* Financing group wrapper to keep button and icon together */
+    .financing-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1 1 auto;
+    }
+
     .financing-btn-inline {
       color: #141414;
       font-family: Montserrat;
@@ -245,7 +255,7 @@
       text-transform: uppercase;
       position: relative;
       white-space: nowrap;
-      flex: 0 0 auto;
+      flex: 1 1 auto;
       width: auto !important;
     }
 
@@ -327,20 +337,44 @@
         min-width: auto;
       }
 
+      /* Financing group takes full width but keeps button and icon inline */
+      .financing-group {
+        width: 100%;
+        flex: 1 1 100%;
+      }
+
       .financing-btn-inline {
         padding-top: 16px;
-        width: 100% !important;
+        flex: 1 1 auto;
+        width: auto !important;
       }
 
       .financing-btn-inline .btn-label-down {
         line-height: normal;
       }
+
+      .tooltip-wrap-inline {
+        flex-shrink: 0;
+      }
     }
 
     @media screen and (max-width: 364px) {
+      .financing-group {
+        gap: 6px;
+      }
+
+      .financing-btn-inline {
+        font-size: 12px;
+      }
+
       .financing-btn-inline .btn-label-down {
         font-size: 12px;
         padding-top: 4px;
+      }
+
+      .tooltip-wrap-inline svg {
+        width: 20px;
+        height: 20px;
       }
     }
 
