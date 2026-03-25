@@ -221,11 +221,17 @@
 
     /* Add to Cart Row - Horizontal Layout */
     .add-to-cart-row {
-      display: flex;
+      display: flex !important;
       align-items: center;
       gap: 12px;
       flex-wrap: wrap;
       width: 100%;
+    }
+
+    .add-to-cart-row .product-form__submit {
+      flex: 0 0 auto;
+      width: auto !important;
+      min-width: 180px;
     }
 
     .financing-btn-inline {
@@ -239,6 +245,8 @@
       text-transform: uppercase;
       position: relative;
       white-space: nowrap;
+      flex: 0 0 auto;
+      width: auto !important;
     }
 
     .financing-btn-inline:before,
@@ -276,6 +284,13 @@
     .tooltip-wrap-inline {
       display: inline-flex;
       align-items: center;
+      flex: 0 0 auto;
+    }
+
+    /* Override any global button styles that force full width */
+    .add-to-cart-row .btn {
+      width: auto !important;
+      max-width: none !important;
     }
 
     .product-form-wrap{
@@ -296,13 +311,25 @@
       transition: 300ms;
     }
 
+    @media screen and (min-width: 750px) {
+      .add-to-cart-row {
+        flex-wrap: nowrap;
+      }
+    }
+
     @media screen and (max-width: 749px) {
       .add-to-cart-row {
         gap: 8px;
       }
 
+      .add-to-cart-row .product-form__submit {
+        width: 100% !important;
+        min-width: auto;
+      }
+
       .financing-btn-inline {
         padding-top: 16px;
+        width: 100% !important;
       }
 
       .financing-btn-inline .btn-label-down {
