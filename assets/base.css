@@ -3864,6 +3864,7 @@ text-transform: uppercase;
   display: flex;
   flex-direction: column;
   gap: 5px;
+  align-items: start;
 }
 .price__container .price__one-time-con{
   display: flex;
