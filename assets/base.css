@@ -3863,7 +3863,7 @@ text-transform: uppercase;
   width: auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 5px;
 }
 .price__container .price__one-time-con{
   display: flex;
