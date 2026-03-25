@@ -96,6 +96,14 @@
               {{ compare_at_price | divided_by: 100.0 | prepend: currency_code }}
             </span>
           </p>
+          {% comment %} Discount Badge {% endcomment %}
+          {% assign original_price = compare_at_price | floor %}
+          {% assign sale_price = price | floor %}
+          {% assign discount_amount = original_price | minus: sale_price %}
+          {% assign discount_percentage = discount_amount | divided_by: 100 | floor %}
+          <div class="price-discount-badge">
+            <span>SAVE ${{ discount_percentage }}</span>
+          </div>
       {% endif %}
     </div>
   </div>
@@ -116,3 +124,49 @@
   {% endif %}
 </div>
 {% endunless %}
+
+<style>
+  .price__one-time {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .price-discount-badge {
+    display: inline-flex;
+    height: 34px;
+    padding: 0px 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #C1FF72;
+  }
+
+  .price-discount-badge span {
+    color: #141414;
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+    white-space: nowrap;
+  }
+
+  @media screen and (max-width: 749px) {
+    .price__one-time {
+      gap: 8px;
+    }
+
+    .price-discount-badge {
+      height: 30px;
+      padding: 0px 8px;
+    }
+
+    .price-discount-badge span {
+      font-size: 12px;
+    }
+  }
+</style>
