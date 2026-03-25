@@ -91,6 +91,7 @@
         </span>
       </div>
       {% if compare_at_price > 0 %}
+        <div class="price-compare-with-badge">
           <p class="price-item--compare-discount">
             <span>
               {{ compare_at_price | divided_by: 100.0 | prepend: currency_code }}
@@ -104,6 +105,7 @@
           <div class="price-discount-badge">
             <span>SAVE ${{ discount_percentage }}</span>
           </div>
+        </div>
       {% endif %}
     </div>
   </div>
@@ -133,6 +135,18 @@
     flex-wrap: wrap;
   }
 
+  /* Wrapper to keep strikethrough price and badge inline */
+  .price-compare-with-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: nowrap;
+  }
+
+  .price-compare-with-badge .price-item--compare-discount {
+    margin: 0;
+  }
+
   .price-discount-badge {
     display: inline-flex;
     height: 34px;
@@ -157,6 +171,10 @@
 
   @media screen and (max-width: 749px) {
     .price__one-time {
+      gap: 8px;
+    }
+
+    .price-compare-with-badge {
       gap: 8px;
     }
 
