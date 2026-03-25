@@ -4015,8 +4015,11 @@ height: 1px;
 }
 .price__container .price__one-time{
  width:100%;
+ display: block;
 }
-  
+.price__container .price__one-time .price-compare-with-badge {
+  margin-top: 10px;
+}
 .price__monthly:before{
   content:'';
   position:absolute;
