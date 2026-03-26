@@ -302,7 +302,7 @@
 }
 
 .related-posts-title {
-  font-size: 2rem;
+  font-size: clamp(21px,4vw,40px);
   font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 2rem;
