@@ -1,56 +1,70 @@
-<div class="section--logo-carousel   {{ section.settings.section_class }}" style="padding-top: {{ section.settings.top_padding }}px; padding-bottom: {{ section.settings.bottom_padding }}px;">
-<div class="splide" id="logo-carousel">
-  <div class="splide__track">
-    <ul class="splide__list">
-      {% for block in section.blocks %}
-      <li class="splide__slide ">
-        <img src="{{ block.settings.image  | img_url: 'master'  }}" alt="Logo">
-      </li>
-      {% endfor %}
-    </ul>
+<div
+  class="section--logo-carousel {{ section.settings.section_class }}"
+  style="padding-top: {{ section.settings.top_padding }}px; padding-bottom: {{ section.settings.bottom_padding }}px;"
+>
+  <div class="splide" id="logo-carousel-{{ section.id }}">
+    <div class="splide__track">
+      <ul class="splide__list">
+        {% for block in section.blocks %}
+          <li class="splide__slide">
+            {% if block.settings.image %}
+              <img src="{{ block.settings.image | img_url: 'master' }}" alt="Logo">
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 </div>
-</div>
+
 <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    new Splide('#logo-carousel', {
+    new Splide('#logo-carousel-{{ section.id }}', {
       autoWidth: true,
       perMove: 1,
       type: 'loop',
-      drag: "free",
+      drag: 'free',
       arrows: false,
       pagination: false,
       reduceMotion: {
         speed: 0,
         rewindSpeed: 0,
-        autoplay: "pause"
-      },
-      autoScroll: {
-        speed: .8
-      },
-      }).mount(window.splide.Extensions);
+        autoplay: 'pause'
+      }
+      {% if section.settings.scroll_direction == 'ltr' %}
+      ,autoScroll: {
+        // Left to right
+        speed: -0.8
+      }
+      {% else %}
+      ,autoScroll: {
+        // Right to left (default)
+        speed: 0.8
+      }
+      {% endif %}
+    }).mount(window.splide.Extensions);
   });
 </script>
 
 <style>
-#logo-carousel li img{
-  max-height:40px;
-  height:100%;
-  width:100%;
-  filter: saturate(0);
-  object-fit:contain;
-}
-  #logo-carousel li {
-  padding:0 30px;
-    display:flex;
-    align-items:center;
-  
-}
+  #logo-carousel-{{ section.id }} li img {
+    max-height: clamp(40px, 35vw, 300px);
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  #logo-carousel-{{ section.id }} li {
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+  }
 </style>
+
 {% schema %}
 {
   "name": "Logo Carousel",
@@ -84,6 +98,16 @@
       "step": 20,
       "unit": "px",
       "default": 980
+    },
+    {
+      "type": "select",
+      "id": "scroll_direction",
+      "label": "Scroll direction",
+      "options": [
+        { "value": "rtl", "label": "Right to left" },
+        { "value": "ltr", "label": "Left to right" }
+      ],
+      "default": "rtl"
     }
   ],
   "blocks": [
@@ -94,7 +118,7 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Logo Image"
+          "label": "Logo image"
         }
       ]
     }

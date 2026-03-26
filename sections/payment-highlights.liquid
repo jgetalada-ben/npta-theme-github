@@ -1,0 +1,259 @@
+{% comment %}
+  Section: Payment Highlights
+{% endcomment %}
+
+<section
+  class="payhi"
+  style="
+    --pad-y: {{ section.settings.pad_y | default: 64 }}px;
+    --pad-x: {{ section.settings.pad_x | default: 24 }}px;
+    --wrap: {{ section.settings.max_width | default: '1200px' }};
+    --bg: {{ section.settings.bg | default: '#f2f0e9' }};
+    --txt: {{ section.settings.text_color | default: '#0b0b0b' }};
+    --hdg: {{ section.settings.heading_color | default: '#01241E' }};
+    --accent: {{ section.settings.accent_color | default: '#157C80' }};
+
+    --cta-mt: {{ section.settings.cta_margin_top | default: 'clamp(16px, 2vw, 28px)' }};
+    --cta-fz: {{ section.settings.cta_font_size | default: 'clamp(14px, 1.4vw, 18px)' }};
+    --cta-bg: {{ section.settings.cta_bg | default: '#157C80' }};
+    --cta-color: {{ section.settings.cta_color | default: '#FFFFFF' }};
+  "
+>
+  <div class="payhi__inner">
+    {% if section.settings.heading != blank %}
+      <h2 class="payhi__title" style="text-align: {{ section.settings.heading_align }};">
+        {{ section.settings.heading }}
+        {% if section.settings.heading_accent != blank %}
+          <span class="payhi__accent">{{ section.settings.heading_accent }}</span>
+        {% endif %}
+      </h2>
+    {% endif %}
+
+    <div class="payhi__grid">
+      {% for block in section.blocks %}
+        <div class="payhi__item" {{ block.shopify_attributes }} style="--logo-w: {{ block.settings.logo_width | default: 96 }};">
+          {% if block.settings.icon != blank %}
+            <div class="payhi__logo">
+              {{ block.settings.icon
+                | image_url: width: 600
+                | image_tag: loading: 'lazy', alt: block.settings.title | escape }}
+            </div>
+          {% endif %}
+
+          {% if block.settings.title != blank %}
+            <h3 class="payhi__item-title">{{ block.settings.title }}</h3>
+          {% endif %}
+
+          {% if block.settings.body != blank %}
+            <div class="payhi__item-body">
+              {{ block.settings.body }}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    {%- if section.settings.show_cta and section.settings.cta_label != blank -%}
+      <div class="payhi__cta-wrap" style="text-align: {{ section.settings.cta_align }};">
+        <a 
+          {% if section.settings.cta_link != blank %}
+            href="{{ section.settings.cta_link }}"
+          {% else %}
+            role="link" aria-disabled="true"
+          {% endif %}
+          class="btn button-yg btn--primary">
+          <span class="btn-label-down">{{ section.settings.cta_label }}</span>
+          <span class="btn-label-down">{{ section.settings.cta_label }}</span>
+        </a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% stylesheet %}
+.payhi{
+  background: var(--bg);
+  color: var(--txt);
+  padding: var(--pad-y) var(--pad-x);
+}
+@media (max-width: 768px) {
+  .payhi{
+    padding: calc(var(--pad-y)/2) calc(var(--pad-x)/2);
+  }
+}
+.payhi__inner{
+  max-width: {{ section.settings.max_width | default: '1200px' }};
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Title */
+.payhi__title{
+  margin: 0 0 3rem 0;
+  font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 1.05;
+  color: var(--hdg);
+  font-size: clamp(21px, 3vw, 40px);
+}
+.payhi__accent{
+  color: var(--accent);
+}
+
+/* Grid */
+.payhi__grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(16px, 3vw, 32px);
+  align-items: start;
+}
+@media (min-width: 900px){
+  .payhi__grid{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .payhi__grid{
+    gap: 50px;
+  }
+}
+
+/* Item */
+.payhi__item{
+  text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: clamp(8px, 1.8vw, 16px);
+  padding: 0;
+}
+
+/* Logo */
+.payhi__logo img{
+  display: block;
+  width: clamp(32px, calc(var(--logo-w) * (100vw / 1440)), 220px);
+  height: auto;
+}
+
+.payhi__item-title{
+  margin: 0;
+  font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: var(--hdg);
+  font-size: clamp(18px, 3vw, 32px);
+}
+
+.payhi__item-body{
+  margin: 0;
+  line-height: 1.5;
+  max-width: 40ch;
+  font-size: clamp(12px, 1.2vw, 20px);
+  font-family: var(--font-poppins400);
+}
+.payhi__item-body p{ margin: 0; }
+.payhi__item-body p + p{ margin-top: 0.35rem; }
+
+/* CTA Button */
+.payhi__cta-wrap{
+  margin-top: var(--cta-mt);
+}
+
+.payhi__cta{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--cta-fz);
+  background: var(--cta-bg);
+  color: var(--cta-color);
+  text-decoration: none;
+  padding: 14px 24px;
+  border-radius: 10px;
+  line-height: 1;
+  cursor: pointer;
+}
+.payhi__cta[aria-disabled="true"]{
+  opacity: .5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.payhi__cta:hover{
+  opacity: .92;
+}
+@media (max-width: 768px) {
+  .payhi__cta-wrap {
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Payment highlights",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Learn Now, Pay Later With" },
+    { "type": "text", "id": "heading_accent", "label": "Heading accent (e.g., ELECTIVE)" },
+    { "type": "select", "id": "heading_align", "label": "Heading alignment", "options": [
+      { "value": "left", "label": "Left" },
+      { "value": "center", "label": "Center" },
+      { "value": "right", "label": "Right" }
+    ], "default": "center" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#01241E" },
+    { "type": "color", "id": "accent_color",  "label": "Accent color",  "default": "#157C80" },
+    { "type": "color", "id": "text_color",    "label": "Text color",    "default": "#0B0B0B" },
+    { "type": "color", "id": "bg",            "label": "Background",    "default": "#F1EFE8" },
+
+    { "type": "header", "content": "Layout" },
+    { "type": "text", "id": "max_width", "label": "Max width (px/%/vw)", "default": "1200px" },
+    { "type": "range", "id": "pad_y", "label": "Padding top & bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "pad_x", "label": "Padding left & right",  "min": 0, "max": 160, "step": 4, "unit": "px", "default": 24 },
+
+    { "type": "header", "content": "CTA button" },
+    { "type": "checkbox", "id": "show_cta", "label": "Show button", "default": false },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Learn more" },
+    { "type": "url", "id": "cta_link", "label": "Button link" },
+    { "type": "checkbox", "id": "cta_new_tab", "label": "Open in new tab", "default": false },
+    { "type": "select", "id": "cta_align", "label": "Button alignment", "options": [
+      { "value": "left", "label": "Left" },
+      { "value": "center", "label": "Center" },
+      { "value": "right", "label": "Right" }
+    ], "default": "center" },
+    { "type": "text", "id": "cta_font_size", "label": "Button font-size (supports clamp())", "default": "clamp(14px, 1.4vw, 18px)" },
+    { "type": "color", "id": "cta_bg", "label": "Button background color", "default": "#157C80" },
+    { "type": "color", "id": "cta_color", "label": "Button text color", "default": "#FFFFFF" },
+    { "type": "text", "id": "cta_margin_top", "label": "Button margin-top (supports clamp())", "default": "clamp(16px, 2vw, 28px)" }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Logo / Icon" },
+        { "type": "range", "id": "logo_width", "label": "Logo width (desktop base, px)", "min": 32, "max": 220, "step": 2, "unit": "px", "default": 96 },
+        { "type": "text", "id": "title", "label": "Title", "default": "Quick Approval" },
+        { "type": "richtext", "id": "body", "label": "Description", "default": "<p>Get a real-time decision</p>" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Payment highlights",
+      "blocks": [
+        { "type": "feature", "settings": { "title": "Quick Approval" } },
+        { "type": "feature", "settings": { "title": "Easy Payments", "body": "<p>Split your purchase into 3, 6, 9, and 12 easy payments</p>" } },
+        { "type": "feature", "settings": { "title": "No Hidden Fees", "body": "<p>0% interest payments with no surprises</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

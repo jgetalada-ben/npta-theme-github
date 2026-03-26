@@ -202,7 +202,7 @@ border-bottom: 1px solid #D0D0D0;
 }
 .facets__heading {
   display: block;
-color: #133257;
+color: #0f828c;
     font-family: var(--font-body-family);
 font-size: 22px;
 font-style: normal;
@@ -539,7 +539,7 @@ line-height: 150%;
   appearance: none;
   -webkit-appearance: none;
   border-radius: 4px;
-  border: 2px solid #133257;
+  border: 2px solid #0f828c;
 
 }
 
@@ -583,7 +583,7 @@ line-height: 150%;
 }
 .facets__label.active svg {
  
-      background-color: #E9F24F;
+      background-color: #C1FF72;
 }
 .facets__label.active .icon-checkmark {
  
@@ -591,8 +591,8 @@ line-height: 150%;
 }
 
 .facets__label.active input {
-   background-color: #E9F24F !important;
-     border: 2px solid #E9F24F !important;
+   background-color: #C1FF72 !important;
+     border: 2px solid #C1FF72 !important;
 }
 
 
@@ -682,7 +682,7 @@ span.active-facets__button-inner:after {
 
 .active-facets__button-wrapper * {
  color: rgba(20, 20, 20, 0.60);
-font-family: Inter;
+font-family: Montserrat, sans-serif;
 font-size: 16px;
 font-style: normal;
 font-weight: 400;
@@ -929,7 +929,7 @@ a.active-facets__button.focused .active-facets__button-inner {
 
 .mobile-facets__open-label {
   transition: text-decoration var(--duration-short) ease;
-  color: var(--navy, #133257);
+  color: var(--navy, #0f828c);
 font-family: Montserrat;
 font-size: 22px;
 font-style: normal;
@@ -1414,7 +1414,7 @@ line-height: 150%;
 }
 
 .clear-all-active-filter{
-  color:  #133257;
+  color:  #0f828c;
     font-family: var(--font-body-family);
 font-size: 16px;
 font-style: normal;

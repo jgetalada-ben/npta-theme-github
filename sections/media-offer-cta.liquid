@@ -1,0 +1,787 @@
+{% comment %}
+  Section: Media Offer CTA
+  - Media (image/video/embed) + content column
+  - Desktop: media left/right (setting)
+  - Mobile: order content-first or media-first (setting)
+  - Fully styleable via settings
+  - Bullets are blocks
+{% endcomment %}
+
+{%- assign sid = section.id -%}
+
+{%- assign layout_desktop = section.settings.layout_desktop | default: 'media_left' -%}
+{%- assign layout_mobile = section.settings.layout_mobile | default: 'content_first' -%}
+
+{%- assign media_ar = '4 / 5' -%}
+{%- case section.settings.media_aspect -%}
+  {%- when 'square' -%}{%- assign media_ar = '1 / 1' -%}
+  {%- when 'landscape' -%}{%- assign media_ar = '16 / 9' -%}
+  {%- else -%}{%- assign media_ar = '4 / 5' -%}
+{%- endcase -%}
+
+{%- assign p = section.settings.product -%}
+{%- assign v = blank -%}
+{%- if p != blank -%}
+  {%- assign v = p.selected_or_first_available_variant -%}
+{%- endif -%}
+
+{%- if section.settings.media_type == 'video' and section.settings.video != blank and section.settings.video_autoplay -%}
+  {%- assign __cta2_first_src = section.settings.video.sources | first -%}
+  {%- if __cta2_first_src != blank -%}
+    <link rel="preload" as="video" href="{{ __cta2_first_src.url }}" type="{{ __cta2_first_src.mime_type }}" fetchpriority="high">
+  {%- endif -%}
+{%- endif -%}
+
+<section
+  id="OfferCTA-{{ sid }}"
+  class="cta2
+    {% if layout_desktop == 'media_right' %}cta2--media-right{% else %}cta2--media-left{% endif %}
+    {% if layout_mobile == 'media_first' %}cta2--m-media-first{% else %}cta2--m-content-first{% endif %}"
+  style="
+    --cta-bg: {{ section.settings.bg | default: '#0F7C82' }};
+    --cta-maxw: {{ section.settings.max_width | default: '1200px' }};
+    --cta-pt: {{ section.settings.pad_top | default: 48 }}px;
+    --cta-pr: {{ section.settings.pad_right | default: 24 }}px;
+    --cta-pb: {{ section.settings.pad_bottom | default: 48 }}px;
+    --cta-pl: {{ section.settings.pad_left | default: 24 }}px;
+    --cta-gap: {{ section.settings.gap | default: 40 }}px;
+
+    --cta-top-title-color: {{ section.settings.top_title_color | default: '#FFFFFF' }};
+    --cta-top-title-size: {{ section.settings.top_title_size | default: 'clamp(20px, 2.2vw, 30px)' }};
+    --cta-top-sub-color: {{ section.settings.top_sub_color | default: '#B9F85A' }};
+    --cta-top-sub-size: {{ section.settings.top_sub_size | default: 'clamp(12px, 1.2vw, 16px)' }};
+
+    --cta-content-title-color: {{ section.settings.content_title_color | default: '#FFFFFF' }};
+    --cta-content-title-size: {{ section.settings.content_title_size | default: 'clamp(16px, 1.8vw, 22px)' }};
+
+    --cta-bullet-color: {{ section.settings.bullet_color | default: '#FFFFFF' }};
+    --cta-bullet-size: {{ section.settings.bullet_size | default: 'clamp(13px, 1.2vw, 16px)' }};
+    --cta-bullet-accent: {{ section.settings.bullet_accent_color | default: '#B9F85A' }};
+    --cta-bullet-icon: {{ section.settings.bullet_icon_color | default: '#B9F85A' }};
+
+    --cta-price-color: {{ section.settings.price_color | default: '#B9F85A' }};
+    --cta-price-size: {{ section.settings.price_size | default: 'clamp(16px, 1.8vw, 22px)' }};
+    --cta-compare-color: {{ section.settings.compare_color | default: 'rgba(255,255,255,0.7)' }};
+    --cta-compare-size: {{ section.settings.compare_size | default: 'clamp(12px, 1.2vw, 16px)' }};
+
+    --cta-btn1-bg: {{ section.settings.btn1_bg | default: '#B9F85A' }};
+    --cta-btn1-color: {{ section.settings.btn1_color | default: '#0B0B0B' }};
+    --cta-btn1-size: {{ section.settings.btn1_size | default: '14px' }};
+    --cta-btn1-radius: {{ section.settings.btn1_radius | default: 10 }}px;
+
+    --cta-btn2-bg: {{ section.settings.btn2_bg | default: 'transparent' }};
+    --cta-btn2-color: {{ section.settings.btn2_color | default: '#FFFFFF' }};
+    --cta-btn2-border: {{ section.settings.btn2_border | default: '#FFFFFF' }};
+    --cta-btn2-size: {{ section.settings.btn2_size | default: '14px' }};
+    --cta-btn2-radius: {{ section.settings.btn2_radius | default: 10 }}px;
+
+    --cta-media-ar: {{ media_ar }};
+    --cta-media-caption-bg: {{ section.settings.media_caption_bg | default: 'rgba(0,0,0,0.45)' }};
+    --cta-media-caption-color: {{ section.settings.media_caption_color | default: '#FFFFFF' }};
+    --cta-media-caption-size: {{ section.settings.media_caption_size | default: '12px' }};
+    --cta-media-desc-color: {{ section.settings.media_desc_color | default: '#FFFFFF' }};
+    --cta-media-desc-size: {{ section.settings.media_desc_size | default: '12px' }};
+  "
+>
+  <div class="cta2__inner">
+
+    {% if section.settings.top_title != blank or section.settings.top_sub != blank %}
+      <div class="cta2__top">
+        {% if section.settings.top_title != blank %}
+          <div class="cta2__top-title">{{ section.settings.top_title }}</div>
+        {% endif %}
+        {% if section.settings.top_sub != blank %}
+          <div class="cta2__top-sub">{{ section.settings.top_sub }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="cta2__grid">
+      <!-- MEDIA -->
+      <div class="cta2__media">
+        <div class="cta2__media-box">
+          {%- if section.settings.media_type == 'image' and section.settings.image != blank -%}
+            {{
+              section.settings.image
+              | image_url: width: 1600
+              | image_tag:
+                class: 'cta2__media-el',
+                loading: 'lazy',
+                widths: '400,600,800,1200,1600',
+                sizes: '(min-width: 990px) 40vw, 90vw',
+                alt: section.settings.media_alt | escape
+            }}
+          {%- elsif section.settings.media_type == 'video' and section.settings.video != blank -%}
+            {%- assign vid = section.settings.video -%}
+            <video
+              class="cta2__media-el"
+              playsinline
+              preload="{% if section.settings.video_autoplay %}auto{% else %}metadata{% endif %}"
+              {% if section.settings.video_autoplay %}autoplay{% endif %}
+              {% if section.settings.video_loop %}loop{% endif %}
+              {% if section.settings.video_muted %}muted{% endif %}
+              {% if section.settings.video_controls %}controls{% endif %}
+              {% if section.settings.video_poster != blank %}
+                poster="{{ section.settings.video_poster | image_url: width: 1600 }}"
+              {% endif %}
+              aria-label="{{ section.settings.media_alt | escape }}"
+            >
+              {%- for s in vid.sources -%}
+                <source src="{{ s.url }}" type="{{ s.mime_type }}">
+              {%- endfor -%}
+            </video>
+          {%- elsif section.settings.media_type == 'embed' and section.settings.embed_url != blank -%}
+            <iframe
+              class="cta2__media-el cta2__embed"
+              src="{{ section.settings.embed_url | escape }}"
+              title="{{ section.settings.media_alt | escape }}"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowfullscreen
+              loading="lazy"></iframe>
+          {%- else -%}
+            <div class="cta2__media-fallback">Add an image or video in the section settings.</div>
+          {%- endif -%}
+
+          {% if section.settings.media_caption != blank %}
+            <div class="cta2__media-caption">{{ section.settings.media_caption }}</div>
+          {% endif %}
+        </div>
+
+        {% if section.settings.media_desc != blank %}
+          <div class="cta2__media-desc">{{ section.settings.media_desc }}</div>
+        {% endif %}
+      </div>
+
+      <!-- CONTENT -->
+      <div class="cta2__content">
+        {% if section.settings.content_title != blank %}
+          <div class="cta2__content-title">{{ section.settings.content_title }}</div>
+        {% endif %}
+
+        {% if section.blocks.size > 0 %}
+          <ul class="cta2__bullets" role="list">
+            {% for block in section.blocks %}
+              <li class="cta2__bullet" {{ block.shopify_attributes }}>
+                <span class="cta2__check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="cta2__bullet-text">
+                  {{ block.settings.text | newline_to_br }}
+                  {% if block.settings.accent != blank %}
+                    <span class="cta2__bullet-accent">{{ block.settings.accent }}</span>
+                  {% endif %}
+                </span>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        {% if section.settings.show_price %}
+          <div class="cta2__price">
+            {% if p != blank and v != blank %}
+              <span class="cta2__price-now">{{ v.price | money }}</span>
+              {% if v.compare_at_price and v.compare_at_price > v.price %}
+                <span class="cta2__price-was">{{ v.compare_at_price | money }}</span>
+              {% endif %}
+            {% else %}
+              {% if section.settings.price_text != blank %}
+                <span class="cta2__price-now">{{ section.settings.price_text }}</span>
+              {% endif %}
+              {% if section.settings.compare_text != blank %}
+                <span class="cta2__price-was">{{ section.settings.compare_text }}</span>
+              {% endif %}
+            {% endif %}
+          </div>
+        {% endif %}
+
+        <div class="cta2__buttons">
+          {% if section.settings.btn1_label != blank and section.settings.btn1_link != blank %}
+            <a class="cta2__btn cta2__btn--primary" href="{{ section.settings.btn1_link }}">
+              {{ section.settings.btn1_label }}
+            </a>
+          {% endif %}
+
+          {%- assign btn2_behavior = section.settings.btn2_behavior | default: 'normal' -%}
+          {% if section.settings.btn2_label != blank and section.settings.btn2_link != blank %}
+            {%- assign btn2_href = section.settings.btn2_link -%}
+            {%- assign btn2_target = '' -%}
+            {%- assign btn2_rel = '' -%}
+
+            {%- if btn2_behavior == 'iframe_modal' -%}
+              {%- assign btn2_href = '#' -%}
+            {%- elsif btn2_behavior == 'normal' and section.settings.btn2_new_tab -%}
+              {%- assign btn2_target = ' target="_blank"' -%}
+              {%- assign btn2_rel = ' rel="noopener noreferrer"' -%}
+            {%- endif -%}
+
+            <a
+              class="cta2__btn cta2__btn--secondary"
+              href="{{ btn2_href }}"
+              {{ btn2_target }}{{ btn2_rel }}
+              data-cta2-action="{{ btn2_behavior }}"
+              {% if btn2_behavior != 'normal' %}data-cta2-url="{{ section.settings.btn2_link }}"{% endif %}
+              aria-controls="cta2-modal-{{ sid }}"
+            >
+              {{ section.settings.btn2_label }}
+            </a>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<style>
+#shopify-section-{{ section.id }}{
+  background: var(--cta-bg) !important;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+#shopify-section-{{ section.id }} > #OfferCTA-{{ section.id }}{
+  background: var(--cta-bg) !important;
+}
+
+  #OfferCTA-{{ sid }}{
+    background: var(--cta-bg);
+    padding: var(--cta-pt) var(--cta-pr) var(--cta-pb) var(--cta-pl);
+  }
+  #OfferCTA-{{ sid }} .cta2__inner{
+    max-width: var(--cta-maxw);
+    margin: 0 auto;
+  }
+
+  /* Top header */
+  #OfferCTA-{{ sid }} .cta2__top{
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  #OfferCTA-{{ sid }} .cta2__top-title{
+    color: var(--cta-top-title-color);
+    font-size: var(--cta-top-title-size);
+    font-family: var(--font-anton, var(--font-heading-family));
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    line-height: normal;
+  }
+  #OfferCTA-{{ sid }} .cta2__top-sub{
+    margin-top: 8px;
+    color: var(--cta-top-sub-color);
+    font-size: var(--cta-top-sub-size);
+    font-family: var(--font-poppins700, var(--font-body-family));
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  /* Grid */
+  #OfferCTA-{{ sid }} .cta2__grid{
+    display: grid;
+    grid-template-columns: minmax(0,1fr) minmax(0,1.15fr);
+    gap: var(--cta-gap);
+    align-items: start;
+    grid-template-areas: "media content";
+  }
+  #OfferCTA-{{ sid }}.cta2--media-right .cta2__grid{
+    grid-template-areas: "content media";
+  }
+  #OfferCTA-{{ sid }} .cta2__media{ grid-area: media; }
+  #OfferCTA-{{ sid }} .cta2__content{ grid-area: content; }
+
+  /* Media */
+  #OfferCTA-{{ sid }} .cta2__media-box{
+    position: relative;
+    aspect-ratio: var(--cta-media-ar);
+    background: rgba(0,0,0,.15);
+    overflow: hidden;
+  }
+  #OfferCTA-{{ sid }} .cta2__media-el{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border: 0;
+  }
+  #OfferCTA-{{ sid }} .cta2__embed{
+    background: #000;
+  }
+  #OfferCTA-{{ sid }} .cta2__media-caption{
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    padding: 8px 10px;
+    background: var(--cta-media-caption-bg);
+    color: var(--cta-media-caption-color);
+    font-size: var(--cta-media-caption-size);
+    line-height: 1.25;
+  }
+  #OfferCTA-{{ sid }} .cta2__media-desc{
+    margin-top: 10px;
+    color: var(--cta-media-desc-color);
+    font-size: var(--cta-media-desc-size);
+    line-height: 1.35;
+  }
+  #OfferCTA-{{ sid }} .cta2__media-fallback{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    color: rgba(255,255,255,.85);
+    padding: 16px;
+    text-align: center;
+  }
+
+  /* Content */
+  #OfferCTA-{{ sid }} .cta2__content-title{
+    color: var(--cta-content-title-color);
+    font-size: var(--cta-content-title-size);
+    font-family: var(--font-poppins700, var(--font-body-family));
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    margin-bottom: 14px;
+  }
+
+  #OfferCTA-{{ sid }} .cta2__bullets{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 12px;
+  }
+  #OfferCTA-{{ sid }} .cta2__bullet{
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    column-gap: 20px;
+    align-items: start;
+  }
+  #OfferCTA-{{ sid }} .cta2__check{
+    width: 25px;
+    height: 25px;
+    color: var(--cta-bullet-icon);
+    margin-top: 7px;
+  }
+  #OfferCTA-{{ sid }} .cta2__check svg{
+    width: 18px;
+    height: 18px;
+    display:block;
+  }
+  #OfferCTA-{{ sid }} .cta2__bullet-text{
+    color: var(--cta-bullet-color);
+    font-size: var(--cta-bullet-size);
+    font-family: var(--font-poppins700, var(--font-body-family));
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  #OfferCTA-{{ sid }} .cta2__bullet-accent{
+    display: inline-block;
+    margin-top: 4px;
+    color: var(--cta-bullet-accent);
+    font-weight: 700;
+  }
+
+  /* Price */
+  #OfferCTA-{{ sid }} .cta2__price{
+    margin-top: 14px;
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin-left: 6%;
+  }
+  @media (max-width: 749px){
+    #OfferCTA-{{ sid }} .cta2__price{
+      margin-left: 0;
+    }
+  }
+  #OfferCTA-{{ sid }} .cta2__price-now{
+    color: var(--cta-price-color);
+    font-size: var(--cta-price-size);
+    font-family: var(--font-poppins700, var(--font-body-family));
+    font-weight: 800;
+    white-space: nowrap;
+  }
+  #OfferCTA-{{ sid }} .cta2__price-was{
+    color: var(--cta-compare-color);
+    font-size: var(--cta-compare-size);
+    font-family: var(--font-poppins700, var(--font-body-family));
+    font-weight: 700;
+    text-decoration: line-through;
+    white-space: nowrap;
+  }
+
+  /* Buttons */
+  #OfferCTA-{{ sid }} .cta2__buttons{
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 70px;
+    align-items: center;
+  }
+  @media (max-width: 749px){
+    #OfferCTA-{{ sid }} .cta2__buttons{
+      gap: 20px;
+      margin-top: 25px;
+    }
+  }
+  #OfferCTA-{{ sid }} .cta2__btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 18px;
+    text-decoration: none;
+    font-family: var(--font-poppins700, var(--font-body-family));
+    font-weight: 800;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  #OfferCTA-{{ sid }} .cta2__btn--primary{
+    background: var(--cta-btn1-bg);
+    color: var(--cta-btn1-color);
+    font-size: var(--cta-btn1-size);
+    border-radius: var(--cta-btn1-radius);
+    border: 1px solid transparent;
+  }
+  #OfferCTA-{{ sid }} .cta2__btn--primary:hover{
+    background: var(--cta-btn1-color);
+    color: var(--cta-btn1-bg);
+  }
+  #OfferCTA-{{ sid }} .cta2__btn--secondary{
+    background: var(--cta-btn2-bg);
+    color: var(--cta-btn2-color);
+    font-size: var(--cta-btn2-size);
+    border-radius: var(--cta-btn2-radius);
+    border: 1px solid var(--cta-btn2-border);
+  }
+  #OfferCTA-{{ sid }} .cta2__btn--secondary:hover {
+    background: var(--cta-btn2-color);
+    color: var(--cta-btn2-bg);
+    border: 1px solid transparent;
+  }
+
+  /* Mobile order control */
+  @media (max-width: 749px){
+    #OfferCTA-{{ sid }} .cta2__grid{
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    #OfferCTA-{{ sid }}.cta2--m-content-first .cta2__grid{
+      grid-template-areas:
+        "content"
+        "media";
+    }
+    #OfferCTA-{{ sid }}.cta2--m-media-first .cta2__grid{
+      grid-template-areas:
+        "media"
+        "content";
+    }
+  }
+</style>
+
+<!-- CTA2 Modal (iframe) -->
+<div id="cta2-modal-{{ sid }}" class="cta2-modal" aria-hidden="true">
+  <div class="cta2-modal__overlay" data-cta2-close></div>
+
+  <div class="cta2-modal__dialog" role="dialog" aria-modal="true" aria-label="Popup">
+    <button type="button" class="cta2-modal__close" aria-label="Close" data-cta2-close>×</button>
+    <div class="cta2-modal__frame-wrap">
+      <iframe class="cta2-modal__iframe" src="" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<style>
+  body.cta2-modal-open {
+    overflow: hidden;
+    height: 100vh;
+  }
+  #cta2-modal-{{ sid }}.cta2-modal { position: fixed; inset: 0; z-index: 999999; display: none; }
+  #cta2-modal-{{ sid }}.cta2-modal.is-open { display: block;background: rgba(0,0,0,.65);backdrop-filter: blur(4px); }
+  #cta2-modal-{{ sid }} .cta2-modal__overlay { position: absolute; inset: 0; background: rgba(0,0,0,.85);backdrop-filter: blur(4px); }
+  #cta2-modal-{{ sid }} .cta2-modal__dialog {
+    position: relative;
+    width: min(920px, calc(100% - 32px));
+    margin: 6vh auto;
+    background: #0b0b0b;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  #cta2-modal-{{ sid }} .cta2-modal__close{
+    position: absolute;
+    top: 20px; right: 10px;
+    width: 40px; height: 40px;
+    border: 0;
+    border-radius: 999px;
+    background: #000;
+    color: #fff;
+    font-size: 24px;
+    line-height: 40px;
+    cursor: pointer;
+    z-index: 2;
+  }
+  #cta2-modal-{{ sid }} .cta2-modal__frame-wrap{ aspect-ratio: 16/9; width: 100%; background: #000; }
+  #cta2-modal-{{ sid }} .cta2-modal__iframe{ width: 100%; height: 100%; border: 0; display: block; }
+  @media (max-width: 749px){
+    #cta2-modal-{{ sid }} .cta2-modal__dialog{ margin: 10vh auto; }
+    #cta2-modal-{{ sid }} .cta2-modal__frame-wrap{ aspect-ratio: 9/16; }
+  }
+</style>
+
+<script>
+  (function () {
+    var root = document.getElementById('OfferCTA-{{ sid }}');
+    if (!root) return;
+
+    var ctaVideo = root.querySelector('video.cta2__media-el');
+    if (ctaVideo) {
+      try { ctaVideo.preload = 'auto'; } catch(e) {}
+      try { ctaVideo.load(); } catch(e) {}
+
+      var pp = ctaVideo.play && ctaVideo.play();
+      if (pp && pp.catch) pp.catch(function(){});
+    }
+
+    var modal = document.getElementById('cta2-modal-{{ sid }}');
+    var iframe = modal ? modal.querySelector('.cta2-modal__iframe') : null;
+
+    function openModal(url){
+      if (!modal || !iframe) return;
+      iframe.src = url;
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('cta2-modal-open');
+    }
+
+    function closeModal(){
+      if (!modal || !iframe) return;
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      iframe.src = '';
+      document.body.classList.remove('cta2-modal-open');
+    }
+
+    if (modal){
+      modal.addEventListener('click', function(e){
+        if (e.target && e.target.hasAttribute('data-cta2-close')) closeModal();
+      });
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+      });
+    }
+
+    function loadTypeform(){
+      return new Promise(function(resolve){
+        if (window.typeformEmbed && window.typeformEmbed.makePopup) return resolve(window.typeformEmbed);
+
+        var existing = document.getElementById('typeform-embed-script');
+        if (existing) {
+          existing.addEventListener('load', function(){ resolve(window.typeformEmbed); });
+          return;
+        }
+
+        var s = document.createElement('script');
+        s.id = 'typeform-embed-script';
+        s.src = 'https://embed.typeform.com/next/embed.js';
+        s.async = true;
+        s.onload = function(){ resolve(window.typeformEmbed); };
+        document.head.appendChild(s);
+      });
+    }
+
+    root.addEventListener('click', function(e){
+      var a = e.target.closest('a[data-cta2-action]');
+      if (!a) return;
+
+      var action = a.getAttribute('data-cta2-action');
+      if (!action || action === 'normal') return;
+
+      var url = a.getAttribute('data-cta2-url');
+      if (!url) return;
+
+      if (action === 'iframe_modal') {
+        e.preventDefault();
+        openModal(url);
+      }
+
+      if (action === 'typeform_popup') {
+        e.preventDefault();
+        loadTypeform().then(function(tf){
+          if (!tf || !tf.makePopup) return;
+          tf.makePopup(url, { mode: "popup", autoClose: true }).open();
+        });
+      }
+    });
+  })();
+</script>
+
+</section>
+
+{% schema %}
+{
+  "name": "Media offer CTA",
+  "tag": "section",
+  "class": "section media-offer-cta",
+  "max_blocks": 10,
+  "settings": [
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select",
+      "id": "layout_desktop",
+      "label": "Desktop layout",
+      "default": "media_left",
+      "options": [
+        { "value": "media_left", "label": "Media left / Content right" },
+        { "value": "media_right", "label": "Content left / Media right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "layout_mobile",
+      "label": "Mobile order",
+      "default": "content_first",
+      "options": [
+        { "value": "content_first", "label": "Content first, then media" },
+        { "value": "media_first", "label": "Media first, then content" }
+      ]
+    },
+    { "type": "text", "id": "max_width", "label": "Max width (e.g. 1200px or 90%)", "default": "1200px" },
+    { "type": "color", "id": "bg", "label": "Background color", "default": "#0F7C82" },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "pad_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 48 },
+    { "type": "range", "id": "pad_right", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Padding right", "default": 24 },
+    { "type": "range", "id": "pad_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 48 },
+    { "type": "range", "id": "pad_left", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Padding left", "default": 24 },
+    { "type": "range", "id": "gap", "min": 8, "max": 80, "step": 2, "unit": "px", "label": "Column gap", "default": 40 },
+
+    { "type": "header", "content": "Top header text" },
+    { "type": "text", "id": "top_title", "label": "Top title", "default": "APPLIED FITNESS™: LEARN HOW TO BE A TRAINER" },
+    { "type": "text", "id": "top_title_size", "label": "Top title font-size (clamp ok)", "default": "clamp(20px, 2.2vw, 30px)" },
+    { "type": "color", "id": "top_title_color", "label": "Top title color", "default": "#FFFFFF" },
+    { "type": "text", "id": "top_sub", "label": "Top subheading", "default": "FEBRUARY OFFER - ENROLL NOW & SAVE $700" },
+    { "type": "text", "id": "top_sub_size", "label": "Top subheading font-size (clamp ok)", "default": "clamp(12px, 1.2vw, 16px)" },
+    { "type": "color", "id": "top_sub_color", "label": "Top subheading color", "default": "#B9F85A" },
+
+    { "type": "header", "content": "Media" },
+    {
+      "type": "select",
+      "id": "media_type",
+      "label": "Media type",
+      "default": "video",
+      "options": [
+        { "value": "video", "label": "Shopify video" },
+        { "value": "image", "label": "Image" },
+        { "value": "embed", "label": "Embed (iframe URL)" }
+      ]
+    },
+    { "type": "video", "id": "video", "label": "Shopify video" },
+    { "type": "image_picker", "id": "video_poster", "label": "Video poster (optional)" },
+    { "type": "checkbox", "id": "video_autoplay", "label": "Autoplay", "default": true },
+    { "type": "checkbox", "id": "video_loop", "label": "Loop", "default": true },
+    { "type": "checkbox", "id": "video_muted", "label": "Muted (recommended for autoplay)", "default": true },
+    { "type": "checkbox", "id": "video_controls", "label": "Show controls", "default": false },
+
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "url", "id": "embed_url", "label": "Embed URL (iframe src)" },
+
+    {
+      "type": "select",
+      "id": "media_aspect",
+      "label": "Media aspect ratio",
+      "default": "portrait",
+      "options": [
+        { "value": "portrait", "label": "Portrait (4:5)" },
+        { "value": "landscape", "label": "Landscape (16:9)" },
+        { "value": "square", "label": "Square (1:1)" }
+      ]
+    },
+    { "type": "text", "id": "media_alt", "label": "Media alt/title", "default": "Offer media" },
+    { "type": "text", "id": "media_caption", "label": "Caption overlay on media (optional)" },
+    { "type": "color", "id": "media_caption_bg", "label": "Caption background", "default": "rgba(0,0,0,0.45)" },
+    { "type": "color", "id": "media_caption_color", "label": "Caption text color", "default": "#FFFFFF" },
+    { "type": "text", "id": "media_caption_size", "label": "Caption font-size", "default": "12px" },
+    { "type": "textarea", "id": "media_desc", "label": "Text under media (optional)" },
+    { "type": "color", "id": "media_desc_color", "label": "Under-media text color", "default": "#FFFFFF" },
+    { "type": "text", "id": "media_desc_size", "label": "Under-media text size", "default": "12px" },
+
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "content_title", "label": "Content title", "default": "WHAT’S INCLUDED" },
+    { "type": "text", "id": "content_title_size", "label": "Content title font-size (clamp ok)", "default": "clamp(16px, 1.8vw, 22px)" },
+    { "type": "color", "id": "content_title_color", "label": "Content title color", "default": "#FFFFFF" },
+
+    { "type": "text", "id": "bullet_size", "label": "Bullet font-size (clamp ok)", "default": "clamp(13px, 1.2vw, 16px)" },
+    { "type": "color", "id": "bullet_color", "label": "Bullet text color", "default": "#FFFFFF" },
+    { "type": "color", "id": "bullet_accent_color", "label": "Bullet accent color", "default": "#B9F85A" },
+    { "type": "color", "id": "bullet_icon_color", "label": "Bullet check color", "default": "#B9F85A" },
+
+    { "type": "header", "content": "Price" },
+    { "type": "checkbox", "id": "show_price", "label": "Show price row", "default": true },
+    { "type": "product", "id": "product", "label": "Product (optional - auto uses product price/compare-at)" },
+    { "type": "text", "id": "price_text", "label": "Price text (used if no product)", "default": "$1,699 CAD" },
+    { "type": "text", "id": "compare_text", "label": "Compare-at text (used if no product)", "default": "$2,399 CAD" },
+    { "type": "color", "id": "price_color", "label": "Price color", "default": "#B9F85A" },
+    { "type": "text", "id": "price_size", "label": "Price font-size (clamp ok)", "default": "clamp(16px, 1.8vw, 22px)" },
+    { "type": "color", "id": "compare_color", "label": "Compare-at color", "default": "rgba(255,255,255,0.7)" },
+    { "type": "text", "id": "compare_size", "label": "Compare-at font-size (clamp ok)", "default": "clamp(12px, 1.2vw, 16px)" },
+
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "btn1_label", "label": "Button 1 label", "default": "ENROLL NOW" },
+    { "type": "url", "id": "btn1_link", "label": "Button 1 link" },
+    { "type": "color", "id": "btn1_bg", "label": "Button 1 background", "default": "#B9F85A" },
+    { "type": "color", "id": "btn1_color", "label": "Button 1 text color", "default": "#0B0B0B" },
+    { "type": "text", "id": "btn1_size", "label": "Button 1 font-size", "default": "14px" },
+    { "type": "range", "id": "btn1_radius", "label": "Button 1 radius", "min": 0, "max": 30, "step": 1, "default": 10 },
+
+    { "type": "text", "id": "btn2_label", "label": "Button 2 label", "default": "TALK TO ADVISOR" },
+    { "type": "url", "id": "btn2_link", "label": "Button 2 link" },
+    {
+      "type": "select",
+      "id": "btn2_behavior",
+      "label": "Button 2 behavior",
+      "default": "normal",
+      "options": [
+        { "value": "normal", "label": "Normal link" },
+        { "value": "typeform_popup", "label": "Typeform popup" },
+        { "value": "iframe_modal", "label": "Popup (iframe modal)" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "btn2_new_tab",
+      "label": "Open in new tab (only for Normal link)",
+      "default": false
+    },
+    { "type": "color", "id": "btn2_bg", "label": "Button 2 background", "default": "transparent" },
+    { "type": "color", "id": "btn2_color", "label": "Button 2 text color", "default": "#FFFFFF" },
+    { "type": "color", "id": "btn2_border", "label": "Button 2 border color", "default": "#FFFFFF" },
+    { "type": "text", "id": "btn2_size", "label": "Button 2 font-size", "default": "14px" },
+    { "type": "range", "id": "btn2_radius", "label": "Button 2 radius", "min": 0, "max": 30, "step": 1, "default": 10 }
+  ],
+  "blocks": [
+    {
+      "type": "bullet",
+      "name": "Included item",
+      "settings": [
+        { "type": "textarea", "id": "text", "label": "Bullet text", "default": "Certified Personal Trainer Course" },
+        { "type": "text", "id": "accent", "label": "Accent line (optional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Media offer CTA",
+      "blocks": [
+        { "type": "bullet" },
+        { "type": "bullet" },
+        { "type": "bullet" }
+      ]
+    }
+  ]
+}
+{% endschema %}

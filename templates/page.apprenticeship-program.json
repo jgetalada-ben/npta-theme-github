@@ -17,33 +17,115 @@
         "padding_bottom": 28
       }
     },
+    "hero_banner_two_Vm3fEQ": {
+      "type": "hero-banner-two",
+      "blocks": {
+        "word_W4TgdT": {
+          "type": "word",
+          "settings": {
+            "word_text": "-World Training."
+          }
+        },
+        "word_Ugqe4b": {
+          "type": "word",
+          "settings": {
+            "word_text": "-Time Mentorship."
+          }
+        },
+        "word_zKyWdH": {
+          "type": "word",
+          "settings": {
+            "word_text": "Fitness Careers."
+          }
+        }
+      },
+      "block_order": [
+        "word_W4TgdT",
+        "word_Ugqe4b",
+        "word_zKyWdH"
+      ],
+      "custom_css": [
+        ".section--hero-banner {min-height: 80vh;}",
+        ".section--hero-content {align-items: end;}",
+        ".section--hero-background::before {background: none;}"
+      ],
+      "name": "Hero Banner Two",
+      "settings": {
+        "background_image": "shopify://shop_images/hero-banner-ap.png",
+        "headline": "REAL",
+        "desc1": "<p>Join Canada’s most immersive Apprenticeship Program, built to turn certified trainers into confident, career-ready coaches.</p>",
+        "desc_size": "clamp(14px,2vw,21px)",
+        "badge_1_text": "",
+        "badge_2_text": "",
+        "button_1_link": "https://app.npta.ca/widget/survey/sM15QBoTJbBVmC9vCifd",
+        "button_1_text": "Start today",
+        "button_1_behavior": "iframe",
+        "button_1_new_tab": false,
+        "button_2_link": "",
+        "button_2_text": "TAKE THE QUIZ",
+        "button_2_behavior": "normal",
+        "button_2_new_tab": false,
+        "hero_image_width": "500",
+        "hero_image_height": "500",
+        "award_text": "",
+        "award_sub_text": "",
+        "award_image_width": "40",
+        "award_image_height": "40",
+        "partner_text": "",
+        "partner_image_width": "40",
+        "partner_image_height": "40"
+      }
+    },
     "section_top_banner_hJLdAL": {
       "type": "section--top-banner",
+      "disabled": true,
       "custom_css": [
         ".section--top-banner {background-color: #000000;}",
         ".section--top-banner:before {width: 100%;}",
-        ".section--top-background {width: 100%;}"
+        ".section--top-background {width: 100%; display: block;}",
+        "h1 {color: #fff;}",
+        ".top-btn1 .btn-label-down {font-weight: bold; font-family: Montserrat;}",
+        "@media (max-width: 980px) {.section--top-banner-container {top: 10%; }}"
       ],
       "settings": {
         "background_image": "shopify://shop_images/AP_Page_Header.jpg",
         "title": "Real-World Training. Real-Time Mentorship. Real Fitness Careers.",
         "subtitle": "Join Canada’s most immersive Apprenticeship Program, built to turn certified trainers into confident, career-ready coaches.",
         "desc1": "",
+        "title_size": "clamp(21px,4vw,42px)",
+        "subtitle_size": "clamp(14px,2vw,21px)",
+        "desc_size": "16px",
         "button_link": "shopify://collections/all",
         "button_text": "GET CERTIFIED",
         "show_button_1": true,
         "button_1_text": "Start today",
         "button_1_link": "https://app.npta.ca/widget/survey/sM15QBoTJbBVmC9vCifd",
+        "button_1_behavior": "new_tab",
+        "button_1_popup_url": "",
+        "button_1_popup_title": "Popup",
         "show_button_2": false,
         "button_2_text": "Purchase now",
         "button_2_link": "shopify://products/apprenticeship-program",
+        "button_2_behavior": "new_tab",
+        "button_2_popup_url": "",
+        "button_2_popup_title": "Popup",
+        "button_gap": 24,
+        "btn1_bg": "#c1ff72",
+        "btn1_text_color": "#01241e",
+        "btn1_font_size": "14px",
+        "btn2_bg": "#ffffff",
+        "btn2_text_color": "#01241e",
+        "btn2_font_size": "clamp(14px,1.4vw,32px)",
         "button_position": "left",
         "title_alignment": "left",
         "container_width": 580,
         "alignment": "flex-start",
-        "banner_height": "",
+        "banner_height": "70vh",
         "top_banner_align_items": "center",
-        "show_banner_gradient": true
+        "show_banner_gradient": true,
+        "popup_max_width": 980,
+        "popup_height_desktop": "min(80vh, 760px)",
+        "popup_height_mobile": "78vh"
       }
     },
     "section_blurb_apprentice_djK8pq": {
@@ -76,7 +158,8 @@
             "text": "<p>At NPTA, we don't just certify trainers— we build careers. Our program goes beyond textbook learning with expert mentorship, hands-on training, and direct industry connections that set you apart.</p><ul><li>40 Hours of Hands-On Training – Work with real clients in a professional gym.</li><li>1:1 Expert Mentorship – Learn from Canada’s top personal trainers.</li><li>Career-Ready Training – Build the skills, confidence, and connections to launch your career.</li><li>Easy Setup – Quick application with no impact on your credit score</li></ul>",
             "show_buttons": true,
             "button_label": "Register now",
-            "button_link": "https://app.npta.ca/widget/survey/sM15QBoTJbBVmC9vCifd"
+            "button_link": "https://app.npta.ca/widget/survey/sM15QBoTJbBVmC9vCifd",
+            "button_behavior": "popup"
           }
         }
       },
@@ -86,7 +169,7 @@
       "name": "t:sections.multirow.presets.name",
       "settings": {
         "image_height": "medium",
-        "background_color": "#133257",
+        "background_color": "#01241e",
         "top_padding": 92,
         "bottom_padding": 92,
         "desktop_image_width": "medium",
@@ -145,6 +228,7 @@
           "settings": {
             "button_label": "Register Now",
             "button_link": "https://app.npta.ca/widget/survey/sM15QBoTJbBVmC9vCifd",
+            "button_behavior": "popup",
             "button_style_secondary": false
           }
         }
@@ -178,28 +262,50 @@
       "custom_css": [
         ".section--top-banner {background-color: #000000;}",
         ".section--top-banner:before {width: 100%;}",
-        ".section--top-background {width: 100%;}"
+        ".section--top-background {width: 100%; display: block;}",
+        "h1 {color: #fff;}",
+        ".top-btn1 .btn-label-down {font-weight: bold; font-family: Montserrat;}",
+        "@media (max-width: 980px) {.section--top-banner-container {top: 10%; }}"
       ],
       "settings": {
-        "background_image": "shopify://shop_images/Ap_Footer.jpg",
+        "background_image": "shopify://shop_images/AP_Footer_Banner.png",
         "title": "Support That Meets You Where You Are",
         "subtitle": "Still feeling unsure? That’s completely okay. Starting your journey in the fitness industry is a big step—and you don’t have to take it alone. We’re here to talk it through and help you find the path that’s right for you.",
         "desc1": "",
+        "title_size": "clamp(16px,3.2vw,32px)",
+        "subtitle_size": "clamp(12px,2vw,18px)",
+        "desc_size": "16px",
         "button_link": "shopify://collections/all",
         "button_text": "GET CERTIFIED",
         "show_button_1": true,
         "button_1_text": "Contact Us",
         "button_1_link": "shopify://pages/book-a-call",
+        "button_1_behavior": "popup_iframe",
+        "button_1_popup_url": "",
+        "button_1_popup_title": "Popup",
         "show_button_2": false,
         "button_2_text": "Purchase now",
         "button_2_link": "shopify://products/apprenticeship-program",
-        "button_position": "left",
-        "title_alignment": "left",
-        "container_width": 520,
-        "alignment": "flex-start",
-        "banner_height": "",
-        "top_banner_align_items": "center",
-        "show_banner_gradient": true
+        "button_2_behavior": "new_tab",
+        "button_2_popup_url": "",
+        "button_2_popup_title": "Popup",
+        "button_gap": 24,
+        "btn1_bg": "#c1ff72",
+        "btn1_text_color": "#01241e",
+        "btn1_font_size": "14px",
+        "btn2_bg": "#ffffff",
+        "btn2_text_color": "#01241e",
+        "btn2_font_size": "clamp(14px,1.4vw,32px)",
+        "button_position": "center",
+        "title_alignment": "center",
+        "container_width": 980,
+        "alignment": "center",
+        "banner_height": "80vh",
+        "top_banner_align_items": "flex-end",
+        "show_banner_gradient": false,
+        "popup_max_width": 980,
+        "popup_height_desktop": "min(80vh, 760px)",
+        "popup_height_mobile": "78vh"
       }
     },
     "section_breadcrumb_eFj6di": {
@@ -224,6 +330,10 @@
         "secondary_button_text": "Contact Us",
         "secondary_button_link": "shopify://pages/contact-us",
         "enable_video_looping": false,
+        "video_height_mode": "auto",
+        "video_height_mobile": "320px",
+        "video_height_desktop": "520px",
+        "video_object_fit": "cover",
         "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "description": "",
         "full_width": false,
@@ -239,21 +349,27 @@
           "type": "step",
           "settings": {
             "step_title": "Select Your Program",
-            "step_description": "Choose the apprenticeship package that aligns with your career goals."
+            "step_description": "Choose the apprenticeship package that aligns with your career goals.",
+            "step_link": "",
+            "step_link_new_tab": false
           }
         },
         "step_ynGT9p": {
           "type": "step",
           "settings": {
             "step_title": "Gain Hands-On Experience",
-            "step_description": "Train with real clients, refine your skills, and learn from top industry mentors."
+            "step_description": "Train with real clients, refine your skills, and learn from top industry mentors.",
+            "step_link": "",
+            "step_link_new_tab": false
           }
         },
         "step_xFUnrd": {
           "type": "step",
           "settings": {
             "step_title": "Launch Your Career with Confidence",
-            "step_description": "With NPTA’s expert guidance and industry connections, you’ll step into the fitness world fully prepared to succeed."
+            "step_description": "With NPTA’s expert guidance and industry connections, you’ll step into the fitness world fully prepared to succeed.",
+            "step_link": "",
+            "step_link_new_tab": false
           }
         }
       },
@@ -454,6 +570,7 @@
   },
   "order": [
     "main",
+    "hero_banner_two_Vm3fEQ",
     "section_top_banner_hJLdAL",
     "section_blurb_apprentice_djK8pq",
     "multirow_PFhaXk",

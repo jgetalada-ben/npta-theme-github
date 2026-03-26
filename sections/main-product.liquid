@@ -8,6 +8,14 @@
   {% if section.settings.image_zoom == 'hover' %}
     data-zoom-on-hover
   {% endif %}
+
+  {% if section.settings.gallery_autoplay_enable %}
+    data-gallery-autoplay="true"
+    data-gallery-autoplay-interval="{{ section.settings.gallery_autoplay_seconds | times: 1000 }}"
+    data-gallery-autoplay-effect="{{ section.settings.gallery_autoplay_effect }}"
+    data-gallery-autoplay-pause-hover="{{ section.settings.gallery_autoplay_pause_on_hover }}"
+    data-gallery-autoplay-mobile="{{ section.settings.gallery_autoplay_enable_mobile }}"
+  {% endif %}
 >
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
@@ -35,6 +43,17 @@
       .section-{{ section.id }}-padding {
         padding-top: {{ section.settings.padding_top }}px;
         padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+    #MainProduct-{{ section.id }}[data-gallery-autoplay-effect="fade"] .product__media-list {
+      transition: opacity 600ms ease-in-out;
+    }
+    #MainProduct-{{ section.id }} .product__media-list.npta-fade-out {
+      opacity: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #MainProduct-{{ section.id }}[data-gallery-autoplay-effect="fade"] .product__media-list {
+        transition: none;
       }
     }
   {%- endstyle -%}
@@ -697,6 +716,7 @@
     {%- if product.media.size > 0 -%}
       <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
       <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
+      <script src="{{ 'product-gallery-autoplay.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
     {%- if first_3d_model -%}
@@ -719,6 +739,171 @@
     </script>
   </div>
 </product-info>
+
+{% render 'ghl-finance-modal' %}
+
+<script>
+(function(){
+  const LINK_SEL = '[data-elective-financing-link]';
+  const GHL_FORM_ID = 'jbeQYeHWMI1dM9tX0mYF';
+  const GHL_BASE = `https://app.npta.ca/widget/form/${GHL_FORM_ID}`;
+
+  const MODAL_ID = 'ghlFinanceModal';
+  const MOUNT_ID = 'ghlFormMount';
+
+  const TARGET_KEY = 'npta_finance_target';
+  const SUBMITTED_KEY = 'npta_finance_submitted_ts';
+
+  const SUBMIT_TTL_DAYS = 0;
+
+  function getModal(){ return document.getElementById(MODAL_ID); }
+  function getMount(){ return document.getElementById(MOUNT_ID); }
+
+  function openModal(){
+    const m = getModal();
+    if(!m) return;
+    m.hidden = false;
+    m.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(opts){
+    const m = getModal();
+    if(!m) return;
+
+    m.hidden = true;
+    m.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+
+    const mount = getMount();
+    if (mount && (!opts || opts.clear !== false)) mount.innerHTML = '';
+  }
+
+  function isSubmitted(){
+    try {
+      const v = localStorage.getItem(SUBMITTED_KEY);
+      if (!v) return false;
+
+      const ts = parseInt(v, 10);
+      if (!Number.isFinite(ts)) return true;
+
+      if (SUBMIT_TTL_DAYS && SUBMIT_TTL_DAYS > 0) {
+        const ttlMs = SUBMIT_TTL_DAYS * 24 * 60 * 60 * 1000;
+        if (Date.now() - ts > ttlMs) return false;
+      }
+
+      return true;
+    } catch(e){
+      return false;
+    }
+  }
+
+  function toQuery(obj){
+    return Object.keys(obj || {})
+      .filter(k => obj[k] != null && obj[k] !== '')
+      .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(obj[k]))
+      .join('&');
+  }
+
+  function buildTarget(href, a){
+    const u = new URL(href, window.location.origin);
+    const q = u.searchParams;
+
+    if (a.dataset.productHandle) q.set('product_handle', a.dataset.productHandle);
+    if (a.dataset.productId)     q.set('product_id', a.dataset.productId);
+
+    const title = a.dataset.productTitle || document.title || '';
+    if (title) q.set('product_title', title);
+
+    u.search = q.toString();
+    return u.toString();
+  }
+
+  function buildFormSrc(a){
+    const attr = (window.__nptaGetAttribution && window.__nptaGetAttribution()) || {};
+
+    const utm = {
+      utm_source: attr.utm_source || '',
+      utm_medium: attr.utm_medium || '',
+      utm_campaign: attr.utm_campaign || '',
+      utm_term: attr.utm_term || '',
+      utm_content: attr.utm_content || ''
+    };
+
+    const prod = {
+      product_title: a.dataset.productTitle || document.title || '',
+      product_handle: a.dataset.productHandle || '',
+      product_id: a.dataset.productId || ''
+    };
+
+    const qs = [toQuery(utm), toQuery(prod)].filter(Boolean).join('&');
+    return qs ? `${GHL_BASE}?${qs}` : GHL_BASE;
+  }
+
+  function injectIframe(src){
+    const mount = getMount();
+    if (!mount) return;
+
+    mount.innerHTML = '';
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.title = 'Elective Financing Form';
+    iframe.loading = 'lazy';
+    iframe.setAttribute('allowtransparency','true');
+    iframe.setAttribute('scrolling','auto');
+    mount.appendChild(iframe);
+  }
+
+  function wire(root){
+    root = root || document;
+    const links = root.querySelectorAll(LINK_SEL);
+    if (!links.length) return;
+
+    links.forEach((a) => {
+      if (a.dataset.ghlWired === '1') return;
+      a.dataset.ghlWired = '1';
+
+      a.addEventListener('click', function(ev){
+        ev.preventDefault();
+        ev.stopPropagation();
+
+        const targetUrl = buildTarget(a.getAttribute('href'), a);
+        sessionStorage.setItem(TARGET_KEY, targetUrl);
+
+        if (isSubmitted()) {
+          window.location.href = targetUrl;
+          return;
+        }
+
+        const src = buildFormSrc(a);
+        injectIframe(src);
+        openModal();
+      }, { capture:true });
+    });
+  }
+
+  document.addEventListener('click', function(e){
+    if (e.target.matches('[data-close-ghl], [data-close-ghl] *')) closeModal({ clear:true });
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeModal({ clear:true });
+  });
+
+  document.addEventListener('DOMContentLoaded', function(){
+    closeModal({ clear:true });
+    wire(document);
+  });
+  window.addEventListener('pageshow', function(){
+    closeModal({ clear:true });
+  });
+
+  document.addEventListener('shopify:section:load', function(e){
+    closeModal({ clear:true });
+    wire(e.target);
+  });
+})();
+</script>
 
 {% schema %}
 {
@@ -2214,6 +2399,48 @@
       ],
       "default": "hide",
       "label": "t:sections.main-product.settings.mobile_thumbnails.label"
+    },
+    {
+  "type": "header",
+      "content": "Gallery autoplay"
+    },
+    {
+      "type": "checkbox",
+      "id": "gallery_autoplay_enable",
+      "default": false,
+      "label": "Auto-advance product images"
+    },
+    {
+      "type": "range",
+      "id": "gallery_autoplay_seconds",
+      "min": 2,
+      "max": 15,
+      "step": 1,
+      "unit": "s",
+      "default": 5,
+      "label": "Autoplay interval"
+    },
+    {
+      "type": "select",
+      "id": "gallery_autoplay_effect",
+      "label": "Transition effect",
+      "default": "slide",
+      "options": [
+        { "value": "slide", "label": "Slide (default)" },
+        { "value": "fade", "label": "Fade" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "gallery_autoplay_pause_on_hover",
+      "default": true,
+      "label": "Pause on hover/focus"
+    },
+    {
+      "type": "checkbox",
+      "id": "gallery_autoplay_enable_mobile",
+      "default": true,
+      "label": "Enable on mobile"
     },
     {
       "type": "checkbox",

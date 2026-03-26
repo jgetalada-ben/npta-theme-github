@@ -1,0 +1,832 @@
+{%- assign sid = section.id -%}
+
+{%- assign ratio = section.settings.aspect_ratio -%}
+{%- if ratio == '21-9' -%}{%- assign ar_desktop = '42.857%' -%}
+{%- elsif ratio == '4-3' -%}{%- assign ar_desktop = '75%' -%}
+{%- elsif ratio == '1-1' -%}{%- assign ar_desktop = '100%' -%}
+{%- else -%}{%- assign ar_desktop = '56.25%' -%}{%- endif -%}
+
+{%- comment %} mobile ratio {% endcomment -%}
+{%- assign mratio = section.settings.aspect_ratio_mobile -%}
+{%- if mratio == '21-9' -%}{%- assign ar_mobile = '42.857%' -%}
+{%- elsif mratio == '4-3' -%}{%- assign ar_mobile = '75%' -%}
+{%- elsif mratio == '1-1' -%}{%- assign ar_mobile = '100%' -%}
+{%- else -%}{%- assign ar_mobile = '56.25%' -%}{%- endif -%}
+
+{%- comment %} overlay darkness 0–1 {% endcomment -%}
+{%- assign ov = section.settings.overlay_darkness | default: 0 | plus: 0 | divided_by: 100.0 -%}
+
+{%- comment %} Audio setting: default OFF (muted autoplay) {% endcomment -%}
+{%- assign enable_audio = section.settings.enable_audio | default: false -%}
+
+{%- assign has_content = false -%}
+{%- if section.settings.title != blank
+      or section.settings.promo_line != blank
+      or section.settings.subtitle != blank
+      or section.settings.desc != blank
+      or section.settings.show_btn1
+      or section.settings.show_btn2 -%}
+  {%- assign has_content = true -%}
+{%- endif -%}
+
+<section
+  id="vid2-{{ sid }}"
+  class="vid2"
+  data-vid2-section
+  data-vid2-audio="{% if enable_audio %}on{% else %}off{% endif %}"
+  data-vid2-mute-after-first-loop="{% if section.settings.mute_after_first_loop %}on{% else %}off{% endif %}"
+>
+  <div class="vid2__outer">
+    <div class="vid2__frame {% if section.settings.height_mode == 'vh' %}vh-mode{% endif %}"
+     style="--ar: {{ ar_desktop }}; --arm: {{ ar_mobile }};
+            --ov: {{ ov }};
+            --reveal: {{ section.settings.reveal_desktop | default: 0 }}px;
+            --revealm: {{ section.settings.reveal_mobile  | default: 0 }}px;
+            --vh-d: {{ section.settings.vh_desktop | default: '75vh' }};
+            --vh-m: {{ section.settings.vh_mobile  | default: '62dvh' }};">
+
+      {%- if section.settings.media_type == 'image' and section.settings.cover_image != blank -%}
+        <img
+          class="vid2__media vid2__img"
+          src="{{ section.settings.cover_image | image_url: width: 3200 }}"
+          alt="{{ section.settings.alt | escape }}"
+          loading="eager">
+
+      {%- elsif section.settings.shopify_video != blank -%}
+        {%- assign v = section.settings.shopify_video -%}
+        <video
+          class="vid2__media"
+          autoplay
+          loop
+          playsinline
+          preload="metadata"
+          {% unless enable_audio %}muted{% endunless %}
+          {% if section.settings.cover_image %}
+            poster="{{ section.settings.cover_image | image_url: width: 2400 }}"
+          {% endif %}
+          aria-label="{{ section.settings.alt | escape }}">
+          {%- for s in v.sources -%}
+            <source src="{{ s.url }}" type="{{ s.mime_type }}">
+          {%- endfor -%}
+        </video>
+
+      {%- elsif section.settings.embed_url != blank -%}
+        {%- assign url = section.settings.embed_url | strip -%}
+        {%- assign iframe_src = '' -%}
+        {%- assign iframe_src_muted = '' -%}
+        {%- assign iframe_src_unmuted = '' -%}
+        {%- assign yt_id = '' -%}
+
+        {%- if url contains 'youtu.be/' -%}
+          {%- assign yt_id = url | split: 'youtu.be/' | last | split: '?' | first -%}
+        {%- elsif url contains 'watch?v=' -%}
+          {%- assign yt_id = url | split: 'watch?v=' | last | split: '&' | first -%}
+        {%- elsif url contains 'youtube.com/embed/' -%}
+          {%- assign yt_id = url | split: 'embed/' | last | split: '?' | first -%}
+        {%- endif -%}
+
+        {%- if yt_id != blank -%}
+          {%- assign yt_base = '?rel=0&controls=0&modestbranding=1&playsinline=1&loop=1&playlist=' | append: yt_id -%}
+          {%- assign iframe_src_muted = 'https://www.youtube-nocookie.com/embed/' | append: yt_id | append: yt_base | append: '&autoplay=1&mute=1' -%}
+          {%- assign iframe_src_unmuted = 'https://www.youtube-nocookie.com/embed/' | append: yt_id | append: yt_base | append: '&autoplay=1&mute=0' -%}
+          {%- if enable_audio -%}
+            {%- assign iframe_src = iframe_src_unmuted -%}
+          {%- else -%}
+            {%- assign iframe_src = iframe_src_muted -%}
+          {%- endif -%}
+
+        {%- elsif url contains 'vimeo.com/' -%}
+          {%- assign vimeo_id = url | split: 'vimeo.com/' | last | split: '?' | first | split: '/' | last -%}
+
+          {%- assign iframe_src_muted = 'https://player.vimeo.com/video/' | append: vimeo_id | append: '?autoplay=1&loop=1&muted=1&background=1' -%}
+          {%- assign iframe_src_unmuted = 'https://player.vimeo.com/video/' | append: vimeo_id | append: '?autoplay=1&loop=1&muted=0&background=0&controls=0&title=0&byline=0&portrait=0' -%}
+
+          {%- if enable_audio -%}
+            {%- assign iframe_src = iframe_src_unmuted -%}
+          {%- else -%}
+            {%- assign iframe_src = iframe_src_muted -%}
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- if iframe_src != blank -%}
+          <iframe
+            class="vid2__media vid2__embed"
+            src="{{ iframe_src }}"
+            data-src-muted="{{ iframe_src_muted }}"
+            data-src-unmuted="{{ iframe_src_unmuted }}"
+            title="{{ section.settings.alt | escape }}"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+            aria-hidden="true"></iframe>
+        {%- else -%}
+          <div class="vid2__fallback">Please provide a valid YouTube or Vimeo URL.</div>
+        {%- endif -%}
+
+      {%- elsif section.settings.cover_image != blank -%}
+        <img
+          class="vid2__media vid2__img"
+          src="{{ section.settings.cover_image | image_url: width: 3200 }}"
+          alt="{{ section.settings.alt | escape }}"
+          loading="eager">
+      {%- else -%}
+        <div class="vid2__fallback">Add a video or image.</div>
+      {%- endif -%}
+
+      {%- if has_content -%}
+        <div class="vid2__overlay" style="--ov: {{ ov }}; background: rgba(0,0,0, {{ ov }});" aria-hidden="true"></div>
+
+        <div class="vid2__content content-{{ section.settings.align }}">
+
+          {%- if section.settings.show_icon_text -%}
+            {%- if section.settings.icon_text != blank or section.settings.icon_image != blank -%}
+              <div
+                class="vid2__icon-text"
+                style="
+                  color: {{ section.settings.icon_text_color }};
+                  font-size: {{ section.settings.icon_text_size | default: 'clamp(14px,1.6vw,18px)' }};
+                "
+              >
+                {%- if section.settings.icon_image != blank -%}
+                  {{
+                    section.settings.icon_image
+                    | image_url: width: 80
+                    | image_tag:
+                      class: 'vid2__icon-text-icon',
+                      loading: 'lazy',
+                      widths: '24,32,48,64,80',
+                      sizes: '28px',
+                      alt: section.settings.icon_text | escape
+                  }}
+                {%- endif -%}
+
+                {%- if section.settings.icon_text != blank -%}
+                  <span class="vid2__icon-text-text">{{ section.settings.icon_text }}</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+
+          {%- assign use_rotator = section.settings.enable_title_rotator | default: false -%}
+          {%- assign rotator_count = section.blocks | where: "type", "rotator_item" | size -%}
+
+          {%- if use_rotator and rotator_count > 0 -%}
+            <h2
+              class="vid2__title vid2__title-rotator"
+              data-vid2-rotator
+              style="
+                color: {{ section.settings.title_color }};
+                font-size: {{ section.settings.title_size | default: 'clamp(28px,5vw,72px)' }};
+                --rot-interval: {{ section.settings.rotator_interval | default: 3 }}s;
+                --rot-stagger: {{ section.settings.rotator_stagger_ms | default: 38 }}ms;
+              "
+              aria-label="Rotating title"
+            >
+              <span class="vid2__rotator-viewport" aria-hidden="true">
+                <span class="vid2__rotator-line" data-rot-line>
+                  {%- comment -%} JS will populate letters {%- endcomment -%}
+                </span>
+              </span>
+
+              <script type="application/json" data-rotator-titles>
+                [
+                  {%- assign first = true -%}
+                  {%- for block in section.blocks -%}
+                    {%- if block.type == 'rotator_item' and block.settings.text != blank -%}
+                      {%- unless first -%},{%- endunless -%}
+                      { "text": {{ block.settings.text | json }} }
+                      {%- assign first = false -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                ]
+              </script>
+            </h2>
+          {%- elsif section.settings.title != blank -%}
+            <h2 class="vid2__title"
+                style="color: {{ section.settings.title_color }}; font-size: {{ section.settings.title_size | default: 'clamp(28px,5vw,72px)' }};">
+              {{ section.settings.title | escape }}
+            </h2>
+          {%- endif -%}
+
+          {%- if section.settings.promo_line != blank -%}
+            <div class="vid2__promo"
+                style="color: {{ section.settings.promo_color }}; font-size: {{ section.settings.promo_size | default: 'clamp(32px,5vw,72px)' }};">
+              {{ section.settings.promo_line | escape }}
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.subtitle != blank -%}
+            <div class="vid2__subtitle"
+                style="color: {{ section.settings.subtitle_color }}; font-size: {{ section.settings.subtitle_size | default: 'clamp(18px,3vw,40px)' }};">
+              {{ section.settings.subtitle | escape }}
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.desc != blank -%}
+            <div class="vid2__desc"
+                 style="color: {{ section.settings.desc_color }}; font-size: {{ section.settings.desc_size | default: 'clamp(14px,2vw,20px)' }};">
+              {{ section.settings.desc }}
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.show_btn1 or section.settings.show_btn2 -%}
+            <div class="vid2__btns" style="margin-top: {{ section.settings.btns_margin_top | default: '16px' }};">
+              {%- if section.settings.show_btn1 and section.settings.btn1_label != blank -%}
+                <a href="{{ section.settings.btn1_link | default: '#' }}"
+                   class="vid2__btn"
+                   style="background: {{ section.settings.btn1_bg }}; color: {{ section.settings.btn1_txt }};">
+                  {{ section.settings.btn1_label }}
+                </a>
+              {%- endif -%}
+              {%- if section.settings.show_btn2 and section.settings.btn2_label != blank -%}
+                <a href="{{ section.settings.btn2_link | default: '#' }}"
+                   class="vid2__btn"
+                   style="background: {{ section.settings.btn2_bg }}; color: {{ section.settings.btn2_txt }};">
+                  {{ section.settings.btn2_label }}
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+#vid2-{{ sid }}.vid2{
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+#vid2-{{ sid }} .vid2__outer{ width:100%; }
+
+#vid2-{{ sid }} .vid2__frame{
+  position: relative; width:100%;
+}
+#vid2-{{ sid }} .vid2__frame::before{
+  content:""; display:block; padding-top: calc(var(--ar,56.25%) - var(--reveal,0px));
+}
+@media (max-width: 750px){
+  #vid2-{{ sid }} .vid2__frame::before{
+    padding-top: calc(var(--arm, var(--ar,56.25%)) - var(--revealm,0px));
+  }
+  #vid2-{{ sid }} .vid2__frame{
+    padding: 30px 0;
+  }
+}
+
+#vid2-{{ sid }} .vid2__frame.vh-mode::before{ content:none; display:none; }
+#vid2-{{ sid }} .vid2__frame.vh-mode{
+  height: var(--vh-d, 75vh);
+}
+@media (max-width: 750px){
+  #vid2-{{ sid }} .vid2__frame.vh-mode{
+    height: var(--vh-m, 62dvh);
+  }
+}
+
+#vid2-{{ sid }} .vid2__media{
+  position:absolute;
+  inset:0; width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  background:#000;
+  z-index:0;
+}
+
+#vid2-{{ sid }} .vid2__overlay{
+  position:absolute; inset:0;
+  z-index:1;
+  background: rgba(0,0,0,var(--ov,0));
+  pointer-events:none;
+  display:block !important;
+}
+
+#vid2-{{ sid }} .vid2__content{
+  z-index:2;
+  position:absolute; inset:0;
+  display:grid; align-content:center; gap: clamp(10px,2.2vw,18px);
+  padding: clamp(16px,3.5vw,64px);
+  max-width: 1200px;
+}
+#vid2-{{ sid }} .content-left{ justify-items:start; text-align:left; margin-left: auto; margin-right: auto; }
+#vid2-{{ sid }} .content-center{ justify-items:center; text-align:center; margin-left:auto; margin-right:auto; }
+#vid2-{{ sid }} .content-right{ justify-items:end; text-align:right; margin-left:auto; margin-right:auto; }
+
+#vid2-{{ sid }} .vid2__title{
+  font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
+  font-weight: 400; text-transform: uppercase; line-height:1.05; margin:0;
+}
+#vid2-{{ sid }} .vid2__promo{
+  font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.05;
+  margin: 0;
+}
+#vid2-{{ sid }} .vid2__subtitle{ font-weight:700; }
+#vid2-{{ sid }} .vid2__desc{ max-width: 75ch; }
+
+#vid2-{{ sid }} .vid2__btns{ display:flex; gap:12px; flex-wrap:wrap; }
+#vid2-{{ sid }} .vid2__btn{
+  font-family: var(--font-adirek800);display:inline-flex; align-items:center; justify-content:center;
+  padding: 14px 24px; border-radius: 10px; text-decoration:none;
+  font-weight:600; line-height:1; white-space:nowrap;
+}
+#vid2-{{ sid }} .vid2__icon-text{
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  line-height: 1.2;
+}
+#vid2-{{ sid }} .vid2__icon-text-icon{
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+}
+#vid2-{{ sid }} .content-left .vid2__icon-text{ justify-self: start; }
+#vid2-{{ sid }} .content-center .vid2__icon-text{ justify-self: center; }
+#vid2-{{ sid }} .content-right .vid2__icon-text{ justify-self: end; }
+#vid2-{{ sid }} .vid2__icon-text-text { font-weight: bold; }
+/* ===== Animated title rotator ===== */
+#vid2-{{ sid }} .vid2__title-rotator{
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+#vid2-{{ sid }} .vid2__rotator-viewport{
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  max-width: 100%;
+}
+
+/* keep wrapping on mobile */
+#vid2-{{ sid }} .vid2__rotator-line{
+  display: inline-block;
+  white-space: normal; /* allow wrap */
+  word-break: break-word;
+}
+
+#vid2-{{ sid }} .vid2__rot-letter{
+  display: inline-block;
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+  will-change: transform, opacity;
+}
+
+/* OUT (letters go down one-by-one) */
+#vid2-{{ sid }} .vid2__rot-letter.is-out{
+  animation: vid2LetterOut 520ms ease forwards;
+  animation-delay: calc(var(--i, 0) * var(--rot-stagger, 38ms));
+}
+
+/* IN (letters go up one-by-one) */
+#vid2-{{ sid }} .vid2__rot-letter.is-in{
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  animation: vid2LetterIn 520ms ease forwards;
+  animation-delay: calc(var(--i, 0) * var(--rot-stagger, 38ms));
+}
+
+@keyframes vid2LetterOut{
+  0%   { opacity: 1; transform: translate3d(0, 0, 0); }
+  100% { opacity: 0; transform: translate3d(0, 22px, 0); }
+}
+
+@keyframes vid2LetterIn{
+  0%   { opacity: 0; transform: translate3d(0, 18px, 0); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  #vid2-{{ sid }} .vid2__rot-letter.is-out,
+  #vid2-{{ sid }} .vid2__rot-letter.is-in{
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+{% endstylesheet %}
+
+<script>
+(function(){
+  function init(sectionEl){
+    if(!sectionEl) return;
+
+    var audioMode = sectionEl.getAttribute('data-vid2-audio');
+    if(audioMode !== 'on') return;
+
+    var muteAfterFirstLoop = sectionEl.getAttribute('data-vid2-mute-after-first-loop') === 'on';
+
+    var frame = sectionEl.querySelector('.vid2__frame');
+    if(!frame) return;
+
+    var video = frame.querySelector('video.vid2__media');
+    var iframe = frame.querySelector('iframe.vid2__embed');
+
+    if(video){
+      var triedGestureBind = false;
+
+      function bindFirstGestureRetry(){
+        if(triedGestureBind) return;
+        triedGestureBind = true;
+
+        var handler = function(){
+          try {
+            video.muted = false;
+            video.volume = 1;
+          } catch(e) {}
+
+          var p = video.play && video.play();
+          if(p && p.catch) p.catch(function(){});
+        };
+
+        document.addEventListener('click', handler, {capture:true, once:true});
+        document.addEventListener('touchstart', handler, {capture:true, once:true});
+        document.addEventListener('keydown', handler, {capture:true, once:true});
+      }
+
+      try {
+        video.muted = false;
+        video.volume = 1;
+      } catch(e) {}
+
+      var p1 = video.play && video.play();
+      if(p1 && p1.catch){
+        p1.catch(function(){
+          try { video.muted = true; } catch(e) {}
+          var p2 = video.play && video.play();
+          if(p2 && p2.catch) p2.catch(function(){});
+
+          bindFirstGestureRetry();
+        });
+      }
+
+      setTimeout(function(){
+        if(video && video.muted){
+          bindFirstGestureRetry();
+        }
+      }, 400);
+
+      // Mute after first loop (Shopify <video> only)
+      if (muteAfterFirstLoop) {
+        var didMute = false;
+        var lastTime = 0;
+
+        function forceMute(){
+          if (didMute) return;
+          didMute = true;
+          try {
+            video.muted = true;
+            video.volume = 0;
+          } catch(e) {}
+        }
+
+        function onTimeUpdate(){
+          if (didMute) return;
+
+          var dur = video.duration || 0;
+          var ct  = video.currentTime || 0;
+
+          // Detect loop boundary: near end -> near start
+          if (dur > 0 && lastTime > (dur - 0.35) && ct < 0.35 && ct < lastTime) {
+            forceMute();
+          }
+
+          lastTime = ct;
+        }
+
+        video.addEventListener('timeupdate', onTimeUpdate, { passive: true });
+
+        // If anything tries to unmute after we've muted, force it back
+        video.addEventListener('volumechange', function(){
+          if (!didMute) return;
+          if (!video.muted || (video.volume && video.volume > 0)) {
+            try { video.muted = true; video.volume = 0; } catch(e) {}
+          }
+        });
+      }
+
+      return;
+    }
+
+    if(iframe){
+      var srcUnmuted = iframe.getAttribute('data-src-unmuted');
+      if(!srcUnmuted) return;
+
+      var swapped = false;
+      function swapToUnmuted(){
+        if(swapped) return;
+        swapped = true;
+        iframe.src = srcUnmuted;
+      }
+
+      document.addEventListener('click', swapToUnmuted, {capture:true, once:true});
+      document.addEventListener('touchstart', swapToUnmuted, {capture:true, once:true});
+      document.addEventListener('keydown', swapToUnmuted, {capture:true, once:true});
+    }
+  }
+
+  init(document.getElementById('vid2-{{ sid }}'));
+
+  document.addEventListener('shopify:section:load', function(evt){
+    if(evt && evt.detail && evt.detail.sectionId === '{{ sid }}'){
+      init(document.getElementById('vid2-{{ sid }}'));
+    }
+  });
+})();
+</script>
+<script>
+(function(){
+  function splitToLetters(text){
+    // keep spaces as non-breaking for stable layout
+    return Array.from(text).map(function(ch){
+      return ch === ' ' ? '\u00A0' : ch;
+    });
+  }
+
+  function renderLetters(lineEl, text, mode){
+    lineEl.innerHTML = '';
+    var chars = splitToLetters(text);
+
+    chars.forEach(function(ch, idx){
+      var span = document.createElement('span');
+      span.className = 'vid2__rot-letter ' + (mode || '');
+      span.style.setProperty('--i', idx);
+      span.textContent = ch;
+      lineEl.appendChild(span);
+    });
+  }
+
+  function animateOut(lineEl){
+    var letters = lineEl.querySelectorAll('.vid2__rot-letter');
+    letters.forEach(function(l){ l.classList.remove('is-in'); l.classList.add('is-out'); });
+  }
+
+  function animateIn(lineEl){
+    var letters = lineEl.querySelectorAll('.vid2__rot-letter');
+    letters.forEach(function(l){ l.classList.remove('is-out'); l.classList.add('is-in'); });
+  }
+
+  function initRotator(sectionEl){
+    if(!sectionEl) return;
+
+    var rot = sectionEl.querySelector('[data-vid2-rotator]');
+    if(!rot) return;
+
+    var dataTag = rot.querySelector('script[data-rotator-titles]');
+    var lineEl = rot.querySelector('[data-rot-line]');
+    if(!dataTag || !lineEl) return;
+
+    var titles = [];
+    try { titles = JSON.parse(dataTag.textContent || '[]'); } catch(e) { titles = []; }
+    titles = (titles || []).map(function(x){ return (x && x.text) ? String(x.text) : ''; }).filter(Boolean);
+
+    if(titles.length === 0) return;
+
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var intervalSec = 3;
+    try{
+      var cssInterval = getComputedStyle(rot).getPropertyValue('--rot-interval').trim();
+      if(cssInterval.endsWith('s')) intervalSec = parseFloat(cssInterval) || 3;
+    }catch(e){}
+
+    // timings
+    var letterDur = 520; // ms (matches CSS)
+    var staggerMs = 38;
+    try{
+      var cssStagger = getComputedStyle(rot).getPropertyValue('--rot-stagger').trim();
+      if(cssStagger.endsWith('ms')) staggerMs = parseFloat(cssStagger) || 38;
+    }catch(e){}
+
+    var maxLetters = Math.max.apply(null, titles.map(function(t){ return Array.from(t).length; }));
+    if(!isFinite(maxLetters) || maxLetters < 1) maxLetters = 1;
+
+    var outTotal = letterDur + (maxLetters * staggerMs);
+    var inTotal  = letterDur + (maxLetters * staggerMs);
+
+    var idx = 0;
+    renderLetters(lineEl, titles[idx], reduced ? '' : 'is-in');
+    if(!reduced) animateIn(lineEl);
+
+    // prevent multiple timers on theme editor reload
+    var timer = null;
+
+    function next(){
+      if(titles.length <= 1) return;
+
+      var nextIdx = (idx + 1) % titles.length;
+
+      if(reduced){
+        idx = nextIdx;
+        renderLetters(lineEl, titles[idx], '');
+        return;
+      }
+
+      // OUT
+      animateOut(lineEl);
+
+      // After OUT done, swap letters and IN
+      window.setTimeout(function(){
+        idx = nextIdx;
+        renderLetters(lineEl, titles[idx], 'is-in');
+        animateIn(lineEl);
+      }, outTotal);
+    }
+
+    function start(){
+      stop();
+      timer = window.setInterval(next, Math.max(1000, intervalSec * 1000));
+    }
+
+    function stop(){
+      if(timer) window.clearInterval(timer);
+      timer = null;
+    }
+
+    // start
+    start();
+
+    // pause when tab hidden
+    document.addEventListener('visibilitychange', function(){
+      if(document.hidden) stop(); else start();
+    });
+
+    // store on element so we can clean up on section reload
+    rot.__vid2Stop = stop;
+  }
+
+  function boot(){
+    var el = document.getElementById('vid2-{{ sid }}');
+    initRotator(el);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+
+  document.addEventListener('shopify:section:load', function(evt){
+    if(evt && evt.detail && evt.detail.sectionId === '{{ sid }}'){
+      // cleanup old if exists
+      var old = document.getElementById('vid2-{{ sid }}');
+      if(old){
+        var rot = old.querySelector('[data-vid2-rotator]');
+        if(rot && rot.__vid2Stop) rot.__vid2Stop();
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', boot);
+      } else {
+        boot();
+      }
+    }
+  });
+
+  document.addEventListener('shopify:section:unload', function(evt){
+    if(evt && evt.detail && evt.detail.sectionId === '{{ sid }}'){
+      var old = document.getElementById('vid2-{{ sid }}');
+      if(old){
+        var rot = old.querySelector('[data-vid2-rotator]');
+        if(rot && rot.__vid2Stop) rot.__vid2Stop();
+      }
+    }
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Video v2",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "select", "id": "media_type", "label": "Media type", "default": "video",
+      "options": [ { "value": "video", "label": "Video" }, { "value": "image", "label": "Image only" } ] },
+
+    { "type": "video", "id": "shopify_video", "label": "Shopify-hosted video" },
+    { "type": "url", "id": "embed_url", "label": "YouTube or Vimeo URL (used if no Shopify video selected)" },
+    { "type": "image_picker", "id": "cover_image", "label": "Cover image / Standalone image" },
+    { "type": "text", "id": "alt", "label": "Media alt text / title", "default": "Promotional video" },
+
+    { "type": "header", "content": "Audio" },
+    { "type": "checkbox", "id": "enable_audio", "label": "Autoplay with Audio", "default": false },
+    { "type": "checkbox", "id": "mute_after_first_loop", "label": "Mute audio after first loop", "default": true },
+
+    { "type": "select", "id": "aspect_ratio", "label": "Aspect ratio (desktop)", "default": "16-9",
+      "options": [
+        { "value": "21-9", "label": "21:9" },
+        { "value": "16-9", "label": "16:9" },
+        { "value": "4-3",  "label": "4:3"  },
+        { "value": "1-1",  "label": "1:1"  }
+      ]
+    },
+    { "type": "select", "id": "aspect_ratio_mobile", "label": "Aspect ratio (mobile)", "default": "16-9",
+      "options": [
+        { "value": "21-9", "label": "21:9" },
+        { "value": "16-9", "label": "16:9" },
+        { "value": "4-3",  "label": "4:3"  },
+        { "value": "1-1",  "label": "1:1"  }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "height_mode",
+      "label": "Height mode",
+      "default": "ratio",
+      "options": [
+        { "value": "ratio", "label": "Aspect ratio (current)" },
+        { "value": "vh",    "label": "Viewport height" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "vh_desktop",
+      "label": "Desktop height (vh/dvh, accepts clamp())",
+      "default": "75vh"
+    },
+    {
+      "type": "text",
+      "id": "vh_mobile",
+      "label": "Mobile height (vh/dvh, accepts clamp())",
+      "default": "62dvh"
+    },
+
+    { "type": "header", "content": "Icon + text" },
+    { "type": "checkbox", "id": "show_icon_text", "label": "Show icon + text", "default": false },
+    { "type": "image_picker", "id": "icon_image", "label": "Icon image" },
+    { "type": "text", "id": "icon_text", "label": "Icon text", "default": "NASM OFFICIAL CANADIAN PARTNER" },
+    { "type": "text", "id": "icon_text_size", "label": "Icon text font-size (clamp ok)", "default": "clamp(12px, 1.4vw, 18px)" },
+    { "type": "color", "id": "icon_text_color", "label": "Icon text color", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Overlay Content" },
+    { "type": "text", "id": "title", "label": "Title" },
+    { "type": "text", "id": "promo_line", "label": "Promo line (e.g. 25% OFF)" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle" },
+    { "type": "richtext", "id": "desc", "label": "Description" },
+
+    { "type": "text", "id": "title_size", "label": "Title font-size (accepts clamp())", "default": "clamp(28px,5vw,72px)" },
+    { "type": "color", "id": "title_color", "label": "Title color", "default": "#FFFFFF" },
+
+    { "type": "text", "id": "promo_size", "label": "Promo line font-size (accepts clamp())", "default": "clamp(32px,5vw,72px)" },
+    { "type": "color", "id": "promo_color", "label": "Promo line color", "default": "#C8FF63" },
+
+    { "type": "text", "id": "subtitle_size", "label": "Subtitle font-size (accepts clamp())", "default": "clamp(18px,3vw,40px)" },
+    { "type": "color", "id": "subtitle_color", "label": "Subtitle color", "default": "#C8FF63" },
+
+    { "type": "text", "id": "desc_size", "label": "Description font-size (accepts clamp())", "default": "clamp(14px,2vw,20px)" },
+    { "type": "color", "id": "desc_color", "label": "Description color", "default": "#FFFFFF" },
+
+    { "type": "select", "id": "align", "label": "Content alignment", "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+
+    { "type": "range", "id": "overlay_darkness", "label": "Overlay darkness (only when content exists)",
+      "min": 0, "max": 100, "step": 5, "unit": "%", "default": 40
+    },
+
+    { "type": "header", "content": "Buttons" },
+    { "type": "checkbox", "id": "show_btn1", "label": "Show Button 1", "default": true },
+    { "type": "text", "id": "btns_margin_top", "label": "Buttons margin-top", "default": "16px" },
+    { "type": "text", "id": "btn1_label", "label": "Button 1 label", "default": "CHOOSE MY COURSE" },
+    { "type": "url", "id": "btn1_link", "label": "Button 1 link" },
+    { "type": "color", "id": "btn1_bg", "label": "Button 1 background", "default": "#C8FF63" },
+    { "type": "color", "id": "btn1_txt", "label": "Button 1 text color", "default": "#0B0B0B" },
+
+    { "type": "checkbox", "id": "show_btn2", "label": "Show Button 2", "default": false },
+    { "type": "text", "id": "btn2_label", "label": "Button 2 label", "default": "Learn more" },
+    { "type": "url", "id": "btn2_link", "label": "Button 2 link" },
+    { "type": "color", "id": "btn2_bg", "label": "Button 2 background", "default": "#FFFFFF" },
+    { "type": "color", "id": "btn2_txt", "label": "Button 2 text color", "default": "#0B0B0B" },
+
+    { "type": "header", "content": "Animated title rotator" },
+    { "type": "checkbox", "id": "enable_title_rotator", "label": "Enable animated title rotator", "default": false },
+    { "type": "range", "id": "rotator_interval", "label": "Change title every (seconds)", "min": 2, "max": 10, "step": 1, "unit": "s", "default": 3 },
+    { "type": "range", "id": "rotator_stagger_ms", "label": "Letter stagger speed (ms)", "min": 18, "max": 90, "step": 2, "unit": "ms", "default": 38 }
+  ],
+  "blocks": [
+    {
+      "type": "rotator_item",
+      "name": "Rotator title",
+      "limit": 5,
+      "settings": [
+        { "type": "text", "id": "text", "label": "Title text", "default": "YOUR NEXT TITLE" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Video v2" }]
+}
+{% endschema %}

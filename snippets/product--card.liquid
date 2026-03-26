@@ -19,7 +19,8 @@
 {% if product.tags %}
   <div class="product-tags">
     {% for tag in product.tags %}
-      {% unless tag == "All Courses" %}
+      {% assign t = tag | downcase %}
+      {% unless t == 'all courses' or t contains 'provider:' %}
         <span class="tag">{{ tag }}</span>
       {% endunless %}
     {% endfor %}
@@ -65,7 +66,7 @@
   transition: 300ms;
 }
 .add-to-cart-button:hover svg {
-  fill: #e9f24f;
+  fill: #C1FF72;
   transition: 300ms;
 }
 
@@ -107,7 +108,7 @@
   text-decoration: none;
 }
 .card:hover .add-to-cart-button svg {
-    fill: #E9F24F !important;
+    fill: #C1FF72 !important;
     transition: 300ms;
 }
 .card img {
@@ -170,7 +171,7 @@
 }
 .card .sale-price {
   border-radius: 10px;
-  background: #133257;
+  background: #0f828c;
   display: flex;
 
   padding: 6px 13px;
@@ -201,7 +202,7 @@
   gap: 10px;
   flex-shrink: 0;
   border-radius: 10px;
-  background: #e9f24f;
+  background: #C1FF72;
 }
 .card .discount {
   color: #141414;

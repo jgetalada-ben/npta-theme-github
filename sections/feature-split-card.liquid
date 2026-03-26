@@ -1,0 +1,221 @@
+{% comment %}
+  Section: Split Feature (Image + Floating Text Card)
+  - Two-column layout with a floating/overlapping content card
+  - Toggle layout: image-left / image-right
+  - Title (Anton), eyebrow, body, CTA
+  - Per-side padding, background color, max width, offsets, radius
+{% endcomment %}
+
+<section
+  id="FeatureSplit-{{ section.id }}"
+  class="nl-section {% if section.settings.layout == 'image-right' %}is-right{% else %}is-left{% endif %}"
+  style="
+    --pt: {{ section.settings.pad_top | default: 48 }}px;
+    --pr: {{ section.settings.pad_right | default: 24 }}px;
+    --pb: {{ section.settings.pad_bottom | default: 48 }}px;
+    --pl: {{ section.settings.pad_left | default: 24 }}px;
+    --gap: {{ section.settings.gap | default: 24 }}px;
+    --bg: {{ section.settings.bg | default: '#E5E5D7' }};
+    --radius: {{ section.settings.radius | default: 20 }}px;
+    --card-bg: {{ section.settings.card_bg | default: '#F6F8EF' }};
+    --card-pad-y: {{ section.settings.card_pad_y | default: 80 }}px;
+    --card-pad-x: {{ section.settings.card_pad_x | default: 64 }}px;
+    --offset: {{ section.settings.card_overlap | default: 36 }}px;
+    --shadow: 0 10px 18px rgba(0,0,0,.06), 0 28px 48px rgba(0,0,0,.10);
+  "
+>
+  {%- assign mw = section.settings.max_width | default: '1200px' | strip -%}
+  {%- unless mw contains 'px' or mw contains '%' or mw contains 'vw' or mw contains 'rem' -%}{% assign mw = mw | append: 'px' %}{%- endunless -%}
+
+  <div class="nl-wrap" style="max-width: {{ mw }};">
+    <div class="nl-grid">
+      {%- comment -%} IMAGE COLUMN {%- endcomment -%}
+      <div class="nl-media">
+        {% if section.settings.image != blank %}
+          {{ section.settings.image | image_url: width: 1800 | image_tag: class: 'nl-img', loading: 'lazy', alt: section.settings.title | default: 'Feature image' }}
+        {% else %}
+          <div class="nl-img nl-img--placeholder" aria-hidden="true"></div>
+        {% endif %}
+      </div>
+
+      {%- comment -%} FLOATING CARD {%- endcomment -%}
+      <div class="nl-card">
+        {% if section.settings.title != blank %}
+          <h2 class="nl-title">{{ section.settings.title }}</h2>
+        {% endif %}
+
+        {% if section.settings.eyebrow != blank %}
+          <p class="nl-eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+
+        {% if section.settings.body != blank %}
+          <div class="nl-body">{{ section.settings.body }}</div>
+        {% endif %}
+
+        {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
+          <a href="{{ section.settings.cta_link }}" class="btn button-yg nl-cta">
+            <span class="btn-label-down">{{ section.settings.cta_label }}</span>
+            <span class="btn-label-down">{{ section.settings.cta_label }}</span>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {% stylesheet %}
+  .nl-section { background: var(--bg); padding: var(--pt) var(--pr) var(--pb) var(--pl); }
+  .nl-wrap { margin: 0 auto; }
+
+  .nl-grid{
+    display: grid;
+    gap: var(--gap);
+    align-items: center;
+    grid-template-columns: minmax(420px, 640px) 1fr;
+    position: relative;
+  }
+  /* Flip order when image is on the right */
+  .nl-section.is-right .nl-media { order: 2; }
+  .nl-section.is-right .nl-card  { order: 1; }
+
+  /* Media */
+  .nl-media {
+    /* position: relative;
+    width: clamp(330px, 60vw, 865px); */
+    max-width: 100%;
+}
+  .nl-img{
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    display: block;
+    border-radius: var(--radius);
+    object-fit: cover;
+    box-shadow: 0 10px 24px rgba(0,0,0,.06);
+  }
+  .nl-img--placeholder{ background:#d9d9d9; aspect-ratio: 16 / 10; border-radius: var(--radius); }
+
+  /* Floating card */
+  .nl-card{
+    position: relative;
+    background: var(--card-bg);
+    border-radius: calc(var(--radius) - 2px);
+    box-shadow: var(--shadow);
+    padding-block: clamp(20px, 6vw, var(--card-pad-y));
+    padding-inline: clamp(20px, 5vw, var(--card-pad-x));
+    --offset-fluid: clamp(20px, 5.8vw, var(--offset));
+    margin-left: calc(var(--offset-fluid) * -1);
+    z-index: 2;
+    width: auto;
+    max-width: clamp(560px, 60vw, 980px);
+    border: 1px solid rgba(0,0,0,.04);
+  }
+  .nl-section.is-right .nl-card{ margin-left: 0; margin-right: calc(var(--offset) * -1); }
+
+  /* Typography */
+  .nl-title{
+    margin: 0 0 12px;
+    font-family: var(--font-anton);
+    font-weight: 400;
+    font-size: clamp(21px, 3vw, 40px);
+    line-height: 1.1;
+    letter-spacing: .01em;
+    color: #0b2a22;
+    text-transform: uppercase;
+  }
+  .nl-eyebrow{
+    margin: 0 0 20px;
+    font-weight: 700;
+    color: #01241E;
+    font-size: clamp(14px, 1.4vw, 24px);
+    font-family: var(--font-poppins700);
+    line-height: normal;
+  }
+  .nl-body{ 
+    color: #01241E;
+    font-size: clamp(12px, 1.2vw, 21px);
+    font-family: var(--font-poppins500);
+    line-height: normal;
+    margin-bottom: 36px;
+  }
+  .nl-body p{ margin: 0; }
+
+  /* CTA button (compact, not full width) */
+  .nl-cta{
+    background: #C8FF63 !important;
+    color: #01241E !important;
+    width: fit-content;
+    border-radius: 12px;
+  }
+  .nl-cta span {
+    font-family: var(--font-adirek800);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  /* Responsive */
+  @media (max-width: 1024px){
+    .nl-grid{ grid-template-columns: 1fr; }
+    .nl-card{
+      margin: 0;
+      max-width: 100%;
+      /* margin-top: calc(var(--gap) * -0.25);
+      width: 100%; */
+    }
+    .nl-body{ 
+      margin-bottom: 24px;
+    }
+  }
+  @media (min-width: 1720px) {
+    #FeatureSplit-{{ section.id }} .nl-wrap {
+      max-width: 1720px !important;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #FeatureSplit-{{ section.id }} .nl-grid {
+      justify-content: center;  /* center grid content within that width */
+    }
+  }
+
+  {% endstylesheet %}
+</section>
+
+{% schema %}
+{
+  "name": "Split Feature Card",
+  "tag": "section",
+  "class": "feature-split-card",
+  "settings": [
+    { "type": "select", "id": "layout", "label": "Layout", "options": [
+      { "value": "image-left",  "label": "Image left, card right" },
+      { "value": "image-right", "label": "Image right, card left" }
+    ], "default": "image-left" },
+
+    { "type": "image_picker", "id": "image", "label": "Image" },
+
+    { "type": "text", "id": "title", "label": "Title", "default": "WHY STUDENTS LOVE NPTA" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow (bold line)", "default": "Canada’s Lowest Prices" },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Get the best NASM deals with zero percent interest payment plans. Found an individual NASM course at a lower price elsewhere? Let us know so we can price match and find an even better deal!</p>" },
+
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "View All" },
+    { "type": "url",  "id": "cta_link",  "label": "Button link" },
+
+    { "type": "header", "content": "Layout & style" },
+    { "type": "text", "id": "max_width", "label": "Max width (e.g. 1200px or 90%)", "default": "1200px" },
+    { "type": "color", "id": "bg", "label": "Section background", "default": "#E3E3D5" },
+    { "type": "color", "id": "card_bg", "label": "Card background", "default": "#FFFFFF" },
+    { "type": "range", "id": "radius", "label": "Corner radius", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "card_overlap", "label": "Card overlap amount", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 28 },
+    { "type": "range", "id": "card_pad_y", "label": "Card padding - top & bottom", "min": 20, "max": 150, "step": 2, "unit": "px", "default": 100 },
+    { "type": "range", "id": "card_pad_x", "label": "Card padding - left & right", "min": 20, "max": 150, "step": 2, "unit": "px", "default": 80 },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "pad_top", "min": 0, "max": 140, "step": 2, "unit": "px", "label": "Padding top", "default": 40 },
+    { "type": "range", "id": "pad_right", "min": 0, "max": 80,  "step": 2, "unit": "px", "label": "Padding right", "default": 24 },
+    { "type": "range", "id": "pad_bottom", "min": 0, "max": 140, "step": 2, "unit": "px", "label": "Padding bottom", "default": 40 },
+    { "type": "range", "id": "pad_left", "min": 0, "max": 80,  "step": 2, "unit": "px", "label": "Padding left", "default": 24 },
+    { "type": "range", "id": "gap", "min": 8, "max": 48, "step": 2, "unit": "px", "label": "Image / Card gap", "default": 24 }
+  ],
+  "blocks": [],
+  "presets": [{ "name": "Split Feature Card" }]
+}
+{% endschema %}

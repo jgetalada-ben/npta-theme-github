@@ -1,0 +1,455 @@
+{%- comment -%}
+  Section: Top Banner V2 (NO OVERLAY)
+  Features:
+  - Desktop image + optional Mobile image fallback to desktop
+  - Desktop height + Mobile height
+  - Mobile object-fit control
+  - Title / Subtitle / Description / Button
+  - Color + font sizes for text
+  - Button colors + sizes
+  - Content alignment: vertical (top/middle/bottom) + horizontal (left/center/right) + text-align
+{%- endcomment -%}
+
+{%- assign sid = section.id -%}
+
+{%- assign desktop_height = section.settings.desktop_height | default: '75vh' | strip -%}
+{%- assign mobile_height = section.settings.mobile_height | default: '60vh' | strip -%}
+
+<section
+  id="top-banner-v2-{{ sid }}"
+  class="top-banner-v2"
+  style="
+    --tb2-height-desktop: {{ desktop_height }};
+    --tb2-height-mobile: {{ mobile_height }};
+
+    --tb2-h-align: {{ section.settings.h_align | default: 'center' }};
+    --tb2-v-align: {{ section.settings.v_align | default: 'center' }};
+    --tb2-text-align: {{ section.settings.text_align | default: 'center' }};
+
+    --tb2-title-color: {{ section.settings.title_color }};
+    --tb2-subtitle-color: {{ section.settings.subtitle_color }};
+    --tb2-desc-color: {{ section.settings.desc_color }};
+
+    --tb2-title-size: {{ section.settings.title_size | default: 'clamp(32px,4vw,56px)' }};
+    --tb2-subtitle-size: {{ section.settings.subtitle_size | default: 'clamp(16px,1.8vw,22px)' }};
+    --tb2-desc-size: {{ section.settings.desc_size | default: 'clamp(14px,1.4vw,18px)' }};
+
+    --tb2-btn-bg: {{ section.settings.button_bg }};
+    --tb2-btn-color: {{ section.settings.button_color }};
+    --tb2-btn-size: {{ section.settings.button_font_size | default: '16px' }};
+  "
+>
+  <div class="tb2-media">
+    {%- comment -%}
+      We render BOTH images (desktop + optional mobile) and just toggle via CSS.
+      If no mobile image is set, we hide the mobile img tag and desktop stays visible on mobile.
+    {%- endcomment -%}
+
+    {%- if section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 3000
+        | image_tag:
+            class: 'tb2-img tb2-img--desktop',
+            loading: 'lazy',
+            sizes: '100vw',
+            widths: '640,960,1280,1600,1920,2400,3000',
+            alt: section.settings.image_alt | escape
+      }}
+    {%- else -%}
+      <div class="tb2-img tb2-img--placeholder" aria-hidden="true"></div>
+    {%- endif -%}
+
+    {%- if section.settings.mobile_image != blank -%}
+      {{
+        section.settings.mobile_image
+        | image_url: width: 2000
+        | image_tag:
+            class: 'tb2-img tb2-img--mobile',
+            loading: 'lazy',
+            sizes: '100vw',
+            widths: '360,540,720,900,1080,1440,2000',
+            alt: section.settings.mobile_image_alt | escape
+      }}
+    {%- endif -%}
+  </div>
+
+  <div class="tb2-content-wrap">
+    <div class="tb2-content">
+      {%- if section.settings.subtitle != blank -%}
+        <div class="tb2-subtitle">
+          {{ section.settings.subtitle }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h2 class="tb2-title">
+          {{ section.settings.title }}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="tb2-desc rte">
+          {{ section.settings.description }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+        <div class="tb2-btn-wrap">
+          <a
+            class="tb2-btn btn button-yg"
+            href="{{ section.settings.button_link }}"
+            {% if section.settings.button_new_tab %}
+              target="_blank" rel="noopener noreferrer"
+            {% endif %}
+          >
+            <span class="btn-label-down">{{ section.settings.button_label }}</span>
+            <span class="btn-label-down">{{ section.settings.button_label }}</span>
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <style>
+    #top-banner-v2-{{ sid }}{
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      min-height: var(--tb2-height-desktop);
+    }
+
+    /* MEDIA */
+    #top-banner-v2-{{ sid }} .tb2-media{
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #top-banner-v2-{{ sid }} .tb2-img{
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-position: center;
+    }
+
+    /* Desktop image defaults */
+    #top-banner-v2-{{ sid }} .tb2-img--desktop{
+      object-fit: cover;
+    }
+
+    /* Mobile image is hidden by default (only shown on mobile when set) */
+    #top-banner-v2-{{ sid }} .tb2-img--mobile{
+      display: none;
+      object-fit: cover; /* will be overridden on mobile by setting */
+    }
+
+    #top-banner-v2-{{ sid }} .tb2-img--placeholder{
+      background: #e5e5e5;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* CONTENT WRAPPER */
+    #top-banner-v2-{{ sid }} .tb2-content-wrap{
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      min-height: var(--tb2-height-desktop);
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      padding: clamp(18px, 3vw, 48px);
+      display: flex;
+      justify-content: var(--tb2-h-align);
+      align-items: var(--tb2-v-align);
+      text-align: var(--tb2-text-align);
+    }
+
+    #top-banner-v2-{{ sid }} .tb2-content{
+      width: min(760px, 100%);
+    }
+
+    #top-banner-v2-{{ sid }} .tb2-subtitle{
+      font-size: var(--tb2-subtitle-size);
+      color: var(--tb2-subtitle-color);
+      font-family: var(--font-body-family);
+      font-weight: 600;
+      letter-spacing: .03em;
+      margin: 0 0 10px;
+    }
+
+    #top-banner-v2-{{ sid }} .tb2-title{
+      font-size: var(--tb2-title-size);
+      color: var(--tb2-title-color);
+      font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
+      font-weight: 500;
+      text-transform: uppercase;
+      line-height: 1.05;
+      letter-spacing: 2px;
+      margin: 0 0 14px;
+      letter-spacing: 2px;
+    }
+
+    #top-banner-v2-{{ sid }} .tb2-desc{
+      font-size: var(--tb2-desc-size);
+      color: var(--tb2-desc-color);
+      font-family: var(--font-body-family);
+      line-height: 1.5;
+      margin: 0 0 18px;
+    }
+
+    #top-banner-v2-{{ sid }} .tb2-desc p{ margin: 0; }
+
+    #top-banner-v2-{{ sid }} .tb2-btn-wrap{
+      display: inline-flex;
+    }
+
+    #top-banner-v2-{{ sid }} .tb2-btn{
+      background: var(--tb2-btn-bg);
+      color: var(--tb2-btn-color);
+      font-size: var(--tb2-btn-size);
+      text-decoration: none;
+    }
+
+    /* MOBILE */
+    @media (max-width: 749px){
+      #top-banner-v2-{{ sid }}{
+        min-height: var(--tb2-height-mobile);
+      }
+
+      #top-banner-v2-{{ sid }} .tb2-content-wrap{
+        min-height: var(--tb2-height-mobile);
+        padding: 18px 16px 22px;
+      }
+
+      /* If a mobile image exists, show it and hide desktop image */
+      {%- if section.settings.mobile_image != blank -%}
+        #top-banner-v2-{{ sid }} .tb2-img--desktop{ display: none; }
+        #top-banner-v2-{{ sid }} .tb2-img--mobile{
+          display: block;
+          object-fit: {{ section.settings.mobile_object_fit | default: 'cover' }};
+        }
+      {%- else -%}
+        /* No mobile image set: keep desktop image visible, but apply mobile object-fit to desktop */
+        #top-banner-v2-{{ sid }} .tb2-img--desktop{
+          object-fit: {{ section.settings.mobile_object_fit | default: 'cover' }};
+        }
+      {%- endif -%}
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Top Banner V2",
+  "tag": "section",
+  "class": "top-banner-v2-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop banner image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Desktop image alt text"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile banner image (optional)"
+    },
+    {
+      "type": "text",
+      "id": "mobile_image_alt",
+      "label": "Mobile image alt text"
+    },
+
+    {
+      "type": "header",
+      "content": "Heights"
+    },
+    {
+      "type": "text",
+      "id": "desktop_height",
+      "label": "Desktop height (CSS value)",
+      "default": "75vh",
+      "info": "Examples: 75vh, 600px, 80vh"
+    },
+    {
+      "type": "text",
+      "id": "mobile_height",
+      "label": "Mobile height (CSS value)",
+      "default": "60vh",
+      "info": "Examples: 60vh, 420px"
+    },
+
+    {
+      "type": "header",
+      "content": "Mobile image fit"
+    },
+    {
+      "type": "select",
+      "id": "mobile_object_fit",
+      "label": "Mobile object-fit",
+      "options": [
+        { "value": "cover", "label": "Cover" },
+        { "value": "contain", "label": "Contain" },
+        { "value": "fill", "label": "Fill" },
+        { "value": "none", "label": "None" },
+        { "value": "scale-down", "label": "Scale down" }
+      ],
+      "default": "cover"
+    },
+
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+
+    {
+      "type": "header",
+      "content": "Alignment"
+    },
+    {
+      "type": "select",
+      "id": "v_align",
+      "label": "Vertical align",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Middle" },
+        { "value": "flex-end", "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "h_align",
+      "label": "Horizontal align",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text align",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+
+    {
+      "type": "header",
+      "content": "Text styles"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "text",
+      "id": "title_size",
+      "label": "Title font-size (accepts clamp())",
+      "default": "clamp(32px,4vw,56px)"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "text",
+      "id": "subtitle_size",
+      "label": "Subtitle font-size (accepts clamp())",
+      "default": "clamp(16px,1.8vw,22px)"
+    },
+    {
+      "type": "color",
+      "id": "desc_color",
+      "label": "Description color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "text",
+      "id": "desc_size",
+      "label": "Description font-size (accepts clamp())",
+      "default": "clamp(14px,1.4vw,18px)"
+    },
+
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_new_tab",
+      "label": "Open button in new tab",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background color",
+      "default": "#C8FF63"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button font color",
+      "default": "#01241E"
+    },
+    {
+      "type": "text",
+      "id": "button_font_size",
+      "label": "Button font-size",
+      "default": "16px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Top Banner V2"
+    }
+  ]
+}
+{% endschema %}

@@ -6,6 +6,15 @@
   --focused-base-outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
   --focused-base-outline-offset: 0.3rem;
   --focused-base-box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
+  --font-anton: "Anton", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-poppins400: "Poppins400", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-poppins500: "Poppins500", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-poppins700: "Poppins700", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-adirek800: "Adirek800", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-proximanova: "ProximaNova", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-proximaregular: "ProximaSanRegular", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-proximamedium: "ProximaSanMedium", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-proximablack: "ProximaSanBlack", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
 .product-card-wrapper .card,
@@ -2607,13 +2616,19 @@ details[open] .modal-overlay::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 50%;
   height: 100%;
   padding: 0 5rem 0 1rem;
   line-height: calc(1 + 0.8 / var(--font-body-scale));
   position: relative;
 }
-
+.phone-number {
+  font-weight: bold;
+    color: #0F828C;
+}
+.header__icon--phone svg path {
+  fill: #0F828C;
+}
 .search-modal__content-bottom {
   bottom: calc((var(--inputs-margin-offset) / 2));
 }
@@ -3703,16 +3718,16 @@ h1{
   position:relative;
 }
 .product__description.rte ul li:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    background-size: 100%;
-    background-fit: contain;
-    width: 24px;
-    height: 24px;
-    background-position: center;
-    margin-top: 0;
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 2.25C10.0716 2.25 8.18657 2.82183 6.58319 3.89317C4.97982 4.96451 3.73013 6.48726 2.99218 8.26884C2.25422 10.0504 2.06114 12.0108 2.43735 13.9021C2.81355 15.7934 3.74215 17.5307 5.10571 18.8943C6.46928 20.2579 8.20656 21.1865 10.0979 21.5627C11.9892 21.9389 13.9496 21.7458 15.7312 21.0078C17.5127 20.2699 19.0355 19.0202 20.1068 17.4168C21.1782 15.8134 21.75 13.9284 21.75 12C21.7473 9.41498 20.7192 6.93661 18.8913 5.10872C17.0634 3.28084 14.585 2.25273 12 2.25ZM16.2806 10.2806L11.0306 15.5306C10.961 15.6004 10.8783 15.6557 10.7872 15.6934C10.6962 15.7312 10.5986 15.7506 10.5 15.7506C10.4014 15.7506 10.3038 15.7312 10.2128 15.6934C10.1218 15.6557 10.039 15.6004 9.96938 15.5306L7.71938 13.2806C7.57865 13.1399 7.49959 12.949 7.49959 12.75C7.49959 12.551 7.57865 12.3601 7.71938 12.2194C7.86011 12.0786 8.05098 11.9996 8.25 11.9996C8.44903 11.9996 8.6399 12.0786 8.78063 12.2194L10.5 13.9397L15.2194 9.21937C15.2891 9.14969 15.3718 9.09442 15.4628 9.0567C15.5539 9.01899 15.6515 8.99958 15.75 8.99958C15.8486 8.99958 15.9461 9.01899 16.0372 9.0567C16.1282 9.09442 16.2109 9.14969 16.2806 9.21937C16.3503 9.28906 16.4056 9.37178 16.4433 9.46283C16.481 9.55387 16.5004 9.65145 16.5004 9.75C16.5004 9.84855 16.481 9.94613 16.4433 10.0372C16.4056 10.1282 16.3503 10.2109 16.2806 10.2806Z' fill='%23141414'/%3E%3C/svg%3E");
+  content: "" !important;
+  position: absolute;
+  left: 0;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 24px;
+  height: 24px;
+  margin-top: 0px !important;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2720%27%20height%3D%2720%27%20viewBox%3D%270%200%2020%2020%27%20fill%3D%27none%27%3E%3Cpath%20fill-rule%3D%27evenodd%27%20clip-rule%3D%27evenodd%27%20d%3D%27M10%2017.5C10.9849%2017.5%2011.9602%2017.306%2012.8701%2016.9291C13.7801%2016.5522%2014.6069%2015.9997%2015.3033%2015.3033C15.9997%2014.6069%2016.5522%2013.7801%2016.9291%2012.8701C17.306%2011.9602%2017.5%2010.9849%2017.5%2010C17.5%209.01509%2017.306%208.03982%2016.9291%207.12987C16.5522%206.21993%2015.9997%205.39314%2015.3033%204.6967C14.6069%204.00026%2013.7801%203.44781%2012.8701%203.0709C11.9602%202.69399%2010.9849%202.5%2010%202.5C8.01088%202.5%206.10322%203.29018%204.6967%204.6967C3.29018%206.10322%202.5%208.01088%202.5%2010C2.5%2011.9891%203.29018%2013.8968%204.6967%2015.3033C6.10322%2016.7098%208.01088%2017.5%2010%2017.5ZM9.80667%2013.0333L13.9733%208.03333L12.6933%206.96667L9.11%2011.2658L7.25583%209.41083L6.0775%2010.5892L8.5775%2013.0892L9.2225%2013.7342L9.80667%2013.0333Z%27%20fill%3D%27%230F828C%27/%3E%3C/svg%3E");
 }
 
 .product__description.rte ul li span{
@@ -3740,7 +3755,7 @@ line-height: 150%;
 }
 
 .price-item--monthly{
-  color: #133257;
+  color: #01241E;
     font-family: var(--font-heading-family);
 font-size: 18px;
 font-style: normal;
@@ -3749,28 +3764,27 @@ line-height: 104%;
 text-transform: uppercase;
 }
 .price-label-month{
-    color: #141414;
+    color: #0F828C;
   font-family: var(--font-body-family);
 font-size: 14px;
 font-style: normal;
-font-weight: 400;
+font-weight: 700;
 line-height: 150%; 
-  opacity: 0.4;
 }
 
 .starting-price-p{
   display:flex;
   align-items:center;
+  gap: 5px;
   margin:0 !important;
 }
 
 .price-item--payment-terms{
-  color: var(--black, #141414);
   font-family: var(--font-body-family);
 font-size: 14px;
 font-style: normal;
-font-weight: 400;
 line-height: 150%;
+text-transform: lowercase;
 }
 
 .price-item--one-time{
@@ -3786,7 +3800,7 @@ line-height: 150%;
 }
 
 .price-item--one-time .comp-price{
-color:  #133257;
+color:  #01241E;
     font-family: var(--font-heading-family);
 font-size: 16px;
 font-style: normal;
@@ -3798,7 +3812,7 @@ text-transform: uppercase;
 }
 
 .price-item--compare{
-  color: #133257;
+  color: #01241E;
     font-family: var(--font-heading-family);
 font-size: 18px;
 font-style: normal;
@@ -3807,7 +3821,17 @@ line-height: 104%;
 text-transform: uppercase;
   margin:0;
 }
-
+.price-item--compare-discount{
+  color: #E88077;
+    font-family: var(--font-heading-family);
+font-size: 18px;
+font-style: normal;
+font-weight: 800;
+line-height: 104%; 
+text-transform: uppercase;
+  margin:0;
+  text-decoration: line-through;
+}
 .starting-price-wrap{
   display:grid;
   
@@ -3836,9 +3860,15 @@ text-transform: uppercase;
  width:33%;
 }
 .price__container .price__one-time{
- width:33%;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
-
+.price__container .price__one-time-con{
+  display: flex;
+    gap: 10px;
+}
   
 
 .price__monthly:before{
@@ -3846,7 +3876,7 @@ text-transform: uppercase;
   position:absolute;
   background: #D0D0D0;
   width: 1px;
-height: 40px;
+height: 100%;
   bottom:0;
   right:15px;
   
@@ -4057,7 +4087,7 @@ height: 1px;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
-  letter-spacing: 1.12px;
+  /* letter-spacing: 1.12px; */
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -4080,12 +4110,12 @@ height: 1px;
 
 
 .button-yg {
-  background-color: #e9f24f;
+  background-color: #C1FF72;
   color: white;
 }
 
 .button-yg:hover {
-  background: #e9f24f;
+  background: #C1FF72;
 }
 
 
@@ -4117,7 +4147,7 @@ height: 1px;
 
 
 .button-b {
-  background-color:#133257;
+  background-color:#0F828C;
   color: #fff;
 }
 .button-b span{
@@ -4125,7 +4155,7 @@ height: 1px;
   color: #fff;
 }
 .button-b:hover {
-  background: #133257;
+  background: #0F828C;
 }
   .button-b:hover .btn-label-down {
   top: 0%;
@@ -4170,7 +4200,7 @@ body p {
 /** Links **/
   .container--footer p a{
 opacity: 0.8;
-color: var(--navy, #133257);
+color: var(--navy, #01241E);
     font-family: var(--font-body-family);
 font-size: 16px;
 font-style: normal;
@@ -4199,8 +4229,8 @@ line-height: 150%;
 /** Links **/
 .section--title-block p > a {
   opacity: 0.8;
-color: #133257;
-font-family: Inter;
+color: #01241E;
+font-family: Montserrat, sans-serif;
 font-size: 16px;
 font-style: normal;
 font-weight: 700;
@@ -4226,7 +4256,7 @@ text-decoration-line: underline;
   height: 0.05em;
   bottom: 0;
   left: 0;
-  background: #133257;
+  background: #01241E;
   transform-origin: bottom left;
   transition: transform 0.25s ease-out;
 }
@@ -4257,7 +4287,7 @@ text-decoration-line: underline;
   height: 0.05em;
   bottom: 0;
   left: 0;
-  background: #E9F24F;
+  background: #C1FF72;
   transform-origin: bottom left;
   transition: transform 0.25s ease-out;
 }
@@ -4316,7 +4346,7 @@ text-decoration-line: underline;
     opacity: .4;
 position:absolute;
   top:-20px;
-  
+      width: max-content;
   
 }
 
@@ -4390,3 +4420,6 @@ margin-top:20px;
  
 }
 
+.search__reset.hidden{
+  display: none;
+}

@@ -1,0 +1,393 @@
+{% comment %}
+  Section: Form Split V1
+  - Left: title + rich description
+  - Right: embedded form (GHL / Typeform / Zapier / any iframe)
+  - Supports: paste full embed code OR paste a URL
+  - Layout controls: background color, background image, padding (clamp()), max width, column ratio, alignment
+{% endcomment %}
+
+{%- assign sid = section.id -%}
+
+{%- assign maxw = section.settings.max_width | default: '1200px' | strip -%}
+{%- unless maxw contains 'px' or maxw contains '%' or maxw contains 'vw' or maxw contains 'rem' -%}
+  {%- assign maxw = maxw | append: 'px' -%}
+{%- endunless -%}
+
+{%- assign leftw = section.settings.left_width | default: 45 -%}
+{%- assign rightw = 100 | minus: leftw -%}
+
+{%- assign has_form = false -%}
+{%- if section.settings.embed_code != blank or section.settings.embed_url != blank -%}
+  {%- assign has_form = true -%}
+{%- endif -%}
+
+{%- assign bg_img_url = '' -%}
+{%- if section.settings.bg_image != blank -%}
+  {%- assign bg_img_url = section.settings.bg_image | image_url: width: 2400 -%}
+{%- endif -%}
+
+<section
+  id="FormSplit-{{ sid }}"
+  class="fspl"
+  style="
+    --fspl-bg: {{ section.settings.bg }};
+    --fspl-pt: {{ section.settings.pad_top }};
+    --fspl-pb: {{ section.settings.pad_bottom }};
+    --fspl-px: {{ section.settings.pad_x }};
+    --fspl-maxw: {{ maxw }};
+    --fspl-gap: {{ section.settings.gap }};
+    --fspl-left: {{ leftw }}%;
+    --fspl-right: {{ rightw }}%;
+    --fspl-title-size: {{ section.settings.title_size }};
+    --fspl-desc-size: {{ section.settings.desc_size }};
+    --fspl-form-h: {{ section.settings.form_height }};
+    --fspl-form-h-m: {{ section.settings.form_height_mobile }};
+    --fspl-card-radius: {{ section.settings.form_radius }}px;
+    --fspl-card-pad: {{ section.settings.form_pad }};
+    --fspl-form-bg: {{ section.settings.form_bg }};
+  "
+>
+  <div class="fspl__inner">
+    <div class="fspl__grid">
+      <!-- LEFT -->
+      <div class="fspl__left" style="text-align: {{ section.settings.text_align }};">
+        {% if section.settings.title != blank %}
+          <h2 class="fspl__title">{{ section.settings.title }}</h2>
+        {% endif %}
+
+        {% if section.settings.desc != blank %}
+          <div class="fspl__desc rte">{{ section.settings.desc }}</div>
+        {% endif %}
+      </div>
+
+      <!-- RIGHT -->
+      <div class="fspl__right">
+        <div class="fspl__form-card">
+          {%- comment -%} Resolve embed sources: page metafield first, then section settings {%- endcomment -%}
+          {%- assign mf_embed = page.metafields.custom.form_embed_code.value
+            | default: page.metafields.custom.form_embed_code
+            | default: '' -%}
+
+          {%- assign embed_code_raw = section.settings.embed_code | default: '' -%}
+          {%- assign embed_url_raw  = section.settings.embed_url  | default: '' -%}
+
+          {%- assign final_embed_code = mf_embed -%}
+          {%- if final_embed_code == blank -%}
+            {%- assign final_embed_code = embed_code_raw -%}
+          {%- endif -%}
+
+          {%- assign has_form = false -%}
+          {%- if final_embed_code != blank or embed_url_raw != blank -%}
+            {%- assign has_form = true -%}
+          {%- endif -%}
+
+          {% if has_form %}
+            {%- if final_embed_code != blank -%}
+              <!-- IMPORTANT: js-fspl-embed enables script re-run for GHL -->
+              <div class="fspl__embed js-fspl-embed">
+                {{ final_embed_code }}
+              </div>
+            {%- else -%}
+              <!-- URL mode -->
+              <div class="fspl__embed js-fspl-embed">
+                <iframe
+                  class="fspl__iframe"
+                  src="{{ embed_url_raw | escape }}"
+                  loading="lazy"
+                  allow="camera; microphone; autoplay; encrypted-media; fullscreen; picture-in-picture"
+                  allowfullscreen
+                  title="Embedded form"
+                ></iframe>
+              </div>
+            {%- endif -%}
+          {% else %}
+            <div class="fspl__placeholder">
+              Add your form embed in the page metafield <b>custom.form_embed_code</b> (or in the section settings).
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #FormSplit-{{ sid }}.fspl{
+      position: relative;
+      background-color: var(--fspl-bg);
+      padding-top: var(--fspl-pt);
+      padding-bottom: var(--fspl-pb);
+      overflow: hidden;
+    }
+
+    {%- if bg_img_url != blank -%}
+      #FormSplit-{{ sid }}.fspl{
+        background-image: url('{{ bg_img_url }}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      /* Fixed overlay (not dynamic) to improve readability */
+      #FormSplit-{{ sid }}.fspl:before{
+        content:"";
+        position:absolute;
+        inset:0;
+        background: rgba(0,0,0,0.35);
+        pointer-events:none;
+        z-index:0;
+      }
+    {%- endif -%}
+
+    #FormSplit-{{ sid }} .fspl__inner{
+      position: relative;
+      z-index: 1;
+      max-width: var(--fspl-maxw);
+      margin: 0 auto;
+      padding-left: var(--fspl-px);
+      padding-right: var(--fspl-px);
+    }
+
+    #FormSplit-{{ sid }} .fspl__grid{
+      display: grid;
+      grid-template-columns: var(--fspl-left) var(--fspl-right);
+      gap: var(--fspl-gap);
+      align-items: start;
+    }
+
+    #FormSplit-{{ sid }} .fspl__title{
+      margin: 0 0 50px;
+      font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
+      font-weight: 400;
+      text-transform: uppercase;
+      line-height: 1.05;
+      font-size: var(--fspl-title-size);
+      color: {{ section.settings.title_color }};
+    }
+
+    #FormSplit-{{ sid }} .fspl__desc{
+      font-family: var(--font-body-family);
+      font-size: var(--fspl-desc-size);
+      line-height: 1.6;
+      color: {{ section.settings.desc_color }};
+    }
+    #FormSplit-{{ sid }} .fspl__desc p{ margin: 0; }
+    #FormSplit-{{ sid }} .fspl__desc p + p{ margin-top: 14px; }
+
+    #FormSplit-{{ sid }} .fspl__form-card{
+      border-radius: var(--fspl-card-radius);
+      padding: var(--fspl-card-pad);
+      overflow: hidden;
+      display: block;
+    }
+
+    #FormSplit-{{ sid }} .fspl__embed,
+    #FormSplit-{{ sid }} .fspl__embed iframe{
+      width: 100%;
+    }
+
+    #FormSplit-{{ sid }} .fspl__iframe{
+      width: 100%;
+      height: var(--fspl-form-h);
+      border: 0;
+      display: block;
+      background: transparent;
+    }
+
+    #FormSplit-{{ sid }} .fspl__placeholder{
+      font-family: var(--font-body-family);
+      opacity: .75;
+      padding: 18px;
+      border: 1px dashed rgba(0,0,0,.25);
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    @media (max-width: 749px){
+      #FormSplit-{{ sid }} .fspl__grid{
+        grid-template-columns: 1fr;
+      }
+
+      #FormSplit-{{ sid }} .fspl__iframe{
+        height: var(--fspl-form-h-m);
+      }
+
+      #FormSplit-{{ sid }} .fspl__title{
+        margin: 0 0 20px;
+      }
+    }
+  </style>
+
+  <!-- Re-run scripts inside embed code (needed for GHL embeds pasted via Liquid/metafield) -->
+  <script>
+    (function () {
+      var root = document.getElementById('FormSplit-{{ sid }}');
+      if (!root) return;
+
+      var embed = root.querySelector('.js-fspl-embed');
+      if (!embed) return;
+
+      var scripts = embed.querySelectorAll('script');
+      scripts.forEach(function(oldScript){
+        var s = document.createElement('script');
+        for (var i=0; i<oldScript.attributes.length; i++){
+          var a = oldScript.attributes[i];
+          s.setAttribute(a.name, a.value);
+        }
+        s.text = oldScript.text || '';
+        oldScript.parentNode.replaceChild(s, oldScript);
+      });
+    })();
+  </script>
+
+  <!-- Scenario C: Store this page's PDF URL for the thank-you page to download -->
+  {% if page.metafields.custom.pdf_download_file != blank %}
+    <script>
+      (function () {
+        try {
+          var pdfUrl = "{{ page.metafields.custom.pdf_download_file | file_url }}";
+          if (pdfUrl) {
+            sessionStorage.setItem('pendingPdfUrl', pdfUrl);
+            sessionStorage.removeItem('pdfDownloaded');
+          }
+        } catch(e) {}
+      })();
+    </script>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Form split v1",
+  "tag": "section",
+  "class": "section form-split-v1",
+  "settings": [
+    { "type": "header", "content": "Layout" },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#F1EFE8" },
+
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image",
+      "info": "Optional. You can connect this to a dynamic source (ex: hero_bg_image)."
+    },
+
+    {
+      "type": "text",
+      "id": "pad_top",
+      "label": "Padding top (CSS, supports clamp())",
+      "default": "clamp(28px, 5vw, 70px)"
+    },
+    {
+      "type": "text",
+      "id": "pad_bottom",
+      "label": "Padding bottom (CSS, supports clamp())",
+      "default": "clamp(28px, 5vw, 70px)"
+    },
+    {
+      "type": "text",
+      "id": "pad_x",
+      "label": "Side padding (CSS, supports clamp())",
+      "default": "clamp(16px, 3vw, 28px)"
+    },
+    { "type": "text", "id": "max_width", "label": "Content max width", "default": "1200px" },
+    {
+      "type": "text",
+      "id": "gap",
+      "label": "Column gap (CSS)",
+      "default": "clamp(18px, 4vw, 56px)"
+    },
+    {
+      "type": "range",
+      "id": "left_width",
+      "label": "Left column width (%)",
+      "min": 35,
+      "max": 60,
+      "step": 1,
+      "default": 45
+    },
+
+    { "type": "header", "content": "Left content" },
+    { "type": "text", "id": "title", "label": "Title", "default": "CPT Exam Pass Guarantee" },
+    { "type": "color", "id": "title_color", "label": "Title color", "default": "#000000" },
+    {
+      "type": "text",
+      "id": "title_size",
+      "label": "Title font size (supports clamp())",
+      "default": "clamp(24px, 3vw, 40px)"
+    },
+    {
+      "type": "richtext",
+      "id": "desc",
+      "label": "Description",
+      "default": "<p>This NASM CPT Exam Pass Guarantee Workbook is designed specifically for aspiring personal trainers who want to pass the NASM CPT exam the first time.</p><p>Inside, you’ll find a clear, structured breakdown of the concepts that actually matter on exam day...</p>"
+    },
+    { "type": "color", "id": "desc_color", "label": "Description color", "default": "#000000" },
+    {
+      "type": "text",
+      "id": "desc_size",
+      "label": "Description font size (supports clamp())",
+      "default": "clamp(14px, 1.4vw, 18px)"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text align",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+
+    { "type": "header", "content": "Form embed" },
+    {
+      "type": "textarea",
+      "id": "embed_code",
+      "label": "Embed code (paste iframe script)",
+      "info": "If set, this takes priority over the URL field."
+    },
+    {
+      "type": "url",
+      "id": "embed_url",
+      "label": "Embed URL (iframe src)",
+      "info": "Use this if you prefer a simple URL instead of full embed code."
+    },
+
+    { "type": "header", "content": "Form card style" },
+    { "type": "color", "id": "form_bg", "label": "Form container background", "default": "#FFFFFF" },
+    {
+      "type": "text",
+      "id": "form_pad",
+      "label": "Form container padding (CSS)",
+      "default": "0px"
+    },
+    {
+      "type": "range",
+      "id": "form_radius",
+      "label": "Form container radius",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "text",
+      "id": "form_height",
+      "label": "Form height desktop (CSS, supports clamp())",
+      "default": "560px"
+    },
+    {
+      "type": "text",
+      "id": "form_height_mobile",
+      "label": "Form height mobile (CSS, supports clamp())",
+      "default": "520px"
+    }
+  ],
+  "presets": [
+    { "name": "Form split v1" }
+  ]
+}
+{% endschema %}
+

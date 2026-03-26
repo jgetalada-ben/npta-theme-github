@@ -10,7 +10,7 @@
   text-align: var(--text-alignment);
 }
 .card:hover .quick-add__submit {
-  background-color: #E9F24F;
+  background-color: #C1FF72;
   transition:300ms;
 }
 
@@ -619,7 +619,7 @@ align-items: center;
 gap: 40px;
 flex-shrink: 0;
   border-radius: 20px;
-background: #133257;
+background: #0f828c;
 }
 
 .custom-bundle-box-wrapper{

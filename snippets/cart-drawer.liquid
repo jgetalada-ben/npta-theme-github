@@ -15,6 +15,24 @@
   .drawer {
     visibility: hidden;
   }
+
+  /* Exam Option Property Styling for Cart Drawer */
+  .cart-item__details .product-option {
+    font-size: 13px;
+  }
+
+  .cart-item__details .product-option dt {
+    font-weight: 600;
+    width: 70%;
+  }
+
+  .cart-item__details .product-option dd {
+    margin-left: 4px;
+    font-size: 12px;
+    color: #fff;
+    max-width: 100%;
+    word-wrap: break-word;
+  }
 </style>
 
 <cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}">

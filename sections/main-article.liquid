@@ -45,6 +45,12 @@
             {%- endif -%}
           </div>
 
+          {%- if article.metafields.custom.blog_summary.value != blank -%}
+            <div class="article-header__summary">
+              {{ article.metafields.custom.blog_summary.value }}
+            </div>
+          {%- endif -%}
+
         </div>
 
         <!-- Right Side: Featured Image -->
@@ -127,12 +133,14 @@
 
         {%- endcase -%}
       {%- endfor -%}
+      {%- comment -%}
       <div class="article-template__back element-margin-top center{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
     <a href="{{ blog.url }}" class="article-template__link link animate-arrow">
       <span class="icon-wrap">{% render 'icon-arrow' %}</span>
       {{ 'blogs.article.back_to_blog' | t: title: blog.title | escape }}
     </a>
   </div>
+  {%- endcomment -%}
     </div>
 
     <aside class="article-sidebar">
@@ -388,6 +396,74 @@
 
 <script type="application/ld+json">
   {{ article | structured_data }}
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const carouselSection = document.querySelector('.related-posts-section');
+  if (!carouselSection) return;
+
+  const carousel = carouselSection.querySelector('.related-posts-carousel');
+  const prevBtn = carouselSection.querySelector('.related-posts-nav--prev');
+  const nextBtn = carouselSection.querySelector('.related-posts-nav--next');
+  const cards = carousel.querySelectorAll('.related-post-card');
+
+  if (cards.length === 0) return;
+
+  let currentIndex = 0;
+  let cardsPerView = window.innerWidth < 768 ? 2 : 4;
+  let maxIndex = Math.max(0, cards.length - cardsPerView);
+
+  // Update carousel display
+  function updateCarousel() {
+    cards.forEach((card, index) => {
+      if (index >= currentIndex && index < currentIndex + cardsPerView) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // Update button states
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex >= maxIndex;
+  }
+
+  // Previous button
+  prevBtn.addEventListener('click', function() {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateCarousel();
+    }
+  });
+
+  // Next button
+  nextBtn.addEventListener('click', function() {
+    if (currentIndex < maxIndex) {
+      currentIndex++;
+      updateCarousel();
+    }
+  });
+
+  // Initial update
+  updateCarousel();
+
+  // Update on window resize
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      const newCardsPerView = window.innerWidth < 768 ? 2 : 4;
+
+      if (newCardsPerView !== cardsPerView) {
+        currentIndex = 0;
+        cardsPerView = newCardsPerView;
+        maxIndex = Math.max(0, cards.length - cardsPerView);
+        updateCarousel();
+      }
+    }, 250);
+  });
+});
 </script>
 
 {% schema %}

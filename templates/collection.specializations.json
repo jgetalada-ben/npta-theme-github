@@ -30,7 +30,7 @@
     "section_header_title_4R3UWU": {
       "type": "section--header-title",
       "custom_css": [
-        "h1 {font-size: clamp(21px, 9.3vw, 42px);}"
+        "h1 {font-size: clamp(21px, 3vw, 42px);}"
       ],
       "settings": {
         "background_color": "#ffffff",

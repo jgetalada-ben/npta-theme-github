@@ -94,6 +94,54 @@
   </div>
 </div>
 
+<script>
+(function () {
+  var sectionRoot = document.getElementById('shopify-section-{{ section.id }}');
+  if (!sectionRoot) return;
+
+  function normPath(p) {
+    return String(p || '').replace(/\/+$/, '');
+  }
+
+  sectionRoot.addEventListener('click', function (e) {
+    var a = e.target.closest('a.button');
+    if (!a) return;
+
+    var href = a.getAttribute('href');
+    if (!href) return;
+
+    try {
+      var targetUrl = new URL(href, window.location.href);
+      var currentUrl = new URL(window.location.href);
+
+      var samePage =
+        targetUrl.origin === currentUrl.origin &&
+        normPath(targetUrl.pathname) === normPath(currentUrl.pathname);
+
+      if (!samePage) return;
+
+      e.preventDefault();
+
+      var hash = targetUrl.hash;
+      if (!hash || hash === '#' || hash === '#top') {
+        history.replaceState(null, '', currentUrl.pathname + currentUrl.search);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
+      history.replaceState(null, '', currentUrl.pathname + currentUrl.search + hash);
+      var id = hash.slice(1);
+      var el = document.getElementById(id) || document.querySelector(hash);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      else window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    } catch (err) {
+      // if URL parsing fails, do nothing and let default behavior happen
+    }
+  }, true);
+})();
+</script>
+
 {% schema %}
 {
   "name": "t:sections.rich-text.name",

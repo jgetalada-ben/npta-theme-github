@@ -1,0 +1,74 @@
+@font-face{
+  font-family: "Anton";
+  src:
+    url(//www.npta.ca/cdn/shop/t/59/assets/Anton-Regular.woff2?v=17078) format("woff2"),
+    url(//www.npta.ca/cdn/shop/t/59/assets/Anton-Regular.woff?v=17078) format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: "Adirek800";
+  src: url(//www.npta.ca/cdn/shop/t/59/assets/Adirek-San-ExtraBold.woff2.woff2?v=17078) format("woff2");;
+  font-weight: 800;
+  font-display: swap;
+}
+@font-face{
+  font-family: "Poppins400";
+  src:
+    url(//www.npta.ca/cdn/shop/t/59/assets/Poppins-Regular.woff2?v=17078) format("woff2"),
+    url(//www.npta.ca/cdn/shop/t/59/assets/Poppins-Regular.woff?v=17078) format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: "Poppins500";
+  src:
+    url(//www.npta.ca/cdn/shop/t/59/assets/Poppins-Medium.woff2?v=17078) format("woff2"),
+    url(//www.npta.ca/cdn/shop/t/59/assets/Poppins-Medium.woff?v=17078) format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: "Poppins700";
+  src:
+    url(//www.npta.ca/cdn/shop/t/59/assets/Poppins-Bold.woff2?v=17078) format("woff2"),
+    url(//www.npta.ca/cdn/shop/t/59/assets/Poppins-Bold.woff?v=17078) format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: "ProximaNova";
+  src:
+    url('fonnts.com-ProximaNova-Semibold.ttf')  format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: "ProximaSanRegular";
+  src:
+    url('fonnts.com-ProximaSansRegular.ttf')  format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: "ProximaSanMedium";
+  src:
+    url('fonnts.com-ProximaSansMedium.ttf')  format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face{
+  font-family: "ProximaSanBlack";
+  src:
+    url('fonnts.com-ProximaSansBlack.ttf')  format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

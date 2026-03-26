@@ -52,6 +52,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
+    {{ 'fonts.css' | asset_url | stylesheet_tag }}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
     <title>
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
@@ -79,18 +85,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {%- endif -%}
 
     {{ content_for_header }}
-
-    <script>
-    (function(w,d,t,r,u){
-      var f,n,i; w[u]=w[u]||[];
-      f=function(){ var o={ti:"97210226", enableAutoSpaTracking:true}; o.q=w[u]; w[u]=new UET(o); w[u].push("pageLoad"); };
-      n=d.createElement(t); n.src=r; n.async=1;
-      n.onload=n.onreadystatechange=function(){ var s=this.readyState; s && s!=="loaded" && s!=="complete" || (f(), n.onload=n.onreadystatechange=null); };
-      i=d.getElementsByTagName(t)[0]; i.parentNode.insertBefore(n,i);
-    })(window,document,"script","//bat.bing.com/bat.js","uetq");
-    </script>
-
-    <script>window.uetq = window.uetq || [];window.uetq.push('event', '', {"revenue_value":Replace_with_Variable_Revenue_Function(),"currency":"CAD"});</script>
 
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
@@ -352,7 +346,209 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
       </style>
     {%- endif -%}
+
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "qz0epxukt3");
+    </script>
+
+{% if template.name == 'product' %}
+  <script
+    src="https://app.npta.ca/js/external-tracking.js"
+    data-tracking-id="tk_ce9114342f21476194c54760a7e08f68"
+    defer
+  ></script>
+{% endif %}
+
   </head>
+
+  <script>
+(function () {
+  const ATTR_KEY = "npta_ft_attribution_v1";
+
+  function safeParse(v){ try { return JSON.parse(v); } catch(e){ return null; } }
+
+  function getCurrentUtmParams() {
+    const url = new URL(window.location.href);
+    const sp = url.searchParams;
+    const utm_source = sp.get("utm_source");
+    if (!utm_source) return null;
+
+    return {
+      utm_source,
+      utm_medium: sp.get("utm_medium") || "(not set)",
+      utm_campaign: sp.get("utm_campaign") || "(not set)",
+      utm_term: sp.get("utm_term") || "",
+      utm_content: sp.get("utm_content") || ""
+    };
+  }
+
+  function detectOrganicFallback() {
+    const ref = document.referrer || "";
+
+    if (/google\./i.test(ref)) return { utm_source:"google", utm_medium:"organic", utm_campaign:"(not set)", utm_term:"", utm_content:"" };
+    if (/bing\./i.test(ref))   return { utm_source:"bing", utm_medium:"organic", utm_campaign:"(not set)", utm_term:"", utm_content:"" };
+    if (/yahoo\./i.test(ref))  return { utm_source:"yahoo", utm_medium:"organic", utm_campaign:"(not set)", utm_term:"", utm_content:"" };
+
+    if (ref) return { utm_source:"referral", utm_medium:"referral", utm_campaign:"(not set)", utm_term:"", utm_content:"" };
+
+    return { utm_source:"direct", utm_medium:"(none)", utm_campaign:"(not set)", utm_term:"", utm_content:"" };
+  }
+
+  function storeFirstTouchOnce() {
+    if (localStorage.getItem(ATTR_KEY)) return;
+
+    const currentUtm = getCurrentUtmParams();
+    const ft = currentUtm || detectOrganicFallback();
+
+    ft.ft_timestamp = new Date().toISOString();
+    ft.ft_landing_page = window.location.href;
+    ft.ft_referrer = document.referrer || "";
+
+    localStorage.setItem(ATTR_KEY, JSON.stringify(ft));
+  }
+
+  // Store first-touch ASAP
+  storeFirstTouchOnce();
+
+  // Expose for other scripts (popup script will read it)
+  window.__nptaGetAttribution = function () {
+    return safeParse(localStorage.getItem(ATTR_KEY));
+  };
+})();
+</script>
+
+<script>
+(function () {
+  const PATCHED_ATTR = "data-npta-utm-patched";
+  const EXTRA_KEYS = ["gclid", "fbclid", "msclkid"];
+
+  function buildTypeformParams(attr) {
+    if (!attr) return null;
+
+    const params = {
+      utm_source: attr.utm_source || "",
+      utm_medium: attr.utm_medium || "",
+      utm_campaign: attr.utm_campaign || "",
+      utm_term: attr.utm_term || "",
+      utm_content: attr.utm_content || "",
+
+      ft_timestamp: attr.ft_timestamp || "",
+      ft_landing_page: attr.ft_landing_page || "",
+      ft_referrer: attr.ft_referrer || ""
+    };
+
+    // Add click IDs from current URL if present
+    try {
+      const sp = new URL(window.location.href).searchParams;
+      EXTRA_KEYS.forEach((k) => {
+        const v = sp.get(k);
+        if (v) params[k] = v;
+      });
+    } catch (e) {}
+
+    return params;
+  }
+
+  function isTypeformUrl(url) {
+    return typeof url === "string" && /typeform\.com/i.test(url);
+  }
+
+  function appendParamsToUrl(urlStr, params) {
+    if (!urlStr || !params) return urlStr;
+
+    let url;
+    try { url = new URL(urlStr); }
+    catch (e) { return urlStr; }
+
+    if (!isTypeformUrl(urlStr)) return urlStr;
+
+    Object.keys(params).forEach((k) => {
+      const v = params[k];
+      if (v !== "" && !url.searchParams.has(k)) {
+        url.searchParams.set(k, v);
+      }
+    });
+
+    return url.toString();
+  }
+
+  function patchNodeOnce(node, getUrl, setUrl) {
+    if (!node || node.getAttribute(PATCHED_ATTR) === "1") return;
+
+    const current = getUrl();
+    if (!current || !isTypeformUrl(current)) return;
+
+    const attr = (typeof window.__nptaGetAttribution === "function")
+      ? window.__nptaGetAttribution()
+      : null;
+
+    const params = buildTypeformParams(attr);
+    if (!params) return;
+
+    const updated = appendParamsToUrl(current, params);
+
+    // Only set if truly different (prevents iframe reload loops)
+    if (updated && updated !== current) {
+      setUrl(updated);
+    }
+
+    // Mark as patched so we never touch again
+    node.setAttribute(PATCHED_ATTR, "1");
+  }
+
+  function patchTypeformEmbeds() {
+    // Typeform embed elements
+    const tfNodes = document.querySelectorAll(
+      "[data-tf-widget],[data-tf-popup],[data-tf-slider],[data-tf-sidetab],[data-tf-button],[data-tf-chat]"
+    );
+
+    tfNodes.forEach((node) => {
+      // Patch data-tf-src
+      if (node.hasAttribute("data-tf-src")) {
+        patchNodeOnce(
+          node,
+          () => node.getAttribute("data-tf-src"),
+          (v) => node.setAttribute("data-tf-src", v)
+        );
+      }
+
+      // Patch href buttons/links
+      if (node.hasAttribute("href")) {
+        patchNodeOnce(
+          node,
+          () => node.getAttribute("href"),
+          (v) => node.setAttribute("href", v)
+        );
+      }
+    });
+
+    // Raw iframe embeds
+    const iframes = document.querySelectorAll("iframe[src*='typeform.com']");
+    iframes.forEach((iframe) => {
+      patchNodeOnce(
+        iframe,
+        () => iframe.getAttribute("src"),
+        (v) => iframe.setAttribute("src", v)
+      );
+    });
+  }
+
+  // Run once now
+  patchTypeformEmbeds();
+
+  // If something injects Typeform later, patch new nodes only
+  const obs = new MutationObserver(function () {
+    patchTypeformEmbeds();
+  });
+  obs.observe(document.documentElement, { childList: true, subtree: true });
+})();
+</script>
+
+
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
 
@@ -438,197 +634,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   
       <script src="https://www.google.com/recaptcha/api.js" async defer></script>
        
-    
-
-<!-- POPUP: Copy everything from here -->
-<div id="iframe-popup-container" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:9999; background:rgba(0,0,0,0.55); align-items:center; justify-content:center;">
-  <div id="iframe-popup-content" style="position:relative; background:#141414; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.5); max-width:550px; width:95vw; max-height:90vh; overflow:auto;">
-    <button id="popup-close-btn"
-      style="position:absolute; top:12px; right:15px; z-index:10; font-size:28px; background:transparent; border:none; color:#fff; cursor:pointer;"
-      aria-label="Close pop-up">
-      &times;
-    </button>
-    <iframe
-      src="https://app.npta.ca/widget/form/6ZKFpg4yveIGDe0EoXV3"
-      style="width:100%; height:577px; border:none; border-radius:0px;"
-      id="popup-6ZKFpg4yveIGDe0EoXV3"
-      title="$25 OFF Pop Up Form - Google Ads"></iframe>
-  </div>
-</div>
-
-    <!-- Typeform UTM Integration in Shopify -->
-
-{% comment %} <div id="my-typeform-div" style="display:none;"></div>
-<script>
-(function() {
-  // Check for UTM params
-  function urlHasUTM() {
-    var params = new URLSearchParams(window.location.search);
-    for (var pair of params.entries()) {
-      if (pair[0].toLowerCase().startsWith('utm_')) {
-        return true;
-      }
-    }
-    return false;
-  }
-  // If no UTM, embed the Typeform
-  if (!urlHasUTM()) {
-    var tDiv = document.getElementById('my-typeform-div');
-    // Set the data-tf-live attribute (replace with your own if needed)
-    tDiv.setAttribute('data-tf-live', '01K0SSPB5N5XXS8JF3F5QZANGK');
-    tDiv.style.display = '';
-    // Optionally load the Typeform embed script if needed:
-    var s = document.createElement('script');
-    s.src = 'https://embed.typeform.com/next/embed.js';
-    s.async = true;
-    document.body.appendChild(s);
-  }
-})();
-</script>
-
-<script src="https://embed.typeform.com/next/embed.js"></script> 
-
-<div id="my-typeform-div" style="display:none;"></div>
-<script>
-(function () {
-  // --- Guard so this runs once ---
-  if (window.__nptaTfFixOnce) return;
-  window.__nptaTfFixOnce = true;
-
-  // Check for UTM params
-  function urlHasUTM() {
-    try {
-      var params = new URLSearchParams(window.location.search);
-      for (var pair of params.entries()) {
-        if ((pair[0] + '').toLowerCase().indexOf('utm_') === 0) return true;
-      }
-    } catch (e) {}
-    return false;
-  }
-
-  // Remove any auto-open attributes from Typeform widgets (sidetab/popup/etc.)
-  function disableAutoOpen(root) {
-    var sel = '[data-tf-sidetab],[data-tf-widget],[data-tf-popup],[data-tf-slider],[data-tf-sidebar]';
-    var nodes = (root.querySelectorAll ? root.querySelectorAll(sel) : []);
-    for (var i = 0; i < nodes.length; i++) {
-      var el = nodes[i], attrs = Array.from(el.attributes || []);
-      for (var j = 0; j < attrs.length; j++) {
-        var a = attrs[j].name;
-        if (/^data-tf-open($|-)/.test(a)) {
-          el.removeAttribute(a);
-        }
-      }
-    }
-  }
-
-  // Watch for Typeform injecting/altering the sidetab and strip auto-open immediately
-  function installObserver(target) {
-    var obs = new MutationObserver(function (muts) {
-      for (var k = 0; k < muts.length; k++) {
-        var m = muts[k];
-
-        if (m.type === 'attributes' && m.target && /^data-tf-open/.test(m.attributeName)) {
-          m.target.removeAttribute(m.attributeName);
-        }
-
-        if (m.addedNodes && m.addedNodes.length) {
-          for (var n = 0; n < m.addedNodes.length; n++) {
-            var node = m.addedNodes[n];
-            if (node.nodeType === 1) disableAutoOpen(node);
-          }
-        }
-      }
-    });
-
-    // We observe the whole document because Typeform might inject outside the container
-    obs.observe(target || document.documentElement, {
-      childList: true,
-      subtree: true,
-      attributes: true,
-      attributeFilter: ['data-tf-open', 'data-tf-open-value', 'data-tf-open-trigger']
-    });
-
-    // First pass in case the sidetab is already present
-    disableAutoOpen(document);
-  }
-
-  // If no UTM, embed the Typeform (to render sidetab) but prevent any auto-open
-  if (!urlHasUTM()) {
-    var tDiv = document.getElementById('my-typeform-div');
-    tDiv.setAttribute('data-tf-live', '01K0SSPB5N5XXS8JF3F5QZANGK');
-    tDiv.style.display = '';
-
-    // Install the observer BEFORE/AS the SDK loads, so we can intercept attributes ASAP
-    installObserver(document);
-
-    // Load SDK
-    var existing = document.querySelector('script[src*="embed.typeform.com/next/embed.js"]');
-    if (!existing) {
-      var s = document.createElement('script');
-      s.src = 'https://embed.typeform.com/next/embed.js';
-      s.async = true;
-      document.body.appendChild(s);
-    }
-  }
-})();
-</script>{% endcomment %}
-
-<script src="https://app.npta.ca/js/form_embed.js"></script>
-<script>
-
-  
-  // Helper to get URL parameter by name
-  function getUrlParam(param) {
-    return new URLSearchParams(window.location.search).get(param);
-  }
-
-  document.addEventListener('DOMContentLoaded', function () {
-    const utmMedium = getUrlParam('utm_medium');
-    const container = document.getElementById('iframe-popup-container');
-    const closeBtn = document.getElementById('popup-close-btn');
-    const popupContent = document.getElementById('iframe-popup-content');
-
-    // Only show popup for ?utm_medium=ad
-    if (utmMedium === 'ad' && container) {
-      setTimeout(function() {
-        container.style.display = 'flex';
-      }, 1000);
-    }
-
-    // Close by button
-    if (closeBtn && container) {
-      closeBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        container.style.display = 'none';
-      });
-    }
-
-    // Close by overlay click
-    if (container && popupContent) {
-      container.addEventListener('click', function (e) {
-        if (!popupContent.contains(e.target)) {
-          container.style.display = 'none';
-        }
-      });
-    }
-  });
-</script>
 
   <!-- NPTA AI Widget Integration -->
   <script src="https://5npta-styling.vercel.app/bundle"></script>
 
-  {% render 'freegifts-snippet-change' %}
+  {{ 'pop-convert-trigger.js' | asset_url | script_tag }}
 
-  {% if country_code == 'PH' %}
-    <script
-      src="https://app.npta.ph/js/external-tracking.js"
-      data-tracking-id="tk_ea4ab7fcc9b14bf8bd4d66bea2e5bf15"
-    ></script>
-  {% else %}
-    <script
-      src="https://app.npta.ca/js/external-tracking.js"
-      data-tracking-id="tk_ce9114342f21476194c54760a7e08f68"
-    ></script>
-  {%endif %}
+  {% if template.name == 'page' and page.handle == 'thank-you' %}
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('download') !== '1') return;
+
+        if (sessionStorage.getItem('pdfDownloaded') === '1') return;
+        sessionStorage.setItem('pdfDownloaded', '1');
+
+        var pdfUrl = sessionStorage.getItem('pendingPdfUrl');
+        if (!pdfUrl) return;
+
+        sessionStorage.removeItem('pendingPdfUrl');
+
+        setTimeout(function () {
+          window.location.href = pdfUrl;
+        }, 300);
+      })();
+    </script>
+  {% endif %}
+
   </body>
 </html>
