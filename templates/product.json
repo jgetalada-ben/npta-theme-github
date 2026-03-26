@@ -1,1 +1,857 @@
-{"sections":{"main":{"type":"main-product","blocks":{"title":{"type":"title","settings":{}},"custom_liquid_8EceCP":{"type":"custom_liquid","settings":{"custom_liquid":"<div class=\"product--badge\">\n  {% if product.compare_at_price > product.price %}\n  {% assign original_price = product.compare_at_price | floor %}\n  {% assign sale_price = product.price | floor %}\n  {% assign discount_amount = original_price | minus: sale_price %}\n  {% assign discount_percentage = discount_amount | divided_by: 100| floor %}\n\n  <div class=\"discount\">\n    <span>SAVE ${{ discount_percentage }}  <\/span>\n  <\/div>\n\n  {% endif %}\n<\/div>\n\n<style>\n  .product--badge {\n    display: flex;\n    align-items: center;\n    gap: 20px;\n  }\n\n  .tag--badge {\n    color: #141414;\n    text-align: center;\n    font-family: var(--font-heading-family);\n    font-size: 14px;\n    font-style: normal;\n    font-weight: 700;\n    line-height: 150%;\n    letter-spacing: 1.12px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\ngap:10px;\n  }\n\n  .discount {\n    display: inline-flex;\n    height: 34px;\n    padding: 0px 10px;\n    justify-content: center;\n    align-items: center;\n    gap: 10px;\n    flex-shrink: 0;\n    border-radius: 10px;\n    background: #C1FF72;\n  }\n\n  .discount {\n    color: #141414;\n    font-family: Montserrat, sans-serif;\n    font-size: 14px;\n    font-style: normal;\n    font-weight: 700;\n    line-height: 150%;\n    \/* 21px *\/\n  }\n\n.product--badge{\ndisplay:flex;\nflex-wrap:Wrap;\n}\n\n@media only screen and (max-width: 600px) {}\n<\/style>"}},"description":{"type":"description","settings":{}},"text_tFH3Dp":{"type":"text","settings":{"text":"<strong>{{ product.metafields.custom.ceu_information.value }}<\/strong>","text_style":"body"}},"price":{"type":"price","settings":{}},"variant_picker":{"type":"variant_picker","settings":{"picker_type":"button","swatch_shape":"circle"}},"buy_buttons_RWgf6F":{"type":"buy_buttons","settings":{"show_dynamic_checkout":false,"show_gift_card_recipient":false}}},"block_order":["title","custom_liquid_8EceCP","description","text_tFH3Dp","price","variant_picker","buy_buttons_RWgf6F"],"custom_css":["@media only screen and (min-width: 768px) {h1 {font-size: 42px !important; }}","@media only screen and (max-width: 767px) {h1 {font-size: 32px !important; }}"],"settings":{"enable_sticky_info":false,"color_scheme":"scheme-2","media_size":"large","constrain_to_viewport":true,"media_fit":"cover","gallery_layout":"thumbnail","media_position":"right","image_zoom":"none","mobile_thumbnails":"hide","gallery_autoplay_enable":true,"gallery_autoplay_seconds":3,"gallery_autoplay_effect":"fade","gallery_autoplay_pause_on_hover":true,"gallery_autoplay_enable_mobile":true,"hide_variants":true,"enable_video_looping":false,"padding_top":36,"padding_bottom":40}},"section_program_info_CQ8Uhg":{"type":"section--program-info","disabled":true,"settings":{"program_info_column_1":"<p>Lorem ipsum<\/p><h3>LOREM IPSUM<\/h3>","program_info_column_2":"<p>Lorem ipsum<\/p><h3>LOREM IPSUM<\/h3>","program_info_column_3":"<p>Lorem ipsum<\/p><h3>LOREM IPSUM<\/h3>"}},"section_program_details_8gPiQi":{"type":"section--program-details","custom_css":["#program_details {background: #f2f2e9;}"],"settings":{"section_id":"program_details","program_details":"<p> Lorem ipsum dolor sit amet<\/p>","enable_fadeup":true}},"pdp_career_paths_slider_mtyLA8":{"type":"pdp-career-paths-slider","blocks":{"card_HmYkNT":{"type":"card","settings":{"enabled":true,"image":"shopify:\/\/shop_images\/Master_Trainer.jpg","title":"Master Trainer","desc":"<p>Your NASM CPT is the essential first step toward becoming a Master Trainer—a respected leader who educates peers, mentors others, and shapes the future of fitness. By building on your CPT with advanced specializations, you evolve from a knowledgeable trainer into a recognized expert. It’s more than a career path—it’s your launchpad from trainer to trailblazer.<\/p>"}},"card_c98EDj":{"type":"card","settings":{"enabled":true,"image":"shopify:\/\/shop_images\/Education_Instructor.jpg","title":"Education Instructor","desc":"<p>With an NASM CPT, professionals in higher education deepen their expertise, enhance coursework development, and bring real-world application into the classroom. Whether you're designing new programs or leading hands-on labs, your certification empowers you to teach with authority. Additional certifications required.<\/p>"}},"card_TC6dtb":{"type":"card","settings":{"enabled":true,"image":"shopify:\/\/shop_images\/Online_Trainer.jpg","title":"Online Trainer","desc":"<p>Expand your reach beyond the gym. With NASM CPT credibility, you can deliver effective, individualized training virtually, helping clients achieve results no matter where they are. Leverage tech, build relationships, and create lasting change from any location.<\/p>"}},"card_Vqeimq":{"type":"card","settings":{"enabled":true,"image":"shopify:\/\/shop_images\/Fitness_Manager.jpg","title":"Fitness Manager","desc":"<p>Move from coaching individuals to leading entire teams. With an NASM CPT, you’ll be equipped to mentor other trainers, manage operations, and elevate client experiences. Drive excellence, promote growth, and lead with confidence.<\/p>"}},"card_DGBHJn":{"type":"card","settings":{"enabled":true,"image":"shopify:\/\/shop_images\/Social_Media_Influencer_969bcdf7-26e6-445a-91bd-eaa2a5ab8d33.jpg","title":"Social Media Influencer","desc":"<p>Build a trusted voice in the fitness space. An NASM CPT adds the credibility behind your content, giving you the authority to inspire, educate, and grow an audience that values expertise. Share your passion, spark action, and lead with authenticity.<\/p>"}},"card_4F6yPX":{"type":"card","settings":{"enabled":true,"image":"shopify:\/\/shop_images\/Gym_Personal_Trainer.jpg","title":"Gym Personal Trainer","desc":"<p>Work in a boutique studio or large gym, creating customized workouts and guiding clients toward their goals. With an NASM CPT, you’ll have the expertise and credibility to deliver real results and stand out on the gym floor. Build trust, drive transformation, and become the trainer clients seek out.<\/p>"}},"card_6YRKQm":{"type":"card","settings":{"enabled":true,"image":"shopify:\/\/shop_images\/Independent_Personal_Trainer.jpg","title":"Independent Personal Trainer","desc":"<p>Build your fitness business and be your own boss. An NASM CPT gives you the knowledge and confidence to create tailored programs, attract loyal clients, and grow a career on your terms. Flex your creativity, scale your impact, and coach with purpose. Your brand. Your business. Your rules.<\/p>"}},"card_hX3jB7":{"type":"card","settings":{"enabled":true,"image":"shopify:\/\/shop_images\/Corporate_Wellness_Trainer.jpg","title":"Corporate Wellness Trainer","desc":"<p>Design and lead programs that keep employees healthier, happier, and more productive. As an NASM CPT, you’ll have the skill set to make fitness part of workplace culture—boosting morale, reducing stress, and improving performance. An additional Wellness Coach certification may be needed. Strengthen workplace teams through wellness.<\/p>"}},"card_mNrwDJ":{"type":"card","settings":{"enabled":true,"image":"shopify:\/\/shop_images\/Gym_Owner.jpg","title":"Gym Owner","desc":"<p>Turn your vision into reality. With an NASM CPT as your foundation, you’ll have the experience and know-how to create a space where clients come to transform—and a business built to thrive. Lead with purpose and shape your community.<\/p>"}}},"block_order":["card_HmYkNT","card_c98EDj","card_TC6dtb","card_Vqeimq","card_DGBHJn","card_4F6yPX","card_6YRKQm","card_hX3jB7","card_mNrwDJ"],"name":"PDP Career paths slider","settings":{"metaobject_key":"career_paths_slider_content","heading":"Discover Your Career Path With This Certification","subheading":"<p>Your potential career pathways start here.<\/p>","items_desktop":"3.5","items_tablet":"2","items_mobile":"1","section_bg":"#ffffff","section_title_color":"#000000","section_desc_color":"#000000","overlay_bg":"#01241e","overlay_bg_hover":"#01241e","card_title_color":"#ffffff","card_desc_color":"#ffffff","section_title_size":"clamp(28px, 3.6vw, 54px)","section_desc_size":"clamp(14px, 2.4vw, 24px)","card_title_size":"clamp(16px, 1.4vw, 20px)","card_desc_size":"clamp(14px, 1.2vw, 16px)","max_width":"1200px","card_gap":"18px","card_radius":12,"overlay_collapsed_height":"72px","overlay_padding":"18px 18px","autoplay":false,"autoplay_speed":5,"show_arrows":false,"nav_bg":"#ffffff","nav_color":"#0e2a4c","show_pagination":true,"pagi_inactive":"#0e2a4c59","pagi_active":"#4fb7c3"}},"cta_program_advisor_i64PYf":{"type":"cta-program-advisor","name":"CTA - Program Advisor","settings":{"max_width":"1200px","pad_y":40,"pad_x":24,"gap":28,"bg_color":"#177f8a","text_color":"#ffffff","left_heading":"<p>CAN’T FIND WHAT<br\/>YOU’RE LOOKING FOR?<\/p>","left_font_size":"clamp(28px, 4vw, 54px)","left_color":"#ffffff","right_title":"Talk to an NPTA Program Advisor","right_title_font_size":"clamp(18px, 1.8vw, 24px)","right_title_color":"#ffffff","right_subtitle":"Our team are ready to help you decide which is best fit you!","right_sub_font_size":"clamp(14px, 1.3vw, 18px)","right_sub_color":"#ffffff","btn_label":"+1-778-949-6782","btn_tel":"+17789496782","btn_link":"","btn_bg":"#ffffff","btn_text_color":"#000000","btn_font_size":"clamp(16px, 1.4vw, 22px)","btn_radius":10,"btn_pad_y":12,"btn_pad_x":18,"btn_show_icon":true,"btn_icon_type":"svg_phone","iconify_icon":"mdi:phone","btn_icon_size":"clamp(16px, 1.6vw, 22px)","btn_icon_gap":10,"btn_icon_color":"#0e2a4c"}},"section_steps_j7BRy6":{"type":"section--steps","blocks":{"step_mLLFHk":{"type":"step","settings":{"step_title":"Get Certified","step_description":"Choose from our diverse range of science-based certification programs. All courses are 100% online and self-paced to provide a flexible learning experience."}},"step_KYAxiC":{"type":"step","settings":{"step_title":"Gain Experience","step_description":"Build your resume + confidence as a trainer through NPTA's Apprenticeship program. Gain hands-on experience and learn directly from Canada's top leading trainers."}},"step_TrCPn7":{"type":"step","settings":{"step_title":"Make Money!","step_description":"Now that you’re experienced and job-ready, start maximizing your earning potential. Join NPTA’s affiliate program and inspire others to sign up for our top-tier certification programs. Earn up to $600 for every successful referral."}}},"block_order":["step_mLLFHk","step_KYAxiC","step_TrCPn7"],"disabled":true,"settings":{"section_id":"how_it_works","section_title":"HOW TO BECOME CERTIFIED","section_description":"<p>3 Steps to Go From Your Desk to Your Dream Job Coaching Clients<\/p>","title_alignment":"center","container_width":980,"alignment":"center","button_text":"CHOOSE YOUR PROGRAM","program_button_link":"\/","quiz_text":"","quiz_link":"\/"}},"section_logo_carousel_Typ4JF":{"type":"section--logo-carousel","blocks":{"logo_WRqazK":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/backfitpro-logo.webp"}},"logo_daxrAW":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/nasm-logo.png"}},"logo_tXtcJX":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/npta-ph-logo_61da15a0-7548-4732-becb-f2132c7cc3c8.png"}},"logo_d8MRnj":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/ncsf-logo.png"}},"logo_rmVXhc":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/kbstronger-logo.png"}},"logo_pXC4Dq":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/afaa-logo.png"}},"logo_L7hV94":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/fitin_logo.png"}}},"block_order":["logo_WRqazK","logo_daxrAW","logo_tXtcJX","logo_d8MRnj","logo_rmVXhc","logo_pXC4Dq","logo_L7hV94"],"name":"Logo Carousel","settings":{"top_padding":0,"bottom_padding":0,"container_width":2000,"scroll_direction":"rtl"}},"section_collapsible_q4ikjm":{"type":"section--collapsible","blocks":{"collapsible_row_PR89HA":{"type":"collapsible_row","settings":{"heading":"{{ product.metafields.custom.product_question_1.value }}","row_content":"{{ product.metafields.custom[\"1_product_answer\"] | metafield_tag }}"}},"collapsible_row_p8fwgB":{"type":"collapsible_row","settings":{"heading":"{{ product.metafields.custom.product_question_2.value }}","row_content":"{{ product.metafields.custom[\"2_product_answer\"] | metafield_tag }}"}},"collapsible_row_xUwdDJ":{"type":"collapsible_row","settings":{"heading":"{{ product.metafields.custom.product_question_3.value }}","row_content":"{{ product.metafields.custom[\"3_product_answer\"] | metafield_tag }}"}},"collapsible_row_cyzCxi":{"type":"collapsible_row","settings":{"heading":"{{ product.metafields.custom.product_question_4.value }}","row_content":"{{ product.metafields.custom[\"4_product_answer\"] | metafield_tag }}"}},"collapsible_row_fpwkVM":{"type":"collapsible_row","settings":{"heading":"{{ product.metafields.custom.product_question_5.value }}","row_content":"{{ product.metafields.custom[\"5_product_answer\"] | metafield_tag }}"}},"collapsible_row_7zDrMF":{"type":"collapsible_row","settings":{"heading":"{{ product.metafields.custom.product_question_6.value }}","row_content":"{{ product.metafields.custom[\"6_product_answer\"] | metafield_tag }}"}},"collapsible_row_Bznc38":{"type":"collapsible_row","settings":{"heading":"{{ product.metafields.custom.product_question_7.value }}","row_content":"{{ product.metafields.custom[\"7_product_answer\"] | metafield_tag }}"}},"collapsible_row_dVFApV":{"type":"collapsible_row","settings":{"heading":"{{ product.metafields.custom.product_question_8.value }}","row_content":"{{ product.metafields.custom[\"8_product_answer\"] | metafield_tag }}"}}},"block_order":["collapsible_row_PR89HA","collapsible_row_p8fwgB","collapsible_row_xUwdDJ","collapsible_row_cyzCxi","collapsible_row_fpwkVM","collapsible_row_7zDrMF","collapsible_row_Bznc38","collapsible_row_dVFApV"],"custom_css":[],"settings":{"section_id":"popular_questions","background_color":"#ffffff","section_class":"","title":"{{ product.metafields.custom.product_title_faqs.value }} FAQs","title_alignment":"center","accordion_link_title":"","accordion_link":"","top_padding":90,"bottom_padding":92,"container_width":980,"footer_text":"","button_text":"","button_link":""}},"section_certified_trainers_qQMF8K":{"type":"section--certified-trainers","blocks":{"trainer_TaaHWw":{"type":"trainer","settings":{"image":"shopify:\/\/shop_images\/DSC04326-Edit_1.jpg","show_content":false,"name":"Alfredson T.","certification":"CPT","quote":"\"If you’re someone who currently works a full-time job and is looking to make that jump to become a trainer, the NASM online self-study program is the right choice for you. Even with a full-time job, I was able to complete the course in 6 weeks and pass my exam first try!\"","rating":"5"}},"trainer_V674Yg":{"type":"trainer","settings":{"image":"shopify:\/\/shop_images\/IMG_3357-_2.jpg","show_content":true,"name":"Mark Lopez","certification":"","quote":"\"I chose to get NASM certified because of its in-depth, evidence-based approach, which I knew would greatly benefit my clients.\"","rating":"5"}},"trainer_FRw4CX":{"type":"trainer","settings":{"image":"shopify:\/\/shop_images\/IMG_3363.jpg","show_content":true,"name":"Martin Chan","certification":"","quote":"\"I selected NASM certification for its comprehensive and research-driven curriculum, ensuring my clients receive the highest level of expertise.\"","rating":"5"}},"trainer_wczYnX":{"type":"trainer","settings":{"image":"shopify:\/\/shop_images\/Cert-1.jpg","show_content":true,"name":"Debora","certification":"","quote":"\"For the past six months, I have been studying hard to become a Certified Personal Trainer with NASM, known for its rigorous exam and strong reputation. Before this, I earned a German fitness instructor license (B-Lizenz). I worked in a gym while studying and really liked the NASM content, especially the OPT model.\"","rating":"5"}},"trainer_QMdBMh":{"type":"trainer","settings":{"image":"shopify:\/\/shop_images\/Cert-4.jpg","show_content":true,"name":"Kevin","certification":"","quote":"\"Becoming NASM Certified is a significant milestone for me. It represents the knowledge and skills I’ve acquired, and my dedication to helping others achieve their fitness goals.\"","rating":"5"}},"trainer_CAa46w":{"type":"trainer","settings":{"image":"shopify:\/\/shop_images\/Cert-3.jpg","show_content":true,"name":"Vierra G.","certification":"","quote":"\"Balancing studying, work, and motherhood was incredibly challenging, but I’m proud to have completed it. This certification enhances my skills for better client service. The Corrective Exercise Specialist course provided advanced techniques for movement impairments, and I’m eager to apply this knowledge to help my clients reach their goals.\"","rating":"5"}},"trainer_QfkX8e":{"type":"trainer","settings":{"image":"shopify:\/\/shop_images\/Cert-5.jpg","show_content":true,"name":"Joyce","certification":"","quote":"“I wanted to take a moment to express my heartfelt gratitude for the exceptional education and support I have received at NASM. The knowledge and skills I’ve gained here have been invaluable, and I am truly thankful for the dedication and passion of the faculty and staff.”","rating":"5"}},"trainer_Rh6jWC":{"type":"trainer","settings":{"image":"shopify:\/\/shop_images\/Cert-6.jpg","show_content":true,"name":"Mahmoud","certification":"","quote":"\"I chose the NASM program for its excellent reputation and scientific approach, ensuring I gain the skills to provide top-notch service to my clients. With my NASM certification, I now create personalized training programs to help clients achieve their fitness goals safely and effectively.”","rating":"5"}},"trainer_yBQTVi":{"type":"trainer","settings":{"image":"shopify:\/\/shop_images\/Cert-7.jpg","show_content":true,"name":"Hossam","certification":"","quote":"\"I study biochemistry, but my passion is exercise science. Finding NASM was the best choice ever. Completing the course while studying was tough, but it deepened my love for exercise science and equipped me with valuable tools to become a professional personal trainer. Thank you, NASM.\"","rating":"5"}},"trainer_weCFwH":{"type":"trainer","settings":{"image":"shopify:\/\/shop_images\/Cert-8.jpg","show_content":true,"name":"Abigail","certification":"","quote":"\"I'm officially a NASM-certified personal trainer and deeply grateful for the program's support in passing the CPT exam! I'm excited to use what I've learned to help clients achieve their fitness goals and transform lives. Certification is just the beginning, and I'm ready for what's next!\"","rating":"5"}},"trainer_HBDezq":{"type":"trainer","settings":{"image":"shopify:\/\/shop_images\/Cert-9.jpg","show_content":true,"name":"Natalya","certification":"","quote":"\"I am now officially a NASM Certified Personal Trainer. I learned so much from this program. As a Certified Personal Trainer, I can now help people achieve their fitness goals and be the best version of themselves! Thank you to everyone who believed in me and helped me in my journey.\"","rating":"5"}},"trainer_VjNQEa":{"type":"trainer","settings":{"image":"shopify:\/\/shop_images\/Cert-10.jpg","show_content":true,"name":"Rodrigo","certification":"","quote":"\"NASM made this course extremely enjoyable and very informative. I was able to acquire knowledge and skills that will allow me to be a successful personal trainer. I’ve learned so much information that I would love to implement to empower others and help them achieve their goals. I am truly passionate about assisting others in becoming the best versions of themselves and living healthier and happier lives.\"","rating":"5"}},"trainer_Fz68RB":{"type":"trainer","settings":{"image":"shopify:\/\/shop_images\/Cert-11.jpg","show_content":true,"name":"Marina","certification":"","quote":"“I’ve been a Personal Trainer for 8 years and chose NASM for their reputation and flexible schedule. The certification took 4 months at my own pace and was applicable to both my profession and personal routines. I’m excited to use my new credentials to help people achieve their fitness goals and improve their lifestyles. Thank you, NASM!”","rating":"5"}},"trainer_UF4Ljr":{"type":"trainer","settings":{"image":"shopify:\/\/shop_images\/Cert-12.jpg","show_content":true,"name":"Frank","certification":"","quote":"\"Training isn't complete without nutrition. For those offering nutritional guidance, the NASM CNC is essential. In my nine years in fitness, it’s been one of the most comprehensive and insightful certifications. The sections on behavior change and coaching skills were transformative. I’m now equipped to assess client needs and provide tailored nutritional coaching for their fitness and lifestyle goals.\"","rating":"5"}},"trainer_pCeEb7":{"type":"trainer","settings":{"image":"shopify:\/\/shop_images\/Cert-13.jpg","show_content":true,"name":"Savanna","certification":"","quote":"\"Enrolling in NASM was one of the best decisions for my career as a Personal Trainer and Sports Nutritionist. The education provided was excellent and equipped me with essential knowledge for the fitness industry. I appreciated the focus on coaching, nutrition, and exercise techniques. Thanks to NASM, I feel empowered to pursue my passion and look forward to further education in fitness, health, and wellness. I highly recommend NASM for expanding your knowledge in the fitness industry.\"","rating":"5"}},"trainer_aV6DXG":{"type":"trainer","settings":{"image":"shopify:\/\/shop_images\/Cert-14.jpg","show_content":true,"name":"Alex Jung Lee","certification":"","quote":"\"Throughout the NASM CPT certification course, I've gained a comprehensive understanding of the intrinsic value associated with health and wellness. I take great pride in successfully achieving the designation of NASM CPT. I am enthusiastic about leveraging my acquired knowledge to support and enhance the well-being of my family, friends, and community as a NASM Certified Personal Trainer.\"","rating":"5"}},"trainer_6kKNPE":{"type":"trainer","settings":{"image":"shopify:\/\/shop_images\/Cert-15.jpg","show_content":true,"name":"Felicitas Avendaño","certification":"","quote":"\"In 2018, I became a NASM Certified Personal Trainer (CPT) and Certified Nutrition Coach (CNC), turning a hobby into a full-time job with a busy schedule across two gyms, online clients, and home visits. Being a nutrition coach has enhanced my ability to help clients and added revenue streams to my business. I’m also proud to have been a gym owner for almost a year, enjoying the responsibility and freedom of leading my own team.\"","rating":"5"}},"trainer_j4cagj":{"type":"trainer","settings":{"image":"shopify:\/\/shop_images\/Cert-16.jpg","show_content":true,"name":"Helen","certification":"","quote":"\"𝐃𝐫𝐞𝐚𝐦𝐬 💭 𝐝𝐨 𝐜𝐨𝐦𝐞 𝐭𝐫𝐮𝐞...𝐚𝐧𝐝 𝐈 𝐃𝐈𝐃 𝐈𝐓!⁣ Studying at 𝟓𝟕 is so very different than at 𝟏𝟗. Yet very possible.⁣\"⁠","rating":"5"}},"trainer_yfwMck":{"type":"trainer","settings":{"image":"shopify:\/\/shop_images\/Cert-17.jpg","show_content":true,"name":"Darryl","certification":"","quote":"\"Time to pass some of this fitness energy down to our youth! Helping to make sure that they play for at least 60 minutes a day.\"","rating":"5"}},"trainer_CkXpwp":{"type":"trainer","settings":{"image":"shopify:\/\/shop_images\/Cert-18.jpg","show_content":true,"name":"Kenneth","certification":"","quote":"\"You can teach an old dog new tricks 😂 something good came out of the pandemic for me!\"","rating":"5"}}},"block_order":["trainer_TaaHWw","trainer_V674Yg","trainer_FRw4CX","trainer_wczYnX","trainer_QMdBMh","trainer_CAa46w","trainer_QfkX8e","trainer_Rh6jWC","trainer_yBQTVi","trainer_weCFwH","trainer_HBDezq","trainer_VjNQEa","trainer_Fz68RB","trainer_UF4Ljr","trainer_pCeEb7","trainer_aV6DXG","trainer_6kKNPE","trainer_j4cagj","trainer_yfwMck","trainer_CkXpwp"],"settings":{"section_id":"testimonials","section_title":"Hear from our certified trainers","section_title2":"","section_description":"","title_alignment":"center","desc_alignment":"left","container_width":980,"alignment":"center","button_1_link":"","button_1_text":"Register Here"}},"section_multicolumn_QREXdr":{"type":"section--multicolumn","blocks":{"column_iM8QWQ":{"type":"column","settings":{"title":"Canada's Lowest Prices","content":"Get the best NASM deals with zero percent interest payment plans. Found an individual NASM course at a lower price elsewhere? Let us know so we can price match and find an even better deal!"}},"column_6PFz4B":{"type":"column","settings":{"title":"Dedicated Support Assistant","content":"You will be assigned a go-to individual to answer any questions you may have regarding your courses."}},"column_y6hHBe":{"type":"column","settings":{"title":"Apprenticeship Program","content":"Receive 40 hours of hands-on client training, a recommendation letter from Jesse Benson, a mentorship session, interview prep and a completion certificate."}}},"block_order":["column_iM8QWQ","column_6PFz4B","column_y6hHBe"],"disabled":true,"custom_css":[".column-list {grid-template-columns: 1fr 1fr 1fr; max-width: 1000px; margin: 50px auto 0;}"],"settings":{"section_id":"why_choose_npta","section_title":"Why choose NPTA?","section_description":"<p>Elevate your career with our wide range of NASM certifications, specialization courses, and bundled packages, Unlock Your Fitness Potential with NPTA!<\/p>","title_alignment":"center","container_width":700,"alignment":"center","view_button_text":"Buy [program name]","view_all_button_link":"\/","program_footer_description":""}},"section_related_products_aPKPXw":{"type":"section--related-products","disabled":true,"settings":{"section_id":"related_programs","section_title":"More programs you may be interested in","section_description":"","title_alignment":"left","container_width":700,"alignment":"flex-start","view_button_text":"Button"}},"related-products":{"type":"related-products","disabled":true,"settings":{"heading":"You may also like","heading_size":"h2","products_to_show":3,"columns_desktop":3,"color_scheme":"scheme-1","image_ratio":"square","image_shape":"default","show_secondary_image":false,"show_vendor":false,"show_rating":false,"columns_mobile":"2","padding_top":36,"padding_bottom":28}},"section_steps_form_P9mAVi":{"type":"section--steps-form","settings":{"section_id":"section-id","section_title":"Want to personalize your certification path?","section_description":"<p>Contact us to <strong>create a custom bundle<\/strong> tailored to your goals in nutrition, personal training, or specialization.<\/p>","webhook_url":"https:\/\/hooks.zapier.com\/hooks\/catch\/18464236\/2tshnoe\/"}},"section_banner_two_VVqGd3":{"type":"section--banner-two","disabled":true,"custom_css":[".section--banner-two {background-position: center 30%; background-repeat: no-repeat; background-size: cover;}"],"settings":{"background_image":"shopify:\/\/shop_images\/CES-6_2a.jpg","title":"Looking for another option?","subtitle":"","button_link":"shopify:\/\/collections\/all","button_text":"GET CERTIFIED","show_button_1":true,"button_1_text":"Contact Us","button_1_link":"shopify:\/\/pages\/contact-us","show_button_2":false,"button_2_text":"Take the quiz","button_2_link":"\/","button_position":"left","title_alignment":"left","container_width":700,"alignment":"flex-start"}}},"order":["main","section_program_info_CQ8Uhg","section_program_details_8gPiQi","pdp_career_paths_slider_mtyLA8","cta_program_advisor_i64PYf","section_steps_j7BRy6","section_logo_carousel_Typ4JF","section_collapsible_q4ikjm","section_certified_trainers_qQMF8K","section_multicolumn_QREXdr","section_related_products_aPKPXw","related-products","section_steps_form_P9mAVi","section_banner_two_VVqGd3"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "custom_liquid_8EceCP": {
+          "type": "custom_liquid",
+          "disabled": true,
+          "settings": {
+            "custom_liquid": "<div class=\"product--badge\">\n  {% if product.compare_at_price > product.price %}\n  {% assign original_price = product.compare_at_price | floor %}\n  {% assign sale_price = product.price | floor %}\n  {% assign discount_amount = original_price | minus: sale_price %}\n  {% assign discount_percentage = discount_amount | divided_by: 100| floor %}\n\n  <div class=\"discount\">\n    <span>SAVE ${{ discount_percentage }}  </span>\n  </div>\n\n  {% endif %}\n</div>\n\n<style>\n  .product--badge {\n    display: flex;\n    align-items: center;\n    gap: 20px;\n  }\n\n  .tag--badge {\n    color: #141414;\n    text-align: center;\n    font-family: var(--font-heading-family);\n    font-size: 14px;\n    font-style: normal;\n    font-weight: 700;\n    line-height: 150%;\n    letter-spacing: 1.12px;\n    text-transform: uppercase;\n    display: flex;\n    align-items: center;\ngap:10px;\n  }\n\n  .discount {\n    display: inline-flex;\n    height: 34px;\n    padding: 0px 10px;\n    justify-content: center;\n    align-items: center;\n    gap: 10px;\n    flex-shrink: 0;\n    border-radius: 10px;\n    background: #C1FF72;\n  }\n\n  .discount {\n    color: #141414;\n    font-family: Montserrat, sans-serif;\n    font-size: 14px;\n    font-style: normal;\n    font-weight: 700;\n    line-height: 150%;\n    /* 21px */\n  }\n\n.product--badge{\ndisplay:flex;\nflex-wrap:Wrap;\n}\n\n@media only screen and (max-width: 600px) {}\n</style>"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "text_tFH3Dp": {
+          "type": "text",
+          "settings": {
+            "text": "<strong>{{ product.metafields.custom.ceu_information.value }}</strong>",
+            "text_style": "body"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "buy_buttons_RWgf6F": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "custom_liquid_8EceCP",
+        "description",
+        "text_tFH3Dp",
+        "price",
+        "variant_picker",
+        "buy_buttons_RWgf6F"
+      ],
+      "custom_css": [
+        "@media only screen and (min-width: 768px) {h1 {font-size: 42px !important; }}",
+        "@media only screen and (max-width: 767px) {h1 {font-size: 32px !important; }}"
+      ],
+      "settings": {
+        "enable_sticky_info": false,
+        "color_scheme": "scheme-2",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "cover",
+        "gallery_layout": "thumbnail",
+        "media_position": "right",
+        "image_zoom": "none",
+        "mobile_thumbnails": "hide",
+        "gallery_autoplay_enable": true,
+        "gallery_autoplay_seconds": 3,
+        "gallery_autoplay_effect": "fade",
+        "gallery_autoplay_pause_on_hover": true,
+        "gallery_autoplay_enable_mobile": true,
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 40
+      }
+    },
+    "section_program_info_CQ8Uhg": {
+      "type": "section--program-info",
+      "disabled": true,
+      "settings": {
+        "program_info_column_1": "<p>Lorem ipsum</p><h3>LOREM IPSUM</h3>",
+        "program_info_column_2": "<p>Lorem ipsum</p><h3>LOREM IPSUM</h3>",
+        "program_info_column_3": "<p>Lorem ipsum</p><h3>LOREM IPSUM</h3>"
+      }
+    },
+    "section_program_details_8gPiQi": {
+      "type": "section--program-details",
+      "custom_css": [
+        "#program_details {background: #f2f2e9;}"
+      ],
+      "settings": {
+        "section_id": "program_details",
+        "program_details": "<p> Lorem ipsum dolor sit amet</p>",
+        "enable_fadeup": true
+      }
+    },
+    "pdp_career_paths_slider_mtyLA8": {
+      "type": "pdp-career-paths-slider",
+      "blocks": {
+        "card_HmYkNT": {
+          "type": "card",
+          "settings": {
+            "enabled": true,
+            "image": "shopify://shop_images/Master_Trainer.jpg",
+            "title": "Master Trainer",
+            "desc": "<p>Your NASM CPT is the essential first step toward becoming a Master Trainer—a respected leader who educates peers, mentors others, and shapes the future of fitness. By building on your CPT with advanced specializations, you evolve from a knowledgeable trainer into a recognized expert. It’s more than a career path—it’s your launchpad from trainer to trailblazer.</p>"
+          }
+        },
+        "card_c98EDj": {
+          "type": "card",
+          "settings": {
+            "enabled": true,
+            "image": "shopify://shop_images/Education_Instructor.jpg",
+            "title": "Education Instructor",
+            "desc": "<p>With an NASM CPT, professionals in higher education deepen their expertise, enhance coursework development, and bring real-world application into the classroom. Whether you're designing new programs or leading hands-on labs, your certification empowers you to teach with authority. Additional certifications required.</p>"
+          }
+        },
+        "card_TC6dtb": {
+          "type": "card",
+          "settings": {
+            "enabled": true,
+            "image": "shopify://shop_images/Online_Trainer.jpg",
+            "title": "Online Trainer",
+            "desc": "<p>Expand your reach beyond the gym. With NASM CPT credibility, you can deliver effective, individualized training virtually, helping clients achieve results no matter where they are. Leverage tech, build relationships, and create lasting change from any location.</p>"
+          }
+        },
+        "card_Vqeimq": {
+          "type": "card",
+          "settings": {
+            "enabled": true,
+            "image": "shopify://shop_images/Fitness_Manager.jpg",
+            "title": "Fitness Manager",
+            "desc": "<p>Move from coaching individuals to leading entire teams. With an NASM CPT, you’ll be equipped to mentor other trainers, manage operations, and elevate client experiences. Drive excellence, promote growth, and lead with confidence.</p>"
+          }
+        },
+        "card_DGBHJn": {
+          "type": "card",
+          "settings": {
+            "enabled": true,
+            "image": "shopify://shop_images/Social_Media_Influencer_969bcdf7-26e6-445a-91bd-eaa2a5ab8d33.jpg",
+            "title": "Social Media Influencer",
+            "desc": "<p>Build a trusted voice in the fitness space. An NASM CPT adds the credibility behind your content, giving you the authority to inspire, educate, and grow an audience that values expertise. Share your passion, spark action, and lead with authenticity.</p>"
+          }
+        },
+        "card_4F6yPX": {
+          "type": "card",
+          "settings": {
+            "enabled": true,
+            "image": "shopify://shop_images/Gym_Personal_Trainer.jpg",
+            "title": "Gym Personal Trainer",
+            "desc": "<p>Work in a boutique studio or large gym, creating customized workouts and guiding clients toward their goals. With an NASM CPT, you’ll have the expertise and credibility to deliver real results and stand out on the gym floor. Build trust, drive transformation, and become the trainer clients seek out.</p>"
+          }
+        },
+        "card_6YRKQm": {
+          "type": "card",
+          "settings": {
+            "enabled": true,
+            "image": "shopify://shop_images/Independent_Personal_Trainer.jpg",
+            "title": "Independent Personal Trainer",
+            "desc": "<p>Build your fitness business and be your own boss. An NASM CPT gives you the knowledge and confidence to create tailored programs, attract loyal clients, and grow a career on your terms. Flex your creativity, scale your impact, and coach with purpose. Your brand. Your business. Your rules.</p>"
+          }
+        },
+        "card_hX3jB7": {
+          "type": "card",
+          "settings": {
+            "enabled": true,
+            "image": "shopify://shop_images/Corporate_Wellness_Trainer.jpg",
+            "title": "Corporate Wellness Trainer",
+            "desc": "<p>Design and lead programs that keep employees healthier, happier, and more productive. As an NASM CPT, you’ll have the skill set to make fitness part of workplace culture—boosting morale, reducing stress, and improving performance. An additional Wellness Coach certification may be needed. Strengthen workplace teams through wellness.</p>"
+          }
+        },
+        "card_mNrwDJ": {
+          "type": "card",
+          "settings": {
+            "enabled": true,
+            "image": "shopify://shop_images/Gym_Owner.jpg",
+            "title": "Gym Owner",
+            "desc": "<p>Turn your vision into reality. With an NASM CPT as your foundation, you’ll have the experience and know-how to create a space where clients come to transform—and a business built to thrive. Lead with purpose and shape your community.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "card_HmYkNT",
+        "card_c98EDj",
+        "card_TC6dtb",
+        "card_Vqeimq",
+        "card_DGBHJn",
+        "card_4F6yPX",
+        "card_6YRKQm",
+        "card_hX3jB7",
+        "card_mNrwDJ"
+      ],
+      "name": "PDP Career paths slider",
+      "settings": {
+        "metaobject_key": "career_paths_slider_content",
+        "heading": "Discover Your Career Path With This Certification",
+        "subheading": "<p>Your potential career pathways start here.</p>",
+        "items_desktop": "3.5",
+        "items_tablet": "2",
+        "items_mobile": "1",
+        "section_bg": "#ffffff",
+        "section_title_color": "#000000",
+        "section_desc_color": "#000000",
+        "overlay_bg": "#01241e",
+        "overlay_bg_hover": "#01241e",
+        "card_title_color": "#ffffff",
+        "card_desc_color": "#ffffff",
+        "section_title_size": "clamp(28px, 3.6vw, 54px)",
+        "section_desc_size": "clamp(14px, 2.4vw, 24px)",
+        "card_title_size": "clamp(16px, 1.4vw, 20px)",
+        "card_desc_size": "clamp(14px, 1.2vw, 16px)",
+        "max_width": "1200px",
+        "card_gap": "18px",
+        "card_radius": 12,
+        "overlay_collapsed_height": "72px",
+        "overlay_padding": "18px 18px",
+        "autoplay": false,
+        "autoplay_speed": 5,
+        "show_arrows": false,
+        "nav_bg": "#ffffff",
+        "nav_color": "#0e2a4c",
+        "show_pagination": true,
+        "pagi_inactive": "#0e2a4c59",
+        "pagi_active": "#4fb7c3"
+      }
+    },
+    "cta_program_advisor_i64PYf": {
+      "type": "cta-program-advisor",
+      "name": "CTA - Program Advisor",
+      "settings": {
+        "max_width": "1200px",
+        "pad_y": 40,
+        "pad_x": 24,
+        "gap": 28,
+        "bg_color": "#177f8a",
+        "text_color": "#ffffff",
+        "left_heading": "<p>CAN’T FIND WHAT<br/>YOU’RE LOOKING FOR?</p>",
+        "left_font_size": "clamp(28px, 4vw, 54px)",
+        "left_color": "#ffffff",
+        "right_title": "Talk to an NPTA Program Advisor",
+        "right_title_font_size": "clamp(18px, 1.8vw, 24px)",
+        "right_title_color": "#ffffff",
+        "right_subtitle": "Our team are ready to help you decide which is best fit you!",
+        "right_sub_font_size": "clamp(14px, 1.3vw, 18px)",
+        "right_sub_color": "#ffffff",
+        "btn_label": "+1-778-949-6782",
+        "btn_tel": "+17789496782",
+        "btn_link": "",
+        "btn_bg": "#ffffff",
+        "btn_text_color": "#000000",
+        "btn_font_size": "clamp(16px, 1.4vw, 22px)",
+        "btn_radius": 10,
+        "btn_pad_y": 12,
+        "btn_pad_x": 18,
+        "btn_show_icon": true,
+        "btn_icon_type": "svg_phone",
+        "iconify_icon": "mdi:phone",
+        "btn_icon_size": "clamp(16px, 1.6vw, 22px)",
+        "btn_icon_gap": 10,
+        "btn_icon_color": "#0e2a4c"
+      }
+    },
+    "section_steps_j7BRy6": {
+      "type": "section--steps",
+      "blocks": {
+        "step_mLLFHk": {
+          "type": "step",
+          "settings": {
+            "step_title": "Get Certified",
+            "step_description": "Choose from our diverse range of science-based certification programs. All courses are 100% online and self-paced to provide a flexible learning experience."
+          }
+        },
+        "step_KYAxiC": {
+          "type": "step",
+          "settings": {
+            "step_title": "Gain Experience",
+            "step_description": "Build your resume + confidence as a trainer through NPTA's Apprenticeship program. Gain hands-on experience and learn directly from Canada's top leading trainers."
+          }
+        },
+        "step_TrCPn7": {
+          "type": "step",
+          "settings": {
+            "step_title": "Make Money!",
+            "step_description": "Now that you’re experienced and job-ready, start maximizing your earning potential. Join NPTA’s affiliate program and inspire others to sign up for our top-tier certification programs. Earn up to $600 for every successful referral."
+          }
+        }
+      },
+      "block_order": [
+        "step_mLLFHk",
+        "step_KYAxiC",
+        "step_TrCPn7"
+      ],
+      "disabled": true,
+      "settings": {
+        "section_id": "how_it_works",
+        "section_title": "HOW TO BECOME CERTIFIED",
+        "section_description": "<p>3 Steps to Go From Your Desk to Your Dream Job Coaching Clients</p>",
+        "title_alignment": "center",
+        "container_width": 980,
+        "alignment": "center",
+        "button_text": "CHOOSE YOUR PROGRAM",
+        "program_button_link": "/",
+        "quiz_text": "",
+        "quiz_link": "/"
+      }
+    },
+    "section_logo_carousel_Typ4JF": {
+      "type": "section--logo-carousel",
+      "blocks": {
+        "logo_WRqazK": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/backfitpro-logo.webp"
+          }
+        },
+        "logo_daxrAW": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/nasm-logo.png"
+          }
+        },
+        "logo_tXtcJX": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/npta-ph-logo_61da15a0-7548-4732-becb-f2132c7cc3c8.png"
+          }
+        },
+        "logo_d8MRnj": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/ncsf-logo.png"
+          }
+        },
+        "logo_rmVXhc": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/kbstronger-logo.png"
+          }
+        },
+        "logo_pXC4Dq": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/afaa-logo.png"
+          }
+        },
+        "logo_L7hV94": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/fitin_logo.png"
+          }
+        }
+      },
+      "block_order": [
+        "logo_WRqazK",
+        "logo_daxrAW",
+        "logo_tXtcJX",
+        "logo_d8MRnj",
+        "logo_rmVXhc",
+        "logo_pXC4Dq",
+        "logo_L7hV94"
+      ],
+      "name": "Logo Carousel",
+      "settings": {
+        "top_padding": 0,
+        "bottom_padding": 0,
+        "container_width": 2000,
+        "scroll_direction": "rtl"
+      }
+    },
+    "section_collapsible_q4ikjm": {
+      "type": "section--collapsible",
+      "blocks": {
+        "collapsible_row_PR89HA": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "{{ product.metafields.custom.product_question_1.value }}",
+            "row_content": "{{ product.metafields.custom[\"1_product_answer\"] | metafield_tag }}"
+          }
+        },
+        "collapsible_row_p8fwgB": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "{{ product.metafields.custom.product_question_2.value }}",
+            "row_content": "{{ product.metafields.custom[\"2_product_answer\"] | metafield_tag }}"
+          }
+        },
+        "collapsible_row_xUwdDJ": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "{{ product.metafields.custom.product_question_3.value }}",
+            "row_content": "{{ product.metafields.custom[\"3_product_answer\"] | metafield_tag }}"
+          }
+        },
+        "collapsible_row_cyzCxi": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "{{ product.metafields.custom.product_question_4.value }}",
+            "row_content": "{{ product.metafields.custom[\"4_product_answer\"] | metafield_tag }}"
+          }
+        },
+        "collapsible_row_fpwkVM": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "{{ product.metafields.custom.product_question_5.value }}",
+            "row_content": "{{ product.metafields.custom[\"5_product_answer\"] | metafield_tag }}"
+          }
+        },
+        "collapsible_row_7zDrMF": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "{{ product.metafields.custom.product_question_6.value }}",
+            "row_content": "{{ product.metafields.custom[\"6_product_answer\"] | metafield_tag }}"
+          }
+        },
+        "collapsible_row_Bznc38": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "{{ product.metafields.custom.product_question_7.value }}",
+            "row_content": "{{ product.metafields.custom[\"7_product_answer\"] | metafield_tag }}"
+          }
+        },
+        "collapsible_row_dVFApV": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "{{ product.metafields.custom.product_question_8.value }}",
+            "row_content": "{{ product.metafields.custom[\"8_product_answer\"] | metafield_tag }}"
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_PR89HA",
+        "collapsible_row_p8fwgB",
+        "collapsible_row_xUwdDJ",
+        "collapsible_row_cyzCxi",
+        "collapsible_row_fpwkVM",
+        "collapsible_row_7zDrMF",
+        "collapsible_row_Bznc38",
+        "collapsible_row_dVFApV"
+      ],
+      "custom_css": [],
+      "settings": {
+        "section_id": "popular_questions",
+        "background_color": "#ffffff",
+        "section_class": "",
+        "title": "{{ product.metafields.custom.product_title_faqs.value }} FAQs",
+        "title_alignment": "center",
+        "accordion_link_title": "",
+        "accordion_link": "",
+        "top_padding": 90,
+        "bottom_padding": 92,
+        "container_width": 980,
+        "footer_text": "",
+        "button_text": "",
+        "button_link": ""
+      }
+    },
+    "section_certified_trainers_qQMF8K": {
+      "type": "section--certified-trainers",
+      "blocks": {
+        "trainer_TaaHWw": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/DSC04326-Edit_1.jpg",
+            "show_content": false,
+            "name": "Alfredson T.",
+            "certification": "CPT",
+            "quote": "\"If you’re someone who currently works a full-time job and is looking to make that jump to become a trainer, the NASM online self-study program is the right choice for you. Even with a full-time job, I was able to complete the course in 6 weeks and pass my exam first try!\"",
+            "rating": "5"
+          }
+        },
+        "trainer_V674Yg": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/IMG_3357-_2.jpg",
+            "show_content": true,
+            "name": "Mark Lopez",
+            "certification": "",
+            "quote": "\"I chose to get NASM certified because of its in-depth, evidence-based approach, which I knew would greatly benefit my clients.\"",
+            "rating": "5"
+          }
+        },
+        "trainer_FRw4CX": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/IMG_3363.jpg",
+            "show_content": true,
+            "name": "Martin Chan",
+            "certification": "",
+            "quote": "\"I selected NASM certification for its comprehensive and research-driven curriculum, ensuring my clients receive the highest level of expertise.\"",
+            "rating": "5"
+          }
+        },
+        "trainer_wczYnX": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-1.jpg",
+            "show_content": true,
+            "name": "Debora",
+            "certification": "",
+            "quote": "\"For the past six months, I have been studying hard to become a Certified Personal Trainer with NASM, known for its rigorous exam and strong reputation. Before this, I earned a German fitness instructor license (B-Lizenz). I worked in a gym while studying and really liked the NASM content, especially the OPT model.\"",
+            "rating": "5"
+          }
+        },
+        "trainer_QMdBMh": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-4.jpg",
+            "show_content": true,
+            "name": "Kevin",
+            "certification": "",
+            "quote": "\"Becoming NASM Certified is a significant milestone for me. It represents the knowledge and skills I’ve acquired, and my dedication to helping others achieve their fitness goals.\"",
+            "rating": "5"
+          }
+        },
+        "trainer_CAa46w": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-3.jpg",
+            "show_content": true,
+            "name": "Vierra G.",
+            "certification": "",
+            "quote": "\"Balancing studying, work, and motherhood was incredibly challenging, but I’m proud to have completed it. This certification enhances my skills for better client service. The Corrective Exercise Specialist course provided advanced techniques for movement impairments, and I’m eager to apply this knowledge to help my clients reach their goals.\"",
+            "rating": "5"
+          }
+        },
+        "trainer_QfkX8e": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-5.jpg",
+            "show_content": true,
+            "name": "Joyce",
+            "certification": "",
+            "quote": "“I wanted to take a moment to express my heartfelt gratitude for the exceptional education and support I have received at NASM. The knowledge and skills I’ve gained here have been invaluable, and I am truly thankful for the dedication and passion of the faculty and staff.”",
+            "rating": "5"
+          }
+        },
+        "trainer_Rh6jWC": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-6.jpg",
+            "show_content": true,
+            "name": "Mahmoud",
+            "certification": "",
+            "quote": "\"I chose the NASM program for its excellent reputation and scientific approach, ensuring I gain the skills to provide top-notch service to my clients. With my NASM certification, I now create personalized training programs to help clients achieve their fitness goals safely and effectively.”",
+            "rating": "5"
+          }
+        },
+        "trainer_yBQTVi": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-7.jpg",
+            "show_content": true,
+            "name": "Hossam",
+            "certification": "",
+            "quote": "\"I study biochemistry, but my passion is exercise science. Finding NASM was the best choice ever. Completing the course while studying was tough, but it deepened my love for exercise science and equipped me with valuable tools to become a professional personal trainer. Thank you, NASM.\"",
+            "rating": "5"
+          }
+        },
+        "trainer_weCFwH": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-8.jpg",
+            "show_content": true,
+            "name": "Abigail",
+            "certification": "",
+            "quote": "\"I'm officially a NASM-certified personal trainer and deeply grateful for the program's support in passing the CPT exam! I'm excited to use what I've learned to help clients achieve their fitness goals and transform lives. Certification is just the beginning, and I'm ready for what's next!\"",
+            "rating": "5"
+          }
+        },
+        "trainer_HBDezq": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-9.jpg",
+            "show_content": true,
+            "name": "Natalya",
+            "certification": "",
+            "quote": "\"I am now officially a NASM Certified Personal Trainer. I learned so much from this program. As a Certified Personal Trainer, I can now help people achieve their fitness goals and be the best version of themselves! Thank you to everyone who believed in me and helped me in my journey.\"",
+            "rating": "5"
+          }
+        },
+        "trainer_VjNQEa": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-10.jpg",
+            "show_content": true,
+            "name": "Rodrigo",
+            "certification": "",
+            "quote": "\"NASM made this course extremely enjoyable and very informative. I was able to acquire knowledge and skills that will allow me to be a successful personal trainer. I’ve learned so much information that I would love to implement to empower others and help them achieve their goals. I am truly passionate about assisting others in becoming the best versions of themselves and living healthier and happier lives.\"",
+            "rating": "5"
+          }
+        },
+        "trainer_Fz68RB": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-11.jpg",
+            "show_content": true,
+            "name": "Marina",
+            "certification": "",
+            "quote": "“I’ve been a Personal Trainer for 8 years and chose NASM for their reputation and flexible schedule. The certification took 4 months at my own pace and was applicable to both my profession and personal routines. I’m excited to use my new credentials to help people achieve their fitness goals and improve their lifestyles. Thank you, NASM!”",
+            "rating": "5"
+          }
+        },
+        "trainer_UF4Ljr": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-12.jpg",
+            "show_content": true,
+            "name": "Frank",
+            "certification": "",
+            "quote": "\"Training isn't complete without nutrition. For those offering nutritional guidance, the NASM CNC is essential. In my nine years in fitness, it’s been one of the most comprehensive and insightful certifications. The sections on behavior change and coaching skills were transformative. I’m now equipped to assess client needs and provide tailored nutritional coaching for their fitness and lifestyle goals.\"",
+            "rating": "5"
+          }
+        },
+        "trainer_pCeEb7": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-13.jpg",
+            "show_content": true,
+            "name": "Savanna",
+            "certification": "",
+            "quote": "\"Enrolling in NASM was one of the best decisions for my career as a Personal Trainer and Sports Nutritionist. The education provided was excellent and equipped me with essential knowledge for the fitness industry. I appreciated the focus on coaching, nutrition, and exercise techniques. Thanks to NASM, I feel empowered to pursue my passion and look forward to further education in fitness, health, and wellness. I highly recommend NASM for expanding your knowledge in the fitness industry.\"",
+            "rating": "5"
+          }
+        },
+        "trainer_aV6DXG": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-14.jpg",
+            "show_content": true,
+            "name": "Alex Jung Lee",
+            "certification": "",
+            "quote": "\"Throughout the NASM CPT certification course, I've gained a comprehensive understanding of the intrinsic value associated with health and wellness. I take great pride in successfully achieving the designation of NASM CPT. I am enthusiastic about leveraging my acquired knowledge to support and enhance the well-being of my family, friends, and community as a NASM Certified Personal Trainer.\"",
+            "rating": "5"
+          }
+        },
+        "trainer_6kKNPE": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-15.jpg",
+            "show_content": true,
+            "name": "Felicitas Avendaño",
+            "certification": "",
+            "quote": "\"In 2018, I became a NASM Certified Personal Trainer (CPT) and Certified Nutrition Coach (CNC), turning a hobby into a full-time job with a busy schedule across two gyms, online clients, and home visits. Being a nutrition coach has enhanced my ability to help clients and added revenue streams to my business. I’m also proud to have been a gym owner for almost a year, enjoying the responsibility and freedom of leading my own team.\"",
+            "rating": "5"
+          }
+        },
+        "trainer_j4cagj": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-16.jpg",
+            "show_content": true,
+            "name": "Helen",
+            "certification": "",
+            "quote": "\"𝐃𝐫𝐞𝐚𝐦𝐬 💭 𝐝𝐨 𝐜𝐨𝐦𝐞 𝐭𝐫𝐮𝐞...𝐚𝐧𝐝 𝐈 𝐃𝐈𝐃 𝐈𝐓!⁣ Studying at 𝟓𝟕 is so very different than at 𝟏𝟗. Yet very possible.⁣\"⁠",
+            "rating": "5"
+          }
+        },
+        "trainer_yfwMck": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-17.jpg",
+            "show_content": true,
+            "name": "Darryl",
+            "certification": "",
+            "quote": "\"Time to pass some of this fitness energy down to our youth! Helping to make sure that they play for at least 60 minutes a day.\"",
+            "rating": "5"
+          }
+        },
+        "trainer_CkXpwp": {
+          "type": "trainer",
+          "settings": {
+            "image": "shopify://shop_images/Cert-18.jpg",
+            "show_content": true,
+            "name": "Kenneth",
+            "certification": "",
+            "quote": "\"You can teach an old dog new tricks 😂 something good came out of the pandemic for me!\"",
+            "rating": "5"
+          }
+        }
+      },
+      "block_order": [
+        "trainer_TaaHWw",
+        "trainer_V674Yg",
+        "trainer_FRw4CX",
+        "trainer_wczYnX",
+        "trainer_QMdBMh",
+        "trainer_CAa46w",
+        "trainer_QfkX8e",
+        "trainer_Rh6jWC",
+        "trainer_yBQTVi",
+        "trainer_weCFwH",
+        "trainer_HBDezq",
+        "trainer_VjNQEa",
+        "trainer_Fz68RB",
+        "trainer_UF4Ljr",
+        "trainer_pCeEb7",
+        "trainer_aV6DXG",
+        "trainer_6kKNPE",
+        "trainer_j4cagj",
+        "trainer_yfwMck",
+        "trainer_CkXpwp"
+      ],
+      "settings": {
+        "section_id": "testimonials",
+        "section_title": "Hear from our certified trainers",
+        "section_title2": "",
+        "section_description": "",
+        "title_alignment": "center",
+        "desc_alignment": "left",
+        "container_width": 980,
+        "alignment": "center",
+        "button_1_link": "",
+        "button_1_text": "Register Here"
+      }
+    },
+    "section_multicolumn_QREXdr": {
+      "type": "section--multicolumn",
+      "blocks": {
+        "column_iM8QWQ": {
+          "type": "column",
+          "settings": {
+            "title": "Canada's Lowest Prices",
+            "content": "Get the best NASM deals with zero percent interest payment plans. Found an individual NASM course at a lower price elsewhere? Let us know so we can price match and find an even better deal!"
+          }
+        },
+        "column_6PFz4B": {
+          "type": "column",
+          "settings": {
+            "title": "Dedicated Support Assistant",
+            "content": "You will be assigned a go-to individual to answer any questions you may have regarding your courses."
+          }
+        },
+        "column_y6hHBe": {
+          "type": "column",
+          "settings": {
+            "title": "Apprenticeship Program",
+            "content": "Receive 40 hours of hands-on client training, a recommendation letter from Jesse Benson, a mentorship session, interview prep and a completion certificate."
+          }
+        }
+      },
+      "block_order": [
+        "column_iM8QWQ",
+        "column_6PFz4B",
+        "column_y6hHBe"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".column-list {grid-template-columns: 1fr 1fr 1fr; max-width: 1000px; margin: 50px auto 0;}"
+      ],
+      "settings": {
+        "section_id": "why_choose_npta",
+        "section_title": "Why choose NPTA?",
+        "section_description": "<p>Elevate your career with our wide range of NASM certifications, specialization courses, and bundled packages, Unlock Your Fitness Potential with NPTA!</p>",
+        "title_alignment": "center",
+        "container_width": 700,
+        "alignment": "center",
+        "view_button_text": "Buy [program name]",
+        "view_all_button_link": "/",
+        "program_footer_description": ""
+      }
+    },
+    "section_related_products_aPKPXw": {
+      "type": "section--related-products",
+      "disabled": true,
+      "settings": {
+        "section_id": "related_programs",
+        "section_title": "More programs you may be interested in",
+        "section_description": "",
+        "title_alignment": "left",
+        "container_width": 700,
+        "alignment": "flex-start",
+        "view_button_text": "Button"
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 3,
+        "columns_desktop": 3,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "section_steps_form_P9mAVi": {
+      "type": "section--steps-form",
+      "settings": {
+        "section_id": "section-id",
+        "section_title": "Want to personalize your certification path?",
+        "section_description": "<p>Contact us to <strong>create a custom bundle</strong> tailored to your goals in nutrition, personal training, or specialization.</p>",
+        "webhook_url": "https://hooks.zapier.com/hooks/catch/18464236/2tshnoe/"
+      }
+    },
+    "section_banner_two_VVqGd3": {
+      "type": "section--banner-two",
+      "disabled": true,
+      "custom_css": [
+        ".section--banner-two {background-position: center 30%; background-repeat: no-repeat; background-size: cover;}"
+      ],
+      "settings": {
+        "background_image": "shopify://shop_images/CES-6_2a.jpg",
+        "title": "Looking for another option?",
+        "subtitle": "",
+        "button_link": "shopify://collections/all",
+        "button_text": "GET CERTIFIED",
+        "show_button_1": true,
+        "button_1_text": "Contact Us",
+        "button_1_link": "shopify://pages/contact-us",
+        "show_button_2": false,
+        "button_2_text": "Take the quiz",
+        "button_2_link": "/",
+        "button_position": "left",
+        "title_alignment": "left",
+        "container_width": 700,
+        "alignment": "flex-start"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section_program_info_CQ8Uhg",
+    "section_program_details_8gPiQi",
+    "pdp_career_paths_slider_mtyLA8",
+    "cta_program_advisor_i64PYf",
+    "section_steps_j7BRy6",
+    "section_logo_carousel_Typ4JF",
+    "section_collapsible_q4ikjm",
+    "section_certified_trainers_qQMF8K",
+    "section_multicolumn_QREXdr",
+    "section_related_products_aPKPXw",
+    "related-products",
+    "section_steps_form_P9mAVi",
+    "section_banner_two_VVqGd3"
+  ]
+}
