@@ -106,6 +106,7 @@
         "logo_GHUAPm",
         "logo_MFWphb"
       ],
+      "disabled": true,
       "custom_css": [
         ".section--logo-carousel {background: #0f828c;}"
       ],
@@ -192,7 +193,7 @@
         "right_title_size": "clamp(16px, 3.2vw, 32px)",
         "list_font_size": "clamp(12px, 2.4vw, 24px)",
         "price_font_size": "clamp(14px, 2.8vw, 28px)",
-        "padding_top": "80",
+        "padding_top": "40",
         "padding_bottom": "80"
       }
     },
