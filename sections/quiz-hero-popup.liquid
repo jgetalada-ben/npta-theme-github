@@ -140,7 +140,7 @@
     }
 
     .qhp .qhp__dialog{
-      width: min(900px, 100%);
+      width: min(700px, 100%);
       max-height: 90vh;
       overflow: auto;
       background: var(--qhp-modal-bg);
@@ -167,6 +167,7 @@
       font-weight: 900;
       letter-spacing: .02em;
       color: var(--qhp-heading);
+      display: none;
     }
     .qhp .qhp__dialogClose{
       width: 40px;
@@ -286,17 +287,29 @@
     }
     .qhp .qhp__bar{
       width: 100%;
-      height: 10px;
+      height: 12px;
       border-radius: 999px;
       background: rgba(0,0,0,.08);
       overflow: hidden;
+      position: relative;
     }
     .qhp .qhp__barFill{
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, var(--qhp-accent), rgba(0,0,0,.25));
+      background: var(--qhp-accent);
       border-radius: 999px;
-      transition: width .35s ease;
+      transition: width .4s ease;
+      position: relative;
+    }
+    .qhp .qhp__barFill::after{
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 30%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.3));
+      border-radius: 999px;
     }
 
     .qhp .qhp__questionCard{
@@ -322,19 +335,22 @@
       text-align: left;
       border-radius: 14px;
       border: 2px solid rgba(0,0,0,.10);
-      padding: 12px 12px;
+      padding: 12px 14px;
       background: #fff;
       cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
       transition: border-color .12s ease, background .12s ease, transform .12s ease;
       font-weight: 700;
       color: #0d2b28;
     }
     .qhp .qhp__option:hover{ border-color: var(--qhp-accent); background: rgba(0,0,0,.02); }
     .qhp .qhp__option[disabled]{ cursor: not-allowed; opacity: .95; }
+
+    .qhp .qhp__optionText{
+      flex: 1;
+    }
 
     .qhp .qhp__option--correct{
       border-color: var(--qhp-correct);
@@ -370,6 +386,10 @@
       margin-bottom: 12px;
     }
     .qhp .qhp__feedback.is-visible{ display:block; }
+    .qhp .qhp__feedback--correct{
+      border-color: var(--qhp-correct);
+      background: color-mix(in srgb, var(--qhp-correct) 15%, #fff);
+    }
     .qhp .qhp__feedbackTitle{
       margin: 0 0 6px;
       font-weight: 900;
@@ -378,7 +398,7 @@
     .qhp .qhp__feedbackText{ margin: 0; line-height: 1.5; }
 
     .qhp .qhp__next{
-      width: 100%;
+      max-width: 200px;
       border-radius: 14px;
       padding: 14px 16px;
       background: var(--qhp-heading);
@@ -536,6 +556,7 @@
     }
     @media (max-width: 640px){
       .qhp .qhp__resultGrid{ grid-template-columns: 1fr; }
+      .qhp .qhp__dialog{ width: 100%; }
     }
   </style>
 
@@ -1012,7 +1033,7 @@
               if(sendStatus) sendStatus.textContent = '';
               if(sendBtn) sendBtn.disabled = false;
 
-              feedback.classList.remove('is-visible');
+              feedback.classList.remove('is-visible', 'qhp__feedback--correct');
               nextBtn.classList.remove('is-visible');
 
               render();
@@ -1048,14 +1069,15 @@
               btn.className = 'qhp__option';
               btn.setAttribute('data-opt', String(optIndex));
 
-              var left = document.createElement('span');
-              left.textContent = label;
+              var textSpan = document.createElement('span');
+              textSpan.className = 'qhp__optionText';
+              textSpan.textContent = label;
 
               var badge = document.createElement('span');
               badge.className = 'qhp__badge';
               badge.textContent = '';
 
-              btn.appendChild(left);
+              btn.appendChild(textSpan);
               btn.appendChild(badge);
 
               btn.addEventListener('click', function(){
@@ -1069,7 +1091,7 @@
 
                 if(isCorrect) score++;
 
-                renderFeedback();
+                renderFeedback(isCorrect);
                 renderOptionsState();
                 nextBtn.textContent = idx < questions.length - 1 ? nextQuestionLabel : seeResultsLabel;
                 nextBtn.classList.add('is-visible');
@@ -1103,12 +1125,15 @@
               });
             }
 
-            function renderFeedback(){
+            function renderFeedback(isCorrect){
               var q = questions[idx];
-              var isCorrect = selected === q.correct;
 
               feedbackTitle.textContent = isCorrect ? 'Correct! 🎉' : 'Not quite, but great try!';
               feedbackText.textContent = q.explanation || '';
+              feedback.classList.remove('qhp__feedback--correct');
+              if(isCorrect){
+                feedback.classList.add('qhp__feedback--correct');
+              }
               feedback.classList.add('is-visible');
             }
 
@@ -1121,7 +1146,7 @@
                 optionsWrap.appendChild(makeOptionBtn(opt, i));
               });
 
-              feedback.classList.remove('is-visible');
+              feedback.classList.remove('is-visible', 'qhp__feedback--correct');
               nextBtn.classList.remove('is-visible');
               nextBtn.textContent = nextQuestionLabel;
               showFeedback = false;
@@ -1217,7 +1242,7 @@
 
               resTitle.textContent = bucket.title || 'Your Results';
               resScore.textContent = score + '/' + total;
-              resPct.textContent = pct + '% Correct';
+              resPct.textContent = pct + '% correct';
 
               resMsg.textContent = bucket.message || '';
               resCta.textContent = bucket.cta || '';
@@ -1546,19 +1571,19 @@
       "type": "text",
       "id": "quiz_title",
       "label": "Modal title (top bar)",
-      "default": "Fitness Quiz"
+      "default": "How much do you really know about fitness?"
     },
     {
       "type": "text",
       "id": "quiz_header",
       "label": "Quiz header",
-      "default": "How Much Do You Really Know About Fitness?"
+      "default": "How much do you really know about fitness?"
     },
     {
       "type": "text",
       "id": "quiz_subheader",
       "label": "Quiz subheader",
-      "default": "Take the NPTA™ Knowledge Challenge"
+      "default": "Take the Knowledge Challenge"
     },
     {
       "type": "text",
@@ -1570,13 +1595,13 @@
       "type": "text",
       "id": "next_question_label",
       "label": "Next question button label",
-      "default": "Next Question"
+      "default": "Next question"
     },
     {
       "type": "text",
       "id": "see_results_label",
       "label": "Final button label",
-      "default": "See Results"
+      "default": "See results"
     },
     {
       "type": "checkbox",
