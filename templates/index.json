@@ -267,28 +267,28 @@
         "included_item_kAT8MA": {
           "type": "included_item",
           "settings": {
-            "text": "NASM CPT (Certified Personal Trainer)",
+            "text": "NASM CPT - Certified Personal Trainer",
             "url": ""
           }
         },
         "included_item_B3W3KX": {
           "type": "included_item",
           "settings": {
-            "text": "NASM CNC (Certified Nutrition Coach)",
+            "text": "NASM CNC - Certified Nutrition Coach",
             "url": ""
           }
         },
         "included_item_fa949c": {
           "type": "included_item",
           "settings": {
-            "text": "NASM PES (Performance Exercise)",
+            "text": "NASM PES - Performance Exercise Specialist",
             "url": ""
           }
         },
         "included_item_T6U3iV": {
           "type": "included_item",
           "settings": {
-            "text": "NASM CES (Corrective exercise)",
+            "text": "NASM CES - Corrective exercise specialist",
             "url": ""
           }
         }
@@ -311,7 +311,7 @@
         "image": "shopify://shop_images/Elitev2.webp",
         "badge_text": "",
         "right_title": "WHAT’S INCLUDED?",
-        "extra_text": "<p><strong>FREE</strong> GLP-1 Certification (Understanding Weight Loss Medications)</p>",
+        "extra_text": "<p>FREE GLP-1 Certification - Understanding Weight Loss Medications</p>",
         "sale_label": "SALE PRICE:",
         "sale_price": "$2,497",
         "reg_label": "REG PRICE:",
