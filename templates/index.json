@@ -29,7 +29,7 @@
         "aspect_ratio": "21-9",
         "aspect_ratio_mobile": "1-1",
         "height_mode": "vh",
-        "vh_desktop": "580px",
+        "vh_desktop": "700px",
         "vh_mobile": "60dvh",
         "show_icon_text": false,
         "icon_text": "NASM OFFICIAL CANADIAN PARTNER",
@@ -63,6 +63,149 @@
         "enable_title_rotator": true,
         "rotator_interval": 5,
         "rotator_stagger_ms": 38
+      }
+    },
+    "section_logo_carousel_Typ4JF": {
+      "type": "section--logo-carousel",
+      "blocks": {
+        "logo_WRqazK": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/backfitpro-logo.webp"
+          }
+        },
+        "logo_daxrAW": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/nasm-logo.png"
+          }
+        },
+        "logo_tXtcJX": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/npta-ph-logo_61da15a0-7548-4732-becb-f2132c7cc3c8.png"
+          }
+        },
+        "logo_d8MRnj": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/ncsf-logo.png"
+          }
+        },
+        "logo_rmVXhc": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/kbstronger-logo.png"
+          }
+        },
+        "logo_pXC4Dq": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/afaa-logo.png"
+          }
+        },
+        "logo_L7hV94": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/fitin_logo.png"
+          }
+        }
+      },
+      "block_order": [
+        "logo_WRqazK",
+        "logo_daxrAW",
+        "logo_tXtcJX",
+        "logo_d8MRnj",
+        "logo_rmVXhc",
+        "logo_pXC4Dq",
+        "logo_L7hV94"
+      ],
+      "name": "Logo Carousel",
+      "settings": {
+        "top_padding": 0,
+        "bottom_padding": 0,
+        "container_width": 2000,
+        "scroll_direction": "rtl"
+      }
+    },
+    "multicolumn_4hXCqV": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_UNGJEJ": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_25.png",
+            "image_width_pct": 100,
+            "image_align": "center",
+            "title": "<a href=\"https://www.npta.ca/collections/bundles?filter.p.m.custom.product_focus=Athletes&filter.v.price.gte=&filter.v.price.lte=&sort_by=manual\" title=\"Athletes Bundles\">ATHLETES</a>",
+            "title_size": "clamp(18px,3vw,24px)",
+            "text": "",
+            "link_label": "",
+            "link": "https://www.npta.ca/collections/bundles?filter.p.m.custom.product_focus=Athletes&filter.v.price.gte=&filter.v.price.lte=&sort_by=manual"
+          }
+        },
+        "column_ajeEYg": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_26.png",
+            "image_width_pct": 100,
+            "image_align": "center",
+            "title": "<a href=\"https://www.npta.ca/collections/bundles?filter.p.m.custom.product_focus=Nutrition&filter.v.price.gte=&filter.v.price.lte=&sort_by=manual\" title=\"Nutrition Bundles\">NUTRITION</a>",
+            "title_size": "clamp(18px,3vw,24px)",
+            "text": "",
+            "link_label": "",
+            "link": "https://www.npta.ca/collections/bundles?filter.p.m.custom.product_focus=Nutrition&filter.v.price.gte=&filter.v.price.lte=&sort_by=manual"
+          }
+        },
+        "column_qLqfqw": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_27.png",
+            "image_width_pct": 100,
+            "image_align": "center",
+            "title": "<a href=\"https://www.npta.ca/collections/bundles?filter.p.m.custom.product_focus=Wellness&filter.v.price.gte=&filter.v.price.lte=&sort_by=manual\" title=\"Wellness Bundles\">WELLNESS</a>",
+            "title_size": "clamp(18px,3vw,24px)",
+            "text": "",
+            "link_label": "",
+            "link": "https://www.npta.ca/collections/bundles?filter.p.m.custom.product_focus=Wellness&filter.v.price.gte=&filter.v.price.lte=&sort_by=manual"
+          }
+        }
+      },
+      "block_order": [
+        "column_UNGJEJ",
+        "column_ajeEYg",
+        "column_qLqfqw"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "slider-component {width: 89%; margin: 0 auto;}",
+        "@media (max-width: 749px) {}",
+        ".multicolumn-card__info h3 a {text-decoration: none;}"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "max_width": "1989px",
+        "title": "TRENDING BUNDLES",
+        "subtitle": "Check out the bundles that are changing careers!",
+        "subtitle_size": "clamp(14px,1.3vw,18px)",
+        "heading_align": "center",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 52,
+        "padding_bottom": 52,
+        "col_pad": 0,
+        "grid_gap": 20,
+        "grid_row_gap": 0,
+        "content_align": "center"
       }
     },
     "section_logo_carousel_Uae8xt": {
@@ -731,69 +874,6 @@
         "gap": 20
       }
     },
-    "section_logo_carousel_Typ4JF": {
-      "type": "section--logo-carousel",
-      "blocks": {
-        "logo_WRqazK": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/backfitpro-logo.webp"
-          }
-        },
-        "logo_daxrAW": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/nasm-logo.png"
-          }
-        },
-        "logo_tXtcJX": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/npta-ph-logo_61da15a0-7548-4732-becb-f2132c7cc3c8.png"
-          }
-        },
-        "logo_d8MRnj": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/ncsf-logo.png"
-          }
-        },
-        "logo_rmVXhc": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/kbstronger-logo.png"
-          }
-        },
-        "logo_pXC4Dq": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/afaa-logo.png"
-          }
-        },
-        "logo_L7hV94": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/fitin_logo.png"
-          }
-        }
-      },
-      "block_order": [
-        "logo_WRqazK",
-        "logo_daxrAW",
-        "logo_tXtcJX",
-        "logo_d8MRnj",
-        "logo_rmVXhc",
-        "logo_pXC4Dq",
-        "logo_L7hV94"
-      ],
-      "name": "Logo Carousel",
-      "settings": {
-        "top_padding": 0,
-        "bottom_padding": 0,
-        "container_width": 2000,
-        "scroll_direction": "rtl"
-      }
-    },
     "whats_new_grid_Pc3dpa": {
       "type": "whats-new-grid",
       "blocks": {
@@ -858,6 +938,7 @@
         "row_wXrptG",
         "row_MUrUxE"
       ],
+      "disabled": true,
       "name": "What's New Grid",
       "settings": {
         "full_width": false,
@@ -930,85 +1011,6 @@
         "cta_bg": "#157c80",
         "cta_color": "#ffffff",
         "cta_margin_top": "clamp(30px, 5vw, 50px)"
-      }
-    },
-    "multicolumn_4hXCqV": {
-      "type": "multicolumn",
-      "blocks": {
-        "column_UNGJEJ": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/Rectangle_25.png",
-            "image_width_pct": 100,
-            "image_align": "center",
-            "title": "<a href=\"https://www.npta.ca/collections/bundles?filter.p.m.custom.product_focus=Athletes&filter.v.price.gte=&filter.v.price.lte=&sort_by=manual\" title=\"Athletes Bundles\">ATHLETES</a>",
-            "title_size": "clamp(18px,3vw,24px)",
-            "text": "",
-            "link_label": "",
-            "link": "https://www.npta.ca/collections/bundles?filter.p.m.custom.product_focus=Athletes&filter.v.price.gte=&filter.v.price.lte=&sort_by=manual"
-          }
-        },
-        "column_ajeEYg": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/Rectangle_26.png",
-            "image_width_pct": 100,
-            "image_align": "center",
-            "title": "<a href=\"https://www.npta.ca/collections/bundles?filter.p.m.custom.product_focus=Nutrition&filter.v.price.gte=&filter.v.price.lte=&sort_by=manual\" title=\"Nutrition Bundles\">NUTRITION</a>",
-            "title_size": "clamp(18px,3vw,24px)",
-            "text": "",
-            "link_label": "",
-            "link": "https://www.npta.ca/collections/bundles?filter.p.m.custom.product_focus=Nutrition&filter.v.price.gte=&filter.v.price.lte=&sort_by=manual"
-          }
-        },
-        "column_qLqfqw": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/Rectangle_27.png",
-            "image_width_pct": 100,
-            "image_align": "center",
-            "title": "<a href=\"https://www.npta.ca/collections/bundles?filter.p.m.custom.product_focus=Wellness&filter.v.price.gte=&filter.v.price.lte=&sort_by=manual\" title=\"Wellness Bundles\">WELLNESS</a>",
-            "title_size": "clamp(18px,3vw,24px)",
-            "text": "",
-            "link_label": "",
-            "link": "https://www.npta.ca/collections/bundles?filter.p.m.custom.product_focus=Wellness&filter.v.price.gte=&filter.v.price.lte=&sort_by=manual"
-          }
-        }
-      },
-      "block_order": [
-        "column_UNGJEJ",
-        "column_ajeEYg",
-        "column_qLqfqw"
-      ],
-      "custom_css": [
-        "slider-component {width: 89%; margin: 0 auto;}",
-        "@media (max-width: 749px) {}",
-        ".multicolumn-card__info h3 a {text-decoration: none;}"
-      ],
-      "name": "t:sections.multicolumn.presets.name",
-      "settings": {
-        "max_width": "1989px",
-        "title": "TRENDING BUNDLES",
-        "subtitle": "Check out the bundles that are changing careers!",
-        "subtitle_size": "clamp(14px,1.3vw,18px)",
-        "heading_align": "center",
-        "heading_size": "h1",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "none",
-        "button_label": "",
-        "button_link": "",
-        "color_scheme": "",
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 52,
-        "padding_bottom": 52,
-        "col_pad": 0,
-        "grid_gap": 20,
-        "grid_row_gap": 0,
-        "content_align": "center"
       }
     },
     "section_certified_trainers_HNR8DL": {
@@ -1572,6 +1574,8 @@
   },
   "order": [
     "video_v2_iHaPQP",
+    "section_logo_carousel_Typ4JF",
+    "multicolumn_4hXCqV",
     "section_logo_carousel_Uae8xt",
     "image_with_text_v2_8iHxCN",
     "video_v2_9YxQ8G",
@@ -1582,10 +1586,8 @@
     "media_offer_cta_NBfj78",
     "trending_feature_row_rL3tYY",
     "trainers_pick_3WFtG8",
-    "section_logo_carousel_Typ4JF",
     "whats_new_grid_Pc3dpa",
     "payment_highlights_wmDcWb",
-    "multicolumn_4hXCqV",
     "section_certified_trainers_HNR8DL",
     "feature_split_card_ELiHdw",
     "section_process_PPjrLE",
