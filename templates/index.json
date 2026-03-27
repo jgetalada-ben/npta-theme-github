@@ -481,6 +481,7 @@
         "logo_CBpwaP",
         "logo_RfHRJR"
       ],
+      "disabled": true,
       "custom_css": [
         ".section--logo-carousel {background: #0f828c;}"
       ],
