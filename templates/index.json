@@ -326,7 +326,7 @@
         "badge_text_color": "#000000",
         "button_bg": "#0b2b24",
         "button_text_color": "#ffffff",
-        "reg_price_color": "#ea4335",
+        "reg_price_color": "#a6a6a6",
         "max_width": "1400",
         "grid_gap": "56",
         "image_radius": "12",
