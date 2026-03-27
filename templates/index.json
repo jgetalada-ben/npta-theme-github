@@ -873,6 +873,65 @@
         "radius": 0
       }
     },
+    "payment_highlights_wmDcWb": {
+      "type": "payment-highlights",
+      "blocks": {
+        "feature_edbdf4": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/material-symbols-light_approval-delegation-sharp.png",
+            "logo_width": 120,
+            "title": "Quick Approval",
+            "body": "<p>Get a real-time decision</p>"
+          }
+        },
+        "feature_9wpwKm": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/material-symbols_payments-outline-sharp.png",
+            "logo_width": 120,
+            "title": "Easy Payments",
+            "body": "<p>Split your purchase into 3, 6, 9, and 12 easy payments</p>"
+          }
+        },
+        "feature_Mhcqpq": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/ic_outline-money-off-csred.png",
+            "logo_width": 120,
+            "title": "No Hidden Fees",
+            "body": "<p>0% interest payments with no surprises</p>"
+          }
+        }
+      },
+      "block_order": [
+        "feature_edbdf4",
+        "feature_9wpwKm",
+        "feature_Mhcqpq"
+      ],
+      "name": "Payment highlights",
+      "settings": {
+        "heading": "Learn Now, Pay Later With",
+        "heading_accent": "ELECTIVE",
+        "heading_align": "center",
+        "heading_color": "#01241e",
+        "accent_color": "#157c80",
+        "text_color": "#0b0b0b",
+        "bg": "#f1efe8",
+        "max_width": "1200px",
+        "pad_y": 100,
+        "pad_x": 100,
+        "show_cta": true,
+        "cta_label": "Learn more",
+        "cta_link": "https://www.npta.ca/pages/payment-plan-options",
+        "cta_new_tab": false,
+        "cta_align": "center",
+        "cta_font_size": "clamp(14px, 1.4vw, 18px)",
+        "cta_bg": "#157c80",
+        "cta_color": "#ffffff",
+        "cta_margin_top": "clamp(30px, 5vw, 50px)"
+      }
+    },
     "multicolumn_4hXCqV": {
       "type": "multicolumn",
       "blocks": {
@@ -1256,65 +1315,6 @@
         "gap": 24
       }
     },
-    "payment_highlights_wmDcWb": {
-      "type": "payment-highlights",
-      "blocks": {
-        "feature_edbdf4": {
-          "type": "feature",
-          "settings": {
-            "icon": "shopify://shop_images/material-symbols-light_approval-delegation-sharp.png",
-            "logo_width": 120,
-            "title": "Quick Approval",
-            "body": "<p>Get a real-time decision</p>"
-          }
-        },
-        "feature_9wpwKm": {
-          "type": "feature",
-          "settings": {
-            "icon": "shopify://shop_images/material-symbols_payments-outline-sharp.png",
-            "logo_width": 120,
-            "title": "Easy Payments",
-            "body": "<p>Split your purchase into 3, 6, 9, and 12 easy payments</p>"
-          }
-        },
-        "feature_Mhcqpq": {
-          "type": "feature",
-          "settings": {
-            "icon": "shopify://shop_images/ic_outline-money-off-csred.png",
-            "logo_width": 120,
-            "title": "No Hidden Fees",
-            "body": "<p>0% interest payments with no surprises</p>"
-          }
-        }
-      },
-      "block_order": [
-        "feature_edbdf4",
-        "feature_9wpwKm",
-        "feature_Mhcqpq"
-      ],
-      "name": "Payment highlights",
-      "settings": {
-        "heading": "Learn Now, Pay Later With",
-        "heading_accent": "ELECTIVE",
-        "heading_align": "center",
-        "heading_color": "#01241e",
-        "accent_color": "#157c80",
-        "text_color": "#0b0b0b",
-        "bg": "#f1efe8",
-        "max_width": "1200px",
-        "pad_y": 100,
-        "pad_x": 100,
-        "show_cta": true,
-        "cta_label": "Learn more",
-        "cta_link": "https://www.npta.ca/pages/payment-plan-options",
-        "cta_new_tab": false,
-        "cta_align": "center",
-        "cta_font_size": "clamp(14px, 1.4vw, 18px)",
-        "cta_bg": "#157c80",
-        "cta_color": "#ffffff",
-        "cta_margin_top": "clamp(30px, 5vw, 50px)"
-      }
-    },
     "section_process_PPjrLE": {
       "type": "section--process",
       "blocks": {
@@ -1584,10 +1584,10 @@
     "trainers_pick_3WFtG8",
     "section_logo_carousel_Typ4JF",
     "whats_new_grid_Pc3dpa",
+    "payment_highlights_wmDcWb",
     "multicolumn_4hXCqV",
     "section_certified_trainers_HNR8DL",
     "feature_split_card_ELiHdw",
-    "payment_highlights_wmDcWb",
     "section_process_PPjrLE",
     "section_text_image_QUzLBC",
     "section_certified_trainers_6Q4NDV",
