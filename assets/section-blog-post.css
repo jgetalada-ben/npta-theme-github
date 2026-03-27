@@ -388,7 +388,7 @@
 }
 
 .related-post-title {
-  font-size: 1.1rem;
+  font-size: clamp(12px,1.6vw,16px);
   font-weight: 600;
   line-height: 1.4;
   margin: 0 0 0.5rem;
@@ -400,7 +400,7 @@
 }
 
 .related-post-excerpt {
-  font-size: 0.9rem;
+  font-size: clamp(10px,1.2vw,12px);
   line-height: 1.5;
   color: #666;
   margin: 0;
