@@ -1,0 +1,96 @@
+{{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
+
+<div style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  {%- assign faq_items = article.metafields.custom.faq_items.value -%}
+
+  {%- if faq_items.size > 0 -%}
+    <div class="article-faq-section page-width page-width--narrow">
+      <h2 class="article-faq-title">{{ section.settings.faq_title }}</h2>
+
+      <div class="article-faq-accordion">
+        {%- for faq_item in faq_items -%}
+          {%- if faq_item.question != blank and faq_item.answer != blank -%}
+            <details class="article-faq-item">
+              <summary class="article-faq-question">
+                <span>{{ faq_item.question }}</span>
+                <svg class="article-faq-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </summary>
+              <div class="article-faq-answer">
+                {{ faq_item.answer | newline_to_br }}
+              </div>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- comment -%} SEO: JSON-LD Schema for FAQ {%- endcomment -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- for faq_item in faq_items -%}
+          {%- if faq_item.question != blank and faq_item.answer != blank -%}
+            {
+              "@type": "Question",
+              "name": {{ faq_item.question | json }},
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": {{ faq_item.answer | strip_html | json }}
+              }
+            }{%- unless forloop.last -%},{%- endunless -%}
+          {%- endif -%}
+        {%- endfor -%}
+      ]
+    }
+    </script>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Blog FAQ Section",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "faq_title",
+      "label": "FAQ Section Title",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "paragraph",
+      "content": "This section displays FAQ items from the blog post metafield: custom.faq_items (uses Blog Post FAQ Item metaobject). If no FAQs are added, the section won't display."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog FAQ Section"
+    }
+  ]
+}
+{% endschema %}
