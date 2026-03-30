@@ -303,7 +303,7 @@
         ".iwt2__badge {bottom: 15px; top: auto;}",
         ".iwt2__img {height: 548px;}",
         ".iwt2__prices .reg,.iwt2__btn {font-size: clamp(12px, 2.4vw, 24px);}",
-        ".iwt2__extra.rte {background: #E8E8E8; padding: 20px; border-radius: 10px; width: 90%; margin: 0 auto;}"
+        ".iwt2__extra.rte {background: #e8e8e8; padding: 20px; border-radius: 10px; width: 90%; margin: 0 auto;}"
       ],
       "name": "Image with text V2",
       "settings": {
