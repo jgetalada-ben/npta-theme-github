@@ -367,7 +367,7 @@
     font-size: clamp(12px, 2vw, 20px);
   }
 
-  /* Elective Financing Button - Matches buy-buttons.liquid style with animation */
+  /* Elective Financing Button - Matches buy-buttons.liquid style */
   #iwt2-{{ sid }} .iwt2__btn-elective {
     color: #141414;
     font-family: Montserrat;
@@ -384,22 +384,12 @@
     border: none;
     cursor: pointer;
     display: inline-block;
-    overflow: hidden;
-    height: 1.5em;
-    line-height: 1.5em;
   }
 
   #iwt2-{{ sid }} .iwt2__btn-elective .btn-label-down {
-    display: block;
-    position: relative;
-    top: -100%;
-    transition: top 0.3s ease;
+    display: inline-block;
     padding: 0;
     margin: 0;
-  }
-
-  #iwt2-{{ sid }} .iwt2__btn-elective:hover .btn-label-down {
-    top: 0%;
   }
 
   #iwt2-{{ sid }} .iwt2__btn-elective:before,
@@ -439,9 +429,6 @@
     #iwt2-{{ sid }} .iwt2__btn-elective {
       padding-top: 16px;
       font-size: 13px;
-    }
-    #iwt2-{{ sid }} .iwt2__btn-elective .btn-label-down {
-      line-height: normal;
     }
   }
 
@@ -579,7 +566,7 @@
             {%- if section.settings.show_elective_button -%}
               <a
                 href="{{ section.settings.elective_link | default: '/pages/payment-plan-options' }}"
-                class="iwt2__btn-elective btn button-b"
+                class="iwt2__btn-elective"
                 data-elective-financing-link
                 {% if section.settings.elective_product_handle != blank %}
                   data-product-handle="{{ section.settings.elective_product_handle }}"
@@ -592,8 +579,7 @@
                   rel="noopener"
                 {% endif %}
               >
-                <span class="btn-label-down">{{ section.settings.elective_button_label | default: "Elective Financing Options" }}</span>
-                <span class="btn-label-down">{{ section.settings.elective_button_label | default: "Elective Financing Options" }}</span>
+                {{ section.settings.elective_button_label | default: "Elective Financing Options" }}
               </a>
             {%- endif -%}
           </div>
