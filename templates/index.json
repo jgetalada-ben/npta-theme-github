@@ -320,7 +320,7 @@
         "button_label": "LEARN MORE",
         "button_link": "https://www.npta.ca/products/npta-elite-bundle",
         "button_align": "left",
-        "show_elective_button": false,
+        "show_elective_button": true,
         "elective_button_label": "Elective Financing Options",
         "elective_link": "https://app.elective.com/student/checkout/1899f285-44bc-42db-a14d-ff1d6e166cd2?productId=6c2831bd-09ba-4a6c-a00e-e9d60ed257ee",
         "elective_new_tab": false,
