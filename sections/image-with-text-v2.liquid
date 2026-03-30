@@ -345,8 +345,9 @@
   #iwt2-{{ sid }} .iwt2__cta{
     margin-top: 22px;
     display: flex;
-    gap: 12px;
+    gap: 16px;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: var(--iwt2-btn-justify);
   }
 
@@ -358,17 +359,23 @@
     color: var(--iwt2-btn-text);
     text-decoration: none;
     border-radius: var(--iwt2-btn-radius);
-    padding: 5px 30px;
-    font-weight: 500;
+    padding: 12px 32px;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: .02em;
     white-space: nowrap;
-    font-family: var(--font-proximamedium);
-    font-size: clamp(12px, 2vw, 20px);
+    font-family: Montserrat, var(--font-proximamedium);
+    font-size: 16px;
+    transition: all 0.3s ease;
+    min-height: 48px;
   }
 
-  /* Elective Financing Button - Matches buy-buttons.liquid style */
-  #iwt2-{{ sid }} .iwt2__btn-elective {
+  #iwt2-{{ sid }} .iwt2__btn:hover{
+    opacity: 0.9;
+  }
+
+  /* Elective Financing Button - Exact copy from buy-buttons.liquid */
+  #iwt2-{{ sid }} .financing-btn-inline {
     color: #141414;
     font-family: Montserrat;
     font-size: 14px;
@@ -379,56 +386,51 @@
     text-transform: uppercase;
     position: relative;
     white-space: nowrap;
-    background: transparent;
-    padding: 0;
-    border: none;
-    cursor: pointer;
-    display: inline-block;
+    flex: 1 1 auto;
+    width: auto !important;
   }
 
-  #iwt2-{{ sid }} .iwt2__btn-elective .btn-label-down {
-    display: inline-block;
-    padding: 0;
-    margin: 0;
-  }
-
-  #iwt2-{{ sid }} .iwt2__btn-elective:before,
-  #iwt2-{{ sid }} .iwt2__btn-elective:after {
+  #iwt2-{{ sid }} .financing-btn-inline:before,
+  #iwt2-{{ sid }} .financing-btn-inline:after {
     content: "";
     position: absolute;
     width: 100%;
     height: 1px;
     bottom: -1px;
-    left: 0;
     background: #01241E;
   }
 
-  #iwt2-{{ sid }} .iwt2__btn-elective:before {
+  #iwt2-{{ sid }} .financing-btn-inline:before {
     left: 0;
   }
 
-  #iwt2-{{ sid }} .iwt2__btn-elective:after {
+  #iwt2-{{ sid }} .financing-btn-inline:after {
     right: 0;
     background: #01241E;
     transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
   }
 
-  #iwt2-{{ sid }} .iwt2__btn-elective:hover:before {
+  #iwt2-{{ sid }} .financing-btn-inline:hover:before {
     background: #01241E;
     width: 0%;
     transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
   }
 
-  #iwt2-{{ sid }} .iwt2__btn-elective:hover:after {
+  #iwt2-{{ sid }} .financing-btn-inline:hover:after {
     background: transparent;
     width: 0%;
     transition: 0s;
   }
 
   @media (max-width: 989px){
-    #iwt2-{{ sid }} .iwt2__btn-elective {
+    #iwt2-{{ sid }} .financing-btn-inline {
       padding-top: 16px;
+      flex: 1 1 auto;
+      width: auto !important;
       font-size: 13px;
+    }
+    #iwt2-{{ sid }} .financing-btn-inline .btn-label-down {
+      line-height: normal;
     }
   }
 
@@ -447,6 +449,16 @@
     #iwt2-{{ sid }} .iwt2__badge{
       font-size: 16px;
       padding: 9px 14px;
+    }
+    #iwt2-{{ sid }} .iwt2__cta{
+      flex-direction: column;
+      gap: 12px;
+      align-items: stretch;
+    }
+    #iwt2-{{ sid }} .iwt2__btn{
+      width: 100%;
+      padding: 14px 24px;
+      font-size: 14px;
     }
   }
 .iwt2__list {
@@ -566,7 +578,7 @@
             {%- if section.settings.show_elective_button -%}
               <a
                 href="{{ section.settings.elective_link | default: '/pages/payment-plan-options' }}"
-                class="iwt2__btn-elective"
+                class="btn button-b financing-btn-inline"
                 data-elective-financing-link
                 {% if section.settings.elective_product_handle != blank %}
                   data-product-handle="{{ section.settings.elective_product_handle }}"
@@ -579,7 +591,8 @@
                   rel="noopener"
                 {% endif %}
               >
-                {{ section.settings.elective_button_label | default: "Elective Financing Options" }}
+                <span class="btn-label-down">{{ section.settings.elective_button_label | default: "Elective Financing Options" }}</span>
+                <span class="btn-label-down">{{ section.settings.elective_button_label | default: "Elective Financing Options" }}</span>
               </a>
             {%- endif -%}
           </div>
