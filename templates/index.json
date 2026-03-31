@@ -68,10 +68,10 @@
     "section_logo_carousel_Typ4JF": {
       "type": "section--logo-carousel",
       "blocks": {
-        "logo_LgbePW": {
+        "logo_3LrUM6": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/TONA_Logo_in_Blue.png"
+            "image": "shopify://shop_images/tona.jpg"
           }
         },
         "logo_WRqazK": {
@@ -118,7 +118,7 @@
         }
       },
       "block_order": [
-        "logo_LgbePW",
+        "logo_3LrUM6",
         "logo_WRqazK",
         "logo_daxrAW",
         "logo_tXtcJX",
