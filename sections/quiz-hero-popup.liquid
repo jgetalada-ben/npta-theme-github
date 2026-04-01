@@ -762,17 +762,17 @@
         </div>
 
         <!-- Hidden Shopify contact form (emails store customer email) -->
-        <form data-qhp-submit-form method="post" action="/contact" accept-charset="UTF-8" style="display:none;">
-          <input type="hidden" name="form_type" value="contact">
-          <input type="hidden" name="utf8" value="✓">
-          <input type="hidden" name="contact[name]" data-qhp-form-name>
-          <input type="hidden" name="contact[email]" data-qhp-form-email>
-          <input type="hidden" name="contact[subject]" data-qhp-form-subject value="Quiz Result Submission">
-          <textarea name="contact[body]" data-qhp-form-body></textarea>
+        {% form 'contact', id: 'qhp-contact-form' %}
+          <div data-qhp-submit-form style="display:none;">
+            <input type="hidden" name="contact[name]" data-qhp-form-name>
+            <input type="hidden" name="contact[email]" data-qhp-form-email>
+            <input type="hidden" name="contact[subject]" data-qhp-form-subject value="Quiz Result Submission">
+            <textarea name="contact[body]" data-qhp-form-body></textarea>
 
-          <!-- Honeypot -->
-          <input class="qhp__hp" type="text" name="contact[company]" tabindex="-1" autocomplete="off" aria-hidden="true">
-        </form>
+            <!-- Honeypot -->
+            <input class="qhp__hp" type="text" name="contact[company]" tabindex="-1" autocomplete="off" aria-hidden="true">
+          </div>
+        {% endform %}
 
         <script type="application/json" data-qhp-questions>
           [
@@ -921,7 +921,8 @@
             // Submit UI
             var sendBtn = root.querySelector('[data-qhp-send]');
             var sendStatus = root.querySelector('[data-qhp-send-status]');
-            var submitForm = root.querySelector('[data-qhp-submit-form]');
+            var submitFormWrap = root.querySelector('[data-qhp-submit-form]');
+            var submitForm = submitFormWrap ? submitFormWrap.closest('form') : null;
             var formName = root.querySelector('[data-qhp-form-name]');
             var formEmail = root.querySelector('[data-qhp-form-email]');
             var formSubject = root.querySelector('[data-qhp-form-subject]');
@@ -976,6 +977,9 @@
             var sent = false;
 
             var closeResets = {{ section.settings.close_resets | json }};
+            var redirectAfterQuiz = {{ section.settings.redirect_after_quiz | json }};
+            var redirectUrl = {{ section.settings.redirect_url | json }};
+            var redirectDelay = {{ section.settings.redirect_delay | json }} || 5;
 
             function lockScroll(locked){
               if(locked){
@@ -1256,6 +1260,12 @@
               if(sendEnabled && sendMode === 'auto' && !sent){
                 submitResults();
               }
+
+              if(redirectAfterQuiz && redirectUrl){
+                setTimeout(function(){
+                  window.location.href = redirectUrl;
+                }, redirectDelay * 1000);
+              }
             }
 
             function render(){
@@ -1318,8 +1328,8 @@
               if(!sendEnabled) return;
               if(sent) return;
 
-              if(submitForm){
-                var hp = submitForm.querySelector('input[name="contact[company]"]');
+              if(submitFormWrap){
+                var hp = submitFormWrap.querySelector('input[name="contact[company]"]');
                 if(hp && hp.value) return;
               }
 
@@ -1812,6 +1822,31 @@
       "id": "retake_label",
       "label": "Retake button label",
       "default": "Retake Quiz"
+    },
+    {
+      "type": "header",
+      "content": "Redirect after quiz"
+    },
+    {
+      "type": "checkbox",
+      "id": "redirect_after_quiz",
+      "label": "Redirect after quiz is finished",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "redirect_url",
+      "label": "Redirect URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "range",
+      "id": "redirect_delay",
+      "label": "Redirect delay (seconds)",
+      "min": 1,
+      "max": 15,
+      "step": 1,
+      "default": 5
     },
     {
       "type": "header",
