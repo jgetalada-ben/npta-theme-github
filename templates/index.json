@@ -306,6 +306,7 @@
         "included_item_fa949c",
         "included_item_T6U3iV"
       ],
+      "disabled": true,
       "custom_css": [
         ".iwt2__badge {bottom: 15px; top: auto;}",
         ".iwt2__img {height: 548px;}",
