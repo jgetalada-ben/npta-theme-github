@@ -36,6 +36,7 @@
         "message_XtU6jK",
         "message_7M8RCx"
       ],
+      "disabled": true,
       "custom_css": [
         ".announcement .rt p {text-transform: uppercase; letter-spacing: 0.5px;}",
         ".announcement .rt p a {color: #fff;}",
