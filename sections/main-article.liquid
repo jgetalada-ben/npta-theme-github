@@ -97,6 +97,23 @@
             <div class="article-template__content page-width page-width--narrow rte">
               {{ article.content }}
             </div>
+            <script>
+              (function(){
+                var tables = document.querySelectorAll('.article-template__content table');
+                tables.forEach(function(table){
+                  var headers = [];
+                  table.querySelectorAll('thead th').forEach(function(th){
+                    headers.push(th.textContent.trim());
+                  });
+                  if(!headers.length) return;
+                  table.querySelectorAll('tbody tr').forEach(function(tr){
+                    tr.querySelectorAll('td').forEach(function(td, i){
+                      if(headers[i]) td.setAttribute('data-label', headers[i]);
+                    });
+                  });
+                });
+              })();
+            </script>
 
       <script type="application/ld+json">
 {
