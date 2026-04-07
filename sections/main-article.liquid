@@ -48,6 +48,14 @@
           {%- if article.metafields.custom.blog_summary.value != blank -%}
             <div class="article-header__summary">
               {{ article.metafields.custom.blog_summary.value }}
+              {%- if article.metafields.custom.main_cta_button_url != blank -%}
+                <a
+                  class="article-header__cta-btn"
+                  href="{{ article.metafields.custom.main_cta_button_url }}"
+                >
+                  {{- article.metafields.custom.main_cta_button_label | default: 'Learn More' -}}
+                </a>
+              {%- endif -%}
             </div>
           {%- endif -%}
 
