@@ -323,9 +323,32 @@
   margin-bottom: 10px;
 }
 
-/* Sticky sidebar effect */
+/* Sidebar banner */
+.article-sidebar__banner {
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.article-sidebar__banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.article-sidebar__banner a {
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.article-sidebar__banner a:hover {
+  opacity: 0.9;
+}
+
+/* Sticky: only banner + GHL form follow on scroll, TOC stays in place */
 @media screen and (min-width: 768px) {
-  .article-sidebar {
+  .article-sidebar__sticky {
     position: sticky;
     top: 10px;
     height: fit-content;
