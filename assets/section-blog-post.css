@@ -159,7 +159,6 @@
 
 .article-template__content table th {
   font-weight: 800;
-  white-space: nowrap;
 }
 
 .article-template__content table tbody tr:nth-child(even) {
