@@ -194,10 +194,6 @@
     padding: 10px 14px;
     border: none;
     border-bottom: 1px solid #f0f0f0;
-    position: relative;
-    padding-left: 40%;
-    text-align: right;
-    min-height: 44px;
     text-align: left;
   }
 
@@ -207,15 +203,10 @@
 
   .article-template__content table td::before {
     content: attr(data-label);
-    position: absolute;
-    left: 14px;
-    top: 10px;
-    font-weight: 800;
-    color: #0f828c;
-    text-align: left;
-    white-space: nowrap;
     display: block;
+    font-weight: 800;
     font-size: 0.8rem;
+    color: #0f828c;
     margin-bottom: 4px;
     text-transform: uppercase;
     letter-spacing: 0.03em;
