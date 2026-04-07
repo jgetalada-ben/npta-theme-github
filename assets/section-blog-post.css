@@ -139,6 +139,9 @@
   table-layout: auto;
   margin: 1.5rem 0;
   font-size: clamp(13px, 1.4vw, 16px);
+  overflow-x: auto;
+  display: block;
+  max-width: 100%;
 }
 
 .article-template__content table thead {
