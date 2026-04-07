@@ -41,7 +41,7 @@
             {%- endif -%}
 
             {%- if block.settings.blog_show_author -%}
-              <span class="article-header__author">✍️ {{ article.author }}</span>
+              <span class="article-header__author">✍️ {% if article.metafields.custom.custom_blog_post_author != blank %}{{ article.metafields.custom.custom_blog_post_author }}{% else %}{{ article.author }}{% endif %}</span>
             {%- endif -%}
           </div>
 
