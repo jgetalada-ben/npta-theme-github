@@ -91,6 +91,8 @@
   line-height: 1.6;
   font-size: clamp(12px,1.6vw,16px);
   color: #333;
+  display: flex;
+  flex-direction: column;
 }
 
 .article-header__summary p {
@@ -103,12 +105,13 @@
 
 .article-header__cta-btn {
   display: inline-block;
-  margin-top: 1.25rem;
+  margin-top: 3rem;
+  width: fit-content;
   padding: 12px 24px;
   background: #0f828c;
   color: #fff;
   font-weight: 800;
-  font-size: 0.95rem;
+  font-size: clamp(12px,1.6vw,16px);
   text-decoration: none;
   border-radius: 10px;
   transition: opacity 0.15s ease, transform 0.15s ease;
