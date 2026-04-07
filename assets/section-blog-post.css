@@ -198,6 +198,7 @@
     padding-left: 40%;
     text-align: right;
     min-height: 44px;
+    text-align: left;
   }
 
   .article-template__content table td:last-child {
@@ -213,6 +214,11 @@
     color: #0f828c;
     text-align: left;
     white-space: nowrap;
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
   }
 
   .article-template__content table tbody tr:nth-child(even) {
