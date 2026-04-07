@@ -102,6 +102,13 @@
               (function(){
                 var tables = document.querySelectorAll('.article-template__content table');
                 tables.forEach(function(table){
+                  // Wrap table in scrollable container
+                  var wrap = document.createElement('div');
+                  wrap.className = 'article-template__table-wrap';
+                  table.parentNode.insertBefore(wrap, table);
+                  wrap.appendChild(table);
+
+                  // Add data-label attributes for mobile card layout
                   var headers = [];
                   table.querySelectorAll('thead th').forEach(function(th){
                     headers.push(th.textContent.trim());
