@@ -16,7 +16,7 @@
         ".vid2__btn {font-size: clamp(14px, 2vw, 20px);}",
         ".vid2__title {font-family: \"ProximaSanBlack\";}",
         ".vid2__promo {letter-spacing: 2px; font-weight: 500;}",
-        "@media screen and (min-width: 1700px) {.vid2__media {object-position: top; }}"
+        ".vid2__media {object-position: top;}"
       ],
       "name": "Video v2",
       "settings": {
