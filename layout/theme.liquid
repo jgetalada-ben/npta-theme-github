@@ -304,10 +304,41 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {% if template.name == 'index' %}
       <style>
         @media screen and (min-width: 750px) {
+          /* Standardized homepage fonts */
           body {
             font-family: Arial, Helvetica, sans-serif;
             font-size: 20px;
             font-weight: 400;
+          }
+
+          /* Standardized homepage section spacing: 80px top/bottom */
+          .hp-finance {
+            padding-top: 80px !important;
+            padding-bottom: 80px !important;
+          }
+          .hp-process {
+            padding-top: 80px !important;
+            padding-bottom: 80px !important;
+          }
+          .hp-advantage {
+            padding-top: 80px !important;
+            padding-bottom: 80px !important;
+          }
+          .section--logo-carousel {
+            padding-top: 40px !important;
+            padding-bottom: 40px !important;
+          }
+          .wn-grid-section {
+            --pt: 80px !important;
+            --pb: 80px !important;
+          }
+          .qhp {
+            padding-top: 80px !important;
+            padding-bottom: 80px !important;
+          }
+          .tp-section {
+            --pt: 80px !important;
+            --pb: 80px !important;
           }
         }
       </style>
