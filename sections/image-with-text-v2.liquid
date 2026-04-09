@@ -246,7 +246,7 @@
 
   #iwt2-{{ sid }} .iwt2__grid{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.3fr;
     gap: var(--iwt2-gap);
     align-items: start;
   }
@@ -351,31 +351,23 @@
     justify-content: var(--iwt2-btn-justify);
   }
 
+  /* LEARN MORE button - uses global .btn and .button-yg classes */
   #iwt2-{{ sid }} .iwt2__btn{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--iwt2-btn-bg);
-    color: var(--iwt2-btn-text);
-    text-decoration: none;
+    /* The global .btn class already handles overflow, height, line-height */
+    /* We only need to add custom styling here */
     border-radius: var(--iwt2-btn-radius);
-    padding: 12px 32px;
+    padding: 0 32px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: .02em;
     white-space: nowrap;
     font-family: Montserrat, var(--font-proximamedium);
     font-size: 16px;
-    transition: all 0.3s ease;
-    min-height: 48px;
   }
 
-  #iwt2-{{ sid }} .iwt2__btn:hover{
-    opacity: 0.9;
-  }
-
-  /* Elective Financing Button - Exact copy from buy-buttons.liquid */
+  /* Elective Financing Button - uses global .btn and .button-b classes */
   #iwt2-{{ sid }} .financing-btn-inline {
+    /* The global .btn class already handles overflow, height, line-height */
     color: #141414;
     font-family: Montserrat;
     font-size: 14px;
@@ -384,10 +376,10 @@
     letter-spacing: 1.12px;
     text-decoration-line: none;
     text-transform: uppercase;
-    position: relative;
     white-space: nowrap;
     flex: 1 1 auto;
     width: auto !important;
+    padding: 0 16px;
   }
 
   #iwt2-{{ sid }} .financing-btn-inline:before,
@@ -424,13 +416,10 @@
 
   @media (max-width: 989px){
     #iwt2-{{ sid }} .financing-btn-inline {
-      padding-top: 16px;
       flex: 1 1 auto;
-      width: auto !important;
+      width: 100% !important;
       font-size: 13px;
-    }
-    #iwt2-{{ sid }} .financing-btn-inline .btn-label-down {
-      line-height: normal;
+      padding: 0 16px;
     }
   }
 
@@ -457,8 +446,9 @@
     }
     #iwt2-{{ sid }} .iwt2__btn{
       width: 100%;
-      padding: 14px 24px;
+      padding: 0 24px;
       font-size: 14px;
+      /* Removed height and line-height - let global .btn class handle it */
     }
   }
 .iwt2__list {
@@ -564,14 +554,15 @@
           <div class="iwt2__cta">
             {%- if section.settings.button_label != blank -%}
               <a
-                class="iwt2__btn"
+                class="iwt2__btn btn button-yg"
                 {% if section.settings.button_link == blank %}
                   role="link" aria-disabled="true"
                 {% else %}
                   href="{{ section.settings.button_link }}"
                 {% endif %}
               >
-                {{ section.settings.button_label }}
+                <span class="btn-label-down">{{ section.settings.button_label }}</span>
+                <span class="btn-label-down">{{ section.settings.button_label }}</span>
               </a>
             {%- endif -%}
 

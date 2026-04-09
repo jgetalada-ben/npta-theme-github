@@ -1,0 +1,85 @@
+{%- assign sid = section.id -%}
+{{ 'hp-sections.css' | asset_url | stylesheet_tag }}
+
+<section id="hp-process-{{ sid }}" class="hp-process" style="background-color: {{ section.settings.bg_color }};">
+  <div class="hp-process__inner" style="max-width: {{ section.settings.container_width }}px;">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="hp-process__heading" style="font-size: {{ section.settings.title_size }}; color: {{ section.settings.title_color }};">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="hp-process__steps" style="max-width: {{ section.settings.steps_width }}px; margin: 0 auto;">
+      {%- for block in section.blocks -%}
+        <div class="hp-process__step" {{ block.shopify_attributes }}>
+          <span class="hp-process__step-label" style="font-size: {{ section.settings.label_size }}; color: {{ section.settings.label_color }};">STEP {{ forloop.index }}</span>
+          <div class="hp-process__step-title" style="font-size: {{ section.settings.step_title_size }}; color: {{ section.settings.step_title_color }};">{{ block.settings.title }}</div>
+          {%- if block.settings.description != blank -%}
+            <p class="hp-process__step-desc" style="font-size: {{ section.settings.desc_size }}; color: {{ section.settings.desc_color }};">{{ block.settings.description }}</p>
+          {%- endif -%}
+        </div>
+        {%- unless forloop.last -%}
+          <div class="hp-process__arrow" aria-hidden="true">
+            {%- comment -%} Right arrow (desktop) {%- endcomment -%}
+            <svg class="hp-process__arrow-right" xmlns="http://www.w3.org/2000/svg" width="43" height="66" viewBox="0 0 43 66" fill="none">
+              <path d="M0 65.3333V0L42.1667 32.6667L0 65.3333Z" fill="#01241E"/>
+            </svg>
+            {%- comment -%} Down arrow (mobile) {%- endcomment -%}
+            <svg class="hp-process__arrow-down" xmlns="http://www.w3.org/2000/svg" width="66" height="43" viewBox="0 0 66 43" fill="none">
+              <path d="M0 0H65.3333L32.6667 42.1667L0 0Z" fill="#01241E"/>
+            </svg>
+          </div>
+        {%- endunless -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.button_text != blank and section.settings.button_link != blank -%}
+      <a href="{{ section.settings.button_link }}" class="btn button-yg hp-process__btn" style="font-size: {{ section.settings.btn_font_size }}; background-color: {{ section.settings.btn_bg_color }};padding-left:20px;padding-right:20px;">
+        <span class="btn-label-down">{{ section.settings.button_text }}</span>
+        <span class="btn-label-down">{{ section.settings.button_text }}</span>
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HP 3-Step Process",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Section Heading", "default": "Three Steps To A Career You'll Actually Love" },
+    { "type": "text", "id": "button_text", "label": "Button Text", "default": "START MY CAREER IN FITNESS" },
+    { "type": "url", "id": "button_link", "label": "Button Link" },
+    { "type": "header", "content": "Typography" },
+    { "type": "text", "id": "title_size", "label": "Heading Font Size", "default": "clamp(24px, 3.5vw, 44px)" },
+    { "type": "color", "id": "title_color", "label": "Heading Color", "default": "#ffffff" },
+    { "type": "text", "id": "label_size", "label": "Step Label Font Size", "default": "clamp(13px, 1.2vw, 16px)" },
+    { "type": "color", "id": "label_color", "label": "Step Label Color", "default": "#ffffff" },
+    { "type": "text", "id": "step_title_size", "label": "Step Title Font Size", "default": "clamp(24px, 3.5vw, 42px)" },
+    { "type": "color", "id": "step_title_color", "label": "Step Title Color", "default": "#ffffff" },
+    { "type": "text", "id": "desc_size", "label": "Step Description Font Size", "default": "clamp(14px, 1.3vw, 16px)" },
+    { "type": "color", "id": "desc_color", "label": "Step Description Color", "default": "#ffffff" },
+    { "type": "text", "id": "btn_font_size", "label": "Button Font Size", "default": "14px" },
+    { "type": "color", "id": "btn_bg_color", "label": "Button Background Color", "default": "#C1FF72" },
+    { "type": "header", "content": "Layout" },
+    { "type": "color", "id": "bg_color", "label": "Section Background Color", "default": "#0f828c" },
+    { "type": "text", "id": "steps_width", "label": "Steps Container Max Width (px)", "default": "1200" },
+    { "type": "text", "id": "container_width", "label": "Section Max Width (px)", "default": "1400" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "richtext", "id": "title", "label": "Step Title", "default": "<p>Get Certified.<br>Get Credible.</p>" },
+        { "type": "textarea", "id": "description", "label": "Step Description" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "HP 3-Step Process",
+    "blocks": [
+      { "type": "step", "settings": { "title": "<p>Get Certified.<br>Get Credible.</p>", "description": "Gold standard certifications and NPTA makes sure you earn it with confidence." } },
+      { "type": "step", "settings": { "title": "<p>Train Real People.<br>Build Real Confidence.</p>", "description": "Practical, hands-on experience that turns your certification into something you can actually feel." } },
+      { "type": "step", "settings": { "title": "<p>Get Mentored,<br>Get Hired.</p>", "description": "Mentorship, job placement support, and a clear path — so you launch with confidence." } }
+    ]
+  }]
+}
+{% endschema %}

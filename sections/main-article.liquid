@@ -41,21 +41,13 @@
             {%- endif -%}
 
             {%- if block.settings.blog_show_author -%}
-              <span class="article-header__author">✍️ {% if article.metafields.custom.custom_blog_post_author != blank %}{{ article.metafields.custom.custom_blog_post_author }}{% else %}{{ article.author }}{% endif %}</span>
+              <span class="article-header__author">✍️ {{ article.author }}</span>
             {%- endif -%}
           </div>
 
           {%- if article.metafields.custom.blog_summary.value != blank -%}
             <div class="article-header__summary">
               {{ article.metafields.custom.blog_summary.value }}
-              {%- if article.metafields.custom.main_cta_button_url != blank -%}
-                <a
-                  class="article-header__cta-btn"
-                  href="{{ article.metafields.custom.main_cta_button_url }}"
-                >
-                  {{- article.metafields.custom.main_cta_button_label | default: 'Learn More' -}}
-                </a>
-              {%- endif -%}
             </div>
           {%- endif -%}
 
@@ -97,31 +89,6 @@
             <div class="article-template__content page-width page-width--narrow rte">
               {{ article.content }}
             </div>
-
-            <script>
-              (function(){
-                var tables = document.querySelectorAll('.article-template__content table');
-                tables.forEach(function(table){
-                  // Wrap table in scrollable container
-                  var wrap = document.createElement('div');
-                  wrap.className = 'article-template__table-wrap';
-                  table.parentNode.insertBefore(wrap, table);
-                  wrap.appendChild(table);
-
-                  // Add data-label attributes for mobile card layout
-                  var headers = [];
-                  table.querySelectorAll('thead th').forEach(function(th){
-                    headers.push(th.textContent.trim());
-                  });
-                  if(!headers.length) return;
-                  table.querySelectorAll('tbody tr').forEach(function(tr){
-                    tr.querySelectorAll('td').forEach(function(td, i){
-                      if(headers[i]) td.setAttribute('data-label', headers[i]);
-                    });
-                  });
-                });
-              })();
-            </script>
 
       <script type="application/ld+json">
 {
@@ -177,60 +144,30 @@
     </div>
 
     <aside class="article-sidebar">
-      <div id="table-of-contents">
-        <h2>Table of Contents</h2>
-        <p>No Table of Contents available.</p>
-      </div>
-
-      <div class="article-sidebar__sticky">
-        {%- if article.metafields.custom.sidebar_banner_image != blank -%}
-          <div class="article-sidebar__banner">
-            {%- if article.metafields.custom.sidebar_banner_url != blank -%}
-              <a href="{{ article.metafields.custom.sidebar_banner_url }}">
-                <img
-                  src="{{ article.metafields.custom.sidebar_banner_image | image_url: width: 900 }}"
-                  alt="{{ article.metafields.custom.sidebar_banner_image.alt | default: 'Sidebar banner' | escape }}"
-                  loading="lazy"
-                  width="450"
-                >
-              </a>
-            {%- else -%}
-              <img
-                src="{{ article.metafields.custom.sidebar_banner_image | image_url: width: 900 }}"
-                alt="{{ article.metafields.custom.sidebar_banner_image.alt | default: 'Sidebar banner' | escape }}"
-                loading="lazy"
-                width="450"
-              >
-            {%- endif -%}
-          </div>
-        {%- endif -%}
-
-        <div class="article-sidebar__ghl-form">
-          {%- if article.metafields.custom.sidebar_ghl_form_embed != blank -%}
-            {{ article.metafields.custom.sidebar_ghl_form_embed }}
-          {%- else -%}
-            <iframe
-              src="https://app.npta.ca/widget/form/lJveusatl20r4YtwufAG"
-              style="width:100%;height:100%;border:none;border-radius:0px"
-              id="inline-lJveusatl20r4YtwufAG"
-              data-layout="{'id':'INLINE'}"
-              data-trigger-type="alwaysShow"
-              data-trigger-value=""
-              data-activation-type="alwaysActivated"
-              data-activation-value=""
-              data-deactivation-type="neverDeactivate"
-              data-deactivation-value=""
-              data-form-name="$25 OFF Pop Up Form - Blog"
-              data-height="543"
-              data-layout-iframe-id="inline-lJveusatl20r4YtwufAG"
-              data-form-id="lJveusatl20r4YtwufAG"
-              title="$25 OFF Pop Up Form - Blog"
-            ></iframe>
-          {%- endif -%}
-          <script src="https://app.npta.ca/js/form_embed.js"></script>
-        </div>
-      </div>
-    </aside> 
+  <div id="table-of-contents">
+    <h2>Table of Contents</h2>
+    <p>No Table of Contents available.</p> <!-- Default message, replaced dynamically by JS -->
+  </div>
+      <iframe
+  src="https://app.npta.ca/widget/form/lJveusatl20r4YtwufAG"
+  style="width:100%;height:100%;border:none;border-radius:0px"
+  id="inline-lJveusatl20r4YtwufAG" 
+  data-layout="{'id':'INLINE'}"
+  data-trigger-type="alwaysShow"
+  data-trigger-value=""
+  data-activation-type="alwaysActivated"
+  data-activation-value=""
+  data-deactivation-type="neverDeactivate"
+  data-deactivation-value=""
+  data-form-name="$25 OFF Pop Up Form - Blog"
+  data-height="543"
+  data-layout-iframe-id="inline-lJveusatl20r4YtwufAG"
+  data-form-id="lJveusatl20r4YtwufAG"
+  title="$25 OFF Pop Up Form - Blog"
+      >
+</iframe>
+<script src="https://app.npta.ca/js/form_embed.js"></script>
+</aside> 
     </div>
 
 

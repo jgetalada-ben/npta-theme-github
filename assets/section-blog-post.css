@@ -91,8 +91,6 @@
   line-height: 1.6;
   font-size: clamp(12px,1.6vw,16px);
   color: #333;
-  display: flex;
-  flex-direction: column;
 }
 
 .article-header__summary p {
@@ -103,25 +101,6 @@
   margin-top: 0.75rem;
 }
 
-.article-header__cta-btn {
-  display: inline-block;
-  margin-top: 3rem;
-  width: fit-content;
-  padding: 12px 24px;
-  background: #0f828c;
-  color: #fff;
-  font-weight: 800;
-  font-size: clamp(12px,1.6vw,16px);
-  text-decoration: none;
-  border-radius: 10px;
-  transition: opacity 0.15s ease, transform 0.15s ease;
-}
-
-.article-header__cta-btn:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-}
-
 /* Responsive adjustments for summary */
 @media screen and (max-width: 767px) {
   .article-header__summary {
@@ -130,94 +109,6 @@
   }
 }
 
-/* ============================================
-   Responsive Tables in Article Content
-   ============================================ */
-.article-template__content table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: auto;
-  margin: 1.5rem 0;
-  font-size: clamp(13px, 1.4vw, 16px);
-  overflow-x: auto;
-  display: block;
-  max-width: 100%;
-}
-
-.article-template__content table thead {
-  background: #0f828c;
-  color: #fff;
-}
-
-.article-template__content table th,
-.article-template__content table td {
-  padding: 12px 16px;
-  text-align: left;
-  border: 1px solid #e0e0e0;
-  vertical-align: top;
-}
-
-.article-template__content table th {
-  font-weight: 800;
-}
-
-.article-template__content table tbody tr:nth-child(even) {
-  background: #f8f9fa;
-}
-
-.article-template__content table tbody tr:hover {
-  background: #eef7f8;
-}
-
-@media screen and (max-width: 767px) {
-  .article-template__content table,
-  .article-template__content table thead,
-  .article-template__content table tbody,
-  .article-template__content table tr,
-  .article-template__content table th,
-  .article-template__content table td {
-    display: block;
-    width: 100%;
-  }
-
-  .article-template__content table thead {
-    display: none;
-  }
-
-  .article-template__content table tr {
-    margin-bottom: 12px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    overflow: hidden;
-    background: #fff;
-  }
-
-  .article-template__content table td {
-    padding: 10px 14px;
-    border: none;
-    border-bottom: 1px solid #f0f0f0;
-    text-align: left;
-  }
-
-  .article-template__content table td:last-child {
-    border-bottom: none;
-  }
-
-  .article-template__content table td::before {
-    content: attr(data-label);
-    display: block;
-    font-weight: 800;
-    font-size: 0.8rem;
-    color: #0f828c;
-    margin-bottom: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-  }
-
-  .article-template__content table tbody tr:nth-child(even) {
-    background: #fff;
-  }
-}
 
 /* Responsive: Image on right, text on left */
 @media screen and (min-width: 768px) {
@@ -317,7 +208,6 @@
 .article-sidebar {
   width: 100%;
   max-width: 600px;
-  align-self: stretch;
 }
 
 
@@ -326,32 +216,9 @@
   margin-bottom: 10px;
 }
 
-/* Sidebar banner */
-.article-sidebar__banner {
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.article-sidebar__banner img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 8px;
-}
-
-.article-sidebar__banner a {
-  display: block;
-  transition: opacity 0.2s ease;
-}
-
-.article-sidebar__banner a:hover {
-  opacity: 0.9;
-}
-
-/* Sticky: only banner + GHL form follow on scroll, TOC stays in place */
+/* Sticky sidebar effect */
 @media screen and (min-width: 768px) {
-  .article-sidebar__sticky {
+  .article-sidebar {
     position: sticky;
     top: 10px;
     height: fit-content;

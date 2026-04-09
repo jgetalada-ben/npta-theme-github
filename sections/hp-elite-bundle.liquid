@@ -1,0 +1,333 @@
+{%- assign sid = section.id -%}
+{{ 'hp-sections.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%} Parse layout ratio {%- endcomment -%}
+{%- assign ratio = section.settings.layout_ratio | default: '50-50' -%}
+{%- case ratio -%}
+  {%- when '40-60' -%}{%- assign img_flex = '0 0 40%' -%}{%- assign content_flex = '0 0 60%' -%}
+  {%- when '60-40' -%}{%- assign img_flex = '0 0 60%' -%}{%- assign content_flex = '0 0 40%' -%}
+  {%- when '30-70' -%}{%- assign img_flex = '0 0 30%' -%}{%- assign content_flex = '0 0 70%' -%}
+  {%- when '70-30' -%}{%- assign img_flex = '0 0 70%' -%}{%- assign content_flex = '0 0 30%' -%}
+  {%- else -%}{%- assign img_flex = '0 0 50%' -%}{%- assign content_flex = '0 0 50%' -%}
+{%- endcase -%}
+
+<section id="hp-elite-{{ sid }}" class="hp-elite">
+  <div class="hp-elite__inner" style="max-width: {{ section.settings.container_width }}px;">
+    <h2 class="hp-elite__title" style="font-size: {{ section.settings.title_size }}; color: {{ section.settings.title_color }};">{{ section.settings.heading }}</h2>
+    <p class="hp-elite__subtitle" style="font-size: {{ section.settings.subtitle_size }}; color: {{ section.settings.subtitle_color }};">{{ section.settings.subtitle }}</p>
+
+    <div class="hp-elite__grid hp-elite__grid--{{ section.settings.desktop_layout }} hp-elite__grid--mobile-{{ section.settings.mobile_layout }}" style="--hp-elite-img-flex: {{ img_flex }}; --hp-elite-content-flex: {{ content_flex }}; max-width: {{ section.settings.grid_width }}px;">
+      <div class="hp-elite__image">
+        {%- if section.settings.product_image != blank -%}
+          <img
+            src="{{ section.settings.product_image | image_url: width: 1000 }}"
+            srcset="{{ section.settings.product_image | image_url: width: 500 }} 500w,
+                    {{ section.settings.product_image | image_url: width: 800 }} 800w,
+                    {{ section.settings.product_image | image_url: width: 1000 }} 1000w"
+            sizes="(max-width: 749px) 90vw, 50vw"
+            alt="{{ section.settings.heading | escape }}"
+            loading="lazy"
+            width="500"
+            height="600">
+        {%- endif -%}
+      </div>
+
+      <div class="hp-elite__details">
+        <h3 class="hp-elite__details-title" style="font-size: {{ section.settings.details_title_size }}; color: {{ section.settings.title_color }};">{{ section.settings.details_heading }}</h3>
+        <ul class="hp-elite__checklist">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'checklist_item' -%}
+              <li class="hp-elite__check-item" style="font-size: {{ section.settings.checklist_size }}; color: {{ section.settings.body_color }};" {{ block.shopify_attributes }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="12" cy="12" r="12" fill="#0f828c"/>
+                  <path d="M7 12.5l3 3 7-7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>{{ block.settings.text }}</span>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+
+        {%- if section.settings.bonus_text != blank -%}
+          <div class="hp-elite__bonus" style="background-color: {{ section.settings.bonus_bg_color }}; color: {{ section.settings.bonus_text_color }}; font-size: {{ section.settings.bonus_font_size }};">
+            {{ section.settings.bonus_text }}
+          </div>
+        {%- endif -%}
+
+        <div class="hp-elite__pricing">
+          <span class="hp-elite__sale-label" style="font-size: {{ section.settings.price_label_size }};">SALE PRICE:</span>
+          <span class="hp-elite__sale-price" style="font-size: {{ section.settings.price_size }};">{{ section.settings.sale_price }}</span>
+          <span class="hp-elite__reg-price" style="font-size: {{ section.settings.price_label_size }};">{{ section.settings.regular_price }}</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="hp-elite__actions">
+      {%- if section.settings.cart_link != blank -%}
+        <a href="{{ section.settings.cart_link }}" class="btn button-yg" style="font-size: {{ section.settings.btn1_font_size }}; background-color: {{ section.settings.btn1_bg_color }};padding-left:20px;padding-right:20px;">
+          <span class="btn-label-down" style="color: {{ section.settings.btn1_text_color }};">{{ section.settings.btn1_text }}</span>
+          <span class="btn-label-down" style="color: {{ section.settings.btn1_text_color }};">{{ section.settings.btn1_text }}</span>
+        </a>
+      {%- endif -%}
+      {%- if section.settings.lnpl_link != blank -%}
+        <a href="{{ section.settings.lnpl_link }}"
+           class="btn button-outline-hp"
+           style="font-size: {{ section.settings.btn2_font_size }}; background-color: {{ section.settings.btn2_bg_color }};padding-left:20px;padding-right:20px;"
+           data-elective-financing-link
+           data-product-handle="{{ section.settings.elective_product_handle }}"
+           data-product-id="{{ section.settings.elective_product_id }}"
+           data-product-title="{{ section.settings.heading | escape }}">
+          <span class="btn-label-down" style="color: {{ section.settings.btn2_text_color }};">{{ section.settings.btn2_text }}</span>
+          <span class="btn-label-down" style="color: {{ section.settings.btn2_text_color }};">{{ section.settings.btn2_text }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{%- comment -%} GHL Finance Modal + Elective script {%- endcomment -%}
+{% render 'ghl-finance-modal' %}
+
+<script>
+(function(){
+  const LINK_SEL = '[data-elective-financing-link]';
+  const GHL_FORM_ID = 'jbeQYeHWMI1dM9tX0mYF';
+  const GHL_BASE = `https://app.npta.ca/widget/form/${GHL_FORM_ID}`;
+
+  const MODAL_ID = 'ghlFinanceModal';
+  const MOUNT_ID = 'ghlFormMount';
+
+  const TARGET_KEY = 'npta_finance_target';
+  const SUBMITTED_KEY = 'npta_finance_submitted_ts';
+
+  const SUBMIT_TTL_DAYS = 0;
+
+  function getModal(){ return document.getElementById(MODAL_ID); }
+  function getMount(){ return document.getElementById(MOUNT_ID); }
+
+  function openModal(){
+    const m = getModal();
+    if(!m) return;
+    m.hidden = false;
+    m.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(opts){
+    const m = getModal();
+    if(!m) return;
+    m.hidden = true;
+    m.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+    const mount = getMount();
+    if (mount && (!opts || opts.clear !== false)) mount.innerHTML = '';
+  }
+
+  function isSubmitted(){
+    try {
+      const v = localStorage.getItem(SUBMITTED_KEY);
+      if (!v) return false;
+      const ts = parseInt(v, 10);
+      if (!Number.isFinite(ts)) return true;
+      if (SUBMIT_TTL_DAYS && SUBMIT_TTL_DAYS > 0) {
+        const ttlMs = SUBMIT_TTL_DAYS * 24 * 60 * 60 * 1000;
+        if (Date.now() - ts > ttlMs) return false;
+      }
+      return true;
+    } catch(e){ return false; }
+  }
+
+  function toQuery(obj){
+    return Object.keys(obj || {})
+      .filter(k => obj[k] != null && obj[k] !== '')
+      .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(obj[k]))
+      .join('&');
+  }
+
+  function buildTarget(href, a){
+    const u = new URL(href, window.location.origin);
+    const q = u.searchParams;
+    if (a.dataset.productHandle) q.set('product_handle', a.dataset.productHandle);
+    if (a.dataset.productId) q.set('product_id', a.dataset.productId);
+    const title = a.dataset.productTitle || document.title || '';
+    if (title) q.set('product_title', title);
+    u.search = q.toString();
+    return u.toString();
+  }
+
+  function buildFormSrc(a){
+    const attr = (window.__nptaGetAttribution && window.__nptaGetAttribution()) || {};
+    const utm = {
+      utm_source: attr.utm_source || '',
+      utm_medium: attr.utm_medium || '',
+      utm_campaign: attr.utm_campaign || '',
+      utm_term: attr.utm_term || '',
+      utm_content: attr.utm_content || ''
+    };
+    const prod = {
+      product_title: a.dataset.productTitle || document.title || '',
+      product_handle: a.dataset.productHandle || '',
+      product_id: a.dataset.productId || ''
+    };
+    const qs = [toQuery(utm), toQuery(prod)].filter(Boolean).join('&');
+    return qs ? `${GHL_BASE}?${qs}` : GHL_BASE;
+  }
+
+  function injectIframe(src){
+    const mount = getMount();
+    if (!mount) return;
+    mount.innerHTML = '';
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.title = 'Elective Financing Form';
+    iframe.loading = 'lazy';
+    iframe.setAttribute('allowtransparency','true');
+    iframe.setAttribute('scrolling','auto');
+    mount.appendChild(iframe);
+  }
+
+  function wire(root){
+    root = root || document;
+    const links = root.querySelectorAll(LINK_SEL);
+    if (!links.length) return;
+    links.forEach((a) => {
+      if (a.dataset.ghlWired === '1') return;
+      a.dataset.ghlWired = '1';
+      a.addEventListener('click', function(ev){
+        ev.preventDefault();
+        ev.stopPropagation();
+        const targetUrl = buildTarget(a.getAttribute('href'), a);
+        sessionStorage.setItem(TARGET_KEY, targetUrl);
+        if (isSubmitted()) {
+          window.location.href = targetUrl;
+          return;
+        }
+        const src = buildFormSrc(a);
+        injectIframe(src);
+        openModal();
+      }, { capture:true });
+    });
+  }
+
+  document.addEventListener('click', function(e){
+    if (e.target.matches('[data-close-ghl], [data-close-ghl] *')) closeModal({ clear:true });
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeModal({ clear:true });
+  });
+  document.addEventListener('DOMContentLoaded', function(){
+    closeModal({ clear:true });
+    wire(document);
+  });
+  window.addEventListener('pageshow', function(){
+    closeModal({ clear:true });
+  });
+  document.addEventListener('shopify:section:load', function(e){
+    closeModal({ clear:true });
+    wire(e.target);
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "HP Elite Bundle",
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The Elite Bundle" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "NASM certified. NPTA™ trained. Career ready." },
+    { "type": "image_picker", "id": "product_image", "label": "Product Image" },
+    { "type": "text", "id": "details_heading", "label": "Details Heading", "default": "What's included" },
+    { "type": "text", "id": "bonus_text", "label": "Bonus Text", "default": "FREE GLP-1 CERTIFICATION - Understanding Weight Loss Medications" },
+    { "type": "text", "id": "sale_price", "label": "Sale Price", "default": "$2,497" },
+    { "type": "text", "id": "regular_price", "label": "Regular Price", "default": "$4,899" },
+
+    { "type": "header", "content": "Button 1 (Primary)" },
+    { "type": "text", "id": "btn1_text", "label": "Button 1 Text", "default": "ADD TO CART" },
+    { "type": "url", "id": "cart_link", "label": "Button 1 Link" },
+    { "type": "text", "id": "btn1_font_size", "label": "Button 1 Font Size", "default": "14px" },
+    { "type": "color", "id": "btn1_text_color", "label": "Button 1 Text Color", "default": "#141414" },
+    { "type": "color", "id": "btn1_bg_color", "label": "Button 1 Background Color", "default": "#C1FF72" },
+
+    { "type": "header", "content": "Button 2 (Elective / LNPL)" },
+    { "type": "text", "id": "btn2_text", "label": "Button 2 Text", "default": "LEARN NOW, PAY LATER" },
+    { "type": "url", "id": "lnpl_link", "label": "Button 2 Link (Elective checkout URL)" },
+    { "type": "text", "id": "btn2_font_size", "label": "Button 2 Font Size", "default": "14px" },
+    { "type": "color", "id": "btn2_text_color", "label": "Button 2 Text Color", "default": "#141414" },
+    { "type": "color", "id": "btn2_bg_color", "label": "Button 2 Background Color", "default": "#ffffff" },
+    { "type": "color", "id": "btn2_border_color", "label": "Button 2 Border Color", "default": "#141414" },
+    { "type": "text", "id": "elective_product_handle", "label": "Elective Product Handle", "info": "e.g. elite-bundle" },
+    { "type": "text", "id": "elective_product_id", "label": "Elective Product ID", "info": "Numeric Shopify product ID" },
+
+    { "type": "header", "content": "Typography" },
+    { "type": "text", "id": "title_size", "label": "Title Font Size", "default": "clamp(28px, 4vw, 48px)" },
+    { "type": "color", "id": "title_color", "label": "Title Color", "default": "#141414" },
+    { "type": "text", "id": "subtitle_size", "label": "Subtitle Font Size", "default": "clamp(14px, 1.5vw, 18px)" },
+    { "type": "color", "id": "subtitle_color", "label": "Subtitle Color", "default": "#555555" },
+    { "type": "text", "id": "details_title_size", "label": "Details Title Font Size", "default": "clamp(20px, 2.5vw, 30px)" },
+    { "type": "text", "id": "checklist_size", "label": "Checklist Font Size", "default": "clamp(14px, 1.3vw, 16px)" },
+    { "type": "color", "id": "body_color", "label": "Body/Checklist Color", "default": "#141414" },
+    { "type": "text", "id": "bonus_font_size", "label": "Bonus Font Size", "default": "clamp(13px, 1.2vw, 15px)" },
+    { "type": "color", "id": "bonus_bg_color", "label": "Bonus Background Color", "default": "#e8e6e0" },
+    { "type": "color", "id": "bonus_text_color", "label": "Bonus Text Color", "default": "#141414" },
+    { "type": "text", "id": "price_label_size", "label": "Price Label Font Size", "default": "clamp(14px, 1.3vw, 16px)" },
+    { "type": "text", "id": "price_size", "label": "Sale Price Font Size", "default": "clamp(24px, 3vw, 36px)" },
+
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select",
+      "id": "layout_ratio",
+      "label": "Image / Content Width Ratio",
+      "options": [
+        { "value": "30-70", "label": "30% Image / 70% Content" },
+        { "value": "40-60", "label": "40% Image / 60% Content" },
+        { "value": "50-50", "label": "50% Image / 50% Content" },
+        { "value": "60-40", "label": "60% Image / 40% Content" },
+        { "value": "70-30", "label": "70% Image / 30% Content" }
+      ],
+      "default": "50-50"
+    },
+    {
+      "type": "select",
+      "id": "desktop_layout",
+      "label": "Desktop Layout",
+      "options": [
+        { "value": "image-first", "label": "Image Left / Content Right" },
+        { "value": "content-first", "label": "Content Left / Image Right" }
+      ],
+      "default": "image-first"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Mobile Layout",
+      "options": [
+        { "value": "image-first", "label": "Image Top / Content Bottom" },
+        { "value": "content-first", "label": "Content Top / Image Bottom" }
+      ],
+      "default": "image-first"
+    },
+    { "type": "text", "id": "grid_width", "label": "Grid Max Width - Image + Content (px)", "default": "834" },
+    { "type": "text", "id": "container_width", "label": "Section Max Width (px)", "default": "1400" }
+  ],
+  "blocks": [
+    {
+      "type": "checklist_item",
+      "name": "Checklist Item",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Item Text", "default": "NASM CPT - Certified Personal Trainer" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "HP Elite Bundle",
+    "blocks": [
+      { "type": "checklist_item", "settings": { "text": "NASM CPT - Certified Personal Trainer" } },
+      { "type": "checklist_item", "settings": { "text": "NASM CNC - Certified Nutrition Coach" } },
+      { "type": "checklist_item", "settings": { "text": "NASM PES - Performance Exercise Specialist" } },
+      { "type": "checklist_item", "settings": { "text": "NASM CES - Corrective Exercise Specialist" } }
+    ]
+  }]
+}
+{% endschema %}

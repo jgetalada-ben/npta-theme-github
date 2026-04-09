@@ -4083,10 +4083,9 @@ height: 1px;
 }
 .btn-label-down {
   color:  #141414;
-  font-family: Montserrat;
-  font-size: 14px;
+  font-size: clamp(14px, 2vw, 20px);
   font-style: normal;
-  font-weight: 700;
+  font-weight: 100;
   /* letter-spacing: 1.12px; */
   text-transform: uppercase;
   text-decoration: none;

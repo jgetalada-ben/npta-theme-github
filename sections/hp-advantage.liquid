@@ -1,0 +1,256 @@
+{%- assign sid = section.id -%}
+{{ 'hp-sections.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .hp-advantage__expandable-inner-{{ sid }} {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s ease;
+  }
+  .hp-advantage__expandable-inner-{{ sid }}.is-expanded {
+    grid-template-rows: 1fr;
+  }
+  .hp-advantage__expandable-hidden {
+    overflow: hidden;
+  }
+  .hp-advantage__expandable-visible p,
+  .hp-advantage__expandable-hidden p {
+    margin: 0 0 0.75rem;
+  }
+  .hp-advantage__expandable-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-weight: 700;
+    color: #000;
+    font-size: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 0.5rem;
+    transition: opacity 0.2s ease;
+  }
+  .hp-advantage__expandable-toggle:hover {
+    opacity: 0.7;
+  }
+  .hp-advantage__expandable-toggle svg {
+    transition: transform 0.4s ease;
+    width: 14px;
+    height: 14px;
+  }
+  .hp-advantage__expandable-toggle.is-expanded svg {
+    transform: rotate(180deg);
+  }
+  .hp-advantage__expandable-hidden h4 {
+    font-family: var(--hp-font-label);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+</style>
+
+<section id="hp-advantage-{{ sid }}" class="hp-advantage">
+  <div class="hp-advantage__inner hp-advantage__inner--desktop-{{ section.settings.desktop_layout }} hp-advantage__inner--mobile-{{ section.settings.mobile_layout }}" style="max-width: {{ section.settings.container_width }}px;">
+    <div class="hp-advantage__image">
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 1188 }}"
+          srcset="{{ section.settings.image | image_url: width: 600 }} 600w,
+                  {{ section.settings.image | image_url: width: 1188 }} 1188w"
+          sizes="(max-width: 749px) 100vw, 42%"
+          alt="{{ section.settings.heading | escape }}"
+          loading="lazy"
+          width="594"
+          height="1018">
+      {%- endif -%}
+    </div>
+
+    <div class="hp-advantage__content">
+      <h2 class="hp-advantage__title" style="font-size: {{ section.settings.title_size }}; color: {{ section.settings.title_color }};">{{ section.settings.heading }}</h2>
+
+      <div class="hp-advantage__benefits">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'benefit' -%}
+            <div class="hp-advantage__benefit" {{ block.shopify_attributes }}>
+              <h4 class="hp-advantage__benefit-title" style="font-size: {{ section.settings.benefit_title_size }}; color: {{ section.settings.benefit_title_color }};">{{ block.settings.title }}</h4>
+              <p class="hp-advantage__benefit-desc" style="font-size: {{ section.settings.body_size }}; color: {{ section.settings.body_color }};">{{ block.settings.description }}</p>
+            </div>
+          {%- elsif block.type == 'expandable_text' -%}
+            <div class="hp-advantage__benefit" {{ block.shopify_attributes }}>
+              {%- if block.settings.title != blank -%}
+                <h4 class="hp-advantage__benefit-title">{{ block.settings.title }}</h4>
+              {%- endif -%}
+              <div class="hp-advantage__benefit-desc" style="font-size: {{ section.settings.body_size }}; color: {{ section.settings.body_color }};" data-expandable-text>
+                {%- if block.settings.visible_text != blank -%}
+                  <div class="hp-advantage__expandable-visible">
+                    {{ block.settings.visible_text }}
+                  </div>
+                {%- endif -%}
+
+                {%- if block.settings.hidden_text != blank -%}
+                  <div class="hp-advantage__expandable-inner-{{ sid }}" data-expandable-inner>
+                    <div class="hp-advantage__expandable-hidden">
+                      {{ block.settings.hidden_text }}
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    class="hp-advantage__expandable-toggle"
+                    data-expandable-toggle
+                    data-label-more="{{ block.settings.read_more_label | escape }}"
+                    data-label-less="{{ block.settings.read_less_label | escape }}"
+                    aria-expanded="false"
+                  >
+                    <span data-toggle-label>{{ block.settings.read_more_label | escape }}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </button>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.button_text != blank and section.settings.button_link != blank -%}
+        <a href="{{ section.settings.button_link }}" class="btn button-b hp-advantage__btn" style="font-size: {{ section.settings.btn_font_size }}; background-color: {{ section.settings.btn_bg_color }};">
+          <span class="btn-label-down" style="color: {{ section.settings.btn_text_color }};">{{ section.settings.button_text }}</span>
+          <span class="btn-label-down" style="color: {{ section.settings.btn_text_color }};">{{ section.settings.button_text }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- comment -%} Partner logos {%- endcomment -%}
+  <div class="hp-advantage__logos" style="max-width: {{ section.settings.container_width }}px;">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'logo' and block.settings.logo != blank -%}
+        <img
+          src="{{ block.settings.logo | image_url: width: 272 }}"
+          alt="Partner logo"
+          loading="lazy"
+          width="136"
+          height="136"
+          class="hp-advantage__logo"
+          {{ block.shopify_attributes }}>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+<script>
+  (function () {
+    var toggles = document.querySelectorAll(
+      '#hp-advantage-{{ sid }} [data-expandable-toggle]'
+    );
+    toggles.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var container = btn.closest('[data-expandable-text]');
+        var inner = container.querySelector('[data-expandable-inner]');
+        var label = btn.querySelector('[data-toggle-label]');
+        var isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+        if (isExpanded) {
+          inner.classList.remove('is-expanded');
+          btn.classList.remove('is-expanded');
+          btn.setAttribute('aria-expanded', 'false');
+          label.textContent = btn.dataset.labelMore;
+          container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          inner.classList.add('is-expanded');
+          btn.classList.add('is-expanded');
+          btn.setAttribute('aria-expanded', 'true');
+          label.textContent = btn.dataset.labelLess;
+        }
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "HP NPTA Advantage",
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The NPTA Advantage" },
+    { "type": "text", "id": "button_text", "label": "CTA Button Text", "default": "TALK TO A CAREER ADVISOR TODAY" },
+    { "type": "url", "id": "button_link", "label": "CTA Button Link" },
+
+    { "type": "header", "content": "Button" },
+    { "type": "text", "id": "btn_font_size", "label": "Button Font Size", "default": "14px" },
+    { "type": "color", "id": "btn_text_color", "label": "Button Text Color", "default": "#ffffff" },
+    { "type": "color", "id": "btn_bg_color", "label": "Button Background Color", "default": "#0f828c" },
+
+    { "type": "header", "content": "Typography" },
+    { "type": "text", "id": "title_size", "label": "Heading Font Size", "default": "clamp(28px, 4vw, 48px)" },
+    { "type": "color", "id": "title_color", "label": "Heading Color", "default": "#141414" },
+    { "type": "text", "id": "benefit_title_size", "label": "Benefit Title Font Size", "default": "clamp(14px, 1.3vw, 17px)" },
+    { "type": "color", "id": "benefit_title_color", "label": "Benefit Title Color", "default": "#0f828c" },
+    { "type": "text", "id": "body_size", "label": "Body Font Size", "default": "clamp(14px, 1.3vw, 16px)" },
+    { "type": "color", "id": "body_color", "label": "Body Color", "default": "#555555" },
+
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select",
+      "id": "desktop_layout",
+      "label": "Desktop Layout",
+      "options": [
+        { "value": "image-left", "label": "Image Left / Content Right" },
+        { "value": "image-right", "label": "Content Left / Image Right" }
+      ],
+      "default": "image-left"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Mobile Layout",
+      "options": [
+        { "value": "image-top", "label": "Image Top / Content Bottom" },
+        { "value": "content-top", "label": "Content Top / Image Bottom" }
+      ],
+      "default": "image-top"
+    },
+    { "type": "text", "id": "container_width", "label": "Container Max Width (px)", "default": "1400" }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "OFFICIAL CANADIAN NASM PARTNER" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Earn your NASM certification through an official Canadian partner, combining global standards with localized support and guidance." }
+      ]
+    },
+    {
+      "type": "expandable_text",
+      "name": "Expandable Text",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title (optional)" },
+        { "type": "richtext", "id": "visible_text", "label": "Visible paragraph", "info": "Always shown." },
+        { "type": "richtext", "id": "hidden_text", "label": "Hidden paragraph(s)", "info": "Revealed when the user clicks 'Read more'." },
+        { "type": "text", "id": "read_more_label", "label": "Read more label", "default": "Read more" },
+        { "type": "text", "id": "read_less_label", "label": "Read less label", "default": "Read less" }
+      ]
+    },
+    {
+      "type": "logo",
+      "name": "Partner Logo",
+      "settings": [
+        { "type": "image_picker", "id": "logo", "label": "Logo Image" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "HP NPTA Advantage",
+    "blocks": [
+      { "type": "benefit", "settings": { "title": "OFFICIAL CANADIAN NASM PARTNER", "description": "Earn your NASM certification through an official Canadian partner, combining global standards with localized support and guidance." } },
+      { "type": "benefit", "settings": { "title": "PRACTICAL REAL-WORLD TRAINING", "description": "Build confidence beyond theory with an apprenticeship-based approach grounded in real coaching experience and the NASM OPT™ Model." } },
+      { "type": "benefit", "settings": { "title": "FLEXIBLE, SELF-PACED LEARNING", "description": "Study on your own schedule with 100% online programming designed to fit around your life and commitments." } },
+      { "type": "benefit", "settings": { "title": "CAREER-READY, WORLDWIDE", "description": "Graduate with a globally respected certification plus the local insight, mentorship, and support needed to enter the global fitness industry with clarity." } }
+    ]
+  }]
+}
+{% endschema %}

@@ -17,8 +17,8 @@
         "message_XtU6jK": {
           "type": "message",
           "settings": {
-            "text": "<p> <a href=\"https://www.npta.ca/collections/career\" title=\"https://www.npta.ca/collections/career\">Elite Bundle Sale: Up to 50% off - Claim now! </a>  </p>",
-            "link_label": "Shop now",
+            "text": "<p> <a href=\"/collections/bundles\" title=\"Bundles\">Elite Bundle Sale: Up to 50% off - Claim now! </a>  </p>",
+            "link_label": "",
             "link_url": ""
           }
         },
@@ -36,14 +36,13 @@
         "message_XtU6jK",
         "message_7M8RCx"
       ],
-      "disabled": true,
       "custom_css": [
         ".announcement .rt p {text-transform: uppercase; letter-spacing: 0.5px;}",
         ".announcement .rt p a {color: #fff;}",
         ".announcement .rt p span {color: #c1ff72;}"
       ],
       "settings": {
-        "bg_color": "#0f828c",
+        "bg_color": "#01241e",
         "text_color": "#ffffff",
         "font_size": 20,
         "padding_y": 20,
@@ -51,7 +50,12 @@
         "countdown_enabled": false,
         "countdown_label": "Ends in:",
         "countdown_end": "2026-02-28T23:59:59-08:00",
-        "countdown_expired_text": "Sale ended"
+        "countdown_expired_text": "Sale ended",
+        "partner_enabled": true,
+        "partner_icon": "shopify://shop_images/mdi_leaf-maple.png",
+        "partner_text": "NASM OFFICIAL CANADIAN PARTNER",
+        "partner_font_size": "clamp(14px,1.6vw,16px)",
+        "partner_text_color": "#ffffff"
       }
     },
     "header": {

@@ -19,7 +19,6 @@
 {% stylesheet %}
     /* Section Heading */
     .wn-heading {
-        text-align: left;
         margin-bottom: 4rem;
         padding: 0 50px;
         font-family: var(--font-anton);
@@ -27,18 +26,14 @@
 
     .wn-heading__title {
         font-family: var(--font-anton);
-        font-size: clamp(21px, 3vw, 40px);
         font-weight: 400;
         line-height: 1.1;
-        color: #01241E;
-        text-transform: uppercase;
+        text-transform: capitalize;
         margin: 0 0 0.5rem 0;
     }
 
     .wn-heading__subtitle {
-        color: #0b0b0b;
         font-family: var(--font-poppins400);
-        font-size: clamp(14px, 1.3vw, 18px);
         line-height: 1.5;
         margin: 0;
     }
@@ -62,8 +57,8 @@
     }
 
     .wn-grid-section.is-full .wn-wrap {
-        max-width: none; 
-        max-height: none; 
+        max-width: none;
+        max-height: none;
     }
 
     .wn-grid-section .wn-row {
@@ -74,7 +69,7 @@
         min-height: var(--row-h);
     }
     .wn-grid-section .wn-row.right-large {
-        grid-template-columns: 1fr 2fr; 
+        grid-template-columns: 1fr 2fr;
     }
 
     .wn-grid-section .wn-card {
@@ -117,10 +112,9 @@
     .card__item-content {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         min-height: 100%;
     }
-    
+
     .wn-grid-section .wn-card.is-large .wn-card__body {
         width: 48%;
     }
@@ -153,7 +147,6 @@
         margin: 0;
         font-family: var(--font-anton);
         font-weight: 400;
-        font-size: clamp(18px,2.4vw,36px);
         line-height: 1.05;
         color: inherit;
         text-shadow: 0 1px 1px rgba(0,0,0,.3);
@@ -161,21 +154,18 @@
         text-transform: capitalize;
     }
     .wn-grid-section .wn-card__body { color: inherit; opacity: .95; }
-    .wn-grid-section .wn-card__body p { 
+    .wn-grid-section .wn-card__body p {
         margin: 0;
         font-weight: 500;
-        font-size: clamp(14px, 1.3vw, 18px);
         line-height: normal;
         font-family: var(--font-poppins500);
     }
     .wn-grid-section .wn-card__body p + p { margin-top: .35rem; }
 
-    .wn-grid-section .wn-card__btn {
-        background: #C8FF63 !important;
-        color: #01241E !important;
+    .wn-card__atc {
         width: fit-content;
     }
-    .wn-grid-section .wn-card__btn span {
+    .wn-card__atc .btn-label-down {
         font-family: var(--font-adirek800);
         font-weight: 600;
         text-transform: uppercase;
@@ -184,40 +174,19 @@
     @media (max-width: 990px) {
         .wn-grid-section .wn-row { grid-template-columns: 1fr; min-height: var(--row-h-m); }
         .wn-grid-section .wn-card { min-height: var(--row-h-m); }
-        .wn-grid-section .wn-card__title { 
-            font-size: 26px; 
+        .wn-grid-section .wn-card__title {
+            font-size: 26px;
             margin-bottom: 10px;
         }
     }
     .wn-card__actions{
     display:flex; align-items:center; gap:14px; margin-top:16px;
     }
-    .wn-card__form {line-height: normal;}
-    .wn-card__form .wn-card__btn{
-        background:#C8FF63!important;
-        color:#01241E!important;
-        overflow: hidden;
-        position: relative;
-    }
-    /* Fix for blank buttons - make first label visible */
-    .wn-card__btn .btn-label-down:first-child {
-        top: 0% !important;
-    }
-    .wn-card__btn .btn-label-down:last-child {
-        top: -100% !important;
-    }
-    .wn-card__btn:hover .btn-label-down:first-child {
-        top: 100% !important;
-    }
-    .wn-card__btn:hover .btn-label-down:last-child {
-        top: 0% !important;
-    }
     .wn-card__info{
     --ring: rgba(255,255,255,.85);
     --bg: rgba(0,0,0,.35);
     position:relative; width:27px; height:27px; border-radius:999px;
     display:grid; place-items:center; text-decoration:none;
-    /* border:2px solid var(--ring); */
     background:#F2F2E9; color:#000;
     backdrop-filter: blur(2px);
     }
@@ -247,12 +216,12 @@
   "
 >
   {% if section.settings.section_title != blank or section.settings.section_subtitle != blank %}
-    <div class="wn-heading">
+    <div class="wn-heading" style="text-align: {{ section.settings.heading_align }};">
         {% if section.settings.section_title != blank %}
-        <h2 class="wn-heading__title">{{ section.settings.section_title }}</h2>
+        <h2 class="wn-heading__title" style="font-size: {{ section.settings.title_size }}; color: {{ section.settings.title_color }};">{{ section.settings.section_title }}</h2>
         {% endif %}
         {% if section.settings.section_subtitle != blank %}
-        <p class="wn-heading__subtitle">{{ section.settings.section_subtitle }}</p>
+        <p class="wn-heading__subtitle" style="font-size: {{ section.settings.subtitle_size }}; color: {{ section.settings.subtitle_color }};">{{ section.settings.section_subtitle }}</p>
         {% endif %}
     </div>
   {% endif %}
@@ -296,25 +265,22 @@
 
 
             <div class="wn-card__content">
-                <div class="card__item-content">
+                <div class="card__item-content" style="justify-content: {{ section.settings.card_content_align }};">
                 <div class="card__item-content-header">
                     {% if block.settings.left_heading != blank %}
-                    <h3 class="wn-card__title">{{ block.settings.left_heading }}</h3>
+                    <h3 class="wn-card__title" style="font-size: {{ section.settings.card_title_size }}; color: {{ section.settings.card_title_color }};">{{ block.settings.left_heading }}</h3>
                     {% endif %}
                     {% if block.settings.left_body != blank %}
-                    <div class="wn-card__body">{{ block.settings.left_body }}</div>
+                    <div class="wn-card__body" style="font-size: {{ section.settings.card_body_size }}; color: {{ section.settings.card_body_color }};">{{ block.settings.left_body }}</div>
                     {% endif %}
                 </div>
 
                 <div class="wn-card__actions">
                     {% if left_variant_id != '' %}
-                    <form method="post" action="/cart/add" class="wn-card__form" novalidate>
-                        <input type="hidden" name="id" value="{{ left_variant_id }}">
-                        <button type="submit" class="btn button-yg wn-card__btn">
-                        <span class="btn-label-down">{{ block.settings.left_btn_label | default: 'Add to Cart' }}</span>
-                        <span class="btn-label-down">{{ block.settings.left_btn_label | default: 'Add to Cart' }}</span>
-                        </button>
-                    </form>
+                    <a href="/cart/add?id={{ left_variant_id }}" class="btn button-yg wn-card__atc" style="font-size: {{ section.settings.btn_font_size }}; background-color: {{ section.settings.btn_bg_color }};" data-wn-atc data-variant-id="{{ left_variant_id }}">
+                        <span class="btn-label-down" style="color: {{ section.settings.btn_label_color }};">{{ block.settings.left_btn_label | default: 'Add to Cart' }}</span>
+                        <span class="btn-label-down" style="color: {{ section.settings.btn_label_color }};">{{ block.settings.left_btn_label | default: 'Add to Cart' }}</span>
+                    </a>
                     {% endif %}
 
                     {% if left_learn_url != blank %}
@@ -361,25 +327,22 @@
 
 
             <div class="wn-card__content">
-                <div class="card__item-content">
+                <div class="card__item-content" style="justify-content: {{ section.settings.card_content_align }};">
                 <div class="card__item-content-header">
                     {% if block.settings.right_heading != blank %}
-                    <h3 class="wn-card__title">{{ block.settings.right_heading }}</h3>
+                    <h3 class="wn-card__title" style="font-size: {{ section.settings.card_title_size }}; color: {{ section.settings.card_title_color }};">{{ block.settings.right_heading }}</h3>
                     {% endif %}
                     {% if block.settings.right_body != blank %}
-                    <div class="wn-card__body">{{ block.settings.right_body }}</div>
+                    <div class="wn-card__body" style="font-size: {{ section.settings.card_body_size }}; color: {{ section.settings.card_body_color }};">{{ block.settings.right_body }}</div>
                     {% endif %}
                 </div>
 
                 <div class="wn-card__actions">
                     {% if right_variant_id != '' %}
-                    <form method="post" action="/cart/add" class="wn-card__form" novalidate>
-                        <input type="hidden" name="id" value="{{ right_variant_id }}">
-                        <button type="submit" class="btn button-yg wn-card__btn">
-                        <span class="btn-label-down">{{ block.settings.right_btn_label | default: 'Add to Cart' }}</span>
-                        <span class="btn-label-down">{{ block.settings.right_btn_label | default: 'Add to Cart' }}</span>
-                        </button>
-                    </form>
+                    <a href="/cart/add?id={{ right_variant_id }}" class="btn button-yg wn-card__atc" style="font-size: {{ section.settings.btn_font_size }}; background-color: {{ section.settings.btn_bg_color }};" data-wn-atc data-variant-id="{{ right_variant_id }}">
+                        <span class="btn-label-down" style="color: {{ section.settings.btn_label_color }};">{{ block.settings.right_btn_label | default: 'Add to Cart' }}</span>
+                        <span class="btn-label-down" style="color: {{ section.settings.btn_label_color }};">{{ block.settings.right_btn_label | default: 'Add to Cart' }}</span>
+                    </a>
                     {% endif %}
 
                     {% if right_learn_url != blank %}
@@ -397,6 +360,30 @@
   </div>
 </section>
 
+<script>
+(function(){
+  document.addEventListener('click', function(e){
+    var link = e.target.closest('[data-wn-atc]');
+    if (!link) return;
+    e.preventDefault();
+    var id = link.dataset.variantId;
+    if (!id) return;
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: [{ id: parseInt(id, 10), quantity: 1 }] })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(){
+      window.location.href = '/cart';
+    })
+    .catch(function(){
+      window.location.href = '/cart/add?id=' + id;
+    });
+  });
+})();
+</script>
+
 {% schema %}
 {
   "name": "What's New Grid",
@@ -409,8 +396,47 @@
     { "type": "text", "id": "max_width", "label": "Max width (e.g. 1989px)", "default": "1989px" },
     { "type": "text", "id": "max_height", "label": "Max height (e.g. 1528px)", "default": "1528px" },
 
-    { "type": "text", "id": "section_title", "label": "Section title", "default": "WHAT’S NEW" },
+    { "type": "header", "content": "Section Heading" },
+    { "type": "text", "id": "section_title", "label": "Section title", "default": "WHAT'S NEW" },
     { "type": "text", "id": "section_subtitle", "label": "Section subtitle", "default": "Stay ahead with the latest programs, partnerships, and exclusive deals designed to elevate your fitness career!" },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Heading Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    { "type": "text", "id": "title_size", "label": "Title Font Size", "default": "clamp(21px, 3vw, 40px)" },
+    { "type": "color", "id": "title_color", "label": "Title Color", "default": "#01241E" },
+    { "type": "text", "id": "subtitle_size", "label": "Subtitle Font Size", "default": "clamp(14px, 1.3vw, 18px)" },
+    { "type": "color", "id": "subtitle_color", "label": "Subtitle Color", "default": "#0b0b0b" },
+
+    { "type": "header", "content": "Card Content" },
+    {
+      "type": "select",
+      "id": "card_content_align",
+      "label": "Card Content Vertical Alignment",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Bottom" },
+        { "value": "space-between", "label": "Space Between" }
+      ],
+      "default": "space-between"
+    },
+    { "type": "text", "id": "card_title_size", "label": "Card Title Font Size", "default": "clamp(18px, 2.4vw, 36px)" },
+    { "type": "color", "id": "card_title_color", "label": "Card Title Color", "default": "#ffffff" },
+    { "type": "text", "id": "card_body_size", "label": "Card Body Font Size", "default": "clamp(14px, 1.3vw, 18px)" },
+    { "type": "color", "id": "card_body_color", "label": "Card Body Color", "default": "#ffffff" },
+
+    { "type": "header", "content": "Button" },
+    { "type": "text", "id": "btn_font_size", "label": "Button Font Size", "default": "14px" },
+    { "type": "color", "id": "btn_label_color", "label": "Button Label Color", "default": "#01241E" },
+    { "type": "color", "id": "btn_bg_color", "label": "Button Background Color", "default": "#C8FF63" },
 
     { "type": "header", "content": "Padding" },
     { "type": "range", "id": "pad_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 24 },

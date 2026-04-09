@@ -1,0 +1,119 @@
+{%- assign sid = section.id -%}
+{{ 'hp-sections.css' | asset_url | stylesheet_tag }}
+
+<section id="hp-finance-{{ sid }}" class="hp-finance hp-finance--desktop-{{ section.settings.desktop_layout }} hp-finance--mobile-{{ section.settings.mobile_layout }}">
+  <div class="hp-finance__image">
+    {%- if section.settings.image != blank -%}
+      <img
+        src="{{ section.settings.image | image_url: width: 946 }}"
+        srcset="{{ section.settings.image | image_url: width: 500 }} 500w,
+                {{ section.settings.image | image_url: width: 946 }} 946w"
+        sizes="(max-width: 749px) 100vw, 34%"
+        alt="{{ section.settings.heading | escape }}"
+        loading="lazy"
+        width="473"
+        height="709">
+    {%- endif -%}
+  </div>
+
+  <div class="hp-finance__content">
+    <h2 class="hp-finance__title" style="font-size: {{ section.settings.title_size }} !important; color: {{ section.settings.title_color }};">{{ section.settings.heading }}</h2>
+    <p class="hp-finance__sub" style="font-size: {{ section.settings.body_size }}; color: {{ section.settings.body_color }};">{{ section.settings.subheading }}</p>
+
+    <div class="hp-finance__features">
+      {%- for block in section.blocks -%}
+        <div class="hp-finance__feature" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != blank -%}
+            <div class="hp-finance__icon">
+              <img
+                src="{{ block.settings.icon | image_url: width: 168 }}"
+                alt="{{ block.settings.title | escape }}"
+                loading="lazy"
+                width="84"
+                height="84">
+            </div>
+          {%- endif -%}
+          <h3 class="hp-finance__feature-title" style="font-size: {{ section.settings.feature_title_size }}; color: {{ section.settings.title_color }};">{{ block.settings.title }}</h3>
+          <p class="hp-finance__feature-desc" style="color: {{ section.settings.body_color }};">{{ block.settings.description }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.button_text != blank and section.settings.button_link != blank -%}
+      <div class="hp-finance__btn-wrap">
+        <a href="{{ section.settings.button_link }}" class="btn button-b" style="font-size: {{ section.settings.btn_font_size }}; background-color: {{ section.settings.btn_bg_color }};">
+          <span class="btn-label-down" style="color: {{ section.settings.btn_text_color }};">{{ section.settings.button_text }}</span>
+          <span class="btn-label-down" style="color: {{ section.settings.btn_text_color }};">{{ section.settings.button_text }}</span>
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HP Finance Section",
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Don't Let Your Finances Stop You." },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Learn now, Pay later with Elective." },
+
+    { "type": "header", "content": "Button" },
+    { "type": "text", "id": "button_text", "label": "Button Text", "default": "GET APPROVED IN SECONDS" },
+    { "type": "url", "id": "button_link", "label": "Button Link" },
+    { "type": "text", "id": "btn_font_size", "label": "Button Font Size", "default": "14px" },
+    { "type": "color", "id": "btn_text_color", "label": "Button Text Color", "default": "#ffffff" },
+    { "type": "color", "id": "btn_bg_color", "label": "Button Background Color", "default": "#0f828c" },
+
+    { "type": "header", "content": "Typography" },
+    { "type": "text", "id": "title_size", "label": "Title Font Size", "default": "clamp(26px, 4vw, 42px)" },
+    { "type": "color", "id": "title_color", "label": "Title Color", "default": "#141414" },
+    { "type": "text", "id": "body_size", "label": "Body Font Size", "default": "clamp(14px, 1.5vw, 18px)" },
+    { "type": "color", "id": "body_color", "label": "Body Color", "default": "#555555" },
+    { "type": "text", "id": "feature_title_size", "label": "Feature Title Font Size", "default": "clamp(13px, 1.3vw, 16px)" },
+
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select",
+      "id": "desktop_layout",
+      "label": "Desktop Layout",
+      "options": [
+        { "value": "image-left", "label": "Image Left / Content Right" },
+        { "value": "image-right", "label": "Content Left / Image Right" }
+      ],
+      "default": "image-left"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Mobile Layout",
+      "options": [
+        { "value": "image-top", "label": "Image Top / Content Bottom" },
+        { "value": "content-top", "label": "Content Top / Image Bottom" }
+      ],
+      "default": "image-top"
+    },
+    { "type": "text", "id": "container_width", "label": "Section Max Width (px)", "default": "1400" }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "title", "label": "Title", "default": "GET APPROVED" },
+        { "type": "text", "id": "description", "label": "Description", "default": "Get a real-time decision." }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "HP Finance Section",
+    "blocks": [
+      { "type": "feature", "settings": { "title": "GET APPROVED", "description": "Get a real-time decision." } },
+      { "type": "feature", "settings": { "title": "EASY PAYMENTS", "description": "Split your purchase into 3, 6, and easy payments." } },
+      { "type": "feature", "settings": { "title": "HASSLE-FREE LEARNING", "description": "0% interest payments with no surprises." } }
+    ]
+  }]
+}
+{% endschema %}

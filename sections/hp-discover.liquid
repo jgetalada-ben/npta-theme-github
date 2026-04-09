@@ -1,0 +1,56 @@
+{%- assign sid = section.id -%}
+{{ 'hp-sections.css' | asset_url | stylesheet_tag }}
+
+<section id="hp-discover-{{ sid }}" class="hp-discover">
+  <div class="hp-discover__inner">
+    <div class="hp-discover__image">
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 1190 }}"
+          srcset="{{ section.settings.image | image_url: width: 600 }} 600w,
+                  {{ section.settings.image | image_url: width: 1190 }} 1190w"
+          sizes="(max-width: 749px) 100vw, 42%"
+          alt="{{ section.settings.heading | escape }}"
+          loading="lazy"
+          width="595"
+          height="738">
+      {%- endif -%}
+    </div>
+
+    <div class="hp-discover__content">
+      <h2 class="hp-discover__title">{{ section.settings.heading }}</h2>
+      <p class="hp-discover__eyebrow">{{ section.settings.eyebrow }}</p>
+      <p class="hp-discover__desc">{{ section.settings.description }}</p>
+
+      <div class="hp-discover__actions">
+        {%- if section.settings.quiz_text != blank and section.settings.quiz_link != blank -%}
+          <a href="{{ section.settings.quiz_link }}" class="hp-btn hp-btn--primary">
+            {{ section.settings.quiz_text }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.advisor_text != blank and section.settings.advisor_link != blank -%}
+          <a href="{{ section.settings.advisor_link }}" class="hp-btn hp-btn--outline-dark">
+            {{ section.settings.advisor_text }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HP Discover Path",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Left Image" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Discover The Right Path For You" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Not sure where to begin?" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Take our quick quiz to find the best starting point for your goals, interests, and experience—we'll guide you to the path that's right for you." },
+    { "type": "text", "id": "quiz_text", "label": "Quiz Button Text", "default": "TAKE THE QUIZ" },
+    { "type": "url", "id": "quiz_link", "label": "Quiz Button Link" },
+    { "type": "text", "id": "advisor_text", "label": "Advisor Button Text", "default": "TALK TO A CAREER ADVISOR" },
+    { "type": "url", "id": "advisor_link", "label": "Advisor Button Link" }
+  ],
+  "presets": [{ "name": "HP Discover Path" }]
+}
+{% endschema %}

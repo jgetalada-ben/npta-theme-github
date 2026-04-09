@@ -116,26 +116,24 @@
     margin: 0 0 20px;
     font-family: var(--font-anton);
     font-weight: 400;
-    text-transform: uppercase;
-    font-size: clamp(21px, 3vw, 40px);
+    text-transform: capitalize;
+    font-size: clamp(21px, 3vw, 32px);
     line-height: 1.1;
     color: #01241E;
   }
-  .tp-subhead { 
-    margin: 0; 
-    font-weight: 700; 
-    color: #01241E; 
-    font-size: clamp(12px, 1.2vw, 21px);
+  .tp-subhead {
+    margin: 0;
+    font-weight: 700;
+    color: #01241E;
+    font-size: clamp(16px, 2.4vw, 20px);
     line-height: 1.2;
-    font-family: var(--font-poppins700);
 }
-  .tp-body { 
-    margin: 0 0 45px; 
-    color: #01241E; 
-    opacity: .9; 
-    font-size: clamp(14px, 1.3vw, 18px);
+  .tp-body {
+    margin: 0 0 45px;
+    color: #01241E;
+    opacity: .9;
+    font-size: clamp(16px, 2.4vw, 20px);
     line-height: normal;
-    font-family: var(--font-poppins400);
 }
 @media (max-width: 768px) {
     .tp-title {
@@ -154,9 +152,12 @@
     color: #01241E !important;
     width: fit-content;
 }
-.tp-section .tp-cta span {
+.tp-section .tp-cta span,
+.tp-section .tp-cta2 span {
   font-family: var(--font-adirek800);
   font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 1.6px;
   text-transform: uppercase;
 }
 
@@ -210,10 +211,9 @@
   }
 
   .tp-card-title {
-    margin: 0 0 20px;
     font-family: var(--font-poppins700);
     text-transform: uppercase;
-    font-size: clamp(18px, 1.7vw, 28px);
+    font-size: clamp(18px, 2.2vw, 22px);
     line-height: 1.2;
     color: #01241E;
     display: -webkit-box;
@@ -221,11 +221,12 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     min-height: calc(1.2em * 3);
+    font-weight: bold;
   }
   .tp-card-blurb { 
     color: #01241E;
     font-family: var(--font-poppins400);
-    font-size: clamp(12px,1vw,18px);
+    font-size: clamp(16px,1.8vw,18px);
     margin-bottom: 25px; 
   }
   .tp-card-blurb p{ 
@@ -236,11 +237,11 @@
     display: inline-block;
     background: var(--price-bg);
     color: var(--price-color);
-    border-radius: 10px;
-    font-size: clamp(12px, 1.2vw, 18px);
+    border-radius: 5px;
+    font-size: clamp(14px, 1.8vw, 22px);
     padding: 10px 40px;
     font-weight: 800;
-    letter-spacing: .02em;
+    letter-spacing: 2.2px;
     font-family: var(--font-poppins700);
   }
   @media (max-width: 1024px) {

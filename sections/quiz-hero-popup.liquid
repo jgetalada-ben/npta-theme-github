@@ -23,81 +23,165 @@
       padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
     }
     .qhp .qhp__container{
-      max-width: {{ section.settings.max_width }}px;
+      {% comment %} max-width: {{ section.settings.max_width }}px; 
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 20px;{% endcomment %}
     }
 
     .qhp .qhp__grid{
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 32px;
+      gap: 100px;
       align-items: center;
     }
+    .qhp .qhp__grid--image-left .qhp__media{ order: -1; }
+    .qhp .qhp__grid--image-left .qhp__content{ order: 1; }
 
     .qhp .qhp__content{ max-width: 560px; }
 
     .qhp .qhp__eyebrow{
-      font-size: 12px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      opacity: .85;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      font-style: italic;
+      letter-spacing: .02em;
+      text-transform: none;
+      opacity: .75;
       margin: 0 0 10px;
     }
 
     .qhp .qhp__heading{
-      font-size: clamp(28px, 3.3vw, 44px);
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(21px, 3vw, 32px);
       line-height: 1.05;
       margin: 0 0 14px;
       color: var(--qhp-heading);
-      font-weight: 800;
-      text-transform: uppercase;
+      font-weight: 400;
+      text-transform: capitalize;
     }
 
     .qhp .qhp__desc{
-      font-size: 16px;
-      line-height: 1.55;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: clamp(16px, 2.4vw, 20px);
+      line-height: 1.5;
       margin: 0 0 22px;
-      max-width: 520px;
+      max-width: 523px;
       opacity: .95;
     }
+    
 
     .qhp .qhp__actions{
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: flex-start;
       gap: 14px;
-      margin: 0 0 26px;
+      margin: 5rem 0 10px;
+    }
+    .qhp .qhp__actions .btn {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .qhp .qhp__actions .button-outline-hp {
+          background-color: #0f828c;
+    }
+    .qhp .qhp__actions .btn .btn-label-down{
+      font-family: Arial, Helvetica, sans-serif;
     }
 
-    .qhp .qhp__btn{
-      appearance: none;
-      border: 0;
-      border-radius: 10px;
-      padding: 12px 18px;
-      font-weight: 800;
-      letter-spacing: .02em;
-      cursor: pointer;
-      transition: transform .12s ease, opacity .12s ease;
-      text-decoration: none;
-      display: inline-flex;
+    .qhp .qhp__advisor{ 
+      font-size: clamp(16px, 2.4vw, 24px); opacity: .95; 
+    }
+
+    /* Calendly popup modal */
+    .qhp-calendly-modal[hidden]{ display: none; }
+    .qhp-calendly-modal{
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 44px;
+      padding: 16px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
     }
-    .qhp .qhp__btn:active{ transform: translateY(1px); }
-    .qhp .qhp__btn:hover{ opacity: .92; }
-    .qhp .qhp__btn[disabled]{ opacity: .6; cursor: not-allowed; }
-
-    .qhp .qhp__btn--primary{ background: var(--qhp-primary-bg); color: var(--qhp-primary-text); }
-    .qhp .qhp__btn--secondary{ background: var(--qhp-secondary-bg); color: var(--qhp-secondary-text); }
-
-    .qhp .qhp__advisor{ margin-top: 10px; font-size: 15px; opacity: .95; }
+    .qhp-calendly-modal.is-open{
+      opacity: 1;
+      visibility: visible;
+    }
+    .qhp-calendly-modal__overlay{
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+    }
+    .qhp-calendly-modal__dialog{
+      position: relative;
+      width: 100%;
+      max-width: 700px;
+      height: 85vh;
+      max-height: 750px;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      z-index: 2;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.06);
+      transform: translateY(30px) scale(0.95);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+      opacity: 0;
+    }
+    .qhp-calendly-modal.is-open .qhp-calendly-modal__dialog{
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    .qhp-calendly-modal__close{
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 3;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+    .qhp-calendly-modal__close:hover{
+      background: #fff;
+      transform: scale(1.1);
+    }
+    .qhp-calendly-modal__mount{
+      width: 100%;
+      height: 100%;
+    }
+    .qhp-calendly-modal__mount iframe{
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+    @media (max-width: 640px){
+      .qhp-calendly-modal{ padding: 10px; }
+      .qhp-calendly-modal__dialog{
+        max-width: 100%;
+        height: 92vh;
+        max-height: none;
+        border-radius: 12px;
+      }
+    }
 
     .qhp .qhp__media{
-      border-radius: 18px;
+      border-radius: 0;
       overflow: hidden;
       background: rgba(0,0,0,.04);
-      min-height: 260px;
+      height: 580px;
     }
     .qhp .qhp__media img{
       width: 100%;
@@ -109,20 +193,27 @@
     @media (max-width: 900px){
       .qhp .qhp__grid{ grid-template-columns: 1fr; }
       .qhp .qhp__content{ max-width: 100%; }
-      .qhp .qhp__media{ min-height: 220px; }
+      .qhp .qhp__media{
+        min-height: auto;
+        max-height: 400px;
+      }
+      .qhp .qhp__media img{
+        height: auto;
+        max-height: 400px;
+      }
     }
 
-    /* Modal */
-    .qhp .qhp__backdrop{
+    /* Modal — high specificity to override section stacking context */
+    div.qhp-quiz-backdrop{
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.55);
+      background-color: rgba(0, 0, 0, 0.6);
       opacity: 0;
       visibility: hidden;
-      transition: opacity .18s ease, visibility .18s ease;
-      z-index: 9998;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 99998;
     }
-    .qhp .qhp__modal{
+    div.qhp-quiz-modal{
       position: fixed;
       inset: 0;
       display: grid;
@@ -130,23 +221,30 @@
       padding: 18px;
       opacity: 0;
       visibility: hidden;
-      transition: opacity .18s ease, visibility .18s ease;
-      z-index: 9999;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 99999;
+      background-color: rgba(0, 0, 0, 0.6);
     }
-    .qhp.qhp--open .qhp__backdrop,
-    .qhp.qhp--open .qhp__modal{
+    div.qhp-quiz-backdrop.is-open,
+    div.qhp-quiz-modal.is-open{
       opacity: 1;
       visibility: visible;
     }
 
-    .qhp .qhp__dialog{
+    div.qhp-quiz-modal .qhp__dialog{
       width: min(700px, 100%);
       max-height: 90vh;
       overflow: auto;
-      background: var(--qhp-modal-bg);
-      border-radius: 18px;
-      box-shadow: 0 18px 60px rgba(0,0,0,.25);
-      border: 1px solid rgba(0,0,0,.08);
+      background-color: var(--qhp-modal-bg, #fff);
+      border-radius: 16px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.06);
+      transform: translateY(30px) scale(0.95);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+      opacity: 0;
+    }
+    div.qhp-quiz-modal.is-open .qhp__dialog{
+      transform: translateY(0) scale(1);
+      opacity: 1;
     }
 
     .qhp .qhp__dialogHeader{
@@ -172,12 +270,18 @@
     .qhp .qhp__dialogClose{
       width: 40px;
       height: 40px;
-      border-radius: 10px;
-      border: 1px solid rgba(0,0,0,.12);
-      background: rgba(0,0,0,.03);
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,.1);
+      background: rgba(255,255,255,.9);
       cursor: pointer;
       display: grid;
       place-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,.12);
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+    .qhp .qhp__dialogClose:hover{
+      background: #fff;
+      transform: scale(1.1);
     }
 
     .qhp .qhp__dialogBody{ padding: 18px; }
@@ -210,6 +314,8 @@
     }
     @media(max-width:720px){
       .qhp .qhp__fieldGrid{ grid-template-columns:1fr; }
+      .qhp .qhp__container{padding:20px;}
+      .qhp .qhp__grid {gap:20px;}
     }
     .qhp .qhp__label{
       display:block;
@@ -561,10 +667,16 @@
       .qhp .qhp__resultGrid{ grid-template-columns: 1fr; }
       .qhp .qhp__dialog{ width: 100%; }
     }
+    @media (max-width: 354px){
+      .btn.button-outline-hp {
+        line-height: normal;
+        padding-top: 5px;
+      }
+    }
   </style>
 
   <div class="qhp__container">
-    <div class="qhp__grid">
+    <div class="qhp__grid{% if section.settings.image_position == 'left' %} qhp__grid--image-left{% endif %}">
       <div class="qhp__content">
         {% if section.settings.eyebrow != blank %}
           <p class="qhp__eyebrow">{{ section.settings.eyebrow }}</p>
@@ -579,25 +691,83 @@
         {% endif %}
 
         <div class="qhp__actions">
-          <button
-            type="button"
-            class="qhp__btn qhp__btn--primary"
-            data-qhp-open
-            {% if section.blocks.size == 0 %}disabled{% endif %}
-          >
-            {{ section.settings.primary_btn_label }}
-          </button>
-
-          {% if section.settings.secondary_btn_label != blank and section.settings.secondary_btn_url != blank %}
-            <a class="qhp__btn qhp__btn--secondary" href="{{ section.settings.secondary_btn_url }}">
-              {{ section.settings.secondary_btn_label }}
+          {%- comment -%} PRIMARY BUTTON {%- endcomment -%}
+          {%- assign pri_mode = section.settings.primary_btn_mode | default: 'quiz' -%}
+          {%- if pri_mode == 'quiz' -%}
+            <a href="#"
+              class="btn button-b"
+              style="background-color: {{ section.settings.primary_btn_bg }};"
+              data-qhp-open
+            >
+              <span class="btn-label-down" style="color: {{ section.settings.primary_btn_text }};">{{ section.settings.primary_btn_label }}</span>
+              <span class="btn-label-down" style="color: {{ section.settings.primary_btn_text }};">{{ section.settings.primary_btn_label }}</span>
             </a>
+          {%- elsif pri_mode == 'typeform' and section.settings.primary_btn_typeform_url != blank -%}
+            <a href="{{ section.settings.primary_btn_typeform_url }}"
+              class="btn button-b"
+              style="background-color: {{ section.settings.primary_btn_bg }};"
+              {% if section.settings.primary_btn_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+            >
+              <span class="btn-label-down" style="color: {{ section.settings.primary_btn_text }};">{{ section.settings.primary_btn_label }}</span>
+              <span class="btn-label-down" style="color: {{ section.settings.primary_btn_text }};">{{ section.settings.primary_btn_label }}</span>
+            </a>
+          {%- elsif pri_mode == 'url' and section.settings.primary_btn_url != blank -%}
+            <a href="{{ section.settings.primary_btn_url }}"
+              class="btn button-b"
+              style="background-color: {{ section.settings.primary_btn_bg }};"
+              {% if section.settings.primary_btn_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+            >
+              <span class="btn-label-down" style="color: {{ section.settings.primary_btn_text }};">{{ section.settings.primary_btn_label }}</span>
+              <span class="btn-label-down" style="color: {{ section.settings.primary_btn_text }};">{{ section.settings.primary_btn_label }}</span>
+            </a>
+          {%- endif -%}
+
+          {% if section.settings.advisor_text != blank %}
+            <div class="qhp__advisor">{{ section.settings.advisor_text }}</div>
           {% endif %}
+
+          {%- comment -%} SECONDARY BUTTON {%- endcomment -%}
+          {%- assign sec_mode = section.settings.secondary_btn_mode | default: 'url' -%}
+          {%- if section.settings.secondary_btn_label != blank -%}
+            {%- if sec_mode == 'calendly' and section.settings.secondary_calendly_url != blank -%}
+              {%- if section.settings.secondary_btn_new_tab -%}
+                <a class="btn button-outline-hp"
+                  href="{{ section.settings.secondary_calendly_url }}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ">
+                  <span class="btn-label-down" style="color: {{ section.settings.secondary_btn_text }};">{{ section.settings.secondary_btn_label }}</span>
+                  <span class="btn-label-down" style="color: {{ section.settings.secondary_btn_text }};">{{ section.settings.secondary_btn_label }}</span>
+                </a>
+              {%- else -%}
+                <a class="btn button-outline-hp"
+                  href="{{ section.settings.secondary_calendly_url }}"
+                  data-qhp-calendly
+                  style="border: 2px solid {{ section.settings.secondary_btn_text }};">
+                  <span class="btn-label-down" style="color: {{ section.settings.secondary_btn_text }};">{{ section.settings.secondary_btn_label }}</span>
+                  <span class="btn-label-down" style="color: {{ section.settings.secondary_btn_text }};">{{ section.settings.secondary_btn_label }}</span>
+                </a>
+              {%- endif -%}
+            {%- elsif sec_mode == 'url' and section.settings.secondary_btn_url != blank -%}
+              <a class="btn button-outline-hp"
+                href="{{ section.settings.secondary_btn_url }}"
+                {% if section.settings.secondary_btn_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+                style="border: 2px solid {{ section.settings.secondary_btn_text }};">
+                <span class="btn-label-down" style="color: {{ section.settings.secondary_btn_text }};">{{ section.settings.secondary_btn_label }}</span>
+                <span class="btn-label-down" style="color: {{ section.settings.secondary_btn_text }};">{{ section.settings.secondary_btn_label }}</span>
+              </a>
+            {%- endif -%}
+          {%- endif -%}
         </div>
 
-        {% if section.settings.advisor_text != blank %}
-          <div class="qhp__advisor">{{ section.settings.advisor_text }}</div>
-        {% endif %}
+        {%- comment -%} Calendly popup modal {%- endcomment -%}
+        <div id="qhp-calendly-modal-{{ section.id }}" class="qhp-calendly-modal" hidden aria-hidden="true">
+          <div class="qhp-calendly-modal__overlay" data-qhp-calendly-close></div>
+          <div class="qhp-calendly-modal__dialog">
+            <button class="qhp-calendly-modal__close" type="button" data-qhp-calendly-close aria-label="Close">&times;</button>
+            <div class="qhp-calendly-modal__mount" id="qhp-calendly-mount-{{ section.id }}"></div>
+          </div>
+        </div>
       </div>
 
       <div class="qhp__media">
@@ -620,10 +790,10 @@
     </div>
   </div>
 
-  <!-- Backdrop + Modal -->
-  <div class="qhp__backdrop" data-qhp-backdrop aria-hidden="true"></div>
+  <!-- Backdrop + Modal — placed at end of section but use fixed positioning with high z-index -->
+  <div class="qhp-quiz-backdrop" data-qhp-backdrop aria-hidden="true" id="qhp-backdrop-{{ section.id }}"></div>
 
-  <div class="qhp__modal" data-qhp-modal aria-hidden="true">
+  <div class="qhp-quiz-modal" data-qhp-modal aria-hidden="true" id="qhp-modal-{{ section.id }}">
     <div class="qhp__dialog" role="dialog" aria-modal="true" aria-label="Quiz">
       <div class="qhp__dialogHeader">
         <h3 class="qhp__dialogTitle">{{ section.settings.quiz_title }}</h3>
@@ -997,6 +1167,8 @@
               if(!questions.length) return;
 
               root.classList.add('qhp--open');
+              backdrop.classList.add('is-open');
+              modal.classList.add('is-open');
               backdrop.setAttribute('aria-hidden','false');
               modal.setAttribute('aria-hidden','false');
               lockScroll(true);
@@ -1020,6 +1192,8 @@
 
             function closeModal(){
               root.classList.remove('qhp--open');
+              backdrop.classList.remove('is-open');
+              modal.classList.remove('is-open');
               backdrop.setAttribute('aria-hidden','true');
               modal.setAttribute('aria-hidden','true');
               lockScroll(false);
@@ -1404,7 +1578,7 @@
             }
 
             // Bindings
-            openBtns.forEach(function(btn){ btn.addEventListener('click', openModal); });
+            openBtns.forEach(function(btn){ btn.addEventListener('click', function(e){ e.preventDefault(); openModal(); }); });
             closeBtn.addEventListener('click', closeModal);
             backdrop.addEventListener('click', closeModal);
             nextBtn.addEventListener('click', onNext);
@@ -1431,6 +1605,76 @@
       </div>
     </div>
   </div>
+
+  {%- comment -%} Calendly popup script {%- endcomment -%}
+  <script>
+  (function(){
+    var sectionId = '{{ section.id }}';
+    var modal = document.getElementById('qhp-calendly-modal-' + sectionId);
+    var mount = document.getElementById('qhp-calendly-mount-' + sectionId);
+    if (!modal || !mount) return;
+
+    function openCalendly(url){
+      mount.innerHTML = '';
+      var iframe = document.createElement('iframe');
+      iframe.src = url;
+      iframe.title = 'Book a Call';
+      iframe.loading = 'lazy';
+      iframe.setAttribute('allow', 'payment');
+      iframe.setAttribute('allowtransparency', 'true');
+      iframe.setAttribute('frameborder', '0');
+      mount.appendChild(iframe);
+
+      modal.hidden = false;
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      /* Trigger animation after DOM update */
+      requestAnimationFrame(function(){
+        requestAnimationFrame(function(){
+          modal.classList.add('is-open');
+        });
+      });
+    }
+
+    function closeCalendly(){
+      modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+      /* Wait for animation to finish before hiding */
+      setTimeout(function(){
+        modal.hidden = true;
+        modal.setAttribute('aria-hidden', 'true');
+        mount.innerHTML = '';
+      }, 350);
+    }
+
+    document.addEventListener('click', function(e){
+      var btn = e.target.closest('[data-qhp-calendly]');
+      if (btn) {
+        e.preventDefault();
+        e.stopPropagation();
+        var href = btn.getAttribute('href');
+        if (href) openCalendly(href);
+        return;
+      }
+      var closer = e.target.closest('[data-qhp-calendly-close]');
+      if (closer && modal && !modal.hidden) {
+        closeCalendly();
+      }
+    });
+
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && modal && !modal.hidden) closeCalendly();
+    });
+
+    /* Safari fix: ensure touch events work on iOS */
+    if (modal) {
+      modal.addEventListener('touchend', function(e){
+        var closer = e.target.closest('[data-qhp-calendly-close]');
+        if (closer) { e.preventDefault(); closeCalendly(); }
+      }, { passive: false });
+    }
+  })();
+  </script>
 </section>
 
 {% schema %}
@@ -1500,11 +1744,41 @@
       "label": "Description",
       "default": "<p>Take the NPTA™ Knowledge Challenge and see how strong your fitness knowledge really is.</p>"
     },
+    { "type": "header", "content": "Primary Button" },
+    {
+      "type": "select",
+      "id": "primary_btn_mode",
+      "label": "Primary button action",
+      "options": [
+        { "value": "quiz", "label": "Open built-in quiz" },
+        { "value": "typeform", "label": "Typeform link" },
+        { "value": "url", "label": "Standard URL" }
+      ],
+      "default": "quiz"
+    },
     {
       "type": "text",
       "id": "primary_btn_label",
       "label": "Primary button label",
       "default": "Take the Quiz"
+    },
+    {
+      "type": "text",
+      "id": "primary_btn_typeform_url",
+      "label": "Typeform URL",
+      "info": "Only used when action is set to Typeform"
+    },
+    {
+      "type": "url",
+      "id": "primary_btn_url",
+      "label": "Standard URL",
+      "info": "Only used when action is set to Standard URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "primary_btn_new_tab",
+      "label": "Open in new tab",
+      "default": false
     },
     {
       "type": "color",
@@ -1515,8 +1789,20 @@
     {
       "type": "color",
       "id": "primary_btn_text",
-      "label": "Primary button text",
+      "label": "Primary button text color",
       "default": "#ffffff"
+    },
+
+    { "type": "header", "content": "Secondary Button" },
+    {
+      "type": "select",
+      "id": "secondary_btn_mode",
+      "label": "Secondary button action",
+      "options": [
+        { "value": "calendly", "label": "Calendly popup" },
+        { "value": "url", "label": "Standard URL" }
+      ],
+      "default": "url"
     },
     {
       "type": "text",
@@ -1525,9 +1811,23 @@
       "default": "Book a Free Call"
     },
     {
+      "type": "text",
+      "id": "secondary_calendly_url",
+      "label": "Calendly URL",
+      "info": "e.g. https://calendly.com/your-team/30min — used when action is Calendly"
+    },
+    {
       "type": "url",
       "id": "secondary_btn_url",
-      "label": "Secondary button link"
+      "label": "Standard URL",
+      "info": "Only used when action is set to Standard URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "secondary_btn_new_tab",
+      "label": "Open in new tab",
+      "default": false,
+      "info": "If Calendly mode + new tab ON: opens Calendly link in new tab instead of popup"
     },
     {
       "type": "color",
@@ -1538,7 +1838,7 @@
     {
       "type": "color",
       "id": "secondary_btn_text",
-      "label": "Secondary button text",
+      "label": "Secondary button text color",
       "default": "#01241e"
     },
     {
@@ -1550,7 +1850,17 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Right image"
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        { "value": "right", "label": "Right" },
+        { "value": "left", "label": "Left" }
+      ],
+      "default": "right"
     },
     {
       "type": "header",
