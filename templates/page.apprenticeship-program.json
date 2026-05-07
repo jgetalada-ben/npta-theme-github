@@ -84,7 +84,7 @@
         ".section--top-banner:before {width: 100%;}",
         ".section--top-background {width: 100%; display: block;}",
         "h1 {color: #fff;}",
-        ".top-btn1 .btn-label-down {font-weight: bold; font-family: Montserrat;}",
+        ".top-btn1 .btn-label-down {font-weight: bold; font-family: var(--font-body-family);}",
         "@media (max-width: 980px) {.section--top-banner-container {top: 10%; }}"
       ],
       "settings": {
@@ -264,7 +264,7 @@
         ".section--top-banner:before {width: 100%;}",
         ".section--top-background {width: 100%; display: block;}",
         "h1 {color: #fff;}",
-        ".top-btn1 .btn-label-down {font-weight: bold; font-family: Montserrat;}",
+        ".top-btn1 .btn-label-down {font-weight: bold; font-family: var(--font-body-family);}",
         "@media (max-width: 980px) {.section--top-banner-container {top: 10%; }}"
       ],
       "settings": {

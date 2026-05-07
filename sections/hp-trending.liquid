@@ -1,0 +1,92 @@
+{%- assign sid = section.id -%}
+{{ 'hp-sections.css' | asset_url | stylesheet_tag }}
+
+<section id="hp-trending-{{ sid }}" class="hp-trending">
+  <div class="hp-trending__inner" style="max-width: {{ section.settings.container_width }}px;">
+    <h2 class="hp-trending__title" style="font-size: {{ section.settings.title_size }}; color: {{ section.settings.title_color }};">{{ section.settings.heading }}</h2>
+    <p class="hp-trending__sub" style="font-size: {{ section.settings.body_size }}; color: {{ section.settings.body_color }};">{{ section.settings.subheading }}</p>
+
+    <div class="hp-trending__grid">
+      {%- for block in section.blocks -%}
+        <article class="hp-trending__card hp-trending__card--{{ block.settings.size }}" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <img
+              class="hp-trending__card-img"
+              src="{{ block.settings.image | image_url: width: 1630 }}"
+              srcset="{{ block.settings.image | image_url: width: 500 }} 500w,
+                      {{ block.settings.image | image_url: width: 900 }} 900w,
+                      {{ block.settings.image | image_url: width: 1630 }} 1630w"
+              sizes="(max-width: 749px) 90vw, {% if block.settings.size == 'large' %}58vw{% else %}31vw{% endif %}"
+              alt="{{ block.settings.title | escape }}"
+              loading="lazy"
+              width="815"
+              height="406">
+          {%- endif -%}
+          <div class="hp-trending__card-overlay"></div>
+          <div class="hp-trending__card-content">
+            <h3 class="hp-trending__card-title" style="font-size: {{ section.settings.card_title_size }};">{{ block.settings.title }}</h3>
+            <p class="hp-trending__card-desc" style="font-size: {{ section.settings.card_body_size }};">{{ block.settings.description }}</p>
+            {%- if block.settings.button_link != blank -%}
+              <a href="{{ block.settings.button_link }}" class="btn button-yg" style="font-size: {{ section.settings.btn_font_size }}; background-color: {{ section.settings.btn_bg_color }};">
+                <span class="btn-label-down">ADD TO CART</span>
+                <span class="btn-label-down">ADD TO CART</span>
+              </a>
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HP Trending Careers",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Trending Careers" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Stay ahead with the latest programs, and partnerships designed to elevate your fitness career!" },
+    { "type": "header", "content": "Typography" },
+    { "type": "text", "id": "title_size", "label": "Heading Font Size", "default": "clamp(28px, 4vw, 44px)" },
+    { "type": "color", "id": "title_color", "label": "Heading Color", "default": "#141414" },
+    { "type": "text", "id": "body_size", "label": "Subheading Font Size", "default": "clamp(14px, 1.4vw, 17px)" },
+    { "type": "color", "id": "body_color", "label": "Subheading Color", "default": "#555555" },
+    { "type": "text", "id": "card_title_size", "label": "Card Title Font Size", "default": "clamp(20px, 3vw, 34px)" },
+    { "type": "text", "id": "card_body_size", "label": "Card Body Font Size", "default": "clamp(13px, 1.2vw, 15px)" },
+    { "type": "text", "id": "btn_font_size", "label": "Button Font Size", "default": "13px" },
+    { "type": "color", "id": "btn_bg_color", "label": "Button Background Color", "default": "#C1FF72" },
+    { "type": "header", "content": "Layout" },
+    { "type": "text", "id": "container_width", "label": "Container Max Width (px)", "default": "1400" }
+  ],
+  "blocks": [
+    {
+      "type": "career_card",
+      "name": "Career Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Card Image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Social Media Influencer" },
+        { "type": "textarea", "id": "description", "label": "Description" },
+        { "type": "url", "id": "button_link", "label": "Button Link" },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Card Size",
+          "options": [
+            { "value": "large", "label": "Large" },
+            { "value": "small", "label": "Small" }
+          ],
+          "default": "large"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "HP Trending Careers",
+    "blocks": [
+      { "type": "career_card", "settings": { "title": "Social Media Influencer", "description": "Expand your reach, attract clients, and boost your brand with strategies top influencers use to succeed online.", "size": "large" } },
+      { "type": "career_card", "settings": { "title": "Advanced Cardio Programming", "description": "Harness cutting-edge science to design powerful, personalized cardio programs that deliver unstoppable client results.", "size": "small" } },
+      { "type": "career_card", "settings": { "title": "Business Blueprint", "description": "Build a thriving fitness career with proven business strategies, expert coaching, and tools to grow a loyal client base.", "size": "small" } },
+      { "type": "career_card", "settings": { "title": "Mindful Stress Management", "description": "Learn practical, science-backed tools to manage stress with guided sessions, gentle movement, and everyday techniques.", "size": "large" } }
+    ]
+  }]
+}
+{% endschema %}

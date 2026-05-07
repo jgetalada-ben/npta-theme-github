@@ -246,7 +246,7 @@
 
   #iwt2-{{ sid }} .iwt2__grid{
     display: grid;
-    grid-template-columns: 1.25fr 1fr;
+    grid-template-columns: 1fr 1.3fr;
     gap: var(--iwt2-gap);
     align-items: start;
   }
@@ -345,24 +345,82 @@
   #iwt2-{{ sid }} .iwt2__cta{
     margin-top: 22px;
     display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
     justify-content: var(--iwt2-btn-justify);
   }
 
+  /* LEARN MORE button - uses global .btn and .button-yg classes */
   #iwt2-{{ sid }} .iwt2__btn{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--iwt2-btn-bg);
-    color: var(--iwt2-btn-text);
-    text-decoration: none;
+    /* The global .btn class already handles overflow, height, line-height */
+    /* We only need to add custom styling here */
     border-radius: var(--iwt2-btn-radius);
-    padding: 5px 30px;
-    font-weight: 500;
+    padding: 0 32px;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: .02em;
     white-space: nowrap;
-    font-family: var(--font-proximamedium);
-    font-size: clamp(12px, 2vw, 20px);
+    font-family: Montserrat, var(--font-proximamedium);
+    font-size: 16px;
+  }
+
+  /* Elective Financing Button - uses global .btn and .button-b classes */
+  #iwt2-{{ sid }} .financing-btn-inline {
+    /* The global .btn class already handles overflow, height, line-height */
+    color: #141414;
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 1.12px;
+    text-decoration-line: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex: 1 1 auto;
+    width: auto !important;
+    padding: 0 16px;
+  }
+
+  #iwt2-{{ sid }} .financing-btn-inline:before,
+  #iwt2-{{ sid }} .financing-btn-inline:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: -1px;
+    background: #01241E;
+  }
+
+  #iwt2-{{ sid }} .financing-btn-inline:before {
+    left: 0;
+  }
+
+  #iwt2-{{ sid }} .financing-btn-inline:after {
+    right: 0;
+    background: #01241E;
+    transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  #iwt2-{{ sid }} .financing-btn-inline:hover:before {
+    background: #01241E;
+    width: 0%;
+    transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  #iwt2-{{ sid }} .financing-btn-inline:hover:after {
+    background: transparent;
+    width: 0%;
+    transition: 0s;
+  }
+
+  @media (max-width: 989px){
+    #iwt2-{{ sid }} .financing-btn-inline {
+      flex: 1 1 auto;
+      width: 100% !important;
+      font-size: 13px;
+      padding: 0 16px;
+    }
   }
 
   @media (max-width: 989px){
@@ -381,7 +439,40 @@
       font-size: 16px;
       padding: 9px 14px;
     }
+    #iwt2-{{ sid }} .iwt2__cta{
+      flex-direction: column;
+      gap: 12px;
+      align-items: stretch;
+    }
+    #iwt2-{{ sid }} .iwt2__btn{
+      width: 100%;
+      padding: 0 24px;
+      font-size: 14px;
+      /* Removed height and line-height - let global .btn class handle it */
+    }
   }
+.iwt2__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.iwt2__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.iwt2__list li::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22ZM17.457 9.457L11 15.914L6.793 11.707L8.207 10.293L11 13.086L16.043 8.043L17.457 9.457Z' fill='%230F828C'/%3E%3C/svg%3E");
+}
 {%- endstyle -%}
 
 <section id="iwt2-{{ sid }}" class="section">
@@ -459,24 +550,196 @@
           </div>
         {%- endif -%}
 
-        {%- if section.settings.button_label != blank -%}
+        {%- if section.settings.button_label != blank or section.settings.show_elective_button -%}
           <div class="iwt2__cta">
-            <a
-              class="iwt2__btn"
-              {% if section.settings.button_link == blank %}
-                role="link" aria-disabled="true"
-              {% else %}
-                href="{{ section.settings.button_link }}"
-              {% endif %}
-            >
-              {{ section.settings.button_label }}
-            </a>
+            {%- if section.settings.button_label != blank -%}
+              <a
+                class="iwt2__btn btn button-yg"
+                {% if section.settings.button_link == blank %}
+                  role="link" aria-disabled="true"
+                {% else %}
+                  href="{{ section.settings.button_link }}"
+                {% endif %}
+              >
+                <span class="btn-label-down">{{ section.settings.button_label }}</span>
+                <span class="btn-label-down">{{ section.settings.button_label }}</span>
+              </a>
+            {%- endif -%}
+
+            {%- if section.settings.show_elective_button -%}
+              <a
+                href="{{ section.settings.elective_link | default: '/pages/payment-plan-options' }}"
+                class="btn button-b financing-btn-inline"
+                data-elective-financing-link
+                {% if section.settings.elective_product_handle != blank %}
+                  data-product-handle="{{ section.settings.elective_product_handle }}"
+                {% endif %}
+                {% if section.settings.elective_product_id != blank %}
+                  data-product-id="{{ section.settings.elective_product_id }}"
+                {% endif %}
+                {% if section.settings.elective_new_tab %}
+                  target="_blank"
+                  rel="noopener"
+                {% endif %}
+              >
+                <span class="btn-label-down">{{ section.settings.elective_button_label | default: "Elective Financing Options" }}</span>
+                <span class="btn-label-down">{{ section.settings.elective_button_label | default: "Elective Financing Options" }}</span>
+              </a>
+            {%- endif -%}
           </div>
         {%- endif -%}
       </div>
     </div>
   </div>
 </section>
+
+{%- if section.settings.show_elective_button -%}
+  {% render 'ghl-finance-modal' %}
+
+  <script>
+  (function(){
+    const LINK_SEL = '[data-elective-financing-link]';
+    const GHL_FORM_ID = 'jbeQYeHWMI1dM9tX0mYF';
+    const GHL_BASE = `https://app.npta.ca/widget/form/${GHL_FORM_ID}`;
+    const MODAL_ID = 'ghlFinanceModal';
+    const MOUNT_ID = 'ghlFormMount';
+    const TARGET_KEY = 'npta_finance_target';
+    const SUBMITTED_KEY = 'npta_finance_submitted_ts';
+    const SUBMIT_TTL_DAYS = 0;
+
+    function getModal(){ return document.getElementById(MODAL_ID); }
+    function getMount(){ return document.getElementById(MOUNT_ID); }
+
+    function openModal(){
+      const m = getModal();
+      if(!m) return;
+      m.hidden = false;
+      m.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(opts){
+      const m = getModal();
+      if(!m) return;
+      m.hidden = true;
+      m.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+      const mount = getMount();
+      if (mount && (!opts || opts.clear !== false)) mount.innerHTML = '';
+    }
+
+    function isSubmitted(){
+      try {
+        const v = localStorage.getItem(SUBMITTED_KEY);
+        if (!v) return false;
+        const ts = parseInt(v, 10);
+        if (!Number.isFinite(ts)) return true;
+        if (SUBMIT_TTL_DAYS && SUBMIT_TTL_DAYS > 0) {
+          const ttlMs = SUBMIT_TTL_DAYS * 24 * 60 * 60 * 1000;
+          if (Date.now() - ts > ttlMs) return false;
+        }
+        return true;
+      } catch(e){
+        return false;
+      }
+    }
+
+    function toQuery(obj){
+      return Object.keys(obj || {})
+        .filter(k => obj[k] != null && obj[k] !== '')
+        .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(obj[k]))
+        .join('&');
+    }
+
+    function buildTarget(href, a){
+      const u = new URL(href, window.location.origin);
+      const q = u.searchParams;
+      if (a.dataset.productHandle) q.set('product_handle', a.dataset.productHandle);
+      if (a.dataset.productId) q.set('product_id', a.dataset.productId);
+      const title = a.dataset.productTitle || document.title || '';
+      if (title) q.set('product_title', title);
+      u.search = q.toString();
+      return u.toString();
+    }
+
+    function buildFormSrc(a){
+      const attr = (window.__nptaGetAttribution && window.__nptaGetAttribution()) || {};
+      const utm = {
+        utm_source: attr.utm_source || '',
+        utm_medium: attr.utm_medium || '',
+        utm_campaign: attr.utm_campaign || '',
+        utm_term: attr.utm_term || '',
+        utm_content: attr.utm_content || ''
+      };
+      const prod = {
+        product_title: a.dataset.productTitle || document.title || '',
+        product_handle: a.dataset.productHandle || '',
+        product_id: a.dataset.productId || ''
+      };
+      const qs = [toQuery(utm), toQuery(prod)].filter(Boolean).join('&');
+      return qs ? (GHL_BASE + '?' + qs) : GHL_BASE;
+    }
+
+    function injectIframe(src){
+      const mount = getMount();
+      if(!mount) return;
+      mount.innerHTML = '';
+      const iframe = document.createElement('iframe');
+      iframe.src = src;
+      iframe.style.width = '100%';
+      iframe.style.border = 'none';
+      iframe.style.display = 'block';
+      mount.appendChild(iframe);
+    }
+
+    function handleClick(e){
+      e.preventDefault();
+      const a = e.currentTarget;
+      if(isSubmitted()){
+        const url = buildTarget(a.href, a);
+        window.open(url, a.target === '_blank' ? '_blank' : '_self');
+        return;
+      }
+      const src = buildFormSrc(a);
+      try {
+        localStorage.setItem(TARGET_KEY, a.href);
+      } catch(err){}
+      injectIframe(src);
+      openModal();
+    }
+
+    function listenForSubmit(){
+      window.addEventListener('message', (evt) => {
+        if(!evt.data || typeof evt.data !== 'object') return;
+        if(evt.data.type === 'hsFormCallback' && evt.data.eventName === 'onFormSubmitted'){
+          try{
+            localStorage.setItem(SUBMITTED_KEY, String(Date.now()));
+            const target = localStorage.getItem(TARGET_KEY);
+            if(target){
+              closeModal({ clear: false });
+              setTimeout(() => { window.location.href = target; }, 300);
+            }
+          } catch(e){}
+        }
+      }, false);
+    }
+
+    function init(){
+      listenForSubmit();
+      const links = document.querySelectorAll(LINK_SEL);
+      links.forEach(link => link.addEventListener('click', handleClick));
+      const closers = document.querySelectorAll('[data-close-ghl]');
+      closers.forEach(el => el.addEventListener('click', () => closeModal()));
+    }
+
+    if(document.readyState === 'loading'){
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+  </script>
+{%- endif -%}
 
 {% schema %}
 {
@@ -513,6 +776,14 @@
         { "value": "right", "label": "Right" }
       ]
     },
+
+    { "type": "header", "content": "Elective Financing Button" },
+    { "type": "checkbox", "id": "show_elective_button", "label": "Show Elective Financing button", "default": false },
+    { "type": "text", "id": "elective_button_label", "label": "Elective button label", "default": "Elective Financing Options" },
+    { "type": "url", "id": "elective_link", "label": "Elective button link", "info": "Defaults to /pages/payment-plan-options if empty" },
+    { "type": "checkbox", "id": "elective_new_tab", "label": "Open elective link in new tab", "default": false },
+    { "type": "text", "id": "elective_product_handle", "label": "Product handle (for modal)", "info": "Optional: For GHL finance modal integration" },
+    { "type": "text", "id": "elective_product_id", "label": "Product ID (for modal)", "info": "Optional: For GHL finance modal integration" },
 
     { "type": "header", "content": "Colors" },
     { "type": "color", "id": "bg_color", "label": "Background", "default": "#FFFFFF" },

@@ -1,0 +1,25 @@
+{% comment %}
+  Custom robots.txt — preserves Shopify's default rules and adds an
+  Allow directive for /checkouts/internal/preloads.js (Shopify injects
+  this script on every page but the default Disallow: /checkouts/ rule
+  blocks crawlers from reading it, which triggers a Semrush warning on
+  every page). Uses the Shopify-recommended structure — DO NOT collapse
+  into {{- -}} whitespace-stripping tags; each directive must be on its
+  own line per robots.txt spec.
+{% endcomment %}
+{% for group in robots.default_groups %}
+  {{- group.user_agent }}
+
+  {%- for rule in group.rules %}
+    {{ rule }}
+  {%- endfor %}
+
+  {%- if group.user_agent.value == '*' %}
+    Allow: /checkouts/internal/preloads.js
+  {%- endif %}
+
+  {%- if group.sitemap != blank %}
+
+    {{ group.sitemap }}
+  {%- endif %}
+{% endfor %}

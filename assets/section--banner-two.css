@@ -61,6 +61,18 @@
     gap:15px;
     margin-top:30px;
   }
+  .button-wrapper .btn .btn-label-down{
+    font-size: clamp(10px,1.4vw,14px);
+  }
+  @media only screen and (max-width: 1024px) {
+    .button-wrapper .btn {
+      line-height: normal;
+    }
+    .button-wrapper .btn .btn-label-down{
+      font-size: 12px;
+      top: -80%;
+    }
+  }
   @media only screen and (max-width: 768px) {
     .section--banner-two .banner-two--text-content h2{
       text-align:center;

@@ -107,7 +107,22 @@
       "label": "Button 1 Text",
       "default": "Register Here"
     },
-        
+    {
+      "type": "header",
+      "content": "Slider Image Height"
+    },
+    {
+      "type": "text",
+      "id": "image_height",
+      "label": "Desktop Image Height (e.g. 432px, 30vw)",
+      "default": "432px"
+    },
+    {
+      "type": "text",
+      "id": "image_height_mobile",
+      "label": "Mobile Image Height (e.g. 360px)",
+      "default": "360px"
+    }
   ],
   "blocks": [
     {
@@ -160,8 +175,27 @@
 
 
 
-<section class="section--certified-trainers" id="{{ section.settings.section_id }}">
+<section class="section--certified-trainers" id="{{ section.settings.section_id }}" data-hbid="hbsct-{{ section.id }}">
   {{ 'section--certified-trainers.css' | asset_url | stylesheet_tag }}
+  <style>
+    [data-hbid="hbsct-{{ section.id }}"] .trainer-wrapper,
+    [data-hbid="hbsct-{{ section.id }}"] .trainer-wrapper img {
+      height: {{ section.settings.image_height | default: '432px' }};
+    }
+    [data-hbid="hbsct-{{ section.id }}"] .trainer-wrapper img {
+      width: 100%;
+      object-fit: cover;
+    }
+    @media (max-width: 768px) {
+      [data-hbid="hbsct-{{ section.id }}"] .trainer-wrapper,
+      [data-hbid="hbsct-{{ section.id }}"] .trainer-wrapper img {
+        height: {{ section.settings.image_height_mobile | default: '360px' }};
+      }
+      [data-hbid="hbsct-{{ section.id }}"] #certification_slide .trainer-wrapper {
+        min-height: {{ section.settings.image_height_mobile | default: '360px' }};
+      }
+    }
+  </style>
   <div class="section--title-block page-container" style="display: flex; justify-content: {{ section.settings.alignment }};max-width: {{ section.settings.container_width }}px;">
     <div>
       <h2 style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_title }}</h2>
@@ -242,7 +276,7 @@
     padding-bottom: 20px;
   }
   .section--certified-trainers .section--hero-buttons {
-    margin-top: auto;
+    margin-top: 60px;
     padding-top: 8px;
     width: 100%;
     display: flex;
@@ -253,25 +287,29 @@
     font-family: var(--font-anton);
     font-weight:400;
     color: #01241E;
-    font-size: clamp(21px, 4vw, 40px);
+    font-size: clamp(21px, 4vw, 32px) !important;
+    text-transform: none;
   }
   #{{ section.settings.section_id }} .section--title-block span h3 {
-    font-size: clamp(14px, 1.4vw, 24px);
-    font-family: var(--font-poppins500);
-    font-weight: 600;
+    font-size: clamp(14px, 1.4vw, 20px);
+    font-family: var(--hp-font-body);
+    font-weight: 400;
     line-height: normal;
     color: #000;
   }
   #{{ section.settings.section_id }} .section--title-block span p {
-    font-family: var(--font-poppins500);
-    font-weight: 500;
-    font-size: clamp(12px, 1.4vw, 20px);
-    line-height: normal;
+    font-family: var(--hp-font-body);
+    font-weight: 400;
+    font-size: clamp(14px, 2.4vw, 20px);
+    line-height: 1.5;
     color: #000;
   }
   @media (max-width: 768px) {
     .section--certified-trainers .section--hero-buttons .btn{
-      width: 90%;
+      width: fit-content;
+    }
+    .section--certified-trainers .section--hero-buttons {
+      margin-top: calc(60px/2);
     }
   }
 </style>

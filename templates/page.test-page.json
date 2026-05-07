@@ -1,1 +1,306 @@
-{"sections":{"main":{"type":"main-page","disabled":true,"settings":{"padding_top":28,"padding_bottom":28}},"form_popup_two_YmdYbC":{"type":"form-popup-two","blocks":{"text_field_BqDtQ3":{"type":"text_field","settings":{"label":"Name","placeholder":"Enter your name"}},"email_YRFnA4":{"type":"email","settings":{"label":"Email","placeholder":"Enter your email"}},"phone_emKrpn":{"type":"phone","settings":{"label":"Phone Number","placeholder":"Enter your phone number"}}},"block_order":["text_field_BqDtQ3","email_YRFnA4","phone_emKrpn"],"settings":{"popup_image":"shopify:\/\/shop_images\/popup-placeholder-1_7ab77f22-8737-4968-b4af-94096d8aa732.jpg","popup_heading":"$25 OFF","popup_subheading":"A course of your choice!","no_thanks_text":"No Thanks","disclaimer_text":"<p>*Can only be redeemed one time<br\/>By entering my email, phone number above, and submitting this form, I agree to receive recurring automated promotional texts and emails.<\/p>","webhook_url":"https:\/\/hooks.zapier.com\/hooks\/catch\/18464236\/2hglw2qa\/","form_submit_label":"Sign Up Now","thank_you_header":"<p>*Can only be redeemed one time<br\/>By entering my email, phone number above, and submitting this form, I agree to receive recurring automated promotional texts and emails.<\/p>","popup_delay":1}},"quiz_hero_popup_Qdb4MK":{"type":"quiz-hero-popup","blocks":{"question_KmiEzN":{"type":"question","settings":{"question":"Your question here...","options":"Option 1\nOption 2\nOption 3\nOption 4","correct_option":1,"explanation":"Explanation text..."}},"question_jUnXXi":{"type":"question","settings":{"question":"Your question here...","options":"Option 1\nOption 2\nOption 3\nOption 4","correct_option":1,"explanation":"Explanation text..."}},"question_W6GpnJ":{"type":"question","settings":{"question":"Your question here...","options":"Option 1\nOption 2\nOption 3\nOption 4","correct_option":1,"explanation":"Explanation text..."}}},"block_order":["question_KmiEzN","question_jUnXXi","question_W6GpnJ"],"name":"Quiz Hero + Popup","settings":{"max_width":1200,"padding_top":48,"padding_bottom":48,"section_bg":"#f2f2e9","heading_color":"#01241e","text_color":"#01241e","eyebrow":"","heading":"DISCOVER THE RIGHT PATH FOR YOU","description":"<p>Not sure where to begin? Take our quick quiz to find the best starting point for your goals, interests, and experience—we’ll guide you to the path that’s right for you.<\/p>","primary_btn_label":"TAKE THE QUIZ","primary_btn_bg":"#0f828c","primary_btn_text":"#ffffff","secondary_btn_label":"BOOK A FREE CALL","secondary_btn_url":"","secondary_btn_bg":"#e0ded0","secondary_btn_text":"#01241e","advisor_text":"","image":"shopify:\/\/shop_images\/Rectangle_109.png","modal_bg":"#ffffff","accent_color":"#0f828c","correct_color":"#a6da18","wrong_color":"#28666e","quiz_title":"Fitness Quiz","quiz_header":"How Much Do You Really Know About Fitness?","quiz_subheader":"Take the Knowledge Challenge","powered_by":"Powered by NPTA™ Canada - National Personal Training Academy","next_question_label":"Next Question","see_results_label":"See Results","close_resets":true,"lead_enabled":true,"lead_title":"Before you start","lead_desc":"Enter your details to begin the quiz.","lead_name_label":"Name","lead_email_label":"Email","lead_name_placeholder":"Your name","lead_email_placeholder":"you@email.com","lead_start_label":"Start Quiz","lead_required_msg":"Please enter your name and a valid email to begin.","send_enabled":true,"send_mode":"button","send_btn_label":"Send my results","send_success_text":"Sent! Our team received your quiz results.","send_error_text":"Sorry, we could not send your results. Please try again.","results_breakdown_heading":"Your Results Breakdown:","results_correct_label":"Correct","results_incorrect_label":"To Learn","results_promo_title":"Ready to Become a Certified Fitness Professional?","results_promo_text":"NPTA offers comprehensive certification programs that will take your knowledge to the next level. Whether you want to launch your own fitness business or work with established gyms, we will give you the tools, knowledge, and credentials to succeed.","results_promo_points":"Nationally recognized certification\nEvidence-based curriculum\nBusiness and entrepreneurship training\nOngoing support and continuing education","results_cta_label":"Explore Certification Programs","results_cta_url":"","retake_label":"Retake Quiz","tier1_title":"🏆 Elite Fitness Knowledge!","tier1_message":"Wow! You scored in the top tier. You have what it takes to be an exceptional fitness professional.","tier1_cta":"You're already thinking like a certified trainer!","tier2_title":"💪 Future Trainer Material!","tier2_message":"Impressive! You have a solid foundation in fitness knowledge. With certification, you could turn this passion into a rewarding career.","tier2_cta":"Imagine what you'll know after certification!","tier3_title":"🎯 Fitness Enthusiast!","tier3_message":"Great job! You know more than the average gym-goer. There’s so much more to discover about the science of fitness.","tier3_cta":"Ready to fill in the knowledge gaps?","tier4_title":"🌟 Curious Beginner!","tier4_message":"Everyone starts somewhere! Your curiosity about fitness is the first step. A whole world of knowledge is waiting for you.","tier4_cta":"Turn your curiosity into expertise!"}}},"order":["main","form_popup_two_YmdYbC","quiz_hero_popup_Qdb4MK"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "hero_banner_v3_KhVMgU": {
+      "type": "hero-banner-v3",
+      "name": "Hero Banner V3",
+      "settings": {
+        "background_image": "shopify://shop_images/pexels-gustavo-fring-8769370.jpg",
+        "background_image_mobile": "shopify://shop_images/herobanner-mobile.webp",
+        "bg_color": "#01241e",
+        "enable_gradient": true,
+        "gradient_direction": "left",
+        "gradient_color": "#01241e",
+        "gradient_opacity": 80,
+        "title": "Stop Being Just a Trainer.",
+        "title_size": "clamp(28px, 4vw, 44px)",
+        "title_color": "#ffffff",
+        "title_line_height": "1.2",
+        "title_letter_spacing": "0.88px",
+        "description": "<p>NPTA's evidence-based curriculum gives you the credentials, the framework, and the confidence to charge more and deliver more.</p>",
+        "desc_size": "clamp(16px, 1.8vw, 22px)",
+        "desc_color": "#ffffff",
+        "desc_line_height": "1.4",
+        "desc_max_width": 450,
+        "show_promo_card": true,
+        "promo_text": "<p>Applied automatically all qualifying certifications.</p><p><em>No code needed. Discount applied at checkout.</em></p>",
+        "promo_text_size": "clamp(13px, 1.2vw, 16px)",
+        "promo_text_color": "#000000",
+        "promo_heading": "SAVE 25% TODAY",
+        "promo_heading_size": "clamp(18px, 2.2vw, 24px)",
+        "promo_heading_color": "#0f828c",
+        "promo_badge_text": "LIMITED TIME",
+        "promo_badge_size": "12px",
+        "promo_badge_bg": "#d9d9d9",
+        "promo_badge_color": "#484b4b",
+        "promo_bg": "#ffffff",
+        "promo_radius": 5,
+        "promo_padding": 20,
+        "promo_max_width": "415px",
+        "button_1_text": "Explore Courses",
+        "button_1_link": "",
+        "button_1_new_tab": false,
+        "button_1_show_arrow": true,
+        "button_1_size": "clamp(14px, 1.8vw, 20px)",
+        "button_1_bg": "#c1ff72",
+        "button_1_color": "#000000",
+        "button_2_text": "View Certifications",
+        "button_2_link": "",
+        "button_2_new_tab": false,
+        "button_2_show_arrow": false,
+        "button_2_size": "clamp(14px, 1.8vw, 20px)",
+        "button_2_bg": "#d3d3d3",
+        "button_2_color": "#000000",
+        "button_radius": 10,
+        "banner_height": "625px",
+        "banner_height_mobile": "500px",
+        "container_width": "1400",
+        "vertical_align": "center",
+        "horizontal_align": "left",
+        "pad_top": 60,
+        "pad_bottom": 60,
+        "pad_left": 20,
+        "pad_right": 20
+      }
+    },
+    "hp_finance": {
+      "type": "hp-finance",
+      "blocks": {
+        "feat_1": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/material-symbols-light_approval-delegation-sharp_2x_990c6867-85b5-4b03-97c4-12516aebba63.png",
+            "title": "INSTANT APPROVAL",
+            "description": "Find out in seconds! No waiting, no guessing."
+          }
+        },
+        "feat_2": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/material-symbols_payments-outline-sharp_2x_890f43b8-f995-41c8-bb23-ac05e3214bfc.png",
+            "title": "FLEXIBLE PAYMENT PLANS",
+            "description": "Choose 3 or 6 monthly payments that fit your life."
+          }
+        },
+        "feat_3": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify://shop_images/ic_outline-money-off-csred_2x_8c92342b-a7aa-4381-8b5e-1572b52c5c0a.png",
+            "title": "ZERO INTEREST. ZERO SURPRISES.",
+            "description": "Pay nothing extra. Just focus on building your career."
+          }
+        }
+      },
+      "block_order": [
+        "feat_1",
+        "feat_2",
+        "feat_3"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/pexels-karola-g-5237979_1.png",
+        "heading": "Your Dream Career Shouldn't Wait on Your Wallet.",
+        "subheading": "Start training now. Pay on a plan that works for you — 0% interest, no stress.",
+        "button_text": "GET APPROVED IN SECONDS",
+        "button_link": "shopify://collections/all",
+        "btn_font_size": "clamp(14px, 2vw, 20px)",
+        "btn_text_color": "#01241e",
+        "btn_bg_color": "#c1ff72",
+        "title_size": "clamp(21px, 3vw, 32px)",
+        "title_color": "#01241e",
+        "body_size": "clamp(14px, 2.4vw, 20px)",
+        "body_color": "#01241e",
+        "feature_title_size": "clamp(14px, 2.2vw, 20px)",
+        "desktop_layout": "image-left",
+        "mobile_layout": "image-top",
+        "container_width": "1400"
+      }
+    },
+    "form_popup_two_YmdYbC": {
+      "type": "form-popup-two",
+      "blocks": {
+        "text_field_BqDtQ3": {
+          "type": "text_field",
+          "settings": {
+            "label": "Name",
+            "placeholder": "Enter your name"
+          }
+        },
+        "email_YRFnA4": {
+          "type": "email",
+          "settings": {
+            "label": "Email",
+            "placeholder": "Enter your email"
+          }
+        },
+        "phone_emKrpn": {
+          "type": "phone",
+          "settings": {
+            "label": "Phone Number",
+            "placeholder": "Enter your phone number"
+          }
+        }
+      },
+      "block_order": [
+        "text_field_BqDtQ3",
+        "email_YRFnA4",
+        "phone_emKrpn"
+      ],
+      "disabled": true,
+      "settings": {
+        "popup_image": "shopify://shop_images/popup-placeholder-1_7ab77f22-8737-4968-b4af-94096d8aa732.jpg",
+        "popup_heading": "$25 OFF",
+        "popup_subheading": "A course of your choice!",
+        "no_thanks_text": "No Thanks",
+        "disclaimer_text": "<p>*Can only be redeemed one time<br/>By entering my email, phone number above, and submitting this form, I agree to receive recurring automated promotional texts and emails.</p>",
+        "webhook_url": "https://hooks.zapier.com/hooks/catch/18464236/2hglw2qa/",
+        "form_submit_label": "Sign Up Now",
+        "thank_you_header": "<p>*Can only be redeemed one time<br/>By entering my email, phone number above, and submitting this form, I agree to receive recurring automated promotional texts and emails.</p>",
+        "popup_delay": 1
+      }
+    },
+    "quiz_hero_popup_Qdb4MK": {
+      "type": "quiz-hero-popup",
+      "blocks": {
+        "question_KmiEzN": {
+          "type": "question",
+          "settings": {
+            "question": "Your question here...",
+            "options": "Option 1\nOption 2\nOption 3\nOption 4",
+            "correct_option": 1,
+            "explanation": "Explanation text..."
+          }
+        },
+        "question_jUnXXi": {
+          "type": "question",
+          "settings": {
+            "question": "Your question here...",
+            "options": "Option 1\nOption 2\nOption 3\nOption 4",
+            "correct_option": 1,
+            "explanation": "Explanation text..."
+          }
+        },
+        "question_W6GpnJ": {
+          "type": "question",
+          "settings": {
+            "question": "Your question here...",
+            "options": "Option 1\nOption 2\nOption 3\nOption 4",
+            "correct_option": 1,
+            "explanation": "Explanation text..."
+          }
+        }
+      },
+      "block_order": [
+        "question_KmiEzN",
+        "question_jUnXXi",
+        "question_W6GpnJ"
+      ],
+      "disabled": true,
+      "name": "Quiz Hero + Popup",
+      "settings": {
+        "max_width": 1200,
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "section_bg": "#f2f2e9",
+        "heading_color": "#01241e",
+        "text_color": "#01241e",
+        "eyebrow": "",
+        "heading": "DISCOVER THE RIGHT PATH FOR YOU",
+        "description": "<p>Not sure where to begin? Take our quick quiz to find the best starting point for your goals, interests, and experience—we’ll guide you to the path that’s right for you.</p>",
+        "primary_btn_mode": "quiz",
+        "primary_btn_label": "TAKE THE QUIZ",
+        "primary_btn_typeform_url": "",
+        "primary_btn_url": "",
+        "primary_btn_new_tab": false,
+        "primary_btn_bg": "#0f828c",
+        "primary_btn_text": "#ffffff",
+        "secondary_btn_mode": "url",
+        "secondary_btn_label": "BOOK A FREE CALL",
+        "secondary_calendly_url": "",
+        "secondary_btn_url": "",
+        "secondary_btn_new_tab": false,
+        "secondary_btn_bg": "#e0ded0",
+        "secondary_btn_text": "#01241e",
+        "advisor_text": "",
+        "image": "shopify://shop_images/Rectangle_109.png",
+        "image_position": "right",
+        "modal_bg": "#ffffff",
+        "accent_color": "#0f828c",
+        "correct_color": "#a6da18",
+        "wrong_color": "#28666e",
+        "quiz_title": "Fitness Quiz",
+        "quiz_header": "How Much Do You Really Know About Fitness?",
+        "quiz_subheader": "Take the Knowledge Challenge",
+        "powered_by": "Powered by NPTA™ Canada - National Personal Training Academy",
+        "next_question_label": "Next Question",
+        "see_results_label": "See Results",
+        "close_resets": true,
+        "lead_enabled": true,
+        "lead_title": "Before you start",
+        "lead_desc": "Enter your details to begin the quiz.",
+        "lead_name_label": "Name",
+        "lead_email_label": "Email",
+        "lead_name_placeholder": "Your name",
+        "lead_email_placeholder": "you@email.com",
+        "lead_start_label": "Start Quiz",
+        "lead_required_msg": "Please enter your name and a valid email to begin.",
+        "send_enabled": true,
+        "send_mode": "button",
+        "send_provider": "shopify_contact",
+        "send_to_email": "",
+        "send_cc_emails": "",
+        "send_subject": "Quiz Result Submission",
+        "send_webhook_url": "",
+        "send_btn_label": "Send my results",
+        "send_success_text": "Sent! Our team received your quiz results.",
+        "send_error_text": "Sorry, we could not send your results. Please try again.",
+        "results_breakdown_heading": "Your Results Breakdown:",
+        "results_correct_label": "Correct",
+        "results_incorrect_label": "To Learn",
+        "results_promo_title": "Ready to Become a Certified Fitness Professional?",
+        "results_promo_text": "NPTA offers comprehensive certification programs that will take your knowledge to the next level. Whether you want to launch your own fitness business or work with established gyms, we will give you the tools, knowledge, and credentials to succeed.",
+        "results_promo_points": "Nationally recognized certification\nEvidence-based curriculum\nBusiness and entrepreneurship training\nOngoing support and continuing education",
+        "results_cta_label": "Explore Certification Programs",
+        "results_cta_url": "",
+        "retake_label": "Retake Quiz",
+        "redirect_after_quiz": true,
+        "redirect_url": "shopify://collections/all",
+        "redirect_delay": 5,
+        "tier1_title": "🏆 Elite Fitness Knowledge!",
+        "tier1_message": "Wow! You scored in the top tier. You have what it takes to be an exceptional fitness professional.",
+        "tier1_cta": "You're already thinking like a certified trainer!",
+        "tier2_title": "💪 Future Trainer Material!",
+        "tier2_message": "Impressive! You have a solid foundation in fitness knowledge. With certification, you could turn this passion into a rewarding career.",
+        "tier2_cta": "Imagine what you'll know after certification!",
+        "tier3_title": "🎯 Fitness Enthusiast!",
+        "tier3_message": "Great job! You know more than the average gym-goer. There’s so much more to discover about the science of fitness.",
+        "tier3_cta": "Ready to fill in the knowledge gaps?",
+        "tier4_title": "🌟 Curious Beginner!",
+        "tier4_message": "Everyone starts somewhere! Your curiosity about fitness is the first step. A whole world of knowledge is waiting for you.",
+        "tier4_cta": "Turn your curiosity into expertise!"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "hero_banner_v3_KhVMgU",
+    "hp_finance",
+    "form_popup_two_YmdYbC",
+    "quiz_hero_popup_Qdb4MK"
+  ]
+}

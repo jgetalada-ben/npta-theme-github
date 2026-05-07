@@ -318,23 +318,22 @@
 
 #vid2-{{ sid }} .vid2__title{
   font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
-  font-weight: 400; text-transform: uppercase; line-height:1.05; margin:0;
+  font-weight: 400; line-height:1.05; margin:0; text-transform: none;
 }
 #vid2-{{ sid }} .vid2__promo{
   font-family: var(--font-anton, var(--font-heading-family, var(--font-body-family)));
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 400;
   line-height: 1.05;
   margin: 0;
 }
 #vid2-{{ sid }} .vid2__subtitle{ font-weight:700; }
-#vid2-{{ sid }} .vid2__desc{ max-width: 75ch; }
-
+#vid2-{{ sid }} .vid2__desc{ max-width: 76ch; }
+#vid2-{{ sid }} .vid2__desc p {line-height: normal;}
 #vid2-{{ sid }} .vid2__btns{ display:flex; gap:12px; flex-wrap:wrap; }
 #vid2-{{ sid }} .vid2__btn{
   font-family: var(--font-adirek800);display:inline-flex; align-items:center; justify-content:center;
-  padding: 14px 24px; border-radius: 10px; text-decoration:none;
-  font-weight:600; line-height:1; white-space:nowrap;
+  padding: 10px 24px; border-radius: 10px; text-decoration:none;
+  font-weight:400; line-height:1; white-space:nowrap;
 }
 #vid2-{{ sid }} .vid2__icon-text{
   display: inline-flex;

@@ -1,0 +1,60 @@
+{%- assign sid = section.id -%}
+{{ 'hp-sections.css' | asset_url | stylesheet_tag }}
+
+<section id="hp-hero-{{ sid }}" class="hp-hero">
+  {%- if section.settings.background_image != blank -%}
+    <picture class="hp-hero__bg">
+      <img
+        src="{{ section.settings.background_image | image_url: width: 2400 }}"
+        srcset="{{ section.settings.background_image | image_url: width: 800 }} 800w,
+                {{ section.settings.background_image | image_url: width: 1200 }} 1200w,
+                {{ section.settings.background_image | image_url: width: 1800 }} 1800w,
+                {{ section.settings.background_image | image_url: width: 2400 }} 2400w"
+        sizes="100vw"
+        alt="{{ section.settings.headline | escape }}"
+        loading="eager"
+        fetchpriority="high"
+        width="1400"
+        height="670">
+    </picture>
+  {%- endif -%}
+  <div class="hp-hero__overlay"></div>
+
+  <div class="hp-hero__content" style="max-width: {{ section.settings.container_width }}px;">
+    {%- if section.settings.headline != blank -%}
+      <h1 class="hp-hero__title" style="font-size: {{ section.settings.title_size }}; color: {{ section.settings.title_color }};">{{ section.settings.headline }}</h1>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="hp-hero__sub" style="font-size: {{ section.settings.body_size }}; color: {{ section.settings.body_color }};">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+    {%- if section.settings.button_text != blank and section.settings.button_link != blank -%}
+      <a href="{{ section.settings.button_link }}" class="btn button-yg btn--primary" style="font-size: {{ section.settings.btn_font_size }}; background-color: {{ section.settings.btn_bg_color }};padding-left:20px;padding-right:20px;">
+        <span class="btn-label-down">{{ section.settings.button_text }}</span>
+        <span class="btn-label-down">{{ section.settings.button_text }}</span>
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HP Hero Banner",
+  "settings": [
+    { "type": "image_picker", "id": "background_image", "label": "Background Image" },
+    { "type": "text", "id": "headline", "label": "Headline", "default": "Spring Forward Your Career" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Earn your NASM certification through NPTA™ and gain the hands-on training, job placement support, and career-ready experience that you need." },
+    { "type": "text", "id": "button_text", "label": "Button Text", "default": "START TODAY" },
+    { "type": "url", "id": "button_link", "label": "Button Link" },
+    { "type": "header", "content": "Typography" },
+    { "type": "text", "id": "title_size", "label": "Title Font Size", "default": "clamp(32px, 5.5vw, 65px)" },
+    { "type": "color", "id": "title_color", "label": "Title Color", "default": "#ffffff" },
+    { "type": "text", "id": "body_size", "label": "Body Font Size", "default": "clamp(14px, 1.8vw, 18px)" },
+    { "type": "color", "id": "body_color", "label": "Body Color", "default": "#ffffff" },
+    { "type": "text", "id": "btn_font_size", "label": "Button Font Size", "default": "14px" },
+    { "type": "color", "id": "btn_bg_color", "label": "Button Background Color", "default": "#C1FF72" },
+    { "type": "header", "content": "Layout" },
+    { "type": "text", "id": "container_width", "label": "Container Max Width (px)", "default": "860" }
+  ],
+  "presets": [{ "name": "HP Hero Banner" }]
+}
+{% endschema %}

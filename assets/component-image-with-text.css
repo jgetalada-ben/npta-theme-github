@@ -432,7 +432,7 @@ Custom
 */
 .image-with-text__heading{
   color:  #141414;
-/* font-family: Montserrat; */
+/* font-family: var(--font-body-family); */
   font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
   font-size: 42px;
   font-style: normal;

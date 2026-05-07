@@ -1,0 +1,52 @@
+{%- assign sid = section.id -%}
+{{ 'hp-sections.css' | asset_url | stylesheet_tag }}
+
+<section id="hp-testimonials-{{ sid }}" class="hp-testimonials">
+  <div class="hp-testimonials__inner">
+    <h2 class="hp-testimonials__title">{{ section.settings.heading }}</h2>
+
+    {%- if section.settings.subtitle != blank -%}
+      <p class="hp-testimonials__eyebrow">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.description != blank -%}
+      <p class="hp-testimonials__desc">{{ section.settings.description }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.image != blank -%}
+      <div class="hp-testimonials__image">
+        <img
+          src="{{ section.settings.image | image_url: width: 2238 }}"
+          srcset="{{ section.settings.image | image_url: width: 800 }} 800w,
+                  {{ section.settings.image | image_url: width: 1200 }} 1200w,
+                  {{ section.settings.image | image_url: width: 2238 }} 2238w"
+          sizes="(max-width: 749px) 90vw, 80vw"
+          alt="{{ section.settings.heading | escape }}"
+          loading="lazy"
+          width="1119"
+          height="453">
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.button_text != blank and section.settings.button_link != blank -%}
+      <a href="{{ section.settings.button_link }}" class="hp-btn hp-btn--primary">
+        {{ section.settings.button_text }}
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HP Testimonials",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Learn From The Best. Be The Best." },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Real Stories. Real Results." },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "See how NASM-certified trainers turned passion into thriving careers. With the right certification and support, you'll gain the skills, confidence, and opportunities to shape your own path." },
+    { "type": "image_picker", "id": "image", "label": "Featured Image" },
+    { "type": "text", "id": "button_text", "label": "Button Text", "default": "LEARN MORE" },
+    { "type": "url", "id": "button_link", "label": "Button Link" }
+  ],
+  "presets": [{ "name": "HP Testimonials" }]
+}
+{% endschema %}

@@ -80,7 +80,7 @@
           -%}
 
           {%- comment -%} Exam Selector - Only show for CPT products {%- endcomment -%}
-          {%- assign show_exam_selector = false -%}
+          {% comment %} {%- assign show_exam_selector = false -%}
           {%- assign exam_trigger_word = product.metafields.custom.exam_trigger_word | default: 'CPT' -%}
           {%- if product.title contains exam_trigger_word -%}
             {%- assign show_exam_selector = true -%}
@@ -88,7 +88,7 @@
 
           {%- if show_exam_selector -%}
             <div class="exam-selector-wrapper">
-              <button type="button" id="exam-selector-btn-{{ section_id }}" class="exam-selector-btn btn button-b">
+              <button type="button" id="exam-selector-btn-{{ section_id }}" class="exam-selector-btn btn button-yg">
                 <span class="btn-label-down">Select Exam</span>
                 <span class="btn-label-down">Select Exam</span>
               </button>
@@ -97,7 +97,7 @@
                 <strong>Selected:</strong> <span>NASM Certified Personal Trainer (NCCA Accredited)</span>
               </p>
             </div>
-          {%- endif -%}
+          {%- endif -%} {% endcomment %}
 
 
           <div class="add-to-cart-row">
@@ -113,17 +113,14 @@
                 disabled
               {% endif %}
             >
-              <span>
-                   {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
-
-                        <span class="btn-label-down">Out of Stock</span>
-                        <span class="btn-label-down">Out of Stock</span>
-                   {%- else -%}
-                    <span class="btn-label-down">Add to Cart</span>
-              <span class="btn-label-down">Add to Cart</span>
-                  {%- endif -%}
-
-
+              <span class="btn-inner">
+                {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+                  <span class="btn-label-down">Out of Stock</span>
+                  <span class="btn-label-down">Out of Stock</span>
+                {%- else -%}
+                  <span class="btn-label-down">Add to Cart</span>
+                  <span class="btn-label-down">Add to Cart</span>
+                {%- endif -%}
               </span>
               {%- render 'loading-spinner' -%}
             </button>
@@ -224,7 +221,7 @@
     /* Add to Cart Row - Horizontal Layout */
     .add-to-cart-row {
       display: flex !important;
-      align-items: center;
+      align-items: left;
       gap: 12px;
       flex-wrap: wrap;
       width: 100%;
@@ -246,7 +243,7 @@
 
     .financing-btn-inline {
       color: #141414;
-      font-family: Montserrat;
+      font-family: var(--font-body-family);
       font-size: 14px;
       font-style: normal;
       font-weight: 700;
@@ -303,6 +300,17 @@
       max-width: none !important;
     }
 
+    /* Safari ignores overflow: hidden on <button> elements, which breaks
+       the .btn-label-down slide animation. Wrap the labels in a block-level
+       span that owns the clipping and containing block instead. */
+    .add-to-cart-row .product-form__submit .btn-inner {
+      display: block;
+      position: relative;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
     .product-form-wrap{
       display: flex;
       align-items: center;
@@ -324,6 +332,7 @@
     @media screen and (min-width: 750px) {
       .add-to-cart-row {
         flex-wrap: nowrap;
+        align-items: baseline;
       }
     }
 
@@ -381,21 +390,17 @@
 /* Exam Selector Styles */
 .exam-selector-wrapper {
   width: 100%;
-  margin-bottom: 25px;
+  margin-bottom: 16px;
 }
 
 .exam-selector-btn {
   width: 100%;
   margin-bottom: 8px;
   background-color: #D9D9D9;
-  cursor: pointer;
+  color:#000 !important;
 }
 .exam-selector-btn:hover {
     background: #D9D9D9;
-}
-.exam-selector-btn span.btn-label-down,
-.exam-selector-btn:hover span.btn-label-down{
-  color: #000;
 }
 .exam-selected-text {
   font-size: 14px;
@@ -557,7 +562,7 @@
 .exam-modal-btn {
   padding: 12px 24px;
   border-radius: 8px;
-  font-family: Montserrat;
+  font-family: var(--font-body-family);
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;

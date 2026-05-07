@@ -35,24 +35,19 @@
         rewindSpeed: 0,
         autoplay: 'pause'
       }
-      {% if section.settings.scroll_direction == 'ltr' %}
       ,autoScroll: {
-        // Left to right
-        speed: -0.8
+        speed: {% if section.settings.scroll_direction == 'ltr' %}-{% endif %}{{ section.settings.marquee_speed | default: 0.8 }},
+        pauseOnHover: {{ section.settings.pause_on_hover | default: true }},
+        pauseOnFocus: {{ section.settings.pause_on_hover | default: true }},
+        rewind: false
       }
-      {% else %}
-      ,autoScroll: {
-        // Right to left (default)
-        speed: 0.8
-      }
-      {% endif %}
     }).mount(window.splide.Extensions);
   });
 </script>
 
 <style>
   #logo-carousel-{{ section.id }} li img {
-    max-height: clamp(40px, 35vw, 300px);
+    max-height: clamp(70px, 13.5vw, 135px);
     height: 100%;
     width: 100%;
     object-fit: contain;
@@ -108,6 +103,22 @@
         { "value": "ltr", "label": "Left to right" }
       ],
       "default": "rtl"
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "label": "Marquee speed",
+      "info": "Higher value = faster scroll. 0 to pause.",
+      "min": 0,
+      "max": 5,
+      "step": 0.1,
+      "default": 0.8
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
     }
   ],
   "blocks": [

@@ -277,7 +277,7 @@ grid-row-gap: 50px;
 .footer-menu-title {
   color: #C1FF72 !important;
   -webkit-text-fill-color: #C1FF72;
-  {% comment %} font-family: Montserrat;
+  {% comment %} font-family: var(--font-body-family);
   font-size: 18px;
   font-style: normal;
   font-weight: 800;
@@ -285,10 +285,9 @@ grid-row-gap: 50px;
   text-transform: uppercase; {% endcomment %}
 }
 .footer-menu-title h3 {
-  {% comment %} font-size: clamp(21px, 2vw, 48px); {% endcomment %}
-  font-size: 18px;
-  font-family: var(--font-adirek800);
-  font-weight: 800;
+   font-family: var(--font-heading-body);
+  font-size: 20px;
+  font-weight: 400;
   line-height: normal;
 }
 
@@ -319,10 +318,9 @@ grid-row-gap: 50px;
   color: #fff;
   text-decoration: none;
   color: #fff;
-  font-family: var(--font-poppins500);
-  font-size: 14px;
+  font-size: 16px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   line-height: normal;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -423,8 +421,7 @@ a:after {
   gap: 10px;
   color: white;
   margin: 15px 0 0;
-  font-family: var(--font-poppins400);
-  font-weight: 400;
+  font-weight: bold;
 }
 .footer-settings-column .footer--logo img {
   width: 152px;
@@ -455,7 +452,7 @@ a:after {
 
 .footer--second-row p {
   color: #fff;
-  font-family: var(--font-poppins700);
+  font-family: var(--font-heading-body);
   font-weight: 700;
   {% comment %} font-size: 18px; {% endcomment %}
   font-style: normal;

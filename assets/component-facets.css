@@ -58,7 +58,7 @@
  
   margin: 0 2rem 0 0;
   color:  #141414;
-font-family: var(--font-heading-family);
+font-family: var(--font-body-family);
 font-size: 14px;
 font-style: normal;
 font-weight: 700;
@@ -238,7 +238,7 @@ text-transform: uppercase;
 
 .facets__summary {
  color: var(--black, #141414);
-font-family: Montserrat;
+font-family: var(--font-body-family);
 font-size: 18px;
 font-style: normal;
 font-weight: 700;
@@ -930,7 +930,7 @@ a.active-facets__button.focused .active-facets__button-inner {
 .mobile-facets__open-label {
   transition: text-decoration var(--duration-short) ease;
   color: var(--navy, #0f828c);
-font-family: Montserrat;
+font-family: var(--font-body-family);
 font-size: 22px;
 font-style: normal;
 font-weight: 800;
@@ -1001,7 +1001,7 @@ details.menu-opening .mobile-facets__close svg {
 }
 .mobile-facets__close-button {
 color: var(--black, #141414);
-    font-family: Montserrat;
+    font-family: var(--font-body-family);
     font-size: 18px;
     font-style: normal;
     font-weight: 700;

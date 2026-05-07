@@ -116,34 +116,31 @@
     margin: 0 0 20px;
     font-family: var(--font-anton);
     font-weight: 400;
-    text-transform: uppercase;
-    font-size: clamp(21px, 3vw, 40px);
+    text-transform: capitalize;
+    font-size: clamp(21px, 3vw, 32px) !important;
     line-height: 1.1;
     color: #01241E;
   }
-  .tp-subhead { 
-    margin: 0; 
-    font-weight: 700; 
-    color: #01241E; 
-    font-size: clamp(12px, 1.2vw, 21px);
+  .tp-subhead {
+    margin: 0;
+    font-weight: 400;
+    font-size: clamp(14px, 2.4vw, 20px);
     line-height: 1.2;
-    font-family: var(--font-poppins700);
 }
-  .tp-body { 
-    margin: 0 0 45px; 
-    color: #01241E; 
-    opacity: .9; 
-    font-size: clamp(14px, 1.3vw, 18px);
+  .tp-body {
+    margin: 10px 0 45px;
+    color: #01241E;
+    opacity: .9;
+    font-size: clamp(14px, 2.4vw, 20px);
     line-height: normal;
-    font-family: var(--font-poppins400);
 }
 @media (max-width: 768px) {
     .tp-title {
         font-size: 28px;
     }
     .tp-body { 
-        font-size: 16px;
-        margin: 0 0 20px; 
+        font-size: 14px;
+        margin: 10px 0 20px; 
     }
     .tp-header { 
         margin-bottom: 20px;
@@ -154,9 +151,12 @@
     color: #01241E !important;
     width: fit-content;
 }
-.tp-section .tp-cta span {
-  font-family: var(--font-adirek800);
-  font-weight: 600;
+.tp-section .tp-cta span,
+.tp-section .tp-cta2 span {
+  font-family: var(--hp-font-body);
+  font-weight: 400;
+  font-size: clamp(14px,2vw,20px);
+  letter-spacing: 1.6px;
   text-transform: uppercase;
 }
 
@@ -176,7 +176,7 @@
   .tp-card {
     display: grid;
     grid-template-rows: auto 1fr;
-    gap: 45px;
+    gap: 0;
     text-decoration: none;
     color: inherit;
   }
@@ -210,22 +210,21 @@
   }
 
   .tp-card-title {
-    margin: 0 0 20px;
-    font-family: var(--font-poppins700);
+    font-family: var(--hp-font-body);
     text-transform: uppercase;
-    font-size: clamp(18px, 1.7vw, 28px);
+    font-size: clamp(14px, 2.2vw, 22px);
     line-height: 1.2;
     color: #01241E;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    min-height: calc(1.2em * 3);
+    font-weight: bold;
   }
   .tp-card-blurb { 
     color: #01241E;
-    font-family: var(--font-poppins400);
-    font-size: clamp(12px,1vw,18px);
+    font-family: var(--hp-font-body);
+    font-size: clamp(14px,1.8vw,18px);
     margin-bottom: 25px; 
   }
   .tp-card-blurb p{ 
@@ -236,12 +235,12 @@
     display: inline-block;
     background: var(--price-bg);
     color: var(--price-color);
-    border-radius: 10px;
-    font-size: clamp(12px, 1.2vw, 18px);
-    padding: 10px 40px;
-    font-weight: 800;
-    letter-spacing: .02em;
-    font-family: var(--font-poppins700);
+    border-radius: 5px;
+    font-size: clamp(14px, 1.8vw, 18px);
+    padding: 5px 30px;
+    font-weight: 400;
+    text-transform: uppercase;
+
   }
   @media (max-width: 1024px) {
     .tp-content { 
@@ -255,7 +254,7 @@
       margin-bottom: 0;
     }
     .tp-price {
-      padding: 10px 50px;
+      padding: 0 50px;
     }
   }
 
@@ -265,9 +264,9 @@
     width: fit-content;
   }
   .tp-section .tp-cta2 span {
-    font-family: var(--font-adirek800);
+    font-family: var(--hp-font-body);
     color: var(--btn-color, #FFFFFF) !important;
-    font-weight: 600;
+    font-weight: 400;
     text-transform: uppercase;
   }
   {% endstylesheet %}

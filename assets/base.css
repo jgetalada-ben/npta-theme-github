@@ -247,7 +247,8 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
   background-color: rgba(var(--color-foreground), 0.2);
 }
 
-.text-body {
+h3,
+h4, h5, .h3, .h4, .h5,.text-body {
   font-size: 1.5rem;
   letter-spacing: 0;
   line-height: calc(1 + 0.8 / var(--font-body-scale));
@@ -258,15 +259,9 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
 
 h1,
 h2,
-h3,
-h4,
-h5,
 .h0,
 .h1,
-.h2,
-.h3,
-.h4,
-.h5 {
+.h2 {
   font-family: var(--font-heading-family);
   font-style: var(--font-heading-style);
   font-weight: var(--font-heading-weight);
@@ -2616,7 +2611,7 @@ details[open] .modal-overlay::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50%;
+  width: 75%;
   height: 100%;
   padding: 0 5rem 0 1rem;
   line-height: calc(1 + 0.8 / var(--font-body-scale));
@@ -3764,9 +3759,11 @@ line-height: 104%;
 text-transform: uppercase;
 }
 .price-label-month{
+    color: #0F828C;
   font-family: var(--font-body-family);
 font-size: 14px;
 font-style: normal;
+font-weight: 700;
 line-height: 150%; 
 }
 
@@ -3862,7 +3859,6 @@ text-transform: uppercase;
   display: flex;
   flex-direction: column;
   gap: 5px;
-  align-items: start;
 }
 .price__container .price__one-time-con{
   display: flex;
@@ -4013,11 +4009,8 @@ height: 1px;
 }
 .price__container .price__one-time{
  width:100%;
- display: block;
 }
-.price__container .price__one-time .price-compare-with-badge {
-  margin-top: 10px;
-}
+  
 .price__monthly:before{
   content:'';
   position:absolute;
@@ -4070,8 +4063,8 @@ height: 1px;
   
 .btn {
   display: inline-block;
-  height: 49px;
-  line-height: 49px;
+  height: 45px;
+  line-height: 45px;
   overflow: hidden;
   position: relative;
   text-align: center;
@@ -4085,16 +4078,11 @@ height: 1px;
 }
 .btn-label-down {
   color:  #141414;
-  font-family: Montserrat;
-  font-size: 14px;
+  font-size: clamp(14px, 1.8vw, 18px);
   font-style: normal;
-  font-weight: 700;
-  /* letter-spacing: 1.12px; */
+  font-weight: 400;
   text-transform: uppercase;
   text-decoration: none;
-}
-
-.btn-label-down {
   display: block;
   margin: 0px 30px;
   height: 100%;
