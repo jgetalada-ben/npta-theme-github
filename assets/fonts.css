@@ -1,3 +1,16 @@
+/*
+ * The Anton / Adirek800 / Poppins400 / Poppins500 / Poppins700 declarations
+ * have been disabled because their .woff2/.woff files do not exist in the
+ * theme assets directory and were returning HTTP 404 from the Shopify CDN.
+ * `font-display: swap` was already falling back to the next font in the stack,
+ * so removing the broken @font-face rules eliminates 5 wasted requests per page
+ * without changing visual rendering. Re-enable each block after uploading the
+ * matching font file to /assets/.
+ *
+ * fonts.css.liquid is the canonical version; this static file mirrors it.
+ */
+
+/*
 @font-face{
   font-family: "Anton";
   src:
@@ -9,7 +22,7 @@
 }
 @font-face{
   font-family: "Adirek800";
-  src: url(//www.npta.ca/cdn/shop/t/65/assets/Adirek-San-ExtraBold.woff2.woff2?v=18274) format("woff2");;
+  src: url(//www.npta.ca/cdn/shop/t/65/assets/Adirek-San-ExtraBold.woff2.woff2?v=18274) format("woff2");
   font-weight: 800;
   font-display: swap;
 }
@@ -40,10 +53,12 @@
   font-style: normal;
   font-display: swap;
 }
+*/
+
 @font-face{
   font-family: "ProximaNova";
   src:
-    url('fonnts.com-ProximaNova-Semibold.ttf')  format('truetype');
+    url(fonnts.com-ProximaNova-Semibold.ttf)  format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -51,7 +66,7 @@
 @font-face{
   font-family: "ProximaSanRegular";
   src:
-    url('fonnts.com-ProximaSansRegular.ttf')  format('truetype');
+    url(fonnts.com-ProximaSansRegular.ttf)  format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -59,7 +74,7 @@
 @font-face{
   font-family: "ProximaSanMedium";
   src:
-    url('fonnts.com-ProximaSansMedium.ttf')  format('truetype');
+    url(fonnts.com-ProximaSansMedium.ttf)  format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -67,7 +82,7 @@
 @font-face{
   font-family: "ProximaSanBlack";
   src:
-    url('fonnts.com-ProximaSansBlack.ttf')  format('truetype');
+    url(fonnts.com-ProximaSansBlack.ttf)  format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;

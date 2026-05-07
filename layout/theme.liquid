@@ -42,6 +42,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="dns-prefetch" href="//app.npta.ca">
+    <link rel="dns-prefetch" href="//5npta-styling.vercel.app">
+    <link rel="dns-prefetch" href="//static.hj.contentsquare.net">
+    <link rel="dns-prefetch" href="//www.clarity.ms">
+    <link rel="dns-prefetch" href="//unpkg.com">
+    <link rel="dns-prefetch" href="//www.google.com">
+    <link rel="dns-prefetch" href="//www.gstatic.com">
 
     {{ 'fonts.css' | asset_url | stylesheet_tag }}
 
@@ -65,7 +75,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@lottiefiles/lottie-player@2.0.12/dist/lottie-player.min.js" defer></script>
 
     
     {%- if settings.animations_reveal_on_scroll -%}
@@ -629,15 +639,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     {%- endif -%}
     <script defer src="{{ 'my-scripts.js' | asset_url }}"></script>
 
-  
-      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-       
+
+      {%- unless request.page_type == 'index' -%}
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+      {%- endunless -%}
+
 
   <!-- NPTA AI Widget Integration -->
   <script src="https://5npta-styling.vercel.app/bundle" defer></script>
 
 
-  {{ 'pop-convert-trigger.js' | asset_url | script_tag }}
+  <script src="{{ 'pop-convert-trigger.js' | asset_url }}" defer></script>
 
   {% if template.name == 'page' and page.handle == 'thank-you' %}
     <script>
