@@ -87,7 +87,14 @@
             <div class="review-card">
               <div class="author-info-wrap">
                 {% if block.settings.author_image %}
-                <img src="{{ block.settings.author_image | img_url: 'medium' }}" class="author-image">
+                <img
+                  src="{{ block.settings.author_image | image_url: width: 240 }}"
+                  class="author-image"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  width="{{ block.settings.author_image.width }}"
+                  height="{{ block.settings.author_image.height }}">
                 {% else %}
                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="none" viewBox="0 0 120 120" class="author-img-default">
                   <path fill="#EFF1F3" d="M0 0h120v120H0z"/>

@@ -48,8 +48,16 @@
       {%- if section.settings.media_type == 'image' and section.settings.cover_image != blank -%}
         <img
           class="vid2__media vid2__img"
-          src="{{ section.settings.cover_image | image_url: width: 3200 }}"
+          src="{{ section.settings.cover_image | image_url: width: 1600 }}"
+          srcset="{{ section.settings.cover_image | image_url: width: 480 }} 480w,
+                  {{ section.settings.cover_image | image_url: width: 768 }} 768w,
+                  {{ section.settings.cover_image | image_url: width: 1200 }} 1200w,
+                  {{ section.settings.cover_image | image_url: width: 1600 }} 1600w,
+                  {{ section.settings.cover_image | image_url: width: 2400 }} 2400w"
+          sizes="100vw"
           alt="{{ section.settings.alt | escape }}"
+          fetchpriority="high"
+          decoding="async"
           loading="eager">
 
       {%- elsif section.settings.shopify_video != blank -%}
@@ -126,8 +134,16 @@
       {%- elsif section.settings.cover_image != blank -%}
         <img
           class="vid2__media vid2__img"
-          src="{{ section.settings.cover_image | image_url: width: 3200 }}"
+          src="{{ section.settings.cover_image | image_url: width: 1600 }}"
+          srcset="{{ section.settings.cover_image | image_url: width: 480 }} 480w,
+                  {{ section.settings.cover_image | image_url: width: 768 }} 768w,
+                  {{ section.settings.cover_image | image_url: width: 1200 }} 1200w,
+                  {{ section.settings.cover_image | image_url: width: 1600 }} 1600w,
+                  {{ section.settings.cover_image | image_url: width: 2400 }} 2400w"
+          sizes="100vw"
           alt="{{ section.settings.alt | escape }}"
+          fetchpriority="high"
+          decoding="async"
           loading="eager">
       {%- else -%}
         <div class="vid2__fallback">Add a video or image.</div>

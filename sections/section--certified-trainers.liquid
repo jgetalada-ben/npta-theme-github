@@ -209,7 +209,17 @@
         {% for block in section.blocks %}
           <div class="splide__slide trainer-wrapper">
             {% if block.settings.image %}
-              <img src="{{ block.settings.image | img_url: 'large' }}" alt="{{ block.settings.name }}">
+              <img
+                src="{{ block.settings.image | image_url: width: 600 }}"
+                srcset="{{ block.settings.image | image_url: width: 360 }} 360w,
+                        {{ block.settings.image | image_url: width: 600 }} 600w,
+                        {{ block.settings.image | image_url: width: 900 }} 900w"
+                sizes="(max-width: 600px) 100vw, 600px"
+                alt="{{ block.settings.name }}"
+                loading="lazy"
+                decoding="async"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}">
             {% endif %}
   {% if block.settings.show_content %}
             <div class="trainer-info">

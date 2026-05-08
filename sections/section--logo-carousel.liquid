@@ -8,7 +8,13 @@
         {% for block in section.blocks %}
           <li class="splide__slide">
             {% if block.settings.image %}
-              <img src="{{ block.settings.image | img_url: 'master' }}" alt="Logo">
+              <img
+                src="{{ block.settings.image | image_url: width: 400 }}"
+                alt="Logo"
+                loading="lazy"
+                decoding="async"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}">
             {% endif %}
           </li>
         {% endfor %}
