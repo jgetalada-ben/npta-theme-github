@@ -135,9 +135,9 @@
   </div>
 </div>
 
-{%- comment -%} Splide assets are loaded once in theme.liquid {%- endcomment -%}
+{%- comment -%} Splide assets are lazy-loaded by theme.liquid; subscribe via splideReady. {%- endcomment -%}
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
+  window.splideReady(function () {
     new Splide('#splide', {
      
       perMove: 1,

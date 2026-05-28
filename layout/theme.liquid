@@ -7,17 +7,30 @@
     {% endif %}
 
 <script>
+    // Hotjar / ContentSquare — queue calls, real script loads on first user
+    // interaction (scroll/touch/click/keydown) or 6s fallback. Anything fired
+    // before then is queued by the hj() shim and replayed when the lib loads.
     window.hj = window.hj || function(){(window.hj.q = window.hj.q || []).push(arguments)};
     window._hjSettings = { hjid: 5360728 };
     window.hj('identify', null, {});
-    window.addEventListener('load', function () {
-      setTimeout(function () {
+    (function () {
+      var loaded = false;
+      function load() {
+        if (loaded) return;
+        loaded = true;
         var s = document.createElement('script');
         s.async = true;
         s.src = 'https://static.hj.contentsquare.net/c/csq-' + window._hjSettings.hjid + '.js';
         document.head.appendChild(s);
-      }, 2000);
-    });
+      }
+      var ev = ['scroll', 'mousemove', 'touchstart', 'keydown', 'click'];
+      function onInteract() {
+        ev.forEach(function (e) { window.removeEventListener(e, onInteract, { passive: true }); });
+        load();
+      }
+      ev.forEach(function (e) { window.addEventListener(e, onInteract, { passive: true }); });
+      window.addEventListener('load', function () { setTimeout(load, 6000); });
+    })();
 </script>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -78,16 +91,120 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
 
     {%- comment -%}
-      Splide (carousels) — loaded once, used by sections: logo-carousel, certified-trainers, reviews.
-      Centralised here to avoid the 3x duplicate parse hit Lighthouse flagged.
-    {%- endcomment -%}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css"></noscript>
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js" defer></script>
+      Splide (carousels) and Lottie player — lazy-loaded only when needed.
+      Splide is used by section--logo-carousel, section--certified-trainers, section--reviews.
+      Lottie is used by form-popup, form-popup-two, main-collection-product-grid.
+      Pages without these never pay for the bytes/parse time.
 
-    {%- comment -%} Lottie pinned to a specific version (was: @latest which is an extra redirect and bypasses caching) {%- endcomment -%}
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js" defer></script>
+      Sections subscribe via window.splideReady(cb) — see how it replaces the
+      previous DOMContentLoaded init pattern in the three carousel sections.
+    {%- endcomment -%}
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css"></noscript>
+    <script>
+      (function () {
+        // ---- Splide loader ----
+        var splideQueue = [];
+        var splideStarted = false;
+        var splideReady = false;
+        window.splideReady = function (cb) {
+          if (splideReady) cb();
+          else splideQueue.push(cb);
+        };
+        function startSplide() {
+          if (splideStarted) return;
+          splideStarted = true;
+          var css = document.createElement('link');
+          css.rel = 'stylesheet';
+          css.href = 'https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css';
+          document.head.appendChild(css);
+          var s1 = document.createElement('script');
+          s1.src = 'https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js';
+          s1.async = false;
+          document.head.appendChild(s1);
+          var s2 = document.createElement('script');
+          s2.src = 'https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js';
+          s2.async = false;
+          s2.onload = function () {
+            splideReady = true;
+            var cb;
+            while ((cb = splideQueue.shift())) {
+              try { cb(); } catch (e) { console.error(e); }
+            }
+          };
+          document.head.appendChild(s2);
+        }
+
+        // ---- Lottie loader ----
+        var lottieStarted = false;
+        function startLottie() {
+          if (lottieStarted) return;
+          lottieStarted = true;
+          var s = document.createElement('script');
+          s.src = 'https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js';
+          s.async = true;
+          document.head.appendChild(s);
+        }
+
+        // ---- Decide when to start ----
+        // IntersectionObserver: load Splide when any .splide approaches the
+        // viewport; load Lottie when any <lottie-player> approaches viewport.
+        // Fallbacks: load on first user interaction; final fallback at 5s.
+        function onReady() {
+          var splideTargets = document.querySelectorAll('.splide');
+          var lottieTargets = document.querySelectorAll('lottie-player');
+
+          if (!splideTargets.length) splideStarted = true; // nothing to load
+          if (!lottieTargets.length) lottieStarted = true;
+
+          if ('IntersectionObserver' in window) {
+            if (splideTargets.length) {
+              var so = new IntersectionObserver(function (entries) {
+                if (entries.some(function (e) { return e.isIntersecting; })) {
+                  so.disconnect();
+                  startSplide();
+                }
+              }, { rootMargin: '600px 0px' });
+              splideTargets.forEach(function (el) { so.observe(el); });
+            }
+            if (lottieTargets.length) {
+              var lo = new IntersectionObserver(function (entries) {
+                if (entries.some(function (e) { return e.isIntersecting; })) {
+                  lo.disconnect();
+                  startLottie();
+                }
+              }, { rootMargin: '400px 0px' });
+              lottieTargets.forEach(function (el) { lo.observe(el); });
+            }
+          } else {
+            // Old browsers — just load it
+            if (splideTargets.length) startSplide();
+            if (lottieTargets.length) startLottie();
+          }
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', onReady);
+        } else {
+          onReady();
+        }
+
+        // Safety nets
+        var ev = ['scroll', 'mousemove', 'touchstart', 'keydown', 'click'];
+        function onInteract() {
+          ev.forEach(function (e) { window.removeEventListener(e, onInteract, { passive: true }); });
+          if (document.querySelector('.splide')) startSplide();
+          if (document.querySelector('lottie-player')) startLottie();
+        }
+        ev.forEach(function (e) { window.addEventListener(e, onInteract, { passive: true }); });
+
+        window.addEventListener('load', function () {
+          setTimeout(function () {
+            if (document.querySelector('.splide')) startSplide();
+            if (document.querySelector('lottie-player')) startLottie();
+          }, 5000);
+        });
+      })();
+    </script>
 
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
@@ -655,11 +772,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     five v3-reCAPTCHA form sections each load their own api.js when rendered.
   {%- endcomment -%}
 
-  <!-- NPTA AI Widget Integration -->
-  <script src="https://5npta-styling.vercel.app/bundle" defer></script>
-
-
-  <script src="{{ 'pop-convert-trigger.js' | asset_url }}" defer="defer"></script>
+  <!-- NPTA AI Widget + pop-convert trigger — delayed until first user
+       interaction (scroll/touch/click/keydown) or 5s after window load.
+       The chat button and the popup trigger don't need to exist on the
+       first frame; deferring them off the critical path is a big TBT win
+       and they still appear well before any engaged user looks for them. -->
+  <script>
+    (function () {
+      var loaded = false;
+      function load() {
+        if (loaded) return;
+        loaded = true;
+        var a = document.createElement('script');
+        a.src = 'https://5npta-styling.vercel.app/bundle';
+        a.async = true;
+        document.body.appendChild(a);
+        var b = document.createElement('script');
+        b.src = {{ 'pop-convert-trigger.js' | asset_url | json }};
+        b.async = true;
+        document.body.appendChild(b);
+      }
+      var ev = ['scroll', 'mousemove', 'touchstart', 'keydown', 'click'];
+      function onInteract() {
+        ev.forEach(function (e) { window.removeEventListener(e, onInteract, { passive: true }); });
+        load();
+      }
+      ev.forEach(function (e) { window.addEventListener(e, onInteract, { passive: true }); });
+      window.addEventListener('load', function () { setTimeout(load, 5000); });
+    })();
+  </script>
 
   {% if template.name == 'page' and page.handle == 'thank-you' %}
     <script>
