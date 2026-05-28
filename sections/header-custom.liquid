@@ -57,7 +57,12 @@
 <header class="site-header">
   <div class="container">
     <div class="header-logo">
-      <img src="{{ settings.logo_image | img_url: '100x' }}" alt="NPTA Logo">
+      <img src="{{ settings.logo_image | image_url: width: 200 }}"
+           srcset="{{ settings.logo_image | image_url: width: 100 }} 1x, {{ settings.logo_image | image_url: width: 200 }} 2x"
+           width="100"
+           height="{{ settings.logo_image.height | times: 100 | divided_by: settings.logo_image.width | default: 50 }}"
+           alt="NPTA Logo"
+           fetchpriority="high" decoding="async">
     </div>
     <nav class="header-nav">
       <ul>

@@ -203,12 +203,18 @@
             </svg>
         </span>
         <div class="discount-popup__image">
-            <img src="{{ section.settings.popup_image | img_url: 'master' }}" alt="Popup Image">
+            <img src="{{ section.settings.popup_image | image_url: width: 900 }}"
+                 width="{{ section.settings.popup_image.width | default: 900 }}"
+                 height="{{ section.settings.popup_image.height | default: 1200 }}"
+                 alt="" loading="lazy" decoding="async">
         </div>
        <div  class="discount-popup__form">
         <div id="popup_content" class="discount-popup__details">
             <div class="discount-popup__logo">
-                <img src="{{ section.settings.popup_logo | img_url: 'master' }}" alt="Popup Logo">
+                <img src="{{ section.settings.popup_logo | image_url: width: 400 }}"
+                     width="{{ section.settings.popup_logo.width | default: 400 }}"
+                     height="{{ section.settings.popup_logo.height | default: 200 }}"
+                     alt="" loading="lazy" decoding="async">
             </div>
             <h2>{{ section.settings.popup_heading }}</h2>
             <p class="popup-subheading">{{ section.settings.popup_subheading }}</p>
@@ -301,7 +307,8 @@
             direction="1"
             mode="normal"
             loop
-            autoplay>
+            autoplay
+            playsinline>
         </lottie-player>
   <h3> LOADING</h3>
     </div>
@@ -536,7 +543,7 @@ width: 100%;
 
     .popup-preloader h3{
   padding-top:150px;
-      color: #133257;
+      color: #01241E;
 }
 
   
@@ -801,7 +808,7 @@ width: 100%;
   height: 0.05em;
   bottom: 0;
   left: 0;
-  background: #133257;
+  background: #01241E;
   transform-origin: bottom left;
   transition: transform 0.25s ease-out;
 }

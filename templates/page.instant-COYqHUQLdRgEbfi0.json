@@ -8,9 +8,13 @@
  * ------------------------------------------------------------
  */
 {
-  "parent": "index.original.json",
-  "context": {
-    "market": "ca"
+  "sections": {
+    "instant-COYqHUQLdRgEbfi0": {
+      "type": "instant-COYqHUQLdRgEbfi0",
+      "settings": {}
+    }
   },
-  "sections": {}
+  "order": [
+    "instant-COYqHUQLdRgEbfi0"
+  ]
 }

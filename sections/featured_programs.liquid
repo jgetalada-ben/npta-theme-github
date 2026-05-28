@@ -334,10 +334,22 @@
 
         <div class="section--container-wrap">
           {% if program_logo %}
-            <img class="ft-program-logo" src="{{ program_logo | img_url: 'original' }}">
+            <img class="ft-program-logo"
+                 src="{{ program_logo | image_url: width: 400 }}"
+                 srcset="{{ program_logo | image_url: width: 200 }} 200w, {{ program_logo | image_url: width: 400 }} 400w"
+                 sizes="200px"
+                 width="{{ program_logo.width | default: 400 }}"
+                 height="{{ program_logo.height | default: 200 }}"
+                 alt="" loading="lazy" decoding="async">
           {% endif %}
           {% if background_image %}
-            <img class="ft-program-background" src="{{ background_image | img_url: 'original' }}" alt="NASM Certifications" class="section--image">
+            <img class="ft-program-background section--image"
+                 src="{{ background_image | image_url: width: 1200 }}"
+                 srcset="{{ background_image | image_url: width: 600 }} 600w, {{ background_image | image_url: width: 900 }} 900w, {{ background_image | image_url: width: 1200 }} 1200w"
+                 sizes="(min-width: 750px) 50vw, 100vw"
+                 width="{{ background_image.width | default: 1200 }}"
+                 height="{{ background_image.height | default: 800 }}"
+                 alt="NASM Certifications" loading="lazy" decoding="async">
           {% endif %}
           <div class="section--content">
             <h1 class="ft-program--title">{{ title }}</h1>
@@ -443,7 +455,7 @@ line-height: 150%;
   }
   .container--footer p a{
 opacity: 0.8;
-color: var(--navy, #133257);
+color: var(--navy, #01241E);
    font-family: var(--font-body-family);
 font-size: 16px;
 font-style: normal;
@@ -664,7 +676,7 @@ line-height: 150%;
 }
 
 .ft-program--button {
-    color:  #E9F24F;
+    color:  #C1FF72;
     font-family: var(--font-heading-family);
 font-size: 14px;
 font-style: normal;
@@ -680,10 +692,10 @@ text-transform: uppercase;
   .section--title-block h2{
     color:  #141414;
 text-align: center;
-    font-family: var(--font-heading-family);
+font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
 font-size: 42px;
 font-style: normal;
-font-weight: 800;
+font-weight: 500;
 line-height: 112%; 
 text-transform: uppercase;
     margin-top:0;

@@ -1,0 +1,666 @@
+{%- liquid
+  assign sid = section.id
+  assign mobile_layout = section.settings.mobile_layout
+
+  assign max_width_raw = section.settings.max_width | strip
+  assign max_width_num = max_width_raw | plus: 0
+  if max_width_raw == blank
+    assign pw_max_width = 1400
+  elsif max_width_num == 0 and max_width_raw != '0'
+    assign pw_max_width = 1400
+  else
+    assign pw_max_width = max_width_num
+  endif
+  if pw_max_width < 900
+    assign pw_max_width = 900
+  elsif pw_max_width > 2000
+    assign pw_max_width = 2000
+  endif
+
+  assign desktop_min_height_raw = section.settings.desktop_min_height | strip
+  assign desktop_min_height_num = desktop_min_height_raw | plus: 0
+  if desktop_min_height_raw == blank
+    assign pw_desktop_min_height = 560
+  elsif desktop_min_height_num == 0 and desktop_min_height_raw != '0'
+    assign pw_desktop_min_height = 560
+  else
+    assign pw_desktop_min_height = desktop_min_height_num
+  endif
+  if pw_desktop_min_height < 320
+    assign pw_desktop_min_height = 320
+  elsif pw_desktop_min_height > 1000
+    assign pw_desktop_min_height = 1000
+  endif
+
+  assign gap_raw = section.settings.gap | strip
+  assign gap_num = gap_raw | plus: 0
+  if gap_raw == blank
+    assign pw_gap = 24
+  elsif gap_num == 0 and gap_raw != '0'
+    assign pw_gap = 24
+  else
+    assign pw_gap = gap_num
+  endif
+  if pw_gap < 0
+    assign pw_gap = 0
+  elsif pw_gap > 120
+    assign pw_gap = 120
+  endif
+
+  assign padding_top_raw = section.settings.padding_top | strip
+  assign padding_top_num = padding_top_raw | plus: 0
+  if padding_top_raw == blank
+    assign pw_pad_top = 24
+  elsif padding_top_num == 0 and padding_top_raw != '0'
+    assign pw_pad_top = 24
+  else
+    assign pw_pad_top = padding_top_num
+  endif
+  if pw_pad_top < 0
+    assign pw_pad_top = 0
+  elsif pw_pad_top > 200
+    assign pw_pad_top = 200
+  endif
+
+  assign padding_bottom_raw = section.settings.padding_bottom | strip
+  assign padding_bottom_num = padding_bottom_raw | plus: 0
+  if padding_bottom_raw == blank
+    assign pw_pad_bottom = 24
+  elsif padding_bottom_num == 0 and padding_bottom_raw != '0'
+    assign pw_pad_bottom = 24
+  else
+    assign pw_pad_bottom = padding_bottom_num
+  endif
+  if pw_pad_bottom < 0
+    assign pw_pad_bottom = 0
+  elsif pw_pad_bottom > 200
+    assign pw_pad_bottom = 200
+  endif
+
+  assign side_pad_raw = section.settings.side_padding | strip
+  assign side_pad_num = side_pad_raw | plus: 0
+  if side_pad_raw == blank
+    assign pw_side_pad = 32
+  elsif side_pad_num == 0 and side_pad_raw != '0'
+    assign pw_side_pad = 32
+  else
+    assign pw_side_pad = side_pad_num
+  endif
+  if pw_side_pad < 0
+    assign pw_side_pad = 0
+  elsif pw_side_pad > 120
+    assign pw_side_pad = 120
+  endif
+
+  assign side_pad_m_raw = section.settings.side_padding_mobile | strip
+  assign side_pad_m_num = side_pad_m_raw | plus: 0
+  if side_pad_m_raw == blank
+    assign pw_side_pad_m = 14
+  elsif side_pad_m_num == 0 and side_pad_m_raw != '0'
+    assign pw_side_pad_m = 14
+  else
+    assign pw_side_pad_m = side_pad_m_num
+  endif
+  if pw_side_pad_m < 0
+    assign pw_side_pad_m = 0
+  elsif pw_side_pad_m > 60
+    assign pw_side_pad_m = 60
+  endif
+
+  assign small_img_h_raw = section.settings.small_image_height | strip
+  assign small_img_h_num = small_img_h_raw | plus: 0
+  if small_img_h_raw == blank
+    assign pw_small_img_h = 440
+  elsif small_img_h_num == 0 and small_img_h_raw != '0'
+    assign pw_small_img_h = 440
+  else
+    assign pw_small_img_h = small_img_h_num
+  endif
+  if pw_small_img_h < 200
+    assign pw_small_img_h = 200
+  elsif pw_small_img_h > 900
+    assign pw_small_img_h = 900
+  endif
+
+  assign small_img_h_m_raw = section.settings.small_image_height_mobile | strip
+  assign small_img_h_m_num = small_img_h_m_raw | plus: 0
+  if small_img_h_m_raw == blank
+    assign pw_small_img_h_m = 360
+  elsif small_img_h_m_num == 0 and small_img_h_m_raw != '0'
+    assign pw_small_img_h_m = 360
+  else
+    assign pw_small_img_h_m = small_img_h_m_num
+  endif
+  if pw_small_img_h_m < 160
+    assign pw_small_img_h_m = 160
+  elsif pw_small_img_h_m > 700
+    assign pw_small_img_h_m = 700
+  endif
+
+  assign title_size_raw = section.settings.title_size | strip
+  if title_size_raw == blank
+    assign pw_title_size = '28px'
+  elsif title_size_raw contains 'clamp(' or title_size_raw contains 'px' or title_size_raw contains 'rem' or title_size_raw contains 'em' or title_size_raw contains 'vw'
+    assign pw_title_size = title_size_raw
+  else
+    assign title_size_num = title_size_raw | plus: 0
+    if title_size_num == 0 and title_size_raw != '0'
+      assign pw_title_size = '28px'
+    else
+      assign pw_title_size = title_size_num | append: 'px'
+    endif
+  endif
+
+  assign subtitle_size_raw = section.settings.subtitle_size | strip
+  if subtitle_size_raw == blank
+    assign pw_subtitle_size = '16px'
+  elsif subtitle_size_raw contains 'clamp(' or subtitle_size_raw contains 'px' or subtitle_size_raw contains 'rem' or subtitle_size_raw contains 'em' or subtitle_size_raw contains 'vw'
+    assign pw_subtitle_size = subtitle_size_raw
+  else
+    assign subtitle_size_num = subtitle_size_raw | plus: 0
+    if subtitle_size_num == 0 and subtitle_size_raw != '0'
+      assign pw_subtitle_size = '16px'
+    else
+      assign pw_subtitle_size = subtitle_size_num | append: 'px'
+    endif
+  endif
+
+  assign eyebrow_size_raw = section.settings.eyebrow_size | strip
+  if eyebrow_size_raw == blank
+    assign pw_eyebrow_size = '20px'
+  elsif eyebrow_size_raw contains 'clamp(' or eyebrow_size_raw contains 'px' or eyebrow_size_raw contains 'rem' or eyebrow_size_raw contains 'em' or eyebrow_size_raw contains 'vw'
+    assign pw_eyebrow_size = eyebrow_size_raw
+  else
+    assign eyebrow_size_num = eyebrow_size_raw | plus: 0
+    if eyebrow_size_num == 0 and eyebrow_size_raw != '0'
+      assign pw_eyebrow_size = '20px'
+    else
+      assign pw_eyebrow_size = eyebrow_size_num | append: 'px'
+    endif
+  endif
+
+  assign headline_size_raw = section.settings.headline_size | strip
+  if headline_size_raw == blank
+    assign pw_headline_size = '44px'
+  elsif headline_size_raw contains 'clamp(' or headline_size_raw contains 'px' or headline_size_raw contains 'rem' or headline_size_raw contains 'em' or headline_size_raw contains 'vw'
+    assign pw_headline_size = headline_size_raw
+  else
+    assign headline_size_num = headline_size_raw | plus: 0
+    if headline_size_num == 0 and headline_size_raw != '0'
+      assign pw_headline_size = '44px'
+    else
+      assign pw_headline_size = headline_size_num | append: 'px'
+    endif
+  endif
+
+  assign button_font_size_raw = section.settings.button_font_size | strip
+  if button_font_size_raw == blank
+    assign pw_btn_font_size = '14px'
+  elsif button_font_size_raw contains 'clamp(' or button_font_size_raw contains 'px' or button_font_size_raw contains 'rem' or button_font_size_raw contains 'em' or button_font_size_raw contains 'vw'
+    assign pw_btn_font_size = button_font_size_raw
+  else
+    assign button_font_size_num = button_font_size_raw | plus: 0
+    if button_font_size_num == 0 and button_font_size_raw != '0'
+      assign pw_btn_font_size = '14px'
+    else
+      assign pw_btn_font_size = button_font_size_num | append: 'px'
+    endif
+  endif
+
+  assign button_radius_raw = section.settings.button_radius | strip
+  assign button_radius_num = button_radius_raw | plus: 0
+  if button_radius_raw == blank
+    assign pw_btn_radius = 12
+  elsif button_radius_num == 0 and button_radius_raw != '0'
+    assign pw_btn_radius = 12
+  else
+    assign pw_btn_radius = button_radius_num
+  endif
+
+  assign button_padding_y_raw = section.settings.button_padding_y | strip
+  assign button_padding_y_num = button_padding_y_raw | plus: 0
+  if button_padding_y_raw == blank
+    assign pw_btn_py = 12
+  elsif button_padding_y_num == 0 and button_padding_y_raw != '0'
+    assign pw_btn_py = 12
+  else
+    assign pw_btn_py = button_padding_y_num
+  endif
+
+  assign button_padding_x_raw = section.settings.button_padding_x | strip
+  assign button_padding_x_num = button_padding_x_raw | plus: 0
+  if button_padding_x_raw == blank
+    assign pw_btn_px = 28
+  elsif button_padding_x_num == 0 and button_padding_x_raw != '0'
+    assign pw_btn_px = 28
+  else
+    assign pw_btn_px = button_padding_x_num
+  endif
+
+  assign mobile_card_width_raw = section.settings.mobile_card_width | strip
+  assign mobile_card_width_num = mobile_card_width_raw | plus: 0
+  if mobile_card_width_raw == blank
+    assign pw_mobile_card_width = 88
+  elsif mobile_card_width_num == 0 and mobile_card_width_raw != '0'
+    assign pw_mobile_card_width = 88
+  else
+    assign pw_mobile_card_width = mobile_card_width_num
+  endif
+  if pw_mobile_card_width < 60
+    assign pw_mobile_card_width = 60
+  elsif pw_mobile_card_width > 100
+    assign pw_mobile_card_width = 100
+  endif
+
+  assign btn_align = section.settings.button_align | default: 'center'
+  assign btn_justify = 'center'
+  if btn_align == 'left'
+    assign btn_justify = 'flex-start'
+  elsif btn_align == 'right'
+    assign btn_justify = 'flex-end'
+  endif
+-%}
+
+<section
+  id="pw-bundle-{{ sid }}"
+  class="pw-bundle pw-bundle--{{ sid }} {% if mobile_layout == 'swipe' %}pw-bundle--swipe{% else %}pw-bundle--stack{% endif %}"
+  style="
+    --pw-bg: {{ section.settings.bg_color }};
+    --pw-max-width: {{ pw_max_width }}px;
+    --pw-pad-top: {{ pw_pad_top }}px;
+    --pw-pad-bottom: {{ pw_pad_bottom }}px;
+    --pw-gap: {{ pw_gap }}px;
+    --pw-desktop-minh: {{ pw_desktop_min_height }}px;
+
+    --pw-side-pad: {{ pw_side_pad }}px;
+    --pw-side-pad-m: {{ pw_side_pad_m }}px;
+
+    --pw-small-img-h: {{ pw_small_img_h }}px;
+    --pw-small-img-h-m: {{ pw_small_img_h_m }}px;
+
+    --pw-title-size: {{ pw_title_size }};
+    --pw-title-color: {{ section.settings.title_color }};
+    --pw-subtitle-size: {{ pw_subtitle_size }};
+    --pw-subtitle-color: {{ section.settings.subtitle_color }};
+
+    --pw-eyebrow-size: {{ pw_eyebrow_size }};
+    --pw-eyebrow-color: {{ section.settings.eyebrow_color }};
+    --pw-headline-size: {{ pw_headline_size }};
+    --pw-headline-color: {{ section.settings.headline_color }};
+
+    --pw-btn-font-size: {{ pw_btn_font_size }};
+    --pw-btn-text: {{ section.settings.button_text_color }};
+    --pw-btn-bg: {{ section.settings.button_bg_color }};
+    --pw-btn-radius: {{ pw_btn_radius }}px;
+    --pw-btn-py: {{ pw_btn_py }}px;
+    --pw-btn-px: {{ pw_btn_px }}px;
+    --pw-btn-justify: {{ btn_justify }};
+
+    --pw-mobile-card-width: {{ pw_mobile_card_width }}%;
+  "
+>
+  <div class="pw-bundle__outer">
+    {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
+      <div class="pw-bundle__heading">
+        {%- if section.settings.title != blank -%}
+          <h2 class="pw-bundle__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subtitle != blank -%}
+          <div class="pw-bundle__subtitle rte">{{ section.settings.subtitle }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="pw-bundle__content" aria-label="Bundle promo content">
+      <!-- LEFT -->
+      <div class="pw-bundle__col pw-bundle__col--left">
+        <div class="pw-bundle__media pw-bundle__media--fill">
+          {%- if section.settings.left_image != blank -%}
+            {{
+              section.settings.left_image
+              | image_url: width: 2000
+              | image_tag:
+                loading: 'lazy',
+                class: 'pw-bundle__img',
+                sizes: '(min-width: 990px) 40vw, 90vw'
+            }}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'pw-bundle__img pw-bundle__placeholder' }}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- MIDDLE -->
+      <div class="pw-bundle__col pw-bundle__col--middle">
+        <div class="pw-bundle__colInner">
+          <div class="pw-bundle__media pw-bundle__media--small">
+            {%- if section.settings.middle_image != blank -%}
+              {{
+                section.settings.middle_image
+                | image_url: width: 1600
+                | image_tag:
+                  loading: 'lazy',
+                  class: 'pw-bundle__img',
+                  sizes: '(min-width: 990px) 28vw, 80vw'
+              }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'pw-bundle__img pw-bundle__placeholder' }}
+            {%- endif -%}
+          </div>
+
+          <div class="pw-bundle__text">
+            {%- if section.settings.eyebrow_text != blank -%}
+              <div class="pw-bundle__eyebrow">{{ section.settings.eyebrow_text }}</div>
+            {%- endif -%}
+            {%- if section.settings.headline_text != blank -%}
+              <div class="pw-bundle__headline">{{ section.settings.headline_text }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="pw-bundle__col pw-bundle__col--right">
+        <div class="pw-bundle__colInner">
+          <div class="pw-bundle__media pw-bundle__media--small mt40">
+            {%- if section.settings.right_image != blank -%}
+              {{
+                section.settings.right_image
+                | image_url: width: 1600
+                | image_tag:
+                  loading: 'lazy',
+                  class: 'pw-bundle__img',
+                  sizes: '(min-width: 990px) 28vw, 80vw'
+              }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'pw-bundle__img pw-bundle__placeholder' }}
+            {%- endif -%}
+          </div>
+
+          <div class="pw-bundle__cta">
+            {%- assign btn_label = section.settings.button_text | default: 'Shop now' -%}
+            {%- if section.settings.button_link != blank -%}
+              <a
+                class="pw-bundle__btn"
+                href="{{ section.settings.button_link }}"
+                {% if section.settings.button_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+              >
+                {{ btn_label }}
+              </a>
+            {%- else -%}
+              <span class="pw-bundle__btn pw-bundle__btn--disabled" role="button" aria-disabled="true">
+                {{ btn_label }}
+              </span>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* --- Isolated styles for this section only --- */
+    #pw-bundle-{{ sid }} {
+      background: var(--pw-bg);
+      padding-top: var(--pw-pad-top);
+      padding-bottom: var(--pw-pad-bottom);
+    }
+
+    #pw-bundle-{{ sid }} .pw-bundle__outer{
+      max-width: var(--pw-max-width);
+      margin: 0 auto;
+      padding-left: var(--pw-side-pad);
+      padding-right: var(--pw-side-pad);
+    }
+
+    #pw-bundle-{{ sid }} .pw-bundle__heading{ margin-bottom: 18px; }
+
+    #pw-bundle-{{ sid }} .pw-bundle__title{
+      margin: 0 0 8px 0;
+      font-size: var(--pw-title-size);
+      color: var(--pw-title-color);
+      line-height: 1.1;
+    }
+
+    #pw-bundle-{{ sid }} .pw-bundle__subtitle{
+      font-size: var(--pw-subtitle-size);
+      color: var(--pw-subtitle-color);
+      line-height: 1.4;
+    }
+
+    #pw-bundle-{{ sid }} .pw-bundle__content{
+      display: grid;
+      grid-template-columns: 1.35fr 1fr 1fr;
+      gap: var(--pw-gap);
+      min-height: var(--pw-desktop-minh);
+      align-items: stretch;
+    }
+
+    #pw-bundle-{{ sid }} .pw-bundle__col{
+      position: relative;
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    /* Make middle/right behave like "top image + bottom content" */
+    #pw-bundle-{{ sid }} .pw-bundle__colInner{
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    #pw-bundle-{{ sid }} .pw-bundle__text,
+    #pw-bundle-{{ sid }} .pw-bundle__cta{
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+
+    #pw-bundle-{{ sid }} .pw-bundle__media{
+      width: 100%;
+      overflow: hidden;
+    }
+
+    #pw-bundle-{{ sid }} .pw-bundle__media--fill{
+      height: 100%;
+    }
+
+    /* Force middle/right images to be consistent size (reduces "big empty beige gaps") */
+    #pw-bundle-{{ sid }} .pw-bundle__media--small{
+      height: var(--pw-small-img-h);
+    }
+
+    #pw-bundle-{{ sid }} .pw-bundle__img{
+      width: 100% !important;
+      height: 100% !important;
+      display: block !important;
+      object-fit: cover;
+    }
+
+    #pw-bundle-{{ sid }} .pw-bundle__placeholder{
+      background: rgba(0,0,0,.04);
+    }
+
+    #pw-bundle-{{ sid }} .pw-bundle__eyebrow{
+      font-size: var(--pw-eyebrow-size);
+      color: var(--pw-eyebrow-color);
+      letter-spacing: .04em;
+      font-weight: 500;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 6px;
+      font-family: var(--font-proximanova);
+    }
+
+    #pw-bundle-{{ sid }} .pw-bundle__headline{
+      font-size: var(--pw-headline-size);
+      color: var(--pw-headline-color);
+      font-weight: 500;
+      font-family: var(--font-anton);
+      text-transform: uppercase;
+      line-height: 1.0;
+    }
+
+    /* Button alignment setting */
+    #pw-bundle-{{ sid }} .pw-bundle__cta{
+      display: flex;
+      justify-content: var(--pw-btn-justify);
+    }
+
+    #pw-bundle-{{ sid }} .pw-bundle__btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: var(--pw-btn-font-size);
+      color: var(--pw-btn-text);
+      background: var(--pw-btn-bg);
+      border-radius: var(--pw-btn-radius);
+      padding: var(--pw-btn-py) var(--pw-btn-px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      transition: opacity .2s ease, transform .2s ease;
+      min-height: 44px;
+      white-space: nowrap;
+      font-family: var(--font-proximamedium);
+    }
+
+    #pw-bundle-{{ sid }} .pw-bundle__btn:hover{
+      opacity: .92;
+      transform: translateY(-1px);
+    }
+
+    #pw-bundle-{{ sid }} .pw-bundle__btn--disabled{
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    /* --- Mobile --- */
+    @media (max-width: 749px){
+      #pw-bundle-{{ sid }} .pw-bundle__outer{
+        padding-left: var(--pw-side-pad-m);
+        padding-right: var(--pw-side-pad-m);
+      }
+
+      #pw-bundle-{{ sid }} .pw-bundle__media--small{
+        height: var(--pw-small-img-h-m);
+      }
+
+      /* Default: swipe */
+      #pw-bundle-{{ sid }}.pw-bundle--swipe .pw-bundle__content{
+        display: flex;
+        gap: 14px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 8px;
+      }
+
+      #pw-bundle-{{ sid }}.pw-bundle--swipe .pw-bundle__content::-webkit-scrollbar{ display: none; }
+      #pw-bundle-{{ sid }}.pw-bundle--swipe .pw-bundle__content{ scrollbar-width: none; }
+
+      #pw-bundle-{{ sid }}.pw-bundle--swipe .pw-bundle__col{
+        flex: 0 0 var(--pw-mobile-card-width);
+        scroll-snap-align: start;
+        min-height: 420px;
+      }
+
+      /* Optional: stack */
+      #pw-bundle-{{ sid }}.pw-bundle--stack .pw-bundle__content{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        min-height: auto;
+      }
+    }
+    .mt40{margin-top:40px;}
+    @media (max-width: 749px){
+      .mt40{margin-top:20px;}
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Performance Bundle",
+  "settings": [
+    { "type": "header", "content": "Section layout" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#F4F2EA" },
+
+    { "type": "text", "id": "max_width", "label": "Max width (px)", "default": "1400", "info": "Numbers only (e.g. 1400)" },
+    { "type": "text", "id": "desktop_min_height", "label": "Desktop min height (px)", "default": "560", "info": "Numbers only (e.g. 560)" },
+    { "type": "text", "id": "gap", "label": "Desktop column gap (px)", "default": "24", "info": "Numbers only (e.g. 24)" },
+
+    { "type": "text", "id": "padding_top", "label": "Padding top (px)", "default": "24", "info": "Numbers only (e.g. 24)" },
+    { "type": "text", "id": "padding_bottom", "label": "Padding bottom (px)", "default": "24", "info": "Numbers only (e.g. 24)" },
+
+    { "type": "text", "id": "side_padding", "label": "Side padding - desktop (px)", "default": "32", "info": "Adds spacing so left/right images don't touch the page edge" },
+    { "type": "text", "id": "side_padding_mobile", "label": "Side padding - mobile (px)", "default": "14", "info": "Numbers only (e.g. 14)" },
+
+    { "type": "text", "id": "small_image_height", "label": "Middle/Right image height - desktop (px)", "default": "440", "info": "Numbers only (e.g. 440)" },
+    { "type": "text", "id": "small_image_height_mobile", "label": "Middle/Right image height - mobile (px)", "default": "360", "info": "Numbers only (e.g. 360)" },
+
+    { "type": "header", "content": "Title / Subtitle (optional)" },
+    { "type": "text", "id": "title", "label": "Title" },
+    { "type": "richtext", "id": "subtitle", "label": "Subtitle" },
+    { "type": "text", "id": "title_size", "label": "Title font size (px)", "default": "28", "info": "Numbers only" },
+    { "type": "color", "id": "title_color", "label": "Title color", "default": "#0B2B24" },
+    { "type": "text", "id": "subtitle_size", "label": "Subtitle font size (px)", "default": "16", "info": "Numbers only" },
+    { "type": "color", "id": "subtitle_color", "label": "Subtitle color", "default": "#0B2B24" },
+
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "left_image", "label": "Left image (large)" },
+    { "type": "image_picker", "id": "middle_image", "label": "Middle image" },
+    { "type": "image_picker", "id": "right_image", "label": "Right image" },
+
+    { "type": "header", "content": "Middle text" },
+    { "type": "text", "id": "eyebrow_text", "label": "Top text (e.g. PERFORMANCE)", "default": "PERFORMANCE" },
+    { "type": "text", "id": "headline_text", "label": "Main text (e.g. WELLNESS BUNDLE)", "default": "WELLNESS BUNDLE" },
+    { "type": "text", "id": "eyebrow_size", "label": "Top text font size (px)", "default": "20", "info": "Numbers only" },
+    { "type": "color", "id": "eyebrow_color", "label": "Top text color", "default": "#0B2B24" },
+    { "type": "text", "id": "headline_size", "label": "Main text font size (px)", "default": "44", "info": "Numbers only" },
+    { "type": "color", "id": "headline_color", "label": "Main text color", "default": "#0B2B24" },
+
+    { "type": "header", "content": "Button (right column)" },
+    { "type": "text", "id": "button_text", "label": "Button text", "default": "SHOP NOW" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "checkbox", "id": "button_new_tab", "label": "Open link in new tab", "default": false },
+
+    {
+      "type": "select",
+      "id": "button_align",
+      "label": "Button alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+
+    { "type": "text", "id": "button_font_size", "label": "Button font size (px)", "default": "14", "info": "Numbers only" },
+    { "type": "color", "id": "button_text_color", "label": "Button text color", "default": "#FFFFFF" },
+    { "type": "color", "id": "button_bg_color", "label": "Button background color", "default": "#0B2B24" },
+    { "type": "text", "id": "button_radius", "label": "Button border radius (px)", "default": "12", "info": "Numbers only" },
+    { "type": "text", "id": "button_padding_y", "label": "Button padding Y (px)", "default": "12", "info": "Numbers only" },
+    { "type": "text", "id": "button_padding_x", "label": "Button padding X (px)", "default": "28", "info": "Numbers only" },
+
+    { "type": "header", "content": "Mobile behavior" },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Mobile layout",
+      "default": "swipe",
+      "options": [
+        { "value": "swipe", "label": "Inline swipe (horizontal)" },
+        { "value": "stack", "label": "Stack (vertical)" }
+      ]
+    },
+    { "type": "text", "id": "mobile_card_width", "label": "Swipe card width (%)", "default": "88", "info": "Numbers only (60–100 recommended)" }
+  ],
+  "presets": [
+    { "name": "Performance Bundle" }
+  ]
+}
+{% endschema %}

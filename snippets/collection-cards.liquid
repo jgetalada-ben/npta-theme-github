@@ -19,7 +19,13 @@
 {% endif %}
 
         {% if product.featured_image %}
-          <img src="{{ product.featured_image | img_url: 'original' }}" alt="{{ product.title }}">
+          <img src="{{ product.featured_image | image_url: width: 800 }}"
+               srcset="{{ product.featured_image | image_url: width: 400 }} 400w, {{ product.featured_image | image_url: width: 600 }} 600w, {{ product.featured_image | image_url: width: 800 }} 800w"
+               sizes="(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw"
+               width="{{ product.featured_image.width | default: 800 }}"
+               height="{{ product.featured_image.height | default: 1000 }}"
+               alt="{{ product.title | escape }}"
+               loading="lazy" decoding="async">
         {% endif %}
         
 
@@ -29,7 +35,8 @@
 {% if product.tags %}
   <div class="product-tags">
     {% for tag in product.tags %}
-      {% unless tag == "All Courses" %}
+      {% assign t = tag | downcase %}
+      {% unless t == 'all courses' or t contains 'provider:' %}
         <span class="tag">{{ tag }}</span>
       {% endunless %}
     {% endfor %}
@@ -87,7 +94,7 @@ height: 34px;
              transition:300ms;
   }
      .add-to-cart-button:hover svg{
- fill: #E9F24F;
+ fill: #C1FF72;
        transition:300ms;
   }
   
@@ -143,7 +150,7 @@ position: relative;
 text-decoration:none;
 }
   .card:hover .add-to-cart-button svg {
-    fill: #E9F24F !important;
+    fill: #C1FF72 !important;
     transition: 300ms;
 }
   /**
@@ -161,7 +168,7 @@ text-decoration:none;
 .card h3 {
   color: #141414;
 
-    font-family: var(--font-heading-family);
+    font-family: var(--font-heading-body);
   font-size: 18px;
   font-style: normal;
   font-weight: 800;
@@ -186,7 +193,7 @@ display:flex;
   align-items: center;
   gap: 10px;
   color: #141414;
-  font-family: var(--font-body-family);
+  font-family: var(--font-heading-body);
   font-size: 12px;
   font-style: normal;
   font-weight: 700;
@@ -204,7 +211,7 @@ display:flex;
 
 .card .sale-price {
   color: #FFF;
-    font-family: var(--font-heading-family);
+    font-family: var(--font-body-family);
 font-size: 18px;
 font-style: normal;
 font-weight: 800;
@@ -213,7 +220,7 @@ text-transform: uppercase;
 }
 .card .sale-price {
   border-radius: 10px;
-background:  #133257;
+background:  #01241E;
   display: flex;
 
 padding: 6px 13px;
@@ -244,7 +251,7 @@ align-items: center;
 gap: 10px;
 flex-shrink: 0;
   border-radius: 10px;
-background:  #E9F24F;
+background:  #C1FF72;
 }
 .card .discount {
 color:  #141414;

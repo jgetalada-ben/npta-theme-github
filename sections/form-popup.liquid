@@ -203,12 +203,18 @@
             </svg>
         </span>
         <div class="discount-popup__image">
-            <img src="{{ section.settings.popup_image | img_url: 'master' }}" alt="Popup Image">
+            <img src="{{ section.settings.popup_image | image_url: width: 900 }}"
+                 width="{{ section.settings.popup_image.width | default: 900 }}"
+                 height="{{ section.settings.popup_image.height | default: 1200 }}"
+                 alt="" loading="lazy" decoding="async">
         </div>
         <div class="discount-popup__form">
             <div id="popup_content" class="discount-popup__details">
                 <div class="discount-popup__logo">
-                    <img src="{{ section.settings.popup_logo | img_url: 'master' }}" alt="Popup Logo">
+                    <img src="{{ section.settings.popup_logo | image_url: width: 400 }}"
+                         width="{{ section.settings.popup_logo.width | default: 400 }}"
+                         height="{{ section.settings.popup_logo.height | default: 200 }}"
+                         alt="" loading="lazy" decoding="async">
                 </div>
                 <h2>{{ section.settings.popup_heading }}</h2>
                 <p class="popup-subheading">{{ section.settings.popup_subheading }}</p>
@@ -310,7 +316,8 @@
                     direction="1"
                     mode="normal"
                     loop
-                    autoplay>
+                    autoplay
+                    playsinline>
                 </lottie-player>
                 <h3>LOADING</h3>
             </div>
@@ -325,6 +332,18 @@ document.addEventListener('DOMContentLoaded', function() {
     var isCustomizer = (window.Shopify && Shopify.designMode);
     if (isCustomizer) {
         return;
+    }
+
+    // Lazy-load reCAPTCHA only when the popup is about to render.
+    // Previously loaded globally in theme.liquid on every page (~30KB).
+    function loadRecaptcha() {
+        if (window.__nptaRecaptchaLoaded) return;
+        window.__nptaRecaptchaLoaded = true;
+        var s = document.createElement('script');
+        s.src = 'https://www.google.com/recaptcha/api.js';
+        s.async = true;
+        s.defer = true;
+        document.head.appendChild(s);
     }
 
     // Check if the Pop-up Form has been submite before
@@ -379,13 +398,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }) || currentPage.startsWith('/products/');
 
     if (!isExcluded) {
+        // Begin the reCAPTCHA download ~1.5s before the popup appears so the
+        // widget has time to render by the time the user sees the form.
+        var popupDelayMs = {{ section.settings.popup_delay | times: 1000 }};
+        setTimeout(loadRecaptcha, Math.max(0, popupDelayMs - 1500));
+
         setTimeout(function() {
             var popup = document.getElementById('discount-popup');
             var popUpContent = document.getElementById('popup_content');
             popup.style.display = 'flex';
-            popup.classList.add('animate-show'); 
-            popUpContent.classList.remove('animate-hide'); 
-        }, {{ section.settings.popup_delay | times: 1000 }});
+            popup.classList.add('animate-show');
+            popUpContent.classList.remove('animate-hide');
+        }, popupDelayMs);
     }
 
     function closePopup() {
@@ -420,11 +444,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (triggerPopup) {
         triggerPopup.addEventListener('click', function(event) {
             event.preventDefault();
+            loadRecaptcha();
             var popup = document.getElementById('discount-popup');
             var popUpContent = document.getElementById('popup_content');
             popup.style.display = 'flex';
-            popup.classList.add('animate-show'); 
-            popUpContent.classList.remove('animate-hide'); 
+            popup.classList.add('animate-show');
+            popUpContent.classList.remove('animate-hide');
         });
     }
 
@@ -507,8 +532,10 @@ document.addEventListener('DOMContentLoaded', function() {
             isValid = false;
         }
 
-      // Check reCAPTCHA
-      var recaptchaResponse = grecaptcha.getResponse();
+      // Check reCAPTCHA — guard against the api.js still loading (lazy-loaded).
+      var recaptchaResponse = (typeof grecaptcha !== 'undefined' && grecaptcha.getResponse)
+        ? grecaptcha.getResponse()
+        : '';
       if (recaptchaResponse.length === 0) {
         document.getElementById('recaptcha-error').style.display = 'block';
         isValid = false;
@@ -606,7 +633,7 @@ width: 100%;
 
     .popup-preloader h3{
   padding-top:150px;
-      color: #133257;
+      color: #01241E;
 }
 
   
@@ -890,7 +917,7 @@ width: 100%;
   height: 0.05em;
   bottom: 0;
   left: 0;
-  background: #133257;
+  background: #01241E;
   transform-origin: bottom left;
   transition: transform 0.25s ease-out;
 }

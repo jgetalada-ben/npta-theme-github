@@ -15,11 +15,9 @@
 }
 .accordion--main .accordion--item .accordion--title h3 {
     margin: 0px;
-      font-family: var(--font-heading-family);
   color:  #141414;
 font-size: 22px;
-font-style: normal;
-font-weight: 800;
+font-weight: 100;
 line-height: 104%;
 text-transform: uppercase;
 }

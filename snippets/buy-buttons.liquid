@@ -79,37 +79,74 @@
             endif
           -%}
 
+          {%- comment -%} Exam Selector - Only show for CPT products {%- endcomment -%}
+          {% comment %} {%- assign show_exam_selector = false -%}
+          {%- assign exam_trigger_word = product.metafields.custom.exam_trigger_word | default: 'CPT' -%}
+          {%- if product.title contains exam_trigger_word -%}
+            {%- assign show_exam_selector = true -%}
+          {%- endif -%}
+
+          {%- if show_exam_selector -%}
+            <div class="exam-selector-wrapper">
+              <button type="button" id="exam-selector-btn-{{ section_id }}" class="exam-selector-btn btn button-yg">
+                <span class="btn-label-down">Select Exam</span>
+                <span class="btn-label-down">Select Exam</span>
+              </button>
+              <input type="hidden" name="properties[Exam Option]" id="exam-option-input-{{ section_id }}" value="NASM Certified Personal Trainer (NCCA Accredited Certification Exam)">
+              <p class="exam-selected-text" id="exam-selected-text-{{ section_id }}">
+                <strong>Selected:</strong> <span>NASM Certified Personal Trainer (NCCA Accredited)</span>
+              </p>
+            </div>
+          {%- endif -%} {% endcomment %}
 
 
-          
-          <button
-            id="ProductSubmitButton-{{ section_id }}"
-            type="submit"
-            name="add"
-            class="product-form__submit button  btn button-yg"
-            {% if product.selected_or_first_available_variant.available == false
-              or quantity_rule_soldout
-              or product.selected_or_first_available_variant == nil
-            %}
-              disabled
-            {% endif %}
-          >
-            <span>
-                 {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
-                 
-                      <span class="btn-label-down">Out of Stock</span>
-                      <span class="btn-label-down">Out of Stock</span>
-                 {%- else -%}
+          <div class="add-to-cart-row">
+            <button
+              id="ProductSubmitButton-{{ section_id }}"
+              type="submit"
+              name="add"
+              class="product-form__submit button  btn button-yg"
+              {% if product.selected_or_first_available_variant.available == false
+                or quantity_rule_soldout
+                or product.selected_or_first_available_variant == nil
+              %}
+                disabled
+              {% endif %}
+            >
+              <span class="btn-inner">
+                {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+                  <span class="btn-label-down">Out of Stock</span>
+                  <span class="btn-label-down">Out of Stock</span>
+                {%- else -%}
                   <span class="btn-label-down">Add to Cart</span>
-            <span class="btn-label-down">Add to Cart</span>
+                  <span class="btn-label-down">Add to Cart</span>
                 {%- endif -%}
-              
-         
-            </span>
-            {%- render 'loading-spinner' -%}
-          </button>
+              </span>
+              {%- render 'loading-spinner' -%}
+            </button>
 
-          
+            {% if product.metafields.custom.payment_options %}
+              <div class="financing-group">
+                <a
+                  href="{{ product.metafields.custom.payment_options.value }}"
+                  target="_blank"
+                  rel="noopener"
+                  class="btn button-b financing-btn-inline"
+                  data-elective-financing-link
+                  data-product-handle="{{ product.handle }}"
+                  data-product-id="{{ product.id }}"
+                >
+                  <span class="btn-label-down">Elective Financing Options</span>
+                  <span class="btn-label-down">Elective Financing Options</span>
+                </a>
+                <div class="tooltip-wrap-inline">
+                  <a href="/pages/payment-plan-options" target="_blank" class="payment-options-tooltip"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><g clip-path="url(#a)"><path d="M12 2C6.475 2 2 6.475 2 12s4.475 10 10 10 10-4.475 10-10S17.525 2 12 2Zm1 15h-2v-6h2v6Zm0-8h-2V7h2v2Z" /></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h24v24H0z"/></clipPath></defs></svg></a>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+
+
 
 
           
@@ -119,27 +156,6 @@
         </div>
       {%- endform -%}
     </product-form>
-
-
-{% if product.metafields.custom.payment_options %}
-  <div class="payment-options">
-    <a
-      href="{{ product.metafields.custom.payment_options.value }}"
-      target="_blank"
-      rel="noopener"
-      class="btn button-b"
-      data-elective-financing-link
-      data-product-handle="{{ product.handle }}"
-      data-product-id="{{ product.id }}"
-    >
-      <span class="btn-label-down">Elective Financing Options</span>
-      <span class="btn-label-down">Elective Financing Options</span>
-    </a>
-  </div>
-  <div class="tooltip-wrap">
-      <a href="/pages/payment-plan-options" target="_blank" class="payment-options-tooltip"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><g clip-path="url(#a)"><path d="M12 2C6.475 2 2 6.475 2 12s4.475 10 10 10 10-4.475 10-10S17.525 2 12 2Zm1 15h-2v-6h2v6Zm0-8h-2V7h2v2Z" /></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h24v24H0z"/></clipPath></defs></svg></a>
-  </div>
-{% endif %}
    </div>
 
     
@@ -191,121 +207,6 @@
 
     <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
-
-  <script>
-    (function() {
-      const ATTR_KEY = 'bh_attribution_v1';
-      const UTM_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
-      const CLICK_IDS = [
-        'gclid','gbraid','wbraid',   // Google
-        'fbclid',                    // Meta
-        'ttclid',                    // TikTok
-        'msclkid',                   // Microsoft Ads
-        'li_fat_id',                 // LinkedIn
-        'twclid'                     // X
-      ];
-
-      function qsParams() {
-        const out = {};
-        const s = new URLSearchParams(window.location.search);
-        [...UTM_KEYS, ...CLICK_IDS].forEach(k => { if (s.get(k)) out[k] = s.get(k); });
-        return out;
-      }
-
-      function first(...vals){ return vals.find(v => v && String(v).trim()) || ''; }
-
-      function getAttr() {
-        try { return JSON.parse(localStorage.getItem(ATTR_KEY) || '{}'); }
-        catch(e){ return {}; }
-      }
-      function saveAttr(a) {
-        const clean = Object.fromEntries(Object.entries(a).filter(([,v]) => v != null && v !== ''));
-        localStorage.setItem(ATTR_KEY, JSON.stringify(clean));
-        // cookie fallback (90 days)
-        const d=new Date(); d.setTime(d.getTime()+90*24*60*60*1000);
-        document.cookie = `bh_attr=${encodeURIComponent(JSON.stringify(clean))}; expires=${d.toUTCString()}; path=/; SameSite=Lax`;
-      }
-
-      function initAttribution() {
-        const existing = getAttr();
-        const incoming = qsParams();
-        const hasNew = Object.keys(incoming).length > 0;
-
-        if (Object.keys(existing).length && !hasNew) return; // don't overwrite unless new UTMs present
-
-        const ref = document.referrer || existing.referrer || '';
-        const attr = {
-          ...existing,
-          ...incoming,
-          first_seen: existing.first_seen || new Date().toISOString(),
-          referrer: existing.referrer || ref,
-          landing_page: existing.landing_page || (window.location.pathname + window.location.search),
-          utm_source: first(incoming.utm_source, existing.utm_source, ref ? new URL(ref).hostname : '(direct)'),
-          utm_medium: first(incoming.utm_medium, existing.utm_medium, hasNew ? 'paid' : (ref ? 'referral' : 'direct')),
-          utm_campaign: first(incoming.utm_campaign, existing.utm_campaign, '(not set)')
-        };
-        saveAttr(attr);
-      }
-
-      function appendAttributionToUrl(url, linkEl) {
-        try {
-          const u = new URL(url, window.location.origin);
-          const attr = getAttr();
-          [...UTM_KEYS, ...CLICK_IDS].forEach(k => { if (attr[k]) u.searchParams.set(k, attr[k]); });
-          if (attr.referrer) u.searchParams.set('source_referrer', attr.referrer);
-          if (attr.landing_page) u.searchParams.set('source_landing', attr.landing_page);
-          u.searchParams.set('source_page', window.location.pathname);
-          if (linkEl?.dataset.productHandle) u.searchParams.set('product_handle', linkEl.dataset.productHandle);
-          if (linkEl?.dataset.productId) u.searchParams.set('product_id', linkEl.dataset.productId);
-          return u.toString();
-        } catch(e) {
-          return url;
-        }
-      }
-
-      function trackElectiveClick(linkEl) {
-        const attr = getAttr();
-        const payload = {
-          event: 'elective_financing_click',
-          event_category: 'Financing',
-          event_label: (linkEl.textContent || '').trim(),
-          page_location: window.location.href,
-          page_path: window.location.pathname,
-          product_handle: linkEl.dataset.productHandle || '',
-          product_id: linkEl.dataset.productId || '',
-          timestamp: Date.now(),
-          ...attr
-        };
-        // GTM / dataLayer
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push(payload);
-        // GA4 (direct)
-        if (window.gtag) window.gtag('event','elective_financing_click', payload);
-        // Meta Pixel
-        if (window.fbq) window.fbq('trackCustom','ElectiveFinancingClick', payload);
-        // Shopify Web Pixel bridge (optional)
-        document.dispatchEvent(new CustomEvent('bh:elective_financing_click', { detail: payload }));
-      }
-
-      function wire() {
-        initAttribution();
-        const link = document.querySelector('[data-elective-financing-link]');
-        if (!link || link.dataset.bhWired === '1') return;
-        link.dataset.bhWired = '1';
-
-        link.addEventListener('click', function() {
-          trackElectiveClick(link);
-          const newHref = appendAttributionToUrl(link.getAttribute('href'), link);
-          if (newHref !== link.getAttribute('href')) link.setAttribute('href', newHref);
-          // navigation proceeds normally (even with target=_blank)
-        }, { capture: true });
-      }
-
-      document.addEventListener('DOMContentLoaded', wire);
-      document.addEventListener('shopify:section:load', wire);
-      document.addEventListener('shopify:section:select', wire);
-    })();
-  </script>
 </div>
 
 
@@ -316,78 +217,449 @@
     .product-form{
       display:inline-flex !important;
     }
-      .payment-options{
-      display:inline-flex !important;
-        
+
+    /* Add to Cart Row - Horizontal Layout */
+    .add-to-cart-row {
+      display: flex !important;
+      align-items: left;
+      gap: 12px;
+      flex-wrap: wrap;
+      width: 100%;
     }
-  .payment-options a{
- color:  #141414;
-font-family: Montserrat;
-font-size: 14px;
-font-style: normal;
-font-weight: 700;
-{% comment %} line-height: 150%; {% endcomment %}
-letter-spacing: 1.12px;
-text-decoration-line: none;
-text-transform: uppercase;
-       position:relative;
-    margin-bottom:10px;
+
+    .add-to-cart-row .product-form__submit {
+      flex: 0 0 auto;
+      width: auto !important;
+      min-width: 180px;
     }
-    
- .payment-options a:before,
-a:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  bottom: -1px;
-  background: #133257;
-}
 
- .payment-options a:before {
-  left: 0;
-}
- .payment-options a:after {
-  right: 0;
-  background: #133257;
-  transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
+    /* Financing group wrapper to keep button and icon together */
+    .financing-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1 1 auto;
+    }
 
- .payment-options a:hover:before {
-  background: #133257;
-  width: 0%;
-  transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
- .payment-options a:hovre:before {
-  background: #133257;
-  width: 0%;
-  transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
+    .financing-btn-inline {
+      color: #141414;
+      font-family: var(--font-body-family);
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: 1.12px;
+      text-decoration-line: none;
+      text-transform: uppercase;
+      position: relative;
+      white-space: nowrap;
+      flex: 1 1 auto;
+      width: auto !important;
+    }
 
- .payment-options a:hover:after {
-  background: transparent;
-  width: 0%;
-  transition: 0s;
-}
-    
+    .financing-btn-inline:before,
+    .financing-btn-inline:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      bottom: -1px;
+      background: #01241E;
+    }
+
+    .financing-btn-inline:before {
+      left: 0;
+    }
+
+    .financing-btn-inline:after {
+      right: 0;
+      background: #01241E;
+      transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .financing-btn-inline:hover:before {
+      background: #01241E;
+      width: 0%;
+      transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .financing-btn-inline:hover:after {
+      background: transparent;
+      width: 0%;
+      transition: 0s;
+    }
+
+    .tooltip-wrap-inline {
+      display: inline-flex;
+      align-items: center;
+      flex: 0 0 auto;
+    }
+
+    /* Override any global button styles that force full width */
+    .add-to-cart-row .btn {
+      width: auto !important;
+      max-width: none !important;
+    }
+
+    /* Safari ignores overflow: hidden on <button> elements, which breaks
+       the .btn-label-down slide animation. Wrap the labels in a block-level
+       span that owns the clipping and containing block instead. */
+    .add-to-cart-row .product-form__submit .btn-inner {
+      display: block;
+      position: relative;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
     .product-form-wrap{
-          display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
     }
-.payment-options-tooltip svg{
-  shape-rendering: auto;
-  
-}
-        .payment-options-tooltip:hover svg{
-transform:scale(1.2);
-          transition:300ms;
 
-}
     .payment-options-tooltip svg{
-  fill: #141414; 
-     transition:300ms;
+      shape-rendering: auto;
+      fill: #0F828C;
+      transition: 300ms;
+    }
+
+    .payment-options-tooltip:hover svg{
+      transform: scale(1.2);
+      transition: 300ms;
+    }
+
+    @media screen and (min-width: 750px) {
+      .add-to-cart-row {
+        flex-wrap: nowrap;
+        align-items: baseline;
+      }
+    }
+
+    @media screen and (max-width: 749px) {
+      .add-to-cart-row {
+        gap: 8px;
+      }
+
+      .add-to-cart-row .product-form__submit {
+        width: 100% !important;
+        min-width: auto;
+      }
+
+      /* Financing group takes full width but keeps button and icon inline */
+      .financing-group {
+        width: 100%;
+        flex: 1 1 100%;
+      }
+
+      .financing-btn-inline {
+        padding-top: 16px;
+        flex: 1 1 auto;
+        width: auto !important;
+      }
+
+      .financing-btn-inline .btn-label-down {
+        line-height: normal;
+      }
+
+      .tooltip-wrap-inline {
+        flex-shrink: 0;
+      }
+    }
+
+    @media screen and (max-width: 364px) {
+      .financing-group {
+        gap: 6px;
+      }
+
+      .financing-btn-inline {
+        font-size: 12px;
+      }
+
+      .financing-btn-inline .btn-label-down {
+        font-size: 12px;
+        padding-top: 4px;
+      }
+
+      .tooltip-wrap-inline svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+/* Exam Selector Styles */
+.exam-selector-wrapper {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.exam-selector-btn {
+  width: 100%;
+  margin-bottom: 8px;
+  background-color: #D9D9D9;
+  color:#000 !important;
+}
+.exam-selector-btn:hover {
+    background: #D9D9D9;
+}
+.exam-selected-text {
+  font-size: 14px;
+  color: #01241E;
+  margin: 8px 0;
+  padding: 8px 12px;
+  background: #F2F2E9;
+  border-radius: 4px;
+}
+
+.exam-selected-text strong {
+  font-weight: 700;
+}
+
+.exam-selected-text span {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+}
+
+/* Modal Styles */
+.exam-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.exam-modal-overlay.active {
+  display: flex;
+}
+
+.exam-modal {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 700px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 32px;
+}
+
+.exam-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #141414;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.exam-modal-close:hover {
+  background: #f0f0f0;
+}
+
+.exam-modal-title {
+  font-family: var(--font-heading-family);
+  font-size: 28px;
+  font-weight: 800;
+  color: #01241E;
+  margin: 0 0 24px 0;
+  padding-right: 40px;
+}
+
+.exam-option {
+  border: 2px solid #d0d0d0;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.exam-option:hover {
+  border-color: #0F828C;
+  background: #f8f8f8;
+}
+
+.exam-option.selected {
+  border-color: #C1FF72;
+  background: #f0ffe0;
+}
+
+.exam-option-header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.exam-option-radio {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border: 2px solid #0F828C;
+  border-radius: 50%;
+  margin-right: 12px;
+  margin-top: 2px;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.exam-option.selected .exam-option-radio {
+  border-color: #0F828C;
+  background: #C1FF72;
+}
+
+.exam-option.selected .exam-option-radio::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: #01241E;
+  border-radius: 50%;
+}
+
+.exam-option-name {
+  font-family: var(--font-heading-family);
+  font-size: 18px;
+  font-weight: 700;
+  color: #01241E;
+  margin: 0 0 8px 0;
+  flex: 1;
+}
+
+.exam-option-description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #141414;
+  margin: 0;
+  padding-left: 32px;
+}
+
+.exam-modal-footer {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.exam-modal-btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-family: var(--font-body-family);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s;
+}
+
+.exam-modal-cancel {
+  background: transparent;
+  color: #141414;
+  border: 2px solid #d0d0d0;
+}
+
+.exam-modal-cancel:hover {
+  background: #f0f0f0;
+}
+
+.exam-modal-confirm {
+  background: #C1FF72;
+  color: #01241E;
+}
+
+.exam-modal-confirm:hover {
+  background: #b0ef62;
+}
+
+@media screen and (max-width: 749px) {
+  .exam-modal {
+    padding: 24px 20px;
+  }
+
+  .exam-modal-title {
+    font-size: 22px;
+  }
+
+  .exam-option {
+    padding: 16px;
+  }
+
+  .exam-option-name {
+    font-size: 16px;
+  }
+
+  .exam-option-description {
+    font-size: 13px;
+    padding-left: 0;
+    margin-top: 8px;
+  }
+
+  .exam-option-header {
+    flex-direction: column;
+  }
+
+  .exam-option-radio {
+    margin-bottom: 8px;
+  }
 }
 
   </style>
+
+{%- comment -%} Exam Selector JavaScript {%- endcomment -%}
+{%- if show_exam_selector -%}
+  <script src="{{ 'exam-selector.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- comment -%} Exam Modal HTML {%- endcomment -%}
+{%- if show_exam_selector -%}
+<div class="exam-modal-overlay" id="exam-modal-{{ section_id }}">
+  <div class="exam-modal">
+    <button type="button" class="exam-modal-close" aria-label="Close">&times;</button>
+    <h2 class="exam-modal-title">Select Your Exam Option</h2>
+
+    <div class="exam-option selected" data-exam-value="NASM Certified Personal Trainer (NCCA Accredited Certification Exam)">
+      <div class="exam-option-header">
+        <div class="exam-option-radio"></div>
+        <h3 class="exam-option-name">Exam Option 1: NASM Certified Personal Trainer (NCCA Accredited Certification Exam)</h3>
+      </div>
+      <p class="exam-option-description">
+        The NCCA is a nationally recognized third-party agency that accredits certification programs which are able to meet and comply with its standards. This closed-book exam has 120 questions. You must pass with a scaled score of 70 or better. This proctored exam can be administered either in-person or online, and you will have 2 hours to complete the test. You must take this exam within 180 days of your enrollment date.
+      </p>
+    </div>
+
+    <div class="exam-option" data-exam-value="NASM Personal Trainer Certificate (Non-Proctored Exam)">
+      <div class="exam-option-header">
+        <div class="exam-option-radio"></div>
+        <h3 class="exam-option-name">Exam Option 2: NASM Personal Trainer Certificate (Non-Proctored Exam)</h3>
+      </div>
+      <p class="exam-option-description">
+        This non-proctored and open-book exam has 100 questions and requires a passing grade of 70%. This exam is administered online only. You will have 3 hours to complete the exam, and you must take the exam within 180 days of your enrollment date.
+      </p>
+    </div>
+
+    <div class="exam-modal-footer">
+      <button type="button" class="exam-modal-btn exam-modal-cancel">Cancel</button>
+      <button type="button" class="exam-modal-btn exam-modal-confirm">Confirm Selection</button>
+    </div>
+  </div>
+</div>
+{%- endif -%}

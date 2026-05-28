@@ -119,6 +119,14 @@
         <span style="font-size: 24px; margin-right: 10px;">&#x1F4CD;</span> <!-- Location pin icon -->
         <span>856 Homer St Suite 110, Vancouver, BC V6B 2W2, Canada</span>
     </div>
+
+    <div style="padding: 10px; text-align: center; font-style: italic; font-size: 14px;">
+    Please review the 
+    <a href="https://www.npta.ca/pages/apprenticeship-terms-and-conditions" target="_blank">
+        Terms &amp; Conditions, Refund Policy, and Financing Terms
+    </a> 
+    associated with the NPTA™ Apprenticeship Program before completing your enrollment.
+    </div>
     
             
               </div>
@@ -135,7 +143,13 @@
                  {% if section.settings.image %}
                     <div class="image-wrapper">
                     {% if section.settings.image %}
-                    <img src="{{ section.settings.image | img_url: 'original' }}" alt="{{ section.settings.alt_text }}">
+                    <img src="{{ section.settings.image | image_url: width: 1200 }}"
+                         srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 1200 }} 1200w"
+                         sizes="(min-width: 750px) 600px, 100vw"
+                         width="{{ section.settings.image.width | default: 1200 }}"
+                         height="{{ section.settings.image.height | default: 800 }}"
+                         alt="{{ section.settings.alt_text | escape }}"
+                         loading="lazy" decoding="async">
                     {% else %}
                     <p>No image available</p>
                     {% endif %}

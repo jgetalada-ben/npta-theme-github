@@ -162,7 +162,7 @@
   }
 </style>
 
-<section class="section--banner-two" style="background-image: url({{ section.settings.background_image | img_url: 'master' }});">
+<section class="section--banner-two" style="background-image: url({{ section.settings.background_image | image_url: width: 1920 }});">
   {{ 'section--banner-two.css' | asset_url | stylesheet_tag }}
   <div class="section--banner-two-container" >
     <div class="banner-two--text-content" style="display: flex; justify-content: {{ section.settings.alignment }};">

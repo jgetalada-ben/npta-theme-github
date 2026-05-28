@@ -156,7 +156,8 @@
 {% if product_tags %}
   <div class="product-tags">
     {% for tag in product_tags %}
-      {% unless tag == "All Courses" %}
+      {% assign t = tag | downcase %}
+      {% unless t == 'all courses' or t contains 'provider:' %}
         <span class="tag">{{ tag }}</span>
       {% endunless %}
     {% endfor %}
@@ -176,13 +177,14 @@
        
           </h3>
     
-            {% assign product = card_product %}
-            {% assign product_description = product.description %}
+          {% assign product = card_product %}
+          {% assign product_description = product.description | strip_html | strip_newlines %}
 
-          <div class="description">{{ product_description | truncate: 130, '...' }}</div> 
-
-
-
+          {% if product_description != blank %}
+            <div class="description">
+              <p>{{ product_description | truncatewords: 18 }}</p>
+            </div>
+          {% endif %}
           
           <div class="card-information">
             {%- if show_vendor -%}

@@ -1,0 +1,420 @@
+{% comment %}
+  Section: Feature Cards Split (image left, content right)
+  - Repeatable cards via blocks
+  - Dynamic styling controls: title/desc/button font + colors
+  - Optional scroll reveal animation (fade/slide)
+{% endcomment %}
+
+{%- assign sid = section.id -%}
+
+{%- assign maxw = section.settings.max_width | default: '1200px' | strip -%}
+{%- unless maxw contains 'px' or maxw contains '%' or maxw contains 'vw' or maxw contains 'rem' -%}
+  {%- assign maxw = maxw | append: 'px' -%}
+{%- endunless -%}
+
+<section
+  id="FeatSplit-{{ sid }}"
+  class="fcs"
+  style="
+    --fcs-bg: {{ section.settings.bg }};
+    --fcs-pt: {{ section.settings.pad_top }};
+    --fcs-pb: {{ section.settings.pad_bottom }};
+    --fcs-px: {{ section.settings.pad_x }};
+    --fcs-maxw: {{ maxw }};
+    --fcs-gap: {{ section.settings.section_gap }};
+    --fcs-card-gap: {{ section.settings.card_gap }};
+    --fcs-card-radius: {{ section.settings.card_radius }}px;
+    --fcs-card-shadow: {{ section.settings.card_shadow }};
+    --fcs-img-radius: {{ section.settings.image_radius }}px;
+
+    --fcs-title-color: {{ section.settings.title_color }};
+    --fcs-title-size: {{ section.settings.title_size }};
+    --fcs-subtitle-color: {{ section.settings.subtitle_color }};
+    --fcs-subtitle-size: {{ section.settings.subtitle_size }};
+    --fcs-desc-color: {{ section.settings.desc_color }};
+    --fcs-desc-size: {{ section.settings.desc_size }};
+
+    --fcs-btn-bg: {{ section.settings.btn_bg }};
+    --fcs-btn-color: {{ section.settings.btn_color }};
+    --fcs-btn-size: {{ section.settings.btn_size }};
+    --fcs-btn-radius: {{ section.settings.btn_radius }}px;
+    --fcs-btn-pad-y: {{ section.settings.btn_pad_y }};
+    --fcs-btn-pad-x: {{ section.settings.btn_pad_x }};
+    --fcs-btn-hover-bg: {{ section.settings.btn_hover_bg }};
+    --fcs-btn-hover-color: {{ section.settings.btn_hover_color }};
+
+    --fcs-reveal-distance: {{ section.settings.reveal_distance }}px;
+    --fcs-reveal-duration: {{ section.settings.reveal_duration }}ms;
+    --fcs-reveal-delay-step: {{ section.settings.reveal_delay_step }}ms;
+  "
+>
+  <div class="fcs__inner">
+    {%- if section.settings.heading != blank -%}
+      <div class="fcs__header">
+        <h2 class="fcs__section-title">{{ section.settings.heading }}</h2>
+        {%- if section.settings.subheading != blank -%}
+          <div class="fcs__section-sub rte">{{ section.settings.subheading }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="fcs__list">
+      {%- for block in section.blocks -%}
+      {%- assign has_btn = false -%}
+      {%- if block.settings.button_label != blank and block.settings.button_link != blank -%}
+        {%- assign has_btn = true -%}
+      {%- endif -%}
+
+      {%- assign has_image = false -%}
+      {%- if block.settings.image != blank -%}
+        {%- assign has_image = true -%}
+      {%- endif -%}
+
+      <article
+        class="fcs__card"
+        data-reveal-index="{{ forloop.index0 }}"
+        {{ block.shopify_attributes }}
+      >
+        <div class="fcs__grid
+          {% if has_image and block.settings.layout == 'content_first' %} is-reverse{% endif %}
+          {% if has_image and section.settings.mobile_order == 'content_first' %} mobile-reverse{% endif %}
+          {% unless has_image %} no-media{% endunless %}
+        ">
+          {%- if has_image -%}
+            <div class="fcs__media">
+              {%- capture sizes -%}
+                (min-width: 990px) 560px, 100vw
+              {%- endcapture -%}
+              {{
+                block.settings.image
+                | image_url: width: 1600
+                | image_tag: loading: 'lazy', sizes: sizes, widths: '360, 540, 720, 900, 1200, 1600', class: 'fcs__img'
+              }}
+            </div>
+          {%- endif -%}
+
+          <div class="fcs__content-wrap">
+            <div class="fcs__content {% if section.settings.enable_reveal %}js-fcs-content-reveal{% endif %}">
+              {%- if block.settings.title != blank -%}
+                <h3 class="fcs__title">{{ block.settings.title }}</h3>
+              {%- endif -%}
+
+              {%- if block.settings.subtitle != blank -%}
+                <div class="fcs__subtitle">{{ block.settings.subtitle }}</div>
+              {%- endif -%}
+
+              {%- if block.settings.desc != blank -%}
+                <div class="fcs__desc rte">{{ block.settings.desc }}</div>
+              {%- endif -%}
+
+              {%- if has_btn -%}
+                <a class="fcs__btn" href="{{ block.settings.button_link }}" {% if block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
+                  {{ block.settings.button_label }}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </article>
+    {%- endfor -%}
+    </div>
+  </div>
+
+  <style>
+    #FeatSplit-{{ sid }}.fcs{
+      background: var(--fcs-bg);
+      padding-top: var(--fcs-pt);
+      padding-bottom: var(--fcs-pb);
+    }
+
+    #FeatSplit-{{ sid }} .fcs__inner{
+      max-width: var(--fcs-maxw);
+      margin: 0 auto;
+      padding-left: var(--fcs-px);
+      padding-right: var(--fcs-px);
+    }
+
+    #FeatSplit-{{ sid }} .fcs__header{
+      margin-bottom: var(--fcs-gap);
+    }
+    #FeatSplit-{{ sid }} .fcs__section-title{
+      margin: 0 0 10px;
+      color: var(--fcs-title-color);
+      font-size: var(--fcs-title-size);
+      line-height: 1.1;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-family: var(--font-heading-family);
+    }
+    #FeatSplit-{{ sid }} .fcs__section-sub{
+      color: var(--fcs-desc-color);
+      font-size: var(--fcs-desc-size);
+      line-height: 1.6;
+      font-family: var(--font-body-family);
+      max-width: 900px;
+    }
+
+    #FeatSplit-{{ sid }} .fcs__list{
+      display: grid;
+      gap: var(--fcs-gap);
+    }
+
+    #FeatSplit-{{ sid }} .fcs__card{
+      border-radius: var(--fcs-card-radius);
+      overflow: visible;
+    }
+
+    #FeatSplit-{{ sid }} .fcs__grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+
+    /* If no image, make it a 1-column layout */
+    #FeatSplit-{{ sid }} .fcs__grid.no-media{
+      grid-template-columns: 1fr;
+    }
+
+    #FeatSplit-{{ sid }} .fcs__grid.is-reverse{
+      direction: rtl;
+    }
+    #FeatSplit-{{ sid }} .fcs__grid.is-reverse > *{
+      direction: ltr;
+    }
+
+    #FeatSplit-{{ sid }} .fcs__media{
+      width: 100%;
+      z-index: 1;
+    }
+
+    #FeatSplit-{{ sid }} .fcs__img{
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: var(--fcs-img-radius);
+      overflow: hidden;
+    }
+
+    #FeatSplit-{{ sid }} .fcs__content-wrap{
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    #FeatSplit-{{ sid }} .fcs__content{
+      background: #fff;
+      border-radius: var(--fcs-card-radius);
+      padding: clamp(18px, 3vw, 38px);
+      box-shadow: var(--fcs-card-shadow);
+    }
+
+    #FeatSplit-{{ sid }} .fcs__title{
+      margin: 0 0 14px;
+      color: var(--fcs-title-color);
+      font-size: var(--fcs-title-size);
+      line-height: 1.15;
+      font-weight: 800;
+      font-family: var(--font-heading-family);
+    }
+
+    #FeatSplit-{{ sid }} .fcs__subtitle{
+      margin: 0 0 12px;
+      color: var(--fcs-subtitle-color);
+      font-size: var(--fcs-subtitle-size);
+      font-weight: 700;
+      line-height: 1.25;
+      font-family: var(--font-body-family);
+    }
+
+    #FeatSplit-{{ sid }} .fcs__desc{
+      color: var(--fcs-desc-color);
+      font-size: var(--fcs-desc-size);
+      line-height: 1.6;
+      font-family: var(--font-body-family);
+      margin-bottom: 18px;
+    }
+    #FeatSplit-{{ sid }} .fcs__desc p{ margin: 0; }
+    #FeatSplit-{{ sid }} .fcs__desc p + p{ margin-top: 12px; }
+
+    #FeatSplit-{{ sid }} .fcs__btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      background: var(--fcs-btn-bg);
+      color: var(--fcs-btn-color);
+      font-size: var(--fcs-btn-size);
+      font-weight: 800;
+      font-family: var(--font-body-family);
+      border-radius: var(--fcs-btn-radius);
+      padding: var(--fcs-btn-pad-y) var(--fcs-btn-pad-x);
+      transition: transform .2s ease, background .2s ease, color .2s ease;
+      will-change: transform;
+    }
+    #FeatSplit-{{ sid }} .fcs__btn:hover{
+      background: var(--fcs-btn-hover-bg);
+      color: var(--fcs-btn-hover-color);
+      transform: translateY(-1px);
+    }
+
+    #FeatSplit-{{ sid }} .js-fcs-content-reveal{
+      transform: translateX(calc(100vw + var(--fcs-reveal-distance)));
+      transition: transform var(--fcs-reveal-duration) cubic-bezier(.2,.8,.2,1);
+      will-change: transform;
+    }
+    #FeatSplit-{{ sid }} .js-fcs-content-reveal.is-inview{
+      transform: translateX(0);
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      #FeatSplit-{{ sid }} .js-fcs-content-reveal{
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 989px){
+      #FeatSplit-{{ sid }} .fcs__grid{
+        grid-template-columns: 1fr;
+      }
+      #FeatSplit-{{ sid }} .fcs__grid.mobile-reverse{
+        display: flex;
+        flex-direction: column-reverse;
+        gap: var(--fcs-card-gap);
+      }
+    }
+  </style>
+
+  {% if section.settings.enable_reveal %}
+    <script>
+      (function () {
+        var root = document.getElementById('FeatSplit-{{ sid }}');
+        if (!root) return;
+
+        var cards = root.querySelectorAll('.fcs__card');
+        if (!cards.length) return;
+
+        cards.forEach(function(card){
+          var i = parseInt(card.getAttribute('data-reveal-index') || '0', 10);
+          var content = card.querySelector('.js-fcs-content-reveal');
+          if (!content) return;
+
+          var step = parseInt(getComputedStyle(root).getPropertyValue('--fcs-reveal-delay-step')) || 80;
+          content.style.transitionDelay = (i * step) + 'ms';
+        });
+
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if (!entry.isIntersecting) return;
+
+            var content = entry.target.querySelector('.js-fcs-content-reveal');
+            if (content) content.classList.add('is-inview');
+
+            io.unobserve(entry.target);
+          });
+        }, { threshold: 0.25 });
+
+        cards.forEach(function(card){ io.observe(card); });
+      })();
+    </script>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Feature cards split",
+  "tag": "section",
+  "class": "section feature-cards-split",
+  "settings": [
+    { "type": "header", "content": "Layout" },
+    { "type": "color", "id": "bg", "label": "Background color", "default": "#06302C" },
+
+    { "type": "text", "id": "pad_top", "label": "Padding top (CSS, supports clamp())", "default": "clamp(30px, 5vw, 80px)" },
+    { "type": "text", "id": "pad_bottom", "label": "Padding bottom (CSS, supports clamp())", "default": "clamp(30px, 5vw, 80px)" },
+    { "type": "text", "id": "pad_x", "label": "Side padding (CSS, supports clamp())", "default": "clamp(16px, 3vw, 28px)" },
+    { "type": "text", "id": "max_width", "label": "Content max width", "default": "1200px" },
+
+    { "type": "text", "id": "section_gap", "label": "Gap between cards (CSS)", "default": "clamp(22px, 4vw, 56px)" },
+    { "type": "text", "id": "card_gap", "label": "Gap between image and content (CSS)", "default": "clamp(18px, 3vw, 44px)" },
+
+    { "type": "range", "id": "card_radius", "label": "Card radius", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 18 },
+    { "type": "text", "id": "card_shadow", "label": "Card shadow (CSS)", "default": "0 12px 30px rgba(0,0,0,0.18)" },
+    { "type": "range", "id": "image_radius", "label": "Image radius", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 18 },
+
+    {
+      "type": "select",
+      "id": "mobile_order",
+      "label": "Mobile order",
+      "options": [
+        { "value": "image_first", "label": "Image first, then content" },
+        { "value": "content_first", "label": "Content first, then image" }
+      ],
+      "default": "image_first"
+    },
+
+    { "type": "header", "content": "Optional header (top of section)" },
+    { "type": "text", "id": "heading", "label": "Section heading" },
+    { "type": "richtext", "id": "subheading", "label": "Section subheading" },
+
+    { "type": "header", "content": "Typography (applies to all cards)" },
+    { "type": "color", "id": "title_color", "label": "Title color", "default": "#141414" },
+    { "type": "text", "id": "title_size", "label": "Title font size (CSS, supports clamp())", "default": "clamp(22px, 2.2vw, 32px)" },
+
+    { "type": "color", "id": "subtitle_color", "label": "Subtitle color", "default": "#141414" },
+    { "type": "text", "id": "subtitle_size", "label": "Subtitle font size (CSS, supports clamp())", "default": "clamp(14px, 1.3vw, 18px)" },
+
+    { "type": "color", "id": "desc_color", "label": "Description color", "default": "#141414" },
+    { "type": "text", "id": "desc_size", "label": "Description font size (CSS, supports clamp())", "default": "clamp(14px, 1.2vw, 16px)" },
+
+    { "type": "header", "content": "Button (applies to all cards)" },
+    { "type": "color", "id": "btn_bg", "label": "Button background", "default": "#C7FF6D" },
+    { "type": "color", "id": "btn_color", "label": "Button text color", "default": "#141414" },
+    { "type": "text", "id": "btn_size", "label": "Button font size (CSS)", "default": "14px" },
+    { "type": "range", "id": "btn_radius", "label": "Button radius", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 10 },
+    { "type": "text", "id": "btn_pad_y", "label": "Button padding Y (CSS)", "default": "12px" },
+    { "type": "text", "id": "btn_pad_x", "label": "Button padding X (CSS)", "default": "26px" },
+    { "type": "color", "id": "btn_hover_bg", "label": "Button hover background", "default": "#B9F85B" },
+    { "type": "color", "id": "btn_hover_color", "label": "Button hover text color", "default": "#141414" },
+
+    { "type": "header", "content": "Animation" },
+    { "type": "checkbox", "id": "enable_reveal", "label": "Enable scroll reveal animation", "default": true },
+    { "type": "range", "id": "reveal_distance", "label": "Reveal distance (px)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 24 },
+    { "type": "range", "id": "reveal_duration", "label": "Reveal duration (ms)", "min": 150, "max": 1200, "step": 50, "unit": "ms", "default": 650 },
+    { "type": "range", "id": "reveal_delay_step", "label": "Stagger delay per card (ms)", "min": 0, "max": 250, "step": 10, "unit": "ms", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "Desktop layout",
+          "options": [
+            { "value": "image_first", "label": "Image left, content right" },
+            { "value": "content_first", "label": "Content left, image right" }
+          ],
+          "default": "image_first"
+        },
+        { "type": "text", "id": "title", "label": "Title", "default": "Master the Exam with Structure and Strategy" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Study with Purpose, Not Panic" },
+        { "type": "richtext", "id": "desc", "label": "Description", "default": "<p>Most students fail not because they lack knowledge, but because they lack structure...</p>" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Learn More" },
+        { "type": "url", "id": "button_link", "label": "Button link" },
+        { "type": "checkbox", "id": "open_new_tab", "label": "Open link in new tab", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature cards split",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

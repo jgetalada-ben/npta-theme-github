@@ -1,0 +1,184 @@
+{{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
+
+<div style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+{%- assign related_count = 0 -%}
+{%- assign related_limit = section.settings.posts_to_show | default: 10 -%}
+
+{%- capture related_posts_cards -%}
+  {%- for blog_article in blog.articles limit: 20 -%}
+    {%- if blog_article.id != article.id -%}
+      {%- if related_count >= related_limit -%}{%- break -%}{%- endif -%}
+      <article class="related-post-card">
+        <a href="{{ blog_article.url }}" class="related-post-link">
+          {%- if blog_article.image -%}
+            <div class="related-post-image">
+              <img src="{{ blog_article.image | image_url: width: 400 }}" alt="{{ blog_article.title | escape }}" loading="lazy">
+            </div>
+          {%- endif -%}
+
+          <div class="related-post-content">
+            <h3 class="related-post-title">{{ blog_article.title }}</h3>
+            {%- if section.settings.show_excerpt and blog_article.excerpt != blank -%}
+              <p class="related-post-excerpt">{{ blog_article.excerpt | strip_html | truncate: 100 }}</p>
+            {%- endif -%}
+          </div>
+        </a>
+      </article>
+      {%- assign related_count = related_count | plus: 1 -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- if related_count > 0 -%}
+  <div class="related-posts-section" id="related-posts-{{ section.id }}">
+    <h2 class="related-posts-title">{{ section.settings.section_title }}</h2>
+
+    <div class="related-posts-carousel-wrapper">
+      <button class="related-posts-nav related-posts-nav--prev" aria-label="Previous">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="related-posts-carousel">
+        {{ related_posts_cards }}
+      </div>
+
+      <button class="related-posts-nav related-posts-nav--next" aria-label="Next">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+{%- endif -%}
+
+<script>
+(function() {
+  var sectionId = {{ section.id | json }};
+
+  function getCardsPerView() {
+    if (window.innerWidth < 768) return 2;
+    if (window.innerWidth < 1024) return 3;
+    return 4;
+  }
+
+  function initCarousel() {
+    var carouselSection = document.getElementById('related-posts-' + sectionId);
+    if (!carouselSection || carouselSection.dataset.initialized === 'true') return;
+    carouselSection.dataset.initialized = 'true';
+
+    var carousel = carouselSection.querySelector('.related-posts-carousel');
+    var prevBtn = carouselSection.querySelector('.related-posts-nav--prev');
+    var nextBtn = carouselSection.querySelector('.related-posts-nav--next');
+    var cards = carousel.querySelectorAll('.related-post-card');
+    if (cards.length === 0) return;
+
+    var currentIndex = 0;
+    var cardsPerView = getCardsPerView();
+    var maxIndex = Math.max(0, cards.length - cardsPerView);
+
+    function updateCarousel() {
+      cards.forEach(function(card, index) {
+        card.style.display = (index >= currentIndex && index < currentIndex + cardsPerView) ? '' : 'none';
+      });
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex >= maxIndex;
+    }
+
+    prevBtn.addEventListener('click', function() {
+      if (currentIndex > 0) { currentIndex--; updateCarousel(); }
+    });
+    nextBtn.addEventListener('click', function() {
+      if (currentIndex < maxIndex) { currentIndex++; updateCarousel(); }
+    });
+
+    updateCarousel();
+
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        var newCardsPerView = getCardsPerView();
+        if (newCardsPerView !== cardsPerView) {
+          currentIndex = 0;
+          cardsPerView = newCardsPerView;
+          maxIndex = Math.max(0, cards.length - cardsPerView);
+          updateCarousel();
+        }
+      }, 250);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousel);
+  } else {
+    initCarousel();
+  }
+
+  document.addEventListener('shopify:section:load', function(event) {
+    if (event.detail && event.detail.sectionId === sectionId) {
+      var el = document.getElementById('related-posts-' + sectionId);
+      if (el) el.dataset.initialized = '';
+      initCarousel();
+    }
+  });
+})();
+</script>
+</div>
+
+{% schema %}
+{
+  "name": "Related Blog Posts",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "YOU MIGHT BE INTERESTED IN"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "label": "Show Excerpt",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "posts_to_show",
+      "min": 2,
+      "max": 20,
+      "step": 1,
+      "label": "Posts to show",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Related Blog Posts"
+    }
+  ]
+}
+{% endschema %}

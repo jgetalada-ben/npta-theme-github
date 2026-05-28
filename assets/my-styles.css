@@ -1,1 +1,210 @@
-.thumbnail-slider:before{display:none!important}.accordion--main .accordion--item{padding:22px 0;border-bottom:1px solid #d0d0d0}.accordion--main .accordion--item .accordion--title{position:relative;padding-right:38px;cursor:pointer}.accordion--main .accordion--item .accordion--title h3{margin:0;font-family:var(--font-heading-family);color:#141414;font-size:22px;font-style:normal;font-weight:800;line-height:104%;text-transform:uppercase}.accordion--main .accordion--item .accordion--toggle{width:24px;height:24px;position:absolute;right:0;top:0}.accordion--main .accordion--item .accordion--toggle .toggle--icon{position:absolute;right:0;top:0;width:100%;height:100%}.accordion--main .accordion--item .accordion--toggle .toggle--icon.toggle--open,.accordion--main .accordion--item.active .accordion--toggle .toggle--icon.toggle--close{display:none}.accordion--main .accordion--item.active .accordion--toggle .toggle--icon.toggle--open{display:block}.accordion--main .accordion--item .accordion--toggle .toggle--icon svg{width:100%;height:100%}.accordion--main .accordion--item .accordion--content{padding-bottom:5px;display:none}.accordion--main .accordion--item .accordion--content p{color:#141414;font-family:var(--font-body-family);font-size:16px;font-style:normal;font-weight:400;line-height:150%;opacity:.8}.accordion--main .accordion--item .accordion--content p:last-child{margin-bottom:0}.accordion--container .link--line{text-align:center;margin-top:80px}.section--collapsible{display:flex;justify-content:center}.section--collapsible .accordion--container{width:90%}.accordion-footer-wrap{margin-top:40px;display:table;text-align:center;width:100%}
+.thumbnail-slider:before{display:none!important}.accordion--main .accordion--item{padding:22px 0;border-bottom:1px solid #d0d0d0}.accordion--main .accordion--item .accordion--title{position:relative;padding-right:38px;cursor:pointer}.accordion--main .accordion--item .accordion--title h3{margin:0;font-family:var(--font-heading-family);color:#141414;font-size:22px;font-style:normal;font-weight:100;letter-spacing:1px;line-height:104%;text-transform:uppercase}.accordion--main .accordion--item .accordion--toggle{width:24px;height:24px;position:absolute;right:0;top:0}.accordion--main .accordion--item .accordion--toggle .toggle--icon{position:absolute;right:0;top:0;width:100%;height:100%}.accordion--main .accordion--item .accordion--toggle .toggle--icon.toggle--open,.accordion--main .accordion--item.active .accordion--toggle .toggle--icon.toggle--close{display:none}.accordion--main .accordion--item.active .accordion--toggle .toggle--icon.toggle--open{display:block}.accordion--main .accordion--item .accordion--toggle .toggle--icon svg{width:100%;height:100%}.accordion--main .accordion--item .accordion--content{padding-bottom:5px;display:none}.accordion--main .accordion--item .accordion--content p{color:#141414;font-family:var(--font-body-family);font-size:16px;font-style:normal;font-weight:400;line-height:150%;opacity:.8}.accordion--main .accordion--item .accordion--content p:last-child{margin-bottom:0}.accordion--container .link--line{text-align:center;margin-top:80px}.section--collapsible{display:flex;justify-content:center}.section--collapsible .accordion--container{width:90%}.accordion-footer-wrap{margin-top:40px;display:table;text-align:center;width:100%}
+
+/* ============================================================
+   iOS Safari & mobile efficiency optimisations
+   ============================================================ */
+
+/* Stop iOS Safari from auto-zooming when a user taps a form input.
+   Safari triggers a zoom-in on any input/select/textarea with font-size below 16px.
+   Dawn's default is 1.3rem which often computes to ~13px. */
+@media (max-width: 749px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="number"],
+  input[type="search"],
+  input[type="password"],
+  input[type="date"],
+  input[type="datetime-local"],
+  textarea,
+  select,
+  .field__input,
+  .select__select {
+    font-size: 16px !important;
+  }
+}
+
+/* Stop iOS Safari inflating body text when the device rotates portrait -> landscape */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Remove the grey iOS tap-flash on interactive elements, and kill the legacy
+   300ms tap delay that some Safari versions still apply */
+a,
+button,
+label,
+input[type="submit"],
+input[type="button"],
+.btn,
+.button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Smooth momentum scrolling for scrollable containers on iOS */
+.cart-drawer__inner,
+.menu-drawer,
+.menu-drawer__navigation,
+.menu-drawer__inner-submenu,
+.predictive-search__results-groups-wrapper,
+.modal__content,
+.discount-popup,
+.tb-modal,
+.qhp__modal {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Cart drawer and menu drawer use 100vh in Dawn, which on iOS Safari ends up taller
+   than the visible viewport (the toolbar at the bottom hides the last ~80px).
+   Override to use dynamic viewport height when supported. */
+@supports (height: 100dvh) {
+  .cart-drawer,
+  .menu-drawer,
+  .menu-drawer__navigation,
+  .menu-drawer__inner-submenu {
+    max-height: 100dvh;
+  }
+}
+
+/* Same fix for our custom modal-open body locks — and stop scroll bleed-through
+   to the underlying page on iOS bounce-scroll */
+body.mr-modal-open,
+body.iwtb-modal-open,
+body.discount-popup-open,
+body.tb-modal-open,
+body.blurb-modal-open,
+body.cta2-modal-open {
+  overscroll-behavior: none;
+}
+@supports (height: 100dvh) {
+  body.mr-modal-open,
+  body.iwtb-modal-open,
+  body.blurb-modal-open,
+  body.cta2-modal-open {
+    height: 100dvh;
+  }
+}
+
+/* Mobile efficiency: avoid running expensive animations on small screens for users
+   who've opted into reduced motion (already a heavy battery / CPU cost on phones) */
+@media (max-width: 749px) and (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Prevent images and videos from overflowing their containers on mobile.
+   Defensive belt-and-braces against future intrinsic-dimension regressions
+   like the TopBlogPosts one. */
+@media (max-width: 749px) {
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* ============================================================
+   iOS safe-area insets (notch / home indicator)
+   ------------------------------------------------------------
+   `viewport-fit=cover` in the meta tag lets us draw under the
+   iPhone notch and home indicator. These rules push the inside
+   of full-bleed UI off those safe areas so content isn't clipped.
+   ============================================================ */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .cart-drawer,
+  .menu-drawer {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .discount-popup__content,
+  .tb-modal__content,
+  .mr-modal__content {
+    padding-bottom: max(env(safe-area-inset-bottom), 16px);
+  }
+  /* Sticky add-to-cart bars / floating CTAs on product pages */
+  .sticky-atc,
+  .floating-cta,
+  .product-cta-sticky {
+    padding-bottom: max(env(safe-area-inset-bottom), 12px);
+  }
+}
+
+/* Minimum 44×44 tap targets for primary mobile navigation, per Apple HIG.
+   Dawn's menu drawer items compute to ~43px on mobile — close, but a hair short. */
+@media (max-width: 749px) {
+  .menu-drawer__menu-item,
+  .header__menu-item,
+  .header__icon {
+    min-height: 4.4rem;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* ============================================================
+   Defer rendering of offscreen sections
+   ------------------------------------------------------------
+   `content-visibility: auto` lets the browser skip layout and paint
+   for sections that are well outside the viewport, until the user
+   scrolls them into view. Big rendering-time saving on mobile for
+   long landing pages.
+   `contain-intrinsic-size: 0 600px` reserves vertical space so the
+   scrollbar and anchor links stay correct while sections are
+   render-skipped.
+   Excluded: the hero (always above the fold) and carousel sections
+   (their JS measures dimensions on init — needs a laid-out element).
+   ============================================================ */
+.hp-finance,
+.hp-process,
+.hp-advantage,
+.hp-elite-bundle,
+.hp-testimonials,
+.hp-top-courses,
+.hp-trending,
+.hp-discover,
+.wn-grid-section,
+.tp-section,
+.section--banner-one,
+.section--banner-two,
+.section--top-banner,
+.section--blurb-apprentice,
+.section--blurb-image,
+.section--blurb-tutoring,
+.section--blurb-content,
+.section--text-image,
+.section--quote-text,
+.section--accordion-three,
+.section--accordion-four,
+.section--how-it-works,
+.section--team,
+.section--image-text-carousel,
+.section--mission-vision,
+.section--multicolumn,
+.section--three-column,
+.section--three-column-light,
+.section--text-form,
+.section--text-steps,
+.section--text-video,
+.section--video-text,
+.section--tabs-content,
+.section--process,
+.section--process-tutoring,
+.section--program-details,
+.section--program-info,
+.section--text-highlight,
+.section--steps,
+.section--steps-form,
+.top-blog-posts-section,
+.latest-blog-posts-section,
+.exciting-news-grid {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px;
+}

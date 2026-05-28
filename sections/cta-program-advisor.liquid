@@ -1,0 +1,278 @@
+{% comment %}
+  Section: CTA - Program Advisor
+  - Desktop: 2 columns (left heading, right content + button)
+  - Mobile: stacked
+  - Supports clamp() in font size settings (use "text" settings for CSS font-size)
+{% endcomment %}
+
+{%- assign sid = section.id -%}
+
+<section
+  id="CtaAdvisor-{{ sid }}"
+  class="cta-advisor"
+  style="
+    --cta-bg: {{ section.settings.bg_color }};
+    --cta-text: {{ section.settings.text_color }};
+
+    --cta-maxw: {{ section.settings.max_width }};
+    --cta-pad-y: {{ section.settings.pad_y }}px;
+    --cta-pad-x: {{ section.settings.pad_x }}px;
+    --cta-gap: {{ section.settings.gap }}px;
+
+    --cta-left-size: {{ section.settings.left_font_size }};
+    --cta-left-color: {{ section.settings.left_color | default: section.settings.text_color }};
+
+    --cta-right-title-size: {{ section.settings.right_title_font_size }};
+    --cta-right-title-color: {{ section.settings.right_title_color | default: section.settings.text_color }};
+
+    --cta-right-sub-size: {{ section.settings.right_sub_font_size }};
+    --cta-right-sub-color: {{ section.settings.right_sub_color | default: section.settings.text_color }};
+
+    --cta-btn-bg: {{ section.settings.btn_bg }};
+    --cta-btn-text: {{ section.settings.btn_text_color }};
+    --cta-btn-font-size: {{ section.settings.btn_font_size }};
+    --cta-btn-radius: {{ section.settings.btn_radius }}px;
+    --cta-btn-pad-y: {{ section.settings.btn_pad_y }}px;
+    --cta-btn-pad-x: {{ section.settings.btn_pad_x }}px;
+    --cta-btn-gap: {{ section.settings.btn_icon_gap }}px;
+
+    --cta-icon-size: {{ section.settings.btn_icon_size }};
+    --cta-icon-color: {{ section.settings.btn_icon_color | default: section.settings.btn_text_color }};
+  "
+>
+  <div class="cta-advisor__inner">
+    <div class="cta-advisor__grid">
+      <div class="cta-advisor__left">
+        {% if section.settings.left_heading != blank %}
+          <div class="cta-advisor__left-heading rte">
+            {{ section.settings.left_heading }}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="cta-advisor__right">
+        {% if section.settings.right_title != blank %}
+          <div class="cta-advisor__right-title">{{ section.settings.right_title }}</div>
+        {% endif %}
+
+        {% if section.settings.right_subtitle != blank %}
+          <div class="cta-advisor__right-sub">{{ section.settings.right_subtitle }}</div>
+        {% endif %}
+
+        {% if section.settings.btn_label != blank %}
+          {%- assign btn_url = section.settings.btn_link -%}
+          {% if btn_url == blank and section.settings.btn_tel != blank %}
+            {%- assign btn_url = 'tel:' | append: section.settings.btn_tel -%}
+          {% endif %}
+
+          <a class="cta-advisor__btn" href="{{ btn_url | default: '#' }}">
+            {% if section.settings.btn_show_icon %}
+              <span class="cta-advisor__btn-icon" aria-hidden="true">
+                {% if section.settings.btn_icon_type == 'svg_phone' %}
+                  <svg class="cta-advisor__svg" viewBox="0 0 24 24" fill="none">
+                    <path d="M8.9 3.2l2 4.3c.2.5.1 1-.2 1.4l-1.4 1.7c1.5 2.7 3.8 5 6.5 6.5l1.7-1.4c.4-.3.9-.4 1.4-.2l4.3 2c.8.4 1.1 1.3.7 2.1l-1 1.9c-.4.8-1.3 1.2-2.2 1-8.6-1.8-15.3-8.5-17.1-17.1-.2-.9.2-1.8 1-2.2l1.9-1c.8-.4 1.7 0 2.1.7z"
+                      fill="currentColor"/>
+                  </svg>
+                {% elsif section.settings.btn_icon_type == 'iconify' and section.settings.iconify_icon != blank %}
+                  <span class="iconify" data-icon="{{ section.settings.iconify_icon | escape }}"></span>
+                {% endif %}
+              </span>
+            {% endif %}
+
+            <span class="cta-advisor__btn-text">{{ section.settings.btn_label }}</span>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #CtaAdvisor-{{ sid }}.cta-advisor{
+      background: var(--cta-bg);
+      color: var(--cta-text);
+      padding: var(--cta-pad-y) 0;
+    }
+
+    #CtaAdvisor-{{ sid }} .cta-advisor__inner{
+      max-width: var(--cta-maxw);
+      margin: 0 auto;
+      padding: 0 var(--cta-pad-x);
+    }
+
+    #CtaAdvisor-{{ sid }} .cta-advisor__grid{
+      display: grid;
+      grid-template-columns: 0.9fr 1fr;
+      align-items: center;
+      gap: var(--cta-gap);
+    }
+
+    #CtaAdvisor-{{ sid }} .cta-advisor__left-heading{
+      color: var(--cta-left-color);
+      font-size: var(--cta-left-size);
+      font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
+      font-weight: 500;
+      letter-spacing: 1px;
+      line-height: 1.05;
+      text-transform: uppercase;
+      text-align: left;
+    }
+
+    #CtaAdvisor-{{ sid }} .cta-advisor__left-heading p{
+      margin: 0;
+    }
+
+    #CtaAdvisor-{{ sid }} .cta-advisor__right{
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    #CtaAdvisor-{{ sid }} .cta-advisor__right-title{
+      font-size: var(--cta-right-title-size);
+      color: var(--cta-right-title-color);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    #CtaAdvisor-{{ sid }} .cta-advisor__right-sub{
+      font-size: var(--cta-right-sub-size);
+      color: var(--cta-right-sub-color);
+      line-height: 1.45;
+      opacity: .95;
+    }
+
+    #CtaAdvisor-{{ sid }} .cta-advisor__btn{
+      display: inline-flex;
+      align-items: center;
+      gap: var(--cta-btn-gap);
+      background: var(--cta-btn-bg);
+      color: var(--cta-btn-text);
+      font-size: var(--cta-btn-font-size);
+      font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
+      letter-spacing: 2px;
+      font-weight: 500;
+      line-height: 1;
+      text-decoration: none;
+      padding: var(--cta-btn-pad-y) var(--cta-btn-pad-x);
+      border-radius: var(--cta-btn-radius);
+      border: 0;
+      white-space: nowrap;
+      transition: transform .18s ease, filter .18s ease;
+    }
+
+    #CtaAdvisor-{{ sid }} .cta-advisor__btn:hover{
+      transform: translateY(-1px);
+      filter: brightness(0.98);
+    }
+
+    #CtaAdvisor-{{ sid }} .cta-advisor__btn:active{
+      transform: translateY(0);
+    }
+
+    #CtaAdvisor-{{ sid }} .cta-advisor__btn-icon{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cta-icon-color);
+      font-size: var(--cta-icon-size);
+      line-height: 1;
+    }
+
+    #CtaAdvisor-{{ sid }} .cta-advisor__svg{
+      width: 1em;
+      height: 1em;
+      display: block;
+    }
+
+    #CtaAdvisor-{{ sid }} .cta-advisor__btn-text{
+      display: inline-block;
+      color: inherit;
+    }
+
+    @media (max-width: 749px){
+      #CtaAdvisor-{{ sid }} .cta-advisor__grid{
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      #CtaAdvisor-{{ sid }} .cta-advisor__right{
+        align-items: center;
+      }
+      #CtaAdvisor-{{ sid }} .cta-advisor__btn{
+        justify-content: center;
+      }
+    }
+  </style>
+
+  {% if section.settings.btn_show_icon and section.settings.btn_icon_type == 'iconify' and section.settings.iconify_icon != blank %}
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js" defer></script>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "CTA - Program Advisor",
+  "tag": "section",
+  "class": "section cta-program-advisor",
+  "settings": [
+    { "type": "header", "content": "Layout" },
+    { "type": "text", "id": "max_width", "label": "Max width (CSS)", "default": "1200px" },
+    { "type": "range", "id": "pad_y", "label": "Section padding Y", "min": 0, "max": 100, "step": 2, "unit": "px", "default": 40 },
+    { "type": "range", "id": "pad_x", "label": "Section padding X", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 24 },
+    { "type": "range", "id": "gap", "label": "Column gap", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 28 },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#177F8A" },
+    { "type": "color", "id": "text_color", "label": "Default text color", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Left content" },
+    { "type": "richtext", "id": "left_heading", "label": "Left heading", "default": "<p>CAN’T FIND WHAT<br>YOU’RE LOOKING FOR?</p>" },
+    { "type": "text", "id": "left_font_size", "label": "Left heading font size (CSS / supports clamp)", "default": "clamp(28px, 4vw, 54px)" },
+    { "type": "color", "id": "left_color", "label": "Left heading color (optional)", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Right content" },
+    { "type": "text", "id": "right_title", "label": "Right title", "default": "Talk to an NPTA Program Advisor" },
+    { "type": "text", "id": "right_title_font_size", "label": "Right title font size (CSS / supports clamp)", "default": "clamp(18px, 1.8vw, 24px)" },
+    { "type": "color", "id": "right_title_color", "label": "Right title color (optional)", "default": "#FFFFFF" },
+
+    { "type": "text", "id": "right_subtitle", "label": "Right subtitle", "default": "Our team are ready to help you decide which is best fit you!" },
+    { "type": "text", "id": "right_sub_font_size", "label": "Right subtitle font size (CSS / supports clamp)", "default": "clamp(14px, 1.3vw, 18px)" },
+    { "type": "color", "id": "right_sub_color", "label": "Right subtitle color (optional)", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Button" },
+    { "type": "text", "id": "btn_label", "label": "Button label", "default": "+1-778-949-6782" },
+    { "type": "text", "id": "btn_tel", "label": "Phone number (used if Button link is empty)", "default": "+17789496782" },
+    { "type": "url", "id": "btn_link", "label": "Button link (optional)" },
+
+    { "type": "color", "id": "btn_bg", "label": "Button background", "default": "#FFFFFF" },
+    { "type": "color", "id": "btn_text_color", "label": "Button text color", "default": "#0E2A4C" },
+    { "type": "text", "id": "btn_font_size", "label": "Button font size (CSS / supports clamp)", "default": "clamp(16px, 1.4vw, 22px)" },
+
+    { "type": "range", "id": "btn_radius", "label": "Button radius", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 10 },
+    { "type": "range", "id": "btn_pad_y", "label": "Button padding Y", "min": 6, "max": 30, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "btn_pad_x", "label": "Button padding X", "min": 10, "max": 50, "step": 1, "unit": "px", "default": 18 },
+
+    { "type": "header", "content": "Button icon" },
+    { "type": "checkbox", "id": "btn_show_icon", "label": "Show icon in button", "default": true },
+    {
+      "type": "select",
+      "id": "btn_icon_type",
+      "label": "Icon type",
+      "default": "svg_phone",
+      "options": [
+        { "value": "svg_phone", "label": "Built-in phone SVG" },
+        { "value": "iconify", "label": "Iconify (CDN)" }
+      ]
+    },
+    { "type": "text", "id": "iconify_icon", "label": "Iconify icon name (e.g. mdi:phone)", "default": "mdi:phone" },
+    { "type": "text", "id": "btn_icon_size", "label": "Icon size (CSS / supports clamp)", "default": "clamp(16px, 1.6vw, 22px)" },
+    { "type": "range", "id": "btn_icon_gap", "label": "Gap between icon and text", "min": 0, "max": 20, "step": 1, "unit": "px", "default": 10 },
+    { "type": "color", "id": "btn_icon_color", "label": "Icon color (optional)", "default": "#0E2A4C" }
+  ],
+  "presets": [
+    {
+      "name": "CTA - Program Advisor"
+    }
+  ]
+}
+{% endschema %}

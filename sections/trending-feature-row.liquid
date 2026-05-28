@@ -1,0 +1,591 @@
+{% comment %}
+  Section: Trending Feature Row
+  - Up to 4 feature cards
+  - Desktop: inline grid
+  - Mobile: horizontal swipe row (no stacking)
+
+  Updates:
+  - Optional product per block to show price + compare at price
+  - Card info position setting (relative/absolute) + offsets
+  - Alignment settings (info + prices)
+  - Price styling settings
+{% endcomment %}
+
+{%- comment -%} Alignment mapping -> CSS vars {%- endcomment -%}
+{%- assign info_align = section.settings.info_align | default: 'right' -%}
+{%- assign prices_align = section.settings.prices_align | default: 'center' -%}
+
+{%- assign info_text_align = 'right' -%}
+{%- assign info_self = 'flex-end' -%}
+{%- if info_align == 'left' -%}
+  {%- assign info_text_align = 'left' -%}
+  {%- assign info_self = 'flex-start' -%}
+{%- elsif info_align == 'center' -%}
+  {%- assign info_text_align = 'center' -%}
+  {%- assign info_self = 'center' -%}
+{%- endif -%}
+
+{%- assign prices_justify = 'center' -%}
+{%- assign prices_self = 'center' -%}
+{%- if prices_align == 'left' -%}
+  {%- assign prices_justify = 'flex-start' -%}
+  {%- assign prices_self = 'flex-start' -%}
+{%- elsif prices_align == 'right' -%}
+  {%- assign prices_justify = 'flex-end' -%}
+  {%- assign prices_self = 'flex-end' -%}
+{%- endif -%}
+
+<section
+  id="TrendingRow-{{ section.id }}"
+  class="trending-row{% if section.settings.enable_entrance_animation %} tr-anim{% endif %}"
+  data-tr-anim="{% if section.settings.enable_entrance_animation %}1{% else %}0{% endif %}"
+  style="
+    --pt: {{ section.settings.pad_top | default: 48 }}px;
+    --pr: {{ section.settings.pad_right | default: 24 }}px;
+    --pb: {{ section.settings.pad_bottom | default: 48 }}px;
+    --pl: {{ section.settings.pad_left | default: 24 }}px;
+    --gap: {{ section.settings.gap | default: 32 }}px;
+    --bg: {{ section.settings.bg | default: '#ffffff' }};
+    --tr-card-bg: {{ section.settings.card_bg | default: '#ffffff' }};
+    --tr-eyebrow-size: {{ section.settings.eyebrow_size | default: '11px' }};
+    --tr-card-title-size: {{ section.settings.card_title_size | default: 'clamp(16px,1.5vw,20px)' }};
+    --tr-eyebrow-color: {{ section.settings.eyebrow_color | default: '#000000' }};
+    --tr-card-title-color: {{ section.settings.card_title_color | default: '#000000' }};
+    --tr-info-text-align: {{ info_text_align }};
+    --tr-info-self: {{ info_self }};
+    --tr-prices-justify: {{ prices_justify }};
+    --tr-prices-self: {{ prices_self }};
+    --tr-price-bg: {{ section.settings.price_bg | default: '#B9F85A' }};
+    --tr-price-color: {{ section.settings.price_color | default: '#000000' }};
+    --tr-price-size: {{ section.settings.price_font_size | default: 'clamp(18px, 2vw, 26px)' }};
+    --tr-compare-color: {{ section.settings.compare_color | default: 'rgba(0,0,0,0.6)' }};
+    --tr-compare-size: {{ section.settings.compare_font_size | default: 'clamp(18px, 2vw, 26px)' }};
+  "
+>
+  {%- assign mw = section.settings.max_width | default: '1200px' | strip -%}
+  {%- unless mw contains 'px' or mw contains '%' or mw contains 'vw' or mw contains 'rem' -%}
+    {%- assign mw = mw | append: 'px' -%}
+  {%- endunless -%}
+
+  {%- liquid
+    assign show_mobile_slider = false
+    if section.blocks.size > 1
+      assign show_mobile_slider = true
+    endif
+  -%}
+
+  <div class="trending-row__inner" style="max-width: {{ mw }};">
+    {% if section.settings.heading != blank or section.settings.subheading != blank %}
+      <div class="trending-row__header">
+        {% if section.settings.heading != blank %}
+          <h2 class="trending-row__title">
+            {{ section.settings.heading }}
+          </h2>
+        {% endif %}
+        {% if section.settings.subheading != blank %}
+          <p class="trending-row__subheading">
+            {{ section.settings.subheading }}
+          </p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <slider-component class="trending-row__slider slider-mobile-gutter">
+      <ul
+        id="TrendingSlider-{{ section.id }}"
+        class="trending-row__list grid grid--1-col-tablet-down grid--{{ section.settings.columns_desktop }}-col-desktop{% if show_mobile_slider %} slider slider--tablet grid--peek{% endif %}"
+        role="list"
+      >
+        {% for block in section.blocks %}
+          {%- assign p = block.settings.product -%}
+          {%- assign v = blank -%}
+          {%- if p != blank -%}
+            {%- assign v = p.selected_or_first_available_variant -%}
+          {%- endif -%}
+
+          {%- assign card_title = block.settings.title -%}
+          {%- if card_title == blank and p != blank -%}
+            {%- assign card_title = p.title -%}
+          {%- endif -%}
+
+          {%- assign card_link = block.settings.title_link -%}
+          {%- if p != blank -%}
+            {%- assign card_link = p.url -%}
+          {%- endif -%}
+
+          {%- assign has_title_link = false -%}
+          {%- if card_link != blank -%}
+            {%- assign has_title_link = true -%}
+          {%- endif -%}
+
+          {%- assign info_position_mode = block.settings.info_position | default: 'relative' -%}
+          {%- assign place_info_in_media = false -%}
+          {%- if info_position_mode == 'absolute' and block.settings.image != blank -%}
+            {%- assign place_info_in_media = true -%}
+          {%- endif -%}
+          {%- assign info_top = block.settings.info_top | strip -%}
+          {%- assign info_right = block.settings.info_right | strip -%}
+          {%- assign info_bottom = block.settings.info_bottom | default: '0px' | strip -%}
+          {%- assign info_left = block.settings.info_left | strip -%}
+
+          <li
+            id="TrendingSlide-{{ section.id }}-{{ forloop.index }}"
+            class="trending-row__item grid__item{% if show_mobile_slider %} slider__slide{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            <div class="trending-card">
+              {%- capture info_markup -%}
+                <div
+                  class="trending-card__info"
+                  style="
+                    {% if place_info_in_media %}
+                      position: absolute;
+                      bottom: {{ info_bottom }};
+                      {% if info_top != blank %}top: {{ info_top }};{% endif %}
+                      {% if info_right != blank %}right: {{ info_right }};{% endif %}
+                      {% if info_left != blank %}left: {{ info_left }};{% endif %}
+                    {% endif %}
+                  "
+                >
+                  {% if block.settings.eyebrow != blank %}
+                    <p class="trending-card__eyebrow">{{ block.settings.eyebrow }}</p>
+                  {% endif %}
+
+                  {% if card_title != blank %}
+                    <h3 class="trending-card__title">
+                      {% if has_title_link %}
+                        <a class="trending-card__title-link" href="{{ card_link }}">{{ card_title }}</a>
+                      {% else %}
+                        <span class="trending-card__title-text">{{ card_title }}</span>
+                      {% endif %}
+                    </h3>
+                  {% endif %}
+                </div>
+              {%- endcapture -%}
+
+              {% if block.settings.image != blank %}
+                <div class="trending-card__image-wrapper">
+                  {{
+                    block.settings.image
+                    | image_url: width: 1200
+                    | image_tag:
+                      loading: 'lazy',
+                      class: 'trending-card__image',
+                      widths: '300, 450, 600, 900, 1200',
+                      sizes: '(min-width: 990px) 25vw, 80vw'
+                  }}
+
+                  {% if place_info_in_media %}
+                    {{ info_markup }}
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {% unless place_info_in_media %}
+                {{ info_markup }}
+              {% endunless %}
+
+              {% if p != blank and v != blank %}
+                <div class="trending-card__prices" aria-label="Product price">
+                  <span class="trending-card__price">
+                    {{ v.price | money }}
+                  </span>
+
+                  {% if v.compare_at_price and v.compare_at_price > v.price %}
+                    <span class="trending-card__compare">
+                      {{ v.compare_at_price | money }}
+                    </span>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+
+    </slider-component>
+  </div>
+
+  {% stylesheet %}
+  .trending-row {
+    background: var(--bg);
+    padding: var(--pt) var(--pr) var(--pb) var(--pl);
+  }
+  .trending-row__inner {
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* Header */
+  .trending-row__header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .trending-row__title {
+    margin: 0 0 8px;
+    font-family: var(--font-anton);
+    font-weight: 400;
+    font-size: clamp(24px, 3vw, 36px);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #000;
+  }
+  .trending-row__subheading {
+    margin: 0;
+    font-family: var(--font-anton);
+    font-size: clamp(24px, 3vw, 36px);
+    color: #000;
+    opacity: 0.85;
+  }
+
+  .trending-row__list {
+    gap: var(--gap);
+  }
+
+  /* Card */
+  .trending-card {
+    position: relative; /* needed for absolute .trending-card__info */
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .trending-card__image-wrapper {
+    width: 100%;
+    overflow: visible;
+    position: relative; 
+  }
+  .trending-card__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 11;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 0;
+    transition: transform 0.35s ease;
+  }
+
+  .trending-card__info {
+    position: relative; /* default */
+    background: var(--tr-card-bg);
+    border-radius: 0;
+    padding: 22px 40px 26px;
+    width: min(520px, 78%);
+    z-index: 2;
+
+    text-align: var(--tr-info-text-align);
+    align-self: var(--tr-info-self);
+  }
+
+  .trending-card__eyebrow {
+    margin: 0 0 6px;
+    font-family: var(--font-poppins700);
+    font-size: var(--tr-eyebrow-size);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--tr-eyebrow-color);
+    font-weight: bold;
+  }
+
+  .trending-card__title {
+    margin: 0;
+    font-family: var(--font-poppins700);
+    font-size: var(--tr-card-title-size);
+    line-height: 1.4;
+    text-transform: uppercase;
+    color: var(--tr-card-title-color);
+    display: inline-block;
+  }
+
+  /* Title link / text */
+  .trending-card__title-link,
+  .trending-card__title-text{
+    color: inherit;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 2px;
+  }
+
+  .trending-card__title-link{
+    display: inline-block;
+    position: relative;
+    color: inherit;
+    text-decoration: none !important;
+    cursor: pointer;
+
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    background-position: 100% 100%;
+    padding-bottom: 4px;
+
+    transition: background-size 0.28s ease, background-position 0.28s ease;
+  }
+  .trending-card__title-link:hover{
+    background-size: 100% 2px;
+    background-position: 0% 100%;
+  }
+  .trending-card__title-link:not(:hover){
+    background-size: 0% 2px;
+    background-position: 100% 100%;
+  }
+
+  /* Prices */
+  .trending-card__prices{
+    width: 100%;
+    margin-top: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: var(--tr-prices-justify);
+    gap: 28px;
+    align-self: var(--tr-prices-self);
+  }
+
+  .trending-card__price{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 30px;
+    border-radius: 999px;
+    background: var(--tr-price-bg);
+    color: var(--tr-price-color);
+    font-family: var(--font-poppins700);
+    font-weight: 700;
+    font-size: var(--tr-price-size);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .trending-card__compare{
+    font-family: var(--font-poppins700);
+    font-weight: 700;
+    font-size: var(--tr-compare-size);
+    color: var(--tr-compare-color);
+    text-decoration: line-through;
+    white-space: nowrap;
+  }
+
+  /* ✅ Mobile fix: force horizontal swipe row (no stacking) */
+  @media screen and (max-width: 749px) {
+    .trending-row__slider { overflow: hidden; }
+
+    .trending-row__list{
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      gap: var(--gap);
+      padding-bottom: 10px;
+    }
+
+    .trending-row__item{
+      flex: 0 0 86%;
+      max-width: 86%;
+      scroll-snap-align: start;
+    }
+
+    .trending-row__list::-webkit-scrollbar{ display:none; }
+    .trending-row__list{ scrollbar-width: none; }
+
+    .trending-card__info {
+      width: 86%;
+      padding: 20px 24px 22px;
+    }
+
+    .trending-card__prices{
+      margin-top: 22px;
+      gap: 18px;
+    }
+  }
+  /* Entrance animation (optional) */
+  #TrendingRow-{{ section.id }}.tr-anim .trending-row__header,
+  #TrendingRow-{{ section.id }}.tr-anim .trending-row__item{
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+    transition:
+      opacity 600ms ease,
+      transform 600ms ease;
+    will-change: opacity, transform;
+  }
+  #TrendingRow-{{ section.id }}.tr-anim.is-anim-in .trending-row__header,
+  #TrendingRow-{{ section.id }}.tr-anim.is-anim-in .trending-row__item{
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    #TrendingRow-{{ section.id }}.tr-anim .trending-row__header,
+    #TrendingRow-{{ section.id }}.tr-anim .trending-row__item{
+      transition: none;
+      transform: none;
+      opacity: 1;
+    }
+  }
+  {% endstylesheet %}
+
+  {% if show_mobile_slider %}
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var sectionId = '{{ section.id }}';
+        var sliderEl = document.querySelector('#TrendingRow-' + sectionId + ' .trending-row__list');
+        if (!sliderEl) return;
+
+        var slides = sliderEl.querySelectorAll('.trending-row__item');
+        if (!slides.length || slides.length === 1) return;
+
+        sliderEl.addEventListener('scroll', function () {
+          var slideWidth = slides[0].offsetWidth || 1;
+          var idx = Math.round(sliderEl.scrollLeft / slideWidth);
+          idx = Math.max(0, Math.min(slides.length - 1, idx));
+          var current = document.querySelector('#TrendingRow-' + sectionId + ' .slider-counter--current');
+          if (current) current.textContent = (idx + 1);
+        });
+      });
+    </script>
+  {% endif %}
+  {% if section.settings.enable_entrance_animation %}
+    <script>
+      (function () {
+        var root = document.getElementById('TrendingRow-{{ section.id }}');
+        if (!root) return;
+        if (root.getAttribute('data-tr-anim') !== '1') return;
+
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          root.classList.add('is-anim-in');
+          return;
+        }
+
+        var header = root.querySelector('.trending-row__header');
+        var items = root.querySelectorAll('.trending-row__item');
+
+        var delay = 0;
+        if (header) {
+          header.style.transitionDelay = delay + 'ms';
+          delay += 120;
+        }
+        items.forEach(function (el, idx) {
+          el.style.transitionDelay = (delay + idx * 90) + 'ms';
+        });
+
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            root.classList.add('is-anim-in');
+            io.disconnect();
+          });
+        }, { threshold: 0.18 });
+
+        io.observe(root);
+      })();
+    </script>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Trending feature row",
+  "tag": "section",
+  "class": "section trending-feature-row",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "header", "content": "Entrance animation" },
+    { "type": "checkbox", "id": "enable_entrance_animation", "label": "Enable entrance animation on scroll", "default": false },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Now trending" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Discover our most popular certifications" },
+    { "type": "text", "id": "max_width", "label": "Max width (e.g. 1200px or 90%)", "default": "1200px" },
+
+    { "type": "color", "id": "bg", "label": "Section background", "default": "#FFFFFF" },
+    { "type": "range", "id": "columns_desktop", "label": "Cards per row (desktop)", "min": 2, "max": 4, "step": 1, "default": 2 },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "pad_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 48 },
+    { "type": "range", "id": "pad_right", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Padding right", "default": 24 },
+    { "type": "range", "id": "pad_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 48 },
+    { "type": "range", "id": "pad_left", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Padding left", "default": 24 },
+    { "type": "range", "id": "gap", "min": 8, "max": 48, "step": 2, "unit": "px", "label": "Card gap", "default": 32 },
+
+    { "type": "header", "content": "Card styles" },
+    { "type": "color", "id": "card_bg", "label": "Card background color", "default": "#FFFFFF" },
+    { "type": "text", "id": "eyebrow_size", "label": "Eyebrow font-size (accepts clamp())", "default": "11px" },
+    { "type": "color", "id": "eyebrow_color", "label": "Eyebrow font color", "default": "#000000" },
+    { "type": "text", "id": "card_title_size", "label": "Card title font-size (accepts clamp())", "default": "clamp(16px,1.5vw,20px)" },
+    { "type": "color", "id": "card_title_color", "label": "Card title font color", "default": "#000000" },
+
+    { "type": "header", "content": "Info + Price alignment" },
+    {
+      "type": "select",
+      "id": "info_align",
+      "label": "Info alignment",
+      "default": "right",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "prices_align",
+      "label": "Prices alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+
+    { "type": "header", "content": "Price styles" },
+    { "type": "color", "id": "price_bg", "label": "Price pill background", "default": "#B9F85A" },
+    { "type": "color", "id": "price_color", "label": "Price pill text color", "default": "#000000" },
+    { "type": "text", "id": "price_font_size", "label": "Price pill font-size (clamp ok)", "default": "clamp(18px, 2vw, 26px)" },
+    { "type": "color", "id": "compare_color", "label": "Compare-at color", "default": "rgba(0,0,0,0.6)" },
+    { "type": "text", "id": "compare_font_size", "label": "Compare-at font-size (clamp ok)", "default": "clamp(18px, 2vw, 26px)" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "product", "id": "product", "label": "Product (optional - shows price + compare at price)" },
+
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Now trending" },
+        { "type": "text", "id": "title", "label": "Title (optional - uses product title if blank)", "default": "Become a certified personal trainer" },
+        { "type": "url", "id": "title_link", "label": "Title link (optional - ignored if product is selected)" },
+
+        { "type": "header", "content": "Info position" },
+        {
+          "type": "select",
+          "id": "info_position",
+          "label": "Info position mode",
+          "default": "relative",
+          "options": [
+            { "value": "relative", "label": "Relative (default)" },
+            { "value": "absolute", "label": "Absolute (overlay)" }
+          ]
+        },
+        { "type": "text", "id": "info_bottom", "label": "Absolute: bottom (default 0px)", "default": "0px" },
+        { "type": "text", "id": "info_top", "label": "Absolute: top (optional)" },
+        { "type": "text", "id": "info_left", "label": "Absolute: left (optional)" },
+        { "type": "text", "id": "info_right", "label": "Absolute: right (optional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trending feature row",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

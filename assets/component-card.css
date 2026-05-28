@@ -10,7 +10,7 @@
   text-align: var(--text-alignment);
 }
 .card:hover .quick-add__submit {
-  background-color: #E9F24F;
+  background-color: #C1FF72;
   transition:300ms;
 }
 
@@ -619,7 +619,7 @@ align-items: center;
 gap: 40px;
 flex-shrink: 0;
   border-radius: 20px;
-background: #133257;
+background: #0f828c;
 }
 
 .custom-bundle-box-wrapper{
@@ -632,10 +632,10 @@ align-items: center;
 .custom-bundle-box-wrapper h3{
   color: #FFF;
 text-align: center;
-font-family: Montserrat;
-font-size: 22px;
+font-family: var(--font-body-family);
+font-size: clamp(16px,1.8vw,18px);
 font-style: normal;
-font-weight: 800;
+font-weight: 400;
 line-height: 104%; 
 text-transform: uppercase;
   margin-bottom:20px;

@@ -1,0 +1,399 @@
+{%- comment -%}
+  Section: Plan Card Carousel (up to 5 slides)
+  - Each block = 1 slide (image + content + button)
+  - Per-slide toggles: title / bullets / description / button
+  - Bullets: textarea (one bullet per line)
+  - If title exists, show a vertical line before it
+  - Section-wide font size controls
+  - Button colors can be set per slide
+{%- endcomment -%}
+
+{%- assign sid = section.id -%}
+
+<section
+  id="plan-carousel-{{ sid }}"
+  class="plan-carousel"
+  style="
+    --pc-max-w: {{ section.settings.max_width | default: '1200px' }};
+    --pc-bg: {{ section.settings.section_bg | default: '#ffffff' }};
+    --pc-card-bg: {{ section.settings.card_bg | default: '#d9d6c7' }};
+    --pc-card-radius: {{ section.settings.card_radius | default: 12 }}px;
+
+    --pc-title-size: {{ section.settings.title_size | default: 'clamp(22px,2.2vw,28px)' }};
+    --pc-bullet-size: {{ section.settings.bullet_size | default: 'clamp(14px,1.4vw,18px)' }};
+    --pc-desc-size: {{ section.settings.desc_size | default: 'clamp(14px,1.3vw,18px)' }};
+    --pc-btn-size: {{ section.settings.btn_size | default: 'clamp(14px,1.3vw,18px)' }};
+
+    --pc-accent: {{ section.settings.accent_color | default: '#2d7a7a' }};
+    --pc-arrow-bg: {{ section.settings.arrow_bg | default: '#ffffff' }};
+    --pc-arrow-color: {{ section.settings.arrow_color | default: '#0b2a23' }};
+  "
+>
+  <div class="pc-wrap">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="pc-heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="pc-slider" aria-label="{{ section.settings.aria_label | default: 'Plan carousel' | escape }}">
+      <button class="pc-nav pc-prev" type="button" aria-label="Previous slide">
+        <span aria-hidden="true">‹</span>
+      </button>
+
+      <div class="pc-viewport" tabindex="0">
+        <div class="pc-track">
+          {%- for block in section.blocks -%}
+            <article class="pc-slide" {{ block.shopify_attributes }}>
+              <div class="pc-card">
+                <div class="pc-media">
+                  {%- if block.settings.image != blank -%}
+                    {{
+                      block.settings.image
+                      | image_url: width: 1600
+                      | image_tag:
+                          class: 'pc-img',
+                          loading: 'lazy',
+                          sizes: '(min-width: 990px) 420px, 90vw',
+                          widths: '360,540,720,900,1100,1400,1600',
+                          alt: block.settings.image_alt | escape
+                    }}
+                  {%- else -%}
+                    <div class="pc-img pc-img--placeholder" aria-hidden="true"></div>
+                  {%- endif -%}
+                </div>
+
+                <div class="pc-content">
+                  {%- if block.settings.show_title and block.settings.title != blank -%}
+                    <div class="pc-title-row">
+                      <h3 class="pc-title">{{ block.settings.title }}</h3>
+                    </div>
+                  {%- endif -%}
+
+                  {%- if block.settings.show_bullets and block.settings.bullets != blank -%}
+                    {%- assign bullets_html = block.settings.bullets | strip | newline_to_br -%}
+                    {%- assign bullets_arr = bullets_html | split: '<br />' -%}
+                    <ul class="pc-bullets" role="list">
+                      {%- for b in bullets_arr -%}
+                        {%- assign item = b | strip -%}
+                        {%- if item != blank -%}
+                          <li class="pc-bullet">
+                            <span class="pc-bullet-icon" aria-hidden="true"></span>
+                            <span class="pc-bullet-text">{{ item }}</span>
+                          </li>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+
+                  {%- if block.settings.show_description and block.settings.description != blank -%}
+                    <div class="pc-desc rte">{{ block.settings.description }}</div>
+                  {%- endif -%}
+
+                  {%- if block.settings.show_button and block.settings.button_label != blank and block.settings.button_link != blank -%}
+                    <div class="pc-btn-wrap">
+                      <a
+                        class="pc-btn btn"
+                        href="{{ block.settings.button_link }}"
+                        style="background: {{ block.settings.button_bg | default: section.settings.default_button_bg }}; color: {{ block.settings.button_color | default: section.settings.default_button_color }};"
+                        {% if block.settings.button_new_tab %}
+                          target="_blank" rel="noopener noreferrer"
+                        {% endif %}
+                      >
+                        {{ block.settings.button_label }}
+                      </a>
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            </article>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <button class="pc-nav pc-next" type="button" aria-label="Next slide">
+        <span aria-hidden="true">›</span>
+      </button>
+    </div>
+  </div>
+
+  <style>
+    #plan-carousel-{{ sid }}{
+      background: var(--pc-bg);
+      width: 100%;
+      padding: {{ section.settings.padding_y | default: 40 }}px 0;
+    }
+
+    #plan-carousel-{{ sid }} .pc-wrap{
+      width: min(var(--pc-max-w), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    #plan-carousel-{{ sid }} .pc-heading{
+      margin: 0 0 18px;
+      font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
+      font-size: clamp(22px, 3vw, 38px);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #000;
+      font-weight: 500;
+    }
+
+    #plan-carousel-{{ sid }} .pc-slider{
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    #plan-carousel-{{ sid }} .pc-nav{
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.15);
+      background: var(--pc-arrow-bg);
+      color: var(--pc-arrow-color);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,.08);
+    }
+    #plan-carousel-{{ sid }} .pc-nav span{
+      font-size: 28px;
+      line-height: 1;
+      transform: translateY(-1px);
+    }
+
+    #plan-carousel-{{ sid }} .pc-viewport{
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      flex: 1 1 auto;
+      outline: none;
+      scrollbar-width: none;
+      -ms-overflow-style: none; 
+    }
+    #plan-carousel-{{ sid }} .pc-viewport::-webkit-scrollbar{
+        height: 0;
+        display: none;
+    }
+    #plan-carousel-{{ sid }} .pc-track{
+      display: flex;
+      gap: 18px;
+      padding: 8px 2px;
+    }
+
+    #plan-carousel-{{ sid }} .pc-slide{
+      scroll-snap-align: start;
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+
+    #plan-carousel-{{ sid }} .pc-card{
+      background: var(--pc-card-bg);
+      border-radius: var(--pc-card-radius);
+      padding: 26px;
+      display: grid;
+      grid-template-columns: minmax(220px, 420px) 1fr;
+      gap: 26px;
+      align-items: center;
+    }
+
+    #plan-carousel-{{ sid }} .pc-img{
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: calc(var(--pc-card-radius) - 4px);
+      object-fit: cover;
+      aspect-ratio: 4 / 3;
+    }
+    #plan-carousel-{{ sid }} .pc-img--placeholder{
+      background: rgba(0,0,0,.08);
+      aspect-ratio: 4 / 3;
+    }
+
+    #plan-carousel-{{ sid }} .pc-title-row{
+      position: relative;
+      padding-left: 18px;
+      margin: 0 0 14px;
+    }
+    #plan-carousel-{{ sid }} .pc-title-row::before{
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 2px;
+      bottom: 2px;
+      width: 4px;
+      background: var(--pc-accent);
+      border-radius: 99px;
+    }
+    #plan-carousel-{{ sid }} .pc-title{
+      margin: 0;
+      font-size: var(--pc-title-size);
+      {% comment %} font-family: var(--font-heading-family, var(--font-body-family)); {% endcomment %}
+      font-family: var(--font-proximamedium);
+      font-weight: 500;
+      color: #111;
+    }
+
+    #plan-carousel-{{ sid }} .pc-bullets{
+      margin: 0 0 18px;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+    #plan-carousel-{{ sid }} .pc-bullet{
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 12px;
+      align-items: start;
+      font-family: var(--font-proximaregular);
+      font-size: var(--pc-bullet-size);
+      color: #111;
+    }
+    #plan-carousel-{{ sid }} .pc-bullet-icon{
+      width: 0;
+      height: 0;
+      margin-top: 6px;
+      border-left: 12px solid var(--pc-accent);
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+    }
+
+    #plan-carousel-{{ sid }} .pc-desc{
+      font-size: var(--pc-desc-size);
+      color: #111;
+      line-height: 1.55;
+      margin: 0 0 18px;
+    }
+    #plan-carousel-{{ sid }} .pc-desc p{ margin: 0; }
+
+    #plan-carousel-{{ sid }} .pc-btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: var(--pc-btn-size);
+      font-weight: 700;
+      border: 1px solid rgba(0,0,0,.08);
+    }
+
+    @media (max-width: 989px){
+      #plan-carousel-{{ sid }} .pc-card{
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 18px;
+      }
+      #plan-carousel-{{ sid }} .pc-nav{ width: 42px; height: 42px; }
+    }
+
+    @media (max-width: 749px){
+      #plan-carousel-{{ sid }}{ padding: {{ section.settings.padding_y_mobile | default: 28 }}px 0; }
+      #plan-carousel-{{ sid }} .pc-wrap{ width: calc(100% - 28px); }
+      #plan-carousel-{{ sid }} .pc-track{ gap: 12px; }
+      #plan-carousel-{{ sid }} .pc-nav{ display: none; }
+    }
+  </style>
+
+  <script>
+    (function(){
+      var root = document.getElementById('plan-carousel-{{ sid }}');
+      if(!root) return;
+
+      var viewport = root.querySelector('.pc-viewport');
+      var track = root.querySelector('.pc-track');
+      var prev = root.querySelector('.pc-prev');
+      var next = root.querySelector('.pc-next');
+      if(!viewport || !track || !prev || !next) return;
+
+      function getStep(){
+        var slide = track.querySelector('.pc-slide');
+        if(!slide) return viewport.clientWidth;
+        var style = window.getComputedStyle(track);
+        var gap = parseFloat(style.columnGap || style.gap || 0) || 0;
+        return slide.getBoundingClientRect().width + gap;
+      }
+
+      prev.addEventListener('click', function(){
+        viewport.scrollBy({ left: -getStep(), behavior: 'smooth' });
+      });
+
+      next.addEventListener('click', function(){
+        viewport.scrollBy({ left: getStep(), behavior: 'smooth' });
+      });
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Plan Card Carousel",
+  "tag": "section",
+  "class": "plan-card-carousel-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Section heading", "default": "WHAT IS THE BEST PLAN FOR YOU?" },
+    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Plan carousel" },
+    { "type": "text", "id": "max_width", "label": "Max width", "default": "1200px" },
+    { "type": "color", "id": "section_bg", "label": "Section background", "default": "#ffffff" },
+    { "type": "color", "id": "card_bg", "label": "Card background", "default": "#d9d6c7" },
+    { "type": "range", "id": "card_radius", "label": "Card radius", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 14 },
+
+    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#2d7a7a" },
+
+    { "type": "header", "content": "Typography" },
+    { "type": "text", "id": "title_size", "label": "Title font-size", "default": "clamp(22px,2.2vw,28px)" },
+    { "type": "text", "id": "bullet_size", "label": "Bullet font-size", "default": "clamp(14px,1.4vw,18px)" },
+    { "type": "text", "id": "desc_size", "label": "Desc font-size", "default": "clamp(14px,1.3vw,18px)" },
+    { "type": "text", "id": "btn_size", "label": "Button font-size", "default": "clamp(14px,1.3vw,18px)" },
+
+    { "type": "header", "content": "Default button colors" },
+    { "type": "color", "id": "default_button_bg", "label": "Button bg", "default": "#2d7a7a" },
+    { "type": "color", "id": "default_button_color", "label": "Button text", "default": "#ffffff" },
+
+    { "type": "header", "content": "Arrows (desktop)" },
+    { "type": "color", "id": "arrow_bg", "label": "Arrow bg", "default": "#ffffff" },
+    { "type": "color", "id": "arrow_color", "label": "Arrow color", "default": "#0b2a23" },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_y", "label": "Padding Y desktop", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_y_mobile", "label": "Padding Y mobile", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 28 }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "limit": 5,
+      "settings": [
+        { "type": "header", "content": "Media" },
+        { "type": "image_picker", "id": "image", "label": "Slide image" },
+        { "type": "text", "id": "image_alt", "label": "Image alt" },
+
+        { "type": "header", "content": "Show or hide parts" },
+        { "type": "checkbox", "id": "show_title", "label": "Show title", "default": true },
+        { "type": "checkbox", "id": "show_bullets", "label": "Show bullets", "default": true },
+        { "type": "checkbox", "id": "show_description", "label": "Show description", "default": true },
+        { "type": "checkbox", "id": "show_button", "label": "Show button", "default": true },
+
+        { "type": "header", "content": "Text" },
+        { "type": "text", "id": "title", "label": "Title", "default": "What’s Included?" },
+        { "type": "textarea", "id": "bullets", "label": "Bullets (one per line)", "default": "NASM Certified Personal Trainer Course\nNPTA Student Support\nFlexible Online Learning" },
+        { "type": "richtext", "id": "description", "label": "Description", "default": "<p>This plan is best for students who want certification only.</p>" },
+
+        { "type": "header", "content": "Button" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Price: $1,599 CAD" },
+        { "type": "url", "id": "button_link", "label": "Button link" },
+        { "type": "checkbox", "id": "button_new_tab", "label": "Open in new tab", "default": false },
+        { "type": "color", "id": "button_bg", "label": "Button bg (optional)" },
+        { "type": "color", "id": "button_color", "label": "Button text (optional)" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Plan Card Carousel" }
+  ]
+}
+{% endschema %}

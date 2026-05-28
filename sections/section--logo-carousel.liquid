@@ -1,56 +1,70 @@
-<div class="section--logo-carousel   {{ section.settings.section_class }}" style="padding-top: {{ section.settings.top_padding }}px; padding-bottom: {{ section.settings.bottom_padding }}px;">
-<div class="splide" id="logo-carousel">
-  <div class="splide__track">
-    <ul class="splide__list">
-      {% for block in section.blocks %}
-      <li class="splide__slide ">
-        <img src="{{ block.settings.image  | img_url: 'master'  }}" alt="Logo">
-      </li>
-      {% endfor %}
-    </ul>
+<div
+  class="section--logo-carousel {{ section.settings.section_class }}"
+  style="padding-top: {{ section.settings.top_padding }}px; padding-bottom: {{ section.settings.bottom_padding }}px;"
+>
+  <div class="splide" id="logo-carousel-{{ section.id }}">
+    <div class="splide__track">
+      <ul class="splide__list">
+        {% for block in section.blocks %}
+          <li class="splide__slide">
+            {% if block.settings.image %}
+              {%- assign logo_alt = block.settings.image.alt | default: 'Partner logo' -%}
+              <img
+                src="{{ block.settings.image | image_url: width: 280 }}"
+                srcset="{{ block.settings.image | image_url: width: 140 }} 1x, {{ block.settings.image | image_url: width: 280 }} 2x"
+                width="{{ block.settings.image.width | default: 140 }}"
+                height="{{ block.settings.image.height | default: 140 }}"
+                alt="{{ logo_alt | escape }}"
+                loading="lazy"
+                decoding="async">
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 </div>
-</div>
-<link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
 
+{%- comment -%} Splide assets are loaded once in theme.liquid {%- endcomment -%}
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    new Splide('#logo-carousel', {
+    new Splide('#logo-carousel-{{ section.id }}', {
       autoWidth: true,
       perMove: 1,
       type: 'loop',
-      drag: "free",
+      drag: 'free',
       arrows: false,
       pagination: false,
       reduceMotion: {
         speed: 0,
         rewindSpeed: 0,
-        autoplay: "pause"
-      },
-      autoScroll: {
-        speed: .8
-      },
-      }).mount(window.splide.Extensions);
+        autoplay: 'pause'
+      }
+      ,autoScroll: {
+        speed: {% if section.settings.scroll_direction == 'ltr' %}-{% endif %}{{ section.settings.marquee_speed | default: 0.8 }},
+        pauseOnHover: {{ section.settings.pause_on_hover | default: true }},
+        pauseOnFocus: {{ section.settings.pause_on_hover | default: true }},
+        rewind: false
+      }
+    }).mount(window.splide.Extensions);
   });
 </script>
 
 <style>
-#logo-carousel li img{
-  max-height:40px;
-  height:100%;
-  width:100%;
-  filter: saturate(0);
-  object-fit:contain;
-}
-  #logo-carousel li {
-  padding:0 30px;
-    display:flex;
-    align-items:center;
-  
-}
+  #logo-carousel-{{ section.id }} li img {
+    max-height: clamp(70px, 13.5vw, 135px);
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  #logo-carousel-{{ section.id }} li {
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+  }
 </style>
+
 {% schema %}
 {
   "name": "Logo Carousel",
@@ -84,6 +98,32 @@
       "step": 20,
       "unit": "px",
       "default": 980
+    },
+    {
+      "type": "select",
+      "id": "scroll_direction",
+      "label": "Scroll direction",
+      "options": [
+        { "value": "rtl", "label": "Right to left" },
+        { "value": "ltr", "label": "Left to right" }
+      ],
+      "default": "rtl"
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "label": "Marquee speed",
+      "info": "Higher value = faster scroll. 0 to pause.",
+      "min": 0,
+      "max": 5,
+      "step": 0.1,
+      "default": 0.8
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
     }
   ],
   "blocks": [
@@ -94,7 +134,7 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Logo Image"
+          "label": "Logo image"
         }
       ]
     }

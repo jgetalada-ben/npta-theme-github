@@ -90,7 +90,13 @@
         <div class="steps-payment--column-right">
              <div class="image-wrapper">
              {% if section.settings.image %}
-              <img src="{{ section.settings.image | img_url: 'original' }}" alt="{{ section.settings.alt_text }}">
+              <img src="{{ section.settings.image | image_url: width: 1200 }}"
+                   srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 1200 }} 1200w"
+                   sizes="(min-width: 750px) 600px, 100vw"
+                   width="{{ section.settings.image.width | default: 1200 }}"
+                   height="{{ section.settings.image.height | default: 800 }}"
+                   alt="{{ section.settings.alt_text | escape }}"
+                   loading="lazy" decoding="async">
             {% else %}
               <p>No image available</p>
             {% endif %}
@@ -243,7 +249,7 @@
 
   .rte-link a {
 
-    color: var(--navy, #133257);
+    color: var(--navy, #0f828c);
     font-family: var(--font-body-family);
     font-size: 16px;
     font-style: normal;
@@ -473,7 +479,6 @@ form .form-row {
 .form-row .form-column label {
   width: 100%;
   color: var(--black, #141414);
-  font-family: var(--font-heading-family);
 
   font-size: 16px;
   font-style: normal;

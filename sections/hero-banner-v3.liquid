@@ -1,0 +1,454 @@
+{%- assign sid = section.id -%}
+
+{%- liquid
+  assign gradient_dir = section.settings.gradient_direction | default: 'left'
+  case gradient_dir
+    when 'left'
+      assign gradient_angle = 'to right'
+    when 'right'
+      assign gradient_angle = 'to left'
+    when 'top'
+      assign gradient_angle = 'to bottom'
+    when 'bottom'
+      assign gradient_angle = 'to top'
+    else
+      assign gradient_angle = 'to right'
+  endcase
+-%}
+
+<section
+  id="hbv3-{{ sid }}"
+  class="hbv3 hbv3--v-{{ section.settings.vertical_align | default: 'center' }} hbv3--h-{{ section.settings.horizontal_align | default: 'left' }}"
+  style="
+    --hbv3-height: {{ section.settings.banner_height | default: '625px' }};
+    --hbv3-height-mobile: {{ section.settings.banner_height_mobile | default: '500px' }};
+    --hbv3-bg-color: {{ section.settings.bg_color | default: '#01241e' }};
+    --hbv3-container-width: {{ section.settings.container_width | default: 1400 }}px;
+    --hbv3-pad-top: {{ section.settings.pad_top | default: 60 }}px;
+    --hbv3-pad-bottom: {{ section.settings.pad_bottom | default: 60 }}px;
+    --hbv3-pad-left: {{ section.settings.pad_left | default: 20 }}px;
+    --hbv3-pad-right: {{ section.settings.pad_right | default: 20 }}px;
+    --hbv3-gradient-from: {{ section.settings.gradient_color | default: '#01241e' }};
+    --hbv3-gradient-opacity: {{ section.settings.gradient_opacity | default: 80 | divided_by: 100.0 }};
+  "
+>
+  {%- comment -%} Desktop background image {%- endcomment -%}
+  {%- if section.settings.background_image != blank -%}
+    <img class="hbv3__bg hbv3__bg--desktop"
+      src="{{ section.settings.background_image | image_url: width: 1920 }}"
+      srcset="{{ section.settings.background_image | image_url: width: 1200 }} 1200w, {{ section.settings.background_image | image_url: width: 1920 }} 1920w"
+      sizes="100vw"
+      alt="{{ section.settings.background_image.alt | default: section.settings.title | escape }}"
+      loading="eager"
+      fetchpriority="high">
+  {%- endif -%}
+
+  {%- comment -%} Mobile background image (falls back to desktop) {%- endcomment -%}
+  {%- if section.settings.background_image_mobile != blank -%}
+    <img class="hbv3__bg hbv3__bg--mobile"
+      src="{{ section.settings.background_image_mobile | image_url: width: 900 }}"
+      alt="{{ section.settings.background_image_mobile.alt | default: section.settings.title | escape }}"
+      loading="eager"
+      fetchpriority="high">
+  {%- elsif section.settings.background_image != blank -%}
+    <img class="hbv3__bg hbv3__bg--mobile"
+      src="{{ section.settings.background_image | image_url: width: 900 }}"
+      alt="{{ section.settings.background_image.alt | default: section.settings.title | escape }}"
+      loading="eager">
+  {%- endif -%}
+
+  {%- comment -%} Gradient overlay {%- endcomment -%}
+  {%- if section.settings.enable_gradient -%}
+    <div class="hbv3__gradient" aria-hidden="true"
+      style="background: linear-gradient({{ gradient_angle }}, {{ section.settings.gradient_color | default: '#01241e' }} 0%, rgba(0,0,0,0) 70%); opacity: {{ section.settings.gradient_opacity | default: 80 | divided_by: 100.0 }};">
+    </div>
+  {%- endif -%}
+
+  <div class="hbv3__inner">
+    <div class="hbv3__content">
+      {%- if section.settings.title != blank -%}
+        <h2 class="hbv3__title"
+          style="font-size: {{ section.settings.title_size }}; color: {{ section.settings.title_color }}; line-height: {{ section.settings.title_line_height | default: '1.1' }}; letter-spacing: {{ section.settings.title_letter_spacing | default: '0.88px' }};">
+          {{ section.settings.title }}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="hbv3__desc"
+          style="font-size: {{ section.settings.desc_size }}; color: {{ section.settings.desc_color }}; line-height: {{ section.settings.desc_line_height | default: '1.4' }}; max-width: {{ section.settings.desc_max_width | default: 450 }}px;">
+          {{ section.settings.description }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.show_promo_card -%}
+        <div class="hbv3__promo"
+          style="
+            background: {{ section.settings.promo_bg | default: '#ffffff' }};
+            border-radius: {{ section.settings.promo_radius | default: 5 }}px;
+            padding: {{ section.settings.promo_padding | default: 20 }}px;
+            max-width: {{ section.settings.promo_max_width | default: '415px' }};
+          ">
+          <div class="hbv3__promo-row">
+            {%- if section.settings.promo_heading != blank -%}
+              <h3 class="hbv3__promo-heading"
+                style="font-size: {{ section.settings.promo_heading_size }}; color: {{ section.settings.promo_heading_color | default: '#0f828c' }};">
+                {{ section.settings.promo_heading }}
+              </h3>
+            {%- endif -%}
+            {%- if section.settings.promo_badge_text != blank -%}
+              <span class="hbv3__promo-badge"
+                style="background: {{ section.settings.promo_badge_bg | default: '#d9d9d9' }}; color: {{ section.settings.promo_badge_color | default: '#484b4b' }}; font-size: {{ section.settings.promo_badge_size | default: '12px' }};">
+                {{ section.settings.promo_badge_text }}
+              </span>
+            {%- endif -%}
+          </div>
+          {%- if section.settings.promo_text != blank -%}
+            <div class="hbv3__promo-text"
+              style="font-size: {{ section.settings.promo_text_size }}; color: {{ section.settings.promo_text_color | default: '#000000' }};">
+              {{ section.settings.promo_text }}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.button_1_text != blank or section.settings.button_2_text != blank -%}
+        <div class="hbv3__buttons">
+          {%- if section.settings.button_1_text != blank -%}
+            <a href="{{ section.settings.button_1_link | default: '#' }}"
+              class="btn button-yg hbv3__btn"
+              {% if section.settings.button_1_new_tab %}target="_blank" rel="noopener"{% endif %}
+              style="background-color: {{ section.settings.button_1_bg | default: '#c1ff72' }}; font-size: {{ section.settings.button_1_size | default: '20px' }}; border-radius: {{ section.settings.button_radius | default: 10 }}px;">
+              <span class="btn-label-down" style="color: {{ section.settings.button_1_color | default: '#000000' }};">
+                <span class="hbv3__btn-inner">
+                  {{ section.settings.button_1_text }}
+                  {%- if section.settings.button_1_show_arrow -%}
+                    <svg class="hbv3__btn-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {%- endif -%}
+                </span>
+              </span>
+              <span class="btn-label-down" style="color: {{ section.settings.button_1_color | default: '#000000' }};">
+                <span class="hbv3__btn-inner">
+                  {{ section.settings.button_1_text }}
+                  {%- if section.settings.button_1_show_arrow -%}
+                    <svg class="hbv3__btn-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {%- endif -%}
+                </span>
+              </span>
+            </a>
+          {%- endif -%}
+
+          {%- if section.settings.button_2_text != blank -%}
+            <a href="{{ section.settings.button_2_link | default: '#' }}"
+              class="btn button-yg hbv3__btn"
+              {% if section.settings.button_2_new_tab %}target="_blank" rel="noopener"{% endif %}
+              style="background-color: {{ section.settings.button_2_bg | default: '#d3d3d3' }}; font-size: {{ section.settings.button_2_size | default: '20px' }}; border-radius: {{ section.settings.button_radius | default: 10 }}px;">
+              <span class="btn-label-down" style="color: {{ section.settings.button_2_color | default: '#000000' }};">
+                <span class="hbv3__btn-inner">
+                  {{ section.settings.button_2_text }}
+                  {%- if section.settings.button_2_show_arrow -%}
+                    <svg class="hbv3__btn-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {%- endif -%}
+                </span>
+              </span>
+              <span class="btn-label-down" style="color: {{ section.settings.button_2_color | default: '#000000' }};">
+                <span class="hbv3__btn-inner">
+                  {{ section.settings.button_2_text }}
+                  {%- if section.settings.button_2_show_arrow -%}
+                    <svg class="hbv3__btn-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {%- endif -%}
+                </span>
+              </span>
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {% stylesheet %}
+    .hbv3 {
+      position: relative;
+      width: 100%;
+      min-height: var(--hbv3-height);
+      background-color: var(--hbv3-bg-color);
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .hbv3 *, .hbv3 *::before, .hbv3 *::after { box-sizing: border-box; }
+
+    .hbv3__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .hbv3__bg--mobile { display: none; }
+
+    .hbv3__gradient {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hbv3__inner {
+      position: relative;
+      z-index: 2;
+      max-width: var(--hbv3-container-width);
+      min-height: var(--hbv3-height);
+      margin: 0 auto;
+      padding: var(--hbv3-pad-top) var(--hbv3-pad-right) var(--hbv3-pad-bottom) var(--hbv3-pad-left);
+      display: flex;
+    }
+
+    /* Vertical alignment modifiers */
+    .hbv3--v-top .hbv3__inner { align-items: flex-start; }
+    .hbv3--v-center .hbv3__inner { align-items: center; }
+    .hbv3--v-bottom .hbv3__inner { align-items: flex-end; }
+
+    /* Horizontal alignment modifiers */
+    .hbv3--h-left .hbv3__inner { justify-content: flex-start; }
+    .hbv3--h-center .hbv3__inner { justify-content: center; }
+    .hbv3--h-right .hbv3__inner { justify-content: flex-end; }
+
+    .hbv3__content {
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .hbv3--h-left .hbv3__content { align-items: flex-start; text-align: left; }
+    .hbv3--h-center .hbv3__content { align-items: center; text-align: center; }
+    .hbv3--h-right .hbv3__content { align-items: flex-end; text-align: right; }
+    .hbv3--h-center .hbv3__desc { margin-left: auto; margin-right: auto; }
+    .hbv3--h-right .hbv3__desc { margin-left: auto; }
+
+    .hbv3__title {
+      margin: 0;
+      font-family: var(--font-anton, 'Anton', sans-serif);
+      font-weight: 400;
+      text-transform: capitalize;
+    }
+
+    .hbv3__desc {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .hbv3__desc p { margin: 0 0 8px; }
+    .hbv3__desc p:last-child { margin-bottom: 0; }
+
+    .hbv3__promo {
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .hbv3__promo-text {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+      letter-spacing: 0.02em;
+    }
+    .hbv3__promo-text p { margin: 0 0 4px; }
+    .hbv3__promo-text p:last-child { margin-bottom: 0; }
+
+    .hbv3__promo-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    justify-content: space-between;
+    }
+    .hbv3__promo-heading {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .hbv3__promo-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      border-radius: 5px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .hbv3__buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    /* Button — inherits base .btn + .button-yg styles (49px height, sliding label animation) */
+    .hbv3 .hbv3__btn {
+      min-width: 200px;
+      padding: 0;
+    }
+    .hbv3 .hbv3__btn .btn-label-down {
+      margin: 0 24px;
+    }
+    .hbv3__btn-inner {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      height: 100%;
+      letter-spacing: 0.02em;
+    }
+    .hbv3__btn-arrow {
+      flex-shrink: 0;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    /* Tablet */
+    @media (max-width: 968px) {
+      .hbv3 { min-height: var(--hbv3-height-mobile); }
+      .hbv3__inner { min-height: var(--hbv3-height-mobile); }
+      .hbv3__content { max-width: 100%; }
+    }
+
+    /* Mobile */
+    @media (max-width: 749px) {
+      .hbv3__bg--desktop { display: none; }
+      .hbv3__bg--mobile { display: block; }
+      .hbv3__inner {
+        padding-left: max(var(--hbv3-pad-left), 20px);
+        padding-right: max(var(--hbv3-pad-right), 20px);
+      }
+      .hbv3__buttons { flex-direction: column; align-items: stretch; }
+      .hbv3 .hbv3__btn { min-width: 0; width: 100%; }
+      .hbv3__promo { max-width: 100% !important; }
+    }
+  {% endstylesheet %}
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner V3",
+  "tag": "section",
+  "class": "hero-banner-v3",
+  "settings": [
+    { "type": "header", "content": "Background" },
+    { "type": "image_picker", "id": "background_image", "label": "Desktop Background Image" },
+    { "type": "image_picker", "id": "background_image_mobile", "label": "Mobile Background Image" },
+    { "type": "color", "id": "bg_color", "label": "Fallback Background Color", "default": "#01241e" },
+
+    { "type": "header", "content": "Gradient Overlay" },
+    { "type": "checkbox", "id": "enable_gradient", "label": "Enable Gradient Overlay", "default": true },
+    {
+      "type": "select", "id": "gradient_direction", "label": "Gradient Position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" },
+        { "value": "top", "label": "Top" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "left"
+    },
+    { "type": "color", "id": "gradient_color", "label": "Gradient Color", "default": "#01241e" },
+    { "type": "range", "id": "gradient_opacity", "label": "Gradient Opacity (%)", "min": 0, "max": 100, "step": 5, "default": 80 },
+
+    { "type": "header", "content": "Title" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Stop Being Just a Trainer." },
+    { "type": "text", "id": "title_size", "label": "Title Font Size (clamp supported)", "default": "clamp(28px, 4vw, 44px)" },
+    { "type": "color", "id": "title_color", "label": "Title Color", "default": "#ffffff" },
+    { "type": "text", "id": "title_line_height", "label": "Title Line Height", "default": "1.2" },
+    { "type": "text", "id": "title_letter_spacing", "label": "Title Letter Spacing", "default": "0.88px" },
+
+    { "type": "header", "content": "Description" },
+    { "type": "richtext", "id": "description", "label": "Description", "default": "<p>NPTA's evidence-based curriculum gives you the credentials, the framework, and the confidence to charge more and deliver more.</p>" },
+    { "type": "text", "id": "desc_size", "label": "Description Font Size (clamp supported)", "default": "clamp(16px, 1.8vw, 22px)" },
+    { "type": "color", "id": "desc_color", "label": "Description Color", "default": "#ffffff" },
+    { "type": "text", "id": "desc_line_height", "label": "Description Line Height", "default": "1.4" },
+    { "type": "range", "id": "desc_max_width", "label": "Description Max Width (px)", "min": 200, "max": 800, "step": 10, "default": 450 },
+
+    { "type": "header", "content": "Promo Card" },
+    { "type": "checkbox", "id": "show_promo_card", "label": "Show Promo Card", "default": true },
+    { "type": "richtext", "id": "promo_text", "label": "Promo Description", "default": "<p>Applied automatically all qualifying certifications.</p><p><em>No code needed. Discount applied at checkout.</em></p>" },
+    { "type": "text", "id": "promo_text_size", "label": "Promo Description Size (clamp supported)", "default": "clamp(13px, 1.2vw, 16px)" },
+    { "type": "color", "id": "promo_text_color", "label": "Promo Description Color", "default": "#000000" },
+    { "type": "text", "id": "promo_heading", "label": "Promo Heading", "default": "SAVE 25% TODAY" },
+    { "type": "text", "id": "promo_heading_size", "label": "Promo Heading Size (clamp supported)", "default": "clamp(18px, 2.2vw, 24px)" },
+    { "type": "color", "id": "promo_heading_color", "label": "Promo Heading Color", "default": "#0f828c" },
+    { "type": "text", "id": "promo_badge_text", "label": "Badge Text", "default": "LIMITED TIME" },
+    { "type": "text", "id": "promo_badge_size", "label": "Badge Font Size", "default": "12px" },
+    { "type": "color", "id": "promo_badge_bg", "label": "Badge Background", "default": "#d9d9d9" },
+    { "type": "color", "id": "promo_badge_color", "label": "Badge Text Color", "default": "#484b4b" },
+    { "type": "color", "id": "promo_bg", "label": "Card Background", "default": "#ffffff" },
+    { "type": "range", "id": "promo_radius", "label": "Card Border Radius", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 5 },
+    { "type": "range", "id": "promo_padding", "label": "Card Padding", "min": 10, "max": 60, "step": 2, "unit": "px", "default": 20 },
+    { "type": "text", "id": "promo_max_width", "label": "Card Max Width (e.g. 415px, 50%)", "default": "415px" },
+
+    { "type": "header", "content": "Primary Button" },
+    { "type": "text", "id": "button_1_text", "label": "Button Text", "default": "Explore Courses" },
+    { "type": "url", "id": "button_1_link", "label": "Button Link" },
+    { "type": "checkbox", "id": "button_1_new_tab", "label": "Open in New Tab", "default": false },
+    { "type": "checkbox", "id": "button_1_show_arrow", "label": "Show Arrow Icon", "default": true },
+    { "type": "text", "id": "button_1_size", "label": "Button Font Size (clamp supported)", "default": "clamp(14px, 1.8vw, 20px)" },
+    { "type": "color", "id": "button_1_bg", "label": "Button Background", "default": "#c1ff72" },
+    { "type": "color", "id": "button_1_color", "label": "Button Text Color", "default": "#000000" },
+
+    { "type": "header", "content": "Secondary Button" },
+    { "type": "text", "id": "button_2_text", "label": "Button Text", "default": "View Certifications" },
+    { "type": "url", "id": "button_2_link", "label": "Button Link" },
+    { "type": "checkbox", "id": "button_2_new_tab", "label": "Open in New Tab", "default": false },
+    { "type": "checkbox", "id": "button_2_show_arrow", "label": "Show Arrow Icon", "default": false },
+    { "type": "text", "id": "button_2_size", "label": "Button Font Size (clamp supported)", "default": "clamp(14px, 1.8vw, 20px)" },
+    { "type": "color", "id": "button_2_bg", "label": "Button Background", "default": "#d3d3d3" },
+    { "type": "color", "id": "button_2_color", "label": "Button Text Color", "default": "#000000" },
+
+    { "type": "header", "content": "Button Shared" },
+    { "type": "range", "id": "button_radius", "label": "Button Border Radius", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 10 },
+
+    { "type": "header", "content": "Layout" },
+    { "type": "text", "id": "banner_height", "label": "Banner Height (e.g. 625px, 80vh)", "default": "625px" },
+    { "type": "text", "id": "banner_height_mobile", "label": "Mobile Banner Height", "default": "500px" },
+    { "type": "text", "id": "container_width", "label": "Content Container Max Width (px)", "default": "1400" },
+    {
+      "type": "select", "id": "vertical_align", "label": "Vertical Alignment",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select", "id": "horizontal_align", "label": "Horizontal Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "pad_top", "label": "Padding Top", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 60 },
+    { "type": "range", "id": "pad_bottom", "label": "Padding Bottom", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 60 },
+    { "type": "range", "id": "pad_left", "label": "Padding Left", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 20 },
+    { "type": "range", "id": "pad_right", "label": "Padding Right", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 20 }
+  ],
+  "presets": [
+    { "name": "Hero Banner V3" }
+  ]
+}
+{% endschema %}

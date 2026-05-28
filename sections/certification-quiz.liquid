@@ -106,7 +106,13 @@
   
   <div class="quiz-image">
     {% if section.settings.quiz_image != blank %}
-      <img src="{{ section.settings.quiz_image | img_url: 'master' }}" alt="Quiz Image">
+      <img src="{{ section.settings.quiz_image | image_url: width: 1200 }}"
+           srcset="{{ section.settings.quiz_image | image_url: width: 600 }} 600w, {{ section.settings.quiz_image | image_url: width: 1200 }} 1200w"
+           sizes="(min-width: 750px) 600px, 100vw"
+           width="{{ section.settings.quiz_image.width | default: 1200 }}"
+           height="{{ section.settings.quiz_image.height | default: 800 }}"
+           alt="Quiz illustration"
+           loading="eager" fetchpriority="high" decoding="async">
     {% endif %}
   </div>
   
@@ -307,7 +313,7 @@ object-fit:cover;
       margin-bottom: 10px;
       color: #141414;
       text-align: center;
-      font-family: Montserrat;
+      font-family: var(--font-body-family);
       font-size: 30px;
       font-style: normal;
       font-weight: 800;
@@ -320,7 +326,7 @@ object-fit:cover;
       margin-bottom: 20px;
       color: #141414;
       text-align: center;
-      font-family: Inter;
+      font-family: Montserrat, sans-serif;
       font-size: 16px;
       font-style: normal;
       font-weight: 400;
@@ -344,7 +350,7 @@ object-fit:cover;
     .quiz-container .answers button,
     .result-container button {
       color: rgba(20, 20, 20, 0.70);
-      font-family: Montserrat;
+      font-family: var(--font-body-family);
       font-size: 14px;
       font-style: normal;
       font-weight: 700;
@@ -355,16 +361,16 @@ object-fit:cover;
     }
 
     .quiz-container .answers button.selected {
-      background: #E9F24F;
+      background: #C1FF72;
       color: #141414;
-      border:1px solid #E9F24F;
+      border:1px solid #C1FF72;
       box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.03);
     }
 
     .quiz-container .answers button:hover {
-      background: #E9F24F;
+      background: #C1FF72;
       color: #141414;
-       border:1px solid #E9F24F;
+       border:1px solid #C1FF72;
       box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.03);
     }
 
@@ -373,7 +379,7 @@ object-fit:cover;
       background-color: transparent;
       border: none;
       text-align: center;
-      font-family: Montserrat;
+      font-family: var(--font-body-family);
       font-size: 14px;
       font-style: normal;
       font-weight: 700;
@@ -387,7 +393,7 @@ object-fit:cover;
     .quiz-subheading {
       color: #141414;
       text-align: center;
-      font-family: Inter;
+      font-family: Montserrat, sans-serif;
       font-size: 16px;
       font-style: normal;
       font-weight: 400;

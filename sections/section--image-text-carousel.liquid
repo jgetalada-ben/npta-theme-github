@@ -73,7 +73,7 @@
           "type": "color",
           "id": "highlight_color",
           "label": "Highlight Color (Highlighted Text)",
-          "default": "#e9f24f"
+          "default": "#C1FF72"
         },
         {
           "type": "text",
@@ -173,7 +173,13 @@
 
               <!-- Image (Right Side) -->
               <div class="slide-image">
-                <img src="{{ block.settings.image | img_url: 'large' }}"alt="{{ block.settings.title_prefix }} {{ block.settings.title_highlight }} {{ block.settings.title_suffix }}" />
+                <img src="{{ block.settings.image | image_url: width: 1000 }}"
+                     srcset="{{ block.settings.image | image_url: width: 500 }} 500w, {{ block.settings.image | image_url: width: 1000 }} 1000w"
+                     sizes="(min-width: 750px) 50vw, 100vw"
+                     width="{{ block.settings.image.width | default: 1000 }}"
+                     height="{{ block.settings.image.height | default: 700 }}"
+                     alt="{{ block.settings.title_prefix }} {{ block.settings.title_highlight }} {{ block.settings.title_suffix }}"
+                     loading="lazy" decoding="async" />
               </div>
 
             </div> <!-- End of slide-container -->

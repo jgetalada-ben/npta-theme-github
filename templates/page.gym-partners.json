@@ -1,1 +1,224 @@
-{"sections":{"main":{"type":"main-page","disabled":true,"settings":{"padding_top":28,"padding_bottom":28}},"section_top_banner_hJLdAL":{"type":"section--top-banner","custom_css":[".section--top-banner {background-position: center top; background-repeat: no-repeat;}"],"settings":{"background_image":"shopify:\/\/shop_images\/G_I_17.png","title":"Gym Partnerships","subtitle":"Partner with NPTA to elevate your gym’s safety standards and reputation.","button_link":"shopify:\/\/collections\/all","button_text":"GET CERTIFIED","show_button_1":false,"button_1_text":"Button","button_1_link":"\/","show_button_2":false,"button_2_text":"Button","button_2_link":"\/","button_position":"left","title_alignment":"left","container_width":520,"alignment":"flex-start"}},"section_breadcrumb_eFj6di":{"type":"section--breadcrumb","settings":{"background_color":"#ffffff","enable_breadcrumbs":true,"breadcrumbs_home_label":"Home","breadcrumbs_separator":"|"}},"section_text_image_PieCxf":{"type":"section--text-image","custom_css":["@media only screen and (max-width: 980px) {.text-image--content {display: flex !important; flex-wrap: wrap; flex-direction: column !important; gap: 30px; }}"],"settings":{"section_id":"","heading":"Enhance Your Gym Safety and Minimize Liability with NPTA","description":"<p>Unlock exclusive discounts on NASM certification for your trainers! <\/p><p>Elevate your training standards, attract more clients, and minimize liability risks with certified trainers—all with one simple step. Partner with NPTA to ensure your team is top-notch and fully certified.<\/p>","image":"shopify:\/\/shop_images\/gym-partner-3.jpg","show_buttons":true,"primary_button_text":"PARTNER WITH NPTA","primary_button_link":"#how-to-join","secondary_button_text":""}},"section_accordion_three_NkkRdQ":{"type":"section--accordion-three","blocks":{"highlight_xci3g6":{"type":"highlight","settings":{"highlight_title":"Discounted Certification Courses","highlight_description":"Receive exclusive discounts on NASM certification courses and continuing education courses for your trainers. Elevate their qualifications and expertise at an affordable rate."}},"highlight_FXQeW8":{"type":"highlight","settings":{"highlight_title":"Improved Safety and Reduced Liability","highlight_description":"Properly trained and certified trainers are better equipped to prevent and manage accidents and injuries, which can significantly reduce your gym’s exposure to liability.\n\nWe will help track your gym trainers’ certificates, remind them to renew them, and alert you about any risks of uncertified trainers."}},"highlight_4MWHxg":{"type":"highlight","settings":{"highlight_title":"KEEP YOUR RISKS LOW","highlight_description":"We assist every certified trainer to stay insured to minimize your risk.  We also help in making recommendations with a reputed insurance provider."}},"highlight_J66XdV":{"type":"highlight","settings":{"highlight_title":"Earn 10% Back on Every Course Purchase","highlight_description":"For every course purchased by an independent trainer associated with your gym, you earn credits equal to 10% of the retail price of the course. These credits can be applied towards future course purchases, further reducing the cost of certifying your trainers."}},"highlight_q6qg64":{"type":"highlight","settings":{"highlight_title":"Enhanced Trainer Competency","highlight_description":"Certified trainers bring a higher level of professionalism and knowledge to your gym, improving the overall quality of service and client satisfaction."}},"highlight_GbyNeC":{"type":"highlight","settings":{"highlight_title":"Boost Your Gym’s Reputation","highlight_description":"Market your gym as a facility with highly qualified, NASM-certified trainers, attracting more clients who seek professional and knowledgeable fitness guidance."}}},"block_order":["highlight_xci3g6","highlight_FXQeW8","highlight_4MWHxg","highlight_J66XdV","highlight_q6qg64","highlight_GbyNeC"],"settings":{"section_id":"","heading":"Benefits for Gym Owners","image":"shopify:\/\/shop_images\/cpt-3224-crop.jpg","show_buttons":false,"primary_button_text":"Button","primary_button_link":"","secondary_button_text":"Button","secondary_button_link":""}},"section_steps_form_hTQQ9K":{"type":"section--steps-form","blocks":{"step_Jigp7j":{"type":"step","settings":{"step_title":"Step One","step_description":"<p>Schedule a consultation or contact our partnership team at <a href=\"mailto:info@npta.ca\" title=\"mailto:info@npta.ca\">info@npta.ca<\/a> to discuss your needs and enroll your gym.<\/p>"}},"step_6QkCBy":{"type":"step","settings":{"step_title":"Step Two","step_description":"<p>Once enrolled, start registering your trainers for discounted NASM certification courses.<\/p>"}}},"block_order":["step_Jigp7j","step_6QkCBy"],"settings":{"section_id":"how-to-join","section_title":"How to join","section_description":"<p>Joining the NPTA Gym Partnership Program is simple.<\/p>","webhook_url":"https:\/\/hooks.zapier.com\/hooks\/catch\/18464236\/2t46brl\/"}},"section_banner_two_EHEU8B":{"type":"section--banner-two","settings":{"background_image":"shopify:\/\/shop_images\/G_I_14B.jpg","title":"Empower Your Team, Elevate Their Skills!","subtitle":"<p>Equip your team with cutting-edge skills and watch them excel. Take the next step in their professional growth and unlock their full potential today<\/p>","button_link":"shopify:\/\/collections\/all","button_text":"Access Specialized Courses Now","show_button_1":true,"button_1_text":"Access Specialized Courses Now","button_1_link":"\/collections\/all?filter.p.tag=Specialization&filter.v.price.gte=&filter.v.price.lte=&sort_by=title-ascending","show_button_2":false,"button_2_text":"Button","button_2_link":"\/","button_position":"center","title_alignment":"left","container_width":700,"alignment":"flex-start"}}},"order":["main","section_top_banner_hJLdAL","section_breadcrumb_eFj6di","section_text_image_PieCxf","section_accordion_three_NkkRdQ","section_steps_form_hTQQ9K","section_banner_two_EHEU8B"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "section_top_banner_hJLdAL": {
+      "type": "section--top-banner",
+      "custom_css": [
+        ".section--top-banner {background-color: #000000;}",
+        ".section--top-banner:before {width: 100%;}",
+        ".section--top-background {width: 100%; display: block;}",
+        "h1 {color: #fff;}",
+        "@media (max-width: 980px) {.section--top-banner-container {top: 10%; }}"
+      ],
+      "settings": {
+        "background_image": "shopify://shop_images/G_I_17.png",
+        "title": "Gym Partnerships",
+        "subtitle": "Partner with NPTA to elevate your gym’s safety standards and reputation.",
+        "desc1": "",
+        "title_size": "clamp(32px,6vw,64px)",
+        "subtitle_size": "26px",
+        "desc_size": "16px",
+        "button_link": "shopify://collections/all",
+        "button_text": "GET CERTIFIED",
+        "show_button_1": false,
+        "button_1_text": "Button",
+        "button_1_link": "/",
+        "show_button_2": false,
+        "button_2_text": "Button",
+        "button_2_link": "/",
+        "button_gap": 24,
+        "btn1_bg": "#c1ff72",
+        "btn1_text_color": "#01241e",
+        "btn1_font_size": "clamp(14px,1.4vw,32px)",
+        "btn2_bg": "#ffffff",
+        "btn2_text_color": "#01241e",
+        "btn2_font_size": "clamp(14px,1.4vw,32px)",
+        "button_position": "left",
+        "title_alignment": "left",
+        "container_width": 520,
+        "alignment": "flex-start",
+        "banner_height": "",
+        "top_banner_align_items": "center",
+        "show_banner_gradient": true
+      }
+    },
+    "section_breadcrumb_eFj6di": {
+      "type": "section--breadcrumb",
+      "settings": {
+        "background_color": "#ffffff",
+        "enable_breadcrumbs": true,
+        "breadcrumbs_home_label": "Home",
+        "breadcrumbs_separator": "|"
+      }
+    },
+    "section_text_image_PieCxf": {
+      "type": "section--text-image",
+      "custom_css": [
+        "@media only screen and (max-width: 980px) {.text-image--content {display: flex !important; flex-wrap: wrap; flex-direction: column !important; gap: 30px; }}"
+      ],
+      "settings": {
+        "section_id": "",
+        "heading": "Enhance Your Gym Safety and Minimize Liability with NPTA",
+        "heading_color": "#01241e",
+        "description": "<p>Unlock exclusive discounts on NASM certification for your trainers! </p><p>Elevate your training standards, attract more clients, and minimize liability risks with certified trainers—all with one simple step. Partner with NPTA to ensure your team is top-notch and fully certified.</p>",
+        "text_color": "#01241e",
+        "image": "shopify://shop_images/gym-partner-3.jpg",
+        "show_buttons": true,
+        "primary_button_text": "PARTNER WITH NPTA",
+        "primary_button_link": "#how-to-join",
+        "primary_button_color": "#c1ff72",
+        "layout": "content-left",
+        "max_width": "1989px",
+        "pad_y": 120,
+        "pad_x": 80,
+        "bg": "#ffffff",
+        "primary_button_text_color": "#0b0b0b",
+        "secondary_prompt": "Would like to speak to a Career Advisor?",
+        "secondary_prompt_color": "#0e2a24",
+        "secondary_button_text": "",
+        "secondary_button_link": "",
+        "secondary_button_color": "#efefdf",
+        "secondary_button_text_color": "#0b0b0b"
+      }
+    },
+    "section_accordion_three_NkkRdQ": {
+      "type": "section--accordion-three",
+      "blocks": {
+        "highlight_xci3g6": {
+          "type": "highlight",
+          "settings": {
+            "highlight_title": "Discounted Certification Courses",
+            "highlight_description": "Receive exclusive discounts on NASM certification courses and continuing education courses for your trainers. Elevate their qualifications and expertise at an affordable rate."
+          }
+        },
+        "highlight_FXQeW8": {
+          "type": "highlight",
+          "settings": {
+            "highlight_title": "Improved Safety and Reduced Liability",
+            "highlight_description": "Properly trained and certified trainers are better equipped to prevent and manage accidents and injuries, which can significantly reduce your gym’s exposure to liability.\n\nWe will help track your gym trainers’ certificates, remind them to renew them, and alert you about any risks of uncertified trainers."
+          }
+        },
+        "highlight_4MWHxg": {
+          "type": "highlight",
+          "settings": {
+            "highlight_title": "KEEP YOUR RISKS LOW",
+            "highlight_description": "We assist every certified trainer to stay insured to minimize your risk.  We also help in making recommendations with a reputed insurance provider."
+          }
+        },
+        "highlight_J66XdV": {
+          "type": "highlight",
+          "settings": {
+            "highlight_title": "Earn 10% Back on Every Course Purchase",
+            "highlight_description": "For every course purchased by an independent trainer associated with your gym, you earn credits equal to 10% of the retail price of the course. These credits can be applied towards future course purchases, further reducing the cost of certifying your trainers."
+          }
+        },
+        "highlight_q6qg64": {
+          "type": "highlight",
+          "settings": {
+            "highlight_title": "Enhanced Trainer Competency",
+            "highlight_description": "Certified trainers bring a higher level of professionalism and knowledge to your gym, improving the overall quality of service and client satisfaction."
+          }
+        },
+        "highlight_GbyNeC": {
+          "type": "highlight",
+          "settings": {
+            "highlight_title": "Boost Your Gym’s Reputation",
+            "highlight_description": "Market your gym as a facility with highly qualified, NASM-certified trainers, attracting more clients who seek professional and knowledgeable fitness guidance."
+          }
+        }
+      },
+      "block_order": [
+        "highlight_xci3g6",
+        "highlight_FXQeW8",
+        "highlight_4MWHxg",
+        "highlight_J66XdV",
+        "highlight_q6qg64",
+        "highlight_GbyNeC"
+      ],
+      "settings": {
+        "section_id": "",
+        "heading": "Benefits for Gym Owners",
+        "image": "shopify://shop_images/cpt-3224-crop.jpg",
+        "show_buttons": false,
+        "primary_button_text": "Button",
+        "primary_button_link": "",
+        "secondary_button_text": "Button",
+        "secondary_button_link": ""
+      }
+    },
+    "section_steps_form_hTQQ9K": {
+      "type": "section--steps-form",
+      "blocks": {
+        "step_Jigp7j": {
+          "type": "step",
+          "settings": {
+            "step_title": "Step One",
+            "step_description": "<p>Schedule a consultation or contact our partnership team at <a href=\"mailto:info@npta.ca\" title=\"mailto:info@npta.ca\">info@npta.ca</a> to discuss your needs and enroll your gym.</p>"
+          }
+        },
+        "step_6QkCBy": {
+          "type": "step",
+          "settings": {
+            "step_title": "Step Two",
+            "step_description": "<p>Once enrolled, start registering your trainers for discounted NASM certification courses.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_Jigp7j",
+        "step_6QkCBy"
+      ],
+      "settings": {
+        "section_id": "how-to-join",
+        "section_title": "How to join",
+        "section_description": "<p>Joining the NPTA Gym Partnership Program is simple.</p>",
+        "webhook_url": "https://hooks.zapier.com/hooks/catch/18464236/2t46brl/"
+      }
+    },
+    "section_banner_two_EHEU8B": {
+      "type": "section--banner-two",
+      "settings": {
+        "background_image": "shopify://shop_images/G_I_14B.jpg",
+        "title": "Empower Your Team, Elevate Their Skills!",
+        "subtitle": "<p>Equip your team with cutting-edge skills and watch them excel. Take the next step in their professional growth and unlock their full potential today</p>",
+        "button_link": "shopify://collections/all",
+        "button_text": "Access Specialized Courses Now",
+        "show_button_1": true,
+        "button_1_text": "Access Specialized Courses Now",
+        "button_1_link": "/collections/all?filter.p.tag=Specialization&filter.v.price.gte=&filter.v.price.lte=&sort_by=title-ascending",
+        "show_button_2": false,
+        "button_2_text": "Button",
+        "button_2_link": "/",
+        "button_position": "center",
+        "title_alignment": "left",
+        "container_width": 700,
+        "alignment": "flex-start"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section_top_banner_hJLdAL",
+    "section_breadcrumb_eFj6di",
+    "section_text_image_PieCxf",
+    "section_accordion_three_NkkRdQ",
+    "section_steps_form_hTQQ9K",
+    "section_banner_two_EHEU8B"
+  ]
+}

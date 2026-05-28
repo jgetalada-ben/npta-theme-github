@@ -1,0 +1,697 @@
+/* ===================================================================
+   HP-SECTIONS.CSS — Homepage Redesign Styles
+   Mobile-first, cross-browser compatible, optimized
+   Buttons use existing .btn / .btn-label-down / .button-yg from base.css
+   =================================================================== */
+
+/* --- Reset & Shared --- */
+.hp-hero, .hp-elite, .hp-finance, .hp-process,
+.hp-advantage, .hp-trending, .hp-courses {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.hp-hero *, .hp-elite *, .hp-finance *, .hp-process *,
+.hp-advantage *, .hp-trending *, .hp-courses * {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Typography --- */
+:root {
+  --hp-font-heading: 'Anton', sans-serif;
+  --hp-font-body: Arial, Helvetica, sans-serif;
+  --hp-font-label: 'Poppins', sans-serif;
+  --hp-teal: #0f828c;
+  --hp-lime: #C1FF72;
+  --hp-dark: #141414;
+  --hp-dark-green: #01241e;
+  --hp-white: #ffffff;
+  --hp-beige: #F2F2E9;
+  --hp-gray: #f2f2e9;
+}
+
+/* --- Outline button variant (not in base.css) --- */
+.hp-btn-outline {
+  background-color: transparent !important;
+  border: 2px solid #141414 !important;
+  color: #141414;
+}
+.hp-btn-outline .btn-label-down {
+  color: #141414 !important;
+}
+.hp-btn-outline:hover {
+  background-color: transparent !important;
+}
+.hp-btn-outline:hover .btn-label-down {
+  top: 0%;
+}
+
+/* --- Generic outline button with inline styles --- */
+.button-outline-hp {
+  background-color: transparent;
+}
+.button-outline-hp:hover .btn-label-down {
+  top: 0%;
+}
+.button-outline-hp:hover {
+  background-color: transparent;
+}
+
+/* ===================================================================
+   1. HERO BANNER
+   =================================================================== */
+.hp-hero {
+  position: relative;
+  width: 100%;
+  min-height: 60dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hp-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hp-hero__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hp-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+.hp-hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 60px 20px;
+  margin: 0 auto;
+}
+.hp-hero__title {
+  font-family: var(--hp-font-heading);
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.hp-hero__sub {
+  font-family: var(--hp-font-body);
+  line-height: 1.6;
+  margin-bottom: 32px;
+  opacity: 0.95;
+}
+@media (min-width: 750px) {
+  .hp-hero { min-height: 670px; }
+  .hp-hero__content { padding: 80px 40px; }
+}
+
+/* ===================================================================
+   2. ELITE BUNDLE
+   =================================================================== */
+.hp-elite {
+  padding: clamp(40px, 6vw, 90px) 20px;
+  background: var(--hp-white);
+}
+.hp-elite__inner {
+  margin: 0 auto;
+  text-align: center;
+}
+.hp-elite__title {
+  font-family: var(--hp-font-heading);
+  font-weight: 400;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.hp-elite__subtitle {
+  font-family: var(--hp-font-body);
+  color: #555;
+  margin-bottom: 40px;
+}
+.hp-elite__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  text-align: left;
+  max-width: 834px;
+  margin: 0 auto;
+}
+/* Mobile layout order */
+.hp-elite__grid--mobile-content-first .hp-elite__image { order: 2; }
+.hp-elite__grid--mobile-content-first .hp-elite__details { order: 1; }
+.hp-elite__grid--mobile-image-first .hp-elite__image { order: 1; }
+.hp-elite__grid--mobile-image-first .hp-elite__details { order: 2; }
+
+.hp-elite__image img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+.hp-elite__details {
+  max-width: 100%;
+}
+.hp-elite__details-title {
+  font-family: var(--hp-font-body);
+  font-weight: 400;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.hp-elite__checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+}
+.hp-elite__check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+  font-family: var(--hp-font-body);
+  line-height: 1.5;
+}
+.hp-elite__check-item svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.hp-elite__bonus {
+  padding: 16px 20px;
+  border-radius: 8px;
+  font-family: var(--hp-font-body);
+  font-weight: 700;
+  margin: 0 auto 30px;
+  text-align: center;
+}
+.hp-elite__pricing {
+  display: flex;
+  align-items: baseline;
+  justify-content: left;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0;
+  font-family: var(--hp-font-body);
+}
+.hp-elite__sale-label {
+  font-weight: 700;
+  color: var(--hp-dark);
+}
+.hp-elite__sale-price {
+  font-weight: 700;
+  color: var(--hp-dark);
+}
+.hp-elite__reg-price {
+  font-size: clamp(16px, 2.4vw, 24px);
+  color: #999;
+  text-decoration: line-through;
+  text-decoration: italic;
+}
+.hp-elite__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+@media (min-width: 750px) {
+  .hp-elite__grid {
+    flex-direction: row;
+    gap: 48px;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  /* Desktop layout order */
+  .hp-elite__grid--image-first .hp-elite__image { order: 1; }
+  .hp-elite__grid--image-first .hp-elite__details { order: 2; }
+  .hp-elite__grid--content-first .hp-elite__image { order: 2; }
+  .hp-elite__grid--content-first .hp-elite__details { order: 1; }
+  /* Widths via CSS vars set inline */
+  .hp-elite__image {
+    flex: var(--hp-elite-img-flex, 0 0 50%);
+    max-width: none;
+  }
+  .hp-elite__details {
+    flex: var(--hp-elite-content-flex, 0 0 50%);
+    max-width: none;
+  }
+}
+
+/* ===================================================================
+   3. FINANCE SECTION
+   =================================================================== */
+.hp-finance {
+  background: var(--hp-beige);
+  overflow: hidden;
+  width: 100%;
+}
+.hp-finance__inner {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+/* Mobile layout order */
+.hp-finance--mobile-content-top .hp-finance__image { order: 2; }
+.hp-finance--mobile-content-top .hp-finance__content { order: 1; }
+.hp-finance--mobile-image-top .hp-finance__image { order: 1; }
+.hp-finance--mobile-image-top .hp-finance__content { order: 2; }
+
+.hp-finance__image img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
+.hp-finance__content {
+  padding: 40px 20px;
+  text-align: center;
+}
+.hp-finance__title {
+  font-family: var(--hp-font-heading);
+  font-weight: 400;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+.hp-finance__sub {
+  font-family: var(--hp-font-body);
+  margin-bottom: 40px;
+  line-height: normal;
+}
+.hp-finance__features {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin-bottom: 40px;
+}
+.hp-finance__feature { text-align: center; }
+.hp-finance__icon { margin-bottom: 12px; }
+.hp-finance__icon img {
+  width: 64px;
+  height: 64px;
+  display: inline-block;
+}
+.hp-finance__feature-title {
+  font-family: var(--hp-font-label);
+  font-weight: bolder;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hp-finance__feature-desc {
+  font-family: var(--hp-font-body);
+  line-height: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  max-width: 264px;
+  margin: 0 auto;
+  font-size: clamp(14px, 2vw, 18px);
+}
+.hp-finance__btn-wrap {
+  display: flex;
+  justify-content: center;
+}
+.hp-finance__btn-wrap .btn.button-b {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+@media (min-width: 750px) {
+  .hp-finance__inner {
+    flex-direction: row;
+    height: 600px;
+  }
+  /* Desktop layout order */
+  .hp-finance--desktop-image-left .hp-finance__image { order: 1; }
+  .hp-finance--desktop-image-left .hp-finance__content { order: 2; }
+  .hp-finance--desktop-image-right .hp-finance__image { order: 2; }
+  .hp-finance--desktop-image-right .hp-finance__content { order: 1; }
+
+  .hp-finance__image { flex: 0 0 34%; }
+  .hp-finance__image img { height: 100%; min-height: 708px; }
+  .hp-finance__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 25px;
+  }
+  .hp-finance__features { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 749px) {
+  .hp-finance--desktop-image-left .hp-finance__image {
+    display: none;
+  }
+}
+/* ===================================================================
+   4. 3-STEP PROCESS
+   =================================================================== */
+.hp-process {
+  padding: clamp(40px, 6vw, 80px) 20px;
+}
+.hp-process__inner {
+  margin: 0 auto;
+  text-align: center;
+}
+.hp-process__heading {
+  font-family: var(--hp-font-heading);
+  font-weight: 400;
+  text-transform: capitalize;
+  margin-bottom: clamp(30px, 4vw, 50px);
+}
+.hp-process__steps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+.hp-process__step { text-align: center; }
+.hp-process__step-label {
+  display: block;
+  font-family: var(--hp-font-label);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.hp-process__step-title {
+  font-family: var(--hp-font-heading);
+  font-weight: 400;
+  line-height: clamp(20px,7vw,50px);
+  text-transform: none;
+}
+.hp-process__step-title p { 
+  margin: 0; 
+  line-height: 1.1;
+}
+.hp-process__step-desc {
+  margin: 20px auto 0;
+  max-width: 290px;
+  line-height: normal;
+  font-family: var(--hp-font-body, sans-serif);
+  font-weight: 400;
+}
+/* Arrows — mobile: show down, hide right */
+.hp-process__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.hp-process__arrow-right { display: none; }
+.hp-process__arrow-down { display: block; }
+.hp-process__btn {
+  margin-top: clamp(40px,8vw,80px);
+}
+@media (min-width: 750px) {
+  .hp-process__steps {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0;
+  }
+  .hp-process__step { flex: 1; max-width: 360px; }
+  .hp-process__arrow {
+    padding: 0 clamp(8px, 2vw, 24px);
+    margin-top: 50px;
+  }
+  /* Desktop: show right, hide down */
+  .hp-process__arrow-right { display: block; }
+  .hp-process__arrow-down { display: none; }
+}
+
+/* ===================================================================
+   5. NPTA ADVANTAGE
+   =================================================================== */
+.hp-advantage {
+  padding: clamp(40px, 6vw, 90px) 20px;
+  background: var(--hp-white);
+}
+.hp-advantage__inner {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+/* Mobile layout order */
+.hp-advantage__inner--mobile-content-top .hp-advantage__image { order: 2; }
+.hp-advantage__inner--mobile-content-top .hp-advantage__content { order: 1; }
+.hp-advantage__inner--mobile-image-top .hp-advantage__image { order: 1; }
+.hp-advantage__inner--mobile-image-top .hp-advantage__content { order: 2; }
+
+.hp-advantage__image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.hp-advantage__title {
+  font-family: var(--hp-font-heading);
+  font-weight: 400;
+  margin-bottom: 32px;
+  text-transform: capitalize;
+}
+.hp-advantage__benefits { margin-bottom: 32px; }
+.hp-advantage__benefit {
+  margin-bottom: 25px;
+}
+.hp-advantage__benefit:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.hp-advantage__benefit-title {
+  font-family: var(--hp-font-label);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.hp-advantage__benefit-desc {
+  font-family: var(--hp-font-body);
+  line-height: 1.78;
+  max-width: 576px;
+}
+.hp-advantage__logos {
+  margin: 0 auto;
+  padding: 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(24px, 5vw, 60px);
+  flex-wrap: wrap;
+  border-top: 1px solid #ddd;
+}
+.hp-advantage__logo {
+  height: clamp(40px, 6vw, 70px);
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.hp-advantage__btn {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+@media (max-width: 749px) {
+  .hp-advantage__btn {
+    height: auto;
+    line-height: normal;
+    padding: 20px;
+    width: fit-content;
+  }
+  .hp-advantage__btn .btn-label-down:last-child {
+    display: none;
+  }
+}
+@media (min-width: 750px) {
+  .hp-advantage__inner {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 55px;
+  }
+  /* Desktop layout order */
+  .hp-advantage__inner--desktop-image-left .hp-advantage__image { order: 1; }
+  .hp-advantage__inner--desktop-image-left .hp-advantage__content { order: 2; }
+  .hp-advantage__inner--desktop-image-right .hp-advantage__image { order: 2; }
+  .hp-advantage__inner--desktop-image-right .hp-advantage__content { order: 1; }
+
+  .hp-advantage__image { flex: 0 0 42%; }
+  .hp-advantage__content { 
+    flex: 1; 
+  }
+}
+@media (max-width: 354px) {
+  .hp-advantage__btn {
+    line-height: normal;
+    padding-top: 10px;
+  }
+}
+
+/* ===================================================================
+   6. TRENDING CAREERS
+   =================================================================== */
+.hp-trending {
+  padding: clamp(40px, 6vw, 90px) 20px;
+  background: var(--hp-white);
+}
+.hp-trending__inner { margin: 0 auto; }
+.hp-trending__title {
+  font-family: var(--hp-font-heading);
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.hp-trending__sub {
+  font-family: var(--hp-font-body);
+  text-align: center;
+  margin-bottom: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hp-trending__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+.hp-trending__card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 280px;
+  display: flex;
+  align-items: flex-end;
+}
+.hp-trending__card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.hp-trending__card:hover .hp-trending__card-img { transform: scale(1.03); }
+.hp-trending__card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
+  z-index: 1;
+}
+.hp-trending__card-content {
+  position: relative;
+  z-index: 2;
+  padding: 24px;
+  width: 100%;
+}
+.hp-trending__card-title {
+  font-family: var(--hp-font-heading);
+  font-weight: 400;
+  color: var(--hp-white);
+  margin-bottom: 8px;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+.hp-trending__card-desc {
+  font-family: var(--hp-font-body);
+  color: rgba(255,255,255,0.9);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  max-width: 400px;
+}
+@media (min-width: 750px) {
+  .hp-trending__grid {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto auto;
+    gap: 20px;
+  }
+  .hp-trending__card:nth-child(1) { grid-column: span 7; min-height: 406px; }
+  .hp-trending__card:nth-child(2) { grid-column: span 5; min-height: 406px; }
+  .hp-trending__card:nth-child(3) { grid-column: span 5; min-height: 386px; }
+  .hp-trending__card:nth-child(4) { grid-column: span 7; min-height: 386px; }
+}
+
+/* ===================================================================
+   7. TOP COURSES
+   =================================================================== */
+.hp-courses {
+  padding: clamp(40px, 6vw, 90px) 20px;
+  background: var(--hp-white);
+}
+.hp-courses__inner { margin: 0 auto; }
+.hp-courses__header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+.hp-courses__title {
+  font-family: var(--hp-font-heading);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.hp-courses__sub {
+  font-family: var(--hp-font-body);
+  margin-bottom: 40px;
+}
+.hp-courses__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+.hp-courses__card { text-align: center; }
+.hp-courses__card-img {
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.hp-courses__card-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 314 / 375;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+.hp-courses__card:hover .hp-courses__card-img img { transform: scale(1.03); }
+.hp-courses__card-title {
+  font-family: var(--hp-font-heading);
+  font-weight: 400;
+  margin-bottom: 16px;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+@media (min-width: 750px) {
+  .hp-courses__header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .hp-courses__grid { grid-template-columns: repeat(3, 1fr); gap: 32px; }
+}
+
+/* ===================================================================
+   ACCESSIBILITY & PRINT
+   =================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .hp-trending__card-img,
+  .hp-courses__card-img img {
+    transition: none !important;
+  }
+  .hp-trending__card:hover .hp-trending__card-img { transform: none; }
+}
+@media print {
+  .hp-hero__overlay,
+  .hp-trending__card-overlay { display: none; }
+  .hp-hero, .hp-process { color: #000; background: #fff !important; }
+}

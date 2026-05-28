@@ -133,7 +133,7 @@
                     {% for block in section.blocks %}
                         {% if block.type == 'highlight' %}
                             <div class="accordion-four--highlight"
-                                data-image="{{ block.settings.highlight_image | img_url: 'original' }}">
+                                data-image="{{ block.settings.highlight_image | image_url: width: 1200 }}">
                                 <h3>{{ block.settings.highlight_title }}</h3>
                                <div class="accordion-highlight-content"> {{ block.settings.highlight_description }}</div>
                             </div>
@@ -182,7 +182,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #133257;
+        background-color: #01241E;
         padding: 90px 0;
     }
 .accordion-four--container{
@@ -292,7 +292,7 @@ margin: 0;
 }
 
 .accordion-four--highlight.active{
-  border-left: 3px solid #E9F24F;
+  border-left: 3px solid #C1FF72;
     transition:300ms padding ;
     padding-left: 24px;
   opacity:1;

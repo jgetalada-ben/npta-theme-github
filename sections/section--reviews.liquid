@@ -87,7 +87,11 @@
             <div class="review-card">
               <div class="author-info-wrap">
                 {% if block.settings.author_image %}
-                <img src="{{ block.settings.author_image | img_url: 'medium' }}" class="author-image">
+                <img src="{{ block.settings.author_image | image_url: width: 120 }}"
+                     srcset="{{ block.settings.author_image | image_url: width: 60 }} 1x, {{ block.settings.author_image | image_url: width: 120 }} 2x"
+                     width="60" height="60"
+                     alt="{{ block.settings.author_name | default: 'Reviewer' | escape }}"
+                     class="author-image" loading="lazy" decoding="async">
                 {% else %}
                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="none" viewBox="0 0 120 120" class="author-img-default">
                   <path fill="#EFF1F3" d="M0 0h120v120H0z"/>
@@ -131,10 +135,7 @@
   </div>
 </div>
 
-<link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
-
+{%- comment -%} Splide assets are loaded once in theme.liquid {%- endcomment -%}
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     new Splide('#splide', {
@@ -202,7 +203,7 @@ line-height: 150%; /* 24px */
   align-items: flex-start;
   gap: 10px;
   border-radius: 20px;
-  background: #133257;
+  background: #0f828c;
 }
 
 .author-info-wrap {

@@ -477,7 +477,8 @@ line-height: 150%; /* 24px */
   
 .section--text-video h2{
 color: #141414;
-    font-family: var(--font-heading-family);
+    {% comment %} font-family: var(--font-heading-family); {% endcomment %}
+     font-family: 'Anton', var(--font-heading-family, var(--font-body-family));
 font-size: 42px;
 font-style: normal;
 font-weight: 800;
@@ -485,15 +486,17 @@ line-height: 112%; /* 47.04px */
 text-transform: uppercase;
   margin-bottom:7px;
   margin-top:0;
+  letter-spacing: 2px;
 }
 
 .section--text-video p{
 color: #141414;
-    font-family: var(--font-body-family);
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: 150%; /* 24px */
+    {% comment %} font-family: var(--font-body-family); {% endcomment %}
+  font-family: var(--font-proximaregular);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 24px */
 }
 
 

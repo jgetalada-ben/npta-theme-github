@@ -149,7 +149,13 @@
 
                   <div class="image-wrapper">
  {% if section.settings.image %}
-  <img src="{{ section.settings.image | img_url: 'original' }}" alt="{{ section.settings.alt_text }}">
+  <img src="{{ section.settings.image | image_url: width: 1200 }}"
+       srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 1200 }} 1200w"
+       sizes="(min-width: 750px) 600px, 100vw"
+       width="{{ section.settings.image.width | default: 1200 }}"
+       height="{{ section.settings.image.height | default: 800 }}"
+       alt="{{ section.settings.alt_text | escape }}"
+       loading="lazy" decoding="async">
 {% else %}
   <p>No image available</p>
 {% endif %}
@@ -173,7 +179,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #133257;
+        background-color: #01241E;
         padding: 90px 0;
     }
 .accordion-four--container{
@@ -285,7 +291,7 @@ margin: 0;
 }
 
 .accordion-four--highlight.active{
-  border-left: 3px solid #E9F24F;
+  border-left: 3px solid #C1FF72;
     transition:300ms padding ;
     padding-left: 24px;
   opacity:1;

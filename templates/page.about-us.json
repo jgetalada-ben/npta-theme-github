@@ -14,40 +14,115 @@
       "disabled": true,
       "settings": {
         "padding_top": 28,
-        "padding_bottom": 28
+        "padding_bottom": 8
       }
     },
     "section_top_banner_hJLdAL": {
       "type": "section--top-banner",
+      "disabled": true,
       "custom_css": [
-        ".section--top-banner {background-position: center top; background-repeat: no-repeat; background-size: cover;}"
+        ".section--top-banner {background-position: center top; background-repeat: no-repeat; background-size: cover;}",
+        ".section--top-background {display: block !important;}",
+        ".top-banner--text-content-container h1 {color: #fff;}"
       ],
       "settings": {
         "background_image": "shopify://shop_images/G_I_18.jpg",
         "title": "ABOUT NPTA",
         "subtitle": "Learn how NPTA empowers the next generation of fitness and health professionals.",
         "desc1": "",
+        "title_size": "clamp(32px,6vw,64px)",
+        "subtitle_size": "26px",
+        "desc_size": "16px",
         "button_link": "shopify://collections/all",
         "button_text": "GET CERTIFIED",
         "show_button_1": false,
         "button_1_text": "Button",
         "button_1_link": "/",
+        "button_1_behavior": "new_tab",
+        "button_1_popup_url": "",
+        "button_1_popup_title": "Popup",
         "show_button_2": false,
         "button_2_text": "Button",
         "button_2_link": "/",
+        "button_2_behavior": "new_tab",
+        "button_2_popup_url": "",
+        "button_2_popup_title": "Popup",
+        "button_gap": 24,
+        "btn1_bg": "#c1ff72",
+        "btn1_text_color": "#01241e",
+        "btn1_font_size": "clamp(14px,1.4vw,32px)",
+        "btn2_bg": "#ffffff",
+        "btn2_text_color": "#01241e",
+        "btn2_font_size": "clamp(14px,1.4vw,32px)",
         "button_position": "left",
         "title_alignment": "left",
         "container_width": 520,
-        "alignment": "flex-start"
+        "alignment": "flex-start",
+        "banner_height": "",
+        "top_banner_align_items": "center",
+        "show_banner_gradient": true,
+        "popup_max_width": 980,
+        "popup_height_desktop": "min(80vh, 760px)",
+        "popup_height_mobile": "78vh"
       }
     },
     "section_breadcrumb_eFj6di": {
       "type": "section--breadcrumb",
+      "disabled": true,
       "settings": {
         "background_color": "#ffffff",
         "enable_breadcrumbs": true,
         "breadcrumbs_home_label": "Home",
         "breadcrumbs_separator": "|"
+      }
+    },
+    "video_v2_xHtLDD": {
+      "type": "video-v2",
+      "name": "Video v2",
+      "settings": {
+        "media_type": "video",
+        "shopify_video": "shopify://files/videos/NPTA Vid.mp4",
+        "embed_url": "",
+        "alt": "Jesse Benson NPTA Founder",
+        "enable_audio": true,
+        "mute_after_first_loop": true,
+        "aspect_ratio": "21-9",
+        "aspect_ratio_mobile": "1-1",
+        "height_mode": "ratio",
+        "vh_desktop": "75vh",
+        "vh_mobile": "62dvh",
+        "show_icon_text": false,
+        "icon_text": "NASM OFFICIAL CANADIAN PARTNER",
+        "icon_text_size": "clamp(12px, 1.4vw, 18px)",
+        "icon_text_color": "#ffffff",
+        "title": "",
+        "promo_line": "",
+        "subtitle": "",
+        "desc": "",
+        "title_size": "clamp(28px,5vw,72px)",
+        "title_color": "#ffffff",
+        "promo_size": "clamp(32px,5vw,72px)",
+        "promo_color": "#c8ff63",
+        "subtitle_size": "clamp(18px,3vw,40px)",
+        "subtitle_color": "#c8ff63",
+        "desc_size": "clamp(14px,2vw,20px)",
+        "desc_color": "#ffffff",
+        "align": "left",
+        "overlay_darkness": 40,
+        "show_btn1": false,
+        "btns_margin_top": "16px",
+        "btn1_label": "CHOOSE MY COURSE",
+        "btn1_link": "",
+        "btn1_bg": "#c8ff63",
+        "btn1_txt": "#0b0b0b",
+        "show_btn2": false,
+        "btn2_label": "Learn more",
+        "btn2_link": "",
+        "btn2_bg": "#ffffff",
+        "btn2_txt": "#0b0b0b",
+        "enable_title_rotator": false,
+        "rotator_interval": 3,
+        "rotator_stagger_ms": 38
       }
     },
     "section_text_highlight_gBAbEw": {
@@ -62,12 +137,32 @@
       "settings": {
         "section_id": "section-id",
         "heading": "WHO WE ARE",
+        "heading_color": "#01241e",
         "description": "<p>National Personal Training Academy (NPTA) is Canada’s top choice for fitness education.</p><p>A proud official distribution partner of NASM. Since 2018, we’ve offered affordable NASM certifications and specializations, bridging theory with real-world application. </p><p>Our mission is to transform your fitness passion into a rewarding career through exceptional education, hands-on training, and dedicated support. With our high standards and expert mentorship, we equip students to become successful certified personal trainers. Join NPTA to elevate your career and make a significant impact in the fitness industry.</p>",
+        "text_color": "#01241e",
         "image": "shopify://shop_images/group-of-nasm-trainers-on-beach.jpg",
         "show_buttons": false,
         "primary_button_text": "",
         "primary_button_link": "",
-        "secondary_button_text": ""
+        "primary_button_behavior": "typeform",
+        "primary_open_new_tab": false,
+        "primary_button_color": "#c1ff72",
+        "layout": "content-left",
+        "max_width": "1989px",
+        "pad_y": 120,
+        "pad_x": 80,
+        "bg": "#ffffff",
+        "primary_button_text_color": "#0b0b0b",
+        "secondary_prompt": "Would like to speak to a Career Advisor?",
+        "secondary_prompt_color": "#0e2a24",
+        "secondary_button_text": "Book a Free Call",
+        "secondary_button_link": "",
+        "secondary_button_behavior": "modal",
+        "secondary_open_new_tab": true,
+        "secondary_button_color": "#efefdf",
+        "secondary_button_text_color": "#0b0b0b",
+        "modal_max_width": "min(980px, 92vw)",
+        "modal_height": "min(80vh, 720px)"
       }
     },
     "section_quote_text_VH7Afh": {
@@ -142,60 +237,6 @@
         "alignment": "center"
       }
     },
-    "section_logo_carousel_t9PTHx": {
-      "type": "section--logo-carousel",
-      "blocks": {
-        "logo_jdTEpK": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/logo-carousel-placeholder-1.png"
-          }
-        },
-        "logo_6DLTX7": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/logo-carousel-place-holder-3.png"
-          }
-        },
-        "logo_9nAJxm": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/logo-carousel-place-holder-2.png"
-          }
-        },
-        "logo_89zi8a": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/logo-carousel-placeholder-1.png"
-          }
-        },
-        "logo_U6x4mq": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/logo-carousel-place-holder-3.png"
-          }
-        },
-        "logo_dMbFUR": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/logo-carousel-place-holder-2.png"
-          }
-        }
-      },
-      "block_order": [
-        "logo_jdTEpK",
-        "logo_6DLTX7",
-        "logo_9nAJxm",
-        "logo_89zi8a",
-        "logo_U6x4mq",
-        "logo_dMbFUR"
-      ],
-      "settings": {
-        "top_padding": 92,
-        "bottom_padding": 92,
-        "container_width": 980
-      }
-    },
     "section_text_form_jeQTRd": {
       "type": "section--text-form",
       "disabled": true,
@@ -207,18 +248,87 @@
         "section_description": "<p><strong>Get Certified and Get Ahead:<br/></strong> Our comprehensive NASM certification programs will equip you with cutting-edge knowledge and skills, setting you apart in a competitive industry.</p><p><strong>Real-World Experience:<br/></strong> Dive into our hands-on apprenticeship program, gaining invaluable experience and mentorship from fitness industry leaders like Jesse Benson, so you're ready to make an impact from day one.</p><p><strong>Accelerate Your Career Growth:<br/></strong> Whether you're just starting or leveling up, our affiliate and apprenticeship programs offer unparalleled opportunities for professional development and maximizing your earning potential.</p><p><strong>Join a Vibrant Community:<br/></strong>Be part of a supportive, collaborative network that celebrates your achievements and fosters an environment of continuous learning and success.</p>",
         "webhook_url": "https://hooks.zapier.com/hooks/catch/xxxxxx/"
       }
+    },
+    "section_logo_carousel_mjYtbr": {
+      "type": "section--logo-carousel",
+      "blocks": {
+        "logo_jQAKye": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/nasm-logo.png"
+          }
+        },
+        "logo_6bzxJG": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/afaa-logo.png"
+          }
+        },
+        "logo_T3EAjh": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/npta-ph-logo_61da15a0-7548-4732-becb-f2132c7cc3c8.png"
+          }
+        },
+        "logo_wrDbUw": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/fitin_logo.png"
+          }
+        },
+        "logo_7Xj9jR": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/backfitpro-logo.webp"
+          }
+        },
+        "logo_Y9HTPM": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/ncsf-logo.png"
+          }
+        },
+        "logo_BLBazE": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/kbstronger-logo.png"
+          }
+        },
+        "logo_V7gjJj": {
+          "type": "logo",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "logo_jQAKye",
+        "logo_6bzxJG",
+        "logo_T3EAjh",
+        "logo_wrDbUw",
+        "logo_7Xj9jR",
+        "logo_Y9HTPM",
+        "logo_BLBazE",
+        "logo_V7gjJj"
+      ],
+      "name": "Logo Carousel",
+      "settings": {
+        "top_padding": 0,
+        "bottom_padding": 0,
+        "container_width": 2000,
+        "scroll_direction": "rtl"
+      }
     }
   },
   "order": [
     "main",
     "section_top_banner_hJLdAL",
     "section_breadcrumb_eFj6di",
+    "video_v2_xHtLDD",
     "section_text_highlight_gBAbEw",
     "section_text_image_g3MAiQ",
     "section_quote_text_VH7Afh",
     "section_mission_vision_LzLbEt",
     "section_three_column_87RzJe",
-    "section_logo_carousel_t9PTHx",
-    "section_text_form_jeQTRd"
+    "section_text_form_jeQTRd",
+    "section_logo_carousel_mjYtbr"
   ]
 }

@@ -107,7 +107,22 @@
       "label": "Button 1 Text",
       "default": "Register Here"
     },
-        
+    {
+      "type": "header",
+      "content": "Slider Image Height"
+    },
+    {
+      "type": "text",
+      "id": "image_height",
+      "label": "Desktop Image Height (e.g. 432px, 30vw)",
+      "default": "432px"
+    },
+    {
+      "type": "text",
+      "id": "image_height_mobile",
+      "label": "Mobile Image Height (e.g. 360px)",
+      "default": "360px"
+    }
   ],
   "blocks": [
     {
@@ -160,10 +175,29 @@
 
 
 
-<section class="section--certified-trainers" id="{{ section.settings.section_id }}">
+<section class="section--certified-trainers" id="{{ section.settings.section_id }}" data-hbid="hbsct-{{ section.id }}">
   {{ 'section--certified-trainers.css' | asset_url | stylesheet_tag }}
-  <div class="section--title-block page-container" style="display: flex; justify-content: {{ section.settings.alignment }};">
-    <div style="max-width: {{ section.settings.container_width }}px;">
+  <style>
+    [data-hbid="hbsct-{{ section.id }}"] .trainer-wrapper,
+    [data-hbid="hbsct-{{ section.id }}"] .trainer-wrapper img {
+      height: {{ section.settings.image_height | default: '432px' }};
+    }
+    [data-hbid="hbsct-{{ section.id }}"] .trainer-wrapper img {
+      width: 100%;
+      object-fit: cover;
+    }
+    @media (max-width: 768px) {
+      [data-hbid="hbsct-{{ section.id }}"] .trainer-wrapper,
+      [data-hbid="hbsct-{{ section.id }}"] .trainer-wrapper img {
+        height: {{ section.settings.image_height_mobile | default: '360px' }};
+      }
+      [data-hbid="hbsct-{{ section.id }}"] #certification_slide .trainer-wrapper {
+        min-height: {{ section.settings.image_height_mobile | default: '360px' }};
+      }
+    }
+  </style>
+  <div class="section--title-block page-container" style="display: flex; justify-content: {{ section.settings.alignment }};max-width: {{ section.settings.container_width }}px;">
+    <div>
       <h2 style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_title }}</h2>
       <span style="text-align: {{ section.settings.title_alignment }};">{{ section.settings.section_description }}</span>
     </div>
@@ -175,7 +209,17 @@
         {% for block in section.blocks %}
           <div class="splide__slide trainer-wrapper">
             {% if block.settings.image %}
-              <img src="{{ block.settings.image | img_url: 'large' }}" alt="{{ block.settings.name }}">
+              <img
+                src="{{ block.settings.image | image_url: width: 600 }}"
+                srcset="{{ block.settings.image | image_url: width: 400 }} 400w,
+                        {{ block.settings.image | image_url: width: 600 }} 600w,
+                        {{ block.settings.image | image_url: width: 900 }} 900w"
+                sizes="(min-width: 1280px) 300px, (min-width: 768px) 33vw, 80vw"
+                width="{{ block.settings.image.width | default: 600 }}"
+                height="{{ block.settings.image.height | default: 800 }}"
+                alt="{{ block.settings.name | escape }}"
+                loading="lazy"
+                decoding="async">
             {% endif %}
   {% if block.settings.show_content %}
             <div class="trainer-info">
@@ -242,25 +286,45 @@
     padding-bottom: 20px;
   }
   .section--certified-trainers .section--hero-buttons {
-    margin-top: auto;
+    margin-top: 60px;
     padding-top: 8px;
     width: 100%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
   }
+  #{{ section.settings.section_id }} .section--title-block h2 {
+    font-family: var(--font-anton);
+    font-weight:400;
+    color: #01241E;
+    font-size: clamp(21px, 4vw, 32px) !important;
+    text-transform: none;
+  }
+  #{{ section.settings.section_id }} .section--title-block span h3 {
+    font-size: clamp(14px, 1.4vw, 20px);
+    font-family: var(--hp-font-body);
+    font-weight: 400;
+    line-height: normal;
+    color: #000;
+  }
+  #{{ section.settings.section_id }} .section--title-block span p {
+    font-family: var(--hp-font-body);
+    font-weight: 400;
+    font-size: clamp(14px, 2.4vw, 20px);
+    line-height: 1.5;
+    color: #000;
+  }
   @media (max-width: 768px) {
     .section--certified-trainers .section--hero-buttons .btn{
-      width: 90%;
+      width: fit-content;
+    }
+    .section--certified-trainers .section--hero-buttons {
+      margin-top: calc(60px/2);
     }
   }
 </style>
 
-<link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
-
-
+{%- comment -%} Splide assets are loaded once in theme.liquid {%- endcomment -%}
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   function initializeSplide() {

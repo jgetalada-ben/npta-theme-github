@@ -66,7 +66,12 @@
           {% if block.type == "top_post" %}
             <div class="top-blog-post">
               <a href="{{ block.settings.top_post.url }}">
-                <img src="{{ block.settings.top_post.image | img_url: '400x' }}" alt="{{ block.settings.top_post.title }}" loading="lazy">
+                <img src="{{ block.settings.top_post.image | image_url: width: 400 }}"
+                     srcset="{{ block.settings.top_post.image | image_url: width: 400 }} 1x, {{ block.settings.top_post.image | image_url: width: 800 }} 2x"
+                     width="{{ block.settings.top_post.image.width | default: 400 }}"
+                     height="{{ block.settings.top_post.image.height | default: 300 }}"
+                     alt="{{ block.settings.top_post.title | escape }}"
+                     loading="lazy" decoding="async">
                 <h4>{{ block.settings.top_post.title }}</h4>
               </a>
               <p class="blog-excerpt">{{ block.settings.top_post.excerpt_or_content | truncatewords: 25 }}</p>
@@ -84,7 +89,11 @@
       {%- if block.type == "media_promo" and block.settings.media_image != blank -%}
         <div class="top-media-promo">
           <a href="{{ block.settings.media_link | default: '#' }}">
-            <img src="{{ block.settings.media_image | img_url: '800x' }}" alt="Media Promotion">
+            <img src="{{ block.settings.media_image | image_url: width: 800 }}"
+                 width="{{ block.settings.media_image.width | default: 800 }}"
+                 height="{{ block.settings.media_image.height | default: 600 }}"
+                 alt="Media promotion"
+                 loading="lazy" decoding="async">
           </a>
         </div>
       {%- endif -%}
@@ -92,8 +101,10 @@
 
     <iframe
       src="https://app.npta.ca/widget/form/lJveusatl20r4YtwufAG"
-      style="width:400px;height:600px;border:none;border-radius:12px;"
+      style="width:400px;height:536px;border:none;border-radius:12px;"
       title="$25 OFF Pop Up Form - Blog"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
     ></iframe>
 
   </div>
@@ -126,6 +137,10 @@
 
 .top-blog-post img {
     border-radius: 20px;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    display: block;
   }
 
 .top-blog-posts {
@@ -162,7 +177,7 @@
 }
 
 .top-blog-post .read-more-btn {
-  color: #133257;
+  color: #0f828c;
   font-weight: bold;
 }
 
@@ -173,7 +188,9 @@
 }
 
 .top-media-promo img {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
   display: block;
   border-radius: 12px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
